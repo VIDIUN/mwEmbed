@@ -7,7 +7,7 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 var ranPlayerTest = false;
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	if( ranPlayerTest ){
 		return ;
 	}
@@ -16,13 +16,13 @@ function jsKalturaPlayerTest( videoId ){
 	module( "My Logo Test" );
 
 	var $iframe = $('#' + videoId + '_ifp').contents();
-	var iframeContext = window.frames['kaltura_player_ifp'];
-	var kdp = $( '#' + videoId )[0];
+	var iframeContext = window.frames['vidiun_player_ifp'];
+	var vdp = $( '#' + videoId )[0];
 	var ranReady = false;
 	asyncTest("Check for logo", function(){
-		kalturaQunitWaitForPlayer( function(){
+		vidiunQunitWaitForPlayer( function(){
 			equal( $iframe.find('.logo img').attr( 'src' ),
-				kdp.evaluate('{logo.img}'),
+				vdp.evaluate('{logo.img}'),
 				"Found logo in control bar" );
 			// Test page context config: 
 			window.checkForHideLogo();
@@ -32,7 +32,7 @@ function jsKalturaPlayerTest( videoId ){
 	
 	window.checkForHideLogo = function(){
 		asyncTest("Check for hide logo", function(){
-			kWidget.destroy( kdp );
+			vWidget.destroy( vdp );
 			// re add a video target with the same name
 			$('#myVideoContainer').append( 
 				$( '<div />' ).attr({
@@ -44,30 +44,30 @@ function jsKalturaPlayerTest( videoId ){
 				})
 			);
 			// embed on top of the old locatoin a standard player ( 12905712 ) with hidden logo:
-			kWidget.embed({
+			vWidget.embed({
 				'targetId': 'myVideoTarget',
 				'wid': '_243342',
 				'uiconf_id' : '12905712',
 				'entry_id' : '0_uka1msg4',
 				'flashvars': {
 					'mylogo.plugin': false,
-                    'kalturaLogo.plugin': false
+                    'vidiunLogo.plugin': false
 				},
 				'readyCallback': function( videoId ){
 					window['onMediaReady'] = function(){
 						equal( $iframe.find('.logo').length, 0, "Logo is hidden" );
 						start();
 					}
-					var kdp = $( '#' + videoId )[0];
-					kdp.addJsListener( 'mediaReady', 'onMediaReady')
+					var vdp = $( '#' + videoId )[0];
+					vdp.addJsListener( 'mediaReady', 'onMediaReady')
 				}
 			});
 		});
 	};
 }
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> My Logo Player </h2>
@@ -82,7 +82,7 @@ function jsKalturaPlayerTest( videoId ){
 	</div>
 </div>
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '6111181',
@@ -90,10 +90,10 @@ function jsKalturaPlayerTest( videoId ){
 		'flashvars':{
 			'mylogo':{
 				'plugin': true,
-				'relativeTo': 'kalturaLogo',
+				'relativeTo': 'vidiunLogo',
 				'position': 'after',
-				'watermarkClickPath': 'http://kaltura.com/',
-				'watermarkPath': 'http://projects.kaltura.com/mdale/samplesmall.png',
+				'watermarkClickPath': 'http://vidiun.com/',
+				'watermarkPath': 'http://projects.vidiun.com/mdale/samplesmall.png',
 				'height': "20",
 				'width': "20",
 				'className': "Watermark"

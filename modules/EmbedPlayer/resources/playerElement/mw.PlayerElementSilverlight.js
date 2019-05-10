@@ -53,7 +53,7 @@
 					_this.playerElement = _this.playerProxy;
 
 					//if this is the target object: add event listeners
-					//if a different object is the target: it should take care of its listeners (such as embedPlayerKPlayer)
+					//if a different object is the target: it should take care of its listeners (such as embedPlayerVPlayer)
 					if ( !_this.targetObj ) {
 						_this.targetObj = _this;
 
@@ -236,8 +236,8 @@
 		bindPlayerFunction : function(bindName, methodName, target) {
 			var _this = this;
 			mw.log( 'PlayerElementSilverlight:: bindPlayerFunction:' + bindName );
-			// The kaltura kdp can only call a global function by given name
-			var gKdpCallbackName = 'silverlight_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
+			// The vidiun vdp can only call a global function by given name
+			var gVdpCallbackName = 'silverlight_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
 
 			// Create an anonymous function with local player scope
 			var createGlobalCB = function(cName) {
@@ -248,11 +248,11 @@
 					}
 					_this.targetObj[methodName](data);
 				};
-			}(gKdpCallbackName, this);
+			}(gVdpCallbackName, this);
 			// Remove the listener ( if it exists already )
-			this.playerElement.removeJsListener( bindName, gKdpCallbackName );
+			this.playerElement.removeJsListener( bindName, gVdpCallbackName );
 			// Add the listener to the Silvrtliht player:
-			this.playerElement.addJsListener( bindName, gKdpCallbackName);
+			this.playerElement.addJsListener( bindName, gVdpCallbackName);
 		}
 	});
 } )( window.mw, jQuery );

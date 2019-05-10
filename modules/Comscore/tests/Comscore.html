@@ -7,14 +7,14 @@
     <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
-	<script>mw.setConfig('Kaltura.NoApiCache', true);</script>
+	<script>mw.setConfig('Vidiun.NoApiCache', true);</script>
   </head>
   <body>
 	<h1>Comscore Plugin</h1>
 	<br>
 	<div>
 		<div id="comscoreSettings"></div>
-		<div id="kaltura_player" style="float:left;width:400px;height:330px"></div>
+		<div id="vidiun_player" style="float:left;width:400px;height:330px"></div>
 		<div style="float:left;padding-left:20px;">
 			<i>Analytics events:</i><br />
 			<textarea id="analyticsLog" rows='15' ></textarea>
@@ -57,8 +57,8 @@
 		</pre>
 	
 	<script>
-	kWidget.featureConfig({
-		'targetId' : 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId' : 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
@@ -69,7 +69,7 @@
 				'position': "before",
 				'relativeTo': "video",
 				'trackEventMonitor': 'trackEvent',
-				'cTagsMap':"http://projects.kaltura.com/ran/comscore/comscore.xml",
+				'cTagsMap':"http://projects.vidiun.com/ran/comscore/comscore.xml",
 				'c2':"3000032",
 				'c3':'myDefaultString',
 				'c3attributeKey':'name',

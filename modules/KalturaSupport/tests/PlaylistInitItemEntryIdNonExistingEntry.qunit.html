@@ -9,32 +9,32 @@
 	<script type="text/javascript">
 		var entryPlaying = null;
 		function jsCallbackReady( videoId ) {
-			var kdp = $( '#' + videoId ).get( 0 );
-			kdp.addJsListener( 'doPlay', 'doPlayCallback' );
+			var vdp = $( '#' + videoId ).get( 0 );
+			vdp.addJsListener( 'doPlay', 'doPlayCallback' );
 		}
 		
-		function jsKalturaPlayerTest( videoId ){
-			var kdp = $( '#' + videoId ).get( 0 );
+		function jsVidiunPlayerTest( videoId ){
+			var vdp = $( '#' + videoId ).get( 0 );
 			// Name this module
 			module( "playlistAPI::initItemEntryId" );
 
 			test( "initItemEntryId is set", function(){
-				equal( kdp.evaluate( '{playlistAPI.initItemEntryId}' ), '0_ntavmku5', 'playlistAPI.initItemEntryId flashvar is set and equals to 0_ntavmku5' );
+				equal( vdp.evaluate( '{playlistAPI.initItemEntryId}' ), '0_ntavmku5', 'playlistAPI.initItemEntryId flashvar is set and equals to 0_ntavmku5' );
 			});
 		}
 		
 		function doPlayCallback( videoId ) {
-			var kdp = $( '#' + videoId ).get( 0 );
+			var vdp = $( '#' + videoId ).get( 0 );
 			if( document.URL.indexOf('runQunitTests') != -1 || document.URL.indexOf('runFlashQunitTests') != -1 ) {
 				test( "Playing first entry", function() {
-					equal( kdp.evaluate('{mediaProxy.entry.id}'), '0_uka1msg4', 'Started playing entry ' + kdp.kentryid );
+					equal( vdp.evaluate('{mediaProxy.entry.id}'), '0_uka1msg4', 'Started playing entry ' + vdp.ventryid );
 				});
 			}
 		}
 	</script>
 	
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 
 <body>

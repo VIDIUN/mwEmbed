@@ -4,7 +4,7 @@
 
 ( function( mw, $ ) {"use strict";
 
-	mw.KBaseButton = mw.KBaseComponent.extend( {
+	mw.VBaseButton = mw.VBaseComponent.extend( {
 
 		defaultConfig: {
 			"align": "right" ,
@@ -13,7 +13,7 @@
 			"showTooltip": true ,
 			"displayImportance": "high" ,
 			"toggle": true ,
-			"kClick": null
+			"vClick": null
 		} ,
 		pressed: false ,
 		offIconClass: 'icon-fullscreen-exit-alt' ,
@@ -40,7 +40,7 @@
 
 		toggleExpend: function () {
 			var _this = this;
-			var clickAction = this.getConfig( "kClick" );
+			var clickAction = this.getConfig( "vClick" );
 			if ( clickAction ) {
 				try {
 					parent[clickAction]();

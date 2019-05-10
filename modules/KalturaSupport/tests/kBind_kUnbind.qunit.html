@@ -6,48 +6,48 @@
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">	
-		function jsKalturaPlayerTest( playerId ) {
+		function jsVidiunPlayerTest( playerId ) {
 			window[ 'playCount' ] = 0;
 			window[ 'pauseCount' ] = 0;
 			// Name this module
-			module( "kBind / kUnbind" );
-			var kdp = $( '#' + playerId ).get( 0 );
-			test( "kBind :: Namespaced event ( doPlay.test ) + Global callback name", function() {
+			module( "vBind / vUnbind" );
+			var vdp = $( '#' + playerId ).get( 0 );
+			test( "vBind :: Namespaced event ( doPlay.test ) + Global callback name", function() {
 				window.doPlayCallback = function() {
-					kdp.kUnbind( "doPlay.test", "doPlayCallback" );
+					vdp.vUnbind( "doPlay.test", "doPlayCallback" );
 					window[ 'playCount' ]++;
 					ok( true, "doPlayCallback binded to doPlay.test" );
 					playtest2();
 					start();
 				}
-				kdp.kBind( "doPlay.test", "doPlayCallback" );
-				kdp.sendNotification( "doPlay" );
+				vdp.vBind( "doPlay.test", "doPlayCallback" );
+				vdp.sendNotification( "doPlay" );
 				stop();
 			} );
 			window['playtest2'] = function(){
-				test( "kBind :: Namespaced event ( doPause.test ) + Anonymous function", function() {
+				test( "vBind :: Namespaced event ( doPause.test ) + Anonymous function", function() {
 					stop();
-					kdp.kBind( "doPause.test", function() {
+					vdp.vBind( "doPause.test", function() {
 						window[ 'pauseCount' ]++;
 						ok( true, "Anonymous function binded to doPause.test" );
 						playtest3();
 						start();
 					} );
 					setTimeout( function() {
-						kdp.sendNotification( "doPause" );
+						vdp.sendNotification( "doPause" );
 					}, 250 );
 				} );
 			}
 			window['playtest3'] = function(){
-				test( "kUnbind :: Whole Namespace ( .test )", function() {
+				test( "vUnbind :: Whole Namespace ( .test )", function() {
 					stop();
 					var currentPauseCount = window[ 'pauseCount' ];
 					var currentPlayCount = window[ 'playCount' ];
-					kdp.kUnbind( ".test" );
-					kdp.sendNotification( "doPlay" );
+					vdp.vUnbind( ".test" );
+					vdp.sendNotification( "doPlay" );
 					equal( currentPlayCount, window[ 'playCount'], "Unbinded doPlay.test (Checking playCount value)" );
 					setTimeout( function() {
-						kdp.sendNotification( "doPause" );
+						vdp.sendNotification( "doPause" );
 						equal( currentPauseCount, window[ 'pauseCount'], "Unbinded doPause.test (Checking pauseCount value)" );
 						playtest4();
 						start();
@@ -55,45 +55,45 @@
 				} );
 			}
 			window['playtest4'] = function(){
-				test( "kBind :: Non-Namespaced Event ( doPlay ) + Global callback name", function() {
+				test( "vBind :: Non-Namespaced Event ( doPlay ) + Global callback name", function() {
 					stop();
 					window.doPlayCallback = function() {
-						kdp.kUnbind( "doPlay", "doPlayCallback" );
+						vdp.vUnbind( "doPlay", "doPlayCallback" );
 						window[ 'playCount' ]++;
 						ok( true, "doPlayCallback binded to doPlay" );
 						playtest5();
 						start();
 					}
-					kdp.kBind( "doPlay", "doPlayCallback" );
-					kdp.sendNotification( "doPlay" );
+					vdp.vBind( "doPlay", "doPlayCallback" );
+					vdp.sendNotification( "doPlay" );
 				} );
 			}
 			window['playtest5'] = function(){
-				test( "kBind :: Non-Namespaced Event ( doPause ) + Anonymous function", function() {
+				test( "vBind :: Non-Namespaced Event ( doPause ) + Anonymous function", function() {
 					stop();
-					kdp.kBind( "doPause", function() {
+					vdp.vBind( "doPause", function() {
 						window[ 'pauseCount' ]++;
-						kdp.kUnbind("doPause");
+						vdp.vUnbind("doPause");
 						ok( true, "Anonymous function binded to doPause" );
 						playtest6();
 						start();
 					} );
 					setTimeout( function() {
-						kdp.sendNotification( "doPause" );
+						vdp.sendNotification( "doPause" );
 					}, 250 );
 				} );
 			}
 			window['playtest6'] = function(){
-				test( "kUnbind :: Eventname ( doPlay / doPause )", function() {
+				test( "vUnbind :: Eventname ( doPlay / doPause )", function() {
 					stop();
 					var currentPlayCount = window[ 'playCount' ];
 					var currentPauseCount = window[ 'pauseCount' ];		
-					kdp.kUnbind( "doPlay" );
-					kdp.kUnbind( "doPause" );
-					kdp.sendNotification( "doPlay" );
+					vdp.vUnbind( "doPlay" );
+					vdp.vUnbind( "doPause" );
+					vdp.sendNotification( "doPlay" );
 					equal( currentPlayCount, window[ 'playCount'], "Unbinded doPlay (Checking playCount value)" );
 					setTimeout( function() {
-						kdp.sendNotification( "doPause" );
+						vdp.sendNotification( "doPause" );
 						equal( currentPauseCount, window[ 'pauseCount'], "Unbinded doPause (Checking pauseCount value)" );
 						playtest7();
 						start();
@@ -102,28 +102,28 @@
 			}
 			var runtbindOnce = false;
 			window['playtest7'] = function(){
-				test( "kUnbind :: Namespaced event ( doPlay.tounbind )", function() {
+				test( "vUnbind :: Namespaced event ( doPlay.tounbind )", function() {
 					stop();
-					kdp.kBind( "doPlay.ns", function() {
+					vdp.vBind( "doPlay.ns", function() {
 						window[ 'playCount' ]++;
 					} );
-					kdp.kBind( "doPlay.tounbind", function() {
+					vdp.vBind( "doPlay.tounbind", function() {
 						window[ 'playCount' ] += 9;
 					} );
-					kdp.sendNotification( "doPlay" );
+					vdp.sendNotification( "doPlay" );
 					var currentPlayCount = window[ 'playCount' ];
-					kdp.kUnbind( "doPlay.tounbind" );
+					vdp.vUnbind( "doPlay.tounbind" );
 					setTimeout( function() {
-						kdp.sendNotification( "doPause" );
+						vdp.sendNotification( "doPause" );
 						setTimeout( function() {
-							kdp.sendNotification( "doPlay" );
-							kdp.kUnbind( "doPlay.ns" );
+							vdp.sendNotification( "doPlay" );
+							vdp.vUnbind( "doPlay.ns" );
 							setTimeout( function() {
 								if( runtbindOnce ){
 									return ;
 								}
 								runtbindOnce = true;
-								kdp.sendNotification( "doPause" );
+								vdp.sendNotification( "doPause" );
 								equal( ++currentPlayCount, window[ 'playCount'], "Unbinded doPlay.tounbind (Checking playCount value)" );
 								
 								playtest8();
@@ -135,26 +135,26 @@
 			}
 			var playtest8Active = true;
 			window['playtest8'] = function(){
-				test( "kUnbind :: Eventname ( doPlay ) + Non-existing global callback name / namespace", function() {
-					kdp.kUnbind("doPlay");
-					kdp.kBind( "doPlay", function() {
+				test( "vUnbind :: Eventname ( doPlay ) + Non-existing global callback name / namespace", function() {
+					vdp.vUnbind("doPlay");
+					vdp.vBind( "doPlay", function() {
 						if( playtest8Active ){
 							window[ 'playCount' ]++;
 						}
 					} );
-					kdp.kUnbind( "doPlay", "wrongName" );
+					vdp.vUnbind( "doPlay", "wrongName" );
 					
 					var currentPlayCount = window[ 'playCount' ];
-					kdp.sendNotification( "doPlay" );
+					vdp.sendNotification( "doPlay" );
 					equal( ++currentPlayCount, window[ 'playCount'], "doPlay was not unbound due to a non-existing global callback name (Checking playCount value)" );
 					
-					kdp.kUnbind( "doPlay.test" );
-					kdp.sendNotification( "doPause" );
-					kdp.sendNotification( "doPlay" );
+					vdp.vUnbind( "doPlay.test" );
+					vdp.sendNotification( "doPause" );
+					vdp.sendNotification( "doPlay" );
 					equal( ++currentPlayCount, window[ 'playCount'], "doPlay was not unbound due to a non-existing namespace (Checking playCount value)" );
 					
-					kdp.kUnbind( "doPlay" );
-					kdp.sendNotification( "doPause" );
+					vdp.vUnbind( "doPlay" );
+					vdp.sendNotification( "doPause" );
 					playtest8Active = false;
 					playtest9();
 					start();
@@ -162,41 +162,41 @@
 			}
 			window['playtest9']= function(){
 				test( "Chaining both functions", function() {
-					kdp.kUnbind("doPlay").kBind( "doPlay.chaining", function() {
+					vdp.vUnbind("doPlay").vBind( "doPlay.chaining", function() {
 						window[ 'playCount' ]++;
 					} );
 					
 					var currentPlayCount = window[ 'playCount' ];
-					kdp.sendNotification( "doPlay" );
+					vdp.sendNotification( "doPlay" );
 					//alert( 'currentPlayCount:' + currentPlayCount );
 					equal( ++currentPlayCount, window[ 'playCount'], "Anonymous function binded to doPlay.chaining (Checking playCount value)" );
-					kdp.kUnbind( ".chaining" ).kBind( "doPause.chaining", function() {
+					vdp.vUnbind( ".chaining" ).vBind( "doPause.chaining", function() {
 						window[ 'pauseCount' ]++;
 					} );
 					
 					var currentPauseCount = window[ 'pauseCount' ];
-					kdp.sendNotification( "doPause" );
-					equal( ++currentPauseCount, window[ 'pauseCount'], "Anonymous function binded to doPause using chained form kUnbind().kBind() (Checking pauseCount value)" );
-					equal( currentPlayCount, window[ 'playCount'], "Unbinded .chaining namespace using chained form kUnbind().kBind() (Checking playCount value)" );
+					vdp.sendNotification( "doPause" );
+					equal( ++currentPauseCount, window[ 'pauseCount'], "Anonymous function binded to doPause using chained form vUnbind().vBind() (Checking pauseCount value)" );
+					equal( currentPlayCount, window[ 'playCount'], "Unbinded .chaining namespace using chained form vUnbind().vBind() (Checking playCount value)" );
 					start();
 				} );
 			}
 		}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 	<h2> Unified bind/unbind methods </h2>
-	<h3> Simple binding for kaltura events.</h3>
-	View the <a target="_blank" href="http://www.kaltura.org/demos/kdp3/docs.html">full list of events</a>
+	<h3> Simple binding for vidiun events.</h3>
+	View the <a target="_blank" href="http://www.vidiun.org/demos/vdp3/docs.html">full list of events</a>
 	<pre class="prettyprint linenums">
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	var foo = "bar";
 	// Unlike addJsListener, you can directly issue local callbacks.
-	kdp.kBind( &quot;doPlay.test&quot;, function(){ //notice the .test postfix namespaces the event)
+	vdp.vBind( &quot;doPlay.test&quot;, function(){ //notice the .test postfix namespaces the event)
 		console.log(&quot;play &quot; + foo); // will log &quot;play bar&quot;
 		//Now we can unbind our .test postfix via kUnbind ( only will log play once )
 		kdp.kUnbind('.test')
@@ -208,7 +208,7 @@ kWidget.addReadyCallback( function( playerId ){
 	
 	<div id="myVideoTarget" style="width: 400px; height: 330px"></div>
 	<script>
-		kWidget.embed({
+		vWidget.embed({
 			'targetId': 'myVideoTarget',
 			'wid': '_243342',
 			'uiconf_id' : '12905712',

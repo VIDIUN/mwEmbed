@@ -1,6 +1,6 @@
 <?php
 
-require_once( dirname( __FILE__ ) . '/../KalturaCommon.php' );
+require_once( dirname( __FILE__ ) . '/../VidiunCommon.php' );
 
 $wgMwEmbedApiServices['upgradePlayer'] = 'mweUpgradePlayer';
 

@@ -11,13 +11,13 @@
 			$.cookie( 'allowCookies', null );
 		}
 
-		function jsKalturaPlayerTest( videoId ) {
-			var kdp = $( '#' + videoId )[0];
+		function jsVidiunPlayerTest( videoId ) {
+			var vdp = $( '#' + videoId )[0];
 			// Name this module
 			module( "Cookies Alert" );
 			
 			var $iframe = $('#' + videoId + '_ifp').contents();
-			var iframeKdp = $iframe.find( '#' + videoId )[0];
+			var iframeVdp = $iframe.find( '#' + videoId )[0];
 			
 			asyncTest( "Alert for cookies on screen", function() {
 				equal ( $iframe.find( '.alert-title' ).text(), "Cookies", "Alert for cookies is displayed");
@@ -27,7 +27,7 @@
 					ok( $.cookie( 'TimedText.Preferences' ), "TimedText preferences cookie is set" );
 					$.cookie( 'allowCookies', null );
 					$.cookie( 'TimedText.Preferences', null )
-					iframeKdp.timedText.refreshDisplay();
+					iframeVdp.timedText.refreshDisplay();
 					$( $iframe.find( '.alert-button' )[ 1 ] ).click();
 					ok( !$.cookie( 'TimedText.Preferences' ), "TimedText preferences cookie is unset" );
 					start();
@@ -35,8 +35,8 @@
 			});
 		}
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 	<h2> User allows/disallows saving cookies </h2>

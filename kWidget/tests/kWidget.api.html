@@ -13,7 +13,7 @@
 
 <script>
 // don't show qunit test links
-window.isKalturaDocsIframe = true;
+window.isVidiunDocsIframe = true;
 </script>
 </head>
 <style>
@@ -48,10 +48,10 @@ function syntaxHighlight( rawData ) {
 	});
 }
 </script>
-<h2> kWidget Direct JS Server API</h2>
-<b>kWidget  Direct Server API</b> enables simple object request API calls. This should not be confused with the <a title="client libs" target="_new" href="http://www.kaltura.com/api_v3/testme/client-libs.php">
+<h2> vWidget Direct JS Server API</h2>
+<b>vWidget  Direct Server API</b> enables simple object request API calls. This should not be confused with the <a title="client libs" target="_new" href="http://www.vidiun.com/api_v3/testme/client-libs.php">
 JavaScript client library</a>, which offers object mappings 
-and works with the code generated in the <a title="testme console" target="_new" href="http://www.kaltura.com/api_v3/testme/index.php">test me console</a>.
+and works with the code generated in the <a title="testme console" target="_new" href="http://www.vidiun.com/api_v3/testme/index.php">test me console</a>.
 <br><br>
 The kWidget  Direct Server API is included by default every time you include the player library.<br><br>
 <pre class="prettyprint linenums">
@@ -220,7 +220,7 @@ $('#plbutton').click(function(){
 	}
 	
 	$('#playlist_result').show().text('loading..');
-	new kWidget.api( {
+	new vWidget.api( {
 		'wid' : '_243342',
 	}).doRequest( multiRequest, function( data ){
 		$('#plclose').show();
@@ -250,13 +250,13 @@ $('#plbutton').click(function(){
 </script>
 <h3>Get entry contextData and custom metadata ( multiRequest )</h3>
 Retrieves all the sources for a given entry id via 
-<a target="_new" href="http://www.kaltura.com/api_v3/testmeDoc/index.php?service=baseentry&action=getcontextdata">baseEntry getContextData</a>
-<br> and via multi-request <a target="_new" href="http://www.kaltura.com/api_v3/testmeDoc/index.php?service=metadata_metadata&action=list">list entry custom metaData</a>
+<a target="_new" href="http://www.vidiun.com/api_v3/testmeDoc/index.php?service=baseentry&action=getcontextdata">baseEntry getContextData</a>
+<br> and via multi-request <a target="_new" href="http://www.vidiun.com/api_v3/testmeDoc/index.php?service=metadata_metadata&action=list">list entry custom metaData</a>
 <br><br>
-Also see <a href="kWidget.getSources.html">kWidget.getSources.html</a> for simple library that builds usable playMainfest source urls 
+Also see <a href="vWidget.getSources.html">vWidget.getSources.html</a> for simple library that builds usable playMainfest source urls 
 
 <pre class="prettyprint linenums">
-&lt;script&gt;<br/>$('#entriesbutton').click(function(){<br/>	new kWidget.api( {<br/>		'wid' : '_243342',<br/>	}).doRequest([<br/>		{<br/>			'contextDataParams' : {<br/>				'referrer' : document.URL,<br/>				'objectType' : 'KalturaEntryContextDataParams',<br/>				'flavorTags': 'all'<br/>			},<br/>			'service' : 'baseentry',<br/>			'entryId' : '0_uka1msg4',<br/>			'action' : 'getContextData'<br/>		},<br/>		{<br/>			 'service' : 'metadata_metadata',<br/>			 'action' : 'list',<br/>			 'version' : '-1',<br/>			 // metaDataFilter<br/>			 'filter:metadataObjectTypeEqual' :1, /* KalturaMetadataObjectType::ENTRY */<br/>			 'filter:orderBy' : '+createdAt',<br/>			 'filter:objectIdEqual' : '0_uka1msg4',<br/>			 'pager:pageSize' : 1<br/>		}<br/>	], function(data ){<br/>		$('#entries_result').html( <br/>			syntaxHighlight( data )<br/>		);<br/>	})<br/>});<br/>&lt;/script&gt;
+&lt;script&gt;<br/>$('#entriesbutton').click(function(){<br/>	new vWidget.api( {<br/>		'wid' : '_243342',<br/>	}).doRequest([<br/>		{<br/>			'contextDataParams' : {<br/>				'referrer' : document.URL,<br/>				'objectType' : 'VidiunEntryContextDataParams',<br/>				'flavorTags': 'all'<br/>			},<br/>			'service' : 'baseentry',<br/>			'entryId' : '0_uka1msg4',<br/>			'action' : 'getContextData'<br/>		},<br/>		{<br/>			 'service' : 'metadata_metadata',<br/>			 'action' : 'list',<br/>			 'version' : '-1',<br/>			 // metaDataFilter<br/>			 'filter:metadataObjectTypeEqual' :1, /* VidiunMetadataObjectType::ENTRY */<br/>			 'filter:orderBy' : '+createdAt',<br/>			 'filter:objectIdEqual' : '0_uka1msg4',<br/>			 'pager:pageSize' : 1<br/>		}<br/>	], function(data ){<br/>		$('#entries_result').html( <br/>			syntaxHighlight( data )<br/>		);<br/>	})<br/>});<br/>&lt;/script&gt;
 </pre>
 </body>
 </html>

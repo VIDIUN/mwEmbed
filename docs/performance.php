@@ -17,7 +17,7 @@
 <script> 
 	$("#gen-performance").click(function(){
 		var testTypes = [
-		         		'embedKdpFlash',
+		         		'embedVdpFlash',
 		         		'embed16',
 		         		'embedMediaElmement',
 		         		'embed17js',

@@ -1,12 +1,12 @@
 <?php
 
-require_once(dirname(__FILE__) . '/kBaseCacheWrapper.php');
+require_once(dirname(__FILE__) . '/vBaseCacheWrapper.php');
 
 /**
  * @package infra
  * @subpackage cache
  */
-class kMemcacheCacheWrapper extends kBaseCacheWrapper
+class vMemcacheCacheWrapper extends vBaseCacheWrapper
 {
 	const MAX_CONNECT_ATTEMPTS = 4;
 	
@@ -121,7 +121,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::get()
+	 * @see vBaseCacheWrapper::get()
 	 */
 	public function get($key)
 	{
@@ -129,7 +129,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::set()
+	 * @see vBaseCacheWrapper::set()
 	 */
 	public function set($key, $var, $expiry = 0)
 	{
@@ -137,7 +137,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::multiGet()
+	 * @see vBaseCacheWrapper::multiGet()
 	 */
 	public function multiGet($keys)
 	{
@@ -145,7 +145,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::delete()
+	 * @see vBaseCacheWrapper::delete()
 	 */
 	public function delete($key)
 	{
@@ -153,7 +153,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::increment()
+	 * @see vBaseCacheWrapper::increment()
 	 */
 	public function increment($key, $delta = 1)
 	{
@@ -161,7 +161,7 @@ class kMemcacheCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::decrement()
+	 * @see vBaseCacheWrapper::decrement()
 	 */
 	public function decrement($key, $delta = 1)
 	{

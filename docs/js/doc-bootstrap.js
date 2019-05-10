@@ -12,30 +12,30 @@ function getBootStrapPath(){
 if( !window.QUnit ){
 	// find the current path: 
 	var baseBootStrapUrl = getBootStrapPath();
-	window.kDocPath = baseBootStrapUrl + '../../docs/';
+	window.vDocPath = baseBootStrapUrl + '../../docs/';
 	// output any blocking scripts that need to be ready before dom ready: 
-	document.write( '<script src="' + kDocPath + 'bootstrap/js/bootstrap-tab.js"></script>' );
-	document.write( '<script src="' + kDocPath + 'bootstrap/js/bootstrap-dropdown.js"></script>' );
-	document.write( '<script src="' + kDocPath + 'js/jquery.prettyKalturaConfig.js"></script>' );
-	document.write( '<script src="' + kDocPath + 'js/kWidget.featureConfig.js"></script>' );
-	// kwidget auth: 
-	document.write( '<script src="' + kDocPath + '../kWidget/kWidget.auth.js"></script>' );
+	document.write( '<script src="' + vDocPath + 'bootstrap/js/bootstrap-tab.js"></script>' );
+	document.write( '<script src="' + vDocPath + 'bootstrap/js/bootstrap-dropdown.js"></script>' );
+	document.write( '<script src="' + vDocPath + 'js/jquery.prettyVidiunConfig.js"></script>' );
+	document.write( '<script src="' + vDocPath + 'js/vWidget.featureConfig.js"></script>' );
+	// vwidget auth: 
+	document.write( '<script src="' + vDocPath + '../vWidget/vWidget.auth.js"></script>' );
 	
 	// inject all the twitter bootstrap css and js ( ok to be injected after page is rendering )
 	$( 'head' ).append(
-		$( '<link rel="shortcut icon" href="' + kDocPath + 'css/favicon.ico">' ),
-		$( '<link href="' + kDocPath + 'bootstrap/build/css/bootstrap.min.css" rel="stylesheet">' ),
-		$( '<link href="' + kDocPath + 'css/kdoc.css" rel="stylesheet">'),
+		$( '<link rel="shortcut icon" href="' + vDocPath + 'css/favicon.ico">' ),
+		$( '<link href="' + vDocPath + 'bootstrap/build/css/bootstrap.min.css" rel="stylesheet">' ),
+		$( '<link href="' + vDocPath + 'css/vdoc.css" rel="stylesheet">'),
 		// bootstrap-modal
-		$( '<script type="text/javascript" src="' + kDocPath + 'bootstrap/js/bootstrap-modal.js"></script>' ),
+		$( '<script type="text/javascript" src="' + vDocPath + 'bootstrap/js/bootstrap-modal.js"></script>' ),
 		// pretify: 
-		$( '<script src="' + kDocPath + 'bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>' ),
-		$( '<link href="' + kDocPath + 'bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet">' ),
+		$( '<script src="' + vDocPath + 'bootstrap/docs/assets/js/google-code-prettify/prettify.js"></script>' ),
+		$( '<link href="' + vDocPath + 'bootstrap/docs/assets/js/google-code-prettify/prettify.css" rel="stylesheet">' ),
 		// color picker:
-		$( '<link rel="stylesheet" media="screen" type="text/css" href="' + kDocPath + 'js/colorPicker/css/colorpicker.css" />' ),
-		$( '<script type="text/javascript" src="' + kDocPath + 'js/colorPicker/js/colorpicker.js"></script>' ),
+		$( '<link rel="stylesheet" media="screen" type="text/css" href="' + vDocPath + 'js/colorPicker/css/colorpicker.css" />' ),
+		$( '<script type="text/javascript" src="' + vDocPath + 'js/colorPicker/js/colorpicker.js"></script>' ),
 		// dialog box: 
-		$( '<script type="text/javascript" src="' + kDocPath + 'js/bootbox.min.js"></script>' )
+		$( '<script type="text/javascript" src="' + vDocPath + 'js/bootbox.min.js"></script>' )
 	);
 	// check if we should enable google analytics: 
 	// TODO remove dependency on mw
@@ -51,25 +51,25 @@ if( !window.QUnit ){
 		})();
 	}
 } else{
-	// provide a stub for prettyKalturaConfig so that tests don't have javascript errors:
-	$.fn.prettyKalturaConfig = function( pluginName, flashVars, flashvarCallback ){
+	// provide a stub for prettyVidiunConfig so that tests don't have javascript errors:
+	$.fn.prettyVidiunConfig = function( pluginName, flashVars, flashvarCallback ){
 		$(this).text( 'running qunit test');
 	};
-	// provide a stub for featureConfig for running tests ( just directly map to kWidget.embed )
-	kWidget.featureConfig = function( embedOptions ){
-		kWidget.embed( embedOptions );
+	// provide a stub for featureConfig for running tests ( just directly map to vWidget.embed )
+	vWidget.featureConfig = function( embedOptions ){
+		vWidget.embed( embedOptions );
 	}
 	// hide all prettyconfig: 
 	$(function(){
 		$('pre.prettyprint').hide();
 	});
 }
-window.isKalturaDocsIframe = false;
+window.isVidiunDocsIframe = false;
 // Detect if in an doc iframe:
 try{
 	if( document.URL.indexOf( 'noparent=') === -1 &&
-		window.parent && window.parent['mw'] && window.parent.mw.getConfig('KalutraDocContext')){
-		window.isKalturaDocsIframe = true;
+		window.parent && window.parent['mw'] && window.parent.mw.getConfig('VidiunDocContext')){
+		window.isVidiunDocsIframe = true;
 		// call parent loaded if set: 
 		if(  window.parent['handleLoadedIframe'] ){
 			window.parent['handleLoadedIframe']();
@@ -117,39 +117,39 @@ if( typeof kWidget != 'undefined' && kWidget.addReadyCallback ){
 	});
 }
 // the update player button: 
-$(document).on('click',  '.kdocUpdatePlayer', function(){
-	$('.kdocPlayerRenderTime').empty();
-	kdocPlayerStartTime = new Date().getTime();
+$(document).on('click',  '.vdocUpdatePlayer', function(){
+	$('.vdocPlayerRenderTime').empty();
+	vdocPlayerStartTime = new Date().getTime();
 })
 
-// Set kdocEmbedPlayer to html5 by default:
-if( ! localStorage.kdocEmbedPlayer ){
-	localStorage.kdocEmbedPlayer = 'html5';
+// Set vdocEmbedPlayer to html5 by default:
+if( ! localStorage.vdocEmbedPlayer ){
+	localStorage.vdocEmbedPlayer = 'html5';
 }
 // always disable playback-mode selector ( v2 ) 
 // now only pages with disablePlaybackModeSelector set LeadWithHTML5 to false, and require forceMobileHTML5
 if( !window['disablePlaybackModeSelector'] ){
 	// don't set flag if any special properties are set: 
-	if( localStorage.kdocEmbedPlayer == 'html5' && window['mw'] && 
-			mw.getConfig( 'Kaltura.LeadWithHTML5') == null &&
+	if( localStorage.vdocEmbedPlayer == 'html5' && window['mw'] && 
+			mw.getConfig( 'Vidiun.LeadWithHTML5') == null &&
 			mw.getConfig( 'disableForceMobileHTML5') == null && 
-			mw.getConfig( 'Kaltura.ForceFlashOnDesktop' ) !== true  
+			mw.getConfig( 'Vidiun.ForceFlashOnDesktop' ) !== true  
 	){
-		mw.setConfig('Kaltura.LeadWithHTML5', true);
+		mw.setConfig('Vidiun.LeadWithHTML5', true);
 	}
 }
-// support forceKDPFlashPlayer flag: 
-if( document.URL.indexOf('forceKDPFlashPlayer') !== -1 ){
-	mw.setConfig( 'Kaltura.LeadWithHTML5', false);
+// support forceVDPFlashPlayer flag: 
+if( document.URL.indexOf('forceVDPFlashPlayer') !== -1 ){
+	mw.setConfig( 'Vidiun.LeadWithHTML5', false);
 	mw.setConfig( 'EmbedPlayer.DisableVideoTagSupport', true );
 }
 
 // document ready events:
 $(function(){
 	// Do any configuration substitutions
-	if( localStorage.kdoc_html5url ){
+	if( localStorage.vdoc_html5url ){
 		$('pre.prettyprint').each(function(){
-			$(this).html( $(this).html().replace('{{HTML5LibraryURL}}', localStorage.kdoc_html5url) )
+			$(this).html( $(this).html().replace('{{HTML5LibraryURL}}', localStorage.vdoc_html5url) )
 		})
 	}
 	
