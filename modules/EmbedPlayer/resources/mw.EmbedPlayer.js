@@ -993,8 +993,8 @@
 				var failCallback = function(){
 					_this.removePoster();
 					_this.layoutBuilder.displayAlert( {
-						title: _this.getKalturaMsg( 'ks-PLUGIN-BLOCKED-TITLE' ),
-						message: _this.getKalturaMsg( 'ks-PLUGIN-BLOCKED' ),
+						title: _this.getVidiunMsg( 'vs-PLUGIN-BLOCKED-TITLE' ),
+						message: _this.getVidiunMsg( 'vs-PLUGIN-BLOCKED' ),
 						keepOverlay: true,
 						noButtons : true,
 						props: {

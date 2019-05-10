@@ -1,7 +1,7 @@
 (function (mw, $) {
     "use strict";
 
-    var FPS = mw.KBasePlugin.extend({
+    var FPS = mw.VBasePlugin.extend({
 
         defaultConfig: {},
 
@@ -193,11 +193,11 @@
          */
         getLicenseUri: function () {
             var licenseUri;
-            var overrideDrmServerURL = mw.getConfig('Kaltura.overrideDrmServerURL');
+            var overrideDrmServerURL = mw.getConfig('Vidiun.overrideDrmServerURL');
             if (overrideDrmServerURL) {
                 licenseUri = overrideDrmServerURL;
             } else {
-                var licenseBaseUrl = mw.getConfig('Kaltura.UdrmServerURL');
+                var licenseBaseUrl = mw.getConfig('Vidiun.UdrmServerURL');
                 if (!licenseBaseUrl) {
                     this.log('Error:: failed to retrieve UDRM license URL ');
                 }
