@@ -6,6 +6,6 @@
     },
     "mw.FPS": {
         "scripts": "resources/mw.FPS.js",
-        "dependencies": ["mw.KBasePlugin"]
+        "dependencies": ["mw.VBasePlugin"]
     }
 }
