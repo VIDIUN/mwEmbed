@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.KBaseSmartContainer = mw.KBaseComponent.extend({
+	mw.VBaseSmartContainer = mw.VBaseComponent.extend({
 		title: "settings",                          // default title attribute for the smart container button. Should be override by each specific smart container
 		closingEvents: 'onplay',                    // events that trigger closing the smart container plugins screen. should be override for each smart container according to its plugins
 		registeredPlugins: [],                      // plugins to display in the Smart Container plugins screen
@@ -68,16 +68,16 @@
 						}
 					});
 
-					_this.bind( "preShowScreen displayMenuOverlay", function(){ // close the smart container screen when opening a kBaseScreen plugin
+					_this.bind( "preShowScreen displayMenuOverlay", function(){ // close the smart container screen when opening a vBaseScreen plugin
 						if ( _this.pluginsScreenOpened ){
 							_this.hideRegisteredPlugins();
 						}
 					});
 
-					_this.bind( "displayMenuOverlay", function(){ // close the smart container screen when opening a kBaseScreen plugin
+					_this.bind( "displayMenuOverlay", function(){ // close the smart container screen when opening a vBaseScreen plugin
 						_this.overlayOpen = true;
 					});
-					_this.bind( "closeMenuOverlay", function(){ // close the smart container screen when opening a kBaseScreen plugin
+					_this.bind( "closeMenuOverlay", function(){ // close the smart container screen when opening a vBaseScreen plugin
 						_this.overlayOpen = false;
 					});
 

@@ -43,7 +43,7 @@ class mweApiGetLicenseData {
 		$response = array();
 		
         // Trim possible ending slash
-        $udrmBaseURL = rtrim($wgKalturaUdrmLicenseServerUrl, '/');
+        $udrmBaseURL = rtrim($wgVidiunUdrmLicenseServerUrl, '/');
         
         try {
             $missingParams = array_diff(array('drm', 'flavor_id', 'entry_id', 'uiconf_id'), array_keys($_REQUEST));

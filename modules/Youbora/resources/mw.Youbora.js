@@ -27,8 +27,8 @@
 			"userId": null,
 			"youboraVersion":'2.2.1',
 			"bufferUnderrunThreshold": 1000,
-			// by default configured against the "kaltura" house account
-			"accountName": 'kaltura',
+			// by default configured against the "vidiun" house account
+			"accountName": 'vidiun',
 			"trackEventMonitor": null,
 			// default custom params: 
 			"param1": "{playerStatusProxy.loadTime}",
@@ -68,8 +68,8 @@
 				}
 			});
 			this.bind('playerReady', function(){
-				if ( _this.kalturaContextData && _this.kalturaContextData.flavorAssets && _this.kalturaContextData.flavorAssets.length === 1 ){
-					_this.currentBitRate = _this.kalturaContextData.flavorAssets[0].bitrate;
+				if ( _this.vidiunContextData && _this.vidiunContextData.flavorAssets && _this.vidiunContextData.flavorAssets.length === 1 ){
+					_this.currentBitRate = _this.vidiunContextData.flavorAssets[0].bitrate;
 				}
 				_this.addBindings();
 			});
@@ -130,7 +130,7 @@
 			this.bind('embedPlayerError' + this.bindPostfix + ' mediaLoadError'  + this.bindPostfix + ' playerError' + this.bindPostfix, function () {
 				var errorMsg = _this.embedPlayer.getError() ? _this.embedPlayer.getError().message : _this.embedPlayer.getErrorMessage();
 				_this.sendBeacon( 'error', {
-					'player': 'kaltura-player-v' + MWEMBED_VERSION,
+					'player': 'vidiun-player-v' + MWEMBED_VERSION,
 					'errorCode': '-1', // currently we don't support error codes
 					'msg': errorMsg,
 					'resource': _this.getCurrentVideoSrc(),
@@ -241,7 +241,7 @@
 			var _this = this;
 			var sendStartEvent = function(){
 				var beaconObj = {
-					'player': 'kaltura-player-v' + MWEMBED_VERSION,
+					'player': 'vidiun-player-v' + MWEMBED_VERSION,
 					'resource': _this.getCurrentVideoSrc(),
 					// 'transcode' // not presently used.
 					'live': _this.embedPlayer.isLive(),
@@ -316,7 +316,7 @@
 				'bitrate': this.currentBitRate !== -1 ? this.currentBitRate * 1024 : -1,
 				'time': this.embedPlayer.currentTime,
 				//'totalBytes':"0", // value is only sent along with the dataType parameter. If the bitrate parameter is sent, then this one is not needed.
-				//'dataType': "0", // Kaltura does not really do RTMP streams any more.
+				//'dataType': "0", // Vidiun does not really do RTMP streams any more.
 				'diffTime': new Date().getTime() - this.previusPingTime
 				// 'nodeHost' //String that indicates the CDN� Node Host
 			});

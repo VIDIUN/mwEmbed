@@ -283,7 +283,7 @@ mw.MediaElement.prototype = {
 				}
 			});
 			// NOTE: We really should not have two VDN sources the point of vdn is to be a set of adaptive streams.
-			// This work around is a result of Kaltura HLS stream tagging
+			// This work around is a result of Vidiun HLS stream tagging
 			if( ( mw.isNativeApp() || mw.isIphone() || mw.isAndroid4andUp() ) && mobileVdn ){
 				_this.setSource( mobileVdn );
 			} else if( desktopVdn ){

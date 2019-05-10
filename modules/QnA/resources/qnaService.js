@@ -243,7 +243,7 @@ DAL for Q&A Module
                 "filter:systemNameEqual": this.QandA_MetadataProfileSystemName
             };
 
-            this.getKClient().doRequest(listMetadataProfileRequest, function (result) {
+            this.getVClient().doRequest(listMetadataProfileRequest, function (result) {
                 _this.metadataProfile = result.objects[0];
                 _this.userId=_this.qnaPlugin.getUserID();
                 deferred.resolve();

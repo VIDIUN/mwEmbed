@@ -4,7 +4,7 @@
             "resources/hls.min.js" ,
           "resources/hlsjs.js"
         ],
-        "dependencies": "mw.KBasePlugin",
-        "kalturaPluginName": "hlsjs"
+        "dependencies": "mw.VBasePlugin",
+        "vidiunPluginName": "hlsjs"
     }
 }

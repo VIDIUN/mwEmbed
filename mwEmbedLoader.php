@@ -384,27 +384,27 @@ class mwEmbedLoader {
 		return $loaderJs;
 	}
 	private function getExportedConfig(){
-		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgKalturaUseManifestUrls,
-			$wgKalturaUseManifestUrls, $wgHTTPProtocol, $wgKalturaServiceUrl, $wgKalturaServiceBase,
-			$wgKalturaCDNUrl, $wgKalturaStatsServiceUrl,$wgKalturaLiveStatsServiceUrl, $wgKalturaAnalyticsServiceUrl, $wgKalturaIframeRewrite, $wgEnableIpadHTMLControls,
-			$wgKalturaAllowIframeRemoteService, $wgKalturaUseAppleAdaptive, $wgKalturaEnableEmbedUiConfJs,
-			$wgKalturaGoogleAnalyticsUA, $wgHTML5PsWebPath, $wgAllowedVars, $wgAllowedPluginVars, $wgAllowedPluginVarsValPartials, $wgAllowedVarsKeyPartials,
-			$wgCacheTTL, $wgMaxCacheEntries, $wgKalturaSupressNonProductionUrlsWarning;
+		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgVidiunUseManifestUrls,
+			$wgVidiunUseManifestUrls, $wgHTTPProtocol, $wgVidiunServiceUrl, $wgVidiunServiceBase,
+			$wgVidiunCDNUrl, $wgVidiunStatsServiceUrl,$wgVidiunLiveStatsServiceUrl, $wgVidiunAnalyticsServiceUrl, $wgVidiunIframeRewrite, $wgEnableIpadHTMLControls,
+			$wgVidiunAllowIframeRemoteService, $wgVidiunUseAppleAdaptive, $wgVidiunEnableEmbedUiConfJs,
+			$wgVidiunGoogleAnalyticsUA, $wgHTML5PsWebPath, $wgAllowedVars, $wgAllowedPluginVars, $wgAllowedPluginVarsValPartials, $wgAllowedVarsKeyPartials,
+			$wgCacheTTL, $wgMaxCacheEntries, $wgVidiunSupressNonProductionUrlsWarning;
 		$exportedJS ='';
 		// Set up globals to be exported as mwEmbed config:
 		$exportedJsConfig= array(
 			'debug' => $wgEnableScriptDebug,
 			//  export the http url for the loader
 			'Mw.XmlProxyUrl' => $wgMwEmbedProxyUrl,
-			'Kaltura.UseManifestUrls' => $wgKalturaUseManifestUrls,
-			'Kaltura.Protocol'	=>	$wgHTTPProtocol,
-			'Kaltura.ServiceUrl' => $wgKalturaServiceUrl,
-			'Kaltura.ServiceBase' => $wgKalturaServiceBase,
-			'Kaltura.CdnUrl' => $wgKalturaCDNUrl,
-			'Kaltura.StatsServiceUrl' => $wgKalturaStatsServiceUrl,
-			'Kaltura.LiveStatsServiceUrl'=>$wgKalturaLiveStatsServiceUrl,
-			'Kaltura.AnalyticsUrl'=>$wgKalturaAnalyticsServiceUrl,
-			'Kaltura.IframeRewrite' => $wgKalturaIframeRewrite,
+			'Vidiun.UseManifestUrls' => $wgVidiunUseManifestUrls,
+			'Vidiun.Protocol'	=>	$wgHTTPProtocol,
+			'Vidiun.ServiceUrl' => $wgVidiunServiceUrl,
+			'Vidiun.ServiceBase' => $wgVidiunServiceBase,
+			'Vidiun.CdnUrl' => $wgVidiunCDNUrl,
+			'Vidiun.StatsServiceUrl' => $wgVidiunStatsServiceUrl,
+			'Vidiun.LiveStatsServiceUrl'=>$wgVidiunLiveStatsServiceUrl,
+			'Vidiun.AnalyticsUrl'=>$wgVidiunAnalyticsServiceUrl,
+			'Vidiun.IframeRewrite' => $wgVidiunIframeRewrite,
 			'EmbedPlayer.EnableIpadHTMLControls' => $wgEnableIpadHTMLControls,
 			'EmbedPlayer.UseFlashOnAndroid' => true,
 			'Vidiun.LoadScriptForVideoTags' => true,
