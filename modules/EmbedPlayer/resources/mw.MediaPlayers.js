@@ -35,14 +35,14 @@ mw.MediaPlayers.prototype = {
 		this.defaultPlayers['video/h264'] = ['NativeComponent', 'Native', 'Kplayer', 'Silverlight', 'Vlc'];
 		this.defaultPlayers['video/mp4'] = ['NativeComponent', 'Native', 'Kplayer', 'Silverlight', 'Vlc'];
 		this.defaultPlayers['application/vnd.apple.mpegurl'] = ['NativeComponent', 'Native'];
-		this.defaultPlayers['application/x-shockwave-flash'] = ['Kplayer'];
+		this.defaultPlayers['application/x-shockwave-flash'] = ['Vplayer'];
 
 		this.defaultPlayers['video/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['video/webm'] = ['Native', 'Vlc'];
 		this.defaultPlayers['application/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['audio/ogg'] = ['Native', 'Vlc', 'Java' ];
-		this.defaultPlayers['audio/mpeg']= ['Native', 'Kplayer'];
-		this.defaultPlayers['audio/mp3']= ['Native', 'Kplayer'];
+		this.defaultPlayers['audio/mpeg']= ['Native', 'Vplayer'];
+		this.defaultPlayers['audio/mp3']= ['Native', 'Vplayer'];
 		this.defaultPlayers['video/mpeg'] = ['Vlc'];
 		this.defaultPlayers['video/x-msvideo'] = ['Vlc'];
 		this.defaultPlayers['video/multicast'] = ['Silverlight'];
@@ -54,7 +54,7 @@ mw.MediaPlayers.prototype = {
 		this.defaultPlayers['image/jpeg'] = ['ImageOverlay'];
 		this.defaultPlayers['image/png'] = ['ImageOverlay'];
 		if ( mw.getConfig("LeadWithHLSOnFlash") ) {
-			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Kplayer');
+			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Vplayer');
 		}
 
 	},

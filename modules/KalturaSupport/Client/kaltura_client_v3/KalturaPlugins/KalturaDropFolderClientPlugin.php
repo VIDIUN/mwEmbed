@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaMetadataClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunMetadataClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderContentFileHandlerMatchPolicy
+class VidiunDropFolderContentFileHandlerMatchPolicy
 {
 	const ADD_AS_NEW = 1;
 	const MATCH_EXISTING_OR_ADD_AS_NEW = 2;
@@ -48,20 +48,20 @@ class KalturaDropFolderContentFileHandlerMatchPolicy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileDeletePolicy
+class VidiunDropFolderFileDeletePolicy
 {
 	const MANUAL_DELETE = 1;
 	const AUTO_DELETE = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileStatus
+class VidiunDropFolderFileStatus
 {
 	const UPLOADING = 1;
 	const PENDING = 2;
@@ -81,10 +81,10 @@ class KalturaDropFolderFileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderStatus
+class VidiunDropFolderStatus
 {
 	const DISABLED = 0;
 	const ENABLED = 1;
@@ -93,10 +93,10 @@ class KalturaDropFolderStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderErrorCode
+class VidiunDropFolderErrorCode
 {
 	const ERROR_CONNECT = "1";
 	const ERROR_AUTENTICATE = "2";
@@ -107,10 +107,10 @@ class KalturaDropFolderErrorCode
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileErrorCode
+class VidiunDropFolderFileErrorCode
 {
 	const ERROR_ADDING_BULK_UPLOAD = "dropFolderXmlBulkUpload.ERROR_ADDING_BULK_UPLOAD";
 	const ERROR_ADD_CONTENT_RESOURCE = "dropFolderXmlBulkUpload.ERROR_ADD_CONTENT_RESOURCE";
@@ -135,20 +135,20 @@ class KalturaDropFolderFileErrorCode
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileHandlerType
+class VidiunDropFolderFileHandlerType
 {
 	const XML = "dropFolderXmlBulkUpload.XML";
 	const CONTENT = "1";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileOrderBy
+class VidiunDropFolderFileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const FILE_NAME_ASC = "+fileName";
@@ -169,10 +169,10 @@ class KalturaDropFolderFileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderOrderBy
+class VidiunDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -185,10 +185,10 @@ class KalturaDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderType
+class VidiunDropFolderType
 {
 	const LOCAL = "1";
 	const FTP = "2";
@@ -198,10 +198,10 @@ class KalturaDropFolderType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFtpDropFolderOrderBy
+class VidiunFtpDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -214,10 +214,10 @@ class KalturaFtpDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemoteDropFolderOrderBy
+class VidiunRemoteDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -230,10 +230,10 @@ class KalturaRemoteDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaScpDropFolderOrderBy
+class VidiunScpDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -246,10 +246,10 @@ class KalturaScpDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSftpDropFolderOrderBy
+class VidiunSftpDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -262,10 +262,10 @@ class KalturaSftpDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSshDropFolderOrderBy
+class VidiunSshDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -278,15 +278,15 @@ class KalturaSshDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDropFolderFileHandlerConfig extends KalturaObjectBase
+abstract class VidiunDropFolderFileHandlerConfig extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileHandlerType
+	 * @var VidiunDropFolderFileHandlerType
 	 * @readonly
 	 */
 	public $handlerType = null;
@@ -295,10 +295,10 @@ abstract class KalturaDropFolderFileHandlerConfig extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolder extends KalturaObjectBase
+class VidiunDropFolder extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -333,14 +333,14 @@ class KalturaDropFolder extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderType
+	 * @var VidiunDropFolderType
 	 */
 	public $type = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderStatus
+	 * @var VidiunDropFolderStatus
 	 */
 	public $status = null;
 
@@ -376,7 +376,7 @@ class KalturaDropFolder extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileDeletePolicy
+	 * @var VidiunDropFolderFileDeletePolicy
 	 */
 	public $fileDeletePolicy = null;
 
@@ -390,7 +390,7 @@ class KalturaDropFolder extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileHandlerType
+	 * @var VidiunDropFolderFileHandlerType
 	 */
 	public $fileHandlerType = null;
 
@@ -404,7 +404,7 @@ class KalturaDropFolder extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileHandlerConfig
+	 * @var VidiunDropFolderFileHandlerConfig
 	 */
 	public $fileHandlerConfig;
 
@@ -418,7 +418,7 @@ class KalturaDropFolder extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderErrorCode
+	 * @var VidiunDropFolderErrorCode
 	 */
 	public $errorCode = null;
 
@@ -498,10 +498,10 @@ class KalturaDropFolder extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFile extends KalturaObjectBase
+class VidiunDropFolderFile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -553,7 +553,7 @@ class KalturaDropFolderFile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileStatus
+	 * @var VidiunDropFolderFileStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -561,7 +561,7 @@ class KalturaDropFolderFile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderType
+	 * @var VidiunDropFolderType
 	 * @readonly
 	 */
 	public $type = null;
@@ -611,7 +611,7 @@ class KalturaDropFolderFile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileErrorCode
+	 * @var VidiunDropFolderFileErrorCode
 	 */
 	public $errorCode = null;
 
@@ -685,15 +685,15 @@ class KalturaDropFolderFile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileListResponse extends KalturaObjectBase
+class VidiunDropFolderFileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDropFolderFile
+	 * @var array of VidiunDropFolderFile
 	 * @readonly
 	 */
 	public $objects;
@@ -710,15 +710,15 @@ class KalturaDropFolderFileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderListResponse extends KalturaObjectBase
+class VidiunDropFolderListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDropFolder
+	 * @var array of VidiunDropFolder
 	 * @readonly
 	 */
 	public $objects;
@@ -735,10 +735,10 @@ class KalturaDropFolderListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDropFolderBaseFilter extends KalturaFilter
+abstract class VidiunDropFolderBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -778,7 +778,7 @@ abstract class KalturaDropFolderBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderType
+	 * @var VidiunDropFolderType
 	 */
 	public $typeEqual = null;
 
@@ -792,7 +792,7 @@ abstract class KalturaDropFolderBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderStatus
+	 * @var VidiunDropFolderStatus
 	 */
 	public $statusEqual = null;
 
@@ -848,7 +848,7 @@ abstract class KalturaDropFolderBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileHandlerType
+	 * @var VidiunDropFolderFileHandlerType
 	 */
 	public $fileHandlerTypeEqual = null;
 
@@ -904,7 +904,7 @@ abstract class KalturaDropFolderBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderErrorCode
+	 * @var VidiunDropFolderErrorCode
 	 */
 	public $errorCodeEqual = null;
 
@@ -947,15 +947,15 @@ abstract class KalturaDropFolderBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderContentFileHandlerConfig extends KalturaDropFolderFileHandlerConfig
+class VidiunDropFolderContentFileHandlerConfig extends VidiunDropFolderFileHandlerConfig
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderContentFileHandlerMatchPolicy
+	 * @var VidiunDropFolderContentFileHandlerMatchPolicy
 	 */
 	public $contentMatchPolicy = null;
 
@@ -974,10 +974,10 @@ class KalturaDropFolderContentFileHandlerConfig extends KalturaDropFolderFileHan
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderContentProcessorJobData extends KalturaJobData
+class VidiunDropFolderContentProcessorJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -1003,7 +1003,7 @@ class KalturaDropFolderContentProcessorJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderContentFileHandlerMatchPolicy
+	 * @var VidiunDropFolderContentFileHandlerMatchPolicy
 	 */
 	public $contentMatchPolicy = null;
 
@@ -1025,10 +1025,10 @@ class KalturaDropFolderContentProcessorJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDropFolderFileBaseFilter extends KalturaFilter
+abstract class VidiunDropFolderFileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -1096,7 +1096,7 @@ abstract class KalturaDropFolderFileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileStatus
+	 * @var VidiunDropFolderFileStatus
 	 */
 	public $statusEqual = null;
 
@@ -1180,7 +1180,7 @@ abstract class KalturaDropFolderFileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDropFolderFileErrorCode
+	 * @var VidiunDropFolderFileErrorCode
 	 */
 	public $errorCodeEqual = null;
 
@@ -1223,33 +1223,33 @@ abstract class KalturaDropFolderFileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaRemoteDropFolder extends KalturaDropFolder
+abstract class VidiunRemoteDropFolder extends VidiunDropFolder
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileFilter extends KalturaDropFolderFileBaseFilter
+class VidiunDropFolderFileFilter extends VidiunDropFolderFileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFilter extends KalturaDropFolderBaseFilter
+class VidiunDropFolderFilter extends VidiunDropFolderBaseFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $currentDc = null;
 
@@ -1257,10 +1257,10 @@ class KalturaDropFolderFilter extends KalturaDropFolderBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFtpDropFolder extends KalturaRemoteDropFolder
+class VidiunFtpDropFolder extends VidiunRemoteDropFolder
 {
 	/**
 	 * 
@@ -1294,10 +1294,10 @@ class KalturaFtpDropFolder extends KalturaRemoteDropFolder
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSshDropFolder extends KalturaRemoteDropFolder
+abstract class VidiunSshDropFolder extends VidiunRemoteDropFolder
 {
 	/**
 	 * 
@@ -1352,10 +1352,10 @@ abstract class KalturaSshDropFolder extends KalturaRemoteDropFolder
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileResource extends KalturaDataCenterContentResource
+class VidiunDropFolderFileResource extends VidiunDataCenterContentResource
 {
 	/**
 	 * Id of the drop folder file object
@@ -1369,10 +1369,10 @@ class KalturaDropFolderFileResource extends KalturaDataCenterContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderImportJobData extends KalturaSshImportJobData
+class VidiunDropFolderImportJobData extends VidiunSshImportJobData
 {
 	/**
 	 * 
@@ -1385,412 +1385,412 @@ class KalturaDropFolderImportJobData extends KalturaSshImportJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaRemoteDropFolderBaseFilter extends KalturaDropFolderFilter
+abstract class VidiunRemoteDropFolderBaseFilter extends VidiunDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaScpDropFolder extends KalturaSshDropFolder
+class VidiunScpDropFolder extends VidiunSshDropFolder
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSftpDropFolder extends KalturaSshDropFolder
+class VidiunSftpDropFolder extends VidiunSshDropFolder
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemoteDropFolderFilter extends KalturaRemoteDropFolderBaseFilter
+class VidiunRemoteDropFolderFilter extends VidiunRemoteDropFolderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaFtpDropFolderBaseFilter extends KalturaRemoteDropFolderFilter
+abstract class VidiunFtpDropFolderBaseFilter extends VidiunRemoteDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSshDropFolderBaseFilter extends KalturaRemoteDropFolderFilter
+abstract class VidiunSshDropFolderBaseFilter extends VidiunRemoteDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFtpDropFolderFilter extends KalturaFtpDropFolderBaseFilter
+class VidiunFtpDropFolderFilter extends VidiunFtpDropFolderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSshDropFolderFilter extends KalturaSshDropFolderBaseFilter
+class VidiunSshDropFolderFilter extends VidiunSshDropFolderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaScpDropFolderBaseFilter extends KalturaSshDropFolderFilter
+abstract class VidiunScpDropFolderBaseFilter extends VidiunSshDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSftpDropFolderBaseFilter extends KalturaSshDropFolderFilter
+abstract class VidiunSftpDropFolderBaseFilter extends VidiunSshDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaScpDropFolderFilter extends KalturaScpDropFolderBaseFilter
+class VidiunScpDropFolderFilter extends VidiunScpDropFolderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSftpDropFolderFilter extends KalturaSftpDropFolderBaseFilter
+class VidiunSftpDropFolderFilter extends VidiunSftpDropFolderBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderService extends KalturaServiceBase
+class VidiunDropFolderService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * Allows you to add a new KalturaDropFolder object
+	 * Allows you to add a new VidiunDropFolder object
 	 * 
-	 * @param KalturaDropFolder $dropFolder 
-	 * @return KalturaDropFolder
+	 * @param VidiunDropFolder $dropFolder 
+	 * @return VidiunDropFolder
 	 */
-	function add(KalturaDropFolder $dropFolder)
+	function add(VidiunDropFolder $dropFolder)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolder", $dropFolder->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolder", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolder", $dropFolder->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolder", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolder");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolder");
 		return $resultObject;
 	}
 
 	/**
-	 * Retrieve a KalturaDropFolder object by ID
+	 * Retrieve a VidiunDropFolder object by ID
 	 * 
 	 * @param int $dropFolderId 
-	 * @return KalturaDropFolder
+	 * @return VidiunDropFolder
 	 */
 	function get($dropFolderId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderId", $dropFolderId);
-		$this->client->queueServiceActionCall("dropfolder_dropfolder", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderId", $dropFolderId);
+		$this->client->queueServiceActionCall("dropfolder_dropfolder", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolder");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolder");
 		return $resultObject;
 	}
 
 	/**
-	 * Update an existing KalturaDropFolder object
+	 * Update an existing VidiunDropFolder object
 	 * 
 	 * @param int $dropFolderId 
-	 * @param KalturaDropFolder $dropFolder Id
-	 * @return KalturaDropFolder
+	 * @param VidiunDropFolder $dropFolder Id
+	 * @return VidiunDropFolder
 	 */
-	function update($dropFolderId, KalturaDropFolder $dropFolder)
+	function update($dropFolderId, VidiunDropFolder $dropFolder)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderId", $dropFolderId);
-		$this->client->addParam($kparams, "dropFolder", $dropFolder->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolder", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderId", $dropFolderId);
+		$this->client->addParam($vparams, "dropFolder", $dropFolder->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolder", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolder");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolder");
 		return $resultObject;
 	}
 
 	/**
-	 * Mark the KalturaDropFolder object as deleted
+	 * Mark the VidiunDropFolder object as deleted
 	 * 
 	 * @param int $dropFolderId 
-	 * @return KalturaDropFolder
+	 * @return VidiunDropFolder
 	 */
 	function delete($dropFolderId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderId", $dropFolderId);
-		$this->client->queueServiceActionCall("dropfolder_dropfolder", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderId", $dropFolderId);
+		$this->client->queueServiceActionCall("dropfolder_dropfolder", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolder");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolder");
 		return $resultObject;
 	}
 
 	/**
-	 * List KalturaDropFolder objects
+	 * List VidiunDropFolder objects
 	 * 
-	 * @param KalturaDropFolderFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDropFolderListResponse
+	 * @param VidiunDropFolderFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDropFolderListResponse
 	 */
-	function listAction(KalturaDropFolderFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDropFolderFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolder", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolder", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderFileService extends KalturaServiceBase
+class VidiunDropFolderFileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * Allows you to add a new KalturaDropFolderFile object
+	 * Allows you to add a new VidiunDropFolderFile object
 	 * 
-	 * @param KalturaDropFolderFile $dropFolderFile 
-	 * @return KalturaDropFolderFile
+	 * @param VidiunDropFolderFile $dropFolderFile 
+	 * @return VidiunDropFolderFile
 	 */
-	function add(KalturaDropFolderFile $dropFolderFile)
+	function add(VidiunDropFolderFile $dropFolderFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFile", $dropFolderFile->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFile", $dropFolderFile->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 
 	/**
-	 * Retrieve a KalturaDropFolderFile object by ID
+	 * Retrieve a VidiunDropFolderFile object by ID
 	 * 
 	 * @param int $dropFolderFileId 
-	 * @return KalturaDropFolderFile
+	 * @return VidiunDropFolderFile
 	 */
 	function get($dropFolderFileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFileId", $dropFolderFileId);
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFileId", $dropFolderFileId);
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 
 	/**
-	 * Update an existing KalturaDropFolderFile object
+	 * Update an existing VidiunDropFolderFile object
 	 * 
 	 * @param int $dropFolderFileId 
-	 * @param KalturaDropFolderFile $dropFolderFile Id
-	 * @return KalturaDropFolderFile
+	 * @param VidiunDropFolderFile $dropFolderFile Id
+	 * @return VidiunDropFolderFile
 	 */
-	function update($dropFolderFileId, KalturaDropFolderFile $dropFolderFile)
+	function update($dropFolderFileId, VidiunDropFolderFile $dropFolderFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFileId", $dropFolderFileId);
-		$this->client->addParam($kparams, "dropFolderFile", $dropFolderFile->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFileId", $dropFolderFileId);
+		$this->client->addParam($vparams, "dropFolderFile", $dropFolderFile->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 
 	/**
-	 * Update status of KalturaDropFolderFile
+	 * Update status of VidiunDropFolderFile
 	 * 
 	 * @param int $dropFolderFileId 
 	 * @param int $status 
-	 * @return KalturaDropFolderFile
+	 * @return VidiunDropFolderFile
 	 */
 	function updateStatus($dropFolderFileId, $status)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFileId", $dropFolderFileId);
-		$this->client->addParam($kparams, "status", $status);
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "updateStatus", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFileId", $dropFolderFileId);
+		$this->client->addParam($vparams, "status", $status);
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "updateStatus", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 
 	/**
-	 * Mark the KalturaDropFolderFile object as deleted
+	 * Mark the VidiunDropFolderFile object as deleted
 	 * 
 	 * @param int $dropFolderFileId 
-	 * @return KalturaDropFolderFile
+	 * @return VidiunDropFolderFile
 	 */
 	function delete($dropFolderFileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFileId", $dropFolderFileId);
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFileId", $dropFolderFileId);
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 
 	/**
-	 * List KalturaDropFolderFile objects
+	 * List VidiunDropFolderFile objects
 	 * 
-	 * @param KalturaDropFolderFileFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDropFolderFileListResponse
+	 * @param VidiunDropFolderFileFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDropFolderFileListResponse
 	 */
-	function listAction(KalturaDropFolderFileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDropFolderFileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFileListResponse");
 		return $resultObject;
 	}
 
 	/**
-	 * Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
+	 * Set the VidiunDropFolderFile status to ignore (VidiunDropFolderFileStatus::IGNORE)
 	 * 
 	 * @param int $dropFolderFileId 
-	 * @return KalturaDropFolderFile
+	 * @return VidiunDropFolderFile
 	 */
 	function ignore($dropFolderFileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "dropFolderFileId", $dropFolderFileId);
-		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "ignore", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "dropFolderFileId", $dropFolderFileId);
+		$this->client->queueServiceActionCall("dropfolder_dropfolderfile", "ignore", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDropFolderFile");
+		$this->client->validateObjectType($resultObject, "VidiunDropFolderFile");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDropFolderClientPlugin extends KalturaClientPlugin
+class VidiunDropFolderClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaDropFolderService
+	 * @var VidiunDropFolderService
 	 */
 	public $dropFolder = null;
 
 	/**
-	 * @var KalturaDropFolderFileService
+	 * @var VidiunDropFolderFileService
 	 */
 	public $dropFolderFile = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->dropFolder = new KalturaDropFolderService($client);
-		$this->dropFolderFile = new KalturaDropFolderFileService($client);
+		$this->dropFolder = new VidiunDropFolderService($client);
+		$this->dropFolderFile = new VidiunDropFolderFileService($client);
 	}
 
 	/**
-	 * @return KalturaDropFolderClientPlugin
+	 * @return VidiunDropFolderClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaDropFolderClientPlugin($client);
+		return new VidiunDropFolderClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

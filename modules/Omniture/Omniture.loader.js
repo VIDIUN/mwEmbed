@@ -1,6 +1,6 @@
 ( function( mw, $ ) { "use strict";
 
-	mw.addKalturaConfCheck( function( embedPlayer, callback ){
+	mw.addVidiunConfCheck( function( embedPlayer, callback ){
 		var pluginName = null;
 		pluginName = embedPlayer.isPluginEnabled( 'omniture' ) ? 'omniture' : null;
 		if( ! pluginName ){

@@ -7,7 +7,7 @@
 // Include configuration: ( will include LocalSettings.php )
 chdir( dirname( __FILE__ ) . '/../../' );
 require_once( 'includes/DefaultSettings.php' );
-require_once( dirname( __FILE__ ) . '/KalturaCommon.php' );
+require_once( dirname( __FILE__ ) . '/VidiunCommon.php' );
 
 $download = new downloadEntry();
 $download->redirectDownload();
@@ -41,11 +41,11 @@ class downloadEntry {
 		}
 		return $this->resultObject;
 	}
-	// Errors set special X-Kaltura and X-Kaltura-App: header and then deliver the no sources video
+	// Errors set special X-Vidiun and X-Vidiun-App: header and then deliver the no sources video
 	private function fatalError( $errorMsg ) {
-		header( "X-Kaltura: error-6" );
-		header( "X-Kaltura-App: exiting on error 6 - requested flavor was not found" );
-		header( "X-Kaltura-Error: " . htmlspecialchars( $errorMsg ) );
+		header( "X-Vidiun: error-6" );
+		header( "X-Vidiun-App: exiting on error 6 - requested flavor was not found" );
+		header( "X-Vidiun-Error: " . htmlspecialchars( $errorMsg ) );
 		// Then redirect to no-sources video: 
 		$this->sources = $this->getErrorVideoSources();
 		$flavorUrl = $this->getSourceForUserAgent();
@@ -64,7 +64,7 @@ class downloadEntry {
 		if ( $this->forceDownload ) {
 			header( "Content-Description: File Transfer" );
 			header( "Content-Type: application/force-download" );
-			$extension = strrchr( substr( $flavorUrl, 0, strpos( $flavorUrl, "?ks=" ) ), '.' );
+			$extension = strrchr( substr( $flavorUrl, 0, strpos( $flavorUrl, "?vs=" ) ), '.' );
 			$flavorId = substr( strrchr( strstr( $flavorUrl, "/format/", true ), '/' ), 1 );
 			
 			if($_GET['downloadName'] != null){
@@ -95,9 +95,9 @@ class downloadEntry {
 		}
 	}
 	
-	// Load the Kaltura library and grab the most compatible flavor
+	// Load the Vidiun library and grab the most compatible flavor
 	public function getSources(){
-		global $wgKalturaServiceUrl, $wgKalturaUseAppleAdaptive, $wgHTTPProtocol;
+		global $wgVidiunServiceUrl, $wgVidiunUseAppleAdaptive, $wgHTTPProtocol;
 		// Check if we already have sources loaded:
 		if( $this->sources !== null ){
 			return $this->sources;
@@ -109,8 +109,8 @@ class downloadEntry {
 			return array();
 		}
 
-		$kResultObject = $this->getResultObject();
-		$resultObject =  $kResultObject->getResult();
+		$vResultObject = $this->getResultObject();
+		$resultObject =  $vResultObject->getResult();
 		
 		// add any web sources
 		$this->sources = array();
@@ -132,30 +132,30 @@ class downloadEntry {
 		$iphoneFlavors = '';
 
 		// Decide if to use playManifest or flvClipper URL
-		if( $kResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
-			$flavorUrl =  $kResultObject->request->getServiceConfig( 'ServiceUrl' ) .'/p/' . $kResultObject->getPartnerId() . '/sp/' .
-			$kResultObject->getPartnerId() . '00/playManifest/entryId/' . $kResultObject->request->getEntryId();
+		if( $vResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
+			$flavorUrl =  $vResultObject->request->getServiceConfig( 'ServiceUrl' ) .'/p/' . $vResultObject->getPartnerId() . '/sp/' .
+			$vResultObject->getPartnerId() . '00/playManifest/entryId/' . $vResultObject->request->getEntryId();
 		} else {
-			$flavorUrl = $kResultObject->request->getServiceConfig( 'CdnUrl' ) .'/p/' . $kResultObject->getPartnerId() . '/sp/' .
-			$kResultObject->getPartnerId() . '00/flvclipper/entry_id/' . $kResultObject->request->getEntryId();
+			$flavorUrl = $vResultObject->request->getServiceConfig( 'CdnUrl' ) .'/p/' . $vResultObject->getPartnerId() . '/sp/' .
+			$vResultObject->getPartnerId() . '00/flvclipper/entry_id/' . $vResultObject->request->getEntryId();
 		}
-		foreach( $resultObject['contextData']->flavorAssets as $KalturaFlavorAsset ){
+		foreach( $resultObject['contextData']->flavorAssets as $VidiunFlavorAsset ){
 			$source = array(
-				'data-bandwidth' => $KalturaFlavorAsset->bitrate * 8,
-				'data-width' =>  $KalturaFlavorAsset->width,
-				'data-height' =>  $KalturaFlavorAsset->height
+				'data-bandwidth' => $VidiunFlavorAsset->bitrate * 8,
+				'data-width' =>  $VidiunFlavorAsset->width,
+				'data-height' =>  $VidiunFlavorAsset->height
 			);
 
 			// If flavor status is not ready - continute to the next flavor
-			if( $KalturaFlavorAsset->status != 2 ) {
-				if( $KalturaFlavorAsset->status == 4 ){
+			if( $VidiunFlavorAsset->status != 2 ) {
+				if( $VidiunFlavorAsset->status == 4 ){
 					$source['data-error'] = "not-ready-transcoding" ;
 				}
 				continue;
 			}
 
 			// If we have apple http steaming then use it for ipad & iphone instead of regular flavors
-			if( strpos( $KalturaFlavorAsset->tags, 'applembr' ) !== false ) {
+			if( strpos( $VidiunFlavorAsset->tags, 'applembr' ) !== false ) {
 				$assetUrl = $flavorUrl . '/format/applehttp/protocol/' . $wgHTTPProtocol . '/a.m3u8';
 
 				$this->sources[] = array_merge( $source, array(
@@ -167,8 +167,8 @@ class downloadEntry {
 			}
 
 			// Check for rtsp as well:
-			if( strpos( $KalturaFlavorAsset->tags, 'hinted' ) !== false ){
-				$assetUrl = $flavorUrl . '/flavorId/' . $KalturaFlavorAsset->id .  '/format/rtsp/name/a.3gp';
+			if( strpos( $VidiunFlavorAsset->tags, 'hinted' ) !== false ){
+				$assetUrl = $flavorUrl . '/flavorId/' . $VidiunFlavorAsset->id .  '/format/rtsp/name/a.3gp';
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl,
 					'type' => 'application/rtsl',
@@ -178,28 +178,28 @@ class downloadEntry {
 			}
 
 			// Else use normal
-			$assetUrl = $flavorUrl . '/flavorId/' . $KalturaFlavorAsset->id . '/format/url/protocol/' . $wgHTTPProtocol;
+			$assetUrl = $flavorUrl . '/flavorId/' . $VidiunFlavorAsset->id . '/format/url/protocol/' . $wgHTTPProtocol;
 
 			// Add iPad Akamai flavor to iPad flavor Ids list
-			if( strpos( $KalturaFlavorAsset->tags, 'ipadnew' ) !== false ) {
-				$ipadFlavors .= $KalturaFlavorAsset->id . ",";
+			if( strpos( $VidiunFlavorAsset->tags, 'ipadnew' ) !== false ) {
+				$ipadFlavors .= $VidiunFlavorAsset->id . ",";
 			}
 
 			// Add iPhone Akamai flavor to iPad&iPhone flavor Ids list
-			if( strpos( $KalturaFlavorAsset->tags, 'iphonenew' ) !== false )
+			if( strpos( $VidiunFlavorAsset->tags, 'iphonenew' ) !== false )
 			{
-				$ipadFlavors .= $KalturaFlavorAsset->id . ",";
-				$iphoneFlavors .= $KalturaFlavorAsset->id . ",";
+				$ipadFlavors .= $VidiunFlavorAsset->id . ",";
+				$iphoneFlavors .= $VidiunFlavorAsset->id . ",";
 			}
 
-			if( strpos( $KalturaFlavorAsset->tags, 'iphone' ) !== false ){
+			if( strpos( $VidiunFlavorAsset->tags, 'iphone' ) !== false ){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl . '/a.mp4',
 					'type' => 'video/h264',
 					'data-flavorid' => 'iPhone',
 				) );
 			};
-			if( strpos( $KalturaFlavorAsset->tags, 'ipad' ) !== false ){
+			if( strpos( $VidiunFlavorAsset->tags, 'ipad' ) !== false ){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl  . '/a.mp4',
 					'type' => 'video/h264',
@@ -207,11 +207,11 @@ class downloadEntry {
 				) );
 			};
 
-			if( $KalturaFlavorAsset->fileExt == 'webm'
-				|| // Kaltura transcodes give: 'matroska'
-				strtolower($KalturaFlavorAsset->containerFormat) == 'matroska'
+			if( $VidiunFlavorAsset->fileExt == 'webm'
+				|| // Vidiun transcodes give: 'matroska'
+				strtolower($VidiunFlavorAsset->containerFormat) == 'matroska'
 				|| // Some ingestion systems give "webm"
-				strtolower($KalturaFlavorAsset->containerFormat) == 'webm'
+				strtolower($VidiunFlavorAsset->containerFormat) == 'webm'
 			){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl . '/a.webm',
@@ -220,11 +220,11 @@ class downloadEntry {
 				) );
 			}
 
-			if( $KalturaFlavorAsset->fileExt == 'ogg'
+			if( $VidiunFlavorAsset->fileExt == 'ogg'
 				||
-				$KalturaFlavorAsset->fileExt == 'ogv'
+				$VidiunFlavorAsset->fileExt == 'ogv'
 				||
-				$KalturaFlavorAsset->containerFormat == 'ogg'
+				$VidiunFlavorAsset->containerFormat == 'ogg'
 			){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl . '/a.ogg',
@@ -234,7 +234,7 @@ class downloadEntry {
 			};
 
 			// Check for ogg audio:
-			if( $KalturaFlavorAsset->fileExt == 'oga' ){
+			if( $VidiunFlavorAsset->fileExt == 'oga' ){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl . '/a.oga',
 					'type' => 'audio/ogg',
@@ -243,7 +243,7 @@ class downloadEntry {
 			}
 
 
-			if( $KalturaFlavorAsset->fileExt == '3gp' ){
+			if( $VidiunFlavorAsset->fileExt == '3gp' ){
 				$this->sources[] = array_merge( $source, array(
 					'src' => $assetUrl . '/a.3gp',
 					'type' => 'video/3gp',
@@ -258,11 +258,11 @@ class downloadEntry {
 		// Apple adaptive streaming is sometimes broken for short videos
 		// If video duration is less then 10 seconds, we should disable it
 		if( $resultObject['meta']->duration < 10 ) {
-			$wgKalturaUseAppleAdaptive = false;
+			$wgVidiunUseAppleAdaptive = false;
 		}
 
 		// Create iPad flavor for Akamai HTTP
-		if ( $ipadFlavors && $wgKalturaUseAppleAdaptive ){
+		if ( $ipadFlavors && $wgVidiunUseAppleAdaptive ){
 			$assetUrl = $flavorUrl . '/flavorIds/' . $ipadFlavors . '/format/applehttp/protocol/' . $wgHTTPProtocol;
 			// Adaptive flavors have no inheret bitrate or size:
 			$this->sources[] = array(
@@ -273,7 +273,7 @@ class downloadEntry {
 		}
 
 		// Create iPhone flavor for Akamai HTTP
-		if ( $iphoneFlavors && $wgKalturaUseAppleAdaptive )
+		if ( $iphoneFlavors && $wgVidiunUseAppleAdaptive )
 		{
 			$assetUrl = $flavorUrl . '/flavorIds/' . $iphoneFlavors . '/format/applehttp/protocol/' . $wgHTTPProtocol;
 			// Adaptive flavors have no inheret bitrate or size:
@@ -284,8 +284,8 @@ class downloadEntry {
 			);
 		}
 
-		// Add in playManifest authentication tokens ( both the KS and referee url )
-		if( $kResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
+		// Add in playManifest authentication tokens ( both the VS and referee url )
+		if( $vResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
 			foreach($this->sources as & $source ){
 				if( isset( $source['src'] )){
 					$source['src'] .= '?ks=' . $kResultObject->client->getKS() . '&referrer=' . $this->getReferer().'&playSessionId='.$this->getPlaySession();
@@ -518,29 +518,29 @@ class downloadEntry {
 	}
 
 	/**
-	 * Kaltura object provides sources, sometimes no sources are found or an error occurs in a video
+	 * Vidiun object provides sources, sometimes no sources are found or an error occurs in a video
 	 * delivery context we don't want ~nothing~ to happen instead we send a special error video.
 	 */
 	public static function getErrorVideoSources(){
-		// @@TODO pull this from config: 'Kaltura.BlackVideoSources'
+		// @@TODO pull this from config: 'Vidiun.BlackVideoSources'
 		return array(
 			'iphone' => array(
-				'src' => 'http://www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_ktavj42z/format/url/protocol/http/a.mp4',
+				'src' => 'http://www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_ktavj42z/format/url/protocol/http/a.mp4',
 				'type' =>'video/h264',
 				'data-flavorid' => 'iPhone'
 			),
 			'ogg' => array(
-				'src' => 'http://www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_gtm9gzz2/format/url/protocol/http/a.ogg',
+				'src' => 'http://www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_gtm9gzz2/format/url/protocol/http/a.ogg',
 				'type' => 'video/ogg',
 				'data-flavorid' => 'ogg'
 			),
 			'webm' => array(
-				'src' => 'http://www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_bqsosjph/format/url/protocol/http/a.webm',
+				'src' => 'http://www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_bqsosjph/format/url/protocol/http/a.webm',
 				'type' => 'video/webm',
 				'data-flavorid' => 'webm'
 			),
 			'3gp' => array(
-				'src' => 'http://www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_mfqemmyg/format/url/protocol/http/a.mp4',
+				'src' => 'http://www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_mfqemmyg/format/url/protocol/http/a.mp4',
 				'type' => 'video/3gp',
 				'data-flavorid' => '3gp'
 			)

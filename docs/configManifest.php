@@ -3,7 +3,7 @@
 require_once( realpath( dirname( __FILE__ ) )  . '/doc-base.php' );
 
 function outputConfig(){
-	global $wgMwEmbedEnabledModules, $wgKalturaPSHtml5SettingsPath;
+	global $wgMwEmbedEnabledModules, $wgVidiunPSHtml5SettingsPath;
 
 	// Support serving plugin manifest data in machine readalbe formats
 	if( !isset( $_REQUEST['plugin_id' ] ) ){
@@ -115,10 +115,10 @@ function outputConfig(){
 	
 	# Register all the onPage scripts:
 	$configRegister = array_merge( $configRegister, 
-		include( realpath( dirname( __FILE__ ) ). '/../kWidget/onPagePlugins/onPagePlugins.manifest.php' ) );
+		include( realpath( dirname( __FILE__ ) ). '/../vWidget/onPagePlugins/onPagePlugins.manifest.php' ) );
 	
-	# Register all kwidget-ps based scripts: ( if setup )
-	$html5ManifestFile = realpath( dirname( $wgKalturaPSHtml5SettingsPath ) . '/../ps/kwidget-ps.manifest.json' ) ;
+	# Register all vwidget-ps based scripts: ( if setup )
+	$html5ManifestFile = realpath( dirname( $wgVidiunPSHtml5SettingsPath ) . '/../ps/vwidget-ps.manifest.json' ) ;
 	if( is_file( $html5ManifestFile ) ){
 		$json = json_decode( file_get_contents( $html5ManifestFile), true );
 		if( $json == null){

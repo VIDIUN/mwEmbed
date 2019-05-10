@@ -13,14 +13,14 @@
 	mw.setConfig( 'EmbedPlayer.NotPlayableDownloadLink', true );
 </script>
 <script type="text/javascript">	
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Download Link" );
-	var kdp = $( '#' + videoId ).get(0);
+	var vdp = $( '#' + videoId ).get(0);
 	var $iframe = $( '#' + videoId + '_ifp' ).contents();
 	
 	asyncTest("Check for Download link", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			ok( $iframe.find( '.largePlayBtn' ).length, "Found player link" );
 			var link = $iframe.find( '.largePlayBtn' ).attr('href') || '';
 			notEqual( link.indexOf( '/entry_id/0_uka1msg4' ), -1 ,
@@ -34,13 +34,13 @@ function jsKalturaPlayerTest( videoId ){
 	
 	asyncTest("Change Media of linked player", function(){
 		window['onChangeMedia'] = function(){
-			var entryId = kdp.evaluate('{mediaProxy.entry.id}');
+			var entryId = vdp.evaluate('{mediaProxy.entry.id}');
 			equal(entryId, "0_swup5zao", "Entry 0_swup5zao change success" );
 			start();
 		}
 		window['doChangeMediaTest'] = function(){
-			kdp.addJsListener( 'changeMedia', 'onChangeMedia' );
-			kdp.sendNotification( "changeMedia", { 'entryId' : '0_swup5zao' } );
+			vdp.addJsListener( 'changeMedia', 'onChangeMedia' );
+			vdp.sendNotification( "changeMedia", { 'entryId' : '0_swup5zao' } );
 		}
 	});
 	
@@ -54,8 +54,8 @@ function jsKalturaPlayerTest( videoId ){
 	}
 </script>
 
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Download Link test </h2>
@@ -70,10 +70,10 @@ To enable the download link player you need to set a few flags:
 
 <br />
 
-<div id="kaltura_player" style="width:400px;height:330px"></div>
+<div id="vidiun_player" style="width:400px;height:330px"></div>
 <script>
-	kWidget.embed({
-		'targetId': 'kaltura_player',
+	vWidget.embed({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',

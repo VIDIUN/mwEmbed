@@ -6,7 +6,7 @@
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Omniture siteCatalyst15 test" );
 }
@@ -19,15 +19,15 @@ function jsKalturaPlayerTest( videoId ){
 	}
 </script>
 
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Omniture siteCatalyst15 test </h2>
-<div id="kaltura_player" style="float:left;width:300px;height:260px"></div>
+<div id="vidiun_player" style="float:left;width:300px;height:260px"></div>
 <script>
-kWidget.featureConfig( {
-	'targetId': 'kaltura_player',
+vWidget.featureConfig( {
+	'targetId': 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '11138511',
 	'entry_id' : '0_uka1msg4',
@@ -35,7 +35,7 @@ kWidget.featureConfig( {
 		'siteCatalyst15': {
 			'sCodePath' : null,
 			'plugin' : true,
-			'path' : 'http://projects.kaltura.com/demos/omniture/siteCatalyst15/v1/siteCatalyst15Plugin.swf',
+			'path' : 'http://projects.vidiun.com/demos/omniture/siteCatalyst15/v1/siteCatalyst15Plugin.swf',
 			
 			'trackEventMonitor' : 'omnitureLogSendNotification',
 			
@@ -82,9 +82,9 @@ kWidget.featureConfig( {
 	window['omnitureLogMediaCall'] = function( mediaCallArgs ){
 		$('#txtlog').append( 's.Media.' + mediaCallArgs[0] + ' ( ' + mediaCallArgs.slice(1).join(', ') + ' ) ' + "\n" );
 	}
-	window['omnitureLogSendNotification'] = function( kalturaEventName, omnitureEvent ){
+	window['omnitureLogSendNotification'] = function( vidiunEventName, omnitureEvent ){
 		$('#txtlog').append(
-			kalturaEventName + ': ' + 
+			vidiunEventName + ': ' + 
 			JSON.stringify( omnitureEvent ) + "\n"
 		)
 	}

@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'keyboardShortcuts', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'keyboardShortcuts', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			"volumePercentChange": 0.1,

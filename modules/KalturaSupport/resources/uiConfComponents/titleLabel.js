@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'titleLabel', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'titleLabel', mw.VBaseComponent.extend({
 		defaultConfig: {
 			"parent": "topBarContainer",
 			"order": 1,

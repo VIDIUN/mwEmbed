@@ -2,7 +2,7 @@
 
 	//Check if we are a friendly iframe: 
 	try {
-		if( window['parent'] && window['parent']['kWidget'] && window !== window['parent'] ){
+		if( window['parent'] && window['parent']['vWidget'] && window !== window['parent'] ){
 			mw.config.set( 'EmbedPlayer.IsFriendlyIframe', true );
 		} else{
 			mw.config.set( 'EmbedPlayer.IsFriendlyIframe', false );
@@ -34,25 +34,25 @@
 				}
 			}
 		} catch( e ) {
-			kWidget.log( "KalturaIframePlayerSetup, could not get configuration " );
+			vWidget.log( "VidiunIframePlayerSetup, could not get configuration " );
 		}
 	}
 	
-	// Set the main KalturaSupport.PlayerConfig var:
-	mw.config.set( 'KalturaSupport.PlayerConfig', playerData['playerConfig'] );
+	// Set the main VidiunSupport.PlayerConfig var:
+	mw.config.set( 'VidiunSupport.PlayerConfig', playerData['playerConfig'] );
 
 	// We should first read the config for the hashObj and after that overwrite with our own settings
 	// The entire block below must be after mw.config.set( hashObj.mwConfig );
 
 	// Don't do an iframe rewrite inside an iframe
-	mw.config.set( 'Kaltura.IframeRewrite', false );
+	mw.config.set( 'Vidiun.IframeRewrite', false );
 
 	// Set a prepend flag so its easy to see what's happening on client vs server side of the iframe:
 	mw.config.set( 'Mw.LogPrepend', 'iframe:');
 
 	// Don't rewrite the video tag from the loader ( if html5 is supported it will be
 	// invoked below and respect the persistent video tag option for iPad overlays )
-	mw.config.set( 'Kaltura.LoadScriptForVideoTags', false );
+	mw.config.set( 'Vidiun.LoadScriptForVideoTags', false );
 
 	// Don't wait for player metadata for size layout and duration Won't be needed since
 	// we add durationHint and size attributes to the video tag
@@ -86,17 +86,17 @@
 		}
 	};
 
-	if( kWidget.isUiConfIdHTML5( playerData.playerConfig.uiConfId )
+	if( vWidget.isUiConfIdHTML5( playerData.playerConfig.uiConfId )
 			||
-		!( kWidget.supportsFlash() || mw.config.get( 'Kaltura.ForceFlashOnDesktop' ) )
+		!( vWidget.supportsFlash() || mw.config.get( 'Vidiun.ForceFlashOnDesktop' ) )
 	){
 		// remove the no_rewrite flash object ( never used in rewrite )
-		removeElement('kaltura_player_iframe_no_rewrite');
+		removeElement('vidiun_player_iframe_no_rewrite');
 
 		// Issue the embedPlayer call:
 		$( '#' + playerData.playerId ).embedPlayer( function(){
 			// Try again to remove the flash player if not already removed:
-			$('#kaltura_player_iframe_no_rewrite').remove();
+			$('#vidiun_player_iframe_no_rewrite').remove();
 
 			var embedPlayer = $( '#' + playerData.playerId )[0];
 			// Try to seek to the IframeSeekOffset time:
@@ -109,7 +109,7 @@
 			}
 		});
 	} else {
-		mw.log("Error: KalturaIframePlayer:: rendering flash player after loading html5 lib");
+		mw.log("Error: VidiunIframePlayer:: rendering flash player after loading html5 lib");
 	}
 
 	// Handle server errors
@@ -121,4 +121,4 @@
 		);
 	}
 
-})( window.mw, window.jQuery, window.kalturaIframePackageData );
+})( window.mw, window.jQuery, window.vidiunIframePackageData );

@@ -1,15 +1,15 @@
 /**
-* Supports the display of kaltura VAST ads.
+* Supports the display of vidiun VAST ads.
 */
 ( function( mw, $ ) {"use strict";
 
 
-mw.KAdPlayer = function( embedPlayer ) {
-	// Create the KAdPlayer
+mw.VAdPlayer = function( embedPlayer ) {
+	// Create the VAdPlayer
 	return this.init( embedPlayer );
 };
 
-mw.KAdPlayer.prototype = {
+mw.VAdPlayer.prototype = {
 
 	// Ad tracking postFix:
 	trackingBindPostfix: '.AdTracking',
@@ -24,7 +24,7 @@ mw.KAdPlayer.prototype = {
 	adClickPostFix :'.adClick',
 
 	// General postFix binding
-	displayPostFix: '.displayKAd',
+	displayPostFix: '.displayVAd',
 
 	adSibling: null,
 
@@ -104,7 +104,7 @@ mw.KAdPlayer.prototype = {
 	 */
 	display: function( adSlot, displayDoneCallback, displayDuration ) {
 		var _this = this;
-		mw.log("KAdPlayer::display:" + adSlot.type + ' ads:' +  adSlot.ads.length );
+		mw.log("VAdPlayer::display:" + adSlot.type + ' ads:' +  adSlot.ads.length );
 
 		// if it's overlay player controls should not be disabled
 		if( adSlot.type !== 'overlay' ) {
@@ -342,7 +342,7 @@ mw.KAdPlayer.prototype = {
 		// check that we have a video to display:
 		var targetSource =  _this.embedPlayer.getCompatibleSource( adConf.videoFiles );
 		if( !targetSource ){
-			mw.log("KAdPlayer:: displayVideoFile> Error no adSlot video src ");
+			mw.log("VAdPlayer:: displayVideoFile> Error no adSlot video src ");
 			adSlot.playbackDone();
 			return ;
 		}
@@ -611,7 +611,7 @@ mw.KAdPlayer.prototype = {
 		var _this = this;
 		var embedPlayer = this.embedPlayer;
 		if( !vid ){
-			mw.log("KAdPlayer:: Error: displayVideoFile no vid to bind" );
+			mw.log("VAdPlayer:: Error: displayVideoFile no vid to bind" );
 			return ;
 		}
 		// update the current ad slot: 
@@ -707,7 +707,7 @@ mw.KAdPlayer.prototype = {
 						skipOffsetInSecs = vid.duration * percent;
 					}
 				} else {
-					mw.log("KAdPlayer:: ignoring skipoffset - invalid format");
+					mw.log("VAdPlayer:: ignoring skipoffset - invalid format");
 				}
 				if ( skipOffsetInSecs || skipPercentage ){
 					$('#' + embedPlayer.id + '_ad_skipBtn').hide();
@@ -715,7 +715,7 @@ mw.KAdPlayer.prototype = {
 			}
 		}
 		adConf.skipOffset = skipOffsetInSecs;
-		mw.log("KAdPlayer:: source updated, add tracking");
+		mw.log("VAdPlayer:: source updated, add tracking");
 		// Always track ad progress:
 		if( vid.readyState > 0 && embedPlayer.selectedPlayer.library !== 'Kplayer' ) {
 			setTimeout(function(){
@@ -808,7 +808,7 @@ mw.KAdPlayer.prototype = {
 		var result = 0;
 		var timesArr = timeString.split(":");
 		if (timesArr.length!=3) {
-		mw.log("KAdPlayer:: ignoring offset - invalid format");
+		mw.log("VAdPlayer:: ignoring offset - invalid format");
 		} else {
 		var multi = 1;
 		//add seconds, then minutes, then hours
@@ -828,7 +828,7 @@ mw.KAdPlayer.prototype = {
 	 */
 	displayCompanions:  function( adSlot, adConf, timeTargetType ){
 		var _this = this;
-		mw.log("KAdPlayer::displayCompanions: " + timeTargetType );
+		mw.log("VAdPlayer::displayCompanions: " + timeTargetType );
 		// NOTE:: is not clear from the ui conf response if multiple
 		// targets need to be supported, and how you would do that
 		var companionTargets = adSlot.companionTargets;
@@ -881,7 +881,7 @@ mw.KAdPlayer.prototype = {
 				targetElm.innerHTML = companion.html;
 			}
 		} catch( e ){
-			mw.log( "Error: KAdPlayer could not access parent iframe" );
+			mw.log( "Error: VAdPlayer could not access parent iframe" );
 		}
 	},
 
@@ -923,7 +923,7 @@ mw.KAdPlayer.prototype = {
 		var sendBeacon = function(eventName){
 			for(var i =0;i < adConf.trackingEvents.length; i++){
 				if( eventName == adConf.trackingEvents[ i ].eventName ){
-					mw.log("KAdPlayer:: sendBeacon: " + eventName + ' to: ' + adConf.trackingEvents[ i ].beaconUrl );
+					mw.log("VAdPlayer:: sendBeacon: " + eventName + ' to: ' + adConf.trackingEvents[ i ].beaconUrl );
 					mw.sendBeaconUrl( adConf.trackingEvents[ i ].beaconUrl );
 				}
 			}
@@ -1277,7 +1277,7 @@ mw.KAdPlayer.prototype = {
 
 			if( $.isFunction( doneCallback ) ){
 				$( vid ).bind('ended.playVideoSibling', function(){
-					mw.log("kAdPlayer::playVideoSibling: ended");
+					mw.log("vAdPlayer::playVideoSibling: ended");
 					$( vid ).unbind( 'ended.playVideoSibling' );
 					_this.restoreEmbedPlayer();
 					// call the deon callback:

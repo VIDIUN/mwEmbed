@@ -5,22 +5,22 @@ require_once( realpath( dirname( __FILE__ ) ) . '/../includes/DefaultSettings.ph
 // start gzip compression if avaliable: 
 if(!ob_start("ob_gzhandler")) ob_start();
 
-$authPage = new kalturaAuthPage();
+$authPage = new vidiunAuthPage();
 $authPage->run();
 
-class kalturaAuthPage {
+class vidiunAuthPage {
 	/**
 	 * Main output page method
 	 */
 	function run(){
-		global $wgKalturaAuthHTTPS, $wgKalturaAuthDomains, $wgHTTPProtocol;
+		global $wgVidiunAuthHTTPS, $wgVidiunAuthDomains, $wgHTTPProtocol;
 		// Check for must run over https
-		if( $wgKalturaAuthHTTPS && $wgHTTPProtocol != 'https' ){
-			return $this->outputError( "Error, Kaltura Authentication page must run over <b>https</b>" );
+		if( $wgVidiunAuthHTTPS && $wgHTTPProtocol != 'https' ){
+			return $this->outputError( "Error, Vidiun Authentication page must run over <b>https</b>" );
 		} 
 		// Check Domain restrictions
-		if( ! in_array($_SERVER['HTTP_HOST'], $wgKalturaAuthDomains ) ){
-			return $this->outputError( "Error, Kaltura page can't run on this domain, " .$_SERVER['HTTP_HOST'] );
+		if( ! in_array($_SERVER['HTTP_HOST'], $wgVidiunAuthDomains ) ){
+			return $this->outputError( "Error, Vidiun page can't run on this domain, " .$_SERVER['HTTP_HOST'] );
 		}
 		// output the javascript driven frame:
 		$this->outputAuthPage();
@@ -40,12 +40,12 @@ class kalturaAuthPage {
 	function getServiceConfig( $name ){
 		switch( $name ){
 			case 'ServiceUrl' : 
-				global $wgKalturaServiceUrl;
-				return $wgKalturaServiceUrl;
+				global $wgVidiunServiceUrl;
+				return $wgVidiunServiceUrl;
 				break;
 			case 'ServiceBase':
-				global $wgKalturaServiceBase;
-				return $wgKalturaServiceBase;
+				global $wgVidiunServiceBase;
+				return $wgVidiunServiceBase;
 				break;
 		}
 	}

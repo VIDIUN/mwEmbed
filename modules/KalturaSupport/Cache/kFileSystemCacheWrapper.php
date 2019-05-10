@@ -1,12 +1,12 @@
 <?php
 
-require_once(dirname(__FILE__) . '/kBaseCacheWrapper.php');
+require_once(dirname(__FILE__) . '/vBaseCacheWrapper.php');
 
 /**
  * @package infra
  * @subpackage cache
  */
-class kFileSystemCacheWrapper extends kBaseCacheWrapper
+class vFileSystemCacheWrapper extends vBaseCacheWrapper
 {
 	const EXPIRY_SUFFIX = '__expiry';
 
@@ -76,7 +76,7 @@ class kFileSystemCacheWrapper extends kBaseCacheWrapper
 	}
 		
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::get()
+	 * @see vBaseCacheWrapper::get()
 	 */
 	public function get($key)
 	{
@@ -109,7 +109,7 @@ class kFileSystemCacheWrapper extends kBaseCacheWrapper
 	}
 		
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::set()
+	 * @see vBaseCacheWrapper::set()
 	 */
 	public function set($key, $var, $expiry = 0)
 	{
@@ -130,7 +130,7 @@ class kFileSystemCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::delete()
+	 * @see vBaseCacheWrapper::delete()
 	 */
 	public function delete($key)
 	{

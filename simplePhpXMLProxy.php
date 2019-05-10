@@ -2,7 +2,7 @@
 // Script: Simple PHP Proxy: Get external HTML, JSON and more!
 //
 // *Version: 1.6, Last updated: 1/24/2009*
-// *Update by michael.dale@kaltura.com*
+// *Update by michael.dale@vidiun.com*
 // * added validate xml and content type
 // * added X-Forwarded-For header for geoLookup services
 //
@@ -149,7 +149,7 @@ require_once( dirname( __FILE__ ) . '/modules/KalturaSupport/KalturaCommon.php' 
 $requestHelper = $container['request_helper'];
 
 function isValidHost( $url = null ){
-	global $kConf;
+	global $vConf;
 	
 	if(!$url)
 		return false;
@@ -159,10 +159,10 @@ function isValidHost( $url = null ){
 		return false;
 	}
 
-	// Get our whitelist from kConf
-	if( isset( $kConf ) ){
-		if( $kConf->hasMap("proxy_whitelist") ){
-			$whitelist = $kConf->getMap("proxy_whitelist");
+	// Get our whitelist from vConf
+	if( isset( $vConf ) ){
+		if( $vConf->hasMap("proxy_whitelist") ){
+			$whitelist = $vConf->getMap("proxy_whitelist");
 		} else {
 			return true;
 		}
@@ -274,7 +274,7 @@ if( trim( $contents ) == '' ){
 if( mb_detect_encoding($contents, 'UTF-8', true) != "UTF-8" ) {
 	$contents = utf8_encode( $contents );
 }
-// remove leading ? in some kaltura cc xml responses :(
+// remove leading ? in some vidiun cc xml responses :(
 if( is_string( $contents ) && isset($contents[0]) && $contents[0] == '?' ){
 	$contents = substr( $contents, 1 );
 }
