@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Access Control Preview, Custom Purchase</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+function jsVidiunPlayerTest( videoId ){
+	var vdp = $('#' + videoId)[0];
+	module( "Access Control Preview" );
+	// Name this module
+	asyncTest("Free Preview End event", function(){
+		
+		window['onFreePreviewEnd'] = function(){
+			vdp.removeJsListener( 'freePreviewEnd', 'onFreePreviewEnd');
+			ok( true, 'Recived onFreePreviewEnd event' );
+			runTriggerPurchase();
+			QUnit.start();
+		};
+		
+		vidiunQunitWaitForPlayer(function(){
+			vdp.addJsListener( 'freePreviewEnd', 'onFreePreviewEnd' );
+			// Start playback
+			vdp.sendNotification( 'doPlay' );
+			// Seek to 8 seconds ( no sense in waiting for 10 seconds )
+			setTimeout(function(){
+				vdp.sendNotification( 'doSeek', 8 );
+			},1000);
+		});
+	});
+	
+	window['runTriggerPurchase'] = function(){
+		asyncTest("Trigger purchase", 2, function(){
+			var localVs = null;
+			window['onChangeMedia'] = function(){
+				vdp.removeJsListener( 'changeMedia', 'onChangeMedia');
+				// validate the updated vs: 
+				equal( vdp.evaluate( '{servicesProxy.vidiunClient.vs}' ), localVs, 'VS updated on change media' );
+				runPlaybackWithValidatedVS();
+				start();
+			}
+			
+			window['onPurchaseResult'] = function( rawResult ){
+				ok( rawResult.vs, "VS present in purchase result" );
+				// update vs...
+				localVs = rawResult.vs;
+				// add a change media listener for the VS update: 
+				vdp.addJsListener('changeMedia', 'onChangeMedia');
+			}
+			
+			$('.myPurchaseDialog').find("button").click();
+		});
+	};
+	window['runPlaybackWithValidatedVS'] = function(){
+		asyncTest("Playback full content", 1, function(){
+			window['onDoSeek'] = function(){
+				vdp.sendNotification( 'doPlay' );
+				setTimeout(function(){
+					vdp.sendNotification( 'doPlay' );
+				},1000);
+				
+				var testDone = false;
+				window.checkTestDone = function(){
+					if( vdp.evaluate('{video.player.currentTime}') > 11 ){
+						testDone = true;
+						vdp.removeJsListener('playerUpdatePlayhead', 'checkTestDone' );
+						ok( vdp.evaluate('{video.player.currentTime}') > 11, 'Playing content past 11 seconds');
+						vdp.sendNotification('doPause');
+						// done will all tests
+						start();
+					}
+				};
+				vdp.addJsListener('playerUpdatePlayhead', 'checkTestDone' );
+				
+				setTimeout( function(){
+					if( !testDone ){
+						// test seek timed out:
+						ok( false, "Could not seek and play past 11" );
+					}
+				}, 9000);
+			};
+			// Start playback
+			vdp.sendNotification( 'doPlay' );
+			vdp.addJsListener('playerSeekEnd', 'onDoSeek' );
+			// seek past end time:
+			vdp.sendNotification( 'doSeek', 9 );
+		});
+	};
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> Access Control Preview, Custom Purchase Flow </h2>
+Demo will pause at 10 seconds, and offer a purchase button. 
+The button calls a back end service that hands off a VS to the player. 
+<i>In a production environment you would check for purchase confirmation</i> <br><br>
+<div id="playerTarget" style="width:400px;height:330px;"></div>
+<br>
+<h2> Integration Guide:</h2>
+The default free preview dialog is repressed with <i>disableAlerts</i>, and an custom action is overlaid, <br>
+to demonstrate end to end preview -> purchase work flow. <br>
+Basic flow is as follows: 
+<pre class="prettyprint linenums">
+vWidget.embed( 'playerTarget', {<br/>	'wid' : '_243342',<br/>	'uiconf_id' : '8145862',<br/>	'entry_id' : '1_20x0ca3l',<br/>	'flashvars':{<br/>		'disableAlerts': true<br/>	},<br/>	'readyCallback': function( playerId ){<br/>		vdp = $('#' + playerId)[0];<br/>		// add a listener for onFreePreviewEnd event<br/>		vdp.vBind( 'freePreviewEnd', function(){<br/>			// video will be paused <br/>			// add your purchase flow<br/>			$('&lt;div&gt;').addClass('your-purchase-dialog')<br/>			.find('#purchase-done-button').click(function(){<br/>				// async purchase flow is complete, send the vs to the player: <br/>				vdp.setVDPAttribute( 'servicesProxy.vidiunClient', 'vs', vsJSON.vs );<br/>				$('.myPurchaseDialog').remove();<br/>				// player should be in &quot;ready to play&quot; state. <br/>			})<br/>		} );		<br/>	}<br/>});
+</pre>
+<script>
+	var myVdp = null;
+	window['doPurchaseDialog'] = function(){
+		var pos = $('#playerTarget').position();
+		$('#playerTarget').after(
+			$('<div />').append(
+				$('<h2>Sample purchase flow:</h2>'),
+				$('<br />'),
+				$('<button />')
+				.attr('type', 'button')
+				.html('simulate purchase')
+				.click( function(){
+					// set to loading 
+					$('.myPurchaseDialog').html( 'loading ...' );
+					// Query the service for a vs:
+					$.getJSON( '../../../services.php?service=VSTest&entry_id=1_20x0ca3l&wid=_243342', function( vsJSON ){
+						if( window['onPurchaseResult'] ){
+							window['onPurchaseResult']( vsJSON );
+						}
+						if( vsJSON && vsJSON.error ){
+							$('.myPurchaseDialog').html( vsJSON.error)
+						} else if( vsJSON && vsJSON.vs ){
+							myVdp.setVDPAttribute( 'servicesProxy.vidiunClient', 'vs', vsJSON.vs );
+							$('.myPurchaseDialog').remove();
+							// player should be in "ready to play" state. 
+						}
+					})
+				})
+			)
+			.addClass('myPurchaseDialog')
+			.css({
+				'position':'absolute',
+				'top': pos.top,
+				'left': pos.left,
+				'width' : "400px",
+				'height' : "330px",
+				'opacity': .8,
+				'background-color': 'black',
+				'color': 'white'
+			})
+		)
+	}
+	vWidget.embed( 'playerTarget', {
+		'wid' : '_243342',
+		'uiconf_id' : '8145862',
+		'entry_id' : '1_20x0ca3l',
+		'flashvars':{
+			'disableAlerts': true
+		},
+		'readyCallback': function( playerId ){
+			myVdp = $('#' + playerId)[0];
+			myVdp.addJsListener( 'freePreviewEnd', 'doPurchaseDialog' );
+		}
+	});
+</script>
+</body>
+</html>
