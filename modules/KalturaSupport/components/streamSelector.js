@@ -123,10 +123,10 @@
 			requestObject.push({
 				'service': 'baseEntry',
 				'action': 'list',
-				'filter:objectType': 'KalturaBaseEntryFilter',
+				'filter:objectType': 'VidiunBaseEntryFilter',
 				// MEDIA_CLIP
 				'filter:typeEqual': 1,
-				'filter:parentEntryIdEqual': this.getPlayer().kentryid
+				'filter:parentEntryIdEqual': this.getPlayer().ventryid
 			});
 
 			var i = 0;
