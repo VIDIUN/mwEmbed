@@ -4,6 +4,6 @@
         "dependencies": [
             "mw.AdTimeline"
         ],
-        "kalturaPluginName": "tremor"
+        "vidiunPluginName": "tremor"
     }
 }

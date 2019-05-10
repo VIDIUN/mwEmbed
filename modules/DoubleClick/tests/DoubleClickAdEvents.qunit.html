@@ -11,83 +11,83 @@
 		var firedEvents = [];
 
 		function onReadyCallback(playerID){
-			var kdp = $('#' + playerID )[0];
+			var vdp = $('#' + playerID )[0];
 
 			// AdTimeline events
 
-			kdp.addJsListener("AdSupport_StartAdPlayback", function(){
+			vdp.addJsListener("AdSupport_StartAdPlayback", function(){
 				$('#adTracking').append("AdSupport_StartAdPlayback event triggered<br>");
 				addEvent("AdSupport_StartAdPlayback");
 			});
-			kdp.addJsListener("AdSupport_EndAdPlayback", function(){
+			vdp.addJsListener("AdSupport_EndAdPlayback", function(){
 				$('#adTracking').append("AdSupport_EndAdPlayback event triggered<br>");
 				addEvent("AdSupport_EndAdPlayback");
 			});
-			kdp.addJsListener("midSequenceComplete", function(){
+			vdp.addJsListener("midSequenceComplete", function(){
 				$('#adTracking').append("midSequenceComplete event triggered<br>");
 				addEvent("midSequenceComplete");
 			});
-			kdp.addJsListener("midSequenceStart", function(){
+			vdp.addJsListener("midSequenceStart", function(){
 				$('#adTracking').append("midSequenceStart event triggered<br>");
 				addEvent("midSequenceStart");
 			});
-			kdp.addJsListener("preSequenceComplete", function(){
+			vdp.addJsListener("preSequenceComplete", function(){
 				$('#adTracking').append("preSequenceComplete event triggered<br>");
 				addEvent("preSequenceComplete");
 			});
-			kdp.addJsListener("preSequenceStart", function(){
+			vdp.addJsListener("preSequenceStart", function(){
 				$('#adTracking').append("preSequenceStart event triggered<br>");
 				addEvent("preSequenceStart");
 			});
-			kdp.addJsListener("postSequenceComplete", function(){
+			vdp.addJsListener("postSequenceComplete", function(){
 				$('#adTracking').append("postSequenceComplete event triggered<br>");
 				addEvent("postSequenceComplete");
 			});
-			kdp.addJsListener("postSequenceStart", function(){
+			vdp.addJsListener("postSequenceStart", function(){
 				$('#adTracking').append("postSequenceStart event triggered<br>");
 				addEvent("postSequenceStart");
 			});
-			kdp.addJsListener("AdSupport_PostSequence", function(){
+			vdp.addJsListener("AdSupport_PostSequence", function(){
 				$('#adTracking').append("AdSupport_PostSequence event triggered<br>");
 				addEvent("AdSupport_PostSequence");
 			});
-			kdp.addJsListener("AdSupport_PostSequenceComplete", function(){
+			vdp.addJsListener("AdSupport_PostSequenceComplete", function(){
 				$('#adTracking').append("AdSupport_PostSequenceComplete event triggered<br>");
 				addEvent("AdSupport_PostSequenceComplete");
 			});
 
-			// kAdPlayer events
+			// vAdPlayer events
 
-			kdp.addJsListener("onResumeAdPlayback", function(){
+			vdp.addJsListener("onResumeAdPlayback", function(){
 				$('#adTracking').append("onResumeAdPlayback event triggered<br>");
 			});
-			kdp.addJsListener("onAdComplete", function(){
+			vdp.addJsListener("onAdComplete", function(){
 				$('#adTracking').append("onAdComplete event triggered<br>");
 				addEvent("onAdComplete");
 			});
-			kdp.addJsListener("onAdPlay", function(){
+			vdp.addJsListener("onAdPlay", function(){
 				$('#adTracking').append("onAdPlay event triggered<br>");
 				addEvent("onAdPlay");
 			});
-			kdp.addJsListener("adClick", function(){
+			vdp.addJsListener("adClick", function(){
 				$('#adTracking').append("adClick event triggered<br>");
 			});
-			kdp.addJsListener("onAdSkip", function(){
+			vdp.addJsListener("onAdSkip", function(){
 				$('#adTracking').append("onAdSkip event triggered<br>");
 			});
-			kdp.addJsListener("onAllAdsCompleted", function(){
+			vdp.addJsListener("onAllAdsCompleted", function(){
 				$('#adTracking').append("onAllAdsCompleted event triggered<br>");
 			});
-			kdp.addJsListener("adErrorEvent", function(){
+			vdp.addJsListener("adErrorEvent", function(){
 				$('#adTracking').append("<font color='red'>adErrorEvent event triggered</font><br>");
 			});
 			
 			// check for playerPlayed and firstPlay events as well: 
-			kdp.addJsListener("playerPlayed", function(){
+			vdp.addJsListener("playerPlayed", function(){
 				$('#adTracking').append("<font color='green'>playerPlayed event triggered</font><br>");
 			});
 			
-			kdp.addJsListener("firstPlay", function(){
+			vdp.addJsListener("firstPlay", function(){
 				$('#adTracking').append("<font color='green'>firstPlay event triggered</font><br>");
 			});
 		}
@@ -98,13 +98,13 @@
 			}
 		}
 
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			QUnit.module( "doubleclickEvents" );
-			var kdp = $('#' + videoId )[0];
+			var vdp = $('#' + videoId )[0];
 			var $iframe = $('#' + videoId + '_ifp').contents();
 			QUnit.asyncTest( "Ad events test", function(assert) {
-				kdp.addJsListener("AdSupport_PostSequenceComplete", function(){
+				vdp.addJsListener("AdSupport_PostSequenceComplete", function(){
 					ok( firedEvents.length == 9 , "All events triggered. Fired events count = " + firedEvents.length);
 					QUnit.start();
 				});
@@ -112,7 +112,7 @@
 
 			// start playing after 1 second
 			setTimeout(function(){
-				kdp.sendNotification("doPlay");
+				vdp.sendNotification("doPlay");
 			},1000);
 
 		}
@@ -122,7 +122,7 @@
 
 
 
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 </head>
 <body>
@@ -133,27 +133,27 @@
 <h4>The expected events:</h4>
 <h5>For pre-roll ads:</h5>
 <ul>
-	<li><b><i>preSequenceStart:</i></b> is triggered by the Kaltura player to mark the beginning of the pre-sequence event</li>
-	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Kaltura player when the first pre-sequence ad starts</li>
+	<li><b><i>preSequenceStart:</i></b> is triggered by the Vidiun player to mark the beginning of the pre-sequence event</li>
+	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Vidiun player when the first pre-sequence ad starts</li>
 	<li><b><i>onAdPlay</i></b> and  <b><i>onAdComplete</i></b> events are triggered by the DoubleClick plugin for each ad in the sequence <b>*</b></li>
-	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Kaltura player when the last pre-sequence ad finish</li>
-	<li><b><i>preSequenceComplete:</i></b> is triggered by the Kaltura player to mark the end of the pre-sequence event</li>
+	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Vidiun player when the last pre-sequence ad finish</li>
+	<li><b><i>preSequenceComplete:</i></b> is triggered by the Vidiun player to mark the end of the pre-sequence event</li>
 </ul>
 <h5>For mid-roll ads:</h5>
 <ul>
-	<li><b><i>midSequenceStart:</i></b> is triggered by the Kaltura player to mark the beginning of the mid-sequence event</li>
-	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Kaltura player when the first mid-sequence ad starts</li>
+	<li><b><i>midSequenceStart:</i></b> is triggered by the Vidiun player to mark the beginning of the mid-sequence event</li>
+	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Vidiun player when the first mid-sequence ad starts</li>
 	<li><b><i>onAdPlay</i></b> and  <b><i>onAdComplete</i></b> events are triggered by the DoubleClick plugin for each ad in the sequence <b>*</b></li>
-	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Kaltura player when the last mid-sequence ad finish</li>
-	<li><b><i>midSequenceComplete:</i></b> is triggered by the Kaltura player to mark the end of the mid-sequence event</li>
+	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Vidiun player when the last mid-sequence ad finish</li>
+	<li><b><i>midSequenceComplete:</i></b> is triggered by the Vidiun player to mark the end of the mid-sequence event</li>
 </ul>
 <h5>For post-roll ads:</h5>
 <ul>
-	<li><b><i>postSequenceStart:</i></b> is triggered by the Kaltura player to mark the beginning of the post-sequence event</li>
-	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Kaltura player when the first post-sequence ad starts</li>
+	<li><b><i>postSequenceStart:</i></b> is triggered by the Vidiun player to mark the beginning of the post-sequence event</li>
+	<li><b><i>AdSupport_StartAdPlayback:</i></b> is triggered by the Vidiun player when the first post-sequence ad starts</li>
 	<li><b><i>onAdPlay</i></b> and  <b><i>onAdComplete</i></b> events are triggered by the DoubleClick plugin for each ad in the sequence <b>*</b></li>
-	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Kaltura player when the last post-sequence ad finish</li>
-	<li><b><i>postSequenceComplete:</i></b> is triggered by the Kaltura player to mark the end of the post-sequence event</li>
+	<li><b><i>AdSupport_EndAdPlayback:</i></b> is triggered by the Vidiun player when the last post-sequence ad finish</li>
+	<li><b><i>postSequenceComplete:</i></b> is triggered by the Vidiun player to mark the end of the post-sequence event</li>
 </ul>
 <h5>Additional events:</h5>
 <ul>
@@ -175,7 +175,7 @@
 <div id="myVideoTarget" style="width:400px;height:330px;"></div>
 
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '25550701',

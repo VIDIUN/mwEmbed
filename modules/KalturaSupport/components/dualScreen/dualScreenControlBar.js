@@ -2,7 +2,7 @@
 	"use strict";
 	mw.dualScreen = mw.dualScreen || {};
 
-	mw.dualScreen.dualScreenControlBar = mw.KBaseComponent.extend({
+	mw.dualScreen.dualScreenControlBar = mw.VBaseComponent.extend({
 		defaultConfig: {
 			'templatePath': 'dualScreenControlBar',
 			'disableDragDrop': false,
@@ -11,22 +11,22 @@
 		"controlBarComponents": {
 			sideBySide: {
 				id: 'sideBySide',
-				title: gM("ks-DUAL-SCREEN-SBS"),
+				title: gM("vs-DUAL-SCREEN-SBS"),
 				event: "SbS"
 			},
 			singleView: {
 				id: 'singleView',
-				title: gM("ks-DUAL-SCREEN-HIDE"),
+				title: gM("vs-DUAL-SCREEN-HIDE"),
 				event: "hide"
 			},
 			pip: {
 				id: 'pip',
-				title: gM("ks-DUAL-SCREEN-PIP"),
+				title: gM("vs-DUAL-SCREEN-PIP"),
 				event: "PiP"
 			},
 			switchView: {
 				id: 'switchView',
-				title: gM("ks-DUAL-SCREEN-SWITCH"),
+				title: gM("vs-DUAL-SCREEN-SWITCH"),
 				event: "switchView"
 			},
             contentSelection: {
@@ -110,7 +110,7 @@
 
 		getComponent: function ( ) {
 			if ( !this.$controlBar ) {
-				var rawHTML = window.kalturaIframePackageData.templates[ this.getConfig("templatePath")];
+				var rawHTML = window.vidiunIframePackageData.templates[ this.getConfig("templatePath")];
 				var transformedHTML = mw.util.tmpl( rawHTML );
 				transformedHTML = transformedHTML({buttons: this.controlBarComponents});
 				this.$controlBar = $( '<div />' )

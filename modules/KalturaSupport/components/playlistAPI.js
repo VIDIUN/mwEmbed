@@ -1,16 +1,16 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add('playlistAPI', mw.KBaseMediaList.extend({
+	mw.PluginManager.add('playlistAPI', mw.VBaseMediaList.extend({
 
 		defaultConfig: {
 			'templatePath': 'components/playlist/playList.tmpl.html',
 			'initItemEntryId': null,
 			'autoContinue': false,
 			'autoPlay': false,
-			'kpl0Name': null,
-			'kpl0Url': null,
-			'kpl0Id': null,
+			'vpl0Name': null,
+			'vpl0Url': null,
+			'vpl0Id': null,
 			'titleLimit': 36,
 			'descriptionLimit': 32,
 			'resizeThumbnails': true,
@@ -26,7 +26,7 @@
 			'hideClipPoster': true,
 			'loop': false,
 			'overflow': false,
-			'cssFileName': 'modules/KalturaSupport/components/playlist/playList.css',
+			'cssFileName': 'modules/VidiunSupport/components/playlist/playList.css',
 			'showControls': true,
 			'MinClips': 2,
 			'MaxClips': 25,
@@ -41,7 +41,7 @@
 
 		loadingEntry: null,      // flag to store the current loading entry
 		firstLoad: true,         // Flag for setting initial entry in first load
-		kClient: null,           // kClient for API calls
+		vClient: null,           // vClient for API calls
 		firstPlay: true,         // firstPlay is used to check if we need to check for autoMute or keep the player volume from previous clip
 
 		currentClipIndex: null,  // currently playing clip index
@@ -125,8 +125,8 @@
 			});
 
 			// API support + backward compatibility
-			$(this.embedPlayer).bind('Kaltura_SetKDPAttribute' + this.bindPostFix, function (event, componentName, property, value) {
-				mw.log("PlaylistAPI::Kaltura_SetKDPAttribute:" + property + ' value:' + value);
+			$(this.embedPlayer).bind('Vidiun_SetVDPAttribute' + this.bindPostFix, function (event, componentName, property, value) {
+				mw.log("PlaylistAPI::Vidiun_SetVDPAttribute:" + property + ' value:' + value);
 				switch (componentName) {
 					case "playlistAPI.dataProvider":
 					case "playlistAPI":
@@ -143,7 +143,7 @@
 				}
 			});
 
-			$(this.embedPlayer).bind('Kaltura_SendNotification' + this.bindPostFix, function (event, notificationName, notificationData) {
+			$(this.embedPlayer).bind('Vidiun_SendNotification' + this.bindPostFix, function (event, notificationName, notificationData) {
 				switch (notificationName) {
 					case 'playlistPlayNext':
 						_this.playNext();
@@ -185,7 +185,7 @@
 					if (_this.playlistSet[_this.currentPlaylistIndex].playlistParams) {
 						// use saved params and extend them with paging params
 						playlistRequest = $.extend(_this.playlistSet[_this.currentPlaylistIndex].playlistParams, {
-							'pager:objectType': 'KalturaFilterPager',
+							'pager:objectType': 'VidiunFilterPager',
 							'pager:pageIndex': _this.page,
 							'pager:pageSize': _this.getConfig('pageSize')
 						});
@@ -194,14 +194,14 @@
 						playlistRequest = {
 							'service': 'playlist',
 							'action': 'execute',
-							'pager:objectType': 'KalturaFilterPager',
+							'pager:objectType': 'VidiunFilterPager',
 							'pager:pageIndex': _this.page,
 							'pager:pageSize': _this.getConfig('pageSize'),
 							'id': _this.playlistSet[_this.currentPlaylistIndex].id
 						};
 					}
 
-					_this.getKClient().doRequest(playlistRequest, function (playlistDataResult) {
+					_this.getVClient().doRequest(playlistRequest, function (playlistDataResult) {
 						if (playlistDataResult.length){
 							_this.addMediaItems(playlistDataResult);
 							_this.getTemplateHTML( {meta: _this.getMetaData(), mediaList: playlistDataResult})
@@ -214,10 +214,10 @@
 
 									if (_this.getLayout() === "horizontal"){
 										_this.getMedialistComponent().find('ul').width((_this.getMediaItemBoxWidth()+1)*_this.mediaList.length);
-										_this.getMedialistComponent().find('.k-carousel').css('width', _this.getMedialistComponent().width() );
+										_this.getMedialistComponent().find('.v-carousel').css('width', _this.getMedialistComponent().width() );
 										if (_this.getConfig('fixedControls')){
 											var width = _this.getComponent().width() - _this.getConfig("horizontalControlsWidth") *2 ;
-											_this.getComponent().find('.k-carousel').css("margin-left",_this.getConfig("horizontalControlsWidth")).width(width);
+											_this.getComponent().find('.v-carousel').css("margin-left",_this.getConfig("horizontalControlsWidth")).width(width);
 										}
 										var scrollLeft = Math.abs(parseInt(_this.getComponent().find("ul").css("left")));
 										var hiddenItems = parseInt(scrollLeft / _this.getConfig( 'mediaItemWidth'));
@@ -254,10 +254,10 @@
 			$(this.embedPlayer).bind('mediaListLayoutReady', function (event) {
 				_this.embedPlayer.triggerHelper('playlistReady');
 				_this.setMultiplePlayLists();
-				_this.getComponent().find(".k-description-container").dotdotdot();
+				_this.getComponent().find(".v-description-container").dotdotdot();
 				// keep aspect ratio of thumbnails - crop and center
 				if ( _this.getConfig("resizeThumbnails") ){
-					_this.getComponent().find('.k-thumb').not('.resized').each(function () {
+					_this.getComponent().find('.v-thumb').not('.resized').each(function () {
 						var img = $(this)[0];
 						img.onload = function () {
 							if (img.naturalWidth / img.naturalHeight > 16 / 9) {
@@ -287,7 +287,7 @@
 					_this.firstLoad = true;
 					_this.setConfig("initItemEntryId" ,params.initItemEntryId )
 				}
-				_this.getKClient().doRequest(params.playlistParams, function (playlistDataResult) {
+				_this.getVClient().doRequest(params.playlistParams, function (playlistDataResult) {
 					if (_this.playlistSet.length === 0){
 						_this.playlistSet.push({});
 					}
@@ -348,7 +348,7 @@
 				});
 			}
 		},
-		// called from KBaseMediaList when a media item is clicked - trigger clip play
+		// called from VBaseMediaList when a media item is clicked - trigger clip play
 		mediaClicked: function (index) {
 			if (this.getConfig('onPage')) {
 				try {
@@ -368,21 +368,21 @@
 
 		loadPlaylists: function () {
 			var embedPlayer = this.embedPlayer;
-			// Populate playlist set with kalturaPlaylistData
-			for (var playlistId in embedPlayer.kalturaPlaylistData) {
-				if (embedPlayer.kalturaPlaylistData.hasOwnProperty(playlistId)) {
-					this.playlistSet.push(embedPlayer.kalturaPlaylistData[ playlistId ]);
+			// Populate playlist set with vidiunPlaylistData
+			for (var playlistId in embedPlayer.vidiunPlaylistData) {
+				if (embedPlayer.vidiunPlaylistData.hasOwnProperty(playlistId)) {
+					this.playlistSet.push(embedPlayer.vidiunPlaylistData[ playlistId ]);
 				}
 			}
 			// update playlist names if set in Flashvars
 			for (var i = 0; i < this.playlistSet.length; i++) {
-				if (this.getConfig('kpl' + i + 'Name')) {
-					this.playlistSet[i].name = this.getConfig('kpl' + i + 'Name');
+				if (this.getConfig('vpl' + i + 'Name')) {
+					this.playlistSet[i].name = this.getConfig('vpl' + i + 'Name');
 				}
 			}
 		},
 
-		// prepare the data to be compatible with KBaseMediaList
+		// prepare the data to be compatible with VBaseMediaList
 		addMediaItems: function (itemsArr) {
 			for (var i = 0; i < itemsArr.length; i++) {
 				var item = itemsArr[i];
@@ -391,8 +391,8 @@
 				var description = item.description || customData.desc;
 
 				// sanitize
-				title = kWidget.sanitize( title );
-				description = kWidget.sanitize( description );
+				title = vWidget.sanitize( title );
+				description = vWidget.sanitize( description );
 
 				var thumbnailUrl = item.thumbnailUrl || customData.thumbUrl || this.getThumbUrl(item);
 				var thumbnailRotatorUrl = this.getConfig('thumbnailRotator') ? this.getThumRotatorUrl() : '';
@@ -408,7 +408,7 @@
 					width: this.getThumbWidth(),
 					height: this.getThumbHeight()
 				};
-				item.durationDisplay = kWidget.seconds2npt(item.duration);
+				item.durationDisplay = vWidget.seconds2npt(item.duration);
 				item.chapterNumber = this.getItemNumber(i);
 				this.mediaList.push(item);
 			}
@@ -431,11 +431,11 @@
 				if (this.getLayout() === "vertical") {
 					this.getMedialistComponent().find(".nano-content").scrollTop(clipIndex * this.getConfig("mediaItemHeight"));
 				}else{
-					this.getMedialistComponent().find( '.k-carousel' )[0].jCarouselLiteGo(clipIndex);
+					this.getMedialistComponent().find( '.v-carousel' )[0].jCarouselLiteGo(clipIndex);
 				}
 			}
 			this.setConfig("selectedIndex", clipIndex);    // save it to the config so it can be retrieved using the API
-			this.embedPlayer.setKalturaConfig('playlistAPI', 'dataProvider', {'content': this.playlistSet, 'selectedIndex': this.getConfig('selectedIndex')}); // for API backward compatibility
+			this.embedPlayer.setVidiunConfig('playlistAPI', 'dataProvider', {'content': this.playlistSet, 'selectedIndex': this.getConfig('selectedIndex')}); // for API backward compatibility
 			this.currentClipIndex = clipIndex; // save clip index for next / previous calls
 			var embedPlayer = this.embedPlayer;
 
@@ -448,7 +448,7 @@
 			}
 
 			// Check if entry id already matches ( and is loaded )
-			if (embedPlayer.kentryid == id) {
+			if (embedPlayer.ventryid == id) {
 				if (this.loadingEntry) {
 					mw.log("Error: PlaylistAPI is loading Entry, possible double playClip request");
 					return;
@@ -568,7 +568,7 @@
 			if ( this.playerIsReady && this.playlistSet.length > 1 ) {
 				var _this = this;
 				if ( this.getComponent().find( ".playlistSelector" ).length == 0 ) { // UI wasn't not created yet
-					this.getComponent().find( ".k-vertical" ).find( ".playlistTitle, .playlistDescription" ).addClass( "multiplePlaylists" );
+					this.getComponent().find( ".v-vertical" ).find( ".playlistTitle, .playlistDescription" ).addClass( "multiplePlaylists" );
 					this.getComponent().find( ".dropDownIcon" ).on( "click", function () {
 						if ( _this.getComponent().find( ".playlistSelector" ).height() > 0 ) {
 							_this.closePlaylistDropdown();
@@ -638,28 +638,28 @@
 					'id': this.playlistSet[_this.currentPlaylistIndex].id
 				};
 				if (this.getConfig('paging')){
-					playlistRequest['pager:objectType'] = 'KalturaFilterPager';
+					playlistRequest['pager:objectType'] = 'VidiunFilterPager';
 					playlistRequest['pager:pageIndex'] = this.page;
 					playlistRequest['pager:pageSize'] = this.getConfig('pageSize');
 				}
-				this.getKClient().doRequest(playlistRequest, function (playlistDataResult) {
+				this.getVClient().doRequest(playlistRequest, function (playlistDataResult) {
 					_this.playlistSet[_this.currentPlaylistIndex].items = playlistDataResult; // save the loaded data to the correct playlist in the playlistSet
 					_this.selectPlaylist(_this.currentPlaylistIndex);
 				});
 			}
 		},
 
-		getKClient: function () {
-			if (!this.kClient) {
-				this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+		getVClient: function () {
+			if (!this.vClient) {
+				this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
 			}
-			return this.kClient;
+			return this.vClient;
 		},
 
 		// select playlist
 		selectPlaylist: function (playlistIndex) {
 			var _this = this;
-			this.embedPlayer.setKalturaConfig('playlistAPI', 'dataProvider', {'content': this.playlistSet, 'selectedIndex': this.getConfig('selectedIndex')}); // for API backward compatibility
+			this.embedPlayer.setVidiunConfig('playlistAPI', 'dataProvider', {'content': this.playlistSet, 'selectedIndex': this.getConfig('selectedIndex')}); // for API backward compatibility
 			this.mediaList = [];
 			var items = this.playlistSet[playlistIndex].items;
 			items = items.length > parseInt( this.getConfig( 'MaxClips' ) ) ? items.slice( 0, parseInt( this.getConfig( 'MaxClips' ) ) ) : items; // support MaxClips Flashvar
@@ -675,7 +675,7 @@
 				this.$mediaListContainer = null;            // remove currently rendered media items so it will re re-calculated on the renderMediaList() call
 				this.getMedialistContainer();
 			}
-			this.addMediaItems( items );   // prepare the data to be compatible with KBaseMediaList
+			this.addMediaItems( items );   // prepare the data to be compatible with VBaseMediaList
 			this.getMedialistHeaderComponent().empty();
 			// First playlist will always have items in it, other playlists will populate the items array after selection.
 			var numOfClips = this.playlistSet[playlistIndex].items.length;
@@ -735,7 +735,7 @@
 		},
 		showEmptyPlaylistError: function () {
 			var $this = $(this);
-			var errorObj = this.embedPlayer.getKalturaMsgObject('mwe-embedplayer-empty_playlist');
+			var errorObj = this.embedPlayer.getVidiunMsgObject('mwe-embedplayer-empty_playlist');
 			this.emptyPlaylistSelected = true;
 			this.getPlayer()['data-blockPlayerDisplay'] = false;
 			// Support no sources custom error msg:

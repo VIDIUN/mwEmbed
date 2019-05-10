@@ -75,7 +75,7 @@ class downloadEntry {
 			}
 
 			if( $mediaType !== 2 ){
-				$options = new KalturaFlavorAssetUrlOptions();
+				$options = new VidiunFlavorAssetUrlOptions();
 				$options->fileName = $filename;
 
 				$requestConfig = $client->getConfig();
@@ -290,7 +290,7 @@ class downloadEntry {
 		if( $vResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
 			foreach($this->sources as & $source ){
 				if( isset( $source['src'] )){
-					$source['src'] .= '?ks=' . $kResultObject->client->getKS() . '&referrer=' . $this->getReferer().'&playSessionId='.$this->getPlaySession();
+					$source['src'] .= '?vs=' . $vResultObject->client->getVS() . '&referrer=' . $this->getReferer().'&playSessionId='.$this->getPlaySession();
 				}
 			}
 		}
@@ -392,23 +392,23 @@ class downloadEntry {
 	 * @param $flavorId
 	 * 	{String} the flavor id string
 	 */
-	 public function getSourceUrl($kResultObject, $resultObject, $source){
+	 public function getSourceUrl($vResultObject, $resultObject, $source){
 		global $wgHTTPProtocol;
 
-		if( $kResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
-			$flavorUrl =  $kResultObject->request->getServiceConfig( 'ServiceUrl' ) .'/p/' . $kResultObject->getPartnerId() . '/sp/' .
-			$kResultObject->getPartnerId() . '00/playManifest/entryId/' . $kResultObject->request->getEntryId();
+		if( $vResultObject->request->getServiceConfig( 'UseManifestUrls' ) ){
+			$flavorUrl =  $vResultObject->request->getServiceConfig( 'ServiceUrl' ) .'/p/' . $vResultObject->getPartnerId() . '/sp/' .
+			$vResultObject->getPartnerId() . '00/playManifest/entryId/' . $vResultObject->request->getEntryId();
 		} else {
-			$flavorUrl = $kResultObject->request->getServiceConfig( 'CdnUrl' ) .'/p/' . $kResultObject->getPartnerId() . '/sp/' .
-			$kResultObject->getPartnerId() . '00/flvclipper/entry_id/' . $kResultObject->request->getEntryId();
+			$flavorUrl = $vResultObject->request->getServiceConfig( 'CdnUrl' ) .'/p/' . $vResultObject->getPartnerId() . '/sp/' .
+			$vResultObject->getPartnerId() . '00/flvclipper/entry_id/' . $vResultObject->request->getEntryId();
 		}
 		$assetUrl = $flavorUrl . '/flavorId/' . $source->id . '/format/url/protocol/' . $wgHTTPProtocol;
-		$src =  $assetUrl .'/a.' . $source->fileExt . '?ks=' . $kResultObject->client->getKS() . '&referrer=' . $this->getReferer();
+		$src =  $assetUrl .'/a.' . $source->fileExt . '?vs=' . $vResultObject->client->getVS() . '&referrer=' . $this->getReferer();
 		return $src;
 	 }
 	private function isSourceOnlyAsset(){
-		$kResultObject = $this->getResultObject();
-		$resultObject =  $kResultObject->getResult();
+		$vResultObject = $this->getResultObject();
+		$resultObject =  $vResultObject->getResult();
 		
 		return ( 
 				// check if flavorAssets do not exist:
@@ -443,15 +443,15 @@ class downloadEntry {
 		}
 
 		$src = false;
-		$kResultObject = $this->getResultObject();
-		$resultObject =  $kResultObject->getResult();
+		$vResultObject = $this->getResultObject();
+		$resultObject =  $vResultObject->getResult();
 		
 		if( $this->isSourceOnlyAsset() ){
 			// Note we are assuming other assets have flavors, and only image gets direct mapping: 
 			// this is probably not a safe assumption, public source only assets may fall into this category 
 			// and should be supproted. 
-			// ENUM mapping here: https://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaMediaType
-			return $resultObject['meta']->downloadUrl . '/a.jpg' . '?ks=' . $kResultObject->client->getKS() . '&referrer=' . $this->getReferer();
+			// ENUM mapping here: https://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunMediaType
+			return $resultObject['meta']->downloadUrl . '/a.jpg' . '?vs=' . $vResultObject->client->getVS() . '&referrer=' . $this->getReferer();
 		}
 		
 		
@@ -467,7 +467,7 @@ class downloadEntry {
 			// flavor ID overrides preferred bitrate so look for it first
 			foreach( $resultObject['contextData']->flavorAssets as $source ){
 				if( isset($source->id) && $source->id == $flavorID){
-					$src = $this->getSourceUrl($kResultObject, $resultObject, $source);
+					$src = $this->getSourceUrl($vResultObject, $resultObject, $source);
 				}
 			}
 		} 
@@ -476,7 +476,7 @@ class downloadEntry {
 			if ($preferredBitrate == 0){
 				foreach( $resultObject['contextData']->flavorAssets as $source ){
 					if (isset($source->tags) && strpos($source->tags,'source') !== false){
-						$src = $this->getSourceUrl($kResultObject, $resultObject, $source);
+						$src = $this->getSourceUrl($vResultObject, $resultObject, $source);
 					}
 				}
 			}else{
@@ -487,7 +487,7 @@ class downloadEntry {
 						$delta =  abs( $source->bitrate - $preferredBitrate );
 						if ( $delta < $deltaBitrate) {
 							$deltaBitrate = $delta;
-							$src = $this->getSourceUrl($kResultObject, $resultObject, $source);
+							$src = $this->getSourceUrl($vResultObject, $resultObject, $source);
 						}
 					}
 				}

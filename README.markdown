@@ -22,22 +22,22 @@ Can't find what your looking for in the documentation, ran into an issue check t
 
 * Pull requests can be sent to <a href="https://github.com/kaltura/mwEmbed/">our git hub repo</a>. Pull requests should be open against the master branch.
 * Our coding conventions <a href="http://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript">follow mediaWiki js guidelines</a>. 
-* See [getting strated guide](http://knowledge.kaltura.com/kaltura-player-toolkit-theme-skin-and-plugins-guide)
-* Also see [Yeoman project](https://github.com/kaltura/generator-kalturaplayer-module) for auto generating skeleton kaltura player plugins.  
+* See [getting strated guide](http://knowledge.vidiun.com/vidiun-player-toolkit-theme-skin-and-plugins-guide)
+* Also see [Yeoman project](https://github.com/vidiun/generator-vidiunplayer-module) for auto generating skeleton vidiun player plugins.  
 
 ## Release Notes
 
-[Release Notes ](https://github.com/kaltura/mwEmbed/tags) documents every release and provides production, staging and zip downloads. 
+[Release Notes ](https://github.com/vidiun/mwEmbed/tags) documents every release and provides production, staging and zip downloads. 
 
 ## Libraries and sub-projects
 
-### Kaltura developed
+### Vidiun developed
 
-* [Chromless flash kdp](https://github.com/kaltura/chromeless-kdp) 
-* [Chromeless sliverlight](https://github.com/kaltura/chromeless-silverlight)
-* [OSMF HLS for flash](https://github.com/kaltura/HLS-OSMF) -- repo not yet public
+* [Chromless flash vdp](https://github.com/vidiun/chromeless-vdp) 
+* [Chromeless sliverlight](https://github.com/vidiun/chromeless-silverlight)
+* [OSMF HLS for flash](https://github.com/vidiun/HLS-OSMF) -- repo not yet public
 * Android HLS player -- repo not yet public
-* [Player Studio](https://github.com/kaltura/player-studio) -- visual player config JSON editor 
+* [Player Studio](https://github.com/vidiun/player-studio) -- visual player config JSON editor 
 
 ### External libraries 
 
@@ -59,5 +59,5 @@ Vidiun HTML5 library is the upstream library for the wikimedia video support in 
 
 All mwEmbed code is released under the AGPLv3 unless a different license for a particular library is specified in the applicable library path
 
-Authors: See [GitHub contributors list](https://github.com/kaltura/mwEmbed/graphs/contributors).
+Authors: See [GitHub contributors list](https://github.com/vidiun/mwEmbed/graphs/contributors).
 

@@ -467,8 +467,8 @@
 			this.getVidiunClient().doRequest( {
 				'service' : 'caption_captionasset',
 				'action' : 'list',
-				'filter:objectType' : 'KalturaAssetFilter',
-				'filter:entryIdEqual' : this.getPlayer().kentryid,
+				'filter:objectType' : 'VidiunAssetFilter',
+				'filter:entryIdEqual' : this.getPlayer().ventryid,
 				'filter:statusEqual' : 2,
 				'pager:pageSize': 50
 			}, function( data ) {

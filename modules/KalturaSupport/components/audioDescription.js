@@ -21,14 +21,14 @@
 
 		setup: function() {
 			var _this = this;
-			// known limitation - kplayer is not supported on Safari desktop
-			if ( kWidget.supportsFlash() && !mw.isDesktopSafari() ) {
-				mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true ); //only kplayer supports audio description
-				this.getPlayer().setKalturaConfig('kdpVars', 'audioDescription',
+			// known limitation - vplayer is not supported on Safari desktop
+			if ( vWidget.supportsFlash() && !mw.isDesktopSafari() ) {
+				mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true ); //only vplayer supports audio description
+				this.getPlayer().setVidiunConfig('vdpVars', 'audioDescription',
 						{ plugin: 'true', volume: this.getConfig( 'volume' ) } );
 				
 				this.bind("playerReady", function(){
-					if (_this.embedPlayer.selectedPlayer.library === "Kplayer"){
+					if (_this.embedPlayer.selectedPlayer.library === "Vplayer"){
 						_this.updateAudioFile();
 					}else{
 						_this.getComponent().hide();

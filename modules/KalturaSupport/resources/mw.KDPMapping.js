@@ -13,7 +13,7 @@
 	};
 	mw.VDPMapping.prototype = {
 
-		// global list of kdp listening callbacks
+		// global list of vdp listening callbacks
 		listenerList: {},
 		/**
 		* Add Player hooks for supporting Vidiun api stuff
@@ -139,14 +139,14 @@
 			// Give vdp plugins a chance to take attribute actions
 			$( embedPlayer ).trigger( 'Vidiun_SetVDPAttribute', [ componentName, property, value ] );
 		},
-		updateKS: function ( embedPlayer, ks){
-			var client = mw.kApiGetPartnerClient( embedPlayer.kwidgetid );
-			// update the new ks:
-			client.setKs( ks );
-			// Update KS flashvar
-			embedPlayer.setFlashvars( 'ks', ks );
-			// TODO confirm flash KDP issues a changeMedia internally for ks updates
-			embedPlayer.sendNotification( 'changeMedia', {'entryId': embedPlayer.kentryid });
+		updateVS: function ( embedPlayer, vs){
+			var client = mw.vApiGetPartnerClient( embedPlayer.vwidgetid );
+			// update the new vs:
+			client.setVs( vs );
+			// Update VS flashvar
+			embedPlayer.setFlashvars( 'vs', vs );
+			// TODO confirm flash VDP issues a changeMedia internally for vs updates
+			embedPlayer.sendNotification( 'changeMedia', {'entryId': embedPlayer.ventryid });
 
 			// add a loading spinner:
 			//embedPlayer.addPlayerSpinner();
@@ -272,7 +272,7 @@
 					return true;
 					break;
 				case 'flashVersion':
-					return kWidget.getFlashVersion();
+					return vWidget.getFlashVersion();
 					break;
 				case 'playerVersion': 
 					return window['MWEMBED_VERSION'];
@@ -421,8 +421,8 @@
 							}
 							return true;
 						break;	
-						case 'kalturaMediaFlavorArray':
-							if( ! embedPlayer.kalturaFlavors ){
+						case 'vidiunMediaFlavorArray':
+							if( ! embedPlayer.vidiunFlavors ){
 								return null;
 							}
 							return embedPlayer.vidiunFlavors;
@@ -578,7 +578,7 @@
 					}
 					break;
 				case 'embedServices':
-					var proxyData = embedPlayer.getKalturaConfig( 'proxyData' );
+					var proxyData = embedPlayer.getVidiunConfig( 'proxyData' );
 					var filedName = expression.replace('embedServices.', '');
 					return this.getProperty(filedName, proxyData);
 					break;
@@ -783,8 +783,8 @@
 				case 'readyToLoad':
 					if( embedPlayer.playerReadyFlag ){
 						// player is already ready when listener is added
-						if( ! embedPlayer.kalturaPlayerMetaData ){
-							embedPlayer.kdpEmptyFlag = true;
+						if( ! embedPlayer.vidiunPlayerMetaData ){
+							embedPlayer.vdpEmptyFlag = true;
 							callback( embedPlayer.id );
 						}
 					} else {
@@ -792,8 +792,8 @@
 						b( 'playerReady', function(){
 							// only trigger vdpEmpty when the player is empty
 							// TODO support 'real' player empty state, ie not via "error handler"
-							if( ! embedPlayer.kalturaPlayerMetaData ){
-								embedPlayer.kdpEmptyFlag = true;
+							if( ! embedPlayer.vidiunPlayerMetaData ){
+								embedPlayer.vdpEmptyFlag = true;
 								// run after all other playerReady events: 
 								setTimeout(function(){
 									callback( embedPlayer.id );
@@ -963,7 +963,7 @@
 					})
 					break;
 				case 'bytesDownloadedChange':
-					// KDP sends an initial bytes loaded zero at player ready:
+					// VDP sends an initial bytes loaded zero at player ready:
 					var prevBufferBytes = 0;
 					b( 'monitorEvent', function(){
 						if( typeof embedPlayer.bufferedPercent != 'undefined' && embedPlayer.mediaElement.selectedSource ){
@@ -1202,13 +1202,13 @@
 					embedPlayer.replay();
 					break;
 				case 'doSeek':
-					// Kaltura doSeek is in seconds rather than percentage:
+					// Vidiun doSeek is in seconds rather than percentage:
 					var seekTime = ( parseFloat( notificationData ) - embedPlayer.startOffset );
-					// Update local kPreSeekTime
-					embedPlayer.kPreSeekTime =  embedPlayer.currentTime;
-					// Once the seek is complete null kPreSeekTime
-					embedPlayer.bindHelper( 'seeked.kdpMapOnce', function(){
-						embedPlayer.kPreSeekTime = null;
+					// Update local vPreSeekTime
+					embedPlayer.vPreSeekTime =  embedPlayer.currentTime;
+					// Once the seek is complete null vPreSeekTime
+					embedPlayer.bindHelper( 'seeked.vdpMapOnce', function(){
+						embedPlayer.vPreSeekTime = null;
 					});
 					embedPlayer.seek( seekTime );
 					break;
@@ -1231,7 +1231,7 @@
 						// check for mediaProxy based override: 
 						&& !notificationData.mediaProxy
 					){
-						mw.log( "KDPMapping:: ChangeMedia missing entryId or refrenceid, empty sources.")
+						mw.log( "VDPMapping:: ChangeMedia missing entryId or refrenceid, empty sources.")
 						embedPlayer.emptySources();
 						break;
 					}
@@ -1258,7 +1258,7 @@
 							embedPlayer.setFlashvars('referenceId', null);
 						}
 						// Update the entry id
-						embedPlayer.kentryid = notificationData.entryId;
+						embedPlayer.ventryid = notificationData.entryId;
 						if (notificationData.referenceId){
 							embedPlayer.referenceId = notificationData.referenceId;
 						}
@@ -1296,7 +1296,7 @@
 
 						// if data is injected via changeMedia, re-load into iframe inject location:
 						if( notificationData.mediaProxy ){
-							window.kalturaIframePackageData.entryResult = notificationData.mediaProxy;
+							window.vidiunIframePackageData.entryResult = notificationData.mediaProxy;
 							// update plugin possition. Future refactor should treat mediaProxy as plugin  
 							embedPlayer.playerConfig.plugins['mediaProxy'] = notificationData.mediaProxy;
 							embedPlayer.playerConfig.plugins['mediaProxy'].manualProvider = true;

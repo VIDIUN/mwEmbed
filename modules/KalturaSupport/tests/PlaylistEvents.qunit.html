@@ -8,59 +8,59 @@
 
 	  <script type="text/javascript">
 		  // Enable uiconf js which includes external resources
-		  mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		  mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
 		  function onReadyCallback(playerID){
-			  var kdp = $('#' + playerID )[0];
-			  kdp.addJsListener("playlistReady", function(){
+			  var vdp = $('#' + playerID )[0];
+			  vdp.addJsListener("playlistReady", function(){
 				  $('#playlistTracking').append("playlistReady event triggered\r\n");
 			  });
-			  kdp.addJsListener("playlistPlayNext", function(){
+			  vdp.addJsListener("playlistPlayNext", function(){
 				  $('#playlistTracking').append("playlistPlayNext event triggered\r\n");
 			  });
-			  kdp.addJsListener("playlistPlayPrevious", function(){
+			  vdp.addJsListener("playlistPlayPrevious", function(){
 				  $('#playlistTracking').append("playlistPlayPrevious event triggered\r\n");
 			  });
-			  kdp.addJsListener("playlistFirstEntry", function(){
+			  vdp.addJsListener("playlistFirstEntry", function(){
 				  $('#playlistTracking').append("playlistFirstEntry event triggered\r\n");
 			  });
-			  kdp.addJsListener("playlistMiddleEntry", function(){
+			  vdp.addJsListener("playlistMiddleEntry", function(){
 				  $('#playlistTracking').append("playlistMiddleEntry event triggered\r\n");
 			  });
-			  kdp.addJsListener("playlistLastEntry", function(){
+			  vdp.addJsListener("playlistLastEntry", function(){
 				  $('#playlistTracking').append("playlistLastEntry event triggered\r\n");
 			  });
 		  }
 
-		  function jsKalturaPlayerTest( videoId ){
+		  function jsVidiunPlayerTest( videoId ){
 			  // Name this module
 			  module( "playlist" );
-			  var kdp = $('#' + videoId )[0];
+			  var vdp = $('#' + videoId )[0];
 			  var $iframe = $('#' + videoId + '_ifp').contents();
 
 			  asyncTest( "Playlist events test #1", function(){
-				  kalturaQunitWaitForPlayer(function(){
+				  vidiunQunitWaitForPlayer(function(){
 					  // look for the playlist:
-					  ok( $( $iframe).find( '.medialistContainer.k-vertical' ).length > 0 , "Found vertical playlist" );
+					  ok( $( $iframe).find( '.medialistContainer.v-vertical' ).length > 0 , "Found vertical playlist" );
 					  ok( $("#playlistTracking").val().indexOf("playlistReady") !== -1 , "playlistReady event fired" );
 					  start();
 				  });
 			  });
 
 			  asyncTest('Playlist events test #2', function() {
-				  equal ( kdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 0, "first clip was selected");
+				  equal ( vdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 0, "first clip was selected");
 				  setTimeout(function() {
 					  start();
-					  kdp.setKDPAttribute("playlistAPI.dataProvider", "selectedIndex", 3 );
-					  equal ( kdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 3, "3rd clip was selected");
-					  kdp.sendNotification('playlistPlayPrevious');
+					  vdp.setVDPAttribute("playlistAPI.dataProvider", "selectedIndex", 3 );
+					  equal ( vdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 3, "3rd clip was selected");
+					  vdp.sendNotification('playlistPlayPrevious');
 				  }, 3000);
 			  });
 
 
 			  setTimeout(function() {
-				  kdp.setKDPAttribute("playlistAPI.dataProvider", "selectedIndex", 2 );
-				  kdp.sendNotification('playlistPlayNext');
+				  vdp.setVDPAttribute("playlistAPI.dataProvider", "selectedIndex", 2 );
+				  vdp.sendNotification('playlistPlayNext');
 			  }, 6000);
 
 			  asyncTest('Playlist events test #3', function() {
@@ -79,8 +79,8 @@
 		  }
 
 	  </script>
-	  <!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	  <script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	  <!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	  <script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
     </head>
    <body>
@@ -95,10 +95,10 @@
 	    <li><b>playlistMiddleEntry</b>: A clip that is not the first or the last clip in the playlist was loaded.</li>
 	    <li><b>playlistLastEntry</b>: The last clip in the playlist was loaded.</li>
     </ul>
-	<div id='kaltura_player' style="height:365px;width:650px"></div>
+	<div id='vidiun_player' style="height:365px;width:650px"></div>
 	<script>
-		kWidget.featureConfig({
-			'targetId': 'kaltura_player',
+		vWidget.featureConfig({
+			'targetId': 'vidiun_player',
 			'wid': '_243342',
 			'uiconf_id': '25975211',
 			'readyCallback': onReadyCallback,
@@ -112,8 +112,8 @@
 					'onPage': false,
 					'layout': 'vertical',
 					'containerPosition': 'left',
-					'kpl0Name': "test 4 item playlist",
-					'kpl0Id': '0_q79jh71b'
+					'vpl0Name': "test 4 item playlist",
+					'vpl0Id': '0_q79jh71b'
 				},
 				'nextPrevBtn':{
 					'plugin': true

@@ -99,14 +99,14 @@ vWidget.featureConfig({
 			'userId': 'customUid',
 			'hideUserId': false,
 			'delay': 1,
-			'hideKs' : false
+			'hideVs' : false
 		},
 		"chromecast":{
 			"plugin": true
 		}
 	},
 	'readyCallback': function(){
-		$('#kaltura_player').css('float', 'left').after('<div id="analyticsContainer" style="float:left;padding-left:20px;" >'+
+		$('#vidiun_player').css('float', 'left').after('<div id="analyticsContainer" style="float:left;padding-left:20px;" >'+
 			'<i>Analytics events:</i> <br />' + 
 				'<textarea id="analyticsLog" style="width:300px;height:280px;" ></textarea>' +
 			'</div>'

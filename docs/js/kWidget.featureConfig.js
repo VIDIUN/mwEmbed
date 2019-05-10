@@ -82,15 +82,15 @@
 		
 		return localEmbedOptions;
 	}
-	kWidget.featureConfig = function( embedOptions ){
+	vWidget.featureConfig = function( embedOptions ){
 		
 		var pageEmbed = $.extend( true, {}, embedOptions );
 		embedOptions = vWidget.getLocalFeatureConfig( embedOptions );
 		
 		// check for only display player flag: 
 		if( document.URL.indexOf( 'onlyDisplayPlayer') != -1 ){
-			// then just map directly to kWidget.embed:
-			kWidget.embed( embedOptions );
+			// then just map directly to vWidget.embed:
+			vWidget.embed( embedOptions );
 			return ;
 		}
 		

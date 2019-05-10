@@ -6,13 +6,13 @@
 </head>
 <body>
 <h3>Stand Alone Live Player ( MediaProxy Override )</h3>
-Kaltura support several stand alone player modes. Learn more about
-<a href="../../../docs/api#standAlonePlayerModes">stand alone player modes</a> Kaltura API documentation.
+Vidiun support several stand alone player modes. Learn more about
+<a href="../../../docs/api#standAlonePlayerModes">stand alone player modes</a> Vidiun API documentation.
 <br><br>
 This example highlights the <b>MediaProxy Override</b>, and JSON Config. It includes a midroll at 5 seconds,
 and sample entry metadata mapping for thumbnail preview slices..
 <br><br>
-    <div id="kaltura_player" style="width:600px;height:338px;"></div>
+    <div id="vidiun_player" style="width:600px;height:338px;"></div>
     HLS Live URL : <input type="text" id="HLSUrl_txt" />
     <button type="button" id="show_btn" value="Show!">Show!</button>
 
@@ -62,27 +62,27 @@ and sample entry metadata mapping for thumbnail preview slices..
 				"overrideFlashvar":false
 			}],
 			"layout":{
-				"skin": "kdark",
+				"skin": "vdark",
 				"cssFiles":[]
 			}
 		};
 		// per entry settings
-		var mediaProxyKalturaToolKitVideo = {
+		var mediaProxyVidiunToolKitVideo = {
 				'entry':{
 					'id': "key_1",
 					'name': "My ToolKit Video",
-					"description": "Kaltura Player toolkit Description.",
+					"description": "Vidiun Player toolkit Description.",
 					"plays":1234,
 					"views":47332,
 					"duration":114,
 					"createdAt":1379965720,
-					"thumbnailUrl": 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
+					"thumbnailUrl": 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
 				},
 				"contextData":{
 					'isCountryRestricted': false
 				},
 				'entryMetadata': {
-					'thumbSlicesUrl': 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
+					'thumbSlicesUrl': 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
 					'AgeGroup': "16"
 				},
             'meta':{
@@ -94,27 +94,27 @@ and sample entry metadata mapping for thumbnail preview slices..
         if (document.location.href.match(/hlsurl/)){
             var matched  = document.location.href.match(/hlsurl=(.*)/)[1];
             var url = decodeURIComponent(matched);
-            mediaProxyKalturaToolKitVideo.meta.hlsStreamUrl = url;
+            mediaProxyVidiunToolKitVideo.meta.hlsStreamUrl = url;
             embedPlayer();
         }
         $('#show_btn' ).click(function(){
             HLSURL = $("#HLSUrl_txt" ).val();
-            mediaProxyKalturaToolKitVideo.meta.hlsStreamUrl = HLSURL;
+            mediaProxyVidiunToolKitVideo.meta.hlsStreamUrl = HLSURL;
             embedPlayer();
         })
 		function embedPlayer() {
-            kWidget.embed( 'kaltura_player' , {
+            vWidget.embed( 'vidiun_player' , {
                 'wid': '_partnerkey' ,
                 'flashvars': {
                     'jsonConfig': jsonConfig ,
                     // per entity settings:
-                    'mediaProxy': mediaProxyKalturaToolKitVideo
+                    'mediaProxy': mediaProxyVidiunToolKitVideo
                 } ,
                 // ready bindings:
                 'readyCallback': function ( playerId ) {
-                    var kdp = document.getElementById( playerId );
+                    var vdp = document.getElementById( playerId );
                     $( '.alertEval a' ).click( function () {
-                        alert( JSON.stringify( kdp.evaluate( $( this ).text() ) ) );
+                        alert( JSON.stringify( vdp.evaluate( $( this ).text() ) ) );
                         return false;
                     } );
 

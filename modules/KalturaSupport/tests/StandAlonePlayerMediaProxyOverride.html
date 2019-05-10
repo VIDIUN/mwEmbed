@@ -6,14 +6,14 @@
 </head>
 <body>
 	<h3>Stand Alone Player ( MediaProxy Override )</h3>
-	Kaltura support several stand alone player modes. Learn more about 
-	<a href="../../../docs/api#standAlonePlayerModes">stand alone player modes</a> Kaltura API documentation. 
+	Vidiun support several stand alone player modes. Learn more about 
+	<a href="../../../docs/api#standAlonePlayerModes">stand alone player modes</a> Vidiun API documentation. 
 	<br><br>
 	This example highlights the <b>MediaProxy Override</b>, and JSON Config. It includes a midroll at 5 seconds,
 	 and sample entry metadata mapping for thumbnail preview slices.. 
 	<br><br>
 
-	<div id="kaltura_player" style="width:600px;height:338px;"></div>
+	<div id="vidiun_player" style="width:600px;height:338px;"></div>
 	
 	<script>
 		var jsonConfig  = {
@@ -54,58 +54,58 @@
 				"overrideFlashvar":false
 			}],
 			"layout":{
-				"skin": "kdark",
+				"skin": "vdark",
 				"cssFiles":[]
 			}
 		};
 		// per entry settings
-		var mediaProxyKalturaToolKitVideo = {
+		var mediaProxyVidiunToolKitVideo = {
 				'entry':{
 					'id': "key_1",
 					'name': "My ToolKit Video",
-					"description": "Kaltura Player toolkit Description.",
+					"description": "Vidiun Player toolkit Description.",
 					"plays":1234,
 					"views":47332,
 					"duration":114,
 					"createdAt":1379965720,
-					"thumbnailUrl": 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
+					"thumbnailUrl": 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
 				},
 				'entryCuePoints': [{
 					"protocolType": 1,
 					"adType": 1, 
 					"cuePointType": "adCuePoint.Ad",
 					"startTime": 4936,
-					"sourceUrl": "http://projects.kaltura.com/mdale/hotelVastAd.xml"
+					"sourceUrl": "http://projects.vidiun.com/mdale/hotelVastAd.xml"
 				}],
 				"contextData":{
 					'isCountryRestricted': false
 				},
 				'entryMetadata': {
-					'thumbSlicesUrl': 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
+					'thumbSlicesUrl': 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
 					'AgeGroup': "16"
 				},
 				'sources':[
 					{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_4j0omqcl/format/url/protocol/http/a.webm",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_4j0omqcl/format/url/protocol/http/a.webm",
 						"width":"624",
 						"height":"352",
 						"bandwidth":"740352",
 						"type":"video/webm; codecs=\"vp8, vorbis",
 					 },{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_d2uwy7vv/format/url/protocol/http/a.mp4",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_d2uwy7vv/format/url/protocol/http/a.mp4",
 						"width":"640",
 						"height":"360",
 						"bandwidth":"1101824",
 						"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 					 },{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_jl7y56al/format/url/protocol/http/a.mp4",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_jl7y56al/format/url/protocol/http/a.mp4",
 						"width":"1280",
 						"height":"720",
 						"bandwidth":"24117248",
 						"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 					 },
 					 {
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorIds/1_jl7y56al/format/applehttp/protocol/http/a.m3u8",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorIds/1_jl7y56al/format/applehttp/protocol/http/a.m3u8",
 						"type":"application/vnd.apple.mpegurl",
 					 }
 				]
@@ -121,7 +121,7 @@
 					"duration":114,
 					"createdAt":1379965720,
 					"updatedAt":1384465538,
-					"thumbnailUrl": 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/0_c0r624gh/version/100004/width/640'
+					"thumbnailUrl": 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/0_c0r624gh/version/100004/width/640'
 				},
 				'entryCuePoints': [{
 					// see enum mappings here: 
@@ -131,62 +131,62 @@
 					"duration": 5005,
 					"startTime": 4936,
 					"endTime": 9941,
-					"sourceUrl": "http://projects.kaltura.com/mdale/hotelVastAd.xml"
+					"sourceUrl": "http://projects.vidiun.com/mdale/hotelVastAd.xml"
 				}],
 				"contextData":{
 					'isCountryRestricted': false
 				},
 				'entryMetadata': {
-					'thumbSlicesUrl': 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/0_c0r624gh/version/100004/width/100/vid_slices/100',
+					'thumbSlicesUrl': 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/0_c0r624gh/version/100004/width/100/vid_slices/100',
 					'AgeGroup': "16"
 				},
 				'sources':[
 					{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_1c89hhxb/format/url/protocol/http/a.webm",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_1c89hhxb/format/url/protocol/http/a.webm",
 						"width":"816",
 						"height":"352",
 						"bandwidth":"637652",
 						"type":"video/webm; codecs=\"vp8, vorbis",
 					 },{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_w3aolq8p/format/url/protocol/http/a.mp4",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_w3aolq8p/format/url/protocol/http/a.mp4",
 						"width":"640",
 						"height":"272",
 						"bandwidth":"9688824",
 						"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 					 },{
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_w48dtkyq/format/url/protocol/http/a.mp4",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorId/0_w48dtkyq/format/url/protocol/http/a.mp4",
 						"width":"1280",
 						"height":"544",
 						"bandwidth":"15352248",
 						"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 					 },
 					 {
-						"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorIds/1_tj3uq03m,0_w48dtkyq/format/applehttp/protocol/http/a.m3u8",
+						"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/0_c0r624gh/flavorIds/1_tj3uq03m,0_w48dtkyq/format/applehttp/protocol/http/a.m3u8",
 						"type":"application/vnd.apple.mpegurl",
 					 }
 				]
 			}
 		
-		kWidget.embed('kaltura_player', {
+		vWidget.embed('vidiun_player', {
 			'wid' : '_243342',
 			'flashvars':{
 				'jsonConfig':jsonConfig,
 				// per entity settings: 
-				'mediaProxy': mediaProxyKalturaToolKitVideo
+				'mediaProxy': mediaProxyVidiunToolKitVideo
 			},
 			// ready bindings:
 			'readyCallback': function( playerId ){
-				var kdp = document.getElementById( playerId );
+				var vdp = document.getElementById( playerId );
 				$('.alertEval a').click(function(){
-					alert( JSON.stringify( kdp.evaluate( $(this).text() ) ) );
+					alert( JSON.stringify( vdp.evaluate( $(this).text() ) ) );
 					return false;
 				});
 				$('#changeMediaSinte').click(function(){
-					kdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxySinte });
+					vdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxySinte });
 					return false;
 				})
 				$('#changeToolKitVideo').click(function(){
-					kdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyKalturaToolKitVideo });
+					vdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyVidiunToolKitVideo });
 					return false;
 				});
 			}
@@ -211,55 +211,55 @@ var mediaProxyEntry = {
 	'entry':{
 		'id': "key_1",
 		'name': "My ToolKit Video",
-		"description": "Kaltura Player Toolkit Description.",
+		"description": "Vidiun Player Toolkit Description.",
 		"plays":1234,
 		"views":47332,
 		"duration":114,
 		"createdAt":1379965720,
-		"thumbnailUrl": 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
+		"thumbnailUrl": 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640'
 	},
 	'entryCuePoints': [{
 		"protocolType": 1,
 		"adType": 1, 
 		"cuePointType": "adCuePoint.Ad",
 		"startTime": 4936,
-		"sourceUrl": "http://projects.kaltura.com/mdale/hotelVastAd.xml"
+		"sourceUrl": "http://projects.vidiun.com/mdale/hotelVastAd.xml"
 	}],
 	"contextData":{
 		'isCountryRestricted': false
 	},
 	'entryMetadata': {
-		'thumbSlicesUrl': 'http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
+		'thumbSlicesUrl': 'http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/100/vid_slices/100',
 		'AgeGroup': "16"
 	},
 	'sources':[
 		{
-			"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_4j0omqcl/format/url/protocol/http/a.webm",
+			"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_4j0omqcl/format/url/protocol/http/a.webm",
 			"width":"624",
 			"height":"352",
 			"bandwidth":"740352",
 			"type":"video/webm; codecs=\"vp8, vorbis",
 		 },{
-			"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_d2uwy7vv/format/url/protocol/http/a.mp4",
+			"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_d2uwy7vv/format/url/protocol/http/a.mp4",
 			"width":"640",
 			"height":"360",
 			"bandwidth":"1101824",
 			"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 		 },{
-			"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_jl7y56al/format/url/protocol/http/a.mp4",
+			"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorId/1_jl7y56al/format/url/protocol/http/a.mp4",
 			"width":"1280",
 			"height":"720",
 			"bandwidth":"24117248",
 			"type":"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2",
 		 },
 		 {
-			"src":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorIds/1_jl7y56al/format/applehttp/protocol/http/a.m3u8",
+			"src":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_sf5ovm7u/flavorIds/1_jl7y56al/format/applehttp/protocol/http/a.m3u8",
 			"type":"application/vnd.apple.mpegurl",
 		 }
 	]
 }
 // do the embed:
-kWidget.embed('kaltura_player', {
+vWidget.embed('vidiun_player', {
 	'wid' : '_partnerkey',
 	'flashvars':{
 		// json player config
@@ -272,20 +272,20 @@ kWidget.embed('kaltura_player', {
 })</pre>
 	<h3>changeMedia call ( without reloading player):</h3>
 	<pre class="prettyprint linenums" style="width:98%;max-width:98%">
-kdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyEntry });</pre>
+vdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyEntry });</pre>
 
 	<h3> Sample changeMedia on an empty player</h3>
-	<div id="kaltura_player2" style="width:600px;height:338px;"></div>
+	<div id="vidiun_player2" style="width:600px;height:338px;"></div>
 	<script>
-		kWidget.embed('kaltura_player2', {
+		vWidget.embed('vidiun_player2', {
 			'wid': '_243342',
 			'flashvars':{
 				'jsonConfig':jsonConfig,
 			},
 			'readyCallback': function( playerId ){
-				var kdp = document.getElementById( playerId );
-				kdp.kBind('readyToLoad', function(){
-					kdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyKalturaToolKitVideo });
+				var vdp = document.getElementById( playerId );
+				vdp.vBind('readyToLoad', function(){
+					vdp.sendNotification('changeMedia', { 'mediaProxy': mediaProxyVidiunToolKitVideo });
 				});
 			}
 		});

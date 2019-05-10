@@ -1,7 +1,7 @@
 /* simple plugin that sends up hammer events via iframe bridge */
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'hammerEvents', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'hammerEvents', mw.VBasePlugin.extend({
 		defaultConfig: {
 			"on": "",
 			"options": ""
