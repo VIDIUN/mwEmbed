@@ -19,13 +19,13 @@
             quizSubmitted: false,
             intrVal: null,
             quizEndFlow: false,
-            isQKDPReady:false,
+            isQVDPReady:false,
 
             init: function (embedPlayer,quizPlugin) {
                 var _this = this;
 
-                _this.KIVQApi = new mw.KIVQApi(embedPlayer);
-                _this.KIVQScreenTemplate = new mw.KIVQScreenTemplate(embedPlayer);
+                _this.VIVQApi = new mw.VIVQApi(embedPlayer);
+                _this.VIVQScreenTemplate = new mw.VIVQScreenTemplate(embedPlayer);
 
                 this.destroy();
                 this.embedPlayer = embedPlayer;
@@ -37,7 +37,7 @@
 
                 this.embedPlayer.disableComponentsHover();
 
-                _this.KIVQApi.getUserEntryIdAndQuizParams( function(data) {
+                _this.VIVQApi.getUserEntryIdAndQuizParams( function(data) {
                     if (!_this.checkApiResponse('User Entry err-->', data[0])) {
                         return false;
                     }
@@ -240,13 +240,13 @@
                     }
                 });
             },
-            checkQKDPReady:function(callback){
+            checkQVDPReady:function(callback){
                 var _this = this;
                 if (_this.intrVal){
                     _this.intrVal = false;
                 }
                 _this.intrVal = setInterval(function () {
-                    if (_this.isQKDPReady){
+                    if (_this.isQVDPReady){
                         clearInterval(_this.intrVal);
                         _this.intrVal = false;
                         callback()
@@ -544,7 +544,7 @@
                 }
                 mw.log(errMsg, data);
                 _this.quizPlugin.ivqShowScreen();
-                _this.KIVQScreenTemplate.tmplErrorScreen();
+                _this.VIVQScreenTemplate.tmplErrorScreen();
                 $(".sub-text").html(gM('mwe-quiz-err-msg'));
                 _this.isErr = true;
             },

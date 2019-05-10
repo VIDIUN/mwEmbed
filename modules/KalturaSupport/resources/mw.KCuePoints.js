@@ -349,7 +349,7 @@
 			return false;
 		},
         getNextLiveCuePoint: function (time) {
-            var cuePoints = this.getCuePointsByType(mw.KCuePoints.TYPE.THUMB);
+            var cuePoints = this.getCuePointsByType(mw.VCuePoints.TYPE.THUMB);
             // TODO: sort the cuePoitns by createdAt
 
             // Start looking for the cue point via time, return LAST match:
@@ -360,7 +360,7 @@
                 }
             }
             if(lastCuePoint){
-                mw.log("KCuePoints :: getNextLiveCuePoint :: currentTime " + mw.seconds2npt(time) + " | lastCuePoint.createdAt " + mw.seconds2npt(lastCuePoint.createdAt));
+                mw.log("VCuePoints :: getNextLiveCuePoint :: currentTime " + mw.seconds2npt(time) + " | lastCuePoint.createdAt " + mw.seconds2npt(lastCuePoint.createdAt));
                 return lastCuePoint;
             }
         },

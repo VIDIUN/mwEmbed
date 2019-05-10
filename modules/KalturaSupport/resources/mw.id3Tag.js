@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'id3Tag', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'id3Tag', mw.VBasePlugin.extend({
 
         defaultConfig: {
             updateTimeIntervalSec: 1 // 1 second interval for update live time between id3 tags events (as for now we get id3 tag each 8 seconds)
@@ -52,8 +52,8 @@
                 case "Native":
                     time = JSON.parse(tag).timestamp / 1000;
                     break;
-                case "Kplayer":
-                    //flash tag: gibrish{"id":"ac1d4fd80c79bf7807f6c33061833a784ff5ce62","timestamp":1.447225650123E12,"offset":1431918.0,"objectType":"KalturaSyncPoint"}
+                case "Vplayer":
+                    //flash tag: gibrish{"id":"ac1d4fd80c79bf7807f6c33061833a784ff5ce62","timestamp":1.447225650123E12,"offset":1431918.0,"objectType":"VidiunSyncPoint"}
                     try{
                         tag = tag.substring(tag.indexOf('{'), tag.length); //remove unreadable gibrish from the tag string
                         var timestamp = tag.match(/timestamp\"\:([0-9|\.|A-F]+)/);

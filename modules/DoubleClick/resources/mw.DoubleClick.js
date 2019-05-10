@@ -160,7 +160,7 @@
 				this.handleCuePoints();
 			}
 			if (( mw.isIE8() || mw.isIE9() || _this.leadWithFlash ) && (mw.supportsFlash())) {
-				mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
+				mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
 				_this.isChromeless = true;
 				_this.prevSlotType = 'none';
 				_this.embedPlayer.bindHelper('playerReady' + _this.bindPostfix, function() {
@@ -170,7 +170,7 @@
 					mw.log("DoubleClick::chromeless volumeChanged: " + percent );
 					_this.embedPlayer.setPlayerElementVolume( percent );
 				});
-				_this.embedPlayer.bindHelper( 'Kaltura_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
+				_this.embedPlayer.bindHelper( 'Vidiun_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
 					if (notificationName === "doPause"){
 						_this.embedPlayer.getPlayerElement().pause();
 					}

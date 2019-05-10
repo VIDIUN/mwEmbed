@@ -30,9 +30,9 @@ mw.VEntryLoader.prototype = {
 		vProperties.flashvars = vProperties.flashvars || {};
 
 
-		if( this.getCacheKey( kProperties ) && this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ){
-		mw.log( "KApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ) );
-			callback( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] );
+		if( this.getCacheKey( vProperties ) && this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ){
+		mw.log( "VApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ) );
+			callback( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] );
 			return ;
 		}
 		// Local method to fill the cache key and run the associated callback

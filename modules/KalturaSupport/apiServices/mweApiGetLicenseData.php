@@ -3,7 +3,7 @@
 /*
 	Returns json with license acquisition data. 
 	Required parameters:
-		wid, uiconf_id, entry_id, ks
+		wid, uiconf_id, entry_id, vs
 	Optional parameter:
 		flavor_ids  (comma-separated list)
 		
@@ -27,7 +27,7 @@
 
 $wgMwEmbedApiServices['getLicenseData'] = 'mweApiGetLicenseData';
 
-require_once( dirname( __FILE__ ) . '/../KalturaCommon.php' );	// For EntryResult
+require_once( dirname( __FILE__ ) . '/../VidiunCommon.php' );	// For EntryResult
 
 class mweApiGetLicenseData {
 
@@ -50,8 +50,8 @@ class mweApiGetLicenseData {
 	}
 	
 	function getMissingParams() {
-		// Check mandatory parameters (wid, uiconf_id, entry_id, ks)
-		$mandatory = array(wid, uiconf_id, entry_id, ks);
+		// Check mandatory parameters (wid, uiconf_id, entry_id, vs)
+		$mandatory = array(wid, uiconf_id, entry_id, vs);
 		$missing = array();
 		foreach ($mandatory as $param) {
 			if (!isset($_REQUEST[$param])) {
@@ -62,7 +62,7 @@ class mweApiGetLicenseData {
 	}
 
 	function run() {
-		global $wgKalturaUdrmLicenseServerUrl;
+		global $wgVidiunUdrmLicenseServerUrl;
 
 		// Always send 200, errors are signalled in json.		
 		$this->sendHeaders();
@@ -75,7 +75,7 @@ class mweApiGetLicenseData {
 			try {
 				$flavorData = $this->getRawFlavorData();				
 				$response = array(
-					"config" 		=> array("licenseServerBaseURL" => $wgKalturaUdrmLicenseServerUrl),
+					"config" 		=> array("licenseServerBaseURL" => $wgVidiunUdrmLicenseServerUrl),
 					"flavorData"	=> $this->filterByRequestedFlavors($flavorData)
 				);
 		
@@ -111,7 +111,7 @@ class mweApiGetLicenseData {
 		global $container;
 		$drmPluginData = null;
 		$resultObject = $container['entry_result']->getResult();
-		$drmPluginData = (array)$resultObject["contextData"]->pluginData["KalturaDrmEntryContextPluginData"];
+		$drmPluginData = (array)$resultObject["contextData"]->pluginData["VidiunDrmEntryContextPluginData"];
 		return $drmPluginData["flavorData"];
 	}
 }

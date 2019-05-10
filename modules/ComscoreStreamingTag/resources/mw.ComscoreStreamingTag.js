@@ -11,7 +11,7 @@
 	mw.ComscoreStreamingTag.prototype = {
 
 		pluginVersion: "1.0.11",
-		reportingPluginName: "kaltura",
+		reportingPluginName: "vidiun",
 		playerVersion: mw.getConfig('version'),
 
 		bindPostfix: '.ComScoreStreamingTag',
@@ -582,7 +582,7 @@
 
 		parserRawConfig: function(configName) {
 			var _this = this;
-			var rawConfig = this.embedPlayer.getRawKalturaConfig(this.moduleName, configName)
+			var rawConfig = this.embedPlayer.getRawVidiunConfig(this.moduleName, configName)
 			if (!rawConfig) return [];
 			var result = {};
 			// Split and trim the spaces

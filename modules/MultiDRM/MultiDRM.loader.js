@@ -7,7 +7,7 @@
 		return (window['MediaSource'] || window['WebKitMediaSource']) && !mw.isFirefox() && !mw.isDesktopSafari() && !mw.isMobileChrome();
 	}
 	//Load 3rd party plugins if DRM sources are available
-	mw.addKalturaConfCheck( function( embedPlayer, callback ){
+	mw.addVidiunConfCheck( function( embedPlayer, callback ){
 		//For native callout on mobile browsers let the flow continue to native APP and decide if DRM is enbaled and supported in native SDK
 		if (embedPlayer.isPluginEnabled("nativeCallout") && !mw.isNativeApp()){
 			callback();
@@ -98,7 +98,7 @@
 			});
 			drmSources.push(hlsSource);
 		}
-		embedPlayer.kalturaFlavors = drmSources;
+		embedPlayer.vidiunFlavors = drmSources;
 		embedPlayer.replaceSources(drmSources);
 	}
 

@@ -1,12 +1,12 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'nativeCallout', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'nativeCallout', mw.VBasePlugin.extend({
 
-		// Defaults for KalturaPlay
+		// Defaults for VidiunPlay
 		defaultConfig: {
-			androidApplinkBaseURL: 	"https://kgit.html5video.org/kplay?",
-			iosApplinkBaseURL: 		"https://kgit.html5video.org/kplay?",
-			appInstallLandingPage: 	"https://kgit.html5video.org/kplay",
+			androidApplinkBaseURL: 	"https://kgit.html5video.org/vplay?",
+			iosApplinkBaseURL: 		"https://kgit.html5video.org/vplay?",
+			appInstallLandingPage: 	"https://kgit.html5video.org/vplay",
 		},
 
 		setup: function(){
@@ -56,7 +56,7 @@
 			var _this = this;
 			
 			var isFriendlyIframe = mw.getConfig('EmbedPlayer.IsFriendlyIframe');
-			var embedFrameURL = isFriendlyIframe ? kWidget.iframeUrls[ this.embedPlayer.id ] : location.href;
+			var embedFrameURL = isFriendlyIframe ? vWidget.iframeUrls[ this.embedPlayer.id ] : location.href;
 			var calloutURL = _this.applinkBase + "embedFrameURL=" + encodeURIComponent(embedFrameURL);
 
 			if (isFriendlyIframe) {
