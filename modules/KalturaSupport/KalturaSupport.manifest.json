@@ -1,9 +1,9 @@
 {
-    "Kaltura.UseAppleAdaptive": {
+    "Vidiun.UseAppleAdaptive": {
         "doc": "If apple HLS streams should be used when available.",
         "type": "boolean"
     },
-    "Kaltura.LeadHLSOnAndroid": {
+    "Vidiun.LeadHLSOnAndroid": {
         "doc": "If Apple HLS streams should be used when available on Android devices, \r\n\t\t\tby default progressive streams are used on Android because of Android HLS compatibility issues.",
         "type": "boolean"
     },
@@ -20,7 +20,7 @@
         "type": "boolean"
     },
     "closedCaptions": {
-        "description": "Reach multi-lingual audience and comply with FCC regulations with Kaltura multi-lingual closed captions support.",
+        "description": "Reach multi-lingual audience and comply with FCC regulations with Vidiun multi-lingual closed captions support.",
         "attributes": {
             "layout": {
                 "doc": "Layout mode for caption, on top of the video or below the video.",
@@ -246,7 +246,7 @@
         }
     },
     "playlistAPI": {
-        "description": "The Kaltura playlist plugin, supports associating multiple clips in sequence.",
+        "description": "The Vidiun playlist plugin, supports associating multiple clips in sequence.",
         "label": "Playlist Configuration",
         "attributes": {
             "containerPosition": {
@@ -348,23 +348,23 @@
             "initItemEntryId": {
                 "doc": "The entryId that should be played first."
             },
-            "kpl0Url": {
-                "doc": "The playlist URL. (can be a Kaltura playlist service or MRSS)",
+            "vpl0Url": {
+                "doc": "The playlist URL. (can be a Vidiun playlist service or MRSS)",
                 "type": "hiddenValue"
             },
-            "kpl0Id": {
-                "doc": "The kaltura playlist Id",
+            "vpl0Id": {
+                "doc": "The vidiun playlist Id",
                 "type": "hiddenValue"
             },
-            "kpl0Name": {
+            "vpl0Name": {
                 "doc": "The name of the playlist.",
                 "type": "hiddenValue"
             },
-            "kpl1Url": {
+            "vpl1Url": {
                 "doc": "The N playlist URL.",
                 "type": "hiddenValue"
             },
-            "kpl1Name": {
+            "vpl1Name": {
                 "doc": "The name of the indexed playlist.",
                 "type": "hiddenValue"
             },
@@ -375,7 +375,7 @@
         }
     },
     "localizationCode": {
-        "description": "Set the language of the Kaltura player user interface. Supports language code or <b>auto</b> to take the browser\r\n\t\trequested language from JavaScript vars.",
+        "description": "Set the language of the Vidiun player user interface. Supports language code or <b>auto</b> to take the browser\r\n\t\trequested language from JavaScript vars.",
         "doc": "language code, or \"auto\" for browser content language preference",
         "type": "string"
     },
@@ -427,7 +427,7 @@
         }
     },
     "flavorComboControllerScreen": {
-        "description": "The Kaltura flavor selector plugin."
+        "description": "The Vidiun flavor selector plugin."
     },
     "audioSelector": {
         "description": "Enables users to select from audio tracks active in the stream."
@@ -646,7 +646,7 @@
         }
     },
     "logo": {
-        "description": "The Kaltura custom logo plugin.",
+        "description": "The Vidiun custom logo plugin.",
         "featureCheckbox": true,
         "attributes": {
             "img": {
@@ -658,12 +658,12 @@
                 "label": "Logo link",
                 "doc": "URL for the control bar logo to click through to.",
                 "type": "url",
-                "initvalue": "http://www.kaltura.com"
+                "initvalue": "http://www.vidiun.com"
             },
             "title": {
                 "doc": "Title tooltip for the logo",
                 "type": "string",
-                "initvalue": "Kaltura"
+                "initvalue": "Vidiun"
             },
             "cssClass": {
                 "doc": "An additional class to add to the logo. Can be used for CSS based custom logo image.",
@@ -672,7 +672,7 @@
         }
     },
     "mylogo": {
-        "description": "The Kaltura custom logo plugin.",
+        "description": "The Vidiun custom logo plugin.",
         "attributes": {
             "watermarkPath": {
                 "doc": "URL path to plugin image. For default controls height, logo can be 20 by 20 pixel png.",
@@ -827,7 +827,7 @@
                 "type": "number"
             },
             "socialShareURL": {
-                "doc": "<p style='text-align: left'>Allows you to define the URL shared for this player:</p>\r\n\t\t\t\t\t\t<ul style='text-align: left'>\r\n\t\t\t\t\t\t\t<li><b>smart</b> will maximize inline social sharing playback, by using the\r\n\t\t\t\t\t\t\t\tpage URL or Kaltura URL, and depend on whether opengraph tags are present on the page</li>\r\n\t\t\t\t\t\t\t<li><b>parent</b> will share the parent page URL.</li>\r\n\t\t\t\t\t\t\t<li><b>http://my-custom-domain.com/?v={mediaProxy.entry.id}</b> a custom URL with magic substitution can also be used.</li>\r\n\t\t\t\t\t\t</ul>",
+                "doc": "<p style='text-align: left'>Allows you to define the URL shared for this player:</p>\r\n\t\t\t\t\t\t<ul style='text-align: left'>\r\n\t\t\t\t\t\t\t<li><b>smart</b> will maximize inline social sharing playback, by using the\r\n\t\t\t\t\t\t\t\tpage URL or Vidiun URL, and depend on whether opengraph tags are present on the page</li>\r\n\t\t\t\t\t\t\t<li><b>parent</b> will share the parent page URL.</li>\r\n\t\t\t\t\t\t\t<li><b>http://my-custom-domain.com/?v={mediaProxy.entry.id}</b> a custom URL with magic substitution can also be used.</li>\r\n\t\t\t\t\t\t</ul>",
                 "type": "string",
                 "initvalue": "smart"
             },
@@ -934,7 +934,7 @@
     },
     "watermark": {
         "featureCheckbox": true,
-        "description": "The kaltura watermark plugin",
+        "description": "The vidiun watermark plugin",
         "type": "featuremenu",
         "label": "Watermark",
         "model": "config.plugins.watermark",
@@ -974,14 +974,14 @@
                 "label": "Image URL",
                 "model": "config.plugins.watermark.img",
                 "doc": "The URL path to the watermark image.",
-                "initvalue": "http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png",
+                "initvalue": "http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png",
                 "type": "url"
             },
             "watermarkClickPath": {
                 "label": "Click URL",
                 "model": "config.plugins.watermark.href",
                 "doc": "The URL for the watermark click.",
-                "initvalue": "http://www.kaltura.com/",
+                "initvalue": "http://www.vidiun.com/",
                 "type": "url"
             },
             "hideTimeout": {
@@ -1034,43 +1034,43 @@
         }
     },
     "statistics": {
-        "description": "Use Kaltura statistics to\r\n\t\t<a target=\"_new\" href=\"http://knowledge.kaltura.com/creating-and-tracking-analytics-kmc-0\">track analytics for the Kaltura player.</a>\r\n\t\tStatistics are enabled by default.",
+        "description": "Use Vidiun statistics to\r\n\t\t<a target=\"_new\" href=\"http://knowledge.vidiun.com/creating-and-tracking-analytics-vmc-0\">track analytics for the Vidiun player.</a>\r\n\t\tStatistics are enabled by default.",
         "attributes": {
             "trackEventMonitor": {
-                "doc": "Use to audit Kaltura events with a named callback function.",
+                "doc": "Use to audit Vidiun events with a named callback function.",
                 "type": "string"
             }
         }
     },
     "playbackContext": {
-        "doc": "The playback context sent to Kaltura analytics."
+        "doc": "The playback context sent to Vidiun analytics."
     },
     "originFeature": {
-        "doc": "The featureType var sent to Kaltura analytics."
+        "doc": "The featureType var sent to Vidiun analytics."
     },
     "applicationName": {
-        "doc": "For registering the application with Kaltura analytics."
+        "doc": "For registering the application with Vidiun analytics."
     },
     "userId": {
-        "doc": "For associating a userId with Kaltura analytics."
+        "doc": "For associating a userId with Vidiun analytics."
     },
     "myExternalResourcesPlugin": {
         "description": "The external resources attributes can be applied to a custom plugin by any name. All number keys can be incremneted to load more resources. i.e onPageJs1 onPageJs2 onPageJs3 etc.",
         "attributes": {
             "onPageJs1": {
-                "doc": "An onPage javascript file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Kaltura_OnPage_Plugins\">onPage plugins</a>",
+                "doc": "An onPage javascript file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Vidiun_OnPage_Plugins\">onPage plugins</a>",
                 "type": "url"
             },
             "onPageCss1": {
-                "doc": "An onPage CSS file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Kaltura_OnPage_Plugins\">onPage plugins</a>",
+                "doc": "An onPage CSS file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Vidiun_OnPage_Plugins\">onPage plugins</a>",
                 "type": "url"
             },
             "iframeHTML5Js1": {
-                "doc": "Javascript to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Kaltura_HTML5_Plugins\">html5 iframe plugins</a>",
+                "doc": "Javascript to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Vidiun_HTML5_Plugins\">html5 iframe plugins</a>",
                 "type": "url"
             },
             "iframeHTML5Css": {
-                "doc": "CSS to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Kaltura_HTML5_Plugins\">html5 iframe plugins</a>",
+                "doc": "CSS to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Vidiun_HTML5_Plugins\">html5 iframe plugins</a>",
                 "type": "url"
             }
         }
@@ -1140,7 +1140,7 @@
         "type": "boolean"
     },
     "bumper": {
-        "description": "Bumpers, enables a Kaltura entry to be displayed before or after the content.",
+        "description": "Bumpers, enables a Vidiun entry to be displayed before or after the content.",
         "attributes": {
             "bumperEntryID": {
                 "doc": "The entry id of the bumper to be played",
@@ -1255,7 +1255,7 @@
             ],
             "title": "Configuration"
         },
-        "description": "Kaltura player features robust VAST support for prerolls, midrolls, overlays, companions and postrolls",
+        "description": "Vidiun player features robust VAST support for prerolls, midrolls, overlays, companions and postrolls",
         "attributes": {
             "prerollUrl": {
                 "doc": "The VAST ad tag XML URL.",
@@ -1581,7 +1581,7 @@
         }
     },
     "captureThumbnail": {
-        "description": "Allow your users to capture a thumbnail from the video content. A KS must be supplied to ingest the reqspective thubmnail.",
+        "description": "Allow your users to capture a thumbnail from the video content. A VS must be supplied to ingest the reqspective thubmnail.",
         "plugin": {
             "doc": "If the plugin should be activated",
             "type": "string"
@@ -1849,7 +1849,7 @@
                 "initvalue": true
             },
             "sendContextWithPlaylist": {
-                "doc": "Send context with the playlist (_KDP_CTXPL sends this automatically)",
+                "doc": "Send context with the playlist (_VDP_CTXPL sends this automatically)",
                 "type": "boolean",
                 "initvalue": false
             },
@@ -1864,7 +1864,7 @@
         }
     },
     "strings": {
-        "description": "Enables overwriting player strings.<br>For full string keys listing, review the <a href=\"http://player.kaltura.com/docs/Strings\" target=\"_blank\">Strings documentation page.</a><br>You can override strings seperately for different locales by adding the locale code before the string key and then a dot. For more info, look at the <a href=\"http://player.kaltura.com/modules/KalturaSupport/tests/StringsLocale.html\" target=\"_blank\">Strings locale demo.</a>",
+        "description": "Enables overwriting player strings.<br>For full string keys listing, review the <a href=\"http://player.vidiun.com/docs/Strings\" target=\"_blank\">Strings documentation page.</a><br>You can override strings seperately for different locales by adding the locale code before the string key and then a dot. For more info, look at the <a href=\"http://player.vidiun.com/modules/VidiunSupport/tests/StringsLocale.html\" target=\"_blank\">Strings locale demo.</a>",
         "type": "featuremenu",
         "label": "Strings",
         "model": "config.plugins.strings",

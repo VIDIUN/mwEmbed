@@ -31,7 +31,7 @@ onload = function () {
 	mediaManager = new cast.receiver.MediaManager(mediaElement);
 
 	castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-	messageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.kaltura.cast.player');
+	messageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.vidiun.cast.player');
 
 	setCastReceiverManagerEvents();
 	initApp();
@@ -114,12 +114,12 @@ onload = function () {
 			var uiconfID = payload['uiconfID'];
 			var entryID = payload['entryID'];
 			mw.setConfig("EmbedPlayer.HidePosterOnStart", true);
-			if (payload['debugKalturaPlayer'] == true){
+			if (payload['debugVidiunPlayer'] == true){
 				mw.setConfig("debug", true);
-				mw.setConfig("debugTarget", "kdebug");
+				mw.setConfig("debugTarget", "vdebug");
 				//mw.setConfig("debugFilter", "---");
 				mw.setConfig("autoScrollDebugTarget", true);
-				document.getElementById('kdebug').style.display = 'block';
+				document.getElementById('vdebug').style.display = 'block';
 			}
 			mw.setConfig("chromecastReceiver", true);
 			mw.setConfig("Kaltura.ExcludedModules", "chromecast");

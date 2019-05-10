@@ -26,11 +26,11 @@ class thumbnailEntry {
 		}
 
 		// Request params
-		$width = $kEntryObject->request->get('width');
-		$height = $kEntryObject->request->get('height');
-		$vid_slices = $kEntryObject->request->get('vid_slices');
-		$vid_sec = $kEntryObject->request->get('vid_sec');
-		$ks = $container['request_helper']->get('ks');
+		$width = $vEntryObject->request->get('width');
+		$height = $vEntryObject->request->get('height');
+		$vid_slices = $vEntryObject->request->get('vid_slices');
+		$vid_sec = $vEntryObject->request->get('vid_sec');
+		$vs = $container['request_helper']->get('vs');
 
 		// Send public cache header for 5 min
 		header("Cache-Control: public, max-age=300");
@@ -46,8 +46,8 @@ class thumbnailEntry {
 			  	$thumbUrl .= $vid_slices ? '/vid_slices/' . intval( $vid_slices ) : '';
 			  	// add vid_sec support
 			  	$thumbUrl .= $vid_sec ? '/vid_sec/' . intval( $vid_sec ) : '';
-			  	// check for ks: 
-			  	$thumbUrl .= $ks ? '/ks/' . $ks : '';
+			  	// check for vs: 
+			  	$thumbUrl .= $vs ? '/vs/' . $vs : '';
 			}
 			header( "Location: " . $thumbUrl );
 		} else {

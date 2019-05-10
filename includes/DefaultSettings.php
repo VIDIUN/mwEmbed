@@ -45,7 +45,7 @@ if( isset( $_GET['psvwidgetpath'] ) ){
 $wgVidiunPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
 
 // The html5-ps modules dir
-$wgKalturaPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
+$wgVidiunPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
 
 // By default set $wgScriptPath to empty
 $wgScriptPath = basename(dirname($_SERVER['SCRIPT_NAME'])) . '/';
@@ -70,13 +70,13 @@ while (false !== ($entry = $d->read())) {
 	}
 }
 
-// Enable every module in the "ps/modules" folder of kwidget-ps
-$wgKwidgetPsEnabledModules = array();
-if (!empty($wgKalturaPSHtml5ModulesDir)){
-    $dPs = dir( $wgKalturaPSHtml5ModulesDir );
+// Enable every module in the "ps/modules" folder of vwidget-ps
+$wgVwidgetPsEnabledModules = array();
+if (!empty($wgVidiunPSHtml5ModulesDir)){
+    $dPs = dir( $wgVidiunPSHtml5ModulesDir );
     while (false !== ($entryPs = $dPs->read())) {
-        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgKwidgetPsEnabledModules ) ){
-            $wgKwidgetPsEnabledModules[] = $entryPs;
+        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgVwidgetPsEnabledModules ) ){
+            $wgVwidgetPsEnabledModules[] = $entryPs;
         }
     }
 }
@@ -142,7 +142,7 @@ $wgExternalPlayersSupportedTypes = array('YouTube');
 
 //Embedded services
 //To enable service re routing for entryResult calls
-$wgEnableKalturaEmbedServicesRouting = true;
+$wgEnableVidiunEmbedServicesRouting = true;
 
 // To include signed headers with user IPs for IP restriction lookups, input a salt string for 
 // $wgVidiunRemoteAddressSalt configuration option. 
@@ -247,7 +247,7 @@ $wgVidiunApiFeatures = array();
 /*********************************************************
  * Override Domain:
 ********************************************************/
-$wgEnableKalturaOverrideDomain = true;
+$wgEnableVidiunOverrideDomain = true;
 
 /*********************************************************
  * A comma-delimited string of allowed flashavrs to be passed to server on dynamic embed call:
@@ -273,7 +273,7 @@ if( is_file( $wgLocalSettingsFile ) ){
 //Set global configs into $wgMwEmbedModuleConfig in order to enable
 //resource loader to output the config in the response
 // if Manifest urls should be used:
-$wgMwEmbedModuleConfig['Kaltura.UseManifestUrls'] = $wgKalturaUseManifestUrls;
+$wgMwEmbedModuleConfig['Vidiun.UseManifestUrls'] = $wgVidiunUseManifestUrls;
 //Add license server config:
 global $wgKalturaLicenseServerUrl, $wgKalturaUdrmLicenseServerUrl;
 $wgMwEmbedModuleConfig['Kaltura.LicenseServerURL'] = $wgKalturaLicenseServerUrl;

@@ -60,7 +60,7 @@ foreach( $playlist['playlist'] as $key => $entry ){
 	$entry =  (array)$entry;
 ?>
 	<li itemscope itemtype="http://schema.org/VideoObject" 
-		class="kaltura-video span2">
+		class="vidiun-video span2">
 		<meta itemprop="duration" content="<?php echo $entry['duration'] ?>">
 		<meta itemprop="thumbnailURL" content="<?php echo $entry['thumbnailUrl'] ?>">
 		<a data-entryid="<?php echo $entry['id'] ?>" href="#" class="thumbnail" title="<?php echo $entry['name'] ?>">

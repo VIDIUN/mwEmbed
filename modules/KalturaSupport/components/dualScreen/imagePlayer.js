@@ -2,11 +2,11 @@
 	"use strict";
 	mw.dualScreen = mw.dualScreen || {};
 
-	mw.dualScreen.imagePlayer = mw.KBaseComponent.extend({
+	mw.dualScreen.imagePlayer = mw.VBaseComponent.extend({
 		defaultConfig: {
 			cuePointType: [{
-				"main": mw.KCuePoints.TYPE.THUMB,
-				"sub": [mw.KCuePoints.THUMB_SUB_TYPE.SLIDE]
+				"main": mw.VCuePoints.TYPE.THUMB,
+				"sub": [mw.VCuePoints.THUMB_SUB_TYPE.SLIDE]
 			}],
 			prefetch: {
 				'durationPercentageUntilNextSequence': 60,
@@ -178,10 +178,10 @@
 		getCuePoints: function(){
 			var cuePoints = [];
 			var _this = this;
-			if ( this.getPlayer().kCuePoints ) {
+			if ( this.getPlayer().vCuePoints ) {
 				$.each( _this.getConfig("cuePointType"), function ( i, cuePointType ) {
 					$.each( cuePointType.sub, function ( j, cuePointSubType ) {
-						var filteredCuePoints = _this.getPlayer().kCuePoints.getCuePointsByType( cuePointType.main, cuePointSubType );
+						var filteredCuePoints = _this.getPlayer().vCuePoints.getCuePointsByType( cuePointType.main, cuePointSubType );
 						cuePoints = cuePoints.concat( filteredCuePoints );
 					} );
 				} );
@@ -277,7 +277,7 @@
 
 				var _this = this;
 				// do the api request
-				this.getKalturaClient().doRequest( {
+				this.getVidiunClient().doRequest( {
 					'service': 'thumbAsset',
 					'action': 'getUrl',
 					'id': assetId

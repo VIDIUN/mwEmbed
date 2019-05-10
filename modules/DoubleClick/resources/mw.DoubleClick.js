@@ -34,7 +34,7 @@
 		adDuration: null,
 		demoStartTime: null,
 
-		// flag for using a chromeless player - move control to KDP DoubleClick plugin
+		// flag for using a chromeless player - move control to VDP DoubleClick plugin
 		isChromeless: false,
 		 //flag for using native mobile IMA SDK
 		isNativeSDK: false,
@@ -96,8 +96,8 @@
 			if (mw.getConfig( 'localizationCode' )){
 				_this.localizationCode = mw.getConfig( 'localizationCode' );
 			}
-			// copy flashVars to KDP to support Chromeless player plugin
-			this.copyFlashvarsToKDP(embedPlayer, pluginName);
+			// copy flashVars to VDP to support Chromeless player plugin
+			this.copyFlashvarsToVDP(embedPlayer, pluginName);
 			this.embedPlayer = embedPlayer;
 			// Inherit BaseAdPlugin
 			mw.inherit( this, new mw.BaseAdPlugin( embedPlayer, callback ) );
@@ -148,16 +148,16 @@
 				return;
 			}
 
-			if ( this.embedPlayer.getRawKalturaConfig('noticeMessage')){
-				embedPlayer.setKalturaConfig( 'doubleClick', 'enableCountDown',true );
-				embedPlayer.setKalturaConfig( 'doubleClick', 'countdownText',this.embedPlayer.getRawKalturaConfig('noticeMessage','text') );
+			if ( this.embedPlayer.getRawVidiunConfig('noticeMessage')){
+				embedPlayer.setVidiunConfig( 'doubleClick', 'enableCountDown',true );
+				embedPlayer.setVidiunConfig( 'doubleClick', 'countdownText',this.embedPlayer.getRawVidiunConfig('noticeMessage','text') );
 			}
 			if ( this.getConfig( 'enableCountDown' ) === true){
 				if ( !_this.getConfig( 'countdownText' ) ){
-					embedPlayer.setKalturaConfig( 'doubleClick', 'countdownText','Advertisement: Video will resume in {sequenceProxy.timeRemaining} seconds');
+					embedPlayer.setVidiunConfig( 'doubleClick', 'countdownText','Advertisement: Video will resume in {sequenceProxy.timeRemaining} seconds');
 				}
 			}else{
-				embedPlayer.setKalturaConfig( 'doubleClick', 'countdownText',null);
+				embedPlayer.setVidiunConfig( 'doubleClick', 'countdownText',null);
 			}
 
 			if ( this.trackCuePoints ){
@@ -217,7 +217,7 @@
 					google.ima.settings.setLocale(_this.localizationCode);
 				}
 				// set player type and version
-				google.ima.settings.setPlayerType("kaltura/mwEmbed");
+				google.ima.settings.setPlayerType("vidiun/mwEmbed");
 				google.ima.settings.setPlayerVersion(mw.getConfig("version"));
 				google.ima.settings.setVpaidMode(google.ima.ImaSdkSettings.VpaidMode.ENABLED);
 
@@ -262,7 +262,7 @@
 		},
 		handleCuePoints: function(){
 			var _this = this;
-			$( this.embedPlayer ).bind('KalturaSupport_AdOpportunity', function( event, cuePointWrapper ) {
+			$( this.embedPlayer ).bind('VidiunSupport_AdOpportunity', function( event, cuePointWrapper ) {
 				if( cuePointWrapper.cuePoint.protocolType == 1 && _this.adCuePoints.indexOf(cuePointWrapper.cuePoint.id) === -1 ){ // Check for  protocolType == 1 ( type = vast )
 					if ( !_this.overrideCuePointWithPreRoll ) {
 						_this.adTagUrl = cuePointWrapper.cuePoint.sourceUrl;
@@ -294,7 +294,7 @@
 		},
 		parseAdTagUrlParts: function(embedPlayer, pluginName){
 			//Handle adTagUrl separately - using postProcessConfig on the entire ad tag breaks doubleclick functionality
-			var adTagUrl = embedPlayer.getRawKalturaConfig( pluginName, "adTagUrl" );
+			var adTagUrl = embedPlayer.getRawVidiunConfig( pluginName, "adTagUrl" );
 			if ( adTagUrl ) {
 				try{
 					//Break url to base and query string.
@@ -311,7 +311,7 @@
 							//Unescape and try to evaluate key and value
 							var evaluatedKey = embedPlayer.evaluate( unescape( queryStringParamsParts[i].substr(0, equalIndex) ) );
 							var evaluatedValue = embedPlayer.evaluate( unescape( queryStringParamsParts[i].substr( equalIndex + 1 ) ) );
-							//Escape kvp and build evaluated query string param back. exclude cust_params.
+							//Escape vvp and build evaluated query string param back. exclude cust_params.
 							if (evaluatedKey != 'cust_params'){
 								evaluatedQueryStringParams += escape( evaluatedKey );
 								if (evaluatedValue) {
@@ -331,7 +331,7 @@
 				} catch (e) {
 					// in case of error - fallback for fully escaped and evaluated adTagUrl string
 					mw.log("failed to evaluate adTagUrl parts, using fully escaped/evaluated adTagUrl");
-					var adTagUrl = embedPlayer.getKalturaConfig(pluginName);
+					var adTagUrl = embedPlayer.getVidiunConfig(pluginName);
 					if ( adTagUrl ){
 						this.adTagUrl = adTagUrl; // escape adTagUrl to prevent Flash string parsing error
 						this.cust_params = "";
@@ -339,8 +339,8 @@
 				}
 			}
 		},
-		copyFlashvarsToKDP: function(embedPlayer, pluginName){
-			var flashVars = embedPlayer.getKalturaConfig(pluginName);
+		copyFlashvarsToVDP: function(embedPlayer, pluginName){
+			var flashVars = embedPlayer.getVidiunConfig(pluginName);
 
 			this.parseAdTagUrlParts(embedPlayer, pluginName);
 			//Escape adTagUrl to prevent flash string parsing error
@@ -354,9 +354,9 @@
 			}
 			// add player version as a Flashvar to be used in playerVersion property of ImaSdkSettings
 			flashVars['playerVersion'] = mw.getConfig("version");
-			embedPlayer.setKalturaConfig('kdpVars', 'doubleClick', flashVars);
+			embedPlayer.setVidiunConfig('vdpVars', 'doubleClick', flashVars);
 			if ( this.localizationCode ){
-				embedPlayer.setKalturaConfig('kdpVars', 'localizationCode', this.localizationCode);
+				embedPlayer.setVidiunConfig('vdpVars', 'localizationCode', this.localizationCode);
 			}
 		},
 		/**
@@ -498,7 +498,7 @@
 					_this.requestAds("postroll");
 				}
 			});
-			_this.embedPlayer.bindHelper('Kaltura_SendNotification' + this.bindPostfix, function (event, notificationName, notificationData) {
+			_this.embedPlayer.bindHelper('Vidiun_SendNotification' + this.bindPostfix, function (event, notificationName, notificationData) {
 				if (_this.playingLinearAd) {
 					if ( notificationName === "doPause" ) {
 						_this.pauseAd(true);
@@ -700,10 +700,10 @@
 		},
 		addSkipSupport: function(){
 			var _this = this;
-			if ( this.embedPlayer.getRawKalturaConfig('skipBtn') && this.embedPlayer.getVideoHolder().find(".ad-skip-btn").length === 0){
+			if ( this.embedPlayer.getRawVidiunConfig('skipBtn') && this.embedPlayer.getVideoHolder().find(".ad-skip-btn").length === 0){
 				var label = "Skip Ad";
-				if( this.embedPlayer.getKalturaConfig( 'skipBtn', 'label' ) ){
-					label = this.embedPlayer.getKalturaConfig( 'skipBtn', 'label' );
+				if( this.embedPlayer.getVidiunConfig( 'skipBtn', 'label' ) ){
+					label = this.embedPlayer.getVidiunConfig( 'skipBtn', 'label' );
 				}
 				this.embedPlayer.getVideoHolder().append(
 					$('<span />')
@@ -729,7 +729,7 @@
 							return false;
 						})
 				);
-				if ( this.embedPlayer.getRawKalturaConfig('skipNotice') && this.embedPlayer.getVideoHolder().find(".ad-skip-label").length === 0){
+				if ( this.embedPlayer.getRawVidiunConfig('skipNotice') && this.embedPlayer.getVideoHolder().find(".ad-skip-label").length === 0){
 					this.embedPlayer.getVideoHolder().append(
 						$('<span />')
 							.addClass( 'ad-component ad-skip-label' )
@@ -739,12 +739,12 @@
 			}
 		},
 		showSkipBtn: function(){
-			if( this.embedPlayer.getKalturaConfig( 'skipBtn', 'skipOffset' ) ){
+			if( this.embedPlayer.getVidiunConfig( 'skipBtn', 'skipOffset' ) ){
 				$(".ad-skip-label").show();
 				this.skipTimeoutId = setTimeout(function(){
 					$(".ad-skip-btn").show();
 					$(".ad-skip-label").hide();
-				},parseFloat(this.embedPlayer.getKalturaConfig( 'skipBtn', 'skipOffset' ) * 1000))
+				},parseFloat(this.embedPlayer.getVidiunConfig( 'skipBtn', 'skipOffset' ) * 1000))
 			}else{
 				$(".ad-skip-btn").show();
 				$(".ad-skip-label").hide();
@@ -851,7 +851,7 @@
 			adsRequest.nonLinearAdSlotHeight = size.height;
 
 
-			// if on chromeless - reuest ads using the KDP DoubleClick plugin instead of the JS plugin
+			// if on chromeless - reuest ads using the VDP DoubleClick plugin instead of the JS plugin
 			if (this.isChromeless){
 				adsRequest.adTagUrl = encodeURIComponent(adsRequest.adTagUrl);
 				this.embedPlayer.getPlayerElement().sendNotification( 'requestAds', adsRequest );
@@ -1472,7 +1472,7 @@
 			 * Handle any send notification events:
 			 */
 
-			embedPlayer.bindHelper( 'Kaltura_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
+			embedPlayer.bindHelper( 'Vidiun_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
 				// Only take local api actions if in an Ad.
 				if( _this.adActive ){
 					mw.log("DoubleClick:: sendNotification: " + notificationName );
@@ -1556,9 +1556,9 @@
 
 		updateRemainingAdTime: function(remainTime){
 			if ( this.embedPlayer.getInterface().find(".ad-skip-label").length ){
-				var offsetRemaining = Math.max(Math.ceil(parseFloat(this.embedPlayer.getKalturaConfig( 'skipBtn', 'skipOffset' )) - remainTime), 0);
+				var offsetRemaining = Math.max(Math.ceil(parseFloat(this.embedPlayer.getVidiunConfig( 'skipBtn', 'skipOffset' )) - remainTime), 0);
 				this.embedPlayer.adTimeline.updateSequenceProxy( 'skipOffsetRemaining', offsetRemaining );
-				this.embedPlayer.getInterface().find(".ad-skip-label").text(this.embedPlayer.evaluate( this.embedPlayer.getRawKalturaConfig('skipNotice','text')) );
+				this.embedPlayer.getInterface().find(".ad-skip-label").text(this.embedPlayer.evaluate( this.embedPlayer.getRawVidiunConfig('skipNotice','text')) );
 			}
 		},
 		// Handler for various ad errors.
@@ -1647,7 +1647,7 @@
 		 */
 		getConfig: function( attrName ){
 			// always get the config from the embedPlayer so that is up-to-date
-			return this.embedPlayer.getKalturaConfig( this.pluginName, attrName );
+			return this.embedPlayer.getVidiunConfig( this.pluginName, attrName );
 		},
 		destroy:function(){
 			// remove any old bindings:

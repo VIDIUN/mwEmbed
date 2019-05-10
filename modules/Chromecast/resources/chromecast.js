@@ -7,7 +7,7 @@
 		mediaPlayers.addPlayer( chromecastPlayer );
 	});
 
-	mw.PluginManager.add( 'chromecast', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'chromecast', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',
@@ -45,7 +45,7 @@
 
 		receiverName: '',
 		drmConfig: null,
-		MESSAGE_NAMESPACE: 'urn:x-cast:com.kaltura.cast.player',
+		MESSAGE_NAMESPACE: 'urn:x-cast:com.vidiun.cast.player',
 
 		isNativeSDK: false, //flag for using native mobile IMA SDK
 		pendingRelated: false,

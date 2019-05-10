@@ -11,14 +11,14 @@
         <div class="chapterBoxInner" >
             <% if( meta.includeThumbnail) { %>
 	        <div class="thumbnailHolder">
-            <img class="k-thumb" alt="Thumbnail for <%=mediaItem.title%>" data-mediaBox-index="<%=i%>" src="<%=mediaItem.thumbnail.url%>"
+            <img class="v-thumb" alt="Thumbnail for <%=mediaItem.title%>" data-mediaBox-index="<%=i%>" src="<%=mediaItem.thumbnail.url%>"
                  style="width:<%=mediaItem.thumbnail.width%>px;
                  height: <%=mediaItem.thumbnail.height%>px"/>
 	        </div>
             <% } %>
-            <span class="k-title-container" title="<%=mediaItem.title%>">
+            <span class="v-title-container" title="<%=mediaItem.title%>">
                 <% if( meta.includeChapterStartTime) { %>
-                <span class="k-start-time">
+                <span class="v-start-time">
                     <span><%=mediaItem.startTimeDisplay%></span>
                 </span>
                 <% } %>
@@ -28,16 +28,16 @@
                 <%
                 var chapterTitle = mediaItem.title;
 	            %>
-                <span class="k-title" title="<%=chapterTitle%>"><%=chapterTitle%></span>
+                <span class="v-title" title="<%=chapterTitle%>"><%=chapterTitle%></span>
             </span>
             <%
             var views = mediaItem.views;
             %>
-	        <div class="k-views-container">
-                <span class="k-views" title="<%=views%>">views: <%=views%></span>
+	        <div class="v-views-container">
+                <span class="v-views" title="<%=views%>">views: <%=views%></span>
 	        </div>
             <% if( meta.includeMediaItemDuration) { %>
-            <span class="k-duration">
+            <span class="v-duration">
                 <!--div class="icon-time"></div-->
                 <span><%=mediaItem.durationDisplay%></span>
             </span>

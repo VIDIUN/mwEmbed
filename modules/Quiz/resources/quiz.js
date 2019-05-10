@@ -7,7 +7,7 @@
     "use strict";
     $.cpObject = {};
     $.quizParams = {};
-    mw.PluginManager.add('quiz', mw.KBaseScreen.extend({
+    mw.PluginManager.add('quiz', mw.VBaseScreen.extend({
         defaultConfig: {
             parent: "controlsContainer",
             order: 5,
@@ -202,7 +202,7 @@
             if (!this.kClient) {
                 this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
         getTemplateHTML: function (data) {
             var defer = $.Deferred();
@@ -376,7 +376,7 @@
                     + '<span class="scoreBig">' + score + '</span>' + ' %' + '</br>'
                     + gM('mwe-quiz-reviewSubmit'));
 
-                    _this.KIVQModule.displayHex(_this.KIVQModule.setHexContainerPos("current"),cpArray);
+                    _this.VIVQModule.displayHex(_this.VIVQModule.setHexContainerPos("current"),cpArray);
 
                     $(document).off('click','.q-box')
                         .on('click', '.q-box', function () {
@@ -438,13 +438,13 @@
 
                     return $.cpObject.cpArray[selectedQuestion]
                         .answeres[
-                        _this.KIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
+                        _this.VIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
                         ];
                 }
                 else {return " "}
             });
             $('.gotItBox').html(gM('mwe-quiz-gotIt')).bind('click', function () {
-                _this.ssSubmitted(_this.KIVQModule.score);
+                _this.ssSubmitted(_this.VIVQModule.score);
             });
         },
         showSelectedQuestion:function(questionNr){
@@ -543,9 +543,9 @@
         addFooter: function (questionNr) {
             var _this = this;
 
-            if (_this.KIVQModule.quizSubmitted) {
+            if (_this.VIVQModule.quizSubmitted) {
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                    _this.KIVQModule.continuePlay();
+                    _this.VIVQModule.continuePlay();
                 });
                 return;
             }
@@ -558,14 +558,14 @@
                     _this.KIVQModule.continuePlay();
                 });
             } else {
-                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.KIVQModule.i2q(questionNr)
+                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
                 + '/' + $.cpObject.cpArray.length + '</span>')
                     .css("float", "right")
                     .css("cursor","default"))
                     .append($('<div></div>')
                         .addClass("pie")
                         .css("float", "right"))
-                    .append($('<span>' + (_this.KIVQModule.getUnansweredQuestNrs()).length + ' '
+                    .append($('<span>' + (_this.VIVQModule.getUnansweredQuestNrs()).length + ' '
                     + gM('mwe-quiz-unanswered') + '</span>')
                         .css("float", "right")
                         .css("cursor","default"));
@@ -579,7 +579,7 @@
                     $(".ftr-right").html(skipTxt).on('click', function () {
                         _this.KIVQModule.checkIfDone(questionNr)
                     });
-                }else if(!_this.KIVQModule.canSkip && $.cpObject.cpArray[questionNr].isAnswerd ){
+                }else if(!_this.VIVQModule.canSkip && $.cpObject.cpArray[questionNr].isAnswerd ){
                     $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
                         _this.KIVQModule.checkIfDone(questionNr)
                     });
@@ -603,12 +603,12 @@
 
                 var pos = (Math.round(((val.startTime/embedPlayer.kalturaPlayerMetaData.msDuration)*100) * 10)/10)-1;
                 $('.bubble-cont').append($('<div id ="' + key + '" style="margin-left:' + pos + '%">' +
-                    _this.KIVQModule.i2q(key) + ' </div>')
+                    _this.VIVQModule.i2q(key) + ' </div>')
                         .addClass(displayClass)
                 );
             });
 
-            if (_this.KIVQModule.canSkip) {
+            if (_this.VIVQModule.canSkip) {
                 handleBubbleclick = '.bubble';
             }
             else{

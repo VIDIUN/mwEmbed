@@ -6,6 +6,6 @@
         "dependencies": [
             "mw.AdTimeline"
         ],
-        "kalturaPluginName": "doubleClick"
+        "vidiunPluginName": "doubleClick"
     }
 }

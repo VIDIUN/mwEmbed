@@ -9,8 +9,8 @@
 /**
  * Cordova vWidget lib
  */
-(function(kWidget){ "use strict";
-	if( !kWidget ){
+(function(vWidget){ "use strict";
+	if( !vWidget ){
 		return ;
 	}
 	var init = function(){
@@ -46,8 +46,8 @@
 
 				this.target.style.backgroundColor += "transparent";
 
-				//kWidget.getIframeRequest( targetId, settings ) - we get it encoded so we decode before encoding whole url again
-				this.iframeUrl = kWidget.getIframeUrl() + '?' + decodeURIComponent(kWidget.getIframeRequest( targetId, settings ));
+				//vWidget.getIframeRequest( targetId, settings ) - we get it encoded so we decode before encoding whole url again
+				this.iframeUrl = vWidget.getIframeUrl() + '?' + decodeURIComponent(vWidget.getIframeRequest( targetId, settings ));
 				this.iframeUrl += '#' + JSON.stringify( window.preMwEmbedConfig );
 				this.iframeUrl = this.iframeUrl.replace(/'/g,"");
 				this.addApi( this.target );
@@ -56,12 +56,12 @@
 				this.setVPlayerId( targetId );
 
 				if ( settings.playOnlyFullscreen )  {
-					kWidget.addThumbCssRules();
-					var thumbUrl = mw.getConfig('EmbedPlayer.BlackPixel') || kWidget.getKalturaThumbUrl( settings );
+					vWidget.addThumbCssRules();
+					var thumbUrl = mw.getConfig('EmbedPlayer.BlackPixel') || vWidget.getVidiunThumbUrl( settings );
 					this.target.innerHTML = '' +
 						'<div style="position: relative; width: 100%; height: 100%;">' +
 						'<img src="' + thumbUrl  + '" >' +
-						'<div class="kWidgetCentered kWidgetPlayBtn" ' +
+						'<div class="vWidgetCentered vWidgetPlayBtn" ' +
 						'id="' + targetId + '_playBtn"' +
 						'></div></div>';
 					// Add a click binding to do the really embed:
@@ -125,8 +125,8 @@
 			asyncEvaluate: function( expression, callbackName ) {
 				this.exec( "asyncEvaluate", [ expression, callbackName ], "NativeComponentPlugin" );
 			},
-			setKDPAttribute: function( host, prop, value ) {
-				this.exec( "setKDPAttribute", [ host, prop, value ], "NativeComponentPlugin" );
+			setVDPAttribute: function( host, prop, value ) {
+				this.exec( "setVDPAttribute", [ host, prop, value ], "NativeComponentPlugin" );
 			},
 			drawPlayer: function( target , openInFullscreen ){
 				var isFullscreen = 0;

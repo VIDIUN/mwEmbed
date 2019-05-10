@@ -1,6 +1,6 @@
 {
     "nielsenVideoCensus": {
-        "description": "Nielsen Video Census allows media owners and advertisers to accurately measure  \r\n\t\tthe size and demographic composition (age, gender, etc.) of audiences viewing video online, \r\n\t\tacross the entire web and for specific sites. Learn more at\r\n\t\t<a target=\"new\" href=\"http://www.nielsen.com/us/en/nielsen-solutions.html\">Nielsen.com</a>\r\n\t\tThe Kaltura Integration supports the Video Census beacon. <br>Note only one beacon is fired per\r\n\t\tcontent view. See NielsenCombined for Nielsen video event tracking support.",
+        "description": "Nielsen Video Census allows media owners and advertisers to accurately measure  \r\n\t\tthe size and demographic composition (age, gender, etc.) of audiences viewing video online, \r\n\t\tacross the entire web and for specific sites. Learn more at\r\n\t\t<a target=\"new\" href=\"http://www.nielsen.com/us/en/nielsen-solutions.html\">Nielsen.com</a>\r\n\t\tThe Vidiun Integration supports the Video Census beacon. <br>Note only one beacon is fired per\r\n\t\tcontent view. See NielsenCombined for Nielsen video event tracking support.",
         "attributes": {
             "trackEventMonitor": {
                 "doc": "Track beacon dispatches.",

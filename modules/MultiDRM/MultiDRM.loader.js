@@ -30,8 +30,8 @@
 				//If there are supported medias load the playback library, unless in native SDK - let native SDK handle sources
 				if ( hasDrmSources(drmSources) && !mw.isNativeApp()) {
 					mw.log("Media sources found, loading DASH player");
-					var clDashPlayerUrl = embedPlayer.getKalturaConfig( "multiDrm", "clDashPlayerUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
-					var dashJsUrl = embedPlayer.getKalturaConfig( "multiDrm", "dashJsUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
+					var clDashPlayerUrl = embedPlayer.getVidiunConfig( "multiDrm", "clDashPlayerUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
+					var dashJsUrl = embedPlayer.getVidiunConfig( "multiDrm", "dashJsUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
 					if (clDashPlayerUrl && dashJsUrl) {
 						$.ajax( {
 							url: clDashPlayerUrl,
@@ -89,12 +89,12 @@
 
 	function setEmbedPlayerConfig(embedPlayer){
 		//Get user configuration
-		var drmUserConfig = embedPlayer.getKalturaConfig("multiDrm");
+		var drmUserConfig = embedPlayer.getVidiunConfig("multiDrm");
 		//Get default config
-		var drmConfig = getDefaultDrmConfig(embedPlayer.kpartnerid);
+		var drmConfig = getDefaultDrmConfig(embedPlayer.vpartnerid);
 		//Deep extend custom config
 		$.extend(true, drmConfig, drmUserConfig);
-		embedPlayer.setKalturaConfig("multiDrm", drmConfig);
+		embedPlayer.setVidiunConfig("multiDrm", drmConfig);
 		return drmConfig;
 	}
 
@@ -232,7 +232,7 @@
 			"customData": {
 				"userId": partnerId ,
 				"sessionId": "castlab-session",
-				"merchant": "kaltura"
+				"merchant": "vidiun"
 			},
 			"sendCustomData": false,
 			"generatePSSH": false,

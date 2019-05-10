@@ -82,39 +82,39 @@
 						),
 						'PlaylistFeatures' => array(
 							'title' => "Playlist features",
-							'path' => 'KalturaSupport/tests/PlaylistFeatures.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistFeatures.qunit.html'
 						),
 						'PlaylistEvents' => array(
 							'title' => "Playlist events",
-							'path' => 'KalturaSupport/tests/PlaylistEvents.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistEvents.qunit.html'
 						),
 						'PlaylistOnPage' => array(
 							'title' => "Playlist on page",
-							'path' => 'KalturaSupport/tests/PlaylistOnPage.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistOnPage.qunit.html'
 						),
 						'PlaylistNoClipList' => array(
 							'title' => "Playlist No Clip List",
-							'path' => 'KalturaSupport/tests/PlaylistNoClipList.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistNoClipList.qunit.html'
 						),
-						'PlaylistKalturaMRSS' => array(
+						'PlaylistVidiunMRSS' => array(
 							'title' => "Media RSS source",
-							'path' => 'KalturaSupport/tests/PlaylistKalturaMRSS.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistVidiunMRSS.qunit.html'
 						),
 						'PlaylistInitItemEntryId' => array(
 							'title' => "Initial EntryId",
-							'path' => 'KalturaSupport/tests/PlaylistInitItemEntryId.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistInitItemEntryId.qunit.html'
 						),
 						'PlaylistVAST' => array(
 							'title' => "Playlist VAST ads",
-							'path' => 'KalturaSupport/tests/PlaylistVAST.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistVAST.qunit.html'
 						),
 						'PlaylistDoubleclick' => array(
 							'title' => "Playlist Doubleclick ads",
-							'path' => 'KalturaSupport/tests/PlaylistDoubleclick.qunit.html'
+							'path' => 'VidiunSupport/tests/PlaylistDoubleclick.qunit.html'
 						),
                         'PlaylistSideBar' => array(
                             'title' => "Playlist within side bar",
-                            'path' => 'KalturaSupport/tests/PlaylistSideBar.qunit.html'
+                            'path' => 'VidiunSupport/tests/PlaylistSideBar.qunit.html'
                         )
 					)
 				),
@@ -283,7 +283,7 @@
 						),
 						'Strings' => array(
 							'title' => 'Custom Strings',
-							'path' => 'KalturaSupport/tests/Strings.html'
+							'path' => 'VidiunSupport/tests/Strings.html'
 						),/*
 						'CustomSkinAudioPlayer' => array(
 							'title' => 'Custom Audio Player Skin',
@@ -355,11 +355,11 @@
 						),
 						'responsive' => array(
 							'title' => "Responsive embed",
-							'path' => 'KalturaSupport/tests/RWDMinimal.html',
+							'path' => 'VidiunSupport/tests/RWDMinimal.html',
 						),
 						'NativeCallout'=> array(
 							'title' => 'Native callout',
-							'path' => 'KalturaSupport/tests/NativeCalloutComingSoon.html',
+							'path' => 'VidiunSupport/tests/NativeCalloutComingSoon.html',
 						),
 						'referenceId' => array(
 							'title' => 'Reference Id',

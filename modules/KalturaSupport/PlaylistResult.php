@@ -61,25 +61,25 @@ class PlaylistResult {
 			if( preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $firstPlaylist) != 0 ){
 				$this->playlistObject = $this->getPlaylistObjectFromMrss( $firstPlaylist );
 			} else {
-				// kaltura playlist id:
+				// vidiun playlist id:
 				// Check for entry cache:
-				if ( !$this->request->hasKS() ){
+				if ( !$this->request->hasVS() ){
 					// Check if we have a cached result object
 					$this->playlistObject = unserialize( $this->cache->get( $this->getCacheKey() ) );
 					// If no cache, then request data from API
 					if( !$this->playlistObject ){
 						$foundInCache = false;
-						$this->playlistObject = $this->getPlaylistObjectFromKalturaApi();
+						$this->playlistObject = $this->getPlaylistObjectFromVidiunApi();
 					} else {
 						$foundInCache = true;
 					}
 				} else {
 					$foundInCache = false;
-					$this->playlistObject = $this->getPlaylistObjectFromKalturaApi();
+					$this->playlistObject = $this->getPlaylistObjectFromVidiunApi();
 				}
 
-				//Only cache request that don't have KS
-				if ( !$foundInCache && !$this->request->hasKS() ){
+				//Only cache request that don't have VS
+				if ( !$foundInCache && !$this->request->hasVS() ){
 					$this->cache->set( $this->getCacheKey(), serialize( $this->playlistObject ) );
 				}
 			}
@@ -175,7 +175,7 @@ class PlaylistResult {
 		return $playlistIds;
 	}
 
-	function getPlaylistObjectFromKalturaApi(){
+	function getPlaylistObjectFromVidiunApi(){
 		$client = $this->client->getClient();
 		$client->startMultiRequest();
 		$firstPlaylist = $this->getPlaylistId(0);
@@ -187,7 +187,7 @@ class PlaylistResult {
 			}
 			$maxClips = $this->uiconf->getPlayerConfig('playlistAPI', 'pageSize');
 			if (isset($maxClips) && $this->uiconf->getPlayerConfig('playlistAPI', 'paging') === true){
-				$params = array( 'id' => $firstPlaylist, 'pager:objectType' => 'KalturaFilterPager', 'pager:pageIndex' => 1, 'pager:pageSize' => $maxClips);
+				$params = array( 'id' => $firstPlaylist, 'pager:objectType' => 'VidiunFilterPager', 'pager:pageIndex' => 1, 'pager:pageSize' => $maxClips);
 			}else{
 				$params = array( 'id' => $firstPlaylist );
 			}
@@ -224,7 +224,7 @@ class PlaylistResult {
 			$this->playlistObject = $playlistResult;
 		} catch( Exception $e ) {
 			// Throw an Exception and pass it upward
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 			return array();
 		}
 		

@@ -4,15 +4,15 @@
 (function(mw, $) {
     'use strict';
 
-    $.extend(KalturaHeartbeatPluginDelegate.prototype, ADB.va.plugins.ah.AdobeHeartbeatPluginDelegate.prototype);
+    $.extend(VidiunHeartbeatPluginDelegate.prototype, ADB.va.plugins.ah.AdobeHeartbeatPluginDelegate.prototype);
 
-    function KalturaHeartbeatPluginDelegate() {
+    function VidiunHeartbeatPluginDelegate() {
     }
 
-    KalturaHeartbeatPluginDelegate.prototype.onError = function(errorInfo) {
+    VidiunHeartbeatPluginDelegate.prototype.onError = function(errorInfo) {
         console.log("AdobeHeartbeatPlugin error: " + errorInfo.getMessage() + " | " + errorInfo.getDetails());
     };
 
     // Export symbols.
-    window.KalturaHeartbeatPluginDelegate = KalturaHeartbeatPluginDelegate;
+    window.VidiunHeartbeatPluginDelegate = VidiunHeartbeatPluginDelegate;
 })(window.mw, window.jQuery);

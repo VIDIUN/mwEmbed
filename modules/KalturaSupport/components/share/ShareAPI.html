@@ -9,12 +9,12 @@
 <body>
 <h2>Share Plugin API</h2>
 <br />
-<div id="kdp" style="width:600px;height:370px;float:left"></div>
-<script type="text/javascript" src="../../tests/resources/qunit-kaltura-bootstrap.js"></script>
+<div id="vdp" style="width:600px;height:370px;float:left"></div>
+<script type="text/javascript" src="../../tests/resources/qunit-vidiun-bootstrap.js"></script>
 <script>
 	function onReadyCallback(playerID){
-		window.kdp = document.getElementById( playerID );
-		kdp.kBind( 'shareEvent', function(event){
+		window.vdp = document.getElementById( playerID );
+		vdp.vBind( 'shareEvent', function(event){
 			// retrieve the share link
 			var shareLink = event.shareLink;
 			$("#shareLink").text(shareLink);
@@ -22,22 +22,22 @@
 		});
 
 		$('#triggerShare').click(function () {
-			window.kdp.sendNotification('doShare');
+			window.vdp.sendNotification('doShare');
 		});
 
 		$('#triggerShareOffset').click(function () {
-			window.kdp.sendNotification('doShare',{"timeOffset":"30"});
+			window.vdp.sendNotification('doShare',{"timeOffset":"30"});
 		});
 
 		$('#shareByPlayform').click(function (){
 			var network = $('#selectPlatform').val();
-			window.kdp.sendNotification('shareByPlatform', network);
+			window.vdp.sendNotification('shareByPlatform', network);
 		});
 	}
 
 
-	kWidget.featureConfig({
-		'targetId': 'kdp',
+	vWidget.featureConfig({
+		'targetId': 'vdp',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'entry_id' : '1_sf5ovm7u',
@@ -65,18 +65,18 @@ The Share plugin provides JavaScript API for triggering the shared link generati
 <br>
 Sample code for Share API:
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function( playerId ){
-	var kdp = $('#' + playerId)[0];
-	kdp.kBind( 'shareEvent', function(event){
+vWidget.addReadyCallback(function( playerId ){
+	var vdp = $('#' + playerId)[0];
+	vdp.vBind( 'shareEvent', function(event){
 		// retrieve the share link
 		var shareLink = event.shareLink;
 	});
 	// trigger share event
-	kdp.sendNotification( 'doShare' );
+	vdp.sendNotification( 'doShare' );
 	// trigger share event with time offset
-	kdp.sendNotification( 'doShare', { "timeOffset" : "30" } );
+	vdp.sendNotification( 'doShare', { "timeOffset" : "30" } );
 	// trigger shareByPlatform event
-	kdp.sendNotification( 'shareByPlatform', 'facebook' );
+	vdp.sendNotification( 'shareByPlatform', 'facebook' );
 });
 </pre>
 Trigger Share event: <button id="triggerShare" href="#">GO</button><br>
