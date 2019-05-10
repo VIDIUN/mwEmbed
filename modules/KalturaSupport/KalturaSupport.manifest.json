@@ -1719,7 +1719,7 @@
     },
     "dualScreen": {
         "label": "Dual Screen",
-        "description": "The Kaltura Player is the front-end interface used to view captured videos and/or presentations. The Kaltura Player provides you with multiple interactive viewing options, such as Picture-in-Picture, Side-by-Side, and other displays",
+        "description": "The Vidiun Player is the front-end interface used to view captured videos and/or presentations. The Vidiun Player provides you with multiple interactive viewing options, such as Picture-in-Picture, Side-by-Side, and other displays",
         "attributes": {
             "defaultDualScreenViewId": {
                 "label": "Default Layout",

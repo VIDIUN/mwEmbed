@@ -190,10 +190,10 @@ mw.VApi.prototype = {
 		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Vidiun.LiveStatsServiceUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Vidiun.LiveStatsServiceUrl' );
 		}
-		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Kaltura.AnalyticsUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.AnalyticsUrl' );
+		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Vidiun.AnalyticsUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.AnalyticsUrl' );
 		}
-		return serviceUrl + mw.getConfig( 'Kaltura.ServiceBase' ) + serviceType;
+		return serviceUrl + mw.getConfig( 'Vidiun.ServiceBase' ) + serviceType;
 	},
 	getSignature: function( params ){
 		params = this.vsort(params);

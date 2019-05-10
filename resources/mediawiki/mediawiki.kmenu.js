@@ -1,6 +1,6 @@
  ( function( mw, $ ) {"use strict";
     
-    mw.KMenu = function( $element, options ) {
+    mw.VMenu = function( $element, options ) {
 		if (mw.getConfig("EmbedPlayer.EnableMobileSkin") && mw.isMobileDevice()){
 			this.mobileMenu = $("<select class='mobileMenuSelect'></select>");
 			$element.parent().prepend(this.mobileMenu);

@@ -79,8 +79,8 @@ mw.VEntryLoader.prototype = {
 
 		var withProxyData = false;
 		// Filter by proxy data
-		if(kProperties.proxyData){
-			baseEntryRequestObj['filter:freeText'] = JSON.stringify(kProperties.proxyData);
+		if(vProperties.proxyData){
+			baseEntryRequestObj['filter:freeText'] = JSON.stringify(vProperties.proxyData);
 			withProxyData = true;
 		}
 

@@ -9,8 +9,8 @@
 <style>
 		td, th{ text-align: left; padding: 4px;}
 	</style>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Mobile Smart Containers</h2>
@@ -27,7 +27,7 @@
 		'entry_id' : '0_7dmu2xhz',
 		'flashvars':{
 			"LeadWithHLSOnFlash": true,
-			"Kaltura.LeadHLSOnAndroid": true,
+			"Vidiun.LeadHLSOnAndroid": true,
 			'playbackRateSelector': {
 				'plugin': true,
 				'defaultSpeed': '1',
@@ -62,12 +62,12 @@
 		}
 	};
 
-	kWidget.featureConfig(featuresSet);
+	vWidget.featureConfig(featuresSet);
 
-	kWidget.addReadyCallback( function( playerId ){
-		var kdp = document.getElementById( playerId );
+	vWidget.addReadyCallback( function( playerId ){
+		var vdp = document.getElementById( playerId );
 		// Log playback rate changes:
-		kdp.kBind('updatedPlaybackRate', function( newRate ){
+		vdp.vBind('updatedPlaybackRate', function( newRate ){
 			$("#changeLog").append( "Set playback rate to x" + newRate + "\n" );
 		});
 	});
@@ -81,7 +81,7 @@
 				featuresSet.flashvars["streamerType"] = "hdnetworkmanifest";
 				delete featuresSet.flashvars["LeadWithHLSOnFlash"];
 			}
-			kWidget.featureConfig(featuresSet);
+			vWidget.featureConfig(featuresSet);
 		});
 
 	})

@@ -331,9 +331,9 @@ class RequestHelper {
 		}
 	}
 	
-	public function hasKS() {
+	public function hasVS() {
 		global $wgForceCache;
-		return $wgForceCache ? false : isset($this->ks);
+		return $wgForceCache ? false : isset($this->vs);
 	}
 
 	public function getVS() {

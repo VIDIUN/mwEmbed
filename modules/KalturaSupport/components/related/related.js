@@ -109,7 +109,7 @@
 			if ( auto !== true){
 				this.embedPlayer.triggerHelper("relatedOpen");
 			}
-			this._super(); // this is an override of showScreen in mw.KBaseScreen.js - call super
+			this._super(); // this is an override of showScreen in mw.VBaseScreen.js - call super
 			if (this.numOfEntries > 0 && this.loadedThumbnails < this.numOfEntries) { // related data was loaded but thumbnails were not loaded yet
 				$('.item-inner').each(function () {
 					var img = $(this).find("img")[0];
