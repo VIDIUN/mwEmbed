@@ -1,7 +1,7 @@
-(function( kWidget, win, md5 ) {
+(function( vWidget, win, md5 ) {
     "use strict";
 
-    var NS = "kalturaCache__";
+    var NS = "vidiunCache__";
     var ttlSuffix = "_ttl";
     var storage;
     var isStorageSupported = true;
@@ -126,5 +126,5 @@
             return quotaExceeded;
         }
     };
-    kWidget.storage = storageManger;
-}( window.kWidget, window, md5 ));
+    vWidget.storage = storageManger;
+}( window.vWidget, window, md5 ));
