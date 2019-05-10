@@ -5,7 +5,7 @@
 	"use strict";
 	var mseSupported = (window['MediaSource'] || window['WebKitMediaSource']);
 	//Load 3rd party plugins if DRM sources are available
-	mw.addKalturaConfCheck( function( embedPlayer, callback ){
+	mw.addVidiunConfCheck( function( embedPlayer, callback ){
 		if( embedPlayer.isPluginEnabled( 'multiDrm' ) ) {
 			var drmConfig = setEmbedPlayerConfig(embedPlayer);
 			if ((mseSupported && !mw.isFirefox()) || drmConfig.forceDASH) {
@@ -17,8 +17,8 @@
 				//If there are supported medias load the playback library
 				if ( hasDrmSources(drmSources) ) {
 					mw.log("Media sources found, loading DASH player");
-					var clDashPlayerUrl = embedPlayer.getKalturaConfig( "multiDrm", "clDashPlayerUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
-					var dashJsUrl = embedPlayer.getKalturaConfig( "multiDrm", "dashJsUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
+					var clDashPlayerUrl = embedPlayer.getVidiunConfig( "multiDrm", "clDashPlayerUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
+					var dashJsUrl = embedPlayer.getVidiunConfig( "multiDrm", "dashJsUrl" ) || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
 					if (clDashPlayerUrl && dashJsUrl) {
 						$.getScript( clDashPlayerUrl)
 							.then(function(){return $.getScript( dashJsUrl)})
@@ -53,12 +53,12 @@
 
 	function setEmbedPlayerConfig(embedPlayer){
 		//Get user configuration
-		var drmUserConfig = embedPlayer.getKalturaConfig("multiDrm");
+		var drmUserConfig = embedPlayer.getVidiunConfig("multiDrm");
 		//Get default config
-		var drmConfig = getDefaultDrmConfig(embedPlayer.kpartnerid);
+		var drmConfig = getDefaultDrmConfig(embedPlayer.vpartnerid);
 		//Deep extend custom config
 		$.extend(true, drmConfig, drmUserConfig);
-		embedPlayer.setKalturaConfig("multiDrm", drmConfig);
+		embedPlayer.setVidiunConfig("multiDrm", drmConfig);
 		return drmConfig;
 	}
 
@@ -138,7 +138,7 @@
 			"customData": {
 				"userId": partnerId ,
 				"sessionId": "castlab-session",
-				"merchant": "kaltura"
+				"merchant": "vidiun"
 			},
 			"sendCustomData": false,
 			"generatePSSH": false,

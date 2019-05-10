@@ -10,7 +10,7 @@
     <body>
     <h2>Heartbeat Plugin Configuration - Adding Adobe Heartbeat analytics plugin</h2>
     <br />
-    <div id="kdp" style="width:600px;height:370px;float:left"></div>
+    <div id="vdp" style="width:600px;height:370px;float:left"></div>
     <script>
         function onReadyCallback(playerID){
             //Add code if needed
@@ -28,8 +28,8 @@
         var localPath = document.location.href;
         localPath = localPath.split('HeartBeatDemo.html')[0];
 
-        kWidget.featureConfig({
-            'targetId': 'kdp',
+        vWidget.featureConfig({
+            'targetId': 'vdp',
             'wid': '_243342',
             'uiconf_id' : '21099702',
             'entry_id' : '1_sf5ovm7u',
@@ -43,14 +43,14 @@
                     'visitorId': '9A32525A5492AE7C0A4C98C6@AdobeOrg',
                     'visitorTrackingServer': 'ovppartners.d1.sc.omtrdc.net',
 
-                    'appMeasurementAccount': 'ovppkaltura',
+                    'appMeasurementAccount': 'ovppvidiun',
                     'appMeasurementTrackingServer': 'ovppartners.d1.sc.omtrdc.net',
-                    'appMeasurementPageName': 'Kaltura Test Page',
+                    'appMeasurementPageName': 'Vidiun Test Page',
                     'appMeasurementCharSet': 'UTF-8',
                     'appMeasurementVisitorID': 'test-vid',
 
                     'heartbeatTrackingServer': 'heartbeats.omtrdc.net',
-                    'heartbeatPublisher': 'ovpkaltura'
+                    'heartbeatPublisher': 'ovpvidiun'
                 },
                 'skipBtn': {
                     'label': 'Skip Ad'
@@ -60,7 +60,7 @@
                     'numPreroll':"1",
                     'prerollInterval':"1",
                     'prerollStartWith':"1",
-                    'prerollUrl':"http://projects.kaltura.com/MichalR/vast3_demo.xml", //2 HTML5 ads
+                    'prerollUrl':"http://projects.vidiun.com/MichalR/vast3_demo.xml", //2 HTML5 ads
                     //'prerollUrl':"http://ad3.liverail.com/?LR_PUBLISHER_ID=1331&LR_CAMPAIGN_ID=229&LR_SCHEMA=vast2", //1 HTML5 ad
                     //'prerollUrl':localPath+"liverailOnlyFlash.xml?random={utility.random}&timestamp={utility.timestamp}&referrer_url={utility.referrer_url}&referrer_host={utility.referrer_host}", //1 Flash ad (VPAID)
                     'overlayStartAt':"5",
@@ -77,7 +77,7 @@
                 'doubleClick':{
                     'plugin':true,
                     'leadWithFlash': false,
-                    'path' : 'http://cdnbakmi.kaltura.com/content/uiconf/ps/veria/kdp3.9.1/plugins/doubleclickPlugin.swf',
+                    'path' : 'http://cdnbakmi.vidiun.com/content/uiconf/ps/veria/vdp3.9.1/plugins/doubleclickPlugin.swf',
                     'adTagUrl': 'http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear',
                     'adTagUrl': 'http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dimageoverlay',
                     'adTagUrl': 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F3510761%2FadRulesSampleTags&ciu_szs=160x600%2C300x250%2C728x90&cust_params=adrule%3Dpremidpostwithpod&impl=s&gdfp_req=1&env=vp&ad_rule=1&vid=12345&cmsid=3601&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]',
@@ -100,8 +100,8 @@
     </p>
     Sample code for Heartbeat configuration:
         <pre class="prettyprint linenums">
-        kWidget.featureConfig({
-                'targetId': 'kdp',
+        vWidget.featureConfig({
+                'targetId': 'vdp',
                 'wid': '_243342',
                 'uiconf_id' : '21099702',
                 'entry_id' : '1_sf5ovm7u',
@@ -113,14 +113,14 @@
                         visitorId: '9A32525A5492AE7C0A4C98C6@AdobeOrg',
                         visitorTrackingServer: 'ovppartners.d1.sc.omtrdc.net',
 
-                        appMeasurementAccount: 'ovppkaltura',
+                        appMeasurementAccount: 'ovppvidiun',
                         appMeasurementTrackingServer: 'ovppartners.d1.sc.omtrdc.net'
-                        appMeasurementPageName: 'Kaltura Test Page',
+                        appMeasurementPageName: 'Vidiun Test Page',
                         appMeasurementCharSet: 'UTF-8',
                         appMeasurementVisitorID: 'test-vid',
 
                         heartbeatTrackingServer: 'heartbeats.omtrdc.net',
-                        heartbeatPublisher: 'ovpkaltura'
+                        heartbeatPublisher: 'ovpvidiun'
                     }
                 }
             });

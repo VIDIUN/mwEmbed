@@ -44,12 +44,12 @@ class mwEmbedLoader {
 		// Get resource (  mwEmbedLoader.js )
 		'vWidget/mwEmbedLoader.js', 
 		// Include checkUserAgentPlayer code
-		'kWidget/kWidget.checkUserAgentPlayerRules.js',
-		// Get kWidget utilities:
-		'kWidget/kWidget.util.js',	
-		// kWidget basic api wrapper
+		'vWidget/vWidget.checkUserAgentPlayerRules.js',
+		// Get vWidget utilities:
+		'vWidget/vWidget.util.js',	
+		// vWidget basic api wrapper
 		'resources/crypto/MD5.js',
-		'kWidget/kWidget.api.js'
+		'vWidget/vWidget.api.js'
 	);
 
 	function request() {
@@ -275,8 +275,8 @@ class mwEmbedLoader {
 			$o.="\n"."vWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
 		
 		}
-		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.ForceFlashOnIE10' ) === true ){
-			$o.="\n".'mw.setConfig(\'Kaltura.ForceFlashOnIE10\', true );' . "\n";
+		if( $this->getUiConfObject()->getPlayerConfig( null, 'Vidiun.ForceFlashOnIE10' ) === true ){
+			$o.="\n".'mw.setConfig(\'Vidiun.ForceFlashOnIE10\', true );' . "\n";
 		}
 
 		if( $this->getUiConfObject()->isJson() ) {
@@ -379,41 +379,41 @@ class mwEmbedLoader {
 		return $loaderJs;
 	}
 	private function getExportedConfig(){
-		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgKalturaUseManifestUrls,
-			$wgKalturaUseManifestUrls, $wgHTTPProtocol, $wgKalturaServiceUrl, $wgKalturaServiceBase,
-			$wgKalturaCDNUrl, $wgKalturaStatsServiceUrl,$wgKalturaLiveStatsServiceUrl, $wgKalturaIframeRewrite, $wgEnableIpadHTMLControls,
-			$wgKalturaAllowIframeRemoteService, $wgKalturaUseAppleAdaptive, $wgKalturaEnableEmbedUiConfJs,
-			$wgKalturaGoogleAnalyticsUA, $wgHTML5PsWebPath;
+		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgVidiunUseManifestUrls,
+			$wgVidiunUseManifestUrls, $wgHTTPProtocol, $wgVidiunServiceUrl, $wgVidiunServiceBase,
+			$wgVidiunCDNUrl, $wgVidiunStatsServiceUrl,$wgVidiunLiveStatsServiceUrl, $wgVidiunIframeRewrite, $wgEnableIpadHTMLControls,
+			$wgVidiunAllowIframeRemoteService, $wgVidiunUseAppleAdaptive, $wgVidiunEnableEmbedUiConfJs,
+			$wgVidiunGoogleAnalyticsUA, $wgHTML5PsWebPath;
 		$exportedJS ='';
 		// Set up globals to be exported as mwEmbed config:
 		$exportedJsConfig= array(
 			'debug' => $wgEnableScriptDebug,
 			//  export the http url for the loader
 			'Mw.XmlProxyUrl' => $wgMwEmbedProxyUrl,
-			'Kaltura.UseManifestUrls' => $wgKalturaUseManifestUrls,
-			'Kaltura.Protocol'	=>	$wgHTTPProtocol,
-			'Kaltura.ServiceUrl' => $wgKalturaServiceUrl,
-			'Kaltura.ServiceBase' => $wgKalturaServiceBase,
-			'Kaltura.CdnUrl' => $wgKalturaCDNUrl,
-			'Kaltura.StatsServiceUrl' => $wgKalturaStatsServiceUrl,
-			'Kaltura.LiveStatsServiceUrl'=>$wgKalturaLiveStatsServiceUrl,
-			'Kaltura.IframeRewrite' => $wgKalturaIframeRewrite,
+			'Vidiun.UseManifestUrls' => $wgVidiunUseManifestUrls,
+			'Vidiun.Protocol'	=>	$wgHTTPProtocol,
+			'Vidiun.ServiceUrl' => $wgVidiunServiceUrl,
+			'Vidiun.ServiceBase' => $wgVidiunServiceBase,
+			'Vidiun.CdnUrl' => $wgVidiunCDNUrl,
+			'Vidiun.StatsServiceUrl' => $wgVidiunStatsServiceUrl,
+			'Vidiun.LiveStatsServiceUrl'=>$wgVidiunLiveStatsServiceUrl,
+			'Vidiun.IframeRewrite' => $wgVidiunIframeRewrite,
 			'EmbedPlayer.EnableIpadHTMLControls' => $wgEnableIpadHTMLControls,
 			'EmbedPlayer.UseFlashOnAndroid' => true,
-			'Kaltura.LoadScriptForVideoTags' => true,
-			'Kaltura.AllowIframeRemoteService' => $wgKalturaAllowIframeRemoteService,
-			'Kaltura.UseAppleAdaptive' => $wgKalturaUseAppleAdaptive,
-			'Kaltura.EnableEmbedUiConfJs' => $wgKalturaEnableEmbedUiConfJs,
-			'Kaltura.PageGoogleAnalytics' => $wgKalturaGoogleAnalyticsUA,
-			'Kaltura.APITimeout' => 10000,
-			'Kaltura.kWidgetPsUrl' => $wgHTML5PsWebPath
+			'Vidiun.LoadScriptForVideoTags' => true,
+			'Vidiun.AllowIframeRemoteService' => $wgVidiunAllowIframeRemoteService,
+			'Vidiun.UseAppleAdaptive' => $wgVidiunUseAppleAdaptive,
+			'Vidiun.EnableEmbedUiConfJs' => $wgVidiunEnableEmbedUiConfJs,
+			'Vidiun.PageGoogleAnalytics' => $wgVidiunGoogleAnalyticsUA,
+			'Vidiun.APITimeout' => 10000,
+			'Vidiun.vWidgetPsUrl' => $wgHTML5PsWebPath
 		);
 		if( isset( $_GET['psvwidgetpath'] ) ){
 			$exportedJsConfig[ 'Vidiun.VWidgetPsPath' ] = htmlspecialchars( $_GET['psvwidgetpath'] );
 		}
 		//For embed services pass "AllowIframeRemoteService" to client so it will be able to pass back the alternative service URL
 		if ($this->request()->isEmbedServicesEnabled()){
-		    $exportedJsConfig['Kaltura.AllowIframeRemoteService'] = true;
+		    $exportedJsConfig['Vidiun.AllowIframeRemoteService'] = true;
 		}
 		
 		// Append Custom config:

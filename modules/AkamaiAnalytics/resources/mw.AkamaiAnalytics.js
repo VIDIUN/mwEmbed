@@ -26,9 +26,9 @@
 			// Unbind any existing bindings
 			this.embedPlayer.unbindHelper( _this.bindPostFix );
 			this.embedPlayer.bindHelper( 'PlayerLoaded' + _this.bindPostFix, function() {
-				// kplayer will use flash akamaiMediaAnalyticsPlugin
-				if ( embedPlayer.selectedPlayer.library == 'Kplayer' ) {
-					_this.sendDataToKPlayer( embedPlayer );
+				// vplayer will use flash akamaiMediaAnalyticsPlugin
+				if ( embedPlayer.selectedPlayer.library == 'Vplayer' ) {
+					_this.sendDataToVPlayer( embedPlayer );
 				} else {
 					if ( typeof setAkamaiMediaAnalyticsData == 'function' ) {
 						// Akamai HTML5 JS is already loaded, don't reload
@@ -147,7 +147,7 @@
 		 * send akamaiData to flash akamaiMediaAnalytics plugin
 		 * @param embedPlayer
 		 */
-		sendDataToKPlayer: function( embedPlayer ) {
+		sendDataToVPlayer: function( embedPlayer ) {
 			var _this = this;
 			var dataObject = this.getAkamaiDataObject( embedPlayer );
 			//log events
@@ -156,8 +156,8 @@
 			});
 
 			this.doOnPlayerLoadReady( embedPlayer, function() {
-				// confirm we are still a KDP instance: 
-				if( embedPlayer.selectedPlayer.library != 'Kplayer' ){
+				// confirm we are still a VDP instance: 
+				if( embedPlayer.selectedPlayer.library != 'Vplayer' ){
 					return ;
 				}
 				dataObject['playerLoadtime'] = embedPlayer.evaluate( '{playerStatusProxy.loadTime}' );

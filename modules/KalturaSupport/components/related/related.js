@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
+	mw.PluginManager.add( 'related', mw.VBaseScreen.extend({
 
 		defaultConfig: {
 			parent: "topBarContainer",
@@ -92,7 +92,7 @@
 
 		showScreen: function(){
 			var _this = this;
-			this._super(); // this is an override of showScreen in mw.KBaseScreen.js - call super
+			this._super(); // this is an override of showScreen in mw.VBaseScreen.js - call super
 			if (this.numOfEntries > 0 && this.loadedThumbnails < this.numOfEntries) { // related data was loaded but thumbnails were not loaded yet
 				$('.item-inner').each(function () {
 					var img = $(this).find("img")[0];
@@ -245,7 +245,7 @@
 				return this.getEntriesFromList( this.getConfig( 'entryList' ), callback );
 			}
 			// if no playlist is defined used the magic related video playlistd id:
-			return this.getEntriesFromPlaylistId( '_KDP_CTXPL', callback, true);
+			return this.getEntriesFromPlaylistId( '_VDP_CTXPL', callback, true);
 		},
 		isValidResult: function( data ){
 			// Check if we got error
@@ -262,7 +262,7 @@
 		},
 		getEntriesFromList: function( entryList, callback){
 			var _this =this;
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service': 'baseEntry',
 				'action': 'getbyids',
 				'entryIds': entryList
@@ -303,15 +303,15 @@
 				'service' : 'playlist',
 				'action' : 'execute',
 				'id' : playlistId,
-				'filter:objectType': 'KalturaMediaEntryFilterForPlaylist',
-				'filter:idNotIn': this.getPlayer().kentryid,
+				'filter:objectType': 'VidiunMediaEntryFilterForPlaylist',
+				'filter:idNotIn': this.getPlayer().ventryid,
 				'filter:limit': this.getConfig('itemsLimit')
 			}
 			if ( sendContext ) {
-				requestObject['playlistContext:objectType'] = 'KalturaEntryContext';
-				requestObject['playlistContext:entryId'] = this.getPlayer().kentryid;
+				requestObject['playlistContext:objectType'] = 'VidiunEntryContext';
+				requestObject['playlistContext:entryId'] = this.getPlayer().ventryid;
 			}
-			this.getKalturaClient().doRequest( requestObject, function( data ) {
+			this.getVidiunClient().doRequest( requestObject, function( data ) {
 				// Validate result, don't issue callback if not valid.
 				if ( !_this.isValidResult( data ) ) {
 					return;
@@ -434,8 +434,8 @@
 					'service' : 'baseEntry',
 					'action' : 'getContextData',
 					'contextDataParams':{
-						'referrer' : window.kWidgetSupport.getHostPageUrl(),
-						'objectType' : 'KalturaEntryContextDataParams',
+						'referrer' : window.vWidgetSupport.getHostPageUrl(),
+						'objectType' : 'VidiunEntryContextDataParams',
 						'flavorTags': "all"},
 					'streamerType': "http",
 					"entryId": acList[i]
@@ -443,7 +443,7 @@
 				requestArray.push( requestObject );
 			}
 			if ( requestArray.length ) {
-				this.getKalturaClient().doRequest( requestArray, function( EntryContextDataArray ) {
+				this.getVidiunClient().doRequest( requestArray, function( EntryContextDataArray ) {
 					$.each( EntryContextDataArray , function( index , EntryContextData ) {
 						var isRestricted = false;
 						var checkFalse = ['isCountryRestricted','isIpAddressRestricted','isSessionRestricted','isSiteRestricted','isUserAgentRestricted'];

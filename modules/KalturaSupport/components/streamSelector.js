@@ -1,7 +1,7 @@
-(function (mw, $, kWidget) {
+(function (mw, $, vWidget) {
 	"use strict";
 
-	mw.PluginManager.add('streamSelector', mw.KBaseComponent.extend({
+	mw.PluginManager.add('streamSelector', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",
@@ -50,10 +50,10 @@
 				_this.streamsReady = true;
 				//Insert original entry to streams
 				_this.streams.splice(0, 0, {
-					id: _this.getPlayer().kentryid,
+					id: _this.getPlayer().ventryid,
 					data: {
-						meta: _this.getPlayer().kalturaPlayerMetaData,
-						contextData: _this.getPlayer().kalturaContextData
+						meta: _this.getPlayer().vidiunPlayerMetaData,
+						contextData: _this.getPlayer().vidiunContextData
 					}
 				});
 				//Set default stream
@@ -63,7 +63,7 @@
 				}
 				_this.currentStream = _this.getDefaultStream();
 				//TODO: handle default stream selection???
-				if (_this.getPlayer().kentryid != _this.currentStream.id) {
+				if (_this.getPlayer().ventryid != _this.currentStream.id) {
 					_this.setStream(_this.currentStream);
 					_this.setActiveMenuItem();
 				}
@@ -114,8 +114,8 @@
 			requestObject.push({
 				'service': 'baseEntry',
 				'action': 'list',
-				'filter:objectType': 'KalturaBaseEntryFilter',
-				'filter:parentEntryIdEqual': this.getPlayer().kentryid
+				'filter:objectType': 'VidiunBaseEntryFilter',
+				'filter:parentEntryIdEqual': this.getPlayer().ventryid
 			});
 
 			var i = 0;
@@ -129,7 +129,7 @@
 			}
 
 			// do the api request
-			this.getKalturaClient().doRequest(requestObject, function (data) {
+			this.getVidiunClient().doRequest(requestObject, function (data) {
 				// Validate result
 				if (data && _this.isValidResult(data[0] && data[0].totalCount > 0)) {
 					_this.createStreamList(data);
@@ -309,21 +309,21 @@
 
 				var checkPlayerSourcesFunction = function (callback) {
 					//Create source data from raw data
-					var sources = kWidgetSupport.getEntryIdSourcesFromPlayerData(embedPlayer.kpartnerid, stream.data);
+					var sources = vWidgetSupport.getEntryIdSourcesFromPlayerData(embedPlayer.vpartnerid, stream.data);
 					//handle player data mappings to embedPlayer and check for errors
-					kWidgetSupport.handlePlayerData(embedPlayer, stream.data);
+					vWidgetSupport.handlePlayerData(embedPlayer, stream.data);
 					//Replace sources
 					embedPlayer.replaceSources(sources);
 
 					//Update player metadata and poster/thumbnail urls
-					embedPlayer.kalturaPlayerMetaData = stream.data.meta;
+					embedPlayer.vidiunPlayerMetaData = stream.data.meta;
 					//Do not show poster on switch to avoid poster flashing
 					mw.setConfig('EmbedPlayer.HidePosterOnStart', true);
-					embedPlayer.triggerHelper('KalturaSupport_EntryDataReady', embedPlayer.kalturaPlayerMetaData);
-					//Reinit the kCuePoints service
+					embedPlayer.triggerHelper('VidiunSupport_EntryDataReady', embedPlayer.vidiunPlayerMetaData);
+					//Reinit the vCuePoints service
 					if( (embedPlayer.rawCuePoints && embedPlayer.rawCuePoints.length > 0)) {
-						embedPlayer.kCuePoints = new mw.KCuePoints( embedPlayer );
-						embedPlayer.triggerHelper('KalturaSupport_CuePointsReady', [embedPlayer.rawCuePoints]);
+						embedPlayer.vCuePoints = new mw.VCuePoints( embedPlayer );
+						embedPlayer.triggerHelper('VidiunSupport_CuePointsReady', [embedPlayer.rawCuePoints]);
 					}
 					callback();
 				};
@@ -390,7 +390,7 @@
 		},
 		getMenu: function () {
 			if (!this.menu) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex')
 				});
 			}
@@ -412,4 +412,4 @@
 		}
 	}));
 
-})(window.mw, window.jQuery, kWidget);
+})(window.mw, window.jQuery, vWidget);

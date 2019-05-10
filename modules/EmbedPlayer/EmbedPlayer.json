@@ -65,8 +65,8 @@
             "mw.PlayerElementSilverlight"
         ]
     },
-    "mw.EmbedPlayerKplayer": {
-        "scripts": "resources/mw.EmbedPlayerKplayer.js"
+    "mw.EmbedPlayerVplayer": {
+        "scripts": "resources/mw.EmbedPlayerVplayer.js"
     },
     "mw.EmbedPlayerGeneric": {
         "scripts": "resources/mw.EmbedPlayerGeneric.js"

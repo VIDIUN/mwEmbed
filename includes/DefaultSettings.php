@@ -43,7 +43,7 @@ if( isset( $_GET['psvwidgetpath'] ) ){
 $wgVidiunPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
 
 // The html5-ps modules dir
-$wgKalturaPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
+$wgVidiunPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
 
 // By default set $wgScriptPath to empty
 $wgScriptPath = basename(dirname($_SERVER['SCRIPT_NAME'])) . '/';
@@ -68,13 +68,13 @@ while (false !== ($entry = $d->read())) {
 	}
 }
 
-// Enable every module in the "ps/modules" folder of kwidget-ps
-$wgKwidgetPsEnabledModules = array();
-if (!empty($wgKalturaPSHtml5ModulesDir)){
-    $dPs = dir( $wgKalturaPSHtml5ModulesDir );
+// Enable every module in the "ps/modules" folder of vwidget-ps
+$wgVwidgetPsEnabledModules = array();
+if (!empty($wgVidiunPSHtml5ModulesDir)){
+    $dPs = dir( $wgVidiunPSHtml5ModulesDir );
     while (false !== ($entryPs = $dPs->read())) {
-        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgKwidgetPsEnabledModules ) ){
-            $wgKwidgetPsEnabledModules[] = $entryPs;
+        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgVwidgetPsEnabledModules ) ){
+            $wgVwidgetPsEnabledModules[] = $entryPs;
         }
     }
 }
@@ -140,7 +140,7 @@ $wgExternalPlayersSupportedTypes = array('YouTube');
 
 //Embedded services
 //To enable service re routing for entryResult calls
-$wgEnableKalturaEmbedServicesRouting = true;
+$wgEnableVidiunEmbedServicesRouting = true;
 
 // To include signed headers with user IPs for IP restriction lookups, input a salt string for 
 // $wgVidiunRemoteAddressSalt configuration option. 
@@ -245,7 +245,7 @@ $wgVidiunApiFeatures = array();
 /*********************************************************
  * Override Domain:
 ********************************************************/
-$wgEnableKalturaOverrideDomain = true;
+$wgEnableVidiunOverrideDomain = true;
 
 /*********************************************************
  * Include local settings override:
@@ -259,19 +259,19 @@ if( is_file( $wgLocalSettingsFile ) ){
 //Set global configs into $wgMwEmbedModuleConfig in order to enable
 //resource loader to output the config in the response
 // if Manifest urls should be used:
-$wgMwEmbedModuleConfig['Kaltura.UseManifestUrls'] = $wgKalturaUseManifestUrls;
+$wgMwEmbedModuleConfig['Vidiun.UseManifestUrls'] = $wgVidiunUseManifestUrls;
 //Add license server config:
-global $wgKalturaLicenseServerUrl, $wgKalturaUdrmLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.LicenseServerURL'] = $wgKalturaLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.UdrmServerURL'] = $wgKalturaUdrmLicenseServerUrl;
+global $wgVidiunLicenseServerUrl, $wgVidiunUdrmLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.LicenseServerURL'] = $wgVidiunLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.UdrmServerURL'] = $wgVidiunUdrmLicenseServerUrl;
 
-// Add Kaltura api services: ( should be part of kaltura module config)
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiKSTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiUiConfJs.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiSleepTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweFeaturesList.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiLanguageSupport.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweUpgradePlayer.php' );
+// Add Vidiun api services: ( should be part of vidiun module config)
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiVSTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiUiConfJs.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiSleepTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweFeaturesList.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiLanguageSupport.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweUpgradePlayer.php' );
 include_once( realpath( dirname( __FILE__ ) )  . '/../studio/studioService.php');
 /**
  * Extensions should register foreign module sources here. 'local' is a

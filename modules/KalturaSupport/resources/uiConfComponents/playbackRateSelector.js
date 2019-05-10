@@ -169,7 +169,7 @@
 			var _this = this;
 			var currentPlayTime = this.getPlayer().currentTime;
 			this.currentSpeed = newSpeed;
-			if (this.getConfig("serverSpeedPlayback") && this.currentSpeed <= 2 && (this.getPlayer().instanceOf === 'Kplayer' || mw.isMobileDevice())){
+			if (this.getConfig("serverSpeedPlayback") && this.currentSpeed <= 2 && (this.getPlayer().instanceOf === 'Vplayer' || mw.isMobileDevice())){
 				// for decimal numbers, make sure we have only one digit after the dot (server limitation)
 				if ( this.currentSpeed % 1 !== 0 ){
 					this.currentSpeed = this.currentSpeed.toFixed(1);

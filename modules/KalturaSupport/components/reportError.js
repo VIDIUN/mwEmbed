@@ -1,13 +1,13 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'reportError', mw.KBasePlugin.extend({
-		kClient: null,
+	mw.PluginManager.add( 'reportError', mw.VBasePlugin.extend({
+		vClient: null,
 		didSeek: false,
 
 		setup: function() {
 			var _this = this;
 			var embedPlayer = this.getPlayer();
-			this.kClient = mw.kApiGetPartnerClient( embedPlayer.kwidgetid );
+			this.vClient = mw.vApiGetPartnerClient( embedPlayer.vwidgetid );
 
 			this.bind( 'playerReady', function() {
 				_this.didSeek = false;
@@ -24,9 +24,9 @@
 				}
 
 				var msgParams = [];
-				msgParams[ 'pid' ] = embedPlayer.kpartnerid;
-				msgParams[ 'uiconfId' ] = embedPlayer.kuiconfid;
-				msgParams[ 'referrer' ] = window.kWidgetSupport.getHostPageUrl();
+				msgParams[ 'pid' ] = embedPlayer.vpartnerid;
+				msgParams[ 'uiconfId' ] = embedPlayer.vuiconfid;
+				msgParams[ 'referrer' ] = window.vWidgetSupport.getHostPageUrl();
 				msgParams[ 'didSeek' ] = _this.didSeek;
 				msgParams[ 'resourceUrl' ] = resourceUrl;
 				msgParams[ 'userAgent' ] = navigator.userAgent;
@@ -48,7 +48,7 @@
 				var eventRequest = { 'service' : 'stats', 'action' : 'reportError', errorCode: 'mediaError' };
 				eventRequest[ 'errorMessage' ] = errorMessage;
 
-				_this.kClient.doRequest( eventRequest );
+				_this.vClient.doRequest( eventRequest );
 			});
 		}
 	}));

@@ -4,8 +4,8 @@
             "resources/chromecastLib.js",
             "resources/chromecast.js"
         ],
-        "dependencies": "mw.KBaseComponent",
-        "kalturaPluginName": "chromecast",
+        "dependencies": "mw.VBaseComponent",
+        "vidiunPluginName": "chromecast",
         "styles": "resources/chromecast.css",
         "messageFile": "Chromecast.i18n.json"
     },
@@ -14,6 +14,6 @@
     },
 	"mw.EmbedPlayerChromecastReceiver": {
 		"scripts": "resources/mw.EmbedPlayerChromecastReceiver.js",
-		"kalturaPluginName": "embedPlayerChromecastReceiver"
+		"vidiunPluginName": "embedPlayerChromecastReceiver"
 	}
 }

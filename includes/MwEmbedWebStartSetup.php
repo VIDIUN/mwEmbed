@@ -150,8 +150,8 @@ function find_relative_path ( $frompath, $topath ) {
     return substr($relpath, 0, -1);
 }
 
-foreach( $wgKwidgetPsEnabledModules as $moduleName ){
-    $modulePath = $wgKalturaPSHtml5ModulesDir . '/' . $moduleName ;
+foreach( $wgVwidgetPsEnabledModules as $moduleName ){
+    $modulePath = $wgVidiunPSHtml5ModulesDir . '/' . $moduleName ;
     $relativeModulePath = (find_relative_path($IP, $modulePath));
     if( is_file( $modulePath . '/' . $moduleName . '.json') ){
         MwEmbedResourceManager::register( $relativeModulePath );

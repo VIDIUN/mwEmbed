@@ -1,7 +1,7 @@
 {
     "freeWheel": {
         "label": "FreeWheel",
-        "description": "FreeWheel gives enterprise-level media companies the infrastructure they \r\n\t\tneed to create scaled, profitable content businesses in the new media landscape. \r\n\t\tLearn more about <a href=\"http://www.freewheel.tv/\" target=\"_blank\">FreeWheel offerings</a>. <br>\r\n\t\tKaltura supports a full featured FreeWheel ad network integration for both HTML5 and flash players.<br>\r\n\t\t<b>Note:</b> Internet Explorer 8 supports only the Flash player integration.",
+        "description": "FreeWheel gives enterprise-level media companies the infrastructure they \r\n\t\tneed to create scaled, profitable content businesses in the new media landscape. \r\n\t\tLearn more about <a href=\"http://www.freewheel.tv/\" target=\"_blank\">FreeWheel offerings</a>. <br>\r\n\t\tVidiun supports a full featured FreeWheel ad network integration for both HTML5 and flash players.<br>\r\n\t\t<b>Note:</b> Internet Explorer 8 supports only the Flash player integration.",
         "attributes": {
             "adManagerUrl": {
                 "doc": "The FreeWheel ad manager SWF URL.",
@@ -36,9 +36,9 @@
                 "doc": "The site section ID used to segment ad retrieval per site section.",
                 "type": "string"
             },
-            "useKalturaTemporalSlots": {
-                "doc": "If Kaltura cuePoints should be used for ad opportunities.",
-                "label": "Use Kaltura cue points.",
+            "useVidiunTemporalSlots": {
+                "doc": "If Vidiun cuePoints should be used for ad opportunities.",
+                "label": "Use Vidiun cue points.",
                 "type": "boolean"
             },
             "videoAssetId": {

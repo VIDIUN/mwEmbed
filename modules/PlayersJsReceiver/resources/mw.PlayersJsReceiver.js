@@ -3,7 +3,7 @@
 */
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'playersJsReceiver', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'playersJsReceiver', mw.VBasePlugin.extend({
 		setup:function(){
 			this.receiver = new playerjs.Receiver();
 	

@@ -27,16 +27,16 @@ $wgVidiunServiceUrl = wgGetUrl('cdn_api_host');
 // Default Vidiun CDN url:
 $wgVidiunCDNUrl = wgGetUrl('cdn_host');
 // Default Stats URL
-$wgKalturaStatsServiceUrl = wgGetUrl('stats_host');
+$wgVidiunStatsServiceUrl = wgGetUrl('stats_host');
 // Default Live Stats URL
-$wgKalturaLiveStatsServiceUrl = wgGetUrl('live_stats_host');
+$wgVidiunLiveStatsServiceUrl = wgGetUrl('live_stats_host');
 
 // SSL host names
 if( $wgHTTPProtocol == 'https' ){
-	$wgKalturaServiceUrl = wgGetUrl('cdn_api_host_https');
-	$wgKalturaCDNUrl = wgGetUrl('cdn_host_https');
-	$wgKalturaStatsServiceUrl = wgGetUrl('stats_host_https');
-	$wgKalturaLiveStatsServiceUrl = wgGetUrl('live_stats_host_https');
+	$wgVidiunServiceUrl = wgGetUrl('cdn_api_host_https');
+	$wgVidiunCDNUrl = wgGetUrl('cdn_host_https');
+	$wgVidiunStatsServiceUrl = wgGetUrl('stats_host_https');
+	$wgVidiunLiveStatsServiceUrl = wgGetUrl('live_stats_host_https');
 
 }
 
@@ -46,8 +46,8 @@ $wgCDNAssetPath = $wgVidiunCDNUrl;
 // Default Vidiun Cache Path
 $wgScriptCacheDirectory = $vConf->get('cache_root_path') . '/html5/' . $wgVidiunVersion;
 
-if (strpos($_SERVER["HTTP_HOST"], "kaltura.com")){
-	$wgLoadScript = $wgKalturaServiceUrl . '/html5/html5lib/' . $wgKalturaVersion . '/load.php';
+if (strpos($_SERVER["HTTP_HOST"], "vidiun.com")){
+	$wgLoadScript = $wgVidiunServiceUrl . '/html5/html5lib/' . $wgVidiunVersion . '/load.php';
 	$wgResourceLoaderUrl = $wgLoadScript;
 }
 
@@ -80,18 +80,18 @@ if( $vConf->hasMap('playReady') ) {
 }
 
 // Get PlayReady License URL
-if( $kConf->hasMap('drm') ) {
-	$drmMap = $kConf->getMap('drm');
+if( $vConf->hasMap('drm') ) {
+	$drmMap = $vConf->getMap('drm');
 	if($drmMap)
-		$wgKalturaUdrmLicenseServerUrl = $drmMap['license_server_url'];
+		$wgVidiunUdrmLicenseServerUrl = $drmMap['license_server_url'];
 }
 
-if( $kConf->hasParam('overrideDomain') ) {
-	$wgEnableKalturaOverrideDomain = $kConf->get('overrideDomain');
+if( $vConf->hasParam('overrideDomain') ) {
+	$wgEnableVidiunOverrideDomain = $vConf->get('overrideDomain');
 }
 
-if( $kConf->hasParam('enableEmbedServicesRouting') ) {
-	$wgEnableKalturaEmbedServicesRouting = $kConf->get('enableEmbedServicesRouting');
+if( $vConf->hasParam('enableEmbedServicesRouting') ) {
+	$wgEnableVidiunEmbedServicesRouting = $vConf->get('enableEmbedServicesRouting');
 }
 
 // A helper function to get full URL of host

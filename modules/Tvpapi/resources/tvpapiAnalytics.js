@@ -1,7 +1,7 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add( 'tvpapiAnalytics', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'tvpapiAnalytics', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			mediaHitInterval: 30
@@ -101,7 +101,7 @@
 		},
 
 		getProxyData: function( key ) {
-			return this.getPlayer().getKalturaConfig('proxyData', key);
+			return this.getPlayer().getVidiunConfig('proxyData', key);
 		},
 
 		getCurrentTime: function() {

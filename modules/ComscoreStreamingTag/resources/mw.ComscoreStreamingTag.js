@@ -7,7 +7,7 @@
 	mw.ComscoreStreamingTag.prototype = {
 
 		pluginVersion: "1.0.4",
-		reportingPluginName: "kaltura",
+		reportingPluginName: "vidiun",
 		playerVersion: mw.getConfig('version'),
 		genericPluginUrlSecure: "https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_generic.js",
 		genericPluginUrl: "http://b.scorecardresearch.com/c2/plugins/streamingtag_plugin_generic.js",
@@ -77,7 +77,7 @@
 			if (_this.isSecure())
 				comScoreSettings.secure = true;
 
-			// The configuration naming used in Kaltura are different from the settings in the StreamSense plugin
+			// The configuration naming used in Vidiun are different from the settings in the StreamSense plugin
 			for (var key in _this.configOptions) {
 				if (this.getConfig(key)) {
 					comScoreSettings[_this.configOptions[key]] = this.getConfig(key)
@@ -86,7 +86,7 @@
 
 			var standalonePluginUrl = this.isSecure() ? this.genericPluginUrlSecure : this.genericPluginUrl;
 
-			kWidget.appendScriptUrl(standalonePluginUrl, function(){
+			vWidget.appendScriptUrl(standalonePluginUrl, function(){
 				_this.streamSenseInstance = new ns_.StreamSense.Plugin(comScoreSettings, _this.reportingPluginName, _this.pluginVersion, _this.playerVersion, {
 					init: function () {
 						_this.playerEvents = ns_.StreamSense.PlayerEvents;
@@ -162,7 +162,7 @@
 		},
 
 		getConfig: function (attr) {
-			return this.embedPlayer.getKalturaConfig(this.moduleName, attr);
+			return this.embedPlayer.getVidiunConfig(this.moduleName, attr);
 		},
 
 		callStreamSensePlugin:function(){
@@ -425,7 +425,7 @@
 
 		parserRawConfig: function(configName) {
 			var _this = this;
-			var rawConfig = this.embedPlayer.getRawKalturaConfig(this.moduleName, configName)
+			var rawConfig = this.embedPlayer.getRawVidiunConfig(this.moduleName, configName)
 			var result = {};
 			// Split and trim the spaces
 			rawConfig.split(/ *, */g).forEach(function(x) {
@@ -604,7 +604,7 @@
 		},
 
 		isSecure:  function () {
-			return mw.getConfig('Kaltura.Protocol') == 'https';
+			return mw.getConfig('Vidiun.Protocol') == 'https';
 		}
 	};
 

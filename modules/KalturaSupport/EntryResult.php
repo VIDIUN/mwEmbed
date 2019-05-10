@@ -40,7 +40,7 @@ class EntryResult {
 	}
 
 	function getResponseHeaders() {
-		global $wgKalturaUiConfCacheTime;
+		global $wgVidiunUiConfCacheTime;
 		// only use response headers if not cachable
 		if( !$this->isCachable( $this->entryResultObj ) ){
 			return $this->responseHeaders;
@@ -51,8 +51,8 @@ class EntryResult {
 			$saveTime = time();
 		}
 		return array(
-			"Cache-Control: public, max-age=$wgKalturaUiConfCacheTime, max-stale=0",
-			"Expires: " . gmdate( "D, d M Y H:i:s", $saveTime + $wgKalturaUiConfCacheTime ) . " GMT",
+			"Cache-Control: public, max-age=$wgVidiunUiConfCacheTime, max-stale=0",
+			"Expires: " . gmdate( "D, d M Y H:i:s", $saveTime + $wgVidiunUiConfCacheTime ) . " GMT",
 		);
 	}
 	
@@ -70,7 +70,7 @@ class EntryResult {
 		}
 		
 		// Check for entry non-expired entry cache:
-		if ( !$this->request->hasKS() ){
+		if ( !$this->request->hasVS() ){
 			$this->entryResultObj = unserialize( $this->cache->get( $this->getCacheKey() ) );
 		}
 
@@ -80,7 +80,7 @@ class EntryResult {
 			// if no errors, not admin and we have access, and we have a fresh API result, add to cache.
 			// note playback will always go through playManifest
 			// so we don't care if we cache where one users has permission but another does not.
-			// we never cache admin or ks users access so would never expose info that not defined across anonymous regional access.
+			// we never cache admin or vs users access so would never expose info that not defined across anonymous regional access.
 			if( $this->isCachable() ){
 				$this->cache->set( $this->getCacheKey(), serialize( $this->entryResultObj ) );
 				$this->cache->set( $this->getCacheKey() + '_savetime', time() );
@@ -104,7 +104,7 @@ class EntryResult {
 				&& 
 			$this->isAccessControlAllowed( $this->entryResultObj ) 
 				&&
-			!$this->request->hasKS();
+			!$this->request->hasVS();
 	}
 	function getCacheKey(){
 		$key = '';
@@ -155,7 +155,7 @@ class EntryResult {
 			$entryId = '{' . $baseEntryIdx . ':result:objects:0:id}';
 			
 			// ------- Disabled AC from iframe. -----
-			// Access control NOTE: kaltura does not use http header spelling of Referer instead kaltura uses: "referrer"
+			// Access control NOTE: vidiun does not use http header spelling of Referer instead vidiun uses: "referrer"
 			$filter = $this->getACFilter();
 			$params = array( 
 				"contextDataParams" => $filter,
@@ -213,9 +213,9 @@ class EntryResult {
 		} else {
 			$resultObject['meta'] = array();
 		}
-		// Check that the ks was valid on the first response ( flavors )
-		if( is_array( $resultObject['meta'] ) && isset( $resultObject['meta']['code'] ) && $resultObject['meta']['code'] == 'INVALID_KS' ){
-			$this->error = 'Error invalid KS';
+		// Check that the vs was valid on the first response ( flavors )
+		if( is_array( $resultObject['meta'] ) && isset( $resultObject['meta']['code'] ) && $resultObject['meta']['code'] == 'INVALID_VS' ){
+			$this->error = 'Error invalid VS';
 			return array();
 		}
 
@@ -340,7 +340,7 @@ class EntryResult {
 				( $accessControl['previewLength'] == -1 || $accessControl['previewLength'] == null ) 
 			)
 		){
-			return "No KS where KS is required\nWe're sorry, access to this content is restricted.";
+			return "No VS where VS is required\nWe're sorry, access to this content is restricted.";
 		}
 
 		if( isset( $accessControl['isScheduledNow'] ) && 
@@ -367,8 +367,8 @@ class EntryResult {
 			for($i=0;$i<count($actions); $i++){
 				$actionsObj = $actions[$i];
 
-				if( get_class( $actionsObj ) == 'KalturaAccessControlBlockAction' ){
-					return "No KS where KS is required\nWe're sorry, access to this content is restricted.";
+				if( get_class( $actionsObj ) == 'VidiunAccessControlBlockAction' ){
+					return "No VS where VS is required\nWe're sorry, access to this content is restricted.";
 				}
 			}
 		}

@@ -77,8 +77,8 @@ mw.VBasePlugin = Class.extend({
 		// Add out plugin instance
 		data.self = this;
 		data.player = this.embedPlayer;
-		data.entry = this.embedPlayer.kalturaPlayerMetaData;
-		data.entryMetadata = this.embedPlayer.kalturaEntryMetaData;
+		data.entry = this.embedPlayer.vidiunPlayerMetaData;
+		data.entryMetadata = this.embedPlayer.vidiunEntryMetaData;
 		data.formaters = mw.util.formaters().getAll();
 
 		var defer = $.Deferred();
@@ -111,22 +111,22 @@ mw.VBasePlugin = Class.extend({
 		var rawHTML = this.getConfig( 'template', true );
 		if( !rawHTML ){
 			var templatePath = this.getConfig( 'templatePath' );
-			if( !window.kalturaIframePackageData.templates[ templatePath ]) {
+			if( !window.vidiunIframePackageData.templates[ templatePath ]) {
 				this.log('getTemplateHTML:: Template not found in payload - trying async loading');
 				if ( templatePath && templatePath.indexOf("http") === 0 ){
 					$.ajax({
 						url: templatePath
 					}).done(function(data) {
-							window.kalturaIframePackageData.templates[ templatePath ] = rawHTML = data;
+							window.vidiunIframePackageData.templates[ templatePath ] = rawHTML = data;
 							parseTemplate(rawHTML);
 						}).fail(function(data) {
-							defer.reject("mw.KBasePlugin::Error occur when trying to load external template from: " + templatePath);
+							defer.reject("mw.VBasePlugin::Error occur when trying to load external template from: " + templatePath);
 						});
 				}else{
-					defer.reject("mw.KBasePlugin::Could not load external template: " + templatePath + ". Must be a full url starting with http.");
+					defer.reject("mw.VBasePlugin::Could not load external template: " + templatePath + ". Must be a full url starting with http.");
 				}
 			}else{
-				rawHTML = window.kalturaIframePackageData.templates[ templatePath ];
+				rawHTML = window.vidiunIframePackageData.templates[ templatePath ];
 				parseTemplate(rawHTML);
 			}
 		}else{
@@ -138,11 +138,11 @@ mw.VBasePlugin = Class.extend({
 		// First get template from 'template' config
 		var rawHTML = this.getConfig( 'template', true );
 		if( !rawHTML ){
-			if( !partialName || !window.kalturaIframePackageData.templates[ partialName ]) {
+			if( !partialName || !window.vidiunIframePackageData.templates[ partialName ]) {
 				this.log('getTemplateHTML:: Template not found');
 				return '';
 			}
-			rawHTML = window.kalturaIframePackageData.templates[ partialName ];
+			rawHTML = window.vidiunIframePackageData.templates[ partialName ];
 		}
 		var transformedHTML = mw.util.tmpl( rawHTML, settings );
 

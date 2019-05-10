@@ -11,10 +11,10 @@
 	<h2> Capture Thumbnail </h2>
 	<br />
 	
-	<div id="kaltura_player" style="width:400px;height:300px;"></div>
+	<div id="vidiun_player" style="width:400px;height:300px;"></div>
 	<script>
-		kWidget.featureConfig( {
-			'targetId': 'kaltura_player',
+		vWidget.featureConfig( {
+			'targetId': 'vidiun_player',
 			'wid': '_243342',
 			'uiconf_id' : '12905712',
 			'entry_id' : '0_uka1msg4',
@@ -26,14 +26,14 @@
 			}
 		});
 	</script>
-	Sample embed to enable captureThumbnail. Note you would want to supply a ks
-	<pre class="prettyprint linenums">kWidget.embed( {
-	'targetId': 'kaltura_player',
+	Sample embed to enable captureThumbnail. Note you would want to supply a vs
+	<pre class="prettyprint linenums">vWidget.embed( {
+	'targetId': 'vidiun_player',
 	'wid': '_243342',
 	'uiconf_id' : '12905712',
 	'entry_id' : '0_uka1msg4',
 	'flashvars': {
-		'ks': /* your ks with thumbnail capture permission */
+		'vs': /* your vs with thumbnail capture permission */
 		'captureThumbnail':{
 			'plugin': true,
 			"tooltip": "Capture Thumbnail"

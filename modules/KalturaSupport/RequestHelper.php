@@ -141,7 +141,7 @@ class RequestHelper {
 		global $wgVidiunAllowIframeRemoteService;
 		
 		// Check if we allow URL override: 
-		if(( $wgKalturaAllowIframeRemoteService == true ) || $this->isEmbedServicesEnabled()){
+		if(( $wgVidiunAllowIframeRemoteService == true ) || $this->isEmbedServicesEnabled()){
 			// Check for urlParameters
 			if( $this->get( $name ) ){
 				return $this->get( $name );
@@ -170,8 +170,8 @@ class RequestHelper {
 	}
 
 	function isEmbedServicesEnabled(){
-	    global $wgEnableKalturaEmbedServicesRouting, $wgKalturaAuthEmbedServicesDomains;
-	    if ($wgEnableKalturaEmbedServicesRouting){
+	    global $wgEnableVidiunEmbedServicesRouting, $wgVidiunAuthEmbedServicesDomains;
+	    if ($wgEnableVidiunEmbedServicesRouting){
 	        return true;
 	    } else {
 	        return false;
@@ -276,7 +276,7 @@ class RequestHelper {
 		// make sure there is no white space
 		$ip = trim( $ip );
 		$s = $ip . "," . time() . "," . microtime( true );
-		return "X-KALTURA-REMOTE-ADDR: " . $s . ',' . md5( $s . "," . $wgKalturaRemoteAddressSalt );
+		return "X-VIDIUN-REMOTE-ADDR: " . $s . ',' . md5( $s . "," . $wgVidiunRemoteAddressSalt );
 	}
 
 	public function getCacheSt(){

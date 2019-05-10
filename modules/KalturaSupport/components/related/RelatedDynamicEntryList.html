@@ -14,11 +14,11 @@
 	Click the "Change Entries" button below the player to change the related entries.
 </p>
 <br />
-<div id="kdp" style="width:600px;height:370px"></div>
+<div id="vdp" style="width:600px;height:370px"></div>
 <script>
 	// will be poulated via ace editor:
-	kWidget.featureConfig({
-		'targetId': 'kdp',
+	vWidget.featureConfig({
+		'targetId': 'vdp',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '1_sf5ovm7u',
@@ -43,15 +43,15 @@
 
 
 	function changeEntryList(){
-		var kdp = $( '#kdp').get(0);
-		kdp.setKDPAttribute('related', 'entryList', '0_33vkwid6,1_18leun9q,1_23pqn2nu');
+		var vdp = $( '#vdp').get(0);
+		vdp.setVDPAttribute('related', 'entryList', '0_33vkwid6,1_18leun9q,1_23pqn2nu');
 	}
 
 </script>
 <br><button onclick="changeEntryList()">Change Entries</button><br><br>
 Code sample:
 <pre>
-kdp.setKDPAttribute('related', 'entryList', '0_33vkwid6,1_18leun9q,1_23pqn2nu');
+vdp.setVDPAttribute('related', 'entryList', '0_33vkwid6,1_18leun9q,1_23pqn2nu');
 </pre>
 </body>
 </html>
