@@ -1,18 +1,18 @@
 /**
- * KEntryLoader enables easy loading of entries with respective metadata. 
+ * VEntryLoader enables easy loading of entries with respective metadata. 
  */
 ( function( mw, $ ) { "use strict";
 
-mw.KEntryLoader = function( client, kProperties ){
-	return this.init( client, kProperties );
+mw.VEntryLoader = function( client, vProperties ){
+	return this.init( client, vProperties );
 };
 
-mw.KEntryLoader.prototype = {
+mw.VEntryLoader.prototype = {
 	baseDataInx:0,
 	playerLoaderCache: [],
-	init: function( client, kProperties ){
+	init: function( client, vProperties ){
 		this.clinet = client;
-		this.kProperties = kProperties;
+		this.vProperties = vProperties;
 	},
 	/**
 	 * PlayerLoader
@@ -25,33 +25,33 @@ mw.KEntryLoader.prototype = {
 	get: function( callback ){
 		var _this = this,
 			requestObject = [];
-		var kProperties = this.kProperties;
+		var vProperties = this.vProperties;
 		// Normalize flashVars
-		kProperties.flashvars = kProperties.flashvars || {};
+		vProperties.flashvars = vProperties.flashvars || {};
 
-		if( this.getCacheKey( kProperties ) && this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ){
-			mw.log( "KApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ) );
-			callback( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] );
+		if( this.getCacheKey( vProperties ) && this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ){
+			mw.log( "VApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ) );
+			callback( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] );
 			return ;
 		}
 		// Local method to fill the cache key and run the associated callback
 		var fillCacheAndRunCallback = function( namedData ){
 			if ( !mw.getConfig("EmbedPlayer.DisableEntryCache") ) {
-				_this.playerLoaderCache[_this.getCacheKey( kProperties )] = namedData;
+				_this.playerLoaderCache[_this.getCacheKey( vProperties )] = namedData;
 			}
 			callback( namedData );
 		};
 
 		// If we don't have entryId and referenceId return an error
-		if( !kProperties.flashvars.referenceId && !kProperties.entry_id ) {
-			mw.log( "KApi:: entryId and referenceId not found, exit.");
+		if( !vProperties.flashvars.referenceId && !vProperties.entry_id ) {
+			mw.log( "VApi:: entryId and referenceId not found, exit.");
 			callback( { error: "Empty player" } );
 			return ;
 		}
 
-		// Check if we have ks flashvar and use it for our request
-		if( kProperties.flashvars && kProperties.flashvars.ks ) {
-			this.clinet.setKs( kProperties.flashvars.ks );
+		// Check if we have vs flashvar and use it for our request
+		if( vProperties.flashvars && vProperties.flashvars.vs ) {
+			this.clinet.setVs( vProperties.flashvars.vs );
 		}
 
 		// Always get the entry id from the first request result
@@ -61,29 +61,29 @@ mw.KEntryLoader.prototype = {
 		var baseEntryRequestObj = {
 			'service' : 'baseentry',
 			'action' : 'list',
-			'filter:objectType' : 'KalturaBaseEntryFilter'
+			'filter:objectType' : 'VidiunBaseEntryFilter'
 		};
 		// Filter by reference Id
-		if( !kProperties.entry_id && kProperties.flashvars.referenceId ){
-			baseEntryRequestObj['filter:referenceIdEqual'] = kProperties.flashvars.referenceId;
-		} else if ( kProperties.entry_id ){
-			if( kProperties.features['entryRedirect'] && kProperties.flashvars.disableEntryRedirect !== true ) {
+		if( !vProperties.entry_id && vProperties.flashvars.referenceId ){
+			baseEntryRequestObj['filter:referenceIdEqual'] = vProperties.flashvars.referenceId;
+		} else if ( vProperties.entry_id ){
+			if( vProperties.features['entryRedirect'] && vProperties.flashvars.disableEntryRedirect !== true ) {
 				// Filter by redirectEntryId
-				baseEntryRequestObj['filter:redirectFromEntryId'] = kProperties.entry_id;
+				baseEntryRequestObj['filter:redirectFromEntryId'] = vProperties.entry_id;
 			} else {
 				// Filter by entryId
-				baseEntryRequestObj['filter:idEqual'] = kProperties.entry_id;
+				baseEntryRequestObj['filter:idEqual'] = vProperties.entry_id;
 			}
 		}
 		requestObject.push(baseEntryRequestObj);
-		var streamerType = kProperties.flashvars.streamerType || 'http';
-		var flavorTags = kProperties.flashvars.flavorTags || 'all';
+		var streamerType = vProperties.flashvars.streamerType || 'http';
+		var flavorTags = vProperties.flashvars.flavorTags || 'all';
 
 		// Add Context Data request
 		requestObject.push({
 			'contextDataParams' : {
-				'referrer' : window.kWidgetSupport.getHostPageUrl(),
-				'objectType' : 'KalturaEntryContextDataParams',
+				'referrer' : window.vWidgetSupport.getHostPageUrl(),
+				'objectType' : 'VidiunEntryContextDataParams',
 				'flavorTags': flavorTags,
 				'streamerType': streamerType
 			},
@@ -98,21 +98,21 @@ mw.KEntryLoader.prototype = {
 			'action' : 'list',
 			'version' : '-1',
 			// metaDataFilter
-			'filter:metadataObjectTypeEqual' :1, /* KalturaMetadataObjectType::ENTRY */
+			'filter:metadataObjectTypeEqual' :1, /* VidiunMetadataObjectType::ENTRY */
 			'filter:orderBy' : '+createdAt',
 			'filter:objectIdEqual' : entryIdValue,
 			'pager:pageSize' : 1
 		});
 		// Check for metadataProfileId flashvar
-		if( typeof kProperties.flashvars['metadataProfileId'] != 'undefined' ){
-			requestObject[requestObject.length-1][ 'filter:metadataProfileIdEqual'] = kProperties.flashvars['metadataProfileId'];
+		if( typeof vProperties.flashvars['metadataProfileId'] != 'undefined' ){
+			requestObject[requestObject.length-1][ 'filter:metadataProfileIdEqual'] = vProperties.flashvars['metadataProfileId'];
 		}
 
-		if( kProperties.flashvars.getCuePointsData !== false ){
+		if( vProperties.flashvars.getCuePointsData !== false ){
 			requestObject.push({
 				'service' : 'cuepoint_cuepoint',
 				'action' : 'list',
-				'filter:objectType' : 'KalturaCuePointFilter',
+				'filter:objectType' : 'VidiunCuePointFilter',
 				'filter:orderBy' : '+startTime',
 				'filter:statusEqual' : 1,
 				'filter:entryIdEqual' : entryIdValue
@@ -135,7 +135,7 @@ mw.KEntryLoader.prototype = {
 
 			// Check if we have an error
 			if( data[0].code ) {
-				mw.log('Error in kaltura api response: ' + data[0].message);
+				mw.log('Error in vidiun api response: ' + data[0].message);
 				callback( { 'error' :  data[0].message } );
 				return ;
 			}
@@ -173,19 +173,19 @@ mw.KEntryLoader.prototype = {
 	},
 	/**
 	 * Get a string representation of the query string
-	 * @param kProperties
+	 * @param vProperties
 	 * @return
 	 */
-	getCacheKey: function( kProperties ){
+	getCacheKey: function( vProperties ){
 		var rKey = '';
-		if( kProperties ){
-			$.each(kProperties, function( inx, value ){
+		if( vProperties ){
+			$.each(vProperties, function( inx, value ){
 				if( inx == 'flashvars' ){
 					// add in the flashvars that can vary the api response
-					if( typeof kProperties.flashvars == 'object'){
-						rKey += kProperties.flashvars.getCuePointsData;
-						rKey += kProperties.flashvars.ks;
-						rKey += kProperties.flashvars.referenceId;
+					if( typeof vProperties.flashvars == 'object'){
+						rKey += vProperties.flashvars.getCuePointsData;
+						rKey += vProperties.flashvars.vs;
+						rKey += vProperties.flashvars.referenceId;
 					}
 				} else {
 					rKey+=inx + '_' + value;
@@ -197,24 +197,24 @@ mw.KEntryLoader.prototype = {
 };
 
 /**
- * KApi entry loader public entry points:
+ * VApi entry loader public entry points:
  *
  */
-mw.kApiEntryLoader = function( kProperties, callback ){
-	if( !kProperties.widget_id ) {
-		mw.log( "Error:: mw.KApiPlayerLoader:: cant run player loader with widget_id "  + kProperties.widget_id );
+mw.vApiEntryLoader = function( vProperties, callback ){
+	if( !vProperties.widget_id ) {
+		mw.log( "Error:: mw.VApiPlayerLoader:: cant run player loader with widget_id "  + vProperties.widget_id );
 	}
 	// Make sure we have features
-	if( !kProperties.features ) {
-		kProperties.features = {};
+	if( !vProperties.features ) {
+		vProperties.features = {};
 	}
 	// Convert widget_id to partner id
-	var client = mw.kApiGetPartnerClient( kProperties.widget_id );
-	var entryLoader = new mw.KEntryLoader( client, kProperties );
+	var client = mw.vApiGetPartnerClient( vProperties.widget_id );
+	var entryLoader = new mw.VEntryLoader( client, vProperties );
 	
 	entryLoader.get(callback);
 	
-	// Return the kClient api object for future requests
+	// Return the vClient api object for future requests
 	return client;
 };
 

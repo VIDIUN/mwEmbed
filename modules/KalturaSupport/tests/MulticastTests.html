@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Multicast Demo</h1>
-<div id="kaltura_player" style="width: 885px; height: 630px;float: left;"></div>
+<div id="vidiun_player" style="width: 885px; height: 630px;float: left;"></div>
 <br style="clear: both;" /><br />
 
 <script>
@@ -19,18 +19,18 @@
 
     /*
      resolvedSrc={ "flavors": [
-     {url: "http://192.168.163.88:9000/kMulticast/http://192.168.163.88:1935/live/abc123/playlist55.m3u8", bitrate:55},
-     {url: "http://192.168.163.88:9000/kMulticast/http://192.168.163.88:1935/live/abc123/playlist855.m3u8", bitrate:855},
-     {url: "http://192.168.163.88:9000/kMulticast/192.168.163.88:1935/live/abc123/playlist515.m3u8", bitrate:515},
-     {url: "http://192.168.163.188:9000/kMulticast/192.168.163.188:1935/live/abc123/playlist55.m3u8", bitrate:55},
-     {url: "http://192.168.163.188:9000/kMulticast/192.168.163.188:1935/live/abc123/playlist515.m3u8", bitrate:515},
-     {url: "http://192.168.163.188:9000/kMulticast/192.168.163.188:1935/live/abc123/playlist2515.m3u8", bitrate:2515}]
+     {url: "http://192.168.163.88:9000/vMulticast/http://192.168.163.88:1935/live/abc123/playlist55.m3u8", bitrate:55},
+     {url: "http://192.168.163.88:9000/vMulticast/http://192.168.163.88:1935/live/abc123/playlist855.m3u8", bitrate:855},
+     {url: "http://192.168.163.88:9000/vMulticast/192.168.163.88:1935/live/abc123/playlist515.m3u8", bitrate:515},
+     {url: "http://192.168.163.188:9000/vMulticast/192.168.163.188:1935/live/abc123/playlist55.m3u8", bitrate:55},
+     {url: "http://192.168.163.188:9000/vMulticast/192.168.163.188:1935/live/abc123/playlist515.m3u8", bitrate:515},
+     {url: "http://192.168.163.188:9000/vMulticast/192.168.163.188:1935/live/abc123/playlist2515.m3u8", bitrate:2515}]
      }
      */
     //var hlssource='http://'+localhost+':1935/live/abc123/playlist.m3u8';
-    //var hlssource='http://kalsegsec-a.akamaihd.net/dc-1/m/ny-live-publish3/kLive/smil:1_oorxcge2_publish.smil/chunklist_b2096000.m3u8';
+    //var hlssource='http://vidsegsec-a.akamaihd.net/dc-1/m/ny-live-publish3/vLive/smil:1_oorxcge2_publish.smil/chunklist_b2096000.m3u8';
 
-   // var multicast='http://'+localhost+':9000/kMulticast/'+hlssource;
+   // var multicast='http://'+localhost+':9000/vMulticast/'+hlssource;
 //    var multicast='239.1.2.3:5552';
 
     var replaceSources=[];
@@ -61,8 +61,8 @@
     if (replaceSources.length>0) {
         mw.setConfig('EmbedPlayer.ReplaceSources', replaceSources);
     }
-    kWidget.featureConfig({
-        'targetId': 'kaltura_player',
+    vWidget.featureConfig({
+        'targetId': 'vidiun_player',
         'wid': '_1742181',
         'uiconf_id' : '27889722',
         'flashvars': {

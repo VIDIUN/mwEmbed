@@ -7,8 +7,8 @@
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">
 		var once = false;
-		function jsKalturaPlayerTest(videoId) {
-			var kdp = $('#' + videoId)[0];
+		function jsVidiunPlayerTest(videoId) {
+			var vdp = $('#' + videoId)[0];
 			if (once) {
 				return;
 			}
@@ -23,20 +23,20 @@
 					}, 100)
 				}
 				// check the start time is set
-				equal(Math.floor(kdp.evaluate('{video.player.currentTime}')), 0, "Kdp time at startup is zero");
-				equal(kdp.evaluate('{duration}'), 20, "20 second duration for 20 second segment.");
+				equal(Math.floor(vdp.evaluate('{video.player.currentTime}')), 0, "Vdp time at startup is zero");
+				equal(vdp.evaluate('{duration}'), 20, "20 second duration for 20 second segment.");
 
 				// add seek listener ( seek to 5 seconds and check time is accurate )
-				kdp.addJsListener('playerSeekEnd', 'onPlayerSeekEnd');
+				vdp.addJsListener('playerSeekEnd', 'onPlayerSeekEnd');
 				// after 1 second of playback issue a seek to 20 seconds
 				setTimeout(function () {
-					kdp.sendNotification('doSeek', 20);
+					vdp.sendNotification('doSeek', 20);
 				}, 1000);
 			});
 
 			window['addSeekTests'] = function () {
 				asyncTest("Playhead seeks", function () {
-					equal(kdp.evaluate('{video.player.currentTime}'), 20, "seek time is 20");
+					equal(vdp.evaluate('{video.player.currentTime}'), 20, "seek time is 20");
 					// true player time:
 					var $iframe = $('#' + videoId + '_ifp').contents();
 					var rawVid = $iframe.find('#myVideoTarget')[0].getPlayerElement();
@@ -46,8 +46,8 @@
 			};
 		}
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>Playhead Segment support</h2>
@@ -56,62 +56,62 @@
 <br>
 Sample code for switching segments:
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function( playerId ){
-	var kdp = $('#' + playerId)[0];
+vWidget.addReadyCallback(function( playerId ){
+	var vdp = $('#' + playerId)[0];
 	$('#switchTime').click(function () {
-		kdp.setKDPAttribute('mediaProxy', 'mediaPlayFrom', $('#k-from').val());
-		kdp.setKDPAttribute('mediaProxy', 'mediaPlayTo', $('#k-to').val());
+		vdp.setVDPAttribute('mediaProxy', 'mediaPlayFrom', $('#v-from').val());
+		vdp.setVDPAttribute('mediaProxy', 'mediaPlayTo', $('#v-to').val());
 		setTimeout(function(){
-			kdp.sendNotification('doPlay');
+			vdp.sendNotification('doPlay');
 		},500);
 		return false;
 	});
 });
 </pre>
-Switch segment to <input id="k-from" size="4" style="width:30px" value="30"> to <input id="k-to" style="width:30px" size="4" value="50">
+Switch segment to <input id="v-from" size="4" style="width:30px" value="30"> to <input id="v-to" style="width:30px" size="4" value="50">
 <a href="#" id="switchTime">GO</a>
 <br/><br/>
 This example highlights change the entry to 1_sf5ovm7u and update time 5 to 30 second, followed by a content play <br>
 <a href="#" id="changeMediaAndTime">changeMedia</a>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function (playerId) {
-	var kdp = $('#' + playerId)[0];
+vWidget.addReadyCallback(function (playerId) {
+	var vdp = $('#' + playerId)[0];
 	$('#changeMediaAndTime').click(function(){
-		kdp.kBind('onChangeMediaDone', function(){
-			kdp.sendNotification('doPlay');
+		vdp.vBind('onChangeMediaDone', function(){
+			vdp.sendNotification('doPlay');
 		});
-		kdp.sendNotification('changeMedia', { 'entryId': '1_sf5ovm7u'} );
-		kdp.setKDPAttribute('mediaProxy', 'mediaPlayFrom', 5);
-		kdp.setKDPAttribute('mediaProxy', 'mediaPlayTo', 30);
+		vdp.sendNotification('changeMedia', { 'entryId': '1_sf5ovm7u'} );
+		vdp.setVDPAttribute('mediaProxy', 'mediaPlayFrom', 5);
+		vdp.setVDPAttribute('mediaProxy', 'mediaPlayTo', 30);
 		return false;
 	});
 });
 </pre>
 
 <script>
-	kWidget.addReadyCallback(function (playerId) {
-		var kdp = $('#' + playerId)[0];
+	vWidget.addReadyCallback(function (playerId) {
+		var vdp = $('#' + playerId)[0];
 		$('#switchTime').click(function () {
-			kdp.setKDPAttribute('mediaProxy', 'mediaPlayFrom', $('#k-from').val());
-			kdp.setKDPAttribute('mediaProxy', 'mediaPlayTo', $('#k-to').val());
+			vdp.setVDPAttribute('mediaProxy', 'mediaPlayFrom', $('#v-from').val());
+			vdp.setVDPAttribute('mediaProxy', 'mediaPlayTo', $('#v-to').val());
 			setTimeout(function(){
-				kdp.sendNotification('doPlay');
+				vdp.sendNotification('doPlay');
 			},500);
 			return false;
 		});
 		$('#changeMediaAndTime').click(function(){
-			kdp.kBind('onChangeMediaDone', function(){
-				kdp.sendNotification('doPlay');
+			vdp.vBind('onChangeMediaDone', function(){
+				vdp.sendNotification('doPlay');
 			});
-			kdp.sendNotification('changeMedia', { 'entryId': '1_sf5ovm7u'} );
-			kdp.setKDPAttribute('mediaProxy', 'mediaPlayFrom', 5);
-			kdp.setKDPAttribute('mediaProxy', 'mediaPlayTo', 30);
+			vdp.sendNotification('changeMedia', { 'entryId': '1_sf5ovm7u'} );
+			vdp.setVDPAttribute('mediaProxy', 'mediaPlayFrom', 5);
+			vdp.setVDPAttribute('mediaProxy', 'mediaPlayTo', 30);
 			return false;
 		});
 	});
 </script>
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id': '12905712',

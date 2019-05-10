@@ -1,7 +1,7 @@
-(function (mw, $, kWidget) {
+(function (mw, $, vWidget) {
 	"use strict";
 
-	mw.PluginManager.add('audioSelector', mw.KBaseComponent.extend({
+	mw.PluginManager.add('audioSelector', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",
@@ -198,7 +198,7 @@
 		},
 		getMenu: function () {
 			if (!this.menu) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex')
 				});
 			}
@@ -220,4 +220,4 @@
 		}
 	}));
 
-})(window.mw, window.jQuery, kWidget);
+})(window.mw, window.jQuery, vWidget);

@@ -10,16 +10,16 @@
 
 	<script type="text/javascript">
 		// Enable uiconf js which includes external resources
-		mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "onPage playlist" );
-			var kdp = $('#' + videoId )[0];
+			var vdp = $('#' + videoId )[0];
 			var $iframe = $('#' + videoId + '_ifp').contents();
 
 			asyncTest( "Check for no clip playlist", function(){
-				kalturaQunitWaitForPlayer(function(){
+				vidiunQunitWaitForPlayer(function(){
 					ok( $( '.onpagePlaylistInterface' ).length > 0, "Found playlistOnPage div" );
 					ok( $( '.onpagePlaylistInterface' ).css("display") === "none", "Playlist is hidden" );
 					start();
@@ -28,19 +28,19 @@
 		}
 
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 </head>
 <body>
 <h2> Playlist No Clip List</h2>
-<div id="kaltura_player" style="width:500px;height:300px"></div>
-<span id="kdoc-more-desc">
+<div id="vidiun_player" style="width:500px;height:300px"></div>
+<span id="vdoc-more-desc">
 	This demo highlights the use of playlist without visual representation in the player embed. 
 </span>
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '25975211',
 		'flashvars':{
@@ -49,8 +49,8 @@
 				'autoPlay': true,
 				'loop': true,
 				'autoContinue': true,
-				'kpl0Name': 'simple two clip pl',
-				'kpl0Url': "http://www.kaltura.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&ks={ks}"
+				'vpl0Name': 'simple two clip pl',
+				'vpl0Url': "http://www.vidiun.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&vs={vs}"
 			},
 			'nextPrevBtn':{
 				'plugin': true

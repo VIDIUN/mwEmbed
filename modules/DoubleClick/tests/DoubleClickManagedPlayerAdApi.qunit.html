@@ -8,9 +8,9 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <!--script type="text/javascript" src="http://s0.2mdn.net/instream/html5/gpt_proxy.js"></script-->
 <script type="text/javascript">
-    mw.setConfig( "Kaltura.UseAppleAdaptive" , false ) ;
+    mw.setConfig( "Vidiun.UseAppleAdaptive" , false ) ;
     var atTagURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F3510761%2FadRulesSampleTags&ciu_szs=160x600%2C300x250%2C728x90&cust_params=adrule%3Dpremidpostwithpod&impl=s&gdfp_req=1&env=vp&ad_rule=1&vid=12345&cmsid=3601&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]";
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "DoubleClick Player API" );
 
@@ -39,7 +39,7 @@ function jsKalturaPlayerTest( videoId ){
 		asyncTest( "Validate ad tag url", function(){
 			
 			equal( 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/3510761/adRulesSampleTags&ciu_szs=160x600,300x250,728x90&cust_params=adrule=premidpostpodandbumpers&impl=s&gdfp_req=1&env=vp&ad_rule=1&vid=47570401&cmsid=481&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp',
-					kdp.evaluate('{doubleClick.requestedAdTagUrl}'),
+					vdp.evaluate('{doubleClick.requestedAdTagUrl}'),
 					"Url matches requested ad tag url");
 			
 			runPausePlayTests();
@@ -85,8 +85,8 @@ function jsKalturaPlayerTest( videoId ){
 				ok( true, "Recived doStop event");
 				start();
 			};
-			kdp.addJsListener( 'doStop', 'onDoStop' );
-			kdp.sendNotification('doStop');
+			vdp.addJsListener( 'doStop', 'onDoStop' );
+			vdp.sendNotification('doStop');
 		});
 	}
 }
@@ -115,7 +115,7 @@ Linear Ad</a>
 <script>
 	$('#adSwich a').click(function(){
                 atTagURL = 	( $(this).attr('data-adUrl') ) ;
-		kWidget.destroy('videoTarget');
+		vWidget.destroy('videoTarget');
         embed();
 
 		return false;
@@ -125,7 +125,7 @@ Linear Ad</a>
 
 <script>
     function embed() {
-        kWidget.featureConfig( {
+        vWidget.featureConfig( {
             'targetId': 'videoTarget' ,
             'wid': '_243342' ,
             'cache_st': 2 ,
@@ -135,7 +135,7 @@ Linear Ad</a>
                 'ForceFlashOnDesktopSafari':true,
                 'doubleClick': {
                     'plugin': true ,
-                    'path': 'http://cdnbakmi.kaltura.com/content/uiconf/ps/veria/kdp3.9.1/plugins/doubleclickPlugin.swf' ,
+                    'path': 'http://cdnbakmi.vidiun.com/content/uiconf/ps/veria/vdp3.9.1/plugins/doubleclickPlugin.swf' ,
                     'adTagUrl': atTagURL ,
                     'disableCompanionAds': false ,
 	                'htmlCompanions': 'testCompanionSquare:300:250;testCompanionLong:728:90',

@@ -4,6 +4,6 @@
         "dependencies": [
             "mw.AdTimeline"
         ],
-        "kalturaPluginName": "FreeWheel"
+        "vidiunPluginName": "FreeWheel"
     }
 }

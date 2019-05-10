@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'nativeCallout', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'nativeCallout', mw.VBasePlugin.extend({
 		defaultConfig: {
 			"storeUrl": null,
 			"mimeName": null,
@@ -10,10 +10,10 @@
 		},
 
 		IOS_STORE_URL: "http://itunes.apple.com/app/id919225951",
-		ANDROID_STORE_URL: "https://play.google.com/store/apps/details?id=com.kaltura.kalturaplayertoolkit",
-		IOS_MIME_NAME: "kalturaPlayerToolkit://",
-		ANDROID_MIME_NAME: "http://kalturaplayertoolkit.com",
-		APPLINK_URL_PREFIX: "https://kalturaplay.appspot.com/play?",
+		ANDROID_STORE_URL: "https://play.google.com/store/apps/details?id=com.vidiun.vidiunplayertoolkit",
+		IOS_MIME_NAME: "vidiunPlayerToolkit://",
+		ANDROID_MIME_NAME: "http://vidiunplayertoolkit.com",
+		APPLINK_URL_PREFIX: "https://vidiunplay.appspot.com/play?",
 
 		ANDROID_STORE_IMAGE: "store-android-nativecallout",
 		IOS_STORE_IMAGE: "store-ios-nativecallout",
@@ -37,7 +37,7 @@
 
 			if( !this.getConfig( "iframeUrl" ) ) {
 				var chromecastPluginFlashvar = "&flashvars[chromecast.plugin]=true";
-				this.setConfig( "iframeUrl", encodeURI( kWidget.iframeUrls[ this.embedPlayer.id ] + chromecastPluginFlashvar ) );
+				this.setConfig( "iframeUrl", encodeURI( vWidget.iframeUrls[ this.embedPlayer.id ] + chromecastPluginFlashvar ) );
 			}
 			
 			if (!this.getConfig("applinkPrefix")) {

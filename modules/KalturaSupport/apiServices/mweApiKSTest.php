@@ -1,6 +1,6 @@
 <?php
 /**
-* This demonstrates grabbing a admin KS for a particular action ( sview ) being granted to the current user / session.
+* This demonstrates grabbing a admin VS for a particular action ( sview ) being granted to the current user / session.
 */
 $wgMwEmbedApiServices['VSTest'] = 'mweApiVSTest';
 
@@ -9,7 +9,7 @@ require_once( dirname( __FILE__ ) . '../../Client/VidiunClientHelper.php' );
 
 class mweApiVSTest {
 	function run(){
-		global $wgKalturaUserSecret;
+		global $wgVidiunUserSecret;
 		// validate params ( hard coded to test a particular test file / account )
 		if( !isset( $_REQUEST['wid'] ) ||  $_REQUEST['wid'] != '_243342' ){
 			$this->outputError( 'bad widget param');
@@ -21,15 +21,15 @@ class mweApiVSTest {
 		}
 		$this->entryId = $_REQUEST['entry_id'];
 
-		// load library and get ks for given entry:
-		if( !isset( $wgKalturaUserSecret ) || ( $wgKalturaUserSecret == null ) ) {
-			$this->outputError( 'no user ks configured');
+		// load library and get vs for given entry:
+		if( !isset( $wgVidiunUserSecret ) || ( $wgVidiunUserSecret == null ) ) {
+			$this->outputError( 'no user vs configured');
 		}
 	
 		$client = $this->getClient();
-		$ks = $client->session->start ( $wgKalturaUserSecret, 
+		$vs = $client->session->start ( $wgVidiunUserSecret, 
 				$_SERVER['REMOTE_ADDR'], 
-				KalturaSessionType::USER, 
+				VidiunSessionType::USER, 
 				$this->partnerId, 
 				3600, // expire in one hour
 				"sview:{$this->entryId}" // give permision to "view" the entry

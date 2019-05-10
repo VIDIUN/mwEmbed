@@ -4,7 +4,7 @@
 ( function( mw, $ ) {
     "use strict";
 
-    mw.PluginManager.add( 'heartbeat', mw.KBasePlugin.extend({
+    mw.PluginManager.add( 'heartbeat', mw.VBasePlugin.extend({
 
         defaultConfig: {
             trackEventMonitor: null, // A callback function to track what's being tracked / sent to heartbeat
@@ -89,20 +89,20 @@
 
         setupHeartBeatPlugin: function(){
             // Setup the video-player plugin
-            this.videoPlayerPlugin = new ADB.va.plugins.videoplayer.VideoPlayerPlugin(new KalturaVideoPlayerPluginDelegate(this.getPlayer(), this.getConfig()));
+            this.videoPlayerPlugin = new ADB.va.plugins.videoplayer.VideoPlayerPlugin(new VidiunVideoPlayerPluginDelegate(this.getPlayer(), this.getConfig()));
             this.configureVideoPlayerPlugin();
             //Setup the AppMeasurement plugin.
-            this.adobeAnalyticsPlugin = new ADB.va.plugins.aa.AdobeAnalyticsPlugin(this.appMeasurement, new KalturaAdobeAnalyticsPluginDelegate());
+            this.adobeAnalyticsPlugin = new ADB.va.plugins.aa.AdobeAnalyticsPlugin(this.appMeasurement, new VidiunAdobeAnalyticsPluginDelegate());
             this.configureAdobeAnalyticsPlugin();
 
             // Setup the AdobeHeartbeat plugin.
-            this.heartbeatPlugin = new ADB.va.plugins.ah.AdobeHeartbeatPlugin(new KalturaHeartbeatPluginDelegate());
+            this.heartbeatPlugin = new ADB.va.plugins.ah.AdobeHeartbeatPlugin(new VidiunHeartbeatPluginDelegate());
             this.configureHeartbeatPlugin();
 
             var plugins = [this.videoPlayerPlugin, this.adobeAnalyticsPlugin, this.heartbeatPlugin];
 
             // Setup and configure the Heartbeat lib.
-            this.heartbeatLib = new ADB.va.Heartbeat(new KalturaHeartbeatDelegate(), plugins);
+            this.heartbeatLib = new ADB.va.Heartbeat(new VidiunHeartbeatDelegate(), plugins);
             this.configureHeartbeatLib();
         },
 

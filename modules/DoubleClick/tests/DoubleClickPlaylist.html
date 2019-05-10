@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 
 			module( "DoubleClick Player pause count" );
 
@@ -17,7 +17,7 @@
 			window["adsEnds"]=0;
 			window["playerPlayEnds"]=0;
 
-			var kdp = $('#' + videoId ).get(0);
+			var vdp = $('#' + videoId ).get(0);
 			asyncTest("Ad started playback", function(){
 				var _this = this;
 				window[ 'onPlay' ] = function(  ){
@@ -54,22 +54,22 @@
 
 				}
 
-				kalturaQunitWaitForPlayer(function(){
+				vidiunQunitWaitForPlayer(function(){
 					// Listen for ad start
-					kdp.addJsListener( 'play', 'onPlay' );
-					kdp.addJsListener( 'pause', 'onPause' );
-					kdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd' );
-					kdp.addJsListener( 'AdSupport_StartAdPlayback', 'onAdSupport_StartAdPlayback' );
-					kdp.addJsListener( 'AdSupport_EndAdPlayback', 'onAdSupport_EndAdPlayback' );
+					vdp.addJsListener( 'play', 'onPlay' );
+					vdp.addJsListener( 'pause', 'onPause' );
+					vdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd' );
+					vdp.addJsListener( 'AdSupport_StartAdPlayback', 'onAdSupport_StartAdPlayback' );
+					vdp.addJsListener( 'AdSupport_EndAdPlayback', 'onAdSupport_EndAdPlayback' );
 					// Send a play request:
-					kdp.sendNotification('doPlay');
+					vdp.sendNotification('doPlay');
 				});
 			});
 			start();
 
 		}
 	</script>
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <div id="myVideoTarget" style="width:800px;height:330px;float:left"></div>
@@ -78,7 +78,7 @@
 	mw.setConfig("forceMobileHTML5", true);
 
 
-	kWidget.embed({
+	vWidget.embed({
 
 		// Normal playlist (No DC plugin)
 		'cache_st': 99,
@@ -94,12 +94,12 @@
 				'autoContinue': true,
 				'autoPlay': false,
 				'autoInsert':true,
-				'kpl0Name': "test 4 item playlist",
-				'kpl0Url': 'http://www.kaltura.com/index.php/partnerservices2/executeplaylist?uid=&partner_id=243342&subp_id=24334200&format=8&ks={ks}&playlist_id=0_q79jh71b'
+				'vpl0Name': "test 4 item playlist",
+				'vpl0Url': 'http://www.vidiun.com/index.php/partnerservices2/executeplaylist?uid=&partner_id=243342&subp_id=24334200&format=8&vs={vs}&playlist_id=0_q79jh71b'
 			},
 			'doubleClick': {
 				'plugin': true,
-				'path': 'http://cdnbakmi.kaltura.com/content/uiconf/ps/veria/kdp3.9.1/plugins/doubleclickPlugin.swf',
+				'path': 'http://cdnbakmi.vidiun.com/content/uiconf/ps/veria/vdp3.9.1/plugins/doubleclickPlugin.swf',
 				'adTagUrl':"http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpreonly&cmsid=496&vid=short_onecue&correlator=[timestamp]",
 				'disableCompanionAds': false,
 				'postSequence': '0',

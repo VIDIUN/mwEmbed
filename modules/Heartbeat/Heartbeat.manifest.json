@@ -1,7 +1,7 @@
 {
   "heartbeat": {
     "label": "heartbeat",
-    "description": "Adobe Heartbeat analytics Kaltura implementation. Adobe Heartbeat supports a dynamic set of attributes based on events you want to track and data you want to associate with each event.",
+    "description": "Adobe Heartbeat analytics Vidiun implementation. Adobe Heartbeat supports a dynamic set of attributes based on events you want to track and data you want to associate with each event.",
     "attributes": {
       "visitorId": {
         "doc": "The Visitor ID service is required by video heartbeat. The Marketing Cloud visitor ID service provides a universal visitor ID across Marketing Cloud solutions.",

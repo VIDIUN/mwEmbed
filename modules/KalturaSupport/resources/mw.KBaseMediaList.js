@@ -4,7 +4,7 @@
 	 * Base screen component that allow to show overlay on top of the player
 	 **/
 
-	mw.KBaseMediaList = mw.KBaseComponent.extend({
+	mw.VBaseMediaList = mw.VBaseComponent.extend({
 
 		mediaList: [],
 		isDisabled: false,
@@ -46,9 +46,9 @@
 
 		setDefaults: function(){
 			this.baseThumbSettings = {
-				'partner_id': this.getPlayer().kpartnerid,
-				'uiconf_id': this.getPlayer().kuiconfid,
-				'entry_id': this.getPlayer().kentryid,
+				'partner_id': this.getPlayer().vpartnerid,
+				'uiconf_id': this.getPlayer().vuiconfid,
+				'entry_id': this.getPlayer().ventryid,
 				'width': this.getConfig( "thumbWidth" )
 			};
 			this._super( );
@@ -112,11 +112,11 @@
 			if( ! this.$el ){
 				var cssClass = (this.getConfig('cssClass') ? ' ' + this.getConfig('cssClass') : '');
 				this.$el = $( '<div />' )
-					.addClass( this.pluginName + cssClass + " medialistContainer unselectable k-" + this.getLayout() );
+					.addClass( this.pluginName + cssClass + " medialistContainer unselectable v-" + this.getLayout() );
 				if (this.getConfig("includeHeader")){
-					this.$el.append($( '<div />' ).addClass("k-medialist-header k-" + this.getLayout() ));
+					this.$el.append($( '<div />' ).addClass("v-medialist-header v-" + this.getLayout() ));
 				}
-				this.$el.append($( '<div />' ).addClass("k-chapters-container k-" + this.getLayout() ));
+				this.$el.append($( '<div />' ).addClass("v-chapters-container v-" + this.getLayout() ));
 				if (!this.getConfig('parent')){
 					if ( this.getConfig( 'containerPosition' ) === 'top' && !this.getConfig( 'onPage' ) ) {
 						this.getMedialistContainer().prepend(this.$el);
@@ -128,10 +128,10 @@
 			return this.$el;
 		},
 		getMedialistComponent: function(){
-			return this.getComponent().find(".k-chapters-container");
+			return this.getComponent().find(".v-chapters-container");
 		},
 		getMedialistHeaderComponent: function(){
-			return this.getComponent().find(".k-medialist-header");
+			return this.getComponent().find(".v-medialist-header");
 		},
 		// set the play list container according to the selected position
 		getMedialistContainer: function(){
@@ -143,9 +143,9 @@
 						var cssLink = this.getConfig('cssFileName');
 						if (cssLink) {
 							//Scroller CSS
-							$( 'head', window.parent.document ).append( '<link type="text/css" rel="stylesheet" href="' + kWidget.getPath() + this.getConfig("scrollerCssPath") + '"/>' );
+							$( 'head', window.parent.document ).append( '<link type="text/css" rel="stylesheet" href="' + vWidget.getPath() + this.getConfig("scrollerCssPath") + '"/>' );
 							//Plugin CSS
-							cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : kWidget.getPath() + cssLink; // support external CSS links
+							cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : vWidget.getPath() + cssLink; // support external CSS links
 							$( 'head', window.parent.document ).append( '<link type="text/css" rel="stylesheet" href="' + cssLink + '"/>' );
 						} else {
 							mw.log( "Error: "+ this.pluginName +" could not find CSS link" );
@@ -167,7 +167,7 @@
 						if ( this.getConfig( 'includeInLayout' ) === false ) {
 							this.$mediaListContainer.hide();
 						}
-						this.$mediaListContainer.addClass( "k-" + this.getLayout() );
+						this.$mediaListContainer.addClass( "v-" + this.getLayout() );
 					} catch ( e ) {
 						mw.log( "Error: "+ this.pluginName +" could not access parent iframe" );
 					}
@@ -393,7 +393,7 @@
 		},
 		getThumbUrl: function(item) {
 			var time = item.thumbOffset || item.startTime;
-			var thumbUrl = kWidget.getKalturaThumbUrl(
+			var thumbUrl = vWidget.getVidiunThumbUrl(
 				$.extend( {}, this.baseThumbSettings, {
 					'vid_sec': parseInt( time / 1000 )
 				} )
@@ -408,7 +408,7 @@
 		},
 		getThumRotatorUrl: function(){
 			var _this = this;
-			var imageSlicesUrl = kWidget.getKalturaThumbUrl(
+			var imageSlicesUrl = vWidget.getVidiunThumbUrl(
 				$.extend( {}, this.baseThumbSettings, {
 					'vid_slices': _this.getSliceCount()
 				})
@@ -491,7 +491,7 @@
 				});
 			if (this.getConfig('thumbnailRotator')) {
 				mediaBoxes
-					.off( 'mouseenter mouseleave', '.k-thumb' )
+					.off( 'mouseenter mouseleave', '.v-thumb' )
 					.on( {
 						mouseenter: function () {
 							var index = $(this).attr( 'data-mediaBox-index' );
@@ -503,7 +503,7 @@
 								'height': item.thumbnail.height,
 								'background-image': 'url(\'' + item.thumbnail.rotatorUrl + '\')',
 								'background-position': _this.getThumbSpriteOffset( item.thumbnail.width, ( item.startTime ) ),
-								// fix aspect ratio on bad Kaltura API returns
+								// fix aspect ratio on bad Vidiun API returns
 								'background-size': ( item.thumbnail.width * _this.getSliceCount() ) + 'px 100%'
 							} );
 
@@ -538,7 +538,7 @@
 									'background-image': 'url(\'' + item.thumbnail.url + '\')'
 								} );
 						}
-					}, ".k-thumb" );
+					}, ".v-thumb" );
 			}
 		},
 		mediaClicked: function(){
@@ -554,8 +554,8 @@
 			return this.getComponent().find( "li[data-mediaBox-index='" + this.selectedMediaItemIndex + "']" );
 		},
 		updateActiveItemDuration: function(duration){
-			this.getActiveItem().find('.k-duration #mediaItemDuration').text(
-				kWidget.seconds2npt( duration )
+			this.getActiveItem().find('.v-duration #mediaItemDuration').text(
+				vWidget.seconds2npt( duration )
 			);
 		},
 		getThumbSpriteOffset: function( thumbWidth, time ){
@@ -590,9 +590,9 @@
 				this.mediaItemVisible = this.calculateVisibleScrollItems();
 				var speed = mw.isTouchDevice() ? 100: 200;
 				// Add scrolling carousel to clip list ( once dom sizes are up-to-date )
-				$cc.find( '.k-carousel' ).jCarouselLite( {
-					btnNext: '.k-next',
-					btnPrev: '.k-prev',
+				$cc.find( '.v-carousel' ).jCarouselLite( {
+					btnNext: '.v-next',
+					btnPrev: '.v-prev',
 					visible: this.mediaItemVisible,
 					mouseWheel: true,
 					circular: false,
@@ -604,10 +604,10 @@
 						$(_this.embedPlayer).trigger("scrollEnd");
 					});
 				$cc.find('ul').width((this.getMediaItemBoxWidth()+1)*this.mediaList.length);
-				$cc.find('.k-carousel').css('width', $cc.width() );
+				$cc.find('.v-carousel').css('width', $cc.width() );
 				if (this.getConfig('fixedControls')){
 					var width = $cc.width() - this.getConfig("horizontalControlsWidth") * 2;
-					$cc.find('.k-carousel').css("margin-left",this.getConfig("horizontalControlsWidth")).width(width);
+					$cc.find('.v-carousel').css("margin-left",this.getConfig("horizontalControlsWidth")).width(width);
 				}
 			}
 		},
@@ -663,43 +663,43 @@
 		addScrollUiComponents: function(){
 			var $cc = this.getMedialistComponent();
 			$cc.find('ul').wrap(
-				$( '<div>' ).addClass('k-carousel')
+				$( '<div>' ).addClass('v-carousel')
 			);
 			// Add scroll buttons
-			$cc.find('.k-carousel').before(
+			$cc.find('.v-carousel').before(
 				$( '<a />' )
-					.addClass( "k-scroll k-prev" )
+					.addClass( "v-scroll v-prev" )
 			);
-			$cc.find('.k-carousel').after(
+			$cc.find('.v-carousel').after(
 				$( '<a />' )
-					.addClass( "k-scroll k-next" )
+					.addClass( "v-scroll v-next" )
 			);
 			if (this.getConfig('fixedControls')){
-				$cc.find('.k-prev,.k-next').addClass("fixed");
+				$cc.find('.v-prev,.v-next').addClass("fixed");
 			}else{
 				// Add media item hover to hide show play buttons:
-				var inKBtn = false;
+				var inVBtn = false;
 				var inContainer = false;
 				var checkHideBtn = function(){
 					setTimeout(function(){
-						if( !inKBtn && !inContainer ){
-							$cc.find('.k-prev,.k-next').animate({'opacity':0});
+						if( !inVBtn && !inContainer ){
+							$cc.find('.v-prev,.v-next').animate({'opacity':0});
 						}
 					},0)
 				}
 				var showBtn = function(){
-					$cc.find('.k-prev,.k-next').animate({'opacity':1});
+					$cc.find('.v-prev,.v-next').animate({'opacity':1});
 				}
-				// check for knext
-				$cc.find('.k-prev,.k-next')
+				// check for vnext
+				$cc.find('.v-prev,.v-next')
 					.hover(function(){
 						showBtn();
-						inKBtn = true;
+						inVBtn = true;
 					},function(){
-						inKBtn = false;
+						inVBtn = false;
 						checkHideBtn();
 					})
-				$cc.find('.k-carousel').hover( function(){
+				$cc.find('.v-carousel').hover( function(){
 					showBtn();
 					inContainer = true;
 				}, function(){
@@ -707,7 +707,7 @@
 					checkHideBtn();
 				})
 				// hide the arrows to start with ( with an animation so users know they are there )
-				$cc.find('.k-prev,.k-next').animate({'opacity':0});
+				$cc.find('.v-prev,.v-next').animate({'opacity':0});
 			}
 		},
 		calculateVisibleScrollItems: function(){
@@ -718,7 +718,7 @@
 			// Get rough estimates for number of media items visible.
 			if( this.getLayout() == 'horizontal' ){
 				// calculate number of visible media items
-				mediaItemVisible = Math.floor( $cc.find( '.k-carousel' ).width() / dimensions.largestBoxWidth );
+				mediaItemVisible = Math.floor( $cc.find( '.v-carousel' ).width() / dimensions.largestBoxWidth );
 			} else {
 				// calculate number of visible for vertical media items
 				mediaItemVisible = Math.floor( $cc.height() / dimensions.largestBoxHeight );

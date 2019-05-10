@@ -6,7 +6,7 @@
 	 * http://support.youbora.com/hc/en-us/article_attachments/201042582/Youbora_Analytics_-_Player_Plugin_Open_REST_API_-_v2.1.0.pdf
 	 */
 	
-	mw.PluginManager.add( 'youbora', mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'youbora', mw.VBasePlugin.extend( {
 
 		defaultConfig: {
 			"contentMetadata": {
@@ -26,13 +26,13 @@
 			},
 			"userId": null,
 			"youboraVersion":'2.0.0',
-			// by default configured against the "kaltura" house account
-			"accountName": 'kaltura',
+			// by default configured against the "vidiun" house account
+			"accountName": 'vidiun',
 			"trackEventMonitor": null,
 			// default custom params: 
 			"param1": "{playerStatusProxy.loadTime}",
 			// player id
-			"param2": "{configProxy.kw.uiconfid}"
+			"param2": "{configProxy.vw.uiconfid}"
 		},
 		// the view index is incremented as users views multiple clips in a given play session. 
 		// set to -1 by default to have always increment "start" start at zero.
@@ -171,7 +171,7 @@
 			var paramObj = {};
 			for( var i = 1; i < 10; i++ ){
 				// see if the param config is populated ( don't use getConfig evaluated value, as it could evaluate to false ) 
-				if( this.embedPlayer.getRawKalturaConfig( "youbora", "param" + i ) ){
+				if( this.embedPlayer.getRawVidiunConfig( "youbora", "param" + i ) ){
 					paramObj[ "param" + i ] = this.getConfig( "param" + i );
 				}
 			}
@@ -305,7 +305,7 @@
 					'bitrate': _this.embedPlayer.mediaElement.selectedSource.getBitrate() || -1,
 					'time': _this.embedPlayer.currentTime,
 					//'totalBytes':"0", // value is only sent along with the dataType parameter. If the bitrate parameter is sent, then this one is not needed.
-					//'dataType': "0", // Kaltura does not really do RTMP streams any more. 
+					//'dataType': "0", // Vidiun does not really do RTMP streams any more. 
 					'diffTime': new Date().getTime() - _this.previusPingTime
 					// 'nodeHost' //String that indicates the CDNâ Node Host
 				});
@@ -361,7 +361,7 @@
 			return parms;
 		},
 		getPluginVersion:function(){
-			var playerVersion = 'kaltura-player-v' + MWEMBED_VERSION;
+			var playerVersion = 'vidiun-player-v' + MWEMBED_VERSION;
 			return this.getConfig('youboraVersion') + '_' + playerVersion;
 		},
 		hanldeQueue: function(){

@@ -1,12 +1,12 @@
 (function (mw, $, ko) {
     "use strict";
-    mw.KQnaModule = function (embedPlayer,qnaPlugin,qnaService) {
+    mw.VQnaModule = function (embedPlayer,qnaPlugin,qnaService) {
         return this.init(embedPlayer,qnaPlugin,qnaService);
     };
-    if (!(mw.KQnaModule.prototype = {
+    if (!(mw.VQnaModule.prototype = {
 
             // The bind postfix:
-            bindPostfix: '.KQnaModule',
+            bindPostfix: '.VQnaModule',
             qnaPlugin: null,
             qnaService: null,
             currentTimeInterval: null,

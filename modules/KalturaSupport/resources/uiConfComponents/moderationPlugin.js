@@ -9,11 +9,11 @@
 		 	"align": "right",
 		 	"showTooltip": true,
 
-		 	"tooltip": gM("ks-MODERATION-REPORT"),
-		 	"reasonSex": gM("ks-MODERATION-REASON-SEX"),
-		 	"reasonViolence": gM("ks-MODERATION-REASON-VIOLENCE"),
-		 	"reasonHarmful": gM("ks-MODERATION-REASON-HARMFUL"),
-		 	"reasonSpam": gM("ks-MODERATION-REASON-SPAM")
+		 	"tooltip": gM("vs-MODERATION-REPORT"),
+		 	"reasonSex": gM("vs-MODERATION-REASON-SEX"),
+		 	"reasonViolence": gM("vs-MODERATION-REASON-VIOLENCE"),
+		 	"reasonHarmful": gM("vs-MODERATION-REASON-HARMFUL"),
+		 	"reasonSpam": gM("vs-MODERATION-REASON-SPAM")
 		},
 
 		drawModal: function() {
@@ -47,13 +47,13 @@
 				$('<div/>' ).append(
 				$('<button />')
 					.addClass( 'ui-state-default ui-corner-all copycode' )
-					.text( gM("ks-MODERATION-CANCEL") )
+					.text( gM("vs-MODERATION-CANCEL") )
 					.click(function(){
 						_this.closeModal();
 					}),
 				$( '<button />' )
 					.addClass( 'ui-state-default ui-corner-all copycode' )
-					.text( gM("ks-MODERATION-SUBMIT") )
+					.text( gM("vs-MODERATION-SUBMIT") )
 					.click(function() {
 						_this.submitFlag({
 							'flagType': $( '#flagType' ).val(),
@@ -99,11 +99,11 @@
 				_this.getPlayer().hideSpinner();
 				var $flagScreen = $( '<div />' )
 					.append(
-						$( '<h3 />' ).text( gM("ks-MODERATION-THANKS") ),
+						$( '<h3 />' ).text( gM("vs-MODERATION-THANKS") ),
 						$( '<div />' ).append(
 							$( '<button />' )
 								.addClass( 'ui-state-default ui-corner-all copycode' )
-								.text( gM("ks-MODERATION-DONE") )
+								.text( gM("vs-MODERATION-DONE") )
 								.click(function() {
 									_this.getPlayer().triggerHelper( 'onEnableKeyboardBinding' );
 									_this.closeModal();

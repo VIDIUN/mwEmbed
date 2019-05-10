@@ -54,11 +54,11 @@
                 mwEmbedPath = window.location.protocol + mwEmbedPath.substring( mwEmbedPath.indexOf(":") + 1);
             }
 
-            var kdpPath = mwEmbedPath + 'modules/EmbedPlayer/binPlayers/kaltura-player/kdp3.swf';
-            //var kdpPath = "http://localhost/chromeless-kdp/KDP3/bin-debug/kdp3.swf";
+            var vdpPath = mwEmbedPath + 'modules/EmbedPlayer/binPlayers/vidiun-player/vdp3.swf';
+            //var vdpPath = "http://localhost/chromeless-vdp/VDP3/bin-debug/vdp3.swf";
 
-            if (mw.getConfig('forceNoKdpCache')) {
-                kdpPath += '?' + new Date().getTime();
+            if (mw.getConfig('forceNoVdpCache')) {
+                vdpPath += '?' + new Date().getTime();
             }
 
             // check for ForceFlashOnDesktopSafari and if so set interval in order to try to detect flash player (run 3 times)
@@ -80,7 +80,7 @@
                         _this.playerElement = $( '#' + playerId )[0];
 
                         //if this is the target object: add event listeners
-                        //if a different object is the target: it should take care of its listeners (such as embedPlayerKPlayer)
+                        //if a different object is the target: it should take care of its listeners (such as embedPlayerVPlayer)
                         if ( !_this.targetObj ) {
                             _this.targetObj = _this;
 
@@ -123,7 +123,7 @@
             flashembed( containerId,
                 {
                     id :				playerId,
-                    src : 				kdpPath,
+                    src : 				vdpPath,
                     bgcolor :			"#000000",
                     allowNetworking : 	"all",
                     version :			[10,0],
@@ -141,7 +141,7 @@
             if(!this.flashDetected && this.detectFlashIntervalLoops==0 ){
                 mw.log("PlayerElementFlash::detectFlash::failed to detecting Flash Player");
                 clearInterval(this.detectFlashInterval); // stop trying to detect flash
-                failCallback(); //trigger fail callback -> goes to the EmbeadPlayerKplayer in order to displayAlert with ks-FLASH-BLOCKED message
+                failCallback(); //trigger fail callback -> goes to the EmbeadPlayerVplayer in order to displayAlert with vs-FLASH-BLOCKED message
             }
             this.detectFlashIntervalLoops--;
         },
@@ -188,10 +188,10 @@
 		removeJsListener: function( eventName, methodName ) {
 			if ( this.playerElement ) {
 				mw.log( 'PlayerElementFlash:: unbindPlayerFunction:' + eventName );
-				// The kaltura kdp can only call a global function by given name
-				var gKdpCallbackName = 'kdp_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
+				// The vidiun vdp can only call a global function by given name
+				var gVdpCallbackName = 'vdp_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
 				// Remove the listener ( if it exists already )
-				this.playerElement.removeJsListener( eventName, gKdpCallbackName );
+				this.playerElement.removeJsListener( eventName, gVdpCallbackName );
 			}
 		},
 		getCurrentTime: function() {

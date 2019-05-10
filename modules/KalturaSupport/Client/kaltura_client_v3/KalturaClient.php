@@ -2823,15 +2823,15 @@ class VidiunFlavorAssetService extends VidiunServiceBase
 	 * @param bool $forceProxy 
 	 * @return string
 	 */
-	function getUrl($id, $storageId = null, $forceProxy = false, KalturaFlavorAssetUrlOptions $options = null)
+	function getUrl($id, $storageId = null, $forceProxy = false, VidiunFlavorAssetUrlOptions $options = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "storageId", $storageId);
-		$this->client->addParam($kparams, "forceProxy", $forceProxy);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "storageId", $storageId);
+		$this->client->addParam($vparams, "forceProxy", $forceProxy);
 		if ($options !== null)
-			$this->client->addParam($kparams, "options", $options->toParams());
-		$this->client->queueServiceActionCall("flavorasset", "getUrl", $kparams);
+			$this->client->addParam($vparams, "options", $options->toParams());
+		$this->client->queueServiceActionCall("flavorasset", "getUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();

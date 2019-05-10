@@ -39,9 +39,9 @@ if( !window.QUnit ){
 	);
 	// check if we should enable google analytics: 
 	// TODO remove dependency on mw
-	if( typeof mw != 'undefined' && mw.getConfig( 'Kaltura.PageGoogleAnalytics' ) ) {
+	if( typeof mw != 'undefined' && mw.getConfig( 'Vidiun.PageGoogleAnalytics' ) ) {
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', mw.getConfig( 'Kaltura.PageGoogleAnalytics' )]);
+		_gaq.push(['_setAccount', mw.getConfig( 'Vidiun.PageGoogleAnalytics' )]);
 		_gaq.push(['_trackPageview']);
 
 		(function() {
@@ -84,32 +84,32 @@ try{
 	// maybe not in the right env.
 }
 // clock player render time
-var kdocPlayerStartTime = new Date().getTime();
-if( typeof kWidget != 'undefined' && kWidget.addReadyCallback ){
-	var kdocTimePerPlayer = {};
-	kWidget.addReadyCallback( function( pId ){
+var vdocPlayerStartTime = new Date().getTime();
+if( typeof vWidget != 'undefined' && vWidget.addReadyCallback ){
+	var vdocTimePerPlayer = {};
+	vWidget.addReadyCallback( function( pId ){
 		if( ! $( '#' + pId ).length ){
 			return ;
 		}
-		$( '#' + pId )[0].kBind("playerReady.pTimeReady", function(){
-			if( kdocTimePerPlayer[ pId] ){
+		$( '#' + pId )[0].vBind("playerReady.pTimeReady", function(){
+			if( vdocTimePerPlayer[ pId] ){
 				return ;
 			}
 			alreadyRun = true;
-			var readyTime = ( new Date().getTime() - kdocPlayerStartTime )/1000;
+			var readyTime = ( new Date().getTime() - vdocPlayerStartTime )/1000;
 			var fileName = location.pathname.split('/').pop();
 			// trigger the google track event if set:: 
 			if( window['_gaq'] ){
 				// send feature page load time event:
 				_gaq.push(['_trackEvent', 'FeaturePage', 'PlayerLoadTimeMs', fileName, readyTime*1000]);
 			}
-			// note kUnbind seems to unbind all mediaReady
-			//$( '#' + pId )[0].kUnbind(".pTimeReady");
-			kdocTimePerPlayer[ pId ] = ( new Date().getTime() - kdocPlayerStartTime )/1000;
-			// note kUnbind seems to unbind all mediaReady
-			$( '#' + pId )[0].kUnbind(".pTimeReady");
-			$('body').append( '<div class="kdocPlayerRenderTime" style="clear:both;"><span style="font-size:11px;">' + pId + ' ready in: <i>' + 
-					kdocTimePerPlayer[ pId ] + '</i> seconds</span></div>');
+			// note vUnbind seems to unbind all mediaReady
+			//$( '#' + pId )[0].vUnbind(".pTimeReady");
+			vdocTimePerPlayer[ pId ] = ( new Date().getTime() - vdocPlayerStartTime )/1000;
+			// note vUnbind seems to unbind all mediaReady
+			$( '#' + pId )[0].vUnbind(".pTimeReady");
+			$('body').append( '<div class="vdocPlayerRenderTime" style="clear:both;"><span style="font-size:11px;">' + pId + ' ready in: <i>' + 
+					vdocTimePerPlayer[ pId ] + '</i> seconds</span></div>');
 			if( document.URL.indexOf( 'noparent=') === -1 && parent && parent.sycnIframeContentHeight ){
 				parent.sycnIframeContentHeight();
 			}

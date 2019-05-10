@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for multi DRM
+ * The "vidiun player" embedPlayer interface for multi DRM
  */
 (function (mw, $) {
 	"use strict";
@@ -252,14 +252,14 @@
 			}
 		},
 		getDrmConfig: function(){
-			var drmConfig = this.getKalturaConfig('multiDrm');
+			var drmConfig = this.getVidiunConfig('multiDrm');
 			//Check for user defined DRM server else use uDRM
-			var overrideDrmServerURL = mw.getConfig('Kaltura.overrideDrmServerURL');
+			var overrideDrmServerURL = mw.getConfig('Vidiun.overrideDrmServerURL');
 			if (overrideDrmServerURL) {
 				drmConfig.widevineLicenseServerURL = overrideDrmServerURL;
 				drmConfig.playReadyLicenseServerURL = overrideDrmServerURL;
 			} else {
-				var licenseBaseUrl = mw.getConfig('Kaltura.UdrmServerURL');
+				var licenseBaseUrl = mw.getConfig('Vidiun.UdrmServerURL');
 				if (!licenseBaseUrl) {
 					this.log('Error:: failed to retrieve UDRM license URL ');
 				}
@@ -269,7 +269,7 @@
 				drmConfig.widevineLicenseServerURL = licenseBaseUrl + "/cenc/widevine/license?" + licenseData;
 				drmConfig.playReadyLicenseServerURL = licenseBaseUrl + "/cenc/playready/license?" + licenseData;
 			}
-			drmConfig.assetId = this.kentryid;
+			drmConfig.assetId = this.ventryid;
 			drmConfig.variantId = this.mediaElement.selectedSource && this.mediaElement.selectedSource.getAssetId();
 			var config = {};
 
@@ -862,7 +862,7 @@
 		},
 
 		/**
-		 * onPlay function callback from the kaltura flash player directly call the
+		 * onPlay function callback from the vidiun flash player directly call the
 		 * parent_play
 		 */
 		_onplay: function () {

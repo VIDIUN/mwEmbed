@@ -1,6 +1,6 @@
 {
     "mw.GoogleAnalytics": {
         "scripts": "resources/mw.GoogleAnalytics.js",
-        "kalturaPluginName": "googleAnalytics"
+        "vidiunPluginName": "googleAnalytics"
     }
 }

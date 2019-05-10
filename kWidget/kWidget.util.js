@@ -120,13 +120,13 @@
         var sliceIndex = Math.ceil( sliceCount * perc );
         return sliceIndex;
     };
-	kWidget.sanitize = function( str ){
+	vWidget.sanitize = function( str ){
 		if (str){
 			str = str.replace(/<(?:.|\n)*?>/gm, '');
 		}
 		return str;
 	};
-	kWidget.getHashParam = function(key) {
+	vWidget.getHashParam = function(key) {
 		var hash = window.location.hash;
 		if ( hash ){
 			var hashParams = hash.split("&");

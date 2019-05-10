@@ -1,17 +1,17 @@
 {
     "tvpapiGetLicensedLinks": {
         "scripts": "resources/getLicensedLinks.js",
-        "dependencies": ["mw.KBasePlugin"] ,
-        "kalturaPluginName": "tvpapiGetLicensedLinks"
+        "dependencies": ["mw.VBasePlugin"] ,
+        "vidiunPluginName": "tvpapiGetLicensedLinks"
     },
     "tvpapiGetLicenseData": {
         "scripts": "resources/getLicenseData.js",
-        "dependencies": ["mw.KBasePlugin"],
-        "kalturaPluginName": "tvpapiGetLicenseData"
+        "dependencies": ["mw.VBasePlugin"],
+        "vidiunPluginName": "tvpapiGetLicenseData"
     },
     "tvpapiAnalytics": {
         "scripts": "resources/tvpapiAnalytics.js",
-        "dependencies": ["mw.KBasePlugin"],
-        "kalturaPluginName": "tvpapiAnalytics"
+        "dependencies": ["mw.VBasePlugin"],
+        "vidiunPluginName": "tvpapiAnalytics"
     }
 }

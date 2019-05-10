@@ -6,7 +6,7 @@
     "EmbedPlayer.EnableIpadHTMLControls": {
         "type": "boolean",
         "doc": "Set to false to use native device controls on iPad. By default this is true. We use HTML controls on iPad.",
-        "description": "The Kaltura player supports configuring native controls on iPad."
+        "description": "The Vidiun player supports configuring native controls on iPad."
     },
     "EmbedPlayer.LiveCuepoints": {
         "type": "boolean",
