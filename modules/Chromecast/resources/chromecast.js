@@ -14,7 +14,7 @@
 			'order': 7,
 			'visible': false,
 			'align': "right",
-			'applicationID': "C43947A1", // DB6462E9: Chromecast default receiver, C43947A1: Kaltura custom receiver supporting DRM, HLS and smooth streaming
+			'applicationID': "C43947A1", // DB6462E9: Chromecast default receiver, C43947A1: Vidiun custom receiver supporting DRM, HLS and smooth streaming
 			'showTooltip': true,
 			'tooltip': gM('mwe-chromecast-chromecast'),
 			'title': gM('mwe-chromecast-chromecast'),
@@ -259,7 +259,7 @@
 			if ( this.getConfig("debugReceiver") ){
 				this.sendMessage({'type': 'show', 'target': 'debug'});
 			}
-			// set kaltura logo if needed
+			// set vidiun logo if needed
 			if ( this.getConfig("logoUrl") && this.getConfig("receiverLogo") ){
 				this.sendMessage({'type': 'setLogo', 'logo': this.getConfig("logoUrl")});
 			}
@@ -274,7 +274,7 @@
 				this.sendMessage({'type': 'license', 'value': this.drmConfig.contextData.widevineLicenseServerURL});
 				this.log("set license URL to: " + this.drmConfig.contextData.widevineLicenseServerURL);
 			}
-			if (this.getConfig("useKalturaPlayer") === true){
+			if (this.getConfig("useVidiunPlayer") === true){
 				var flashVars = this.getFlashVars();
 				this.sendMessage({'type': 'embed', 'lib': kWidget.getPath(), 'publisherID': this.embedPlayer.kwidgetid.substr(1), 'uiconfID': this.embedPlayer.kuiconfid, 'entryID': this.embedPlayer.kentryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars});
 				this.displayMessage(gM('mwe-chromecast-loading'));
@@ -350,9 +350,9 @@
 				fv['proxyData'] = proxyData;
 			}
 
-			// add support for passing ks
-			if ( this.embedPlayer.getFlashvars("ks") ){
-				fv["ks"] = this.embedPlayer.getFlashvars("ks");
+			// add support for passing vs
+			if ( this.embedPlayer.getFlashvars("vs") ){
+				fv["vs"] = this.embedPlayer.getFlashvars("vs");
 			}
 			return fv;
 		},
@@ -463,7 +463,7 @@
 						_this.embedPlayer.play();
 					}
 					_this.updateScreen();
-					// hide kaltura logo
+					// hide vidiun logo
 					if ( _this.getConfig("receiverLogo") ){
 						_this.sendMessage({'type': 'hide', 'target': 'logo'});
 					}
@@ -684,7 +684,7 @@
 					_this.embedPlayer.play();
 				},1000);
 			}else{
-				if ( this.embedPlayer.selectedPlayer.library == "Kplayer" ){
+				if ( this.embedPlayer.selectedPlayer.library == "Vplayer" ){
 					// since we don't have the canSeek promise, we need to reload the media on playerReady, wait for it to load and then preform the seek operation. Add a timeout as seek is not always available on the mediaLoaded event
 					this.bind("playerReady.stopCast", function(){
 						_this.unbind("playerReady.stopCast");

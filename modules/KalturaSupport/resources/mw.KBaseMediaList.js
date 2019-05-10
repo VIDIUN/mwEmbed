@@ -55,8 +55,8 @@
 				'entry_id': this.getPlayer().ventryid,
 				'width': this.getConfig( "thumbWidth" )
 			};
-			if ( this.getPlayer().getFlashvars( 'loadThumbnailWithKs' )  ){
-				this.baseThumbSettings[ 'ks' ] = this.getPlayer().getFlashvars('ks');
+			if ( this.getPlayer().getFlashvars( 'loadThumbnailWithVs' )  ){
+				this.baseThumbSettings[ 'vs' ] = this.getPlayer().getFlashvars('vs');
 			}
 		},
 		_addBindings: function () {

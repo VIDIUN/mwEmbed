@@ -108,7 +108,7 @@
 				return (cuePoint.cuePointType == 'thumbCuePoint.Thumb');
 			});
 			var loadThumbnailWithReferrer = this.embedPlayer.getFlashvars( 'loadThumbnailWithReferrer' );
-			var referrer = window.kWidgetSupport.getHostPageUrl();
+			var referrer = window.vWidgetSupport.getHostPageUrl();
 			//Create request data only for cuepoints that have assetId
 			$.each(thumbCuePoint, function (index, item) {
 				// for some thumb cue points, assetId may be undefined from the API.
@@ -336,7 +336,7 @@
 				"monitorEvent" + this.bindPostfix +
 				" seeked" + this.bindPostfix +
 				" onplay" + this.bindPostfix +
-				" KalturaSupport_ThumbCuePointsUpdated" + this.bindPostfix,
+				" VidiunSupport_ThumbCuePointsUpdated" + this.bindPostfix,
 				function (e) {
 					var currentTime = embedPlayer.getPlayerElementTime() * 1000;
 					//In case of seeked the current cuepoint needs to be updated to new seek time before
