@@ -145,7 +145,7 @@
                             })();
                         }
                     }
-                    flashvars.KalturaHLS = hlsPluginConfiguration;
+                    flashvars.VidiunHLS = hlsPluginConfiguration;
                     flashvars.streamerType = _this.streamerType = 'hls';
 				}
 

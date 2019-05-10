@@ -26,8 +26,8 @@
             init: function (embedPlayer,quizPlugin) {
                 var _this = this;
 
-                _this.KIVQApi = new mw.KIVQApi(embedPlayer);
-                _this.KIVQScreenTemplate = new mw.KIVQScreenTemplate(embedPlayer);
+                _this.VIVQApi = new mw.VIVQApi(embedPlayer);
+                _this.VIVQScreenTemplate = new mw.VIVQScreenTemplate(embedPlayer);
 
                 this.destroy();
                 this.embedPlayer = embedPlayer;
@@ -540,7 +540,7 @@
                 }
                 mw.log(errMsg, data);
                 _this.quizPlugin.ivqShowScreen();
-                _this.KIVQScreenTemplate.tmplErrorScreen();
+                _this.VIVQScreenTemplate.tmplErrorScreen();
                 $(".sub-text").html(gM('mwe-quiz-err-msg'));
                 _this.isErr = true;
             },

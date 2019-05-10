@@ -150,8 +150,8 @@
 	},
    "id3Tag": {
      "scripts": "resources/mw.id3Tag.js",
-     "dependencies": "mw.KBasePlugin",
-     "kalturaLoad": "always"
+     "dependencies": "mw.VBasePlugin",
+     "vidiunLoad": "always"
    },
 	"controlBarContainer": {
 		"scripts": "components/controlBarContainer.js",
@@ -190,8 +190,8 @@
 	},
     "pipBtn":{
       "scripts": "components/pipBtn.js",
-      "dependencies": "mw.KBaseComponent",
-      "kalturaPluginName": "pipBtn"
+      "dependencies": "mw.VBaseComponent",
+      "vidiunPluginName": "pipBtn"
     },
 	"playPauseBtn": {
 		"scripts": "components/playPauseBtn.js",

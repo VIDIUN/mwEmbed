@@ -3,7 +3,7 @@
  */
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'pipBtn', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'pipBtn', mw.VBaseComponent.extend({
 
 			defaultConfig: {
 				'parent': 'controlsContainer',

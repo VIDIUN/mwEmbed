@@ -256,9 +256,9 @@ $wgAllowedVars = "inlineScript";
 $wgAllowedVarsKeyPartials = "onPageJs,onPageCss,IframeCustomPluginJs,IframeCustomPluginCss";
 $wgAllowedPluginVars = "plugin,templatePath,templates,iframeHTML5Js,iframeHTML5Css,loadInIframe";
 $wgAllowedPluginVarsValPartials = "{html5ps}";
-// Kaltura cache TTL value in unix time for dynamic embed local storage caching of kWidget, default is 10 minutes
+// Vidiun cache TTL value in unix time for dynamic embed local storage caching of vWidget, default is 10 minutes
 $wgCacheTTL = (10 * 60 * 1000);
-// Kaltura max cache entries, limit max available cached entries per domain to avoid over populating localStorage
+// Vidiun max cache entries, limit max available cached entries per domain to avoid over populating localStorage
 $wgMaxCacheEntries = 1;
 
 /*********************************************************
@@ -275,18 +275,18 @@ if( is_file( $wgLocalSettingsFile ) ){
 // if Manifest urls should be used:
 $wgMwEmbedModuleConfig['Vidiun.UseManifestUrls'] = $wgVidiunUseManifestUrls;
 //Add license server config:
-global $wgKalturaLicenseServerUrl, $wgKalturaUdrmLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.LicenseServerURL'] = $wgKalturaLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.UdrmServerURL'] = $wgKalturaUdrmLicenseServerUrl;
+global $wgVidiunLicenseServerUrl, $wgVidiunUdrmLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.LicenseServerURL'] = $wgVidiunLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.UdrmServerURL'] = $wgVidiunUdrmLicenseServerUrl;
 
-// Add Kaltura api services: ( should be part of kaltura module config)
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiKSTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiUiConfJs.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiSleepTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweFeaturesList.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiLanguageSupport.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweUpgradePlayer.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiGetLicenseData.php' );
+// Add Vidiun api services: ( should be part of vidiun module config)
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiVSTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiUiConfJs.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiSleepTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweFeaturesList.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiLanguageSupport.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweUpgradePlayer.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiGetLicenseData.php' );
 include_once( realpath( dirname( __FILE__ ) )  . '/../studio/studioService.php');
 /**
  * Extensions should register foreign module sources here. 'local' is a

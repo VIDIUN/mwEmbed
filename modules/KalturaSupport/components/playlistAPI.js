@@ -697,7 +697,7 @@
 				if (this.playlistInterfaceHeight){
 					$( ".playlistInterface").height(this.playlistInterfaceHeight);
 				}
-				this.renderMediaList();  // set the media list in KBaseMediaList
+				this.renderMediaList();  // set the media list in VBaseMediaList
 
 				// support initial selectedIndex or initItemEntryId
 				if ( this.firstLoad ) {
