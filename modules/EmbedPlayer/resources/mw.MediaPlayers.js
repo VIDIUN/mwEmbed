@@ -41,8 +41,8 @@ mw.MediaPlayers.prototype = {
 		this.defaultPlayers['video/webm'] = ['Native', 'Vlc'];
 		this.defaultPlayers['application/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['audio/ogg'] = ['Native', 'Vlc', 'Java' ];
-		this.defaultPlayers['audio/mpeg']= ['Native', 'Kplayer'];
-		this.defaultPlayers['audio/mp3']= ['Native', 'Kplayer'];
+		this.defaultPlayers['audio/mpeg']= ['Native', 'Vplayer'];
+		this.defaultPlayers['audio/mp3']= ['Native', 'Vplayer'];
 		this.defaultPlayers['video/mpeg'] = ['Vlc'];
 		this.defaultPlayers['video/x-msvideo'] = ['Vlc'];
 		this.defaultPlayers['video/multicast'] = ['Silverlight'];
@@ -54,7 +54,7 @@ mw.MediaPlayers.prototype = {
 		this.defaultPlayers['image/jpeg'] = ['ImageOverlay'];
 		this.defaultPlayers['image/png'] = ['ImageOverlay'];
 		if ( mw.getConfig("LeadWithHLSOnFlash") ) {
-			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Kplayer');
+			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Vplayer');
 		}
 		if ( mw.getConfig("chromecastReceiver") ) {
 			this.defaultPlayers['application/vnd.apple.mpegurl'].push('ChromecastReceiver');

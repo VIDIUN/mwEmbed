@@ -10,18 +10,18 @@
 
 <script type="text/javascript" src="resources/companion.js"></script>
 
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Referrer Override for ad tag URL example </h2>
-<div id="kaltura_player" style="width:430px;height:330px;float:left">
+<div id="vidiun_player" style="width:430px;height:330px;float:left">
 </div>
 <script>
 </script>
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '13920942',
 		'entry_id' : '0_uka1msg4',
@@ -31,7 +31,7 @@
 				'numPreroll' : 1,
 				'skipOffset': 5,
 				'storeSession': false,
-				'prerollUrl' : 'http://projects.kaltura.com/mdale/hotelVastAd.xml?domain={configProxy.flashvars.referrer}',
+				'prerollUrl' : 'http://projects.vidiun.com/mdale/hotelVastAd.xml?domain={configProxy.flashvars.referrer}',
 				'timeout' : 4,
 				'preSequence' : 1
 			},

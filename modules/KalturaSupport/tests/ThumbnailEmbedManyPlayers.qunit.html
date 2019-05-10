@@ -63,7 +63,7 @@ if( window.QUnit ){
 		);
 		
 		// Do the thumb embed:
-		kWidget.thumbEmbed({
+		vWidget.thumbEmbed({
 			'targetId': playerId,
 			'wid': '_243342',
 			'uiconf_id' : '12905712',
@@ -72,26 +72,26 @@ if( window.QUnit ){
 				'externalInterfaceDisabled' : false
 			},
 			'readyCallback': function( cbPlayerId ){
-				var kdp = $('#' + cbPlayerId)[0];
-				equal( playerId, cbPlayerId, "kWidget readyCallback fired with playerid" );
+				var vdp = $('#' + cbPlayerId)[0];
+				equal( playerId, cbPlayerId, "vWidget readyCallback fired with playerid" );
 				window['onMediaReady'] = function(){
 					ok( true, "Ready callback fired onMedia ready");
-					kdp.sendNotification('doPause');
+					vdp.sendNotification('doPause');
 				}
-				kdp.addJsListener("mediaReady", "onMediaReady");
+				vdp.addJsListener("mediaReady", "onMediaReady");
 				// ( the click should trigger the play )
 				window['onPlayerUpdatePlayhead'] = function(){
 					ok( true, " onPlayerUpdatePlayhead event recived ( playing content after thumb click )");
-					kdp.sendNotification('doPause');
-					kdp.removeJsListener('playerUpdatePlayhead', 'onPlayerUpdatePlayhead' );
+					vdp.sendNotification('doPause');
+					vdp.removeJsListener('playerUpdatePlayhead', 'onPlayerUpdatePlayhead' );
 					start();
 				};
-				kdp.addJsListener('playerUpdatePlayhead', 'onPlayerUpdatePlayhead' );
+				vdp.addJsListener('playerUpdatePlayhead', 'onPlayerUpdatePlayhead' );
 						
 			},
 			'thumbReadyCallback': function( cbPlayerId ){
 				equal( playerId, cbPlayerId, "thumbReadyCallback fired with playerid" );
-				$( '#' + cbPlayerId ).find('.kWidgetPlayBtn').click();
+				$( '#' + cbPlayerId ).find('.vWidgetPlayBtn').click();
 			}
 		});
 	});
@@ -134,7 +134,7 @@ if( window.QUnit ){
 							})
 				)
 				var entryId = possibleEntries[ Math.floor(Math.random()*possibleEntries.length) ]
-				var kWidgetEmbedSettings = {
+				var vWidgetEmbedSettings = {
 					'targetId': playerId,
 					'wid': '_243342',
 					'uiconf_id' : '12905712',
@@ -144,8 +144,8 @@ if( window.QUnit ){
 					},
 					'readyCallback': function( playerId ){
 						console.log("player " + playerId + " ready for binding");
-						var kdp = document.getElementById( playerId )
-						kdp.kBind('mediaReady', function(){
+						var vdp = document.getElementById( playerId )
+						vdp.vBind('mediaReady', function(){
 							playersReady++;
 							if( playersReady == numOfPlayer ){
 								appendToScore( "to render " + numOfPlayer + " players" );
@@ -165,7 +165,7 @@ if( window.QUnit ){
 					mw.setConfig("EmbedPlayer.DisableContextMenu",true);
 					kWidget.thumbEmbed( kWidgetEmbedSettings );
 				} else {
-					kWidget.embed( kWidgetEmbedSettings );
+					vWidget.embed( vWidgetEmbedSettings );
 				}
 			})(i);
 		}

@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,29 +28,29 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileCreateMode
+class VidiunMetadataProfileCreateMode
 {
 	const API = 1;
-	const KMC = 2;
+	const VMC = 2;
 	const APP = 3;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileStatus
+class VidiunMetadataProfileStatus
 {
 	const ACTIVE = 1;
 	const DEPRECATED = 2;
@@ -58,10 +58,10 @@ class KalturaMetadataProfileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataStatus
+class VidiunMetadataStatus
 {
 	const VALID = 1;
 	const INVALID = 2;
@@ -69,10 +69,10 @@ class KalturaMetadataStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAssetOrderBy
+class VidiunFileAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -81,10 +81,10 @@ class KalturaFileAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataObjectType
+class VidiunMetadataObjectType
 {
 	const AD_CUE_POINT = "adCuePointMetadata.AdCuePoint";
 	const ANNOTATION = "annotationMetadata.Annotation";
@@ -96,10 +96,10 @@ class KalturaMetadataObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataOrderBy
+class VidiunMetadataOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const METADATA_PROFILE_VERSION_ASC = "+metadataProfileVersion";
@@ -112,10 +112,10 @@ class KalturaMetadataOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileOrderBy
+class VidiunMetadataProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -124,10 +124,10 @@ class KalturaMetadataProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadata extends KalturaObjectBase
+class VidiunMetadata extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -164,7 +164,7 @@ class KalturaMetadata extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 * @readonly
 	 */
 	public $metadataObjectType = null;
@@ -204,7 +204,7 @@ class KalturaMetadata extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataStatus
+	 * @var VidiunMetadataStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -221,15 +221,15 @@ class KalturaMetadata extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataListResponse extends KalturaObjectBase
+class VidiunMetadataListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadata
+	 * @var array of VidiunMetadata
 	 * @readonly
 	 */
 	public $objects;
@@ -246,10 +246,10 @@ class KalturaMetadataListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfile extends KalturaObjectBase
+class VidiunMetadataProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -270,7 +270,7 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectType = null;
 
@@ -322,7 +322,7 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileStatus
+	 * @var VidiunMetadataProfileStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -354,7 +354,7 @@ class KalturaMetadataProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileCreateMode
+	 * @var VidiunMetadataProfileCreateMode
 	 */
 	public $createMode = null;
 
@@ -362,10 +362,10 @@ class KalturaMetadataProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileField extends KalturaObjectBase
+class VidiunMetadataProfileField extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -403,15 +403,15 @@ class KalturaMetadataProfileField extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
+class VidiunMetadataProfileFieldListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadataProfileField
+	 * @var array of VidiunMetadataProfileField
 	 * @readonly
 	 */
 	public $objects;
@@ -428,15 +428,15 @@ class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileListResponse extends KalturaObjectBase
+class VidiunMetadataProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMetadataProfile
+	 * @var array of VidiunMetadataProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -453,10 +453,10 @@ class KalturaMetadataProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaFileAssetBaseFilter extends KalturaFilter
+abstract class VidiunFileAssetBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -482,7 +482,7 @@ abstract class KalturaFileAssetBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFileAssetObjectType
+	 * @var VidiunFileAssetObjectType
 	 */
 	public $fileAssetObjectTypeEqual = null;
 
@@ -531,7 +531,7 @@ abstract class KalturaFileAssetBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFileAssetStatus
+	 * @var VidiunFileAssetStatus
 	 */
 	public $statusEqual = null;
 
@@ -546,10 +546,10 @@ abstract class KalturaFileAssetBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImportMetadataJobData extends KalturaJobData
+class VidiunImportMetadataJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -576,10 +576,10 @@ class KalturaImportMetadataJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMetadataBaseFilter extends KalturaFilter
+abstract class VidiunMetadataBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -619,7 +619,7 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectTypeEqual = null;
 
@@ -689,7 +689,7 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataStatus
+	 * @var VidiunMetadataStatus
 	 */
 	public $statusEqual = null;
 
@@ -704,10 +704,10 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
+abstract class VidiunMetadataProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -726,7 +726,7 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataObjectType
+	 * @var VidiunMetadataObjectType
 	 */
 	public $metadataObjectTypeEqual = null;
 
@@ -796,7 +796,7 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileStatus
+	 * @var VidiunMetadataProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -810,14 +810,14 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileCreateMode
+	 * @var VidiunMetadataProfileCreateMode
 	 */
 	public $createModeEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaMetadataProfileCreateMode
+	 * @var VidiunMetadataProfileCreateMode
 	 */
 	public $createModeNotEqual = null;
 
@@ -839,10 +839,10 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTransformMetadataJobData extends KalturaJobData
+class VidiunTransformMetadataJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -883,10 +883,10 @@ class KalturaTransformMetadataJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCompareMetadataCondition extends KalturaCompareCondition
+class VidiunCompareMetadataCondition extends VidiunCompareCondition
 {
 	/**
 	 * May contain the full xpath to the field in three formats
@@ -919,19 +919,19 @@ class KalturaCompareMetadataCondition extends KalturaCompareCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAssetFilter extends KalturaFileAssetBaseFilter
+class VidiunFileAssetFilter extends VidiunFileAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMatchMetadataCondition extends KalturaMatchCondition
+class VidiunMatchMetadataCondition extends VidiunMatchCondition
 {
 	/**
 	 * May contain the full xpath to the field in three formats
@@ -964,10 +964,10 @@ class KalturaMatchMetadataCondition extends KalturaMatchCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataFieldChangedCondition extends KalturaMatchCondition
+class VidiunMetadataFieldChangedCondition extends VidiunMatchCondition
 {
 	/**
 	 * May contain the full xpath to the field in three formats
@@ -1014,28 +1014,28 @@ class KalturaMetadataFieldChangedCondition extends KalturaMatchCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataFilter extends KalturaMetadataBaseFilter
+class VidiunMetadataFilter extends VidiunMetadataBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileFilter extends KalturaMetadataProfileBaseFilter
+class VidiunMetadataProfileFilter extends VidiunMetadataProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataSearchItem extends KalturaSearchOperator
+class VidiunMetadataSearchItem extends VidiunSearchOperator
 {
 	/**
 	 * 
@@ -1056,64 +1056,64 @@ class KalturaMetadataSearchItem extends KalturaSearchOperator
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataService extends KalturaServiceBase
+class VidiunMetadataService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * Allows you to add a metadata object and metadata content associated with Kaltura object
+	 * Allows you to add a metadata object and metadata content associated with Vidiun object
 	 * 
 	 * @param int $metadataProfileId 
 	 * @param string $objectType 
 	 * @param string $objectId 
 	 * @param string $xmlData XML metadata
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function add($metadataProfileId, $objectType, $objectId, $xmlData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "xmlData", $xmlData);
-		$this->client->queueServiceActionCall("metadata_metadata", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "xmlData", $xmlData);
+		$this->client->queueServiceActionCall("metadata_metadata", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	/**
-	 * Allows you to add a metadata object and metadata file associated with Kaltura object
+	 * Allows you to add a metadata object and metadata file associated with Vidiun object
 	 * 
 	 * @param int $metadataProfileId 
 	 * @param string $objectType 
 	 * @param string $objectId 
 	 * @param file $xmlFile XML metadata
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function addFromFile($metadataProfileId, $objectType, $objectId, $xmlFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xmlFile", $xmlFile);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xmlFile", $xmlFile);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
@@ -1124,21 +1124,21 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * @param string $objectType 
 	 * @param string $objectId 
 	 * @param string $url XML metadata remote url
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function addFromUrl($metadataProfileId, $objectType, $objectId, $url)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "url", $url);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromUrl", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "url", $url);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
@@ -1150,21 +1150,21 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * @param string $objectType 
 	 * @param string $objectId 
 	 * @param string $url XML metadata remote url
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function addFromBulk($metadataProfileId, $objectType, $objectId, $url)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->addParam($kparams, "objectType", $objectType);
-		$this->client->addParam($kparams, "objectId", $objectId);
-		$this->client->addParam($kparams, "url", $url);
-		$this->client->queueServiceActionCall("metadata_metadata", "addFromBulk", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->addParam($vparams, "objectType", $objectType);
+		$this->client->addParam($vparams, "objectId", $objectId);
+		$this->client->addParam($vparams, "url", $url);
+		$this->client->queueServiceActionCall("metadata_metadata", "addFromBulk", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
@@ -1172,18 +1172,18 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * Retrieve a metadata object by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
@@ -1193,20 +1193,20 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * @param int $id 
 	 * @param string $xmlData XML metadata
 	 * @param int $version Enable update only if the metadata object version did not change by other process
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function update($id, $xmlData = null, $version = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "xmlData", $xmlData);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("metadata_metadata", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "xmlData", $xmlData);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("metadata_metadata", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
@@ -1215,43 +1215,43 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param file $xmlFile XML metadata
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function updateFromFile($id, $xmlFile = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xmlFile", $xmlFile);
-		$this->client->queueServiceActionCall("metadata_metadata", "updateFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xmlFile", $xmlFile);
+		$this->client->queueServiceActionCall("metadata_metadata", "updateFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 
 	/**
 	 * List metadata objects by filter and pager
 	 * 
-	 * @param KalturaMetadataFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaMetadataListResponse
+	 * @param VidiunMetadataFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunMetadataListResponse
 	 */
-	function listAction(KalturaMetadataFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunMetadataFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadata", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadata", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataListResponse");
 		return $resultObject;
 	}
 
@@ -1263,9 +1263,9 @@ class KalturaMetadataService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -1284,10 +1284,10 @@ class KalturaMetadataService extends KalturaServiceBase
 	 */
 	function invalidate($id, $version = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("metadata_metadata", "invalidate", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("metadata_metadata", "invalidate", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -1304,9 +1304,9 @@ class KalturaMetadataService extends KalturaServiceBase
 	 */
 	function serve($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadata", "serve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadata", "serve", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -1317,79 +1317,79 @@ class KalturaMetadataService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param file $xslFile 
-	 * @return KalturaMetadata
+	 * @return VidiunMetadata
 	 */
 	function updateFromXSL($id, $xslFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xslFile", $xslFile);
-		$this->client->queueServiceActionCall("metadata_metadata", "updateFromXSL", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xslFile", $xslFile);
+		$this->client->queueServiceActionCall("metadata_metadata", "updateFromXSL", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadata");
+		$this->client->validateObjectType($resultObject, "VidiunMetadata");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataProfileService extends KalturaServiceBase
+class VidiunMetadataProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * Allows you to add a metadata profile object and metadata profile content associated with Kaltura object type
+	 * Allows you to add a metadata profile object and metadata profile content associated with Vidiun object type
 	 * 
-	 * @param KalturaMetadataProfile $metadataProfile 
+	 * @param VidiunMetadataProfile $metadataProfile 
 	 * @param string $xsdData XSD metadata definition
 	 * @param string $viewsData UI views definition
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
-	function add(KalturaMetadataProfile $metadataProfile, $xsdData, $viewsData = null)
+	function add(VidiunMetadataProfile $metadataProfile, $xsdData, $viewsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$this->client->addParam($kparams, "xsdData", $xsdData);
-		$this->client->addParam($kparams, "viewsData", $viewsData);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$this->client->addParam($vparams, "xsdData", $xsdData);
+		$this->client->addParam($vparams, "viewsData", $viewsData);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	/**
-	 * Allows you to add a metadata profile object and metadata profile file associated with Kaltura object type
+	 * Allows you to add a metadata profile object and metadata profile file associated with Vidiun object type
 	 * 
-	 * @param KalturaMetadataProfile $metadataProfile 
+	 * @param VidiunMetadataProfile $metadataProfile 
 	 * @param file $xsdFile XSD metadata definition
 	 * @param file $viewsFile UI views definition
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
-	function addFromFile(KalturaMetadataProfile $metadataProfile, $xsdFile, $viewsFile = null)
+	function addFromFile(VidiunMetadataProfile $metadataProfile, $xsdFile, $viewsFile = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsdFile", $xsdFile);
-		$this->client->addParam($kfiles, "viewsFile", $viewsFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "addFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsdFile", $xsdFile);
+		$this->client->addParam($vfiles, "viewsFile", $viewsFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "addFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1397,18 +1397,18 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * Retrieve a metadata profile object by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1416,47 +1416,47 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * Update an existing metadata object
 	 * 
 	 * @param int $id 
-	 * @param KalturaMetadataProfile $metadataProfile 
+	 * @param VidiunMetadataProfile $metadataProfile 
 	 * @param string $xsdData XSD metadata definition
 	 * @param string $viewsData UI views definition
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
-	function update($id, KalturaMetadataProfile $metadataProfile, $xsdData = null, $viewsData = null)
+	function update($id, VidiunMetadataProfile $metadataProfile, $xsdData = null, $viewsData = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "metadataProfile", $metadataProfile->toParams());
-		$this->client->addParam($kparams, "xsdData", $xsdData);
-		$this->client->addParam($kparams, "viewsData", $viewsData);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "metadataProfile", $metadataProfile->toParams());
+		$this->client->addParam($vparams, "xsdData", $xsdData);
+		$this->client->addParam($vparams, "viewsData", $viewsData);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
 	/**
 	 * List metadata profile objects by filter and pager
 	 * 
-	 * @param KalturaMetadataProfileFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaMetadataProfileListResponse
+	 * @param VidiunMetadataProfileFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunMetadataProfileListResponse
 	 */
-	function listAction(KalturaMetadataProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunMetadataProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfileListResponse");
 		return $resultObject;
 	}
 
@@ -1464,18 +1464,18 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * List metadata profile fields by metadata profile id
 	 * 
 	 * @param int $metadataProfileId 
-	 * @return KalturaMetadataProfileFieldListResponse
+	 * @return VidiunMetadataProfileFieldListResponse
 	 */
 	function listFields($metadataProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "metadataProfileId", $metadataProfileId);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "listFields", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "metadataProfileId", $metadataProfileId);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "listFields", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfileFieldListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfileFieldListResponse");
 		return $resultObject;
 	}
 
@@ -1487,9 +1487,9 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -1503,19 +1503,19 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param int $toVersion 
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
 	function revert($id, $toVersion)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "toVersion", $toVersion);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "revert", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "toVersion", $toVersion);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "revert", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1524,20 +1524,20 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param file $xsdFile XSD metadata definition
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
 	function updateDefinitionFromFile($id, $xsdFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsdFile", $xsdFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateDefinitionFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsdFile", $xsdFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateDefinitionFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1546,20 +1546,20 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param file $viewsFile UI views file
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
 	function updateViewsFromFile($id, $viewsFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "viewsFile", $viewsFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateViewsFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "viewsFile", $viewsFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateViewsFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1568,20 +1568,20 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param file $xsltFile XSLT file, will be executed on every metadata add/update
-	 * @return KalturaMetadataProfile
+	 * @return VidiunMetadataProfile
 	 */
 	function updateTransformationFromFile($id, $xsltFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsltFile", $xsltFile);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateTransformationFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsltFile", $xsltFile);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "updateTransformationFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaMetadataProfile");
+		$this->client->validateObjectType($resultObject, "VidiunMetadataProfile");
 		return $resultObject;
 	}
 
@@ -1593,9 +1593,9 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 */
 	function serve($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "serve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "serve", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -1609,47 +1609,47 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 	 */
 	function serveView($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("metadata_metadataprofile", "serveView", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("metadata_metadataprofile", "serveView", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMetadataClientPlugin extends KalturaClientPlugin
+class VidiunMetadataClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaMetadataService
+	 * @var VidiunMetadataService
 	 */
 	public $metadata = null;
 
 	/**
-	 * @var KalturaMetadataProfileService
+	 * @var VidiunMetadataProfileService
 	 */
 	public $metadataProfile = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->metadata = new KalturaMetadataService($client);
-		$this->metadataProfile = new KalturaMetadataProfileService($client);
+		$this->metadata = new VidiunMetadataService($client);
+		$this->metadataProfile = new VidiunMetadataProfileService($client);
 	}
 
 	/**
-	 * @return KalturaMetadataClientPlugin
+	 * @return VidiunMetadataClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaMetadataClientPlugin($client);
+		return new VidiunMetadataClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaFileSyncClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunFileSyncClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTrackEntryEventType
+class VidiunTrackEntryEventType
 {
 	const UPLOADED_FILE = 1;
 	const WEBCAM_COMPLETED = 2;
@@ -51,10 +51,10 @@ class KalturaTrackEntryEventType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfAdminOrderBy
+class VidiunUiConfAdminOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -63,10 +63,10 @@ class KalturaUiConfAdminOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTrackEntry extends KalturaObjectBase
+class VidiunTrackEntry extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -78,7 +78,7 @@ class KalturaTrackEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaTrackEntryEventType
+	 * @var VidiunTrackEntryEventType
 	 */
 	public $trackEventType = null;
 
@@ -157,7 +157,7 @@ class KalturaTrackEntry extends KalturaObjectBase
 	 *
 	 * @var string
 	 */
-	public $ks = null;
+	public $vs = null;
 
 	/**
 	 * 
@@ -191,15 +191,15 @@ class KalturaTrackEntry extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTrackEntryListResponse extends KalturaObjectBase
+class VidiunTrackEntryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaTrackEntry
+	 * @var array of VidiunTrackEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -216,10 +216,10 @@ class KalturaTrackEntryListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfAdmin extends KalturaUiConf
+class VidiunUiConfAdmin extends VidiunUiConf
 {
 	/**
 	 * 
@@ -232,15 +232,15 @@ class KalturaUiConfAdmin extends KalturaUiConf
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfAdminListResponse extends KalturaObjectBase
+class VidiunUiConfAdminListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUiConfAdmin
+	 * @var array of VidiunUiConfAdmin
 	 * @readonly
 	 */
 	public $objects;
@@ -257,31 +257,31 @@ class KalturaUiConfAdminListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUiConfAdminBaseFilter extends KalturaUiConfFilter
+abstract class VidiunUiConfAdminBaseFilter extends VidiunUiConfFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfAdminFilter extends KalturaUiConfAdminBaseFilter
+class VidiunUiConfAdminFilter extends VidiunUiConfAdminBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryAdminService extends KalturaServiceBase
+class VidiunEntryAdminService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -291,19 +291,19 @@ class KalturaEntryAdminService extends KalturaServiceBase
 	 * 
 	 * @param string $entryId Entry id
 	 * @param int $version Desired version of the data
-	 * @return KalturaBaseEntry
+	 * @return VidiunBaseEntry
 	 */
 	function get($entryId, $version = -1)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("adminconsole_entryadmin", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("adminconsole_entryadmin", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBaseEntry");
+		$this->client->validateObjectType($resultObject, "VidiunBaseEntry");
 		return $resultObject;
 	}
 
@@ -312,19 +312,19 @@ class KalturaEntryAdminService extends KalturaServiceBase
 	 * 
 	 * @param string $flavorId 
 	 * @param int $version Desired version of the data
-	 * @return KalturaBaseEntry
+	 * @return VidiunBaseEntry
 	 */
 	function getByFlavorId($flavorId, $version = -1)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorId", $flavorId);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("adminconsole_entryadmin", "getByFlavorId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorId", $flavorId);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("adminconsole_entryadmin", "getByFlavorId", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBaseEntry");
+		$this->client->validateObjectType($resultObject, "VidiunBaseEntry");
 		return $resultObject;
 	}
 
@@ -332,29 +332,29 @@ class KalturaEntryAdminService extends KalturaServiceBase
 	 * Get base entry by ID with no filters.
 	 * 
 	 * @param string $entryId Entry id
-	 * @return KalturaTrackEntryListResponse
+	 * @return VidiunTrackEntryListResponse
 	 */
 	function getTracks($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("adminconsole_entryadmin", "getTracks", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("adminconsole_entryadmin", "getTracks", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaTrackEntryListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunTrackEntryListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfAdminService extends KalturaServiceBase
+class VidiunUiConfAdminService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -362,19 +362,19 @@ class KalturaUiConfAdminService extends KalturaServiceBase
 	/**
 	 * Adds new UIConf with no partner limitation
 	 * 
-	 * @param KalturaUiConfAdmin $uiConf 
-	 * @return KalturaUiConfAdmin
+	 * @param VidiunUiConfAdmin $uiConf 
+	 * @return VidiunUiConfAdmin
 	 */
-	function add(KalturaUiConfAdmin $uiConf)
+	function add(VidiunUiConfAdmin $uiConf)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "uiConf", $uiConf->toParams());
-		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "uiConf", $uiConf->toParams());
+		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfAdmin");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfAdmin");
 		return $resultObject;
 	}
 
@@ -382,20 +382,20 @@ class KalturaUiConfAdminService extends KalturaServiceBase
 	 * Update an existing UIConf with no partner limitation
 	 * 
 	 * @param int $id 
-	 * @param KalturaUiConfAdmin $uiConf 
-	 * @return KalturaUiConfAdmin
+	 * @param VidiunUiConfAdmin $uiConf 
+	 * @return VidiunUiConfAdmin
 	 */
-	function update($id, KalturaUiConfAdmin $uiConf)
+	function update($id, VidiunUiConfAdmin $uiConf)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "uiConf", $uiConf->toParams());
-		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "uiConf", $uiConf->toParams());
+		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfAdmin");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfAdmin");
 		return $resultObject;
 	}
 
@@ -403,18 +403,18 @@ class KalturaUiConfAdminService extends KalturaServiceBase
 	 * Retrieve a UIConf by id with no partner limitation
 	 * 
 	 * @param int $id 
-	 * @return KalturaUiConfAdmin
+	 * @return VidiunUiConfAdmin
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfAdmin");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfAdmin");
 		return $resultObject;
 	}
 
@@ -426,9 +426,9 @@ class KalturaUiConfAdminService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -440,34 +440,34 @@ class KalturaUiConfAdminService extends KalturaServiceBase
 	/**
 	 * Retrieve a list of available UIConfs  with no partner limitation
 	 * 
-	 * @param KalturaUiConfFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaUiConfAdminListResponse
+	 * @param VidiunUiConfFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunUiConfAdminListResponse
 	 */
-	function listAction(KalturaUiConfFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunUiConfFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("adminconsole_uiconfadmin", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaUiConfAdminListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunUiConfAdminListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportAdminService extends KalturaServiceBase
+class VidiunReportAdminService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -475,19 +475,19 @@ class KalturaReportAdminService extends KalturaServiceBase
 	/**
 	 * 
 	 * 
-	 * @param KalturaReport $report 
-	 * @return KalturaReport
+	 * @param VidiunReport $report 
+	 * @return VidiunReport
 	 */
-	function add(KalturaReport $report)
+	function add(VidiunReport $report)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "report", $report->toParams());
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "report", $report->toParams());
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaReport");
+		$this->client->validateObjectType($resultObject, "VidiunReport");
 		return $resultObject;
 	}
 
@@ -495,41 +495,41 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param int $id 
-	 * @return KalturaReport
+	 * @return VidiunReport
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaReport");
+		$this->client->validateObjectType($resultObject, "VidiunReport");
 		return $resultObject;
 	}
 
 	/**
 	 * 
 	 * 
-	 * @param KalturaReportFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaReportListResponse
+	 * @param VidiunReportFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunReportListResponse
 	 */
-	function listAction(KalturaReportFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunReportFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaReportListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunReportListResponse");
 		return $resultObject;
 	}
 
@@ -537,20 +537,20 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param int $id 
-	 * @param KalturaReport $report 
-	 * @return KalturaReport
+	 * @param VidiunReport $report 
+	 * @return VidiunReport
 	 */
-	function update($id, KalturaReport $report)
+	function update($id, VidiunReport $report)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "report", $report->toParams());
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "report", $report->toParams());
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaReport");
+		$this->client->validateObjectType($resultObject, "VidiunReport");
 		return $resultObject;
 	}
 
@@ -562,9 +562,9 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -578,23 +578,23 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param array $params 
-	 * @return KalturaReportResponse
+	 * @return VidiunReportResponse
 	 */
 	function executeDebug($id, array $params = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
 		if ($params !== null)
 			foreach($params as $index => $obj)
 			{
-				$this->client->addParam($kparams, "params:$index", $obj->toParams());
+				$this->client->addParam($vparams, "params:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "executeDebug", $kparams);
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "executeDebug", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaReportResponse");
+		$this->client->validateObjectType($resultObject, "VidiunReportResponse");
 		return $resultObject;
 	}
 
@@ -606,9 +606,9 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 */
 	function getParameters($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "getParameters", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "getParameters", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -626,10 +626,10 @@ class KalturaReportAdminService extends KalturaServiceBase
 	 */
 	function getCsvUrl($id, $reportPartnerId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "reportPartnerId", $reportPartnerId);
-		$this->client->queueServiceActionCall("adminconsole_reportadmin", "getCsvUrl", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "reportPartnerId", $reportPartnerId);
+		$this->client->queueServiceActionCall("adminconsole_reportadmin", "getCsvUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -639,44 +639,44 @@ class KalturaReportAdminService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdminConsoleClientPlugin extends KalturaClientPlugin
+class VidiunAdminConsoleClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaEntryAdminService
+	 * @var VidiunEntryAdminService
 	 */
 	public $entryAdmin = null;
 
 	/**
-	 * @var KalturaUiConfAdminService
+	 * @var VidiunUiConfAdminService
 	 */
 	public $uiConfAdmin = null;
 
 	/**
-	 * @var KalturaReportAdminService
+	 * @var VidiunReportAdminService
 	 */
 	public $reportAdmin = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->entryAdmin = new KalturaEntryAdminService($client);
-		$this->uiConfAdmin = new KalturaUiConfAdminService($client);
-		$this->reportAdmin = new KalturaReportAdminService($client);
+		$this->entryAdmin = new VidiunEntryAdminService($client);
+		$this->uiConfAdmin = new VidiunUiConfAdminService($client);
+		$this->reportAdmin = new VidiunReportAdminService($client);
 	}
 
 	/**
-	 * @return KalturaAdminConsoleClientPlugin
+	 * @return VidiunAdminConsoleClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaAdminConsoleClientPlugin($client);
+		return new VidiunAdminConsoleClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

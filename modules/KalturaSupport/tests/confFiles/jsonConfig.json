@@ -17,7 +17,7 @@
       "closedCaptions": {},
       "watermark": {
          "cssClass": "topLeft",
-         "img": "http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png"
+         "img": "http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png"
       },
       "logo": {},
 	   "moderation":{},
@@ -28,13 +28,13 @@
    },
    "uiVars":[
       {
-         "key":"Kaltura.UseAppleAdaptive",
+         "key":"Vidiun.UseAppleAdaptive",
          "value":false,
          "overrideFlashvar":false
       }
    ],
    "layout":{
-      "skin": "kdark",
+      "skin": "vdark",
 	   "cssFiles":[ ]
    }
 }

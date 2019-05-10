@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of KalturaResultEntry
+ * Description of VidiunResultEntry
  *
  * @author ran
  */
@@ -131,10 +131,10 @@ class EntryResult {
 		return $key;
 	}
 	function getEntryResultFromApi(){
-		global $wgKalturaApiFeatures;
+		global $wgVidiunApiFeatures;
 
 		// Check if the API supports entryRedirect feature
-		$supportsEntryRedirect = isset($wgKalturaApiFeatures['entryRedirect']) ? $wgKalturaApiFeatures['entryRedirect'] : false;
+		$supportsEntryRedirect = isset($wgVidiunApiFeatures['entryRedirect']) ? $wgVidiunApiFeatures['entryRedirect'] : false;
 
 		$client = $this->client->getClient();
 		// define resultObject prior to try catch call
@@ -146,9 +146,9 @@ class EntryResult {
 			if( $this->request->noCache ) {
 				$client->addParam( $params, "nocache",  true );
 			}
-			$namedMultiRequest = new KalturaNamedMultiRequest( $client, $params );
+			$namedMultiRequest = new VidiunNamedMultiRequest( $client, $params );
 
-			$filter = new KalturaBaseEntryFilter();
+			$filter = new VidiunBaseEntryFilter();
 			if( ! $this->request->getEntryId() && $this->request->getReferenceId() ) {
 				$filter->referenceIdEqual = $this->request->getReferenceId();
 			} else if( $supportsEntryRedirect && $this->uiconf->getPlayerConfig(false, 'disableEntryRedirect') !== true ){
@@ -178,17 +178,17 @@ class EntryResult {
 			// Entry Custom Metadata
 			// Always get custom metadata for now 
 			//if( $this->uiconf->getPlayerConfig(false, 'requiredMetadataFields') ) {
-				$filter = new KalturaMetadataFilter();
-				$filter->orderBy = KalturaMetadataOrderBy::CREATED_AT_ASC;
+				$filter = new VidiunMetadataFilter();
+				$filter->orderBy = VidiunMetadataOrderBy::CREATED_AT_ASC;
 				$filter->objectIdEqual = $entryId;
-				$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::ENTRY;
+				$filter->metadataObjectTypeEqual = VidiunMetadataObjectType::ENTRY;
 				// Check if metadataProfileId is defined
 				$metadataProfileId = $this->uiconf->getPlayerConfig( false, 'metadataProfileId' );
 				if( $metadataProfileId ){
 					$filter->metadataProfileIdEqual = $metadataProfileId;
 				}
 				
-				$metadataPager =  new KalturaFilterPager();
+				$metadataPager =  new VidiunFilterPager();
 				$metadataPager->pageSize = 1;
 				$params = array( 'filter' => $filter, 'metadataPager', $metadataPager );
 				$namedMultiRequest->addNamedRequest( 'entryMeta', 'metadata_metadata', 'list', $params );
@@ -197,8 +197,8 @@ class EntryResult {
 			// Entry Cue Points
 			// Always get Cue Points for now
 			//if( $this->uiconf->getPlayerConfig(false, 'getCuePointsData') !== false ) {
-				$filter = new KalturaCuePointFilter();
-				$filter->orderBy = KalturaAdCuePointOrderBy::START_TIME_ASC;
+				$filter = new VidiunCuePointFilter();
+				$filter->orderBy = VidiunAdCuePointOrderBy::START_TIME_ASC;
 				$filter->entryIdEqual = $entryId;
 
 				$params = array( 'filter' => $filter );
@@ -212,7 +212,7 @@ class EntryResult {
 
 		} catch( Exception $e ){
 			// Update the Exception and pass it upward
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 			return array();
 		}
 
@@ -278,7 +278,7 @@ class EntryResult {
 		return $resultObject;
 	}
 	public function getACFilter(){
-		$filter = new KalturaEntryContextDataParams();
+		$filter = new VidiunEntryContextDataParams();
 		$filter->referrer = $this->request->getReferer();
 		$filter->userAgent = $this->request->getUserAgent();
 		$filter->flavorTags = 'all';
@@ -295,7 +295,7 @@ class EntryResult {
 	*/
 	public function isAccessControlAllowed( $resultObject = null ) {
 			
-		// Kaltura only has entry level access control not playlist level access control atm: 
+		// Vidiun only has entry level access control not playlist level access control atm: 
 		// don't check anything without an entry_id
 		/*if( !$this->request->getEntryId() ){
 			return true;

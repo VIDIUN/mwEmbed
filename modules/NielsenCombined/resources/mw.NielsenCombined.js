@@ -1,6 +1,6 @@
 /**
 * NielsenCombined implemented per document outlined here:
-* https://portal.kaltura.com/product/Shared%20Documents/Solution%20Architects/_Generic%20PRDs/Nielsen/KDP%20Nielsen%20Plugin%20PRD.docx
+* https://portal.vidiun.com/product/Shared%20Documents/Solution%20Architects/_Generic%20PRDs/Nielsen/VDP%20Nielsen%20Plugin%20PRD.docx
 *
 * Basic player flow:
 *
@@ -266,7 +266,7 @@
 				_this.dispatchEvent( 11, String( vid.volume ) );
 			});
 
-			// Kaltura HTML5 does not really have an idle state:
+			// Vidiun HTML5 does not really have an idle state:
 			// sender.onIdle( function( args ) { ggCom1.onCurrentStateChanged( args ) } );
 
 			// Monitor:
@@ -412,7 +412,7 @@
 			// A tag map that allows for ads to override content values
 			var tagMap = {};
 			// Get the current config evaluated expressions:
-			var evalConfig = this.embedPlayer.getKalturaConfig('nielsenCombined');
+			var evalConfig = this.embedPlayer.getVidiunConfig('nielsenCombined');
 			$.each( evalConfig, function( attr, evalValue ){
 				// set the tag value
 				if( !_this.inAd() && attr.indexOf('tag_') === 0 ){
@@ -437,7 +437,7 @@
 		 * Get a configuration value with full expression evaluation:
 		 */
 		getConfig: function( propAttr ){
-			return this.embedPlayer.getKalturaConfig('nielsenCombined', propAttr );
+			return this.embedPlayer.getVidiunConfig('nielsenCombined', propAttr );
 		},
 		/**
 		 * Get the gg com object:

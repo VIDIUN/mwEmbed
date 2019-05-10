@@ -1,28 +1,28 @@
 // always disable adaptive for accurate seeks. 
-mw.setConfig('Kaltura.UseAppleAdaptive', false);
+mw.setConfig('Vidiun.UseAppleAdaptive', false);
 
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	/**
 	 * The main chaptersView object:
 	 */
-	var chaptersView = function(kdp, configOverride){
-		return this.init(kdp, configOverride);
+	var chaptersView = function(vdp, configOverride){
+		return this.init(vdp, configOverride);
 	};
 	chaptersView.prototype = {
 		// a flag to skip pausing when pauseAfterChapter is enabled
 		skipPauseFlag: false,
-		init: function( kdp, configOverride ){
+		init: function( vdp, configOverride ){
 			if( configOverride ){
 				this.configOverride = configOverride;
 			}
-			this.kdp = kdp;
+			this.vdp = vdp;
 			var _this = this;
 			// setup api object
-			this.api = new kWidget.api( { 'wid' : this.getAttr( 'configProxy.kw.id' ) } );
-			// Use KS from player ( in case admin ks was provided ) 
-			if(  this.getAttr('ks') ){
-				this.api.setKs( this.getAttr('ks')  )
+			this.api = new vWidget.api( { 'wid' : this.getAttr( 'configProxy.vw.id' ) } );
+			// Use VS from player ( in case admin vs was provided ) 
+			if(  this.getAttr('vs') ){
+				this.api.setVs( this.getAttr('vs')  )
 			}
 			// setup the app target:
 			this.$chaptersContainer = this.getConfig( 'containerId') ? 
@@ -34,8 +34,8 @@ kWidget.addReadyCallback( function( playerId ){
 			);
 			// add layout helper to container:
 			this.$chaptersContainer
-				.addClass( 'k-chapters-container' )
-				.addClass( 'k-' + _this.getLayout() );
+				.addClass( 'v-chapters-container' )
+				.addClass( 'v-' + _this.getLayout() );
 			
 			// load cue points
 			_this.loadCuePoints(function(){
@@ -49,7 +49,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		addBindings: function(){
 			var _this = this;
-			var postFix = '.chaptersView_' + this.kdp.id;
+			var postFix = '.chaptersView_' + this.vdp.id;
 			// remove any old bindings:
 			$(window).unbind( postFix )
 			.bind('resize' + postFix + ' ' + 'orientationchange' + postFix, function(){
@@ -59,7 +59,7 @@ kWidget.addReadyCallback( function( playerId ){
 			// check for resize or orientation change, and re-draw chapters. 
 			// monitor player 
 			// add playhead tracker
-			kdp.kBind('playerUpdatePlayhead', function( ct ){
+			vdp.vBind('playerUpdatePlayhead', function( ct ){
 				_this.updateActiveChapter( ct );
 			});
 		},
@@ -87,8 +87,8 @@ kWidget.addReadyCallback( function( playerId ){
 				if( this.getCuePoints()[ activeIndex ] ){
 					var endTime = _this.getChapterEndTimeByInx( activeIndex );
 					var countDown =  Math.abs( time - endTime );
-					$activeChapter.find('.k-duration span').text(
-						kWidget.seconds2npt( countDown )
+					$activeChapter.find('.v-duration span').text(
+						vWidget.seconds2npt( countDown )
 					);
 				}
 				// nothing to do, active chapter already set. 
@@ -96,7 +96,7 @@ kWidget.addReadyCallback( function( playerId ){
 			}
 			// Check if we should pause on chapter update: 
 			if( this.getConfig( 'pauseAfterChapter' ) && !this.skipPauseFlag ){
-				this.kdp.sendNotification( 'doPause');
+				this.vdp.sendNotification( 'doPause');
 			}
 			// restore skip pause flag: 
 			this.skipPauseFlag = false;
@@ -108,14 +108,14 @@ kWidget.addReadyCallback( function( playerId ){
 				var endTime = _this.getChapterEndTimeByInx( inx );
 				$( chapterBox )
 				.removeClass( 'active' )
-				.find('.k-duration span').text(
-					kWidget.seconds2npt( endTime - startTime )	
+				.find('.v-duration span').text(
+					vWidget.seconds2npt( endTime - startTime )	
 				)
 			});
 
 			if( this.getCuePoints()[ activeIndex ] ){
 				this.getCuePoints()[ activeIndex ].$chapterBox.addClass('active');
-				this.$chaptersContainer.find('.k-carousel')[0].jCarouselLiteGo( activeIndex );
+				this.$chaptersContainer.find('.v-carousel')[0].jCarouselLiteGo( activeIndex );
 			}
 		},
 		getChapterInxForTime: function( time ){
@@ -153,7 +153,7 @@ kWidget.addReadyCallback( function( playerId ){
 					'service': 'cuepoint_cuepoint',
 					'action': 'list',
 					'filter:entryIdEqual': this.getAttr( 'mediaProxy.entry.id' ),
-					'filter:objectType':'KalturaCuePointFilter',
+					'filter:objectType':'VidiunCuePointFilter',
 					'filter:cuePointTypeEqual':	'annotation.Annotation',
 					'filter:tagsLike' : this.getConfig('tags') || 'chaptering'
 				},
@@ -242,18 +242,18 @@ kWidget.addReadyCallback( function( playerId ){
 			.addClass('chapterBoxInner')
 			.append( 
 				$('<span>')
-				.addClass('k-title-container')
+				.addClass('v-title-container')
 				.append( 
 					$('<span>')
 					.attr('title', cuePoint['text'])
-					.addClass('k-title')
+					.addClass('v-title')
 					.text(
 						chapterTitle 
 					)
 				),
 				$('<span>')
 				.attr( 'title', fullDesc )
-				.addClass('k-description')
+				.addClass('v-description')
 				.text( chapterDesc )
 			)
 			
@@ -261,26 +261,26 @@ kWidget.addReadyCallback( function( playerId ){
 				var startTime =  cuePoint.startTime / 1000;
 				var endTime = _this.getChapterEndTimeByInx( inx ) 
 				$chapterInner.append(
-					$('<span>').addClass('k-duration').append(
+					$('<span>').addClass('v-duration').append(
 						$('<div />').addClass('icon-time'),
-						$('<span>').text( kWidget.seconds2npt( endTime - startTime ) )
+						$('<span>').text( vWidget.seconds2npt( endTime - startTime ) )
 					)
 				)
 			}
 			// check if we should include chapter duration:
 			if( this.getConfig('includeChapterStartTime') ){
 				// Add 0 padding to start time min
-				var st = kWidget.seconds2npt( cuePoint.startTime / 1000 );
+				var st = vWidget.seconds2npt( cuePoint.startTime / 1000 );
 				var stParts = st.split(':');
 				if( stParts.length == 2 && stParts[0].length == 1 ){
 					st = '0' + st;
 				}
-				var $timeDisp = $('<span>').addClass( 'k-start-time');
+				var $timeDisp = $('<span>').addClass( 'v-start-time');
 				$timeDisp.prepend(
 					$('<span>').html( st )
 				)
 				// Append timeDisp box:
-				$chapterInner.find('.k-title-container').prepend(
+				$chapterInner.find('.v-title-container').prepend(
 					$timeDisp
 				);
 			}
@@ -296,7 +296,7 @@ kWidget.addReadyCallback( function( playerId ){
 				// replace spaces with '&nbsp;'
 				chapterVal = chapterVal.replace(/\s/g, '&nbsp;' );
 				$capterText = $('<span>').addClass('chapterNumber').html( chapterVal );
-				$chapterInner.find('.k-title-container').prepend( 
+				$chapterInner.find('.v-title-container').prepend( 
 					$capterText
 				)
 			}
@@ -335,16 +335,16 @@ kWidget.addReadyCallback( function( playerId ){
 			// Add click binding:
 			$chapterBox.click( function(){
 				// Check if the media is ready:
-				if( _this.getAttr( 'playerStatusProxy.kdpStatus' ) != 'ready' ){
-					kWidget.log( "Error: chapterView:: click before chapter ready" );
+				if( _this.getAttr( 'playerStatusProxy.vdpStatus' ) != 'ready' ){
+					vWidget.log( "Error: chapterView:: click before chapter ready" );
 					return ;
 				}
 				// Check if the current chapter is already active, set skipPause flag accordingly. 
 				_this.skipPauseFlag = !$( this ).hasClass( 'active');
 				// start playback 
-				_this.kdp.sendNotification( 'doPlay' );
+				_this.vdp.sendNotification( 'doPlay' );
 				// see to start time and play ( +.1 to avoid highlight of prev chapter ) 
-				_this.kdp.sendNotification( 'doSeek', ( cuePoint.startTime / 1000 ) + .1 );
+				_this.vdp.sendNotification( 'doSeek', ( cuePoint.startTime / 1000 ) + .1 );
 			});
 			
 			// check for client side render function, can override or extend chapterBox
@@ -374,27 +374,27 @@ kWidget.addReadyCallback( function( playerId ){
 					'background-size' : 'auto 100%'
 				}
 			// Check for custom var override of cuePoint
-			var $divImage = $('<div>').addClass('k-thumb').attr({
+			var $divImage = $('<div>').addClass('v-thumb').attr({
 				'alt': "Thumbnail for " + cuePoint.text
 			}).css( baseImageCss );
 			
 			var baseThumbSettings = {
-				'partner_id': this.getAttr( 'configProxy.kw.partnerId' ),
-				'uiconf_id': this.getAttr('configProxy.kw.uiConfId'),
+				'partner_id': this.getAttr( 'configProxy.vw.partnerId' ),
+				'uiconf_id': this.getAttr('configProxy.vw.uiConfId'),
 				'entry_id': this.getAttr( 'mediaProxy.entry.id' ),
 				'width': thumbWidth
 			}
 			// check for customData:
 			var thumbUrl = cuePoint.customData['thumbUrl'] ? 
 					cuePoint.customData['thumbUrl'] :
-					kWidget.getKalturaThumbUrl(
+					vWidget.getVidiunThumbUrl(
 						$.extend( {}, baseThumbSettings, {
 							'vid_sec': parseInt( cuePoint.startTime / 1000 )
 						})
 					);
 			
 			// Check if NOT using "rotator" ( just return the target time directly )
-			$divImage.addClass('k-thumb')
+			$divImage.addClass('v-thumb')
 			.css({
 				'background-image': 'url(\'' + thumbUrl + '\')'
 			});
@@ -403,7 +403,7 @@ kWidget.addReadyCallback( function( playerId ){
 			if( !this.getConfig( 'thumbnailRotator' ) ){
 				return $divImage;
 			}
-			var imageSlicesUrl = kWidget.getKalturaThumbUrl(
+			var imageSlicesUrl = vWidget.getVidiunThumbUrl(
 					$.extend( {}, baseThumbSettings, {
 						'vid_slices': _this.getSliceCount()
 					})
@@ -421,7 +421,7 @@ kWidget.addReadyCallback( function( playerId ){
 					'height': thumbHeight,
 					'background-image': 'url(\'' + imageSlicesUrl + '\')',
 					'background-position': _this.getThumbSpriteOffset( thumbWidth, ( cuePoint.startTime / 1000 ) ),
-					// fix aspect ratio on bad Kaltura API returns
+					// fix aspect ratio on bad Vidiun API returns
 					'background-size': ( thumbWidth * _this.getSliceCount() ) + 'px 100%'
 				});
 				
@@ -454,7 +454,7 @@ kWidget.addReadyCallback( function( playerId ){
 			return $divImage;
 		},
 		/**
-		 * TODO abstract into kWidget rotator, so we can use the same code in scrubber. 
+		 * TODO abstract into vWidget rotator, so we can use the same code in scrubber. 
 		 */
 		getThumbSpriteOffset: function( thumbWidth, time ){
 			var sliceIndex = this.getSliceIndexForTime( time );
@@ -482,29 +482,29 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		// get the chapter container with respective layout
 		getChapterContainer: function(){
-			// remove any existing k-chapters-container for this player
-			$('.k-player-' + this.kdp.id + '.k-chapters-container').remove();
+			// remove any existing v-chapters-container for this player
+			$('.v-player-' + this.vdp.id + '.v-chapters-container').remove();
 			// Build new chapters container
-			$chaptersContainer = $('<div>').addClass( 'k-player-' + this.kdp.id + ' k-chapters-container');
+			$chaptersContainer = $('<div>').addClass( 'v-player-' + this.vdp.id + ' v-chapters-container');
 			// check for where it should be appended:
 			switch( this.getConfig('containerPosition') ){
 				case 'before':
 					$chaptersContainer.css('clear', 'both');
-					$( this.kdp )
+					$( this.vdp )
 						.css( 'float', 'left')
 						.before( $chaptersContainer );
 				break;
 				case 'left':
-					$chaptersContainer.css('float', 'left').insertBefore( this.kdp );
-					$( this.kdp ).css('float', 'left');
+					$chaptersContainer.css('float', 'left').insertBefore( this.vdp );
+					$( this.vdp ).css('float', 'left');
 				break;
 				case 'right':
-					$chaptersContainer.css('float', 'left').insertAfter( this.kdp );
-					$( this.kdp ).css('float', 'left' );
+					$chaptersContainer.css('float', 'left').insertAfter( this.vdp );
+					$( this.vdp ).css('float', 'left' );
 				break;
 				case 'after':
 				default:
-					$( this.kdp )
+					$( this.vdp )
 						.css( 'float', 'none')
 						.after( $chaptersContainer );
 				break;
@@ -512,15 +512,15 @@ kWidget.addReadyCallback( function( playerId ){
 			// set size based on layout
 			// set sizes:
 			if( this.getConfig('overflow') != true ){
-				$chaptersContainer.css('width', $( this.kdp ).width() )
+				$chaptersContainer.css('width', $( this.vdp ).width() )
 				if( this.getLayout() == 'vertical' ){
-					$chaptersContainer.css( 'height', $( this.kdp ).height() )
+					$chaptersContainer.css( 'height', $( this.vdp ).height() )
 				}
 			} else {
 				if( this.getLayout() == 'horizontal' ){
 					$chaptersContainer.css('width', '100%' );
 				} else if( this.getLayout() == 'vertical' ){
-					$chaptersContainer.css( 'width', $( this.kdp ).width() );
+					$chaptersContainer.css( 'width', $( this.vdp ).width() );
 				}
 			}
 			// special conditional for vertical chapter width
@@ -547,16 +547,16 @@ kWidget.addReadyCallback( function( playerId ){
 			var chaptersVisible = 3;
 			
 			$cc.find('ul').wrap(
-				$( '<div>' ).addClass('k-carousel')
+				$( '<div>' ).addClass('v-carousel')
 			);
 			// Add scroll buttons
-			$cc.find('.k-carousel').before(
+			$cc.find('.v-carousel').before(
 				$( '<a />' )
-				.addClass( "k-scroll k-prev" )
+				.addClass( "v-scroll v-prev" )
 			)
-			$cc.find('.k-carousel').after(
+			$cc.find('.v-carousel').after(
 				$( '<a />' )
-				.addClass( "k-scroll k-next" )
+				.addClass( "v-scroll v-next" )
 			)
 			// Get rough estimates for number of chapter visable.  
 			var largestBoxWidth =0;
@@ -575,7 +575,7 @@ kWidget.addReadyCallback( function( playerId ){
 				// set container height if horizontal
 				$cc.css( 'height', largetsBoxHeight );
 				// calculate number of visible chapters
-				chaptersVisible = Math.floor( $cc.find( '.k-carousel' ).width() / largestBoxWidth );
+				chaptersVisible = Math.floor( $cc.find( '.v-carousel' ).width() / largestBoxWidth );
 			} else {
 				// calculate number of visible for vertical chapters
 				chaptersVisible = Math.floor( this.$chaptersContainer.height() / largetsBoxHeight );
@@ -585,9 +585,9 @@ kWidget.addReadyCallback( function( playerId ){
 				chaptersVisible = this.getCuePoints().length
 			}
 			// Add scrolling carousel to clip list ( once dom sizes are up-to-date )
-			$cc.find('.k-carousel').jCarouselLite({
-				btnNext: '.k-player-' + this.kdp.id +' .k-next',
-				btnPrev: '.k-player-' + this.kdp.id +' .k-prev',
+			$cc.find('.v-carousel').jCarouselLite({
+				btnNext: '.v-player-' + this.vdp.id +' .v-next',
+				btnPrev: '.v-player-' + this.vdp.id +' .v-prev',
 				visible: chaptersVisible,
 				mouseWheel: true,
 				circular: false,
@@ -595,13 +595,13 @@ kWidget.addReadyCallback( function( playerId ){
 			});
 			// make sure vertical height matches target:
 			if( this.getLayout() == 'vertical' ){
-				$cc.find('.k-carousel').css('height', $cc.height() )
+				$cc.find('.v-carousel').css('height', $cc.height() )
 			}
 			
 			// give more height if needed 
 			if( this.getLayout() == 'horizontal' ){
 				// fit to container:
-				$cc.find('.k-carousel').css('width', $cc.width() )
+				$cc.find('.v-carousel').css('width', $cc.width() )
 				// set width to horizontalChapterBoxWidth 
 				$cc.find('.chapterBox').css( 'width', this.getChapterBoxWidth() );
 				//set to auto to discover height:
@@ -629,31 +629,31 @@ kWidget.addReadyCallback( function( playerId ){
 				return $(a).data('index') > $(b).data('index') ? 1 : -1;
 			});
 			// start at clip zero ( should be default ) 
-			$cc.find('.k-carousel')[0].jCarouselLiteGo( 0 );
+			$cc.find('.v-carousel')[0].jCarouselLiteGo( 0 );
 			
 			// Add chapter hover to hide show play buttons:
-			var inKBtn = false;
+			var inVBtn = false;
 			var inContainer = false;
 			var checkHideBtn = function(){
 				setTimeout(function(){
-					if( !inKBtn && !inContainer ){
-						$cc.find('.k-prev,.k-next').animate({'opacity':0});	
+					if( !inVBtn && !inContainer ){
+						$cc.find('.v-prev,.v-next').animate({'opacity':0});	
 					}
 				},0)
 			}
 			var showBtn = function(){
-				$cc.find('.k-prev,.k-next').animate({'opacity':1});
+				$cc.find('.v-prev,.v-next').animate({'opacity':1});
 			}
-			// check for knext 
-			$cc.find('.k-prev,.k-next')
+			// check for vnext 
+			$cc.find('.v-prev,.v-next')
 			.hover(function(){
 				showBtn();
-				inKBtn = true;
+				inVBtn = true;
 			},function(){ 
-				inKBtn = false;
+				inVBtn = false;
 				checkHideBtn();
 			})
-			$cc.find('.k-carousel').hover( function(){
+			$cc.find('.v-carousel').hover( function(){
 				showBtn();
 				inContainer = true;
 			}, function(){
@@ -661,7 +661,7 @@ kWidget.addReadyCallback( function( playerId ){
 				checkHideBtn();
 			})
 			// hide the arrows to start with ( with an animation so users know they are there )
-			$cc.find('.k-prev,.k-next').animate({'opacity':0});	
+			$cc.find('.v-prev,.v-next').animate({'opacity':0});	
 		},
 		getLayout: function(){
 			return  this.getConfig( 'layout' ) || 'horizontal';
@@ -686,7 +686,7 @@ kWidget.addReadyCallback( function( playerId ){
 			}
 			switch( errorData.code ){
 				case "SERVICE_FORBIDDEN":
-					error.title = "Invalid Kaltura Secret";
+					error.title = "Invalid Vidiun Secret";
 					error.msg = "please check player configuration";
 					break;
 				default:
@@ -719,7 +719,7 @@ kWidget.addReadyCallback( function( playerId ){
 			}
 		},
 		normalizeAttrValue: function( attrValue ){
-			// normalize flash kdp string values
+			// normalize flash vdp string values
 			switch( attrValue ){
 				case "null":
 					return null;
@@ -735,7 +735,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		getAttr: function( attr ){
 			return this.normalizeAttrValue(
-				this.kdp.evaluate( '{' + attr + '}' )
+				this.vdp.evaluate( '{' + attr + '}' )
 			);
 		},
 		getConfig : function( attr ){
@@ -743,7 +743,7 @@ kWidget.addReadyCallback( function( playerId ){
 				return this.configOverride[ attr ];
 			}
 			return this.normalizeAttrValue(
-				this.kdp.evaluate('{chaptersView.' + attr + '}' )
+				this.vdp.evaluate('{chaptersView.' + attr + '}' )
 			);
 		}
 	}
@@ -753,10 +753,10 @@ kWidget.addReadyCallback( function( playerId ){
 	// We start build out at chaneMedia time, will clear out old chapters 
 	// in cases for playlists with entries without chapters.
 	var instance;
-	kdp.kBind( 'changeMedia', function(){
-		instance = new chaptersView( kdp );
+	vdp.vBind( 'changeMedia', function(){
+		instance = new chaptersView( vdp );
 	});
-	kdp.kBind( 'mediaReady', function(){
+	vdp.vBind( 'mediaReady', function(){
 		if( instance.mediaReady ){
 			instance.mediaReady();
 		}

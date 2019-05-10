@@ -26,7 +26,7 @@
             onSelected: null
         };
 
-        this.bindPostfix = '.kMenu';
+        this.bindPostfix = '.vMenu';
         this.$el = $element;
         this.options = $.extend( {}, defaults, options) ;
 
@@ -36,7 +36,7 @@
         return this;
     }
 
-    mw.KMenu.prototype = {
+    mw.VMenu.prototype = {
         init: function(){
             var _this = this;
             // Add CSS class

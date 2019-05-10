@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'liveStatus', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'liveStatus', mw.VBaseComponent.extend({
 		onAirStatus: false,
 
 		defaultConfig: {

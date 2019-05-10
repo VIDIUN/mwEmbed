@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentType
+class VidiunDocumentType
 {
 	const DOCUMENT = 11;
 	const SWF = 12;
@@ -47,10 +47,10 @@ class KalturaDocumentType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentEntryOrderBy
+class VidiunDocumentEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const END_DATE_ASC = "+endDate";
@@ -77,80 +77,80 @@ class KalturaDocumentEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParamsOrderBy
+class VidiunDocumentFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParamsOutputOrderBy
+class VidiunDocumentFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParamsOrderBy
+class VidiunImageFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParamsOutputOrderBy
+class VidiunImageFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParamsOrderBy
+class VidiunPdfFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParamsOutputOrderBy
+class VidiunPdfFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParamsOrderBy
+class VidiunSwfFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParamsOutputOrderBy
+class VidiunSwfFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentEntry extends KalturaBaseEntry
+class VidiunDocumentEntry extends VidiunBaseEntry
 {
 	/**
 	 * The type of the document
 	 * 	 
 	 *
-	 * @var KalturaDocumentType
+	 * @var VidiunDocumentType
 	 * @insertonly
 	 */
 	public $documentType = null;
@@ -168,15 +168,15 @@ class KalturaDocumentEntry extends KalturaBaseEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentListResponse extends KalturaObjectBase
+class VidiunDocumentListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDocumentEntry
+	 * @var array of VidiunDocumentEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -193,19 +193,19 @@ class KalturaDocumentListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParams extends KalturaFlavorParams
+class VidiunDocumentFlavorParams extends VidiunFlavorParams
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParams extends KalturaFlavorParams
+class VidiunImageFlavorParams extends VidiunFlavorParams
 {
 	/**
 	 * 
@@ -246,10 +246,10 @@ class KalturaImageFlavorParams extends KalturaFlavorParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParams extends KalturaFlavorParams
+class VidiunPdfFlavorParams extends VidiunFlavorParams
 {
 	/**
 	 * 
@@ -262,10 +262,10 @@ class KalturaPdfFlavorParams extends KalturaFlavorParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParams extends KalturaFlavorParams
+class VidiunSwfFlavorParams extends VidiunFlavorParams
 {
 	/**
 	 * 
@@ -285,15 +285,15 @@ class KalturaSwfFlavorParams extends KalturaFlavorParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDocumentEntryBaseFilter extends KalturaBaseEntryFilter
+abstract class VidiunDocumentEntryBaseFilter extends VidiunBaseEntryFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDocumentType
+	 * @var VidiunDocumentType
 	 */
 	public $documentTypeEqual = null;
 
@@ -322,19 +322,19 @@ abstract class KalturaDocumentEntryBaseFilter extends KalturaBaseEntryFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunDocumentFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunImageFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 	/**
 	 * 
@@ -375,10 +375,10 @@ class KalturaImageFlavorParamsOutput extends KalturaFlavorParamsOutput
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunPdfFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 	/**
 	 * 
@@ -391,10 +391,10 @@ class KalturaPdfFlavorParamsOutput extends KalturaFlavorParamsOutput
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunSwfFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 	/**
 	 * 
@@ -414,166 +414,166 @@ class KalturaSwfFlavorParamsOutput extends KalturaFlavorParamsOutput
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentEntryFilter extends KalturaDocumentEntryBaseFilter
+class VidiunDocumentEntryFilter extends VidiunDocumentEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDocumentFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunDocumentFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaImageFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunImageFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPdfFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunPdfFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSwfFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunSwfFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParamsFilter extends KalturaDocumentFlavorParamsBaseFilter
+class VidiunDocumentFlavorParamsFilter extends VidiunDocumentFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParamsFilter extends KalturaImageFlavorParamsBaseFilter
+class VidiunImageFlavorParamsFilter extends VidiunImageFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParamsFilter extends KalturaPdfFlavorParamsBaseFilter
+class VidiunPdfFlavorParamsFilter extends VidiunPdfFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParamsFilter extends KalturaSwfFlavorParamsBaseFilter
+class VidiunSwfFlavorParamsFilter extends VidiunSwfFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDocumentFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunDocumentFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaImageFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunImageFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPdfFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunPdfFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSwfFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunSwfFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentFlavorParamsOutputFilter extends KalturaDocumentFlavorParamsOutputBaseFilter
+class VidiunDocumentFlavorParamsOutputFilter extends VidiunDocumentFlavorParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImageFlavorParamsOutputFilter extends KalturaImageFlavorParamsOutputBaseFilter
+class VidiunImageFlavorParamsOutputFilter extends VidiunImageFlavorParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPdfFlavorParamsOutputFilter extends KalturaPdfFlavorParamsOutputBaseFilter
+class VidiunPdfFlavorParamsOutputFilter extends VidiunPdfFlavorParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSwfFlavorParamsOutputFilter extends KalturaSwfFlavorParamsOutputBaseFilter
+class VidiunSwfFlavorParamsOutputFilter extends VidiunSwfFlavorParamsOutputBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentsService extends KalturaServiceBase
+class VidiunDocumentsService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -581,21 +581,21 @@ class KalturaDocumentsService extends KalturaServiceBase
 	/**
 	 * Add new document entry after the specific document file was uploaded and the upload token id exists
 	 * 
-	 * @param KalturaDocumentEntry $documentEntry Document entry metadata
+	 * @param VidiunDocumentEntry $documentEntry Document entry metadata
 	 * @param string $uploadTokenId Upload token id
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
-	function addFromUploadedFile(KalturaDocumentEntry $documentEntry, $uploadTokenId)
+	function addFromUploadedFile(VidiunDocumentEntry $documentEntry, $uploadTokenId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->addParam($kparams, "uploadTokenId", $uploadTokenId);
-		$this->client->queueServiceActionCall("document_documents", "addFromUploadedFile", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->addParam($vparams, "uploadTokenId", $uploadTokenId);
+		$this->client->queueServiceActionCall("document_documents", "addFromUploadedFile", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -603,23 +603,23 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Copy entry into new entry
 	 * 
 	 * @param string $sourceEntryId Document entry id to copy from
-	 * @param KalturaDocumentEntry $documentEntry Document entry metadata
+	 * @param VidiunDocumentEntry $documentEntry Document entry metadata
 	 * @param int $sourceFlavorParamsId The flavor to be used as the new entry source, source flavor will be used if not specified
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
-	function addFromEntry($sourceEntryId, KalturaDocumentEntry $documentEntry = null, $sourceFlavorParamsId = null)
+	function addFromEntry($sourceEntryId, VidiunDocumentEntry $documentEntry = null, $sourceFlavorParamsId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "sourceEntryId", $sourceEntryId);
+		$vparams = array();
+		$this->client->addParam($vparams, "sourceEntryId", $sourceEntryId);
 		if ($documentEntry !== null)
-			$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->addParam($kparams, "sourceFlavorParamsId", $sourceFlavorParamsId);
-		$this->client->queueServiceActionCall("document_documents", "addFromEntry", $kparams);
+			$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->addParam($vparams, "sourceFlavorParamsId", $sourceFlavorParamsId);
+		$this->client->queueServiceActionCall("document_documents", "addFromEntry", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -627,21 +627,21 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Copy flavor asset into new entry
 	 * 
 	 * @param string $sourceFlavorAssetId Flavor asset id to be used as the new entry source
-	 * @param KalturaDocumentEntry $documentEntry Document entry metadata
-	 * @return KalturaDocumentEntry
+	 * @param VidiunDocumentEntry $documentEntry Document entry metadata
+	 * @return VidiunDocumentEntry
 	 */
-	function addFromFlavorAsset($sourceFlavorAssetId, KalturaDocumentEntry $documentEntry = null)
+	function addFromFlavorAsset($sourceFlavorAssetId, VidiunDocumentEntry $documentEntry = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "sourceFlavorAssetId", $sourceFlavorAssetId);
+		$vparams = array();
+		$this->client->addParam($vparams, "sourceFlavorAssetId", $sourceFlavorAssetId);
 		if ($documentEntry !== null)
-			$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->queueServiceActionCall("document_documents", "addFromFlavorAsset", $kparams);
+			$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->queueServiceActionCall("document_documents", "addFromFlavorAsset", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -655,15 +655,15 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 */
 	function convert($entryId, $conversionProfileId = null, array $dynamicConversionAttributes = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "conversionProfileId", $conversionProfileId);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "conversionProfileId", $conversionProfileId);
 		if ($dynamicConversionAttributes !== null)
 			foreach($dynamicConversionAttributes as $index => $obj)
 			{
-				$this->client->addParam($kparams, "dynamicConversionAttributes:$index", $obj->toParams());
+				$this->client->addParam($vparams, "dynamicConversionAttributes:$index", $obj->toParams());
 			}
-		$this->client->queueServiceActionCall("document_documents", "convert", $kparams);
+		$this->client->queueServiceActionCall("document_documents", "convert", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -677,19 +677,19 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * 
 	 * @param string $entryId Document entry id
 	 * @param int $version Desired version of the data
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
 	function get($entryId, $version = -1)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "version", $version);
-		$this->client->queueServiceActionCall("document_documents", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "version", $version);
+		$this->client->queueServiceActionCall("document_documents", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -697,20 +697,20 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Update document entry. Only the properties that were set will be updated.
 	 * 
 	 * @param string $entryId Document entry id to update
-	 * @param KalturaDocumentEntry $documentEntry Document entry metadata to update
-	 * @return KalturaDocumentEntry
+	 * @param VidiunDocumentEntry $documentEntry Document entry metadata to update
+	 * @return VidiunDocumentEntry
 	 */
-	function update($entryId, KalturaDocumentEntry $documentEntry)
+	function update($entryId, VidiunDocumentEntry $documentEntry)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "documentEntry", $documentEntry->toParams());
-		$this->client->queueServiceActionCall("document_documents", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "documentEntry", $documentEntry->toParams());
+		$this->client->queueServiceActionCall("document_documents", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -722,9 +722,9 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 */
 	function delete($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -736,38 +736,38 @@ class KalturaDocumentsService extends KalturaServiceBase
 	/**
 	 * List document entries by filter with paging support.
 	 * 
-	 * @param KalturaDocumentEntryFilter $filter Document entry filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaDocumentListResponse
+	 * @param VidiunDocumentEntryFilter $filter Document entry filter
+	 * @param VidiunFilterPager $pager Pager
+	 * @return VidiunDocumentListResponse
 	 */
-	function listAction(KalturaDocumentEntryFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDocumentEntryFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("document_documents", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("document_documents", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentListResponse");
 		return $resultObject;
 	}
 
 	/**
-	 * Upload a document file to Kaltura, then the file can be used to create a document entry.
+	 * Upload a document file to Vidiun, then the file can be used to create a document entry.
 	 * 
 	 * @param file $fileData The file data
 	 * @return string
 	 */
 	function upload($fileData)
 	{
-		$kparams = array();
-		$kfiles = array();
-		$this->client->addParam($kfiles, "fileData", $fileData);
-		$this->client->queueServiceActionCall("document_documents", "upload", $kparams, $kfiles);
+		$vparams = array();
+		$vfiles = array();
+		$this->client->addParam($vfiles, "fileData", $fileData);
+		$this->client->queueServiceActionCall("document_documents", "upload", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -785,9 +785,9 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 */
 	function convertPptToSwf($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "convertPptToSwf", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "convertPptToSwf", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -806,11 +806,11 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 */
 	function serve($entryId, $flavorAssetId = null, $forceProxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "forceProxy", $forceProxy);
-		$this->client->queueServiceActionCall("document_documents", "serve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "forceProxy", $forceProxy);
+		$this->client->queueServiceActionCall("document_documents", "serve", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -826,11 +826,11 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 */
 	function serveByFlavorParamsId($entryId, $flavorParamsId = null, $forceProxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "flavorParamsId", $flavorParamsId);
-		$this->client->addParam($kparams, "forceProxy", $forceProxy);
-		$this->client->queueServiceActionCall("document_documents", "serveByFlavorParamsId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "flavorParamsId", $flavorParamsId);
+		$this->client->addParam($vparams, "forceProxy", $forceProxy);
+		$this->client->queueServiceActionCall("document_documents", "serveByFlavorParamsId", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -840,22 +840,22 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Replace content associated with the given document entry.
 	 * 
 	 * @param string $entryId Document entry id to update
-	 * @param KalturaResource $resource Resource to be used to replace entry doc content
+	 * @param VidiunResource $resource Resource to be used to replace entry doc content
 	 * @param int $conversionProfileId The conversion profile id to be used on the entry
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
-	function updateContent($entryId, KalturaResource $resource, $conversionProfileId = null)
+	function updateContent($entryId, VidiunResource $resource, $conversionProfileId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "resource", $resource->toParams());
-		$this->client->addParam($kparams, "conversionProfileId", $conversionProfileId);
-		$this->client->queueServiceActionCall("document_documents", "updateContent", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "resource", $resource->toParams());
+		$this->client->addParam($vparams, "conversionProfileId", $conversionProfileId);
+		$this->client->queueServiceActionCall("document_documents", "updateContent", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -863,18 +863,18 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Approves document replacement
 	 * 
 	 * @param string $entryId Document entry id to replace
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
 	function approveReplace($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "approveReplace", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "approveReplace", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 
@@ -882,48 +882,48 @@ class KalturaDocumentsService extends KalturaServiceBase
 	 * Cancels document replacement
 	 * 
 	 * @param string $entryId Document entry id to cancel
-	 * @return KalturaDocumentEntry
+	 * @return VidiunDocumentEntry
 	 */
 	function cancelReplace($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("document_documents", "cancelReplace", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("document_documents", "cancelReplace", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDocumentEntry");
+		$this->client->validateObjectType($resultObject, "VidiunDocumentEntry");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDocumentClientPlugin extends KalturaClientPlugin
+class VidiunDocumentClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaDocumentsService
+	 * @var VidiunDocumentsService
 	 */
 	public $documents = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->documents = new KalturaDocumentsService($client);
+		$this->documents = new VidiunDocumentsService($client);
 	}
 
 	/**
-	 * @return KalturaDocumentClientPlugin
+	 * @return VidiunDocumentClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaDocumentClientPlugin($client);
+		return new VidiunDocumentClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

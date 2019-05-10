@@ -13,12 +13,12 @@ window['disablePlaybackModeSelector'] = true;
 </head>
 <body>
 <div id="audio" style="width:480px;height:130px" ></div>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script>
 	var flashvars = {
 		'SoundVisualize': {
 			'plugin' : 'true',
-			'path' : '/content/uiconf/ps/demos/kdp3/plugins/v3.5.6/SoundVisualizePlugin.swf',
+			'path' : '/content/uiconf/ps/demos/vdp3/plugins/v3.5.6/SoundVisualizePlugin.swf',
 			'width' : '100%',
 			'height' : '100%',
 			'relativeTo': 'video',
@@ -33,7 +33,7 @@ window['disablePlaybackModeSelector'] = true;
 	};
 	function doEmbedPlayer( fv ){
 		// clear the companions 
-		kWidget.embed({
+		vWidget.embed({
 			'targetId': 'audio',
 			'wid': '_243342',
 			'uiconf_id' : '11138511',
