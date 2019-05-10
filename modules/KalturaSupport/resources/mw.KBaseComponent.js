@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.KBaseComponent = mw.KBasePlugin.extend({
+mw.VBaseComponent = mw.VBasePlugin.extend({
 
 	// Set basic config for all components
 	getBaseConfig: function(){

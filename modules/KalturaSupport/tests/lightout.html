@@ -76,7 +76,7 @@ function lightsOff(){
 	</div>
 </div>
 
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script>
 	var flashvars = {
 			'lightIcon': {
@@ -87,7 +87,7 @@ function lightsOff(){
 				'buttonType' : 'iconButton',
 				'icon': 'uploadIcon',
 				'relativeTo': 'fullScreenBtnControllerScreen',
-				'kClick': "jsCall('lights')",
+				'vClick': "jsCall('lights')",
 				'position': 'before',
 				'color1': '14540253',
 				'tooltip': 'Dim lights',
@@ -99,12 +99,12 @@ function lightsOff(){
 			'externalInterfaceDisabled' : 'false',
 			'timerControllerScreen1.visible' : 'false',
 			'timerControllerScreen2.visible' : 'false',
-			'full.skinPath' : '/content/uiconf/ps/demos/kdp3/assets/skinLightbulb.swf'
+			'full.skinPath' : '/content/uiconf/ps/demos/vdp3/assets/skinLightbulb.swf'
 			
 	};
 	function doEmbedPlayer( fv ){
 		// clear the companions 
-		kWidget.embed({
+		vWidget.embed({
 			'targetId': 'lights',
 			'wid': '_243342',
 			'uiconf_id' : '11138511',

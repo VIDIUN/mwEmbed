@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVarPartnerUsageItem extends KalturaObjectBase
+class VidiunVarPartnerUsageItem extends VidiunObjectBase
 {
 	/**
 	 * Partner ID
@@ -61,7 +61,7 @@ class KalturaVarPartnerUsageItem extends KalturaObjectBase
 	 * Partner status
 	 * 	 
 	 *
-	 * @var KalturaPartnerStatus
+	 * @var VidiunPartnerStatus
 	 */
 	public $partnerStatus = null;
 
@@ -221,22 +221,22 @@ class KalturaVarPartnerUsageItem extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerUsageListResponse extends KalturaObjectBase
+class VidiunPartnerUsageListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaVarPartnerUsageItem
+	 * @var VidiunVarPartnerUsageItem
 	 */
 	public $total;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaVarPartnerUsageItem
+	 * @var array of VidiunVarPartnerUsageItem
 	 */
 	public $objects;
 
@@ -251,25 +251,25 @@ class KalturaPartnerUsageListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVarPartnerUsageTotalItem extends KalturaVarPartnerUsageItem
+class VidiunVarPartnerUsageTotalItem extends VidiunVarPartnerUsageItem
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVarConsolePartnerFilter extends KalturaPartnerFilter
+class VidiunVarConsolePartnerFilter extends VidiunPartnerFilter
 {
 	/**
 	 * Eq filter for the partner's group type
 	 *      
 	 *
-	 * @var KalturaPartnerGroupType
+	 * @var VidiunPartnerGroupType
 	 */
 	public $groupTypeEq = null;
 
@@ -294,12 +294,12 @@ class KalturaVarConsolePartnerFilter extends KalturaPartnerFilter
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVarConsoleService extends KalturaServiceBase
+class VidiunVarConsoleService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -307,26 +307,26 @@ class KalturaVarConsoleService extends KalturaServiceBase
 	/**
 	 * Function which calulates partner usage of a group of a VAR's sub-publishers
 	 * 
-	 * @param KalturaPartnerFilter $partnerFilter 
-	 * @param KalturaReportInputFilter $usageFilter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaPartnerUsageListResponse
+	 * @param VidiunPartnerFilter $partnerFilter 
+	 * @param VidiunReportInputFilter $usageFilter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunPartnerUsageListResponse
 	 */
-	function getPartnerUsage(KalturaPartnerFilter $partnerFilter = null, KalturaReportInputFilter $usageFilter = null, KalturaFilterPager $pager = null)
+	function getPartnerUsage(VidiunPartnerFilter $partnerFilter = null, VidiunReportInputFilter $usageFilter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($partnerFilter !== null)
-			$this->client->addParam($kparams, "partnerFilter", $partnerFilter->toParams());
+			$this->client->addParam($vparams, "partnerFilter", $partnerFilter->toParams());
 		if ($usageFilter !== null)
-			$this->client->addParam($kparams, "usageFilter", $usageFilter->toParams());
+			$this->client->addParam($vparams, "usageFilter", $usageFilter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("varconsole_varconsole", "getPartnerUsage", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("varconsole_varconsole", "getPartnerUsage", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaPartnerUsageListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunPartnerUsageListResponse");
 		return $resultObject;
 	}
 
@@ -339,10 +339,10 @@ class KalturaVarConsoleService extends KalturaServiceBase
 	 */
 	function updateStatus($id, $status)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "status", $status);
-		$this->client->queueServiceActionCall("varconsole_varconsole", "updateStatus", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "status", $status);
+		$this->client->queueServiceActionCall("varconsole_varconsole", "updateStatus", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -352,32 +352,32 @@ class KalturaVarConsoleService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVarConsoleClientPlugin extends KalturaClientPlugin
+class VidiunVarConsoleClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaVarConsoleService
+	 * @var VidiunVarConsoleService
 	 */
 	public $varConsole = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->varConsole = new KalturaVarConsoleService($client);
+		$this->varConsole = new VidiunVarConsoleService($client);
 	}
 
 	/**
-	 * @return KalturaVarConsoleClientPlugin
+	 * @return VidiunVarConsoleClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaVarConsoleClientPlugin($client);
+		return new VidiunVarConsoleClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

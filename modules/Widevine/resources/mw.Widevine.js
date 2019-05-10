@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'widevine', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'widevine', mw.VBasePlugin.extend({
 		defaultConfig: {
 			'useSupportedBrowserMsg': 'This video is not supported by this browser.',
 			'useSupportedBrowserTitle': 'Notification',
@@ -8,8 +8,8 @@
 			'useSupportedDeviceTitle': 'Notification',
 			'intallFlashMsg': "This video requires Adobe Flash Player, which is currently not available on your browser. Please <a href='http://www.adobe.com/support/flashplayer/downloads.html' target='_blank'> install Adobe Flash Player </a> to view this video.",
 			'installFlashTitle': 'Notification',
-			'useKdpMsg': 'This video requires Adobe Flash enabled player.',
-			'useKdpTitle': 'Notification',
+			'useVdpMsg': 'This video requires Adobe Flash enabled player.',
+			'useVdpTitle': 'Notification',
 			'promptText': 'Widevine Video Optimizer plugin is needed for enabling video playback in this page. ',
 			'promptLinkText': 'Get Video Optimizer',
 			'PromptRestartChromeAfterInstall' : 'Download of the plugin installer will start immediately. Note that you must restart your Chrome browser after running the installer',
@@ -37,7 +37,7 @@
 			var msg;
 			var title;
 
-			this.getPlayer().setKalturaConfig('kdpVars', 'widevine',
+			this.getPlayer().setVidiunConfig('vdpVars', 'widevine',
 				{ plugin: 'true', loadingPolicy: 'preInitialize', asyncInit: 'true', isWv: true});
 
 			this.bind( 'playerReady', function() {
@@ -54,7 +54,7 @@
 					// If we don't have widevine flavors, but other flavors then let player handle them
 				} else {
 					//hide default "no source found" alert
-					_this.getPlayer().setKalturaConfig(null, 'disableAlerts', true);
+					_this.getPlayer().setVidiunConfig(null, 'disableAlerts', true);
 
 					//if mobile device
 					if (kWidget.isMobileDevice()) {
@@ -116,7 +116,7 @@
 			};
 			// Set the portal
 
-			var portal = "kaltura";
+			var portal = "vidiun";
 
 
 			function doDetect( type, value  ) {
@@ -304,7 +304,7 @@
 				}
 				if (platform)
 				{
-					 return kWidget.getPath() + 'modules/Widevine/resources/' + widevineSrcPath[platform];
+					 return vWidget.getPath() + 'modules/Widevine/resources/' + widevineSrcPath[platform];
 				}
 				return null;
 			}

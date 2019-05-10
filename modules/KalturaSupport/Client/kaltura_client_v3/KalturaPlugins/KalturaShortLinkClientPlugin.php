@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkStatus
+class VidiunShortLinkStatus
 {
 	const DISABLED = 1;
 	const ENABLED = 2;
@@ -47,10 +47,10 @@ class KalturaShortLinkStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkOrderBy
+class VidiunShortLinkOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const EXPIRES_AT_ASC = "+expiresAt";
@@ -61,10 +61,10 @@ class KalturaShortLinkOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLink extends KalturaObjectBase
+class VidiunShortLink extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -136,7 +136,7 @@ class KalturaShortLink extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaShortLinkStatus
+	 * @var VidiunShortLinkStatus
 	 */
 	public $status = null;
 
@@ -144,15 +144,15 @@ class KalturaShortLink extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkListResponse extends KalturaObjectBase
+class VidiunShortLinkListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaShortLink
+	 * @var array of VidiunShortLink
 	 * @readonly
 	 */
 	public $objects;
@@ -169,10 +169,10 @@ class KalturaShortLinkListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaShortLinkBaseFilter extends KalturaFilter
+abstract class VidiunShortLinkBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -275,7 +275,7 @@ abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaShortLinkStatus
+	 * @var VidiunShortLinkStatus
 	 */
 	public $statusEqual = null;
 
@@ -290,22 +290,22 @@ abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkFilter extends KalturaShortLinkBaseFilter
+class VidiunShortLinkFilter extends VidiunShortLinkBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkService extends KalturaServiceBase
+class VidiunShortLinkService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -313,42 +313,42 @@ class KalturaShortLinkService extends KalturaServiceBase
 	/**
 	 * List short link objects by filter and pager
 	 * 
-	 * @param KalturaShortLinkFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaShortLinkListResponse
+	 * @param VidiunShortLinkFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunShortLinkListResponse
 	 */
-	function listAction(KalturaShortLinkFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunShortLinkFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLinkListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunShortLinkListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * Allows you to add a short link object
 	 * 
-	 * @param KalturaShortLink $shortLink 
-	 * @return KalturaShortLink
+	 * @param VidiunShortLink $shortLink 
+	 * @return VidiunShortLink
 	 */
-	function add(KalturaShortLink $shortLink)
+	function add(VidiunShortLink $shortLink)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "shortLink", $shortLink->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "shortLink", $shortLink->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
@@ -356,18 +356,18 @@ class KalturaShortLinkService extends KalturaServiceBase
 	 * Retrieve an short link object by id
 	 * 
 	 * @param string $id 
-	 * @return KalturaShortLink
+	 * @return VidiunShortLink
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("shortlink_shortlink", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("shortlink_shortlink", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
@@ -375,20 +375,20 @@ class KalturaShortLinkService extends KalturaServiceBase
 	 * Update exisitng short link
 	 * 
 	 * @param string $id 
-	 * @param KalturaShortLink $shortLink 
-	 * @return KalturaShortLink
+	 * @param VidiunShortLink $shortLink 
+	 * @return VidiunShortLink
 	 */
-	function update($id, KalturaShortLink $shortLink)
+	function update($id, VidiunShortLink $shortLink)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "shortLink", $shortLink->toParams());
-		$this->client->queueServiceActionCall("shortlink_shortlink", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "shortLink", $shortLink->toParams());
+		$this->client->queueServiceActionCall("shortlink_shortlink", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
@@ -396,18 +396,18 @@ class KalturaShortLinkService extends KalturaServiceBase
 	 * Mark the short link as deleted
 	 * 
 	 * @param string $id 
-	 * @return KalturaShortLink
+	 * @return VidiunShortLink
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("shortlink_shortlink", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("shortlink_shortlink", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaShortLink");
+		$this->client->validateObjectType($resultObject, "VidiunShortLink");
 		return $resultObject;
 	}
 
@@ -420,42 +420,42 @@ class KalturaShortLinkService extends KalturaServiceBase
 	 */
 	function gotoAction($id, $proxy = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "proxy", $proxy);
-		$this->client->queueServiceActionCall("shortlink_shortlink", "goto", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "proxy", $proxy);
+		$this->client->queueServiceActionCall("shortlink_shortlink", "goto", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaShortLinkClientPlugin extends KalturaClientPlugin
+class VidiunShortLinkClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaShortLinkService
+	 * @var VidiunShortLinkService
 	 */
 	public $shortLink = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->shortLink = new KalturaShortLinkService($client);
+		$this->shortLink = new VidiunShortLinkService($client);
 	}
 
 	/**
-	 * @return KalturaShortLinkClientPlugin
+	 * @return VidiunShortLinkClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaShortLinkClientPlugin($client);
+		return new VidiunShortLinkClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

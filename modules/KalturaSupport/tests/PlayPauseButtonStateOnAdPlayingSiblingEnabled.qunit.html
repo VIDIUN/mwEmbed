@@ -10,11 +10,11 @@
 	<script>mw.setConfig('forceMobileHTML5', true);</script>
 	
 	<script type="text/javascript">	
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "playPauseBtn state changing" );
 
-			var kdp = $( '#' + videoId ).get( 0 );
+			var vdp = $( '#' + videoId ).get( 0 );
 
 			asyncTest("Ad started playback", function(){
 				window[ 'onAdStart' ] = function( slot ){
@@ -24,9 +24,9 @@
 					start();
 				}
 					
-				kalturaQunitWaitForPlayer(function(){
+				vidiunQunitWaitForPlayer(function(){
 				// Listen for ad start
-					kdp.addJsListener('adStart', 'onAdStart');
+					vdp.addJsListener('adStart', 'onAdStart');
 				});
 			});
 
@@ -36,9 +36,9 @@
 			
 				start();
 
-				kdp.addJsListener('adClick', 'onAdClick');
-				kdp.addJsListener('playerPlayed', 'onPlayerPlayed');
-				kdp.addJsListener('onEndedDone', 'onEndedDone');
+				vdp.addJsListener('adClick', 'onAdClick');
+				vdp.addJsListener('playerPlayed', 'onPlayerPlayed');
+				vdp.addJsListener('onEndedDone', 'onEndedDone');
 			});
 		}
 
@@ -56,9 +56,9 @@
 			
 				start();
 
-				kdp.removeJsListener('playerPlayed', 'onPlayerPlayed');
-				kdp.addJsListener('doPlay', 'onDoPlay');
-				kdp.addJsListener('doPause', 'onDoPause');
+				vdp.removeJsListener('playerPlayed', 'onPlayerPlayed');
+				vdp.addJsListener('doPlay', 'onDoPlay');
+				vdp.addJsListener('doPause', 'onDoPause');
 			});
 		}
 
@@ -79,8 +79,8 @@
 		}
 
 		window[ 'onEndedDone' ] = function(){
-			kdp.removeJsListener('doPlay', 'onDoPlay');
-			kdp.removeJsListener('doPause', 'onDoPause');
+			vdp.removeJsListener('doPlay', 'onDoPlay');
+			vdp.removeJsListener('doPause', 'onDoPause');
 
 			asyncTest( "Validate icon changed to replay when entry ended", function(){
 				equal("Replay", getPlayerBtn().title);
@@ -91,22 +91,22 @@
 	}
 
 	function getPlayerBtn() {
-		var playerElement = $("#kaltura_player iframe").get(0).contentWindow.document;
+		var playerElement = $("#vidiun_player iframe").get(0).contentWindow.document;
 		return playerElement.getElementsByClassName("playPauseBtn")[0];
 	}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 	<h1>Player Skin 2.0 + Test Page for PlayPauseBtn state changes with Ads + Sibling Enabled</h1>
 	<br />
-	<div id="kaltura_player" style="width: 300px; height: 330px;"></div>
+	<div id="vidiun_player" style="width: 300px; height: 330px;"></div>
 	<br style="clear: both;" /><br />
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '13306622',
 		'entry_id' : '0_uka1msg4',
@@ -115,10 +115,10 @@
 				'numPreroll':"1", 
 				'prerollInterval':"1",
 				'prerollStartWith':"1",
-				'prerollUrl':"http://projects.kaltura.com/MichalR/vast3_demo.xml", 
+				'prerollUrl':"http://projects.vidiun.com/MichalR/vast3_demo.xml", 
 				'overlayStartAt':"20",
 				'overlayInterval':"300",
-				'overlayUrl':"http://projects.kaltura.com/MichalR/vast_overlay.xml",
+				'overlayUrl':"http://projects.vidiun.com/MichalR/vast_overlay.xml",
 				'numPostroll':"1",
 				'preSequence':"1",
 				'postSequence':"1",

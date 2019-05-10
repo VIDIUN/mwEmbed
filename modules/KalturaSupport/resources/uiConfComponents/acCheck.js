@@ -4,9 +4,9 @@
 ( function( mw, $ ) { "use strict";
 
 var acCheck = function( embedPlayer ){
-	var ac  = embedPlayer.kalturaContextData;
+	var ac  = embedPlayer.vidiunContextData;
 	// TODO move getAccessControlStatus to local method
-	var acStatus = kWidgetSupport.getAccessControlStatus( ac, embedPlayer );
+	var acStatus = vWidgetSupport.getAccessControlStatus( ac, embedPlayer );
 	if( acStatus !== true ){
 		embedPlayer.setError( acStatus );
 		return ;
@@ -14,8 +14,8 @@ var acCheck = function( embedPlayer ){
 };
 
 //Check for new Embed Player events:
-mw.addKalturaConfCheck( function( embedPlayer, callback ){
-	if( embedPlayer.kalturaContextData ){
+mw.addVidiunConfCheck( function( embedPlayer, callback ){
+	if( embedPlayer.vidiunContextData ){
 		acCheck( embedPlayer );
 	}
 	callback();

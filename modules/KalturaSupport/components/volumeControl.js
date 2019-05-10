@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'volumeControl', mw.KBaseComponent.extend({
+mw.PluginManager.add( 'volumeControl', mw.VBaseComponent.extend({
 
 	defaultConfig: {
 		parent: "controlsContainer",

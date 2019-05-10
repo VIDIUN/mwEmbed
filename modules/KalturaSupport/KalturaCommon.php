@@ -1,6 +1,6 @@
 <?php
 
-define( 'KALTURA_GENERIC_SERVER_ERROR', "Error getting sources from server. Please try again.");
+define( 'VIDIUN_GENERIC_SERVER_ERROR', "Error getting sources from server. Please try again.");
 
 /* 
  * TODO: Use PHP5 auto loading capability instead of requiring all of our resources all the time
@@ -11,17 +11,17 @@ define( 'KALTURA_GENERIC_SERVER_ERROR', "Error getting sources from server. Plea
 require_once( dirname( __FILE__ ) . '/../../includes/Pimple.php' );
 // Include request utility helper
 require_once( dirname( __FILE__ ) . '/RequestHelper.php' );
-// Include the kaltura client
-require_once( dirname( __FILE__ ) . '/Client/KalturaClientHelper.php' );
-// Include Kaltura Logger
-require_once( dirname( __FILE__ ) . '/KalturaLogger.php' );
-// Include Kaltura Cache
-require_once( dirname( __FILE__ ) . '/Cache/kFileSystemCacheWrapper.php');
-require_once( dirname( __FILE__ ) . '/Cache/kNoCacheWrapper.php');
-require_once( dirname( __FILE__ ) . '/KalturaCache.php');
-require_once( dirname( __FILE__ ) . '/KalturaUtils.php');
+// Include the vidiun client
+require_once( dirname( __FILE__ ) . '/Client/VidiunClientHelper.php' );
+// Include Vidiun Logger
+require_once( dirname( __FILE__ ) . '/VidiunLogger.php' );
+// Include Vidiun Cache
+require_once( dirname( __FILE__ ) . '/Cache/vFileSystemCacheWrapper.php');
+require_once( dirname( __FILE__ ) . '/Cache/vNoCacheWrapper.php');
+require_once( dirname( __FILE__ ) . '/VidiunCache.php');
+require_once( dirname( __FILE__ ) . '/VidiunUtils.php');
 
-// Include Kaltura Utilities
+// Include Vidiun Utilities
 
 // Initilize our shared container
 $container = new Pimple();
@@ -32,40 +32,40 @@ $container['request_helper'] = $container->share(function ($c) {
 });
 
 $container['utility_helper'] = $container->share(function ($c) {
-	return new KalturaUtils();
+	return new VidiunUtils();
 });
 
-$kUtility = $container['utility_helper'];
+$vUtility = $container['utility_helper'];
 
 // Set global vars
 $container['mwembed_version'] = $wgMwEmbedVersion;
 $container['cache_directory'] = $wgScriptCacheDirectory;
 $container['logs_directory'] = $wgScriptCacheDirectory . '/logs';
-$container['cache_expiry'] = $wgKalturaUiConfCacheTime;
+$container['cache_expiry'] = $wgVidiunUiConfCacheTime;
 $container['enable_logs'] = $wgLogApiRequests;
-$container['service_timeout'] = $wgKalturaServiceTimeout;
+$container['service_timeout'] = $wgVidiunServiceTimeout;
 
 // Setup Logger object
 $container['logger'] = $container->share(function ($c) {
-	return new KalturaLogger( $c['logs_directory'], $c['enable_logs'] );
+	return new VidiunLogger( $c['logs_directory'], $c['enable_logs'] );
 });
 
 // Setup Cache Adapter / Helper
 $container['no_cache_adapter'] = $container->share(function ($c) {
-	return new kNoCacheWrapper();
+	return new vNoCacheWrapper();
 });
 $container['file_cache_adapter'] = $container->share(function ($c) {
-	$fileCache = new kFileSystemCacheWrapper();
+	$fileCache = new vFileSystemCacheWrapper();
 	$fileCache->init($c['cache_directory'], 'iframe', 2, false, $c['cache_expiry'], true);
 	return $fileCache;
 });
 $container['cache_helper'] = $container->share(function ($c) {
 
 	// Choose which cache adapter to use
-	global $wgEnableScriptDebug, $wgKalturaForceResultCache;
+	global $wgEnableScriptDebug, $wgVidiunForceResultCache;
 	$useCache = !$wgEnableScriptDebug;
 	// Force cache flag ( even in debug )
-	if( $wgKalturaForceResultCache === true){
+	if( $wgVidiunForceResultCache === true){
 		$useCache = true;
 	}
 	$request = $c['request_helper'];
@@ -76,7 +76,7 @@ $container['cache_helper'] = $container->share(function ($c) {
 	}
 
 	$className = ($useCache) ? 'file_cache_adapter' : 'no_cache_adapter';
-	return new KalturaCache( $c[ $className ], $c['cache_expiry'] );
+	return new VidiunCache( $c[ $className ], $c['cache_expiry'] );
 });
 
 // Setup client helper
@@ -109,7 +109,7 @@ $container['client_helper'] = $container->share(function ($c) {
 		$config['WidgetId'] = $request->getWidgetId();
 	}	
 
-	return new KalturaClientHelper( $config );
+	return new VidiunClientHelper( $config );
 });
 
 $container['uiconf_result'] = $container->share(function ($c) {

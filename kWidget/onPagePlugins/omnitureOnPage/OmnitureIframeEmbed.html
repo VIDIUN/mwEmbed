@@ -7,35 +7,35 @@
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">	
 	//Enable uiconf js which includes external resources ( not needed if resources are defined in uiConf )
-	mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
-	mw.setConfig('Kaltura.ForceIframeEmbed', true);
+	mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
+	mw.setConfig('Vidiun.ForceIframeEmbed', true);
 	
-	function jsKalturaPlayerTest( videoId ){
+	function jsVidiunPlayerTest( videoId ){
 		// Name this module
 		module( "Omniture page test" );
 	}
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Omniture On Page, SiteCatalyst 15</h2>
-<div id="kaltura_player" style="width:500px;height:310px;"></div>
+<div id="vidiun_player" style="width:500px;height:310px;"></div>
 <script>
-kWidget.embed('kaltura_player', {
+vWidget.embed('vidiun_player', {
 	'wid' : '_243342',
 	'uiconf_id' : '2877502',
 	'entry_id' : '1_zm1lgs13',
 	'flashvars': {
 		'omnitureOnPage' :{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			'relativeTo': 'video',
 			'position': 'before',
 			'includeInLayout':false,
 			'loadInIframe':true,
 			
-			's_codeUrl':  "kWidget/onPagePlugins/omnitureOnPage/resources/adobe_sample_s_code.js",
+			's_codeUrl':  "vWidget/onPagePlugins/omnitureOnPage/resources/adobe_sample_s_code.js",
 			's_codeVarName': 's',
 			'trackEventMonitor': 'omnitureTrackingLog',
 			

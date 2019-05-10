@@ -9,8 +9,8 @@
 <style>
 		td, th{ text-align: left; padding: 4px;}
 	</style>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Playback Rate ( HTML5 only ) </h2>
@@ -25,7 +25,7 @@ Note you must use <b>progressive delivery</b> for playback rate control, and not
 	<button class="btn-info btn btn-mini" data-rate="fastest"><i class="icon-white icon-fast-forward"></i> fastest</button>
 </div>
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
@@ -42,15 +42,15 @@ Note you must use <b>progressive delivery</b> for playback rate control, and not
 			}
 		}
 	});
-	kWidget.addReadyCallback( function( playerId ){
-		var kdp = document.getElementById( playerId );
+	vWidget.addReadyCallback( function( playerId ){
+		var vdp = document.getElementById( playerId );
 		// Log playback rate changes:
-		kdp.kBind('updatedPlaybackRate', function( newRate ){
+		vdp.vBind('updatedPlaybackRate', function( newRate ){
 			$("#changeLog").append( "Set playback rate to x" + newRate + "\n" );
 		});
 		// Update rate on button click
 		$('.rate-buttons button').click(function(){
-			kdp.sendNotification('playbackRateChangeSpeed', $( this ).attr('data-rate') );
+			vdp.sendNotification('playbackRateChangeSpeed', $( this ).attr('data-rate') );
 		})
 	});
 </script>
@@ -76,15 +76,15 @@ Note you must use <b>progressive delivery</b> for playback rate control, and not
 	<br>
 Example code: log rate changes and bind buttons to update named rates: 
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	// Log playback rate changes:
-	kdp.kBind('updatedPlaybackRate', function( newRate ){
+	vdp.vBind('updatedPlaybackRate', function( newRate ){
 		$("#changeLog").append( "Set playback rate to x" + newRate + "\n" );
 	});
 	// Update rate on button click
 	$('.rate-buttons button').click(function(){
-		kdp.sendNotification('playbackRateChangeSpeed', $( this ).attr('data-rate') );
+		vdp.sendNotification('playbackRateChangeSpeed', $( this ).attr('data-rate') );
 	})
 })
 </pre>

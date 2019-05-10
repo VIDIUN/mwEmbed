@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'topBarContainer', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'topBarContainer', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			'hover': true

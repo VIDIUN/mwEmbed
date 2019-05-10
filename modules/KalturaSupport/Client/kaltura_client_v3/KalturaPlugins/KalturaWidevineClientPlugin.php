@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,28 +28,28 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaDrmClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunDrmClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineRepositorySyncMode
+class VidiunWidevineRepositorySyncMode
 {
 	const MODIFY = 0;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorAssetOrderBy
+class VidiunWidevineFlavorAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -62,26 +62,26 @@ class KalturaWidevineFlavorAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParamsOrderBy
+class VidiunWidevineFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParamsOutputOrderBy
+class VidiunWidevineFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineProfileOrderBy
+class VidiunWidevineProfileOrderBy
 {
 	const ID_ASC = "+id";
 	const NAME_ASC = "+name";
@@ -90,10 +90,10 @@ class KalturaWidevineProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineProfile extends KalturaDrmProfile
+class VidiunWidevineProfile extends VidiunDrmProfile
 {
 	/**
 	 * 
@@ -141,15 +141,15 @@ class KalturaWidevineProfile extends KalturaDrmProfile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineRepositorySyncJobData extends KalturaJobData
+class VidiunWidevineRepositorySyncJobData extends VidiunJobData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaWidevineRepositorySyncMode
+	 * @var VidiunWidevineRepositorySyncMode
 	 */
 	public $syncMode = null;
 
@@ -178,10 +178,10 @@ class KalturaWidevineRepositorySyncJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorAsset extends KalturaFlavorAsset
+class VidiunWidevineFlavorAsset extends VidiunFlavorAsset
 {
 	/**
 	 * License distribution window start date 
@@ -211,19 +211,19 @@ class KalturaWidevineFlavorAsset extends KalturaFlavorAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParams extends KalturaFlavorParams
+class VidiunWidevineFlavorParams extends VidiunFlavorParams
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunWidevineFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 	/**
 	 * License distribution window start date 
@@ -245,85 +245,85 @@ class KalturaWidevineFlavorParamsOutput extends KalturaFlavorParamsOutput
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWidevineProfileBaseFilter extends KalturaDrmProfileFilter
+abstract class VidiunWidevineProfileBaseFilter extends VidiunDrmProfileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineProfileFilter extends KalturaWidevineProfileBaseFilter
+class VidiunWidevineProfileFilter extends VidiunWidevineProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWidevineFlavorAssetBaseFilter extends KalturaFlavorAssetFilter
+abstract class VidiunWidevineFlavorAssetBaseFilter extends VidiunFlavorAssetFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWidevineFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunWidevineFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorAssetFilter extends KalturaWidevineFlavorAssetBaseFilter
+class VidiunWidevineFlavorAssetFilter extends VidiunWidevineFlavorAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParamsFilter extends KalturaWidevineFlavorParamsBaseFilter
+class VidiunWidevineFlavorParamsFilter extends VidiunWidevineFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWidevineFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunWidevineFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineFlavorParamsOutputFilter extends KalturaWidevineFlavorParamsOutputBaseFilter
+class VidiunWidevineFlavorParamsOutputFilter extends VidiunWidevineFlavorParamsOutputBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineDrmService extends KalturaServiceBase
+class VidiunWidevineDrmService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -337,10 +337,10 @@ class KalturaWidevineDrmService extends KalturaServiceBase
 	 */
 	function getLicense($flavorAssetId, $referrer = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "referrer", $referrer);
-		$this->client->queueServiceActionCall("widevine_widevinedrm", "getLicense", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "referrer", $referrer);
+		$this->client->queueServiceActionCall("widevine_widevinedrm", "getLicense", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -350,32 +350,32 @@ class KalturaWidevineDrmService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidevineClientPlugin extends KalturaClientPlugin
+class VidiunWidevineClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaWidevineDrmService
+	 * @var VidiunWidevineDrmService
 	 */
 	public $widevineDrm = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->widevineDrm = new KalturaWidevineDrmService($client);
+		$this->widevineDrm = new VidiunWidevineDrmService($client);
 	}
 
 	/**
-	 * @return KalturaWidevineClientPlugin
+	 * @return VidiunWidevineClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaWidevineClientPlugin($client);
+		return new VidiunWidevineClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

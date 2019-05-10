@@ -7,17 +7,17 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	
 	// Name this module
 	module( "NielsenCombined player" );
 
 	var $iframe = $('#' + videoId + '_ifp').contents();
-	var iframeContext = window.frames['kaltura_player_ifp'];
+	var iframeContext = window.frames['vidiun_player_ifp'];
 	var player =  $('#' + videoId )[0];
 	
 	asyncTest("Player Ready", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			ok( $iframe.find('.largePlayBtn').length, ".largePlayBtn found" );
 			testPlay();
 			start();
@@ -108,36 +108,36 @@ function jsKalturaPlayerTest( videoId ){
 }
 </script>
 <script type="text/javascript">	
-var kdpPlayer = null;
-kWidget.addReadyCallback( function( playerId ){
-	kdpPlayer = $('#' + playerId )[0];
+var vdpPlayer = null;
+vWidget.addReadyCallback( function( playerId ){
+	vdpPlayer = $('#' + playerId )[0];
 	// only html5 ( should change to a jsListener if we get the flash verison on this page as well)
-	$( kdpPlayer ).bind( 'NielsenCombined_DispatchEvent', function( event, args ){
+	$( vdpPlayer ).bind( 'NielsenCombined_DispatchEvent', function( event, args ){
 		$('#analyticsLog').append( "NielsenCombined:: " + JSON.stringify( args ) + "\n");
 	});
 });
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Nielsen Combined</h2>
 <div id="nielsenAnalyticsSettings"></div>
-	<div id="kaltura_player" style="float:left;width:400px;height:330px"></div>
+	<div id="vidiun_player" style="float:left;width:400px;height:330px"></div>
 	<div id="analyticsContainer" style="float:left;padding-left:10px;" >
 	<i>Analytics events:</i> <br />
 	<textarea id="analyticsLog" rows='15' style="width:340px;"></textarea>
 	</div>
 	<script>
 	window['trackEvent'] = function( eventObj ){
-		if( kdpPlayer ){
-			$( kdpPlayer ).trigger( 'NielsenCombined_DispatchEvent',  [eventObj]);
+		if( vdpPlayer ){
+			$( vdpPlayer ).trigger( 'NielsenCombined_DispatchEvent',  [eventObj]);
 		}
 	}
 	// clear the text box: 
 	$('#analyticsLog').empty();
-	kWidget.featureConfig({
-		'targetId' : 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId' : 'vidiun_player',
 		'wid' : '_243342',
 		'uiconf_id' : '11138511',
 		'entry_id' : '0_swup5zao',

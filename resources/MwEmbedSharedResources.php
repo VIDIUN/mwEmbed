@@ -349,8 +349,8 @@ return array(
 		'scripts' => 'resources/mediawiki/mediawiki.Uri.js',
 	),
 
-	'mediawiki.kmenu' => array(
-		'scripts' => 'resources/mediawiki/mediawiki.kmenu.js',
+	'mediawiki.vmenu' => array(
+		'scripts' => 'resources/mediawiki/mediawiki.vmenu.js',
 	),
 	
 	'mediawiki.language' => array(

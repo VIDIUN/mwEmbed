@@ -1,6 +1,6 @@
 ( function( mw, $ ) { "use strict";
 
-	mw.PluginManager.add( 'moderation', mw.KBaseScreen.extend({
+	mw.PluginManager.add( 'moderation', mw.VBaseScreen.extend({
 
 		defaultConfig: {
 			"parent": mw.isMobileDevice() ? 'topBarContainer' : 'controlsContainer',
@@ -109,8 +109,8 @@
 			this.getKalturaClient().doRequest( {
 				'service' : 'baseentry',
 				'action' : 'flag',
-				'moderationFlag:objectType' : 'KalturaModerationFlag',
-				'moderationFlag:flaggedEntryId' : _this.getPlayer().kentryid,
+				'moderationFlag:objectType' : 'VidiunModerationFlag',
+				'moderationFlag:flaggedEntryId' : _this.getPlayer().ventryid,
 				'moderationFlag:flagType' : flagObj.flagType,
 				'moderationFlag:comments' : flagObj.flagComments
 			}, function( data ) {

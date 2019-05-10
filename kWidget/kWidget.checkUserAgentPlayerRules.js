@@ -1,29 +1,29 @@
 /**
- * Optional kWidget library
+ * Optional vWidget library
  * Get a user agent player rules
  * @param {Object} ruleSet Object containing the rule set and actions
  * @return {String} What player should the browser lead with:
  * 		 'flash' ( default, lead with flash) | leadWithHTML5 | forceFlash | forceMsg Raw html message string to be displayed ( instead of player )
  */
-kWidget.getUserAgentPlayerRulesMsg = function( ruleSet ){
-	return kWidget.checkUserAgentPlayerRules( ruleSet, true );
+vWidget.getUserAgentPlayerRulesMsg = function( ruleSet ){
+	return vWidget.checkUserAgentPlayerRules( ruleSet, true );
 };
-kWidget.addUserAgentRule = function( uiconfId, rule, action ){
+vWidget.addUserAgentRule = function( uiconfId, rule, action ){
 	var ruleInx = 0;
 	// if there are existing rules, get the last rule index:
-	if( kWidget.userAgentPlayerRules[ uiconfId ] ){
-		for (ruleInx in kWidget.userAgentPlayerRules[ uiconfId ]['rules']) ;
+	if( vWidget.userAgentPlayerRules[ uiconfId ] ){
+		for (ruleInx in vWidget.userAgentPlayerRules[ uiconfId ]['rules']) ;
 	} else {
-		kWidget.userAgentPlayerRules[ uiconfId ] = { 'rules':{}, 'actions': {} };
+		vWidget.userAgentPlayerRules[ uiconfId ] = { 'rules':{}, 'actions': {} };
 	}
 	var ruleIndex = parseInt( ruleInx) +1;
 	// add the rule
-	kWidget.userAgentPlayerRules[ uiconfId ]['rules'][ ruleIndex ] = { 'regMatch': rule };
-	kWidget.userAgentPlayerRules[ uiconfId ]['actions'][ ruleIndex ] = {'mode': action, 'val': 1 };
+	vWidget.userAgentPlayerRules[ uiconfId ]['rules'][ ruleIndex ] = { 'regMatch': rule };
+	vWidget.userAgentPlayerRules[ uiconfId ]['actions'][ ruleIndex ] = {'mode': action, 'val': 1 };
 };
-kWidget.checkUserAgentPlayerRules = function( ruleSet, getMsg ){
-	var ua = ( mw.getConfig( 'KalturaSupport_ForceUserAgent' ) )?
-			mw.getConfig( 'KalturaSupport_ForceUserAgent' ) : navigator.userAgent;
+vWidget.checkUserAgentPlayerRules = function( ruleSet, getMsg ){
+	var ua = ( mw.getConfig( 'VidiunSupport_ForceUserAgent' ) )?
+			mw.getConfig( 'VidiunSupport_ForceUserAgent' ) : navigator.userAgent;
 	var flashMode = {
 		mode: 'flash',
 		val: true

@@ -29,8 +29,8 @@
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
 		'readyCallback': function( playerId ){
-			console.log( "kWidget player ready: " + playerId );
-			var kdp = $('#' + playerId ).get(0);
+			console.log( "vWidget player ready: " + playerId );
+			var vdp = $('#' + playerId ).get(0);
 			var $iframe = $( '#' + playerId + '_ifp' ).contents();
 			var vid = $iframe.find('video').get(0);
 			
@@ -44,7 +44,7 @@
 					$( '<a />' ).attr('href', '#' + _thisEntryId)
 					.click( function(){
 						// issue play request: 
-						kdp.sendNotification('doPlay');
+						vdp.sendNotification('doPlay');
 					
 						// make the player fullscreen
 						setTimeout(function(){
@@ -52,10 +52,10 @@
 						}, 250);
 						
 						// Check if we need to change media: 
-						if( kdp.evaluate('{mediaProxy.entry.id}') != _thisEntryId ){
+						if( vdp.evaluate('{mediaProxy.entry.id}') != _thisEntryId ){
 							isSwitchingStreams = true;
 							// change media to given entry ( and play) if iOS delay since fullscreen and play conflict 
-							kdp.sendNotification('changeMedia', { 'entryId' : _thisEntryId } );
+							vdp.sendNotification('changeMedia', { 'entryId' : _thisEntryId } );
 						} 
 							
 					})
@@ -67,11 +67,11 @@
 				$iframe.find('#' + playerId).get(0).toggleFullscreen();
 			}
 			window['onCloseFullScreen'] = function(){
-				kdp.sendNotification('doStop');
+				vdp.sendNotification('doStop');
 			};
 			// Listen to change media event: 
-			kdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd');
-			kdp.addJsListener( 'closeFullScreen', 'onCloseFullScreen'); 
+			vdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd');
+			vdp.addJsListener( 'closeFullScreen', 'onCloseFullScreen'); 
 			
 		}
 	});

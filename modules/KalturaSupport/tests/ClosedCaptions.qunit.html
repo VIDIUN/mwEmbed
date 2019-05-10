@@ -6,20 +6,20 @@
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "closedCaptions Sample" );
 
-			var kdp = $( '#' + videoId ).get( 0 );
+			var vdp = $( '#' + videoId ).get( 0 );
 			var captionsOverlay;
-			kdp.kBind('changeMedia', 'onChangeMedia');
+			vdp.vBind('changeMedia', 'onChangeMedia');
 
 			asyncTest( "closedCaptions plugin exists", function() {
-				kalturaQunitWaitForPlayer(function(){
-					equal( kdp.evaluate( '{closedCaptions.plugin}' ), true, "closedCaptions plugin exists");
-					kdp.sendNotification("doPlay");
-					kdp.kBind('playing', function() {
-						kdp.kUnbind('playing');
+				vidiunQunitWaitForPlayer(function(){
+					equal( vdp.evaluate( '{closedCaptions.plugin}' ), true, "closedCaptions plugin exists");
+					vdp.sendNotification("doPlay");
+					vdp.vBind('playing', function() {
+						vdp.vUnbind('playing');
 						captionsOverlay = $('.captionsOverlay', document.getElementById("myVideoTarget_ifp").contentDocument);
 
 						if( captionsOverlay.length > 0) {
@@ -28,7 +28,7 @@
 							checkCaptionsExistOnMediaEntry();
 							//change to media with captions and continue
 							setTimeout(function() {
-								kdp.sendNotification("changeMedia", { entryId : "1_23pqn2nu" });
+								vdp.sendNotification("changeMedia", { entryId : "1_23pqn2nu" });
 							}, 3000);
 						}
 					});
@@ -50,16 +50,16 @@
 			}
 
 			window.onChangeMedia = function() {
-				kdp.sendNotification("doPlay");
-				kdp.kBind('playing', function() { 
-					kdp.kUnbind('playing');
+				vdp.sendNotification("doPlay");
+				vdp.vBind('playing', function() { 
+					vdp.vUnbind('playing');
 					captionsOverlay = $('.captionsOverlay', document.getElementById("myVideoTarget_ifp").contentDocument);
 					testDisplayCaptionsValue();
 				});
 			}
 
 			window.testDisplayCaptionsValue = function() { 
-				if( kdp.evaluate( '{closedCaptions.displayCaptions}' ) == false ) { 
+				if( vdp.evaluate( '{closedCaptions.displayCaptions}' ) == false ) { 
 					asyncTest( "displayCaptions value is false", function(){
 						if( captionsOverlay.length == 0 ) {
 							ok(true, "Captions are not displayed");
@@ -83,8 +83,8 @@
 
 			window.testDisplayCaptionsEnabled = function() {
 				asyncTest( "Display Captions Enabled", function(){
-					if( kdp.evaluate( '{closedCaptions.displayCaptions}' ) == true ) {
-						equal( kdp.evaluate( '{closedCaptions.displayCaptions}' ), true, "display captions is set to true" );
+					if( vdp.evaluate( '{closedCaptions.displayCaptions}' ) == true ) {
+						equal( vdp.evaluate( '{closedCaptions.displayCaptions}' ), true, "display captions is set to true" );
 						start();
 					}
 				});
@@ -99,8 +99,8 @@
 		}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 
@@ -109,7 +109,7 @@
 <br>
 
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id': '12907572',

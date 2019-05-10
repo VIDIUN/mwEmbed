@@ -8,23 +8,23 @@
 <script type="text/javascript">
 window['disablePlaybackModeSelector'] = true;
 
-kWidget.addReadyCallback( function(videoId){
+vWidget.addReadyCallback( function(videoId){
 	$( '#overlayDiv' ).show();
-    var kdp = $( '#' + videoId ).get( 0 );
+    var vdp = $( '#' + videoId ).get( 0 );
     $( '#fforward' ).click( function() {
-        var duration = kdp.evaluate( '{video.player.duration}' );
-        var seekTo = kdp.evaluate( '{video.player.currentTime}' ) + 15;
+        var duration = vdp.evaluate( '{video.player.duration}' );
+        var seekTo = vdp.evaluate( '{video.player.currentTime}' ) + 15;
         if ( seekTo > duration ) {
             seekTo = duration;
         }
-        kdp.sendNotification( "doSeek", [ seekTo ] );
+        vdp.sendNotification( "doSeek", [ seekTo ] );
     });
     $( '#rewind' ).click( function() {
-        var seekTo = kdp.evaluate( '{video.player.currentTime}' ) - 20;
+        var seekTo = vdp.evaluate( '{video.player.currentTime}' ) - 20;
         if ( seekTo < 0 ) {
             seekTo = 0;
         }
-        kdp.sendNotification( "doSeek", [ seekTo ] );
+        vdp.sendNotification( "doSeek", [ seekTo ] );
     });
 });
 </script>
@@ -44,10 +44,10 @@ kWidget.addReadyCallback( function(videoId){
 <a href="?forceMobileHTML5"> Force Mobile Safari</a> for testing with desktop chrome and safari.
 <br /><br />
 <div style="float:left">
-	<div id="kaltura_player" style="width:400px;height:330px"></div>
+	<div id="vidiun_player" style="width:400px;height:330px"></div>
 	<script>
-		kWidget.embed( {
-			'targetId': 'kaltura_player',
+		vWidget.embed( {
+			'targetId': 'vidiun_player',
 			'wid': '_243342',
 			'uiconf_id': '12905712',
 			'entry_id': '0_uka1msg4'

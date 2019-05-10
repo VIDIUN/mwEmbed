@@ -1,9 +1,9 @@
 <?php 
 /**
-* Kaltura named multi request, enables simple names for parts of mulitrequest and returns an
+* Vidiun named multi request, enables simple names for parts of mulitrequest and returns an
 * associative array with named result values.
 */
-class KalturaNamedMultiRequest { 
+class VidiunNamedMultiRequest { 
 	var $requestInx;
 	function __construct( $client, $defaultParams = array() ) {	
 		$this->client = $client;
@@ -15,11 +15,11 @@ class KalturaNamedMultiRequest {
 		return count( $this->requestInx );
 	}
 	function addNamedRequest( $name, $service, $action, $params){
-		$kparams = $this->defualt_params;
+		$vparams = $this->defualt_params;
 		foreach( $params as $pKey => $pVal ){
-			$this->client->addParam($kparams, $pKey, $pVal );
+			$this->client->addParam($vparams, $pKey, $pVal );
 		}
-		$this->client->queueServiceActionCall( $service, $action, $kparams );
+		$this->client->queueServiceActionCall( $service, $action, $vparams );
 		$this->requestInx[ count( $this->requestInx ) ] = $name;
 		return count( $this->requestInx );
 	}

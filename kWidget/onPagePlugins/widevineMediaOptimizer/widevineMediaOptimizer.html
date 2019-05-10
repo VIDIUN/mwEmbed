@@ -7,32 +7,32 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 // Enable uiconf js which includes external resources 
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>Widevine Media Optimizer</h2>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
 //////////////////////////////////////////////////////////////////////////////////////
 // TODO: 
-// update widevine path to "widevinePlugin.swf" after KDP v3.7.2 is available, 
+// update widevine path to "widevinePlugin.swf" after VDP v3.7.2 is available, 
 // until then edit player attributes won't work. 
 /////////////////////////////////////////////////////////////////////////////////////
-kWidget.featureConfig({
+vWidget.featureConfig({
 	'cache_st': 23,
-	'targetId' : 'kaltura_player',
+	'targetId' : 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '9677891',
 	'entry_id' : '0_uka1msg4',
 	'flashvars': {
 		'widevine':{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			//'asyncInit': 'true',
 			'includeInLayout': 'false',
 			'relativeTo': 'video',

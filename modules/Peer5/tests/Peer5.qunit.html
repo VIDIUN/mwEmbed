@@ -7,10 +7,10 @@
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">
 		mw.setConfig("forceMobileHTML5", true);
-		function jsKalturaPlayerTest(videoId) {
+		function jsVidiunPlayerTest(videoId) {
 			module("Peer5");
 			asyncTest("Check peer5 sanity", function () {
-				kalturaQunitWaitForPlayer(function () {
+				vidiunQunitWaitForPlayer(function () {
 					ok(true, "player ready event is fired");
 					var $iframe = $('#' + videoId + '_ifp').contents();
 					// only check for blob api for chrome > 25
@@ -36,8 +36,8 @@
 		}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Peer 5 Sample page </h2>
@@ -46,7 +46,7 @@
 </div>
 <script>
 
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'cache_st':'123',
 		'targetId':'playerMain',
 //		"wid":'_1375472',

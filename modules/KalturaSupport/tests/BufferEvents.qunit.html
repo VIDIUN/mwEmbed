@@ -6,21 +6,21 @@
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Buffer Events" );
-	var kdp = $( '#' + videoId ).get(0);
+	var vdp = $( '#' + videoId ).get(0);
 	
 	test( "Add buffer listeners", function() {
-		kdp.kBind( 'bytesDownloadedChange', 'testBytesDownloadedChange' );
-		kdp.kBind( 'bytesTotalChange', 'testBytesTotalChange' );
-		kdp.kBind( 'bufferProgress',  'testBufferProgress' );
-		kdp.kBind( 'bufferChange',  'testBufferChange' );
-		kdp.kBind( 'playerDownloadComplete', 'testPlayerDownloadComplete' );
+		vdp.vBind( 'bytesDownloadedChange', 'testBytesDownloadedChange' );
+		vdp.vBind( 'bytesTotalChange', 'testBytesTotalChange' );
+		vdp.vBind( 'bufferProgress',  'testBufferProgress' );
+		vdp.vBind( 'bufferChange',  'testBufferChange' );
+		vdp.vBind( 'playerDownloadComplete', 'testPlayerDownloadComplete' );
 		ok( true, "Added buffer listeners" );
 		// Start playback after 1 second: 
 		setTimeout( function(){
-			kdp.sendNotification( 'doPlay' );
+			vdp.sendNotification( 'doPlay' );
 		}, 2000 );
 	});
 	
@@ -72,20 +72,20 @@ function jsKalturaPlayerTest( videoId ){
 }
 </script>
 <script>
-	kWidget.addReadyCallback(function(playerId){
-		var kdp = $('#' + playerId )[0];
-		kdp.kBind( 'bytesDownloadedChange', function( eventData ){
+	vWidget.addReadyCallback(function(playerId){
+		var vdp = $('#' + playerId )[0];
+		vdp.vBind( 'bytesDownloadedChange', function( eventData ){
 			$('#bufferEvents').append(
 				'testBytesDownloadedChange: ' + eventData.newValue + "\n"
 			)
 		});
-		kdp.kBind( 'bufferProgress',  function( eventData ){
+		vdp.vBind( 'bufferProgress',  function( eventData ){
 			$('#bufferEvents').append(
 				'bufferProgress: new time: ' + eventData.newTime	+ "\n"
 			)
 		});
 		var once = false;
-		kdp.kBind( 'playerDownloadComplete: ',  function( eventData ){
+		vdp.vBind( 'playerDownloadComplete: ',  function( eventData ){
 			if( once ){
 				return 
 			}
@@ -96,22 +96,22 @@ function jsKalturaPlayerTest( videoId ){
 		});
 	})
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>Buffer Events</h2>
-The following binds to buffer events and logs progress. All buffer events are <a href="http://www.kaltura.org/demos/kdp3/docs.html#jsapi">listed here</a>:  
+The following binds to buffer events and logs progress. All buffer events are <a href="http://www.vidiun.org/demos/vdp3/docs.html#jsapi">listed here</a>:  
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function(playerId){
-	var kdp = $('#' + playerId )[0];
+vWidget.addReadyCallback(function(playerId){
+	var vdp = $('#' + playerId )[0];
 	}
-	kdp.kBind( 'bytesDownloadedChange', function( eventData ){
+	vdp.vBind( 'bytesDownloadedChange', function( eventData ){
 		$('#bufferEvents').append(
 			'testBytesDownloadedChange: ' + eventData.newValue 
 		)
 	});
-	kdp.kBind( 'bufferProgress',  function( eventData ){
+	vdp.vBind( 'bufferProgress',  function( eventData ){
 		$('#bufferEvents').append(
 			'bufferProgress: new time: ' + eventData.newTime	
 		)
@@ -120,8 +120,8 @@ kWidget.addReadyCallback(function(playerId){
 </pre>
 <br />
 
-<object id="kaltura_player_1330021939" 
-	name="kaltura_player_1330021939" 
+<object id="vidiun_player_1330021939" 
+	name="vidiun_player_1330021939" 
 	type="application/x-shockwave-flash" 
 	allowFullScreen="true" 
 	allowNetworking="all" 
@@ -131,14 +131,14 @@ kWidget.addReadyCallback(function(playerId){
 	xmlns:dc="http://purl.org/dc/terms/" 
 	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
 	rel="media:video" 
-	resource="http://www.kaltura.com/index.php/kwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" 
-	data="http://www.kaltura.com/index.php/kwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm">
+	resource="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" 
+	data="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm">
 		<param name="allowFullScreen" value="true" />
 		<param name="allowNetworking" value="all" />
 		<param name="allowScriptAccess" value="always" />
 		<param name="bgcolor" value="#000000" />
 		<param name="flashVars" value="&" />
-		<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" />
+		<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" />
 </object>
 Buffer event log: <br>
 <textarea id="bufferEvents" style="width:500px;height:100px"></textarea>

@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,21 +28,21 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLikeService extends KalturaServiceBase
+class VidiunLikeService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -55,9 +55,9 @@ class KalturaLikeService extends KalturaServiceBase
 	 */
 	function like($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("like_like", "like", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("like_like", "like", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -74,9 +74,9 @@ class KalturaLikeService extends KalturaServiceBase
 	 */
 	function unlike($entryId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->queueServiceActionCall("like_like", "unlike", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("like_like", "unlike", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -94,10 +94,10 @@ class KalturaLikeService extends KalturaServiceBase
 	 */
 	function checkLikeExists($entryId, $userId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "userId", $userId);
-		$this->client->queueServiceActionCall("like_like", "checkLikeExists", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "userId", $userId);
+		$this->client->queueServiceActionCall("like_like", "checkLikeExists", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -107,32 +107,32 @@ class KalturaLikeService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLikeClientPlugin extends KalturaClientPlugin
+class VidiunLikeClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaLikeService
+	 * @var VidiunLikeService
 	 */
 	public $like = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->like = new KalturaLikeService($client);
+		$this->like = new VidiunLikeService($client);
 	}
 
 	/**
-	 * @return KalturaLikeClientPlugin
+	 * @return VidiunLikeClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaLikeClientPlugin($client);
+		return new VidiunLikeClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

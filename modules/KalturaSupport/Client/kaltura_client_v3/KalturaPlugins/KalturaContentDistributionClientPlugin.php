@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaMetadataClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunMetadataClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionAction
+class VidiunDistributionAction
 {
 	const SUBMIT = 1;
 	const UPDATE = 2;
@@ -49,10 +49,10 @@ class KalturaDistributionAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionErrorType
+class VidiunDistributionErrorType
 {
 	const MISSING_FLAVOR = 1;
 	const MISSING_THUMBNAIL = 2;
@@ -62,10 +62,10 @@ class KalturaDistributionErrorType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionFieldRequiredStatus
+class VidiunDistributionFieldRequiredStatus
 {
 	const NOT_REQUIRED = 0;
 	const REQUIRED_BY_PROVIDER = 1;
@@ -73,10 +73,10 @@ class KalturaDistributionFieldRequiredStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileActionStatus
+class VidiunDistributionProfileActionStatus
 {
 	const DISABLED = 1;
 	const AUTOMATIC = 2;
@@ -84,10 +84,10 @@ class KalturaDistributionProfileActionStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileStatus
+class VidiunDistributionProfileStatus
 {
 	const DISABLED = 1;
 	const ENABLED = 2;
@@ -95,10 +95,10 @@ class KalturaDistributionProfileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProtocol
+class VidiunDistributionProtocol
 {
 	const FTP = 1;
 	const SCP = 2;
@@ -109,10 +109,10 @@ class KalturaDistributionProtocol
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorType
+class VidiunDistributionValidationErrorType
 {
 	const CUSTOM_ERROR = 0;
 	const STRING_EMPTY = 1;
@@ -122,10 +122,10 @@ class KalturaDistributionValidationErrorType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionFlag
+class VidiunEntryDistributionFlag
 {
 	const NONE = 0;
 	const SUBMIT_REQUIRED = 1;
@@ -136,10 +136,10 @@ class KalturaEntryDistributionFlag
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionStatus
+class VidiunEntryDistributionStatus
 {
 	const PENDING = 0;
 	const QUEUED = 1;
@@ -157,10 +157,10 @@ class KalturaEntryDistributionStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionSunStatus
+class VidiunEntryDistributionSunStatus
 {
 	const BEFORE_SUNRISE = 1;
 	const AFTER_SUNRISE = 2;
@@ -168,10 +168,10 @@ class KalturaEntryDistributionSunStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderParser
+class VidiunGenericDistributionProviderParser
 {
 	const XSL = 1;
 	const XPATH = 2;
@@ -179,20 +179,20 @@ class KalturaGenericDistributionProviderParser
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderStatus
+class VidiunGenericDistributionProviderStatus
 {
 	const ACTIVE = 2;
 	const DELETED = 3;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConfigurableDistributionProfileOrderBy
+class VidiunConfigurableDistributionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -201,10 +201,10 @@ class KalturaConfigurableDistributionProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileOrderBy
+class VidiunDistributionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -213,18 +213,18 @@ class KalturaDistributionProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProviderOrderBy
+class VidiunDistributionProviderOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProviderType
+class VidiunDistributionProviderType
 {
 	const IDETIC = "ideticDistribution.IDETIC";
 	const YOUTUBE_API = "youtubeApiDistribution.YOUTUBE_API";
@@ -233,10 +233,10 @@ class KalturaDistributionProviderType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionOrderBy
+class VidiunEntryDistributionOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const SUBMITTED_AT_ASC = "+submittedAt";
@@ -251,10 +251,10 @@ class KalturaEntryDistributionOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProfileOrderBy
+class VidiunGenericDistributionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -263,10 +263,10 @@ class KalturaGenericDistributionProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderActionOrderBy
+class VidiunGenericDistributionProviderActionOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -275,10 +275,10 @@ class KalturaGenericDistributionProviderActionOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderOrderBy
+class VidiunGenericDistributionProviderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -287,10 +287,10 @@ class KalturaGenericDistributionProviderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProfileOrderBy
+class VidiunSyndicationDistributionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -299,30 +299,30 @@ class KalturaSyndicationDistributionProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProviderOrderBy
+class VidiunSyndicationDistributionProviderOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAssetDistributionCondition extends KalturaObjectBase
+abstract class VidiunAssetDistributionCondition extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetDistributionRule extends KalturaObjectBase
+class VidiunAssetDistributionRule extends VidiunObjectBase
 {
 	/**
-	 * The validation error description that will be set on the "data" property on KalturaDistributionValidationErrorMissingAsset if rule was not fulfilled
+	 * The validation error description that will be set on the "data" property on VidiunDistributionValidationErrorMissingAsset if rule was not fulfilled
 	 * 	 
 	 *
 	 * @var string
@@ -333,7 +333,7 @@ class KalturaAssetDistributionRule extends KalturaObjectBase
 	 * An array of asset distribution conditions
 	 * 	 
 	 *
-	 * @var array of KalturaAssetDistributionCondition
+	 * @var array of VidiunAssetDistributionCondition
 	 */
 	public $assetDistributionConditions;
 
@@ -341,10 +341,10 @@ class KalturaAssetDistributionRule extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionFieldConfig extends KalturaObjectBase
+class VidiunDistributionFieldConfig extends VidiunObjectBase
 {
 	/**
 	 * A value taken from a connector field enum which associates the current configuration to that connector field
@@ -364,8 +364,8 @@ class KalturaDistributionFieldConfig extends KalturaObjectBase
 	public $userFriendlyFieldName = null;
 
 	/**
-	 * An XSLT string that extracts the right value from the Kaltura entry MRSS XML.
-	 *      The value of the current connector field will be the one that is returned from transforming the Kaltura entry MRSS XML using this XSLT string.
+	 * An XSLT string that extracts the right value from the Vidiun entry MRSS XML.
+	 *      The value of the current connector field will be the one that is returned from transforming the Vidiun entry MRSS XML using this XSLT string.
 	 *      
 	 *
 	 * @var string
@@ -376,7 +376,7 @@ class KalturaDistributionFieldConfig extends KalturaObjectBase
 	 * Is the field required to have a value for submission ?
 	 *      
 	 *
-	 * @var KalturaDistributionFieldRequiredStatus
+	 * @var VidiunDistributionFieldRequiredStatus
 	 */
 	public $isRequired = null;
 
@@ -392,7 +392,7 @@ class KalturaDistributionFieldConfig extends KalturaObjectBase
 	 * Entry column or metadata xpath that should trigger an update
 	 *      
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $updateParams;
 
@@ -409,19 +409,19 @@ class KalturaDistributionFieldConfig extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionJobProviderData extends KalturaObjectBase
+abstract class VidiunDistributionJobProviderData extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionThumbDimensions extends KalturaObjectBase
+class VidiunDistributionThumbDimensions extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -441,10 +441,10 @@ class KalturaDistributionThumbDimensions extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionProfile extends KalturaObjectBase
+abstract class VidiunDistributionProfile extends VidiunObjectBase
 {
 	/**
 	 * Auto generated unique id
@@ -484,7 +484,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProviderType
+	 * @var VidiunDistributionProviderType
 	 * @insertonly
 	 */
 	public $providerType = null;
@@ -499,35 +499,35 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileStatus
+	 * @var VidiunDistributionProfileStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileActionStatus
+	 * @var VidiunDistributionProfileActionStatus
 	 */
 	public $submitEnabled = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileActionStatus
+	 * @var VidiunDistributionProfileActionStatus
 	 */
 	public $updateEnabled = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileActionStatus
+	 * @var VidiunDistributionProfileActionStatus
 	 */
 	public $deleteEnabled = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileActionStatus
+	 * @var VidiunDistributionProfileActionStatus
 	 */
 	public $reportEnabled = null;
 
@@ -567,7 +567,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	 * Thumbnail dimensions that should be submitted if ready
 	 * 	 
 	 *
-	 * @var array of KalturaDistributionThumbDimensions
+	 * @var array of VidiunDistributionThumbDimensions
 	 */
 	public $optionalThumbDimensions;
 
@@ -575,7 +575,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	 * Thumbnail dimensions that required to be readt before submission
 	 * 	 
 	 *
-	 * @var array of KalturaDistributionThumbDimensions
+	 * @var array of VidiunDistributionThumbDimensions
 	 */
 	public $requiredThumbDimensions;
 
@@ -583,7 +583,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	 * Asset Distribution Rules for assets that should be submitted if ready
 	 * 	 
 	 *
-	 * @var array of KalturaAssetDistributionRule
+	 * @var array of VidiunAssetDistributionRule
 	 */
 	public $optionalAssetDistributionRules;
 
@@ -591,7 +591,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	 * Assets Asset Distribution Rules for assets that are required to be ready before submission
 	 * 	 
 	 *
-	 * @var array of KalturaAssetDistributionRule
+	 * @var array of VidiunAssetDistributionRule
 	 */
 	public $requiredAssetDistributionRules;
 
@@ -620,7 +620,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	public $recommendedStorageProfileForDownload = null;
 
 	/**
-	 * The best Kaltura data center to be used to download the asset files to
+	 * The best Vidiun data center to be used to download the asset files to
 	 * 	 
 	 *
 	 * @var int
@@ -628,7 +628,7 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 	public $recommendedDcForDownload = null;
 
 	/**
-	 * The best Kaltura data center to be used to execute the distribution job
+	 * The best Vidiun data center to be used to execute the distribution job
 	 * 	 
 	 *
 	 * @var int
@@ -639,15 +639,15 @@ abstract class KalturaDistributionProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileListResponse extends KalturaObjectBase
+class VidiunDistributionProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionProfile
+	 * @var array of VidiunDistributionProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -664,15 +664,15 @@ class KalturaDistributionProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionProvider extends KalturaObjectBase
+abstract class VidiunDistributionProvider extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProviderType
+	 * @var VidiunDistributionProviderType
 	 * @readonly
 	 */
 	public $type = null;
@@ -737,15 +737,15 @@ abstract class KalturaDistributionProvider extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProviderListResponse extends KalturaObjectBase
+class VidiunDistributionProviderListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionProvider
+	 * @var array of VidiunDistributionProvider
 	 * @readonly
 	 */
 	public $objects;
@@ -762,10 +762,10 @@ class KalturaDistributionProviderListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionRemoteMediaFile extends KalturaObjectBase
+class VidiunDistributionRemoteMediaFile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -792,22 +792,22 @@ class KalturaDistributionRemoteMediaFile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionValidationError extends KalturaObjectBase
+abstract class VidiunDistributionValidationError extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionAction
+	 * @var VidiunDistributionAction
 	 */
 	public $action = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionErrorType
+	 * @var VidiunDistributionErrorType
 	 */
 	public $errorType = null;
 
@@ -822,10 +822,10 @@ abstract class KalturaDistributionValidationError extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistribution extends KalturaObjectBase
+class VidiunEntryDistribution extends VidiunObjectBase
 {
 	/**
 	 * Auto generated unique id
@@ -890,7 +890,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionStatus
+	 * @var VidiunEntryDistributionStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -898,7 +898,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionSunStatus
+	 * @var VidiunEntryDistributionSunStatus
 	 * @readonly
 	 */
 	public $sunStatus = null;
@@ -906,7 +906,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionFlag
+	 * @var VidiunEntryDistributionFlag
 	 * @readonly
 	 */
 	public $dirtyStatus = null;
@@ -981,14 +981,14 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionValidationError
+	 * @var array of VidiunDistributionValidationError
 	 */
 	public $validationErrors;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobErrorTypes
+	 * @var VidiunBatchJobErrorTypes
 	 * @readonly
 	 */
 	public $errorType = null;
@@ -1012,7 +1012,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasSubmitResultsLog = null;
@@ -1020,7 +1020,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasSubmitSentDataLog = null;
@@ -1028,7 +1028,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasUpdateResultsLog = null;
@@ -1036,7 +1036,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasUpdateSentDataLog = null;
@@ -1044,7 +1044,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasDeleteResultsLog = null;
@@ -1052,7 +1052,7 @@ class KalturaEntryDistribution extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $hasDeleteSentDataLog = null;
@@ -1061,15 +1061,15 @@ class KalturaEntryDistribution extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionListResponse extends KalturaObjectBase
+class VidiunEntryDistributionListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaEntryDistribution
+	 * @var array of VidiunEntryDistribution
 	 * @readonly
 	 */
 	public $objects;
@@ -1086,15 +1086,15 @@ class KalturaEntryDistributionListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProfileAction extends KalturaObjectBase
+class VidiunGenericDistributionProfileAction extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProtocol
+	 * @var VidiunDistributionProtocol
 	 */
 	public $protocol = null;
 
@@ -1151,10 +1151,10 @@ class KalturaGenericDistributionProfileAction extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderAction extends KalturaObjectBase
+class VidiunGenericDistributionProviderAction extends VidiunObjectBase
 {
 	/**
 	 * Auto generated
@@ -1194,7 +1194,7 @@ class KalturaGenericDistributionProviderAction extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionAction
+	 * @var VidiunDistributionAction
 	 * @insertonly
 	 */
 	public $action = null;
@@ -1202,7 +1202,7 @@ class KalturaGenericDistributionProviderAction extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProviderStatus
+	 * @var VidiunGenericDistributionProviderStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -1210,14 +1210,14 @@ class KalturaGenericDistributionProviderAction extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProviderParser
+	 * @var VidiunGenericDistributionProviderParser
 	 */
 	public $resultsParser = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProtocol
+	 * @var VidiunDistributionProtocol
 	 */
 	public $protocol = null;
 
@@ -1291,15 +1291,15 @@ class KalturaGenericDistributionProviderAction extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderActionListResponse extends KalturaObjectBase
+class VidiunGenericDistributionProviderActionListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaGenericDistributionProviderAction
+	 * @var array of VidiunGenericDistributionProviderAction
 	 * @readonly
 	 */
 	public $objects;
@@ -1316,10 +1316,10 @@ class KalturaGenericDistributionProviderActionListResponse extends KalturaObject
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProvider extends KalturaDistributionProvider
+class VidiunGenericDistributionProvider extends VidiunDistributionProvider
 {
 	/**
 	 * Auto generated
@@ -1366,7 +1366,7 @@ class KalturaGenericDistributionProvider extends KalturaDistributionProvider
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProviderStatus
+	 * @var VidiunGenericDistributionProviderStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -1388,14 +1388,14 @@ class KalturaGenericDistributionProvider extends KalturaDistributionProvider
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionThumbDimensions
+	 * @var array of VidiunDistributionThumbDimensions
 	 */
 	public $optionalThumbDimensions;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionThumbDimensions
+	 * @var array of VidiunDistributionThumbDimensions
 	 */
 	public $requiredThumbDimensions;
 
@@ -1417,15 +1417,15 @@ class KalturaGenericDistributionProvider extends KalturaDistributionProvider
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderListResponse extends KalturaObjectBase
+class VidiunGenericDistributionProviderListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaGenericDistributionProvider
+	 * @var array of VidiunGenericDistributionProvider
 	 * @readonly
 	 */
 	public $objects;
@@ -1442,10 +1442,10 @@ class KalturaGenericDistributionProviderListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetDistributionPropertyCondition extends KalturaAssetDistributionCondition
+class VidiunAssetDistributionPropertyCondition extends VidiunAssetDistributionCondition
 {
 	/**
 	 * The property name to look for, this will match to a getter on the asset object.
@@ -1468,10 +1468,10 @@ class KalturaAssetDistributionPropertyCondition extends KalturaAssetDistribution
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaConfigurableDistributionJobProviderData extends KalturaDistributionJobProviderData
+abstract class VidiunConfigurableDistributionJobProviderData extends VidiunDistributionJobProviderData
 {
 	/**
 	 * 
@@ -1484,22 +1484,22 @@ abstract class KalturaConfigurableDistributionJobProviderData extends KalturaDis
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaConfigurableDistributionProfile extends KalturaDistributionProfile
+abstract class VidiunConfigurableDistributionProfile extends VidiunDistributionProfile
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDistributionFieldConfig
+	 * @var array of VidiunDistributionFieldConfig
 	 */
 	public $fieldConfigArray;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaExtendingItemMrssParameter
+	 * @var array of VidiunExtendingItemMrssParameter
 	 */
 	public $itemXpathsToExtend;
 
@@ -1507,10 +1507,10 @@ abstract class KalturaConfigurableDistributionProfile extends KalturaDistributio
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContentDistributionSearchItem extends KalturaSearchItem
+class VidiunContentDistributionSearchItem extends VidiunSearchItem
 {
 	/**
 	 * 
@@ -1529,21 +1529,21 @@ class KalturaContentDistributionSearchItem extends KalturaSearchItem
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionSunStatus
+	 * @var VidiunEntryDistributionSunStatus
 	 */
 	public $distributionSunStatus = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionFlag
+	 * @var VidiunEntryDistributionFlag
 	 */
 	public $entryDistributionFlag = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionStatus
+	 * @var VidiunEntryDistributionStatus
 	 */
 	public $entryDistributionStatus = null;
 
@@ -1566,10 +1566,10 @@ class KalturaContentDistributionSearchItem extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionJobData extends KalturaJobData
+class VidiunDistributionJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -1581,7 +1581,7 @@ class KalturaDistributionJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfile
+	 * @var VidiunDistributionProfile
 	 */
 	public $distributionProfile;
 
@@ -1595,7 +1595,7 @@ class KalturaDistributionJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistribution
+	 * @var VidiunEntryDistribution
 	 */
 	public $entryDistribution;
 
@@ -1610,7 +1610,7 @@ class KalturaDistributionJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProviderType
+	 * @var VidiunDistributionProviderType
 	 */
 	public $providerType = null;
 
@@ -1618,7 +1618,7 @@ class KalturaDistributionJobData extends KalturaJobData
 	 * Additional data that relevant for the provider only
 	 * 	 
 	 *
-	 * @var KalturaDistributionJobProviderData
+	 * @var VidiunDistributionJobProviderData
 	 */
 	public $providerData;
 
@@ -1643,7 +1643,7 @@ class KalturaDistributionJobData extends KalturaJobData
 	 * 	 Could be used later for media update 
 	 * 	 
 	 *
-	 * @var array of KalturaDistributionRemoteMediaFile
+	 * @var array of VidiunDistributionRemoteMediaFile
 	 */
 	public $mediaFiles;
 
@@ -1651,10 +1651,10 @@ class KalturaDistributionJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionProfileBaseFilter extends KalturaFilter
+abstract class VidiunDistributionProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -1701,7 +1701,7 @@ abstract class KalturaDistributionProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProfileStatus
+	 * @var VidiunDistributionProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -1716,15 +1716,15 @@ abstract class KalturaDistributionProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDistributionProviderBaseFilter extends KalturaFilter
+abstract class VidiunDistributionProviderBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionProviderType
+	 * @var VidiunDistributionProviderType
 	 */
 	public $typeEqual = null;
 
@@ -1739,10 +1739,10 @@ abstract class KalturaDistributionProviderBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorInvalidData extends KalturaDistributionValidationError
+class VidiunDistributionValidationErrorInvalidData extends VidiunDistributionValidationError
 {
 	/**
 	 * 
@@ -1754,13 +1754,13 @@ class KalturaDistributionValidationErrorInvalidData extends KalturaDistributionV
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionValidationErrorType
+	 * @var VidiunDistributionValidationErrorType
 	 */
 	public $validationErrorType = null;
 
 	/**
 	 * Parameter of the validation error
-	 * 	 For example, minimum value for KalturaDistributionValidationErrorType::STRING_TOO_SHORT validation error
+	 * 	 For example, minimum value for VidiunDistributionValidationErrorType::STRING_TOO_SHORT validation error
 	 * 	 
 	 *
 	 * @var string
@@ -1771,10 +1771,10 @@ class KalturaDistributionValidationErrorInvalidData extends KalturaDistributionV
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorMissingAsset extends KalturaDistributionValidationError
+class VidiunDistributionValidationErrorMissingAsset extends VidiunDistributionValidationError
 {
 	/**
 	 * 
@@ -1787,10 +1787,10 @@ class KalturaDistributionValidationErrorMissingAsset extends KalturaDistribution
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorMissingFlavor extends KalturaDistributionValidationError
+class VidiunDistributionValidationErrorMissingFlavor extends VidiunDistributionValidationError
 {
 	/**
 	 * 
@@ -1803,10 +1803,10 @@ class KalturaDistributionValidationErrorMissingFlavor extends KalturaDistributio
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorMissingMetadata extends KalturaDistributionValidationError
+class VidiunDistributionValidationErrorMissingMetadata extends VidiunDistributionValidationError
 {
 	/**
 	 * 
@@ -1819,15 +1819,15 @@ class KalturaDistributionValidationErrorMissingMetadata extends KalturaDistribut
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorMissingThumbnail extends KalturaDistributionValidationError
+class VidiunDistributionValidationErrorMissingThumbnail extends VidiunDistributionValidationError
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionThumbDimensions
+	 * @var VidiunDistributionThumbDimensions
 	 */
 	public $dimensions;
 
@@ -1835,10 +1835,10 @@ class KalturaDistributionValidationErrorMissingThumbnail extends KalturaDistribu
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaEntryDistributionBaseFilter extends KalturaFilter
+abstract class VidiunEntryDistributionBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -1927,7 +1927,7 @@ abstract class KalturaEntryDistributionBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionStatus
+	 * @var VidiunEntryDistributionStatus
 	 */
 	public $statusEqual = null;
 
@@ -1941,7 +1941,7 @@ abstract class KalturaEntryDistributionBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryDistributionFlag
+	 * @var VidiunEntryDistributionFlag
 	 */
 	public $dirtyStatusEqual = null;
 
@@ -1984,10 +1984,10 @@ abstract class KalturaEntryDistributionBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionJobProviderData extends KalturaDistributionJobProviderData
+class VidiunGenericDistributionJobProviderData extends VidiunDistributionJobProviderData
 {
 	/**
 	 * 
@@ -2006,7 +2006,7 @@ class KalturaGenericDistributionJobProviderData extends KalturaDistributionJobPr
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProviderParser
+	 * @var VidiunGenericDistributionProviderParser
 	 */
 	public $resultParserType = null;
 
@@ -2014,10 +2014,10 @@ class KalturaGenericDistributionJobProviderData extends KalturaDistributionJobPr
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProfile extends KalturaDistributionProfile
+class VidiunGenericDistributionProfile extends VidiunDistributionProfile
 {
 	/**
 	 * 
@@ -2030,28 +2030,28 @@ class KalturaGenericDistributionProfile extends KalturaDistributionProfile
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProfileAction
+	 * @var VidiunGenericDistributionProfileAction
 	 */
 	public $submitAction;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProfileAction
+	 * @var VidiunGenericDistributionProfileAction
 	 */
 	public $updateAction;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProfileAction
+	 * @var VidiunGenericDistributionProfileAction
 	 */
 	public $deleteAction;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProfileAction
+	 * @var VidiunGenericDistributionProfileAction
 	 */
 	public $fetchReportAction;
 
@@ -2073,10 +2073,10 @@ class KalturaGenericDistributionProfile extends KalturaDistributionProfile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGenericDistributionProviderActionBaseFilter extends KalturaFilter
+abstract class VidiunGenericDistributionProviderActionBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -2137,7 +2137,7 @@ abstract class KalturaGenericDistributionProviderActionBaseFilter extends Kaltur
 	/**
 	 * 
 	 *
-	 * @var KalturaDistributionAction
+	 * @var VidiunDistributionAction
 	 */
 	public $actionEqual = null;
 
@@ -2152,10 +2152,10 @@ abstract class KalturaGenericDistributionProviderActionBaseFilter extends Kaltur
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProfile extends KalturaDistributionProfile
+class VidiunSyndicationDistributionProfile extends VidiunDistributionProfile
 {
 	/**
 	 * 
@@ -2176,28 +2176,28 @@ class KalturaSyndicationDistributionProfile extends KalturaDistributionProfile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProvider extends KalturaDistributionProvider
+class VidiunSyndicationDistributionProvider extends VidiunDistributionProvider
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionDeleteJobData extends KalturaDistributionJobData
+class VidiunDistributionDeleteJobData extends VidiunDistributionJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionFetchReportJobData extends KalturaDistributionJobData
+class VidiunDistributionFetchReportJobData extends VidiunDistributionJobData
 {
 	/**
 	 * 
@@ -2217,46 +2217,46 @@ class KalturaDistributionFetchReportJobData extends KalturaDistributionJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileFilter extends KalturaDistributionProfileBaseFilter
+class VidiunDistributionProfileFilter extends VidiunDistributionProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProviderFilter extends KalturaDistributionProviderBaseFilter
+class VidiunDistributionProviderFilter extends VidiunDistributionProviderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionSubmitJobData extends KalturaDistributionJobData
+class VidiunDistributionSubmitJobData extends VidiunDistributionJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionUpdateJobData extends KalturaDistributionJobData
+class VidiunDistributionUpdateJobData extends VidiunDistributionJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionValidationErrorInvalidMetadata extends KalturaDistributionValidationErrorInvalidData
+class VidiunDistributionValidationErrorInvalidMetadata extends VidiunDistributionValidationErrorInvalidData
 {
 	/**
 	 * 
@@ -2269,64 +2269,64 @@ class KalturaDistributionValidationErrorInvalidMetadata extends KalturaDistribut
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionFilter extends KalturaEntryDistributionBaseFilter
+class VidiunEntryDistributionFilter extends VidiunEntryDistributionBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderActionFilter extends KalturaGenericDistributionProviderActionBaseFilter
+class VidiunGenericDistributionProviderActionFilter extends VidiunGenericDistributionProviderActionBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaConfigurableDistributionProfileBaseFilter extends KalturaDistributionProfileFilter
+abstract class VidiunConfigurableDistributionProfileBaseFilter extends VidiunDistributionProfileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionDisableJobData extends KalturaDistributionUpdateJobData
+class VidiunDistributionDisableJobData extends VidiunDistributionUpdateJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionEnableJobData extends KalturaDistributionUpdateJobData
+class VidiunDistributionEnableJobData extends VidiunDistributionUpdateJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGenericDistributionProfileBaseFilter extends KalturaDistributionProfileFilter
+abstract class VidiunGenericDistributionProfileBaseFilter extends VidiunDistributionProfileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGenericDistributionProviderBaseFilter extends KalturaDistributionProviderFilter
+abstract class VidiunGenericDistributionProviderBaseFilter extends VidiunDistributionProviderFilter
 {
 	/**
 	 * 
@@ -2387,7 +2387,7 @@ abstract class KalturaGenericDistributionProviderBaseFilter extends KalturaDistr
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefaultEqual = null;
 
@@ -2401,7 +2401,7 @@ abstract class KalturaGenericDistributionProviderBaseFilter extends KalturaDistr
 	/**
 	 * 
 	 *
-	 * @var KalturaGenericDistributionProviderStatus
+	 * @var VidiunGenericDistributionProviderStatus
 	 */
 	public $statusEqual = null;
 
@@ -2416,76 +2416,76 @@ abstract class KalturaGenericDistributionProviderBaseFilter extends KalturaDistr
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSyndicationDistributionProfileBaseFilter extends KalturaDistributionProfileFilter
+abstract class VidiunSyndicationDistributionProfileBaseFilter extends VidiunDistributionProfileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSyndicationDistributionProviderBaseFilter extends KalturaDistributionProviderFilter
+abstract class VidiunSyndicationDistributionProviderBaseFilter extends VidiunDistributionProviderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConfigurableDistributionProfileFilter extends KalturaConfigurableDistributionProfileBaseFilter
+class VidiunConfigurableDistributionProfileFilter extends VidiunConfigurableDistributionProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProfileFilter extends KalturaGenericDistributionProfileBaseFilter
+class VidiunGenericDistributionProfileFilter extends VidiunGenericDistributionProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderFilter extends KalturaGenericDistributionProviderBaseFilter
+class VidiunGenericDistributionProviderFilter extends VidiunGenericDistributionProviderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProfileFilter extends KalturaSyndicationDistributionProfileBaseFilter
+class VidiunSyndicationDistributionProfileFilter extends VidiunSyndicationDistributionProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationDistributionProviderFilter extends KalturaSyndicationDistributionProviderBaseFilter
+class VidiunSyndicationDistributionProviderFilter extends VidiunSyndicationDistributionProviderBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProfileService extends KalturaServiceBase
+class VidiunDistributionProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -2493,19 +2493,19 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	/**
 	 * Add new Distribution Profile
 	 * 
-	 * @param KalturaDistributionProfile $distributionProfile 
-	 * @return KalturaDistributionProfile
+	 * @param VidiunDistributionProfile $distributionProfile 
+	 * @return VidiunDistributionProfile
 	 */
-	function add(KalturaDistributionProfile $distributionProfile)
+	function add(VidiunDistributionProfile $distributionProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "distributionProfile", $distributionProfile->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "distributionProfile", $distributionProfile->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfile");
 		return $resultObject;
 	}
 
@@ -2513,18 +2513,18 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	 * Get Distribution Profile by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaDistributionProfile
+	 * @return VidiunDistributionProfile
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfile");
 		return $resultObject;
 	}
 
@@ -2532,20 +2532,20 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	 * Update Distribution Profile by id
 	 * 
 	 * @param int $id 
-	 * @param KalturaDistributionProfile $distributionProfile 
-	 * @return KalturaDistributionProfile
+	 * @param VidiunDistributionProfile $distributionProfile 
+	 * @return VidiunDistributionProfile
 	 */
-	function update($id, KalturaDistributionProfile $distributionProfile)
+	function update($id, VidiunDistributionProfile $distributionProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "distributionProfile", $distributionProfile->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "distributionProfile", $distributionProfile->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfile");
 		return $resultObject;
 	}
 
@@ -2554,19 +2554,19 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param int $status 
-	 * @return KalturaDistributionProfile
+	 * @return VidiunDistributionProfile
 	 */
 	function updateStatus($id, $status)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "status", $status);
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "updateStatus", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "status", $status);
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "updateStatus", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfile");
 		return $resultObject;
 	}
 
@@ -2578,9 +2578,9 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -2592,57 +2592,57 @@ class KalturaDistributionProfileService extends KalturaServiceBase
 	/**
 	 * List all distribution providers
 	 * 
-	 * @param KalturaDistributionProfileFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDistributionProfileListResponse
+	 * @param VidiunDistributionProfileFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDistributionProfileListResponse
 	 */
-	function listAction(KalturaDistributionProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDistributionProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfileListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * 
 	 * 
-	 * @param KalturaPartnerFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDistributionProfileListResponse
+	 * @param VidiunPartnerFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDistributionProfileListResponse
 	 */
-	function listByPartner(KalturaPartnerFilter $filter = null, KalturaFilterPager $pager = null)
+	function listByPartner(VidiunPartnerFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "listByPartner", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_distributionprofile", "listByPartner", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProfileListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryDistributionService extends KalturaServiceBase
+class VidiunEntryDistributionService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -2650,19 +2650,19 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	/**
 	 * Add new Entry Distribution
 	 * 
-	 * @param KalturaEntryDistribution $entryDistribution 
-	 * @return KalturaEntryDistribution
+	 * @param VidiunEntryDistribution $entryDistribution 
+	 * @return VidiunEntryDistribution
 	 */
-	function add(KalturaEntryDistribution $entryDistribution)
+	function add(VidiunEntryDistribution $entryDistribution)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryDistribution", $entryDistribution->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryDistribution", $entryDistribution->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2670,18 +2670,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Get Entry Distribution by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2689,18 +2689,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Validates Entry Distribution by id for submission
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function validate($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "validate", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "validate", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2708,20 +2708,20 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Update Entry Distribution by id
 	 * 
 	 * @param int $id 
-	 * @param KalturaEntryDistribution $entryDistribution 
-	 * @return KalturaEntryDistribution
+	 * @param VidiunEntryDistribution $entryDistribution 
+	 * @return VidiunEntryDistribution
 	 */
-	function update($id, KalturaEntryDistribution $entryDistribution)
+	function update($id, VidiunEntryDistribution $entryDistribution)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "entryDistribution", $entryDistribution->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "entryDistribution", $entryDistribution->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2733,9 +2733,9 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -2747,23 +2747,23 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	/**
 	 * List all distribution providers
 	 * 
-	 * @param KalturaEntryDistributionFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaEntryDistributionListResponse
+	 * @param VidiunEntryDistributionFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunEntryDistributionListResponse
 	 */
-	function listAction(KalturaEntryDistributionFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunEntryDistributionFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistributionListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistributionListResponse");
 		return $resultObject;
 	}
 
@@ -2772,19 +2772,19 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param bool $submitWhenReady 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function submitAdd($id, $submitWhenReady = false)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "submitWhenReady", $submitWhenReady);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitAdd", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "submitWhenReady", $submitWhenReady);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitAdd", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2792,18 +2792,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Submits Entry Distribution changes to the remote destination
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function submitUpdate($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitUpdate", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitUpdate", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2811,18 +2811,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Submits Entry Distribution report request
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function submitFetchReport($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitFetchReport", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitFetchReport", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2830,18 +2830,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Deletes Entry Distribution from the remote destination
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function submitDelete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitDelete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "submitDelete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2849,18 +2849,18 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 * Retries last submit action
 	 * 
 	 * @param int $id 
-	 * @return KalturaEntryDistribution
+	 * @return VidiunEntryDistribution
 	 */
 	function retrySubmit($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "retrySubmit", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "retrySubmit", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEntryDistribution");
+		$this->client->validateObjectType($resultObject, "VidiunEntryDistribution");
 		return $resultObject;
 	}
 
@@ -2873,10 +2873,10 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 */
 	function serveSentData($id, $actionType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "actionType", $actionType);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "serveSentData", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "actionType", $actionType);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "serveSentData", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -2891,10 +2891,10 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 	 */
 	function serveReturnedData($id, $actionType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "actionType", $actionType);
-		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "serveReturnedData", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "actionType", $actionType);
+		$this->client->queueServiceActionCall("contentdistribution_entrydistribution", "serveReturnedData", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -2902,12 +2902,12 @@ class KalturaEntryDistributionService extends KalturaServiceBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDistributionProviderService extends KalturaServiceBase
+class VidiunDistributionProviderService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -2915,34 +2915,34 @@ class KalturaDistributionProviderService extends KalturaServiceBase
 	/**
 	 * List all distribution providers
 	 * 
-	 * @param KalturaDistributionProviderFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDistributionProviderListResponse
+	 * @param VidiunDistributionProviderFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDistributionProviderListResponse
 	 */
-	function listAction(KalturaDistributionProviderFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDistributionProviderFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_distributionprovider", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_distributionprovider", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDistributionProviderListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDistributionProviderListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderService extends KalturaServiceBase
+class VidiunGenericDistributionProviderService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -2950,19 +2950,19 @@ class KalturaGenericDistributionProviderService extends KalturaServiceBase
 	/**
 	 * Add new Generic Distribution Provider
 	 * 
-	 * @param KalturaGenericDistributionProvider $genericDistributionProvider 
-	 * @return KalturaGenericDistributionProvider
+	 * @param VidiunGenericDistributionProvider $genericDistributionProvider 
+	 * @return VidiunGenericDistributionProvider
 	 */
-	function add(KalturaGenericDistributionProvider $genericDistributionProvider)
+	function add(VidiunGenericDistributionProvider $genericDistributionProvider)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "genericDistributionProvider", $genericDistributionProvider->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "genericDistributionProvider", $genericDistributionProvider->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProvider");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProvider");
 		return $resultObject;
 	}
 
@@ -2970,18 +2970,18 @@ class KalturaGenericDistributionProviderService extends KalturaServiceBase
 	 * Get Generic Distribution Provider by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaGenericDistributionProvider
+	 * @return VidiunGenericDistributionProvider
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProvider");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProvider");
 		return $resultObject;
 	}
 
@@ -2989,20 +2989,20 @@ class KalturaGenericDistributionProviderService extends KalturaServiceBase
 	 * Update Generic Distribution Provider by id
 	 * 
 	 * @param int $id 
-	 * @param KalturaGenericDistributionProvider $genericDistributionProvider 
-	 * @return KalturaGenericDistributionProvider
+	 * @param VidiunGenericDistributionProvider $genericDistributionProvider 
+	 * @return VidiunGenericDistributionProvider
 	 */
-	function update($id, KalturaGenericDistributionProvider $genericDistributionProvider)
+	function update($id, VidiunGenericDistributionProvider $genericDistributionProvider)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "genericDistributionProvider", $genericDistributionProvider->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "genericDistributionProvider", $genericDistributionProvider->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProvider");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProvider");
 		return $resultObject;
 	}
 
@@ -3014,9 +3014,9 @@ class KalturaGenericDistributionProviderService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -3028,34 +3028,34 @@ class KalturaGenericDistributionProviderService extends KalturaServiceBase
 	/**
 	 * List all distribution providers
 	 * 
-	 * @param KalturaGenericDistributionProviderFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaGenericDistributionProviderListResponse
+	 * @param VidiunGenericDistributionProviderFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunGenericDistributionProviderListResponse
 	 */
-	function listAction(KalturaGenericDistributionProviderFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunGenericDistributionProviderFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovider", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderListResponse");
 		return $resultObject;
 	}
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
+class VidiunGenericDistributionProviderActionService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -3063,19 +3063,19 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	/**
 	 * Add new Generic Distribution Provider Action
 	 * 
-	 * @param KalturaGenericDistributionProviderAction $genericDistributionProviderAction 
-	 * @return KalturaGenericDistributionProviderAction
+	 * @param VidiunGenericDistributionProviderAction $genericDistributionProviderAction 
+	 * @return VidiunGenericDistributionProviderAction
 	 */
-	function add(KalturaGenericDistributionProviderAction $genericDistributionProviderAction)
+	function add(VidiunGenericDistributionProviderAction $genericDistributionProviderAction)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3084,19 +3084,19 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param string $xslData XSL MRSS transformation data
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addMrssTransform($id, $xslData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "xslData", $xslData);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssTransform", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "xslData", $xslData);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssTransform", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3105,20 +3105,20 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param file $xslFile XSL MRSS transformation file
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addMrssTransformFromFile($id, $xslFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xslFile", $xslFile);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssTransformFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xslFile", $xslFile);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssTransformFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3127,19 +3127,19 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param string $xsdData XSD MRSS validatation data
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addMrssValidate($id, $xsdData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "xsdData", $xsdData);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssValidate", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "xsdData", $xsdData);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssValidate", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3148,20 +3148,20 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param file $xsdFile XSD MRSS validatation file
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addMrssValidateFromFile($id, $xsdFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "xsdFile", $xsdFile);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssValidateFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "xsdFile", $xsdFile);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addMrssValidateFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3170,19 +3170,19 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param string $transformData Transformation data xsl, xPath or regex
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addResultsTransform($id, $transformData)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "transformData", $transformData);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addResultsTransform", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "transformData", $transformData);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addResultsTransform", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3191,20 +3191,20 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $id The id of the generic distribution provider action
 	 * @param file $transformFile Transformation file xsl, xPath or regex
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function addResultsTransformFromFile($id, $transformFile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$kfiles = array();
-		$this->client->addParam($kfiles, "transformFile", $transformFile);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addResultsTransformFromFile", $kparams, $kfiles);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$vfiles = array();
+		$this->client->addParam($vfiles, "transformFile", $transformFile);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "addResultsTransformFromFile", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3212,18 +3212,18 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * Get Generic Distribution Provider Action by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3232,19 +3232,19 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $genericDistributionProviderId 
 	 * @param int $actionType 
-	 * @return KalturaGenericDistributionProviderAction
+	 * @return VidiunGenericDistributionProviderAction
 	 */
 	function getByProviderId($genericDistributionProviderId, $actionType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "genericDistributionProviderId", $genericDistributionProviderId);
-		$this->client->addParam($kparams, "actionType", $actionType);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "getByProviderId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "genericDistributionProviderId", $genericDistributionProviderId);
+		$this->client->addParam($vparams, "actionType", $actionType);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "getByProviderId", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3253,21 +3253,21 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * 
 	 * @param int $genericDistributionProviderId 
 	 * @param int $actionType 
-	 * @param KalturaGenericDistributionProviderAction $genericDistributionProviderAction 
-	 * @return KalturaGenericDistributionProviderAction
+	 * @param VidiunGenericDistributionProviderAction $genericDistributionProviderAction 
+	 * @return VidiunGenericDistributionProviderAction
 	 */
-	function updateByProviderId($genericDistributionProviderId, $actionType, KalturaGenericDistributionProviderAction $genericDistributionProviderAction)
+	function updateByProviderId($genericDistributionProviderId, $actionType, VidiunGenericDistributionProviderAction $genericDistributionProviderAction)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "genericDistributionProviderId", $genericDistributionProviderId);
-		$this->client->addParam($kparams, "actionType", $actionType);
-		$this->client->addParam($kparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "updateByProviderId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "genericDistributionProviderId", $genericDistributionProviderId);
+		$this->client->addParam($vparams, "actionType", $actionType);
+		$this->client->addParam($vparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "updateByProviderId", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3275,20 +3275,20 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 * Update Generic Distribution Provider Action by id
 	 * 
 	 * @param int $id 
-	 * @param KalturaGenericDistributionProviderAction $genericDistributionProviderAction 
-	 * @return KalturaGenericDistributionProviderAction
+	 * @param VidiunGenericDistributionProviderAction $genericDistributionProviderAction 
+	 * @return VidiunGenericDistributionProviderAction
 	 */
-	function update($id, KalturaGenericDistributionProviderAction $genericDistributionProviderAction)
+	function update($id, VidiunGenericDistributionProviderAction $genericDistributionProviderAction)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "genericDistributionProviderAction", $genericDistributionProviderAction->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderAction");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderAction");
 		return $resultObject;
 	}
 
@@ -3300,9 +3300,9 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -3320,10 +3320,10 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	 */
 	function deleteByProviderId($genericDistributionProviderId, $actionType)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "genericDistributionProviderId", $genericDistributionProviderId);
-		$this->client->addParam($kparams, "actionType", $actionType);
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "deleteByProviderId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "genericDistributionProviderId", $genericDistributionProviderId);
+		$this->client->addParam($vparams, "actionType", $actionType);
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "deleteByProviderId", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -3335,77 +3335,77 @@ class KalturaGenericDistributionProviderActionService extends KalturaServiceBase
 	/**
 	 * List all distribution providers
 	 * 
-	 * @param KalturaGenericDistributionProviderActionFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaGenericDistributionProviderActionListResponse
+	 * @param VidiunGenericDistributionProviderActionFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunGenericDistributionProviderActionListResponse
 	 */
-	function listAction(KalturaGenericDistributionProviderActionFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunGenericDistributionProviderActionFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("contentdistribution_genericdistributionprovideraction", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaGenericDistributionProviderActionListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunGenericDistributionProviderActionListResponse");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContentDistributionClientPlugin extends KalturaClientPlugin
+class VidiunContentDistributionClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaDistributionProfileService
+	 * @var VidiunDistributionProfileService
 	 */
 	public $distributionProfile = null;
 
 	/**
-	 * @var KalturaEntryDistributionService
+	 * @var VidiunEntryDistributionService
 	 */
 	public $entryDistribution = null;
 
 	/**
-	 * @var KalturaDistributionProviderService
+	 * @var VidiunDistributionProviderService
 	 */
 	public $distributionProvider = null;
 
 	/**
-	 * @var KalturaGenericDistributionProviderService
+	 * @var VidiunGenericDistributionProviderService
 	 */
 	public $genericDistributionProvider = null;
 
 	/**
-	 * @var KalturaGenericDistributionProviderActionService
+	 * @var VidiunGenericDistributionProviderActionService
 	 */
 	public $genericDistributionProviderAction = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->distributionProfile = new KalturaDistributionProfileService($client);
-		$this->entryDistribution = new KalturaEntryDistributionService($client);
-		$this->distributionProvider = new KalturaDistributionProviderService($client);
-		$this->genericDistributionProvider = new KalturaGenericDistributionProviderService($client);
-		$this->genericDistributionProviderAction = new KalturaGenericDistributionProviderActionService($client);
+		$this->distributionProfile = new VidiunDistributionProfileService($client);
+		$this->entryDistribution = new VidiunEntryDistributionService($client);
+		$this->distributionProvider = new VidiunDistributionProviderService($client);
+		$this->genericDistributionProvider = new VidiunGenericDistributionProviderService($client);
+		$this->genericDistributionProviderAction = new VidiunGenericDistributionProviderActionService($client);
 	}
 
 	/**
-	 * @return KalturaContentDistributionClientPlugin
+	 * @return VidiunContentDistributionClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaContentDistributionClientPlugin($client);
+		return new VidiunContentDistributionClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{
