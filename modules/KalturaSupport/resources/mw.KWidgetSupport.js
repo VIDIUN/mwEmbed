@@ -1174,7 +1174,7 @@ mw.VWidgetSupport.prototype = {
 			errObj = embedPlayer.getVidiunMsgObject( "NO_VS" );
 		}
 		if( data.meta && (data.meta.status == 1 || data.meta.status == 0) ){
-			errObj = embedPlayer.getKalturaMsgObject( "ks-ENTRY_CONVERTING" );
+			errObj = embedPlayer.getVidiunMsgObject( "vs-ENTRY_CONVERTING" );
 		}
 		if( data.error ) {
 			errObj = embedPlayer.getVidiunMsgObject( 'GENERIC_ERROR' );

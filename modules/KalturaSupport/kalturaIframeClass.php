@@ -2,8 +2,8 @@
 /**
  * Vidiun iFrame class:
  */
-require_once 'KalturaCommon.php';
-require_once 'KalturaDependencyResolver.php';
+require_once 'VidiunCommon.php';
+require_once 'VidiunDependencyResolver.php';
 
 class vidiunIframeClass {
 
@@ -708,8 +708,8 @@ HTML;
 	/**
 	 * Get all the vidiun defined modules from player config
 	 * */
-	function outputKalturaModules(){
-		global $wgMwEmbedEnabledModules, $wgKwidgetPsEnabledModules, $wgKalturaPSHtml5ModulesDir, $psRelativePath,
+	function outputVidiunModules(){
+		global $wgMwEmbedEnabledModules, $wgVwidgetPsEnabledModules, $wgVidiunPSHtml5ModulesDir, $psRelativePath,
 		$wgEnableScriptDebug;
 		$o='';
 		// Init modules array, always include MwEmbedSupport
@@ -782,13 +782,13 @@ HTML;
 				moduleList.splice( itemToDelete, 1);
 		}
 HTML;
-		//Set the kwidget-ps folder for the loader script
-        $o.="mw.config.set('pskwidgetpath', '$psRelativePath');";
+		//Set the vwidget-ps folder for the loader script
+        $o.="mw.config.set('psvwidgetpath', '$psRelativePath');";
 		// inline scripts if debug mode is off and flag is set:
 		if ($this->inlineScript && !$wgEnableScriptDebug ){
 			$o.= $this->outputInlineScript(array_merge($moduleList, $psModuleList));
 		} else {
-			$o.= 'mw.config.set(\'KalturaSupport.DepModuleList\', moduleList);mw.loader.load(moduleList);';
+			$o.= 'mw.config.set(\'VidiunSupport.DepModuleList\', moduleList);mw.loader.load(moduleList);';
 		}
 		// check if loadingSpinner plugin has config:
 		if( isset( $playerConfig['plugins']['loadingSpinner'] ) ){
@@ -855,11 +855,11 @@ HTML;
 	function getModuleDependencyList($moduleList){
 		$modulesRegistry = $this->getModulesRegistry($moduleList);
 
-		$kalturaDependencyResolver = new KalturaDependencyResolver();
-		$kalturaDependencyResolver->register($modulesRegistry);
+		$vidiunDependencyResolver = new VidiunDependencyResolver();
+		$vidiunDependencyResolver->register($modulesRegistry);
 
 		// Set the startup modules state to ready cause they were already included in startup load
-		$kalturaDependencyResolver->setState(array(
+		$vidiunDependencyResolver->setState(array(
 			"jquery" => "ready",
 			"mediawiki" => "ready",
 			"mw.MwEmbedSupport" => "ready",
@@ -868,7 +868,7 @@ HTML;
 			"jquery.loadingSpinner" => "ready"
 		));
 
-		$moduleList = $kalturaDependencyResolver->getDependencies($moduleList);
+		$moduleList = $vidiunDependencyResolver->getDependencies($moduleList);
 		return $moduleList;
 	}
 
@@ -946,8 +946,8 @@ HTML;
 		return $styles;
 	}
 
-	function getKalturaIframeScripts(){
-	    global $wgMwEmbedVersion, $wgKalturaApiFeatures, $wgEnableScriptDebug;
+	function getVidiunIframeScripts(){
+	    global $wgMwEmbedVersion, $wgVidiunApiFeatures, $wgEnableScriptDebug;
 		ob_start();
 		?>
 		<script type="text/javascript">
@@ -968,7 +968,7 @@ HTML;
 					// import vWidget and mw into the current context:
 					window['vWidget'] = window['parent']['vWidget']; 
 				} else {
-					// include kWiget script if not already avaliable
+					// include vWiget script if not already avaliable
 					<?php
 					if ($this->inlineScript && !$wgEnableScriptDebug ){
 						$response = file_get_contents($this->getMwEmbedLoaderLocation());
@@ -989,7 +989,7 @@ HTML;
 		<!-- Output any iframe based packaged data -->
 		<script type="text/javascript">
 			// Initialize the iframe with associated setup
-			window.kalturaIframePackageData = <?php
+			window.vidiunIframePackageData = <?php
 				$payload = array(
 					// The base player config controls most aspects of player display and sources
 					'playerConfig' => $this->getUiConfResult()->getPlayerConfig(),
@@ -1229,7 +1229,7 @@ HTML;
 					}
 					<?php
 						$this->loadCustomResources(
-							$this->outputKalturaModules() .
+							$this->outputVidiunModules() .
 							'if (window.inlineScript === false){mw.loader.go();}'
 						);
 					?>
