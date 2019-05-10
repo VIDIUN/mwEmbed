@@ -1095,7 +1095,7 @@
 
 		/**
 		 * Seek function ( should be implemented by embedPlayer interface
-		 * playerNative, playerKplayer etc. ) embedPlayer seek only handles URL
+		 * playerNative, playerVplayer etc. ) embedPlayer seek only handles URL
 		 * time seeks
 		 * @param {Float}
 		 *            percent of the video total length to seek to

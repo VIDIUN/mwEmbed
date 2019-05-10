@@ -14,11 +14,11 @@ function jsKalturaPlayerTest( videoId ){
 	// Name this module
 	module( "DoubleClick Player API" );
 
-	var kdp = $('#' + videoId ).get(0);
+	var vdp = $('#' + videoId ).get(0);
 	
 	asyncTest("Ad started playback", function(){
 		window[ 'onAdStart' ] = function( slot ){
-			kdp.removeJsListener( 'adStart', 'onAdStart' );
+			vdp.removeJsListener( 'adStart', 'onAdStart' );
 			
 			ok( true, "adStart event sent");
 			
@@ -27,11 +27,11 @@ function jsKalturaPlayerTest( videoId ){
 			runValidateAdTag();
 			start();
 		}
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			// Listen for ad start
-			kdp.addJsListener( 'adStart', 'onAdStart' );
+			vdp.addJsListener( 'adStart', 'onAdStart' );
 			// Send a play request:
-			kdp.sendNotification('doPlay');
+			vdp.sendNotification('doPlay');
 		});
 	});
 	
@@ -56,7 +56,7 @@ function jsKalturaPlayerTest( videoId ){
 				}
 				gotPlayEvent = true;
 				
-				kdp.removeJsListener( 'doPlay', 'onDoPlay' );
+				vdp.removeJsListener( 'doPlay', 'onDoPlay' );
 				ok( true, "Recived doPlay event" );
 				setTimeout(function(){
 					runDoStopTest();
@@ -65,17 +65,17 @@ function jsKalturaPlayerTest( videoId ){
 			}
 			
 			window['onDoPause'] = function(){
-				kdp.removeJsListener( 'doPause', 'onDoPause' );
+				vdp.removeJsListener( 'doPause', 'onDoPause' );
 				ok( true, "Recived doPause event" );
-				kdp.addJsListener( 'doPlay', 'onDoPlay' );
+				vdp.addJsListener( 'doPlay', 'onDoPlay' );
 				setTimeout(function(){
-					kdp.sendNotification( 'doPlay' );
+					vdp.sendNotification( 'doPlay' );
 				},500);
 			};
 		
 		
-			kdp.addJsListener( 'doPause', 'onDoPause' );
-			kdp.sendNotification('doPause');
+			vdp.addJsListener( 'doPause', 'onDoPause' );
+			vdp.sendNotification('doPause');
 		});
 	}
 	
@@ -91,8 +91,8 @@ function jsKalturaPlayerTest( videoId ){
 	}
 }
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> DoubleClick Managed Player</h2>

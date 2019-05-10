@@ -2,7 +2,7 @@
 
 class RequestHelper {
 
-	var $ks = null;
+	var $vs = null;
 	var $noCache = false;
 	var $debug = false;
 	var $utility = null;
@@ -20,12 +20,12 @@ class RequestHelper {
 		'flashvars' => null,
 		'playlist_id' => null,
 		'urid' => null,
-		// Custom service url properties ( only used when wgKalturaAllowIframeRemoteService is set to true ) 
+		// Custom service url properties ( only used when wgVidiunAllowIframeRemoteService is set to true ) 
 		'ServiceUrl'=> null,
 		'ServiceBase'=>null,
 		'CdnUrl'=> null,
 		'UseManifestUrls' => null,
-		'ks' => null,
+		'vs' => null,
 		'debug' => null,
 		// for thumbnails
 		'width' => null,
@@ -44,14 +44,14 @@ class RequestHelper {
 		$this->utility = $utility;
 		//parse input:
 		$this->parseRequest();
-		// Set KS if available in URL parameter or flashvar
-		$this->setKSIfExists();
+		// Set VS if available in URL parameter or flashvar
+		$this->setVSIfExists();
 	}
 
 	// Parse the embedFrame request and sanitize input
 	private function parseRequest(){
-		global $wgEnableScriptDebug, $wgKalturaUseAppleAdaptive,
-				$wgKalturaPartnerDisableAppleAdaptive;
+		global $wgEnableScriptDebug, $wgVidiunUseAppleAdaptive,
+				$wgVidiunPartnerDisableAppleAdaptive;
 		// Support /key/value path request:
 		if( isset( $_SERVER['PATH_INFO'] ) ){
 			$urlParts = explode( '/', $_SERVER['PATH_INFO'] );
@@ -145,7 +145,7 @@ class RequestHelper {
 	}
 
 	function getServiceConfig( $name ){
-		global $wgKalturaAllowIframeRemoteService;
+		global $wgVidiunAllowIframeRemoteService;
 		
 		// Check if we allow URL override: 
 		if(( $wgKalturaAllowIframeRemoteService == true ) || $this->isEmbedServicesEnabled()){
@@ -158,20 +158,20 @@ class RequestHelper {
 		// Else use the global config: 
 		switch( $name ){
 			case 'ServiceUrl' : 
-				global $wgKalturaServiceUrl;
-				return $wgKalturaServiceUrl;
+				global $wgVidiunServiceUrl;
+				return $wgVidiunServiceUrl;
 				break;
 			case 'ServiceBase':
-				global $wgKalturaServiceBase;
-				return $wgKalturaServiceBase;
+				global $wgVidiunServiceBase;
+				return $wgVidiunServiceBase;
 				break;
 			case 'CdnUrl':
-				global $wgKalturaCDNUrl;
-				return $wgKalturaCDNUrl;
+				global $wgVidiunCDNUrl;
+				return $wgVidiunCDNUrl;
 				break;
 			case 'UseManifestUrls':
-				global $wgKalturaUseManifestUrls;
-				return $wgKalturaUseManifestUrls;
+				global $wgVidiunUseManifestUrls;
+				return $wgVidiunUseManifestUrls;
 				break;
 		}
 	}
@@ -199,9 +199,9 @@ class RequestHelper {
 	}
 
 	public function getReferer(){
-		global $wgKalturaForceReferer;
-		if( $wgKalturaForceReferer !== false ){
-			return $wgKalturaForceReferer;
+		global $wgVidiunForceReferer;
+		if( $wgVidiunForceReferer !== false ){
+			return $wgVidiunForceReferer;
 		}
 		if( isset( $_SERVER['HTTP_REFERER'] ) ){
 			$urlParts = parse_url( $_SERVER['HTTP_REFERER'] );
@@ -209,7 +209,7 @@ class RequestHelper {
 				return $urlParts['scheme'] . "://" . $urlParts['host'] . "/";
 			}
 		}
-		return 'http://www.kaltura.com/';
+		return 'http://www.vidiun.com/';
 	}
 
 	// Check if private IP
@@ -284,8 +284,8 @@ class RequestHelper {
 		if( !$ip ){
 			$ip = $_SERVER['REMOTE_ADDR'];
 		}
-		if( $wgKalturaForceIP ){
-			$ip = $wgKalturaForceIP;
+		if( $wgVidiunForceIP ){
+			$ip = $wgVidiunForceIP;
 		}
 		// make sure there is no white space
 		$ip = trim( $ip );
@@ -331,16 +331,16 @@ class RequestHelper {
 		return (!is_null($key)) ? $default : array();
 	}
 
-	private function setKSIfExists() {
-		$ks = null;
-		if( $this->getFlashVars('ks') ) {
-			$ks = $this->getFlashVars('ks');
-		} else if( $this->get('ks') ) {
-			$ks = $this->get('ks');
+	private function setVSIfExists() {
+		$vs = null;
+		if( $this->getFlashVars('vs') ) {
+			$vs = $this->getFlashVars('vs');
+		} else if( $this->get('vs') ) {
+			$vs = $this->get('vs');
 		}
-		// check for empty ks
-		if( $ks && trim($ks) != '' ){
-			$this->ks = $ks;
+		// check for empty vs
+		if( $vs && trim($vs) != '' ){
+			$this->vs = $vs;
 		}
 	}
 	
@@ -349,7 +349,7 @@ class RequestHelper {
 		return $wgForceCache ? false : isset($this->ks);
 	}
 
-	public function getKS() {
-		return $this->ks;
+	public function getVS() {
+		return $this->vs;
 	}
 }

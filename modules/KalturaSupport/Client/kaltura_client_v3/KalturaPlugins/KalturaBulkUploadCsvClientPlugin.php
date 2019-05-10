@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaBulkUploadClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunBulkUploadClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCsvVersion
+class VidiunBulkUploadCsvVersion
 {
 	const V1 = 1;
 	const V2 = 2;
@@ -48,16 +48,16 @@ class KalturaBulkUploadCsvVersion
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCsvJobData extends KalturaBulkUploadJobData
+class VidiunBulkUploadCsvJobData extends VidiunBulkUploadJobData
 {
 	/**
 	 * The version of the csv file
 	 * 	 
 	 *
-	 * @var KalturaBulkUploadCsvVersion
+	 * @var VidiunBulkUploadCsvVersion
 	 * @readonly
 	 */
 	public $csvVersion = null;
@@ -66,7 +66,7 @@ class KalturaBulkUploadCsvJobData extends KalturaBulkUploadJobData
 	 * Array containing CSV headers
 	 * 	 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $columns;
 
@@ -74,26 +74,26 @@ class KalturaBulkUploadCsvJobData extends KalturaBulkUploadJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCsvClientPlugin extends KalturaClientPlugin
+class VidiunBulkUploadCsvClientPlugin extends VidiunClientPlugin
 {
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * @return KalturaBulkUploadCsvClientPlugin
+	 * @return VidiunBulkUploadCsvClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaBulkUploadCsvClientPlugin($client);
+		return new VidiunBulkUploadCsvClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -173,7 +173,7 @@ if( !mw.Language ){
 		"kr" : "Kanuri",
 		"kri" : "Krio",
 		"krj" : "Kinaray-a",
-		"ks" : "\u0915\u0936\u094d\u092e\u0940\u0930\u0940 - (\u0643\u0634\u0645\u064a\u0631\u064a)",
+		"vs" : "\u0915\u0936\u094d\u092e\u0940\u0930\u0940 - (\u0643\u0634\u0645\u064a\u0631\u064a)",
 		"ksh" : "Ripoarisch",
 		"ku" : "Kurd\u00ee \/ \u0643\u0648\u0631\u062f\u06cc",
 		"ku-latn" : "\u202aKurd\u00ee (lat\u00een\u00ee)\u202c",

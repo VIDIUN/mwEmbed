@@ -14,22 +14,22 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 // Enable uiconf js which includes external resources 
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Description Box test" );
-	var kdp = $('#' + videoId )[0];
+	var vdp = $('#' + videoId )[0];
 	var $iframe = $('#' + videoId + '_ifp').contents();
 	
 	asyncTest( "Check for Description box", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			// look for description box id: 
 			ok( $( '#descriptionBox_' + videoId ).length, "Found descriptionBox div" );
-			equal ( $( '#descriptionBox_' + videoId ).height(), kdp.evaluate('{descriptionBox.boxHeight}'), "Height is set correctly");
+			equal ( $( '#descriptionBox_' + videoId ).height(), vdp.evaluate('{descriptionBox.boxHeight}'), "Height is set correctly");
 			equal( $( '#descriptionBox_' + videoId ).find('p').html(), 
-					kdp.evaluate('{mediaProxy.entry.description}'), 
-					"description matches kdp description");
+					vdp.evaluate('{mediaProxy.entry.description}'), 
+					"description matches vdp description");
 			start();
 		});
 	});
@@ -37,23 +37,23 @@ function jsKalturaPlayerTest( videoId ){
 }
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Description / Title Box </h2>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
-kWidget.featureConfig({
+vWidget.featureConfig({
 	'cache_st': 23,
-	'targetId' : 'kaltura_player',
+	'targetId' : 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '9677891',
 	'entry_id' : '0_uka1msg4',
 	'flashvars': {
 		'descriptionBox':{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			'relativeTo': 'video',
 			'position': 'before',
 			

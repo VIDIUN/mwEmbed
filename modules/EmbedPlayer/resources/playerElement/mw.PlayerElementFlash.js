@@ -12,7 +12,7 @@
 		id: null,
 		readyState: 0,
 		disabled: false,
-		//counter for listneres function names, in case we want to subscribe more than one func to the same kdp notification
+		//counter for listneres function names, in case we want to subscribe more than one func to the same vdp notification
 		listenerCounter: 0,
 		targetObj: null,
 		initialized: false,
@@ -181,9 +181,9 @@
                 });
             }
         },
-		setKDPAttribute: function( obj, property, value ) {
+		setVDPAttribute: function( obj, property, value ) {
 			if ( this.playerElement && !this.disabled ) {
-				this.playerElement.setKDPAttribute( obj, property, value );
+				this.playerElement.setVDPAttribute( obj, property, value );
 			}
 		},
 		addJsListener: function( eventName, methodName ) {
@@ -243,8 +243,8 @@
 		bindPlayerFunction : function(bindName, methodName, target) {
 			var _this = this;
 			mw.log( 'PlayerElementFlash:: bindPlayerFunction:' + bindName );
-			// The kaltura kdp can only call a global function by given name
-			var gKdpCallbackName = 'kdp_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
+			// The vidiun vdp can only call a global function by given name
+			var gVdpCallbackName = 'vdp_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
 
 			// Create an anonymous function with local player scope
 			var createGlobalCB = function(cName) {
@@ -255,11 +255,11 @@
 					}
 					_this.targetObj[methodName](data);
 				};
-			}(gKdpCallbackName, this);
+			}(gVdpCallbackName, this);
 			// Remove the listener ( if it exists already )
-			this.playerElement.removeJsListener( bindName, gKdpCallbackName );
-			// Add the listener to the KDP flash player:
-			this.playerElement.addJsListener( bindName, gKdpCallbackName);
+			this.playerElement.removeJsListener( bindName, gVdpCallbackName );
+			// Add the listener to the VDP flash player:
+			this.playerElement.addJsListener( bindName, gVdpCallbackName);
 		},
 		onUpdatePlayhead : function ( playheadVal ) {
 			this.currentTime = playheadVal;

@@ -1,21 +1,21 @@
 /**
- * Kaltura style analytics reporting class
+ * Vidiun style analytics reporting class
  */
 ( function( mw, $ ) { "use strict";
 
-// Avoid undefined symbol for javascript response "Kaltura" from the api
-window['Kaltura'] = true;
+// Avoid undefined symbol for javascript response "Vidiun" from the api
+window['Vidiun'] = true;
 
-// KAnalytics Constructor
-mw.KAnalytics = function( embedPlayer ){
+// VAnalytics Constructor
+mw.VAnalytics = function( embedPlayer ){
 	this.init( embedPlayer );
 };
 
 // Add analytics to the embed player:
-mw.addKAnalytics = function( embedPlayer ) {
-	embedPlayer.kAnalytics = new mw.KAnalytics( embedPlayer );
+mw.addVAnalytics = function( embedPlayer ) {
+	embedPlayer.vAnalytics = new mw.VAnalytics( embedPlayer );
 }
-mw.KAnalytics.prototype = {
+mw.VAnalytics.prototype = {
 
 	// Local reference to embedPlayer
 	embedPlayer: null,
@@ -27,7 +27,7 @@ mw.KAnalytics.prototype = {
 	// avoids sending lots of seeks while scrubbing
 	lastSeekEventTime: 0,
 
-	bindPostFix: '.kAnalytics',
+	bindPostFix: '.vAnalytics',
 
 	// Start Time
 	startReportTime: 0,
@@ -67,12 +67,12 @@ mw.KAnalytics.prototype = {
 	},
 
 	/**
-	 * Constructor for kAnalytics
+	 * Constructor for vAnalytics
 	 *
 	 * @param {Object}
-	 *		  embedPlayer Player to apply Kaltura analytics to.
+	 *		  embedPlayer Player to apply Vidiun analytics to.
 	 * @parma {Object}
-	 * 			kalturaClient Kaltura client object for the api session.
+	 * 			vidiunClient Vidiun client object for the api session.
 	 */
 	init: function( embedPlayer ) {
 		var _this = this;
@@ -116,9 +116,9 @@ mw.KAnalytics.prototype = {
 	 * Get the current report set
 	 *
 	 * @param {Number}
-	 *			KalturaStatsEventType The eventType number.
+	 *			VidiunStatsEventType The eventType number.
 	 */
-	sendAnalyticsEvent: function( KalturaStatsEventKey ){
+	sendAnalyticsEvent: function( VidiunStatsEventKey ){
 		var _this = this;
 		mw.log("KAnalytics :: doSendAnalyticsEvent > " + KalturaStatsEventKey );
 		// Kalutra analytics does not collect info for ads:
@@ -136,8 +136,8 @@ mw.KAnalytics.prototype = {
 			'duration'			: this.embedPlayer.getDuration(),
 			'eventTimestamp'	: new Date().getTime(),
 			'isFirstInSession'	: 'false',
-			'objectType'		: 'KalturaStatsEvent',
-			'partnerId'			: this.embedPlayer.kpartnerid,
+			'objectType'		: 'VidiunStatsEvent',
+			'partnerId'			: this.embedPlayer.vpartnerid,
 			'sessionId'			: this.embedPlayer.evaluate('{configProxy.sessionId}'),
 			'uiconfId'			: 0
 		};
@@ -149,10 +149,10 @@ mw.KAnalytics.prototype = {
 		eventSet[ 'seek' ] = ( this.hasSeeked ) ? 'true' : 'false';
 
 		// Set the 'event:entryId'
-		if( this.embedPlayer.kentryid ){
-			eventSet[ 'entryId' ] = this.embedPlayer.kentryid;
+		if( this.embedPlayer.ventryid ){
+			eventSet[ 'entryId' ] = this.embedPlayer.ventryid;
 		} else {
-			// if kentryid is not set, use the selected source url
+			// if ventryid is not set, use the selected source url
 			eventSet[ 'entryId' ] = this.embedPlayer.getSrc();
 		}
 
@@ -175,8 +175,8 @@ mw.KAnalytics.prototype = {
 			eventSet[ 'uiconfId' ] = this.embedPlayer.kuiconfid;
 		}
 		// Set the 'event:widgetId'
-		if( this.embedPlayer.kwidgetid ) {
-			eventSet[ 'widgetId' ] = this.embedPlayer.kwidgetid;
+		if( this.embedPlayer.vwidgetid ) {
+			eventSet[ 'widgetId' ] = this.embedPlayer.vwidgetid;
 		}
 		var flashVarEvents = {
 				'playbackContext' : 'contextId',
@@ -186,8 +186,8 @@ mw.KAnalytics.prototype = {
 		}
 		// support legacy ( deprecated ) top level config
 		for( var fvKey in flashVarEvents){
-			if( this.embedPlayer.getKalturaConfig( '', fvKey ) ){
-				eventSet[ flashVarEvents[ fvKey ] ] = encodeURIComponent( this.embedPlayer.getKalturaConfig('', fvKey ) );
+			if( this.embedPlayer.getVidiunConfig( '', fvKey ) ){
+				eventSet[ flashVarEvents[ fvKey ] ] = encodeURIComponent( this.embedPlayer.getVidiunConfig('', fvKey ) );
 			}
 		}
 		// check for the vars in the correct location:
@@ -230,14 +230,14 @@ mw.KAnalytics.prototype = {
 		}
 
 		// Send events for this player:
-		$( this.embedPlayer ).trigger( 'KalturaSendAnalyticEvent', [ KalturaStatsEventKey, eventSet ] );
+		$( this.embedPlayer ).trigger( 'VidiunSendAnalyticEvent', [ VidiunStatsEventKey, eventSet ] );
 
 		// check for defined callback: 
-		var parentTrackName = this.embedPlayer.getKalturaConfig( 'statistics', 'trackEventMonitor');
+		var parentTrackName = this.embedPlayer.getVidiunConfig( 'statistics', 'trackEventMonitor');
 		if(  mw.getConfig('EmbedPlayer.IsFriendlyIframe') ){
 			try {
 				if( window.parent[ parentTrackName ] ){
-					 window.parent[ parentTrackName ]( KalturaStatsEventKey, eventSet );
+					 window.parent[ parentTrackName ]( VidiunStatsEventKey, eventSet );
 				}
 			} catch( e ){
 				// error in calling parent page event
@@ -278,7 +278,7 @@ mw.KAnalytics.prototype = {
 		b( 'widgetLoaded', 'WIDGET_LOADED' );
 
 		// When the poster or video ( when autoplay ) media is loaded
-		b( 'KalturaSupport_EntryDataReady', 'MEDIA_LOADED' );
+		b( 'VidiunSupport_EntryDataReady', 'MEDIA_LOADED' );
 
 		// When the play button is pressed or called from javascript
 		b( 'firstPlay', 'PLAY' );
@@ -331,7 +331,7 @@ mw.KAnalytics.prototype = {
 
 
 		/*
-		 * Other kaltura event types that are presently not usable in the
+		 * Other vidiun event types that are presently not usable in the
 		 * html5 player at this point in time:
 		 *
 		 * OPEN_EDIT = 8;

@@ -4,14 +4,14 @@
 
 ( function( mw, $ ) { "use strict";
 
-	mw.addKalturaConfCheck( function(embedPlayer, callback ) {
+	mw.addVidiunConfCheck( function(embedPlayer, callback ) {
 		// Disable Conviva with IE9
 		if( mw.isIE9() ) {
 			callback();
 			return;
 		}
 		if( embedPlayer.isPluginEnabled ( 'Conviva' ) ) {
-			var config = embedPlayer.getKalturaConfig( 'Conviva', [ 'convivaKalturaHTML5Lib', 'convivaAjaxTimeout', 'convivaCustomerId', 'convivaServiceUrl' ] );
+			var config = embedPlayer.getVidiunConfig( 'Conviva', [ 'convivaVidiunHTML5Lib', 'convivaAjaxTimeout', 'convivaCustomerId', 'convivaServiceUrl' ] );
 
 			var initParameter = function( parameter, defaultValue ) {
 				if ( ! config[ parameter ] ) {
@@ -30,9 +30,9 @@
 			// Initialize optional config parameters whith default values if not present explicitly
 			initParameter( 'convivaAjaxTimeout', 1000 ); // default to 1 second unless explicitly set
 
-			if ( ! initParameter( 'convivaKalturaHTML5Lib' ) ) {
+			if ( ! initParameter( 'convivaVidiunHTML5Lib' ) ) {
 				isError = true;
-				mw.log( 'Conviva: Error: "Conviva.convivaKalturaHTML5Lib" is a required parameter!' );
+				mw.log( 'Conviva: Error: "Conviva.convivaVidiunHTML5Lib" is a required parameter!' );
 			}
 			if ( ! initParameter( 'convivaCustomerId' ) ) {
 				isError = true;
@@ -57,14 +57,14 @@
 
 			$.ajax({
 				type: "GET",
-				url: config[ 'convivaKalturaHTML5Lib' ],
+				url: config[ 'convivaVidiunHTML5Lib' ],
 				dataType: 'script',
 				timeout: config[ 'convivaAjaxTimeout' ],
 				success: function() {
 					new mw.Conviva( embedPlayer, callback, config );
 				},
 				error: function() {
-					mw.log( 'Conviva: Error: convivaKalturaHTML5Lib failed to load or timed out!');
+					mw.log( 'Conviva: Error: convivaVidiunHTML5Lib failed to load or timed out!');
 					// proceed if Conviva's lib fails to load or times out
 					callback();
 			   }

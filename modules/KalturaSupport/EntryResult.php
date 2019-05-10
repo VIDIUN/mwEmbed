@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of KalturaResultEntry
+ * Description of VidiunResultEntry
  *
  * @author ran
  */

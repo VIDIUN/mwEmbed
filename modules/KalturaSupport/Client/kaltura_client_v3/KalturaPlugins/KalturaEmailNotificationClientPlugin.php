@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaEventNotificationClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunEventNotificationClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationTemplatePriority
+class VidiunEmailNotificationTemplatePriority
 {
 	const HIGH = 1;
 	const NORMAL = 3;
@@ -48,20 +48,20 @@ class KalturaEmailNotificationTemplatePriority
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationFormat
+class VidiunEmailNotificationFormat
 {
 	const HTML = "1";
 	const TEXT = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationRecipientProviderType
+class VidiunEmailNotificationRecipientProviderType
 {
 	const STATIC_LIST = "1";
 	const CATEGORY = "2";
@@ -69,10 +69,10 @@ class KalturaEmailNotificationRecipientProviderType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationTemplateOrderBy
+class VidiunEmailNotificationTemplateOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -83,16 +83,16 @@ class KalturaEmailNotificationTemplateOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationRecipient extends KalturaObjectBase
+class VidiunEmailNotificationRecipient extends VidiunObjectBase
 {
 	/**
 	 * Recipient e-mail address
 	 * 	 
 	 *
-	 * @var KalturaStringValue
+	 * @var VidiunStringValue
 	 */
 	public $email;
 
@@ -100,7 +100,7 @@ class KalturaEmailNotificationRecipient extends KalturaObjectBase
 	 * Recipient name
 	 * 	 
 	 *
-	 * @var KalturaStringValue
+	 * @var VidiunStringValue
 	 */
 	public $name;
 
@@ -108,16 +108,16 @@ class KalturaEmailNotificationRecipient extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaEmailNotificationRecipientJobData extends KalturaObjectBase
+abstract class VidiunEmailNotificationRecipientJobData extends VidiunObjectBase
 {
 	/**
 	 * Provider type of the job data.
 	 * 	  
 	 *
-	 * @var KalturaEmailNotificationRecipientProviderType
+	 * @var VidiunEmailNotificationRecipientProviderType
 	 * @readonly
 	 */
 	public $providerType = null;
@@ -126,19 +126,19 @@ abstract class KalturaEmailNotificationRecipientJobData extends KalturaObjectBas
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaEmailNotificationRecipientProvider extends KalturaObjectBase
+abstract class VidiunEmailNotificationRecipientProvider extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserProviderFilter extends KalturaFilter
+class VidiunCategoryUserProviderFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -157,7 +157,7 @@ class KalturaCategoryUserProviderFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryUserStatus
+	 * @var VidiunCategoryUserStatus
 	 */
 	public $statusEqual = null;
 
@@ -199,7 +199,7 @@ class KalturaCategoryUserProviderFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUpdateMethodType
+	 * @var VidiunUpdateMethodType
 	 */
 	public $updateMethodEqual = null;
 
@@ -228,15 +228,15 @@ class KalturaCategoryUserProviderFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationCategoryRecipientJobData extends KalturaEmailNotificationRecipientJobData
+class VidiunEmailNotificationCategoryRecipientJobData extends VidiunEmailNotificationRecipientJobData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryUserFilter
+	 * @var VidiunCategoryUserFilter
 	 */
 	public $categoryUserFilter;
 
@@ -244,23 +244,23 @@ class KalturaEmailNotificationCategoryRecipientJobData extends KalturaEmailNotif
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationCategoryRecipientProvider extends KalturaEmailNotificationRecipientProvider
+class VidiunEmailNotificationCategoryRecipientProvider extends VidiunEmailNotificationRecipientProvider
 {
 	/**
 	 * The ID of the category whose subscribers should receive the email notification.
 	 * 	 
 	 *
-	 * @var KalturaStringValue
+	 * @var VidiunStringValue
 	 */
 	public $categoryId;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryUserProviderFilter
+	 * @var VidiunCategoryUserProviderFilter
 	 */
 	public $categoryUserFilter;
 
@@ -268,25 +268,25 @@ class KalturaEmailNotificationCategoryRecipientProvider extends KalturaEmailNoti
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationParameter extends KalturaEventNotificationParameter
+class VidiunEmailNotificationParameter extends VidiunEventNotificationParameter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationStaticRecipientJobData extends KalturaEmailNotificationRecipientJobData
+class VidiunEmailNotificationStaticRecipientJobData extends VidiunEmailNotificationRecipientJobData
 {
 	/**
 	 * Email to emails and names
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $emailRecipients;
 
@@ -294,16 +294,16 @@ class KalturaEmailNotificationStaticRecipientJobData extends KalturaEmailNotific
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationStaticRecipientProvider extends KalturaEmailNotificationRecipientProvider
+class VidiunEmailNotificationStaticRecipientProvider extends VidiunEmailNotificationRecipientProvider
 {
 	/**
 	 * Email to emails and names
 	 * 	 
 	 *
-	 * @var array of KalturaEmailNotificationRecipient
+	 * @var array of VidiunEmailNotificationRecipient
 	 */
 	public $emailRecipients;
 
@@ -311,16 +311,16 @@ class KalturaEmailNotificationStaticRecipientProvider extends KalturaEmailNotifi
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
+class VidiunEmailNotificationTemplate extends VidiunEventNotificationTemplate
 {
 	/**
 	 * Define the email body format
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationFormat
+	 * @var VidiunEmailNotificationFormat
 	 */
 	public $format = null;
 
@@ -360,7 +360,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Email recipient emails and names
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientProvider
+	 * @var VidiunEmailNotificationRecipientProvider
 	 */
 	public $to;
 
@@ -368,7 +368,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Email recipient emails and names
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientProvider
+	 * @var VidiunEmailNotificationRecipientProvider
 	 */
 	public $cc;
 
@@ -376,7 +376,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Email recipient emails and names
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientProvider
+	 * @var VidiunEmailNotificationRecipientProvider
 	 */
 	public $bcc;
 
@@ -384,7 +384,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Default email addresses to whom the reply should be sent. 
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientProvider
+	 * @var VidiunEmailNotificationRecipientProvider
 	 */
 	public $replyTo;
 
@@ -392,7 +392,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Define the email priority
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationTemplatePriority
+	 * @var VidiunEmailNotificationTemplatePriority
 	 */
 	public $priority = null;
 
@@ -426,7 +426,7 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Adds a e-mail custom header
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $customHeaders;
 
@@ -434,15 +434,15 @@ class KalturaEmailNotificationTemplate extends KalturaEventNotificationTemplate
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationUserRecipientJobData extends KalturaEmailNotificationRecipientJobData
+class VidiunEmailNotificationUserRecipientJobData extends VidiunEmailNotificationRecipientJobData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaUserFilter
+	 * @var VidiunUserFilter
 	 */
 	public $filter;
 
@@ -450,15 +450,15 @@ class KalturaEmailNotificationUserRecipientJobData extends KalturaEmailNotificat
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationUserRecipientProvider extends KalturaEmailNotificationRecipientProvider
+class VidiunEmailNotificationUserRecipientProvider extends VidiunEmailNotificationRecipientProvider
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaUserFilter
+	 * @var VidiunUserFilter
 	 */
 	public $filter;
 
@@ -466,10 +466,10 @@ class KalturaEmailNotificationUserRecipientProvider extends KalturaEmailNotifica
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDispatchJobData
+class VidiunEmailNotificationDispatchJobData extends VidiunEventNotificationDispatchJobData
 {
 	/**
 	 * Define the email sender email
@@ -491,7 +491,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Email recipient emails and names, key is mail address and value is the name
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientJobData
+	 * @var VidiunEmailNotificationRecipientJobData
 	 */
 	public $to;
 
@@ -499,7 +499,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Email cc emails and names, key is mail address and value is the name
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientJobData
+	 * @var VidiunEmailNotificationRecipientJobData
 	 */
 	public $cc;
 
@@ -507,7 +507,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Email bcc emails and names, key is mail address and value is the name
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientJobData
+	 * @var VidiunEmailNotificationRecipientJobData
 	 */
 	public $bcc;
 
@@ -515,7 +515,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Email addresses that a replies should be sent to, key is mail address and value is the name
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationRecipientJobData
+	 * @var VidiunEmailNotificationRecipientJobData
 	 */
 	public $replyTo;
 
@@ -523,7 +523,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Define the email priority
 	 * 	 
 	 *
-	 * @var KalturaEmailNotificationTemplatePriority
+	 * @var VidiunEmailNotificationTemplatePriority
 	 */
 	public $priority = null;
 
@@ -557,7 +557,7 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 	 * Adds a e-mail custom header
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $customHeaders;
 
@@ -565,44 +565,44 @@ class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDi
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaEmailNotificationTemplateBaseFilter extends KalturaEventNotificationTemplateFilter
+abstract class VidiunEmailNotificationTemplateBaseFilter extends VidiunEventNotificationTemplateFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationTemplateFilter extends KalturaEmailNotificationTemplateBaseFilter
+class VidiunEmailNotificationTemplateFilter extends VidiunEmailNotificationTemplateBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailNotificationClientPlugin extends KalturaClientPlugin
+class VidiunEmailNotificationClientPlugin extends VidiunClientPlugin
 {
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * @return KalturaEmailNotificationClientPlugin
+	 * @return VidiunEmailNotificationClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaEmailNotificationClientPlugin($client);
+		return new VidiunEmailNotificationClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

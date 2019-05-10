@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'playbackRateSelector', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'playbackRateSelector', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",

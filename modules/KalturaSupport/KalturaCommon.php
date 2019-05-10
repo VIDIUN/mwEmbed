@@ -1,6 +1,6 @@
 <?php
 
-define( 'KALTURA_GENERIC_SERVER_ERROR', "Error getting sources from server. Please try again.");
+define( 'VIDIUN_GENERIC_SERVER_ERROR', "Error getting sources from server. Please try again.");
 
 /* 
  * TODO: Use PHP5 auto loading capability instead of requiring all of our resources all the time
@@ -33,30 +33,30 @@ $container['request_helper'] = $container->share(function ($c) {
 });
 
 $container['utility_helper'] = $container->share(function ($c) {
-	return new KalturaUtils();
+	return new VidiunUtils();
 });
 
-$kUtility = $container['utility_helper'];
+$vUtility = $container['utility_helper'];
 
 // Set global vars
 $container['mwembed_version'] = $wgMwEmbedVersion;
 $container['cache_directory'] = $wgScriptCacheDirectory;
 $container['logs_directory'] = $wgScriptCacheDirectory . '/logs';
-$container['cache_expiry'] = $wgKalturaUiConfCacheTime;
+$container['cache_expiry'] = $wgVidiunUiConfCacheTime;
 $container['enable_logs'] = $wgLogApiRequests;
-$container['service_timeout'] = $wgKalturaServiceTimeout;
+$container['service_timeout'] = $wgVidiunServiceTimeout;
 
 // Setup Logger object
 $container['logger'] = $container->share(function ($c) {
-	return new KalturaLogger( $c['logs_directory'], $c['enable_logs'] );
+	return new VidiunLogger( $c['logs_directory'], $c['enable_logs'] );
 });
 
 // Setup Cache Adapter / Helper
 $container['no_cache_adapter'] = $container->share(function ($c) {
-	return new kNoCacheWrapper();
+	return new vNoCacheWrapper();
 });
 $container['file_cache_adapter'] = $container->share(function ($c) {
-	$fileCache = new kFileSystemCacheWrapper();
+	$fileCache = new vFileSystemCacheWrapper();
 	$fileCache->init($c['cache_directory'], 'iframe', 2, false, $c['cache_expiry'], true);
 	return $fileCache;
 });
@@ -74,7 +74,7 @@ $container['cache_helper'] = $container->share(function ($c) {
 	global $wgEnableScriptDebug, $wgKalturaForceResultCache,$wgUseMemcache;
 	$useCache = !$wgEnableScriptDebug;
 	// Force cache flag ( even in debug )
-	if( $wgKalturaForceResultCache === true){
+	if( $wgVidiunForceResultCache === true){
 		$useCache = true;
 	}
 	$request = $c['request_helper'];
@@ -121,7 +121,7 @@ $container['client_helper'] = $container->share(function ($c) {
 		$config['WidgetId'] = $request->getWidgetId();
 	}	
 
-	return new KalturaClientHelper( $config );
+	return new VidiunClientHelper( $config );
 });
 
 $container['uiconf_result'] = $container->share(function ($c) {

@@ -1,20 +1,20 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>Kaltura Recipe:  best-practice JavaScript-based KDP embedding</title>
+		<title>Vidiun Recipe:  best-practice JavaScript-based VDP embedding</title>
 		<meta name="description" content="">
 		<style>
 			/* For actual page, choose height and width that match your player size.  Black makes sense as
 			   background for video content but can be anything.  "Color" should contrast background (to
 			   make readable the notices that apear in case Flash is missing/ wrong version: */
-			#kdp_shim { height:300px; width:400px; background:#000; color:yellow;}
+			#vdp_shim { height:300px; width:400px; background:#000; color:yellow;}
 			/* for this sample page only: */
 			a img { border:none;}
 			#sample_playlist { padding:0; margin: 10px 0;}
 			 #sample_playlist li { display:inline; margin: 10px 10px 10px 0; list-style: inside none none;}
 			 #clock { width: 250px; margin: 10px; }
 		</style>
-		<script src="http://cdn.kaltura.org/apis/seo/flashembed.js"></script>
+		<script src="http://cdn.vidiun.org/apis/seo/flashembed.js"></script>
 		<!-- the above is open source from http://flowplayer.org/tools/toolbox/flashembed.html 
 				NOTE: flashembed must come before mwEmbedLoader.php
 		-->
@@ -22,18 +22,18 @@
 		<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 		<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 		<script type="text/javascript">	
-			function jsKalturaPlayerTest( videoId ){
+			function jsVidiunPlayerTest( videoId ){
 		
 				// Name this module
 				module( "flashembed embed test" );
 				test( "flashembed tests", function(){
-					equal( videoId, 'kaltura_player', 'flashembed with id');
+					equal( videoId, 'vidiun_player', 'flashembed with id');
 					// check for static methods
 					var flashembedStaticMethods = ['asString', 'getHTML', 'getVersion', 'isSupported'];
 					$.each( flashembedStaticMethods, function( inx, name){
 						equal( typeof flashembed[name], 'function', name + " static method found" ); 
 					});
-					// test non-kaltura embed
+					// test non-vidiun embed
 					// embed a clock with normal flash embed: 
 					var clock = flashembed("clock", "http://www.jquerytools.org/media/swf/global/clock.swf");
 					equal( $('#clock').find('object').length, 1, "Clock object inserted" );
@@ -41,45 +41,45 @@
 				
 			}
 		
-			// placed in head to make sure jsCallbackReady is available as soon as KDP is
-			// (if page is "heavy", KDP may call jsCallbackReady before DOM is ready)
+			// placed in head to make sure jsCallbackReady is available as soon as VDP is
+			// (if page is "heavy", VDP may call jsCallbackReady before DOM is ready)
 
-			// jsCallbackReady is called by KDP as soon as KDP is ready to begin interacting with javascript
+			// jsCallbackReady is called by VDP as soon as VDP is ready to begin interacting with javascript
 			function jsCallbackReady(player_id) {
-				// create a (global) reference to the KDP so we don't have to repeat querying the dom
+				// create a (global) reference to the VDP so we don't have to repeat querying the dom
 				// we use the "window." prefix to stress that this var is global
-				window.kdp = document.getElementById(player_id);
-				if( kdp_embed.auto_play ) {
-					kdp.setKDPAttribute("configProxy.flashvars", "autoPlay", "true");
+				window.vdp = document.getElementById(player_id);
+				if( vdp_embed.auto_play ) {
+					vdp.setVDPAttribute("configProxy.flashvars", "autoPlay", "true");
 				}
 			}
 		</script>
 		
-		<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-		<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+		<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+		<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 	</head>
 
 	<body>
 		<h2>Flashembed</h2>
-		<b>Note:</b> flashembed html5 library rewrite is deprecated, you should instead use <i>kWidget.embed</i>
+		<b>Note:</b> flashembed html5 library rewrite is deprecated, you should instead use <i>vWidget.embed</i>
 		
 		
 		<!-- other parts of the page -->
 
 		<ul id="sample_playlist">
-			<li id="1_v1z55w0b"><a href="?entryId=1_v1z55w0b"><img alt="entry name inserted via kaltuta php client, etc." src="http://www.kaltura.com/p/243342/thumbnail/entry_id/1_v1z55w0b/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
-			<li id="0_uka1msg4"><a href="?entryId=0_uka1msg4"><img alt="entry name inserted via kaltuta php client, etc." src="http://www.kaltura.com/p/243342/thumbnail/entry_id/0_uka1msg4/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
-			<li id="0_7dmu2xhz"><a href="?entryId=0_7dmu2xhz"><img alt="entry name inserted via kaltuta php client, etc." src="http://www.kaltura.com/p/243342/thumbnail/entry_id/0_7dmu2xhz/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
+			<li id="1_v1z55w0b"><a href="?entryId=1_v1z55w0b"><img alt="entry name inserted via vidiun php client, etc." src="http://www.vidiun.com/p/243342/thumbnail/entry_id/1_v1z55w0b/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
+			<li id="0_uka1msg4"><a href="?entryId=0_uka1msg4"><img alt="entry name inserted via vidiun php client, etc." src="http://www.vidiun.com/p/243342/thumbnail/entry_id/0_uka1msg4/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
+			<li id="0_7dmu2xhz"><a href="?entryId=0_7dmu2xhz"><img alt="entry name inserted via vidiun php client, etc." src="http://www.vidiun.com/p/243342/thumbnail/entry_id/0_7dmu2xhz/height/81/width/144/quality/66/type/2/bgcolor/000000" /></a></li>
 		</ul>
 
-		<!-- KDP will be inserted into this div by the embedding script.  Style this div to be the size of
+		<!-- VDP will be inserted into this div by the embedding script.  Style this div to be the size of
 			the	player you want.  To specify which video should be loaded by using server side logic, use
 			the div's "data-entryid" attribute (valid html5).  Otherwise the javascript on this page will
 			try to load a video based on whether a video id (entry id) was passed through the url - such
 			as in the case of a bookmarked page or a link that appears on a search engine results page -
 			and if not will check if you defined the "fallback_entry" var (lower down on this page). -->
-		<div id="kdp_shim" data-entryid=""></div>
-		<!-- read "Kaltura and Video SEO" to learn all about otimizing this div for Video SEO -->
+		<div id="vdp_shim" data-entryid=""></div>
+		<!-- read "Vidiun and Video SEO" to learn all about otimizing this div for Video SEO -->
 
 		<!-- rest of page -->
 
@@ -87,28 +87,28 @@
 			probably be included in and external .js file. -->
 
 		<script>
-			kdp_embed = {
-				doKdpEmbed  : function() {
-					// Should only be changed if you are running Kaltura On Prem / Kaltura CE:
-					var service_url = "http://www.kaltura.com/";
+			vdp_embed = {
+				doVdpEmbed  : function() {
+					// Should only be changed if you are running Vidiun On Prem / Vidiun CE:
+					var service_url = "http://www.vidiun.com/";
 					// logic cascade for deciding which entry to load
 					var entry_id = this.getEntryIdFromUrl() || this.getEntryIdFromDataAttr() || this.fallback_entry;
 
 					flashembed(this.placeholder_id,
 							{	// attributes and params:
-								id :				"kaltura_player",
-								src : 				service_url + "/index.php/kwidget/wid/_" + kdp_embed.partner_id + "/uiconf_id/" +
-													kdp_embed.uiconf_id + "/entry_id/" + entry_id,
-								height :			kdp_embed.height,
-								width :				kdp_embed.width,
+								id :				"vidiun_player",
+								src : 				service_url + "/index.php/vwidget/wid/_" + vdp_embed.partner_id + "/uiconf_id/" +
+													vdp_embed.uiconf_id + "/entry_id/" + entry_id,
+								height :			vdp_embed.height,
+								width :				vdp_embed.width,
 								bgcolor :			"#000000",
 								allowNetworking : 	"all",
 								version :			[10,0],
 			//					onFail :			do something,
-								expressInstall :	"http://cdn.kaltura.org/apis/seo/expressinstall.swf"
+								expressInstall :	"http://cdn.vidiun.org/apis/seo/expressinstall.swf"
 							},
 							{	// flashvars:
-								// The following enables KDP's JavaScript API (the "external interface" is
+								// The following enables VDP's JavaScript API (the "external interface" is
 								// disabled by default):
 								externalInterfaceDisabled : "false"
 								// "false" must be double-quoted, all other values don't have to be
@@ -123,17 +123,17 @@
 					// if the page being loaded includes a reference to a specific entry (video), either via
 					// the hash (a page bookmarked/ sent as link by a human) or via a url parameter (from a
 					// search engine results page):
-					if(location.hash.indexOf(kdp_embed.url_param_name) != -1) {
+					if(location.hash.indexOf(vdp_embed.url_param_name) != -1) {
 						// get the entry id from the url document fragment (aka hash):
-						return location.hash.split("#")[1].substring((kdp_embed.url_param_name.length+1));
+						return location.hash.split("#")[1].substring((vdp_embed.url_param_name.length+1));
 					}
-					else if(location.search.indexOf(kdp_embed.url_param_name) != -1) {
+					else if(location.search.indexOf(vdp_embed.url_param_name) != -1) {
 						// get the entry id from the url parameters (aka querystring):
-						return location.search.split("?")[1].substring((kdp_embed.url_param_name.length+1));
+						return location.search.split("?")[1].substring((vdp_embed.url_param_name.length+1));
 					}
 					else {
 						// use the default video defined in "fallback_entry" below:
-//						return kdp_embed.fallback_entry;
+//						return vdp_embed.fallback_entry;
 						return false;
 					}
 				},
@@ -146,7 +146,7 @@
 				},
 				// for supporting using of page as landing page with entry id passed as url parameter:
 				url_param_name : 	"entryId",
-				placeholder_id :	"kdp_shim",
+				placeholder_id :	"vdp_shim",
 				// the entry to play when first loading the page if no entry id was passed on the url:
 				fallback_entry : 	"0_uka1msg4",
 				// must be replaced with your partner id
@@ -159,7 +159,7 @@
 				width : 			"400"
 			}
 			// embed the player:
-			kdp_embed.doKdpEmbed();
+			vdp_embed.doVdpEmbed();
 		</script>
 		<!-- if you don't want top use jquery then the next script block needs to be modified -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
@@ -167,19 +167,19 @@
 			$(function() {
 				// attached to <ul> so that <li>'s can be updated via ajax and will continue to work
 				$("#sample_playlist").click(function(e) {
-					// "window.kdp" instead of "kdp" to prevent possible "undefined" error
-					if(window.kdp) {
-						if(kdp_embed.auto_continue) {
-							kdp.addJsListener("playerPlayEnd", "playNextVid");
+					// "window.vdp" instead of "vdp" to prevent possible "undefined" error
+					if(window.vdp) {
+						if(vdp_embed.auto_continue) {
+							vdp.addJsListener("playerPlayEnd", "playNextVid");
 						}
 						var entry_id = $(e.target).parents("li").attr("id");						
-						kdp.sendNotification("changeMedia",{entryId: entry_id});
-						location.hash = kdp_embed.url_param_name + "=" + entry_id;
+						vdp.sendNotification("changeMedia",{entryId: entry_id});
+						location.hash = vdp_embed.url_param_name + "=" + entry_id;
 					}
 					else {
 						alert("player not ready yet");
 						// optionally, store desired entry_id in var + add to jsCallbackReady a 
-						// listener for kdpReady/ kdpEmpty and auto load click on entry as soon as 
+						// listener for vdpReady/ vdpEmpty and auto load click on entry as soon as 
 						// player is ready for it (some consider remembering the entry id a potential
 						// UX issue because the wait could be several seconds long). If you do this,
 						// move the "var entry_id..." line to above the if clause.
@@ -189,19 +189,19 @@
 			});
 
 			function playNextVid() {
-				window.now_playing = kdp.evaluate("{mediaProxy.entry.id}");
+				window.now_playing = vdp.evaluate("{mediaProxy.entry.id}");
 				var next_entry_id = $("#" + now_playing).next().attr("id");
 				if(next_entry_id.length) {
-					kdp.sendNotification("changeMedia",{entryId: next_entry_id});
+					vdp.sendNotification("changeMedia",{entryId: next_entry_id});
 					location.hash = "entryId=" + next_entry_id;
 				}
 			}
 			
 			
-			// Also embed non-kaltua swf:
-			flashembed("nonKalturaSwf", 
+			// Also embed non-vidiun swf:
+			flashembed("nonVidiunSwf", 
 				{	// attributes and params:
-					id :				"nonKalturaTest",
+					id :				"nonVidiunTest",
 					src : 				'resources/swfobject/test.swf',
 					height :			120,
 					width :				300,
@@ -219,8 +219,8 @@
 		<br />
 		<div id="clock"></div>
 		<br>
-Non-Kaltura swf object embed with flashembed:<br>
-<div id="nonKalturaSwf"></div>
+Non-Vidiun swf object embed with flashembed:<br>
+<div id="nonVidiunSwf"></div>
 
 	</body>
 </html>

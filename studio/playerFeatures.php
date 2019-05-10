@@ -98,7 +98,7 @@ $basePluginConfig = array(
 );
 
 $configRegister = array();
-global $wgMwEmbedEnabledModules, $wgKalturaPSHtml5SettingsPath, $wgBaseMwEmbedPath;
+global $wgMwEmbedEnabledModules, $wgVidiunPSHtml5SettingsPath, $wgBaseMwEmbedPath;
 foreach ($wgMwEmbedEnabledModules as $moduleName) {
     $manifestPath =  $wgBaseMwEmbedPath . "/modules/$moduleName/{$moduleName}.manifest.";
     if( is_file( $manifestPath . "json" ) ){

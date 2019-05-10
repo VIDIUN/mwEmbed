@@ -1,6 +1,6 @@
 if( console && console.log )
 	console.log( 'OnPage Js: fooBar1' );
-KWidget.addReadyCallback( function( playerId ){
+VWidget.addReadyCallback( function( playerId ){
 	if( console && console.log )
 		console.log( 'OnPage Js: fooBar1: player ready: ' + playerId );
 });

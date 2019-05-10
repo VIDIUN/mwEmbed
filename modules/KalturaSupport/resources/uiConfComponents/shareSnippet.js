@@ -2,7 +2,7 @@
  * Share Snippet plugin:
 
 <Plugin id="shareSnippet" width="1" height="1"
-path="/content/uiconf/ps/cornell/kdp_3.5.32/plugins/ShareSnippetPlugin4.swf"
+path="/content/uiconf/ps/cornell/vdp_3.5.32/plugins/ShareSnippetPlugin4.swf"
 visible="false" includeInLayout="false"
 landingPagePrefix="http://www.cornell.edu/video/?videoID="
 generatorEmbedPrefix="http://www.cornell.edu/video/embed.js?videoID="
@@ -15,11 +15,11 @@ customSnippetAfter="' type%3D'text%2Fjavascript'%3E%3C%2Fscript%3E%3Cnoscript%3E
 *
 
 <Button id="shareBtnEndScreen"
-kClick="sendNotification('showShareSnippets')"
+vClick="sendNotification('showShareSnippets')"
 buttonType="onScreenButton" minWidth="60"
 labelPlacement="top" label="Share"
 styleName="onScreenBtn" upIcon="shareIcon"
-k_buttonType="buttonIconControllerArea" color1="14540253"
+v_buttonType="buttonIconControllerArea" color1="14540253"
 color2="16777215" color3="3355443" color4="0x58A1E0"
 color5="16777215" font="Arial" />
 
@@ -41,7 +41,7 @@ color5="16777215" font="Arial" />
 
 		// We should have a base Plugin that will have getConfig method and plugin will extend that class and call the partner getConfig
 		getConfig: function( attr ) {
-			return this.embedPlayer.getKalturaConfig( this.pluginName, attr );
+			return this.embedPlayer.getVidiunConfig( this.pluginName, attr );
 		},
 
 		addPlayerBindings: function() {
@@ -55,8 +55,8 @@ color5="16777215" font="Arial" />
 		addShareButton: function() {
 			var _this = this;
 			var embedPlayer = this.embedPlayer;
-			var shareButtonClick = embedPlayer.getKalturaConfig('kalturaShareBtnControllerScreen', 'kClick') || embedPlayer.getKalturaConfig('shareBtnControllerScreen', 'kClick') ;
-			// TODO: We should have better support for kClick attribute [ sendNotification('showShareSnippets') ]
+			var shareButtonClick = embedPlayer.getVidiunConfig('vidiunShareBtnControllerScreen', 'vClick') || embedPlayer.getVidiunConfig('shareBtnControllerScreen', 'vClick') ;
+			// TODO: We should have better support for vClick attribute [ sendNotification('showShareSnippets') ]
 			if( shareButtonClick && shareButtonClick.indexOf('showShareSnippets') ) {
 
 				mw.log('shareSnippet :: add share button');
@@ -106,10 +106,10 @@ color5="16777215" font="Arial" />
 				// Custom share URL
 				shareUrl = this.getConfig('landingPagePrefix') + this.getConfig('uuid');
 			} else {
-				// Default KMC preview page
-				var partnerId = embedPlayer.kwidgetid.substr(1,embedPlayer.kwidgetid.length);
-				shareUrl = mw.getConfig('Kaltura.ServiceUrl') + '/index.php/kmc/preview/';
-				shareUrl += 'partner_id/' + partnerId + '/entry_id/' + embedPlayer.kentryid + '/uiconf_id/' + embedPlayer.kuiconfid;
+				// Default VMC preview page
+				var partnerId = embedPlayer.vwidgetid.substr(1,embedPlayer.vwidgetid.length);
+				shareUrl = mw.getConfig('Vidiun.ServiceUrl') + '/index.php/vmc/preview/';
+				shareUrl += 'partner_id/' + partnerId + '/entry_id/' + embedPlayer.ventryid + '/uiconf_id/' + embedPlayer.vuiconfid;
 			}
 
 			// Genrate Embed Code
@@ -194,7 +194,7 @@ color5="16777215" font="Arial" />
 	};
 
 	// Bind to new player event
-	mw.addKalturaPlugin( 'shareSnippet', function( embedPlayer, callback ){
+	mw.addVidiunPlugin( 'shareSnippet', function( embedPlayer, callback ){
 		shareSnippet.init( embedPlayer );
 		// Continue player build-out
 		callback();

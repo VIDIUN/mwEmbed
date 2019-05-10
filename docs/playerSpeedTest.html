@@ -1,20 +1,20 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>kWidget Player test</title>
+<title>vWidget Player test</title>
 </head>
 <body>
 <h2 id='runtime-header'> </h2>
 <br />
 <!-- 
 <div id="testLinks">
-	<a href="#embed16">kWidget HTML5 1.6x </a><br>
-	<a href="#embedKdpFlash">KDP Flash Embed</a><br>
+	<a href="#embed16">vWidget HTML5 1.6x </a><br>
+	<a href="#embedVdpFlash">VDP Flash Embed</a><br>
 	<a href="#embedMediaElmement">MediaElement.js Embed</a><br>
-	<a href="#embed17">kWidget HTML5 1.7</a> <br>
-	<a href="#embed17js">kWidget HTML5 1.7</a> ( js entry load ) <br>
-	<a href="#onPage17">OnPage Kaltura HTML5 1.7</a><br>
-	<a href="#autoEmbed17">OnPage Kaltura HTML5 1.7</a><br>
+	<a href="#embed17">vWidget HTML5 1.7</a> <br>
+	<a href="#embed17js">vWidget HTML5 1.7</a> ( js entry load ) <br>
+	<a href="#onPage17">OnPage Vidiun HTML5 1.7</a><br>
+	<a href="#autoEmbed17">OnPage Vidiun HTML5 1.7</a><br>
 	<a href="#rawVideoTag">Raw video tag ( just cdn source loading )</a>
 </div>
  -->
@@ -43,8 +43,8 @@
 
 	function onPage17_test(){
 		startClock();
-		document.write( '<script type="text/javascript" src="http://cdnakmi.kaltura.org/apis/html5versions/1.7alpha/mwEmbedStartup.php"></scr' + 'ipt>');
-		getVideoTagFromKSources( function(){
+		document.write( '<script type="text/javascript" src="http://cdnakmi.vidiun.org/apis/html5versions/1.7alpha/mwEmbedStartup.php"></scr' + 'ipt>');
+		getVideoTagFromVSources( function(){
 			$('video').embedPlayer( function(){
 				appendToScore( "Library Loaded, Player ready");
 
@@ -59,8 +59,8 @@
 
 	function rawVideoTag_test(){
 		startClock();
-		// stand alone minimal kaltura library for grabbing video sources: 
-		getVideoTagFromKSources(function(){
+		// stand alone minimal vidiun library for grabbing video sources: 
+		getVideoTagFromVSources(function(){
 			var myVid = document.getElementById( 'myVid' );
 			myVid.addEventListener('playing', function(){
 				appendToScore( "Video started playback", 'done');
@@ -75,20 +75,20 @@
 		document.write( '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></scr' + 'ipt>' );
 		document.write( '<link rel="stylesheet" href="https://raw.github.com/johndyer/mediaelement/master/build/mediaelementplayer.min.css" />' );
 		document.write( '<script src="https://raw.github.com/johndyer/mediaelement/master/build/mediaelement-and-player.min.js"></scr' + 'ipt>' );
-		// stand alone minimal kaltura library for grabbing video sources: 
-		document.write( '<script src="http://cdnakmi.kaltura.org/apis/html5versions/1.6.12.12/modules/KalturaSupport/' + 
-				'standAloneTests/kWidget.getSources.js"></scr' + 'ipt>' );
+		// stand alone minimal vidiun library for grabbing video sources: 
+		document.write( '<script src="http://cdnakmi.vidiun.org/apis/html5versions/1.6.12.12/modules/VidiunSupport/' + 
+				'standAloneTests/vWidget.getSources.js"></scr' + 'ipt>' );
 		// output blocking continue script test:
 		document.write( '<script type="text/javascript">continueMediaElementTest()</scr' + 'ipt>');
 	}
 	function continueMediaElementTest(){
 		appendToScore( "Loaded mediaElement library" );
-		// now load sources from kaltura
-		kWidget.getSources({
+		// now load sources from vidiun
+		vWidget.getSources({
 			'partnerId': '243342',
 			'entryId': testEntryId,
 			'callback': function( sourceSet ){
-				getVideoTagFromKSources(function(){
+				getVideoTagFromVSources(function(){
 					// embed mediaplayer:
 					$('video').mediaelementplayer({
 						success: function(player, node) {
@@ -103,10 +103,10 @@
 			}
 		});
 	}
-	function getVideoTagFromKSources( callback){
-		appendScriptUrl( 'http://cdnakmi.kaltura.org/apis/html5versions/1.6.12.12/modules/KalturaSupport/' + 
-				'standAloneTests/kWidget.getSources.js', function(){
-			kWidget.getSources({
+	function getVideoTagFromVSources( callback){
+		appendScriptUrl( 'http://cdnakmi.vidiun.org/apis/html5versions/1.6.12.12/modules/VidiunSupport/' + 
+				'standAloneTests/vWidget.getSources.js', function(){
+			vWidget.getSources({
 				'partnerId': '243342',
 				'entryId': testEntryId,
 				'callback': function( sourceSet ){
@@ -114,7 +114,7 @@
 					var vidHTML = '<video id="myVid" width="400" height="330" ' +
 					'data-durationhint=60 ' +
 					'controls="true" ' +
-					'poster="' + getKalturaThumbUrl({
+					'poster="' + getVidiunThumbUrl({
 						'entry_id': testEntryId,
 						'partner_id' : testPartnerId
 					}) + '" >';
@@ -144,37 +144,37 @@
 
 	function embed17_test(){
 		startClock();
-		// appendScriptUrl('/html5.kaltura/mwEmbed/mwEmbedLoader.php', function(){
-		appendScriptUrl('http://cdnakmi.kaltura.org/apis/html5versions/1.7alpha/mwEmbedLoader.php',function(){
+		// appendScriptUrl('/html5.vidiun/mwEmbed/mwEmbedLoader.php', function(){
+		appendScriptUrl('http://cdnakmi.vidiun.org/apis/html5versions/1.7alpha/mwEmbedLoader.php',function(){
 			mw.setConfig( 'forceMobileHTML5', true);
-			appendToScore( "Load kWidget library");
-			doKWidgetEmbed();
+			appendToScore( "Load vWidget library");
+			doVWidgetEmbed();
 		});
 	}
 	function embed17js_test(){
 		startClock();
-		//appendScriptUrl('/html5.kaltura/mwEmbed/mwEmbedLoader.php', function(){
-		appendScriptUrl('http://cdnakmi.kaltura.org/apis/html5versions/1.7jsEntryLoad/mwEmbedLoader.php',function(){
+		//appendScriptUrl('/html5.vidiun/mwEmbed/mwEmbedLoader.php', function(){
+		appendScriptUrl('http://cdnakmi.vidiun.org/apis/html5versions/1.7jsEntryLoad/mwEmbedLoader.php',function(){
 			mw.setConfig( 'forceMobileHTML5', true);
-			appendToScore( "Load kWidget library");
-			doKWidgetEmbed();
+			appendToScore( "Load vWidget library");
+			doVWidgetEmbed();
 		});
 	}	
 
 	function embed16_test(){
 		startClock();
-		appendScriptUrl('http://cdnakmi.kaltura.org/apis/html5versions/1.6.12.12/mwEmbedLoader.php', function(){
+		appendScriptUrl('http://cdnakmi.vidiun.org/apis/html5versions/1.6.12.12/mwEmbedLoader.php', function(){
 			mw.setConfig( 'forceMobileHTML5', true);
-			appendToScore( "Load kWidget library");
-			doKWidgetEmbed();
+			appendToScore( "Load vWidget library");
+			doVWidgetEmbed();
 		});
 	}
-	function embedKdpFlash_test(){
+	function embedVdpFlash_test(){
 		startClock();
-		appendScriptUrl('http://cdnakmi.kaltura.org/apis/html5versions/1.6.12.12/mwEmbedLoader.php', function(){
+		appendScriptUrl('http://cdnakmi.vidiun.org/apis/html5versions/1.6.12.12/mwEmbedLoader.php', function(){
 			mw.setConfig( 'forceMobileHTML5', false);
-			appendToScore( "Load kWidget library");
-			doKWidgetEmbed();
+			appendToScore( "Load vWidget library");
+			doVWidgetEmbed();
 		});
 	}
 
@@ -192,12 +192,12 @@
 	function getTimeSinceLast(){
 		return  new Date().getTime() - previusTime;
 	}
-	function kWidgetStartPlaybackTime(){
+	function vWidgetStartPlaybackTime(){
 		appendToScore( "Start Playback", 'done' );
 
 	}
-	function doKWidgetEmbed(){
-		kWidget.embed({
+	function doVWidgetEmbed(){
+		vWidget.embed({
 			'targetId': 'myVideoTarget',
 			'wid': '_' + testPartnerId,
 			'uiconf_id' : testUiConfId,
@@ -207,8 +207,8 @@
 			},
 			'readyCallback': function( playerId ){
 				appendToScore( "library and player loaded " );
-				var kdp = document.getElementById( playerId );
-				kdp.addJsListener("doPlay", 'kWidgetStartPlaybackTime' )
+				var vdp = document.getElementById( playerId );
+				vdp.addJsListener("doPlay", 'vWidgetStartPlaybackTime' )
 			}
 		});
 	}
@@ -251,20 +251,20 @@
 		// This arises when a base node is used (#2709 and #4378).
 		head.insertBefore( script, head.firstChild );
 	}
-	function getKalturaThumbUrl( entry ){
+	function getVidiunThumbUrl( entry ){
  		entry.width = 400;
  		entry.height = 300;
 
-	 	var ks = ( entry.ks ) ? '?ks=' + entry.ks : '';
+	 	var vs = ( entry.vs ) ? '?vs=' + entry.vs : '';
 
 	 	// Support widget_id based thumbs: 
 	 	if( entry.widget_id && ! entry.partner_id ){
 	 		entry.partner_id = entry.widget_id.substr(1);
 	 	}
 
-	 	return 'http://cdnbakmi.kaltura.com' + '/p/' + entry.partner_id + '/sp/' +
+	 	return 'http://cdnbakmi.vidiun.com' + '/p/' + entry.partner_id + '/sp/' +
 	 		entry.partner_id + '00/thumbnail/entry_id/' + entry.entry_id + '/width/' +
-	 		parseInt(entry.width) + '/height/' + parseInt(entry.height) + ks;
+	 		parseInt(entry.width) + '/height/' + parseInt(entry.height) + vs;
 	 };
 
 </script>

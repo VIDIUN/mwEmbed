@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'durationLabel', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'durationLabel', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			parent: "controlsContainer",
