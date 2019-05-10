@@ -1298,7 +1298,7 @@ HTML;
     <?php $customCss = $this->outputCustomCss(); ?>
 
 	<script type="text/javascript">
-	    if (window['kWidget'] && !window['kWidget'].isMobileDevice()){
+	    if (window['vWidget'] && !window['vWidget'].isMobileDevice()){
             var head = document.head || document.getElementsByTagName('head')[0];
             head.appendChild(<?php $customCss ?>);
 	    }

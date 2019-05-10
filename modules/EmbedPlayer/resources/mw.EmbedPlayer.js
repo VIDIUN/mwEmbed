@@ -2200,8 +2200,8 @@
 		},
 
 		isMobileSkin: function(){
-			var skin = this.getRawKalturaConfig("layout") ? this.getRawKalturaConfig("layout").skin : window["kalturaIframePackageData"].playerConfig.layout ? window["kalturaIframePackageData"].playerConfig.layout.skin : "kdark";
-			return ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "kdark" && mw.isMobileDevice() && !mw.isWindowsPhone() );
+			var skin = this.getRawVidiunConfig("layout") ? this.getRawVidiunConfig("layout").skin : window["vidiunIframePackageData"].playerConfig.layout ? window["vidiunIframePackageData"].playerConfig.layout.skin : "vdark";
+			return ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "vdark" && mw.isMobileDevice() && !mw.isWindowsPhone() );
 		},
 
 		/**
