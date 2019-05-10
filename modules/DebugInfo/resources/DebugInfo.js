@@ -46,20 +46,20 @@ mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
 
     },
 
-    extractKES:function(url) {
+    extractVES:function(url) {
         try {
             var $scope=this.$scope;
-            var re = /https?:\/\/(?:([^\/]*)\/(?:kCache|kVOD|kMulticast)\/)(?:([^\/]*)\/(?:kCache|kVOD|kMulticast)\/)?(?:([^\/]*)\/(?:kCache|kVOD|kMulticast)\/)?(?:([^\/]*)\/(?:kCache|kVOD|kMulticast)\/)?([^\/]*)\//i;
-            $scope.kesChain = "";
+            var re = /https?:\/\/(?:([^\/]*)\/(?:vCache|vVOD|vMulticast)\/)(?:([^\/]*)\/(?:vCache|vVOD|vMulticast)\/)?(?:([^\/]*)\/(?:vCache|vVOD|vMulticast)\/)?(?:([^\/]*)\/(?:vCache|vVOD|vMulticast)\/)?([^\/]*)\//i;
+            $scope.vesChain = "";
             var m2=re.exec(url);
             for (var i=1;i<m2.length;i++) {
                 if (!m2[i]) {
                     continue;
                 }
-                if ($scope.kesChain.length > 0) {
-                    $scope.kesChain += " => ";
+                if ($scope.vesChain.length > 0) {
+                    $scope.vesChain += " => ";
                 }
-                $scope.kesChain += m2[i];
+                $scope.vesChain += m2[i];
             }
 
 
@@ -73,7 +73,7 @@ mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
 
         this.bind("debugInfoReceived", function( e, data ){
             if (data.uri) {
-                _this.extractKES(data.uri);
+                _this.extractVES(data.uri);
             }
             if( data.info && data.info == "Playing segment"){
                 $scope.hlsCurrentSegment=data.uri;
@@ -337,7 +337,7 @@ mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
                 this.$scope.mcPacketsPerSec=data.PacketRate;
                 this.$scope.multicastSessionId=data.multicastSessionId;
 
-                this.extractKES(data.multiastServerUrl);
+                this.extractVES(data.multiastServerUrl);
             }
         }
     }

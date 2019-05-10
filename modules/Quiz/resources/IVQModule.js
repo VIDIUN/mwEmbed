@@ -122,13 +122,13 @@
                         }
                     }
 
-                    if(_this.isKPlaylist){
+                    if(_this.isVPlaylist){
                         if (_this.quizSubmitted){
                             mw.log("Quiz: Playlist Auto Continue When Submitted");
-                            _this.embedPlayer.setKDPAttribute('playlistAPI','autoContinue',true);
+                            _this.embedPlayer.setVDPAttribute('playlistAPI','autoContinue',true);
                         }else{
                             mw.log("Quiz: Playlist Don't Auto Continue");
-                            _this.embedPlayer.setKDPAttribute('playlistAPI','autoContinue',false);
+                            _this.embedPlayer.setVDPAttribute('playlistAPI','autoContinue',false);
                         }
                     }
 
@@ -157,7 +157,7 @@
                 var _this = this;
                 if (data[0].totalCount > 0 &&  !$.isEmptyObject(data[0].objects[0])) {
                     mw.log('Quiz: Set user entry id');
-                    _this.kQuizUserEntryId = data[0].objects[0].id;
+                    _this.vQuizUserEntryId = data[0].objects[0].id;
                 }
                 else{
                     _this.VIVQApi.createQuizUserEntryId(function(userData){
@@ -166,7 +166,7 @@
                         }
                         else{
                             mw.log('Quiz: create user entry id');
-                            _this.kQuizUserEntryId = userData.id;
+                            _this.vQuizUserEntryId = userData.id;
                         }
                     });
                 }
@@ -606,9 +606,9 @@
             sendIVQMesageToListener:function(){
                 try {
                     var _this = this;
-                    window.kdp = document.getElementById( _this.embedPlayer.id );
-                    window.kdp.sendNotification("QuizSubmitted", _this.kQuizUserEntryId);
-                    mw.log('Quiz: QuizSubmitted sent to kdp');
+                    window.vdp = document.getElementById( _this.embedPlayer.id );
+                    window.vdp.sendNotification("QuizSubmitted", _this.vQuizUserEntryId);
+                    mw.log('Quiz: QuizSubmitted sent to vdp');
                 } catch (e) {
                     mw.log('postMessage listener of parent is undefined: ', e);
                 }

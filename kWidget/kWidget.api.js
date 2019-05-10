@@ -125,10 +125,10 @@ vWidget.api.prototype = {
 			clearTimeout(timeoutError);
 			// check if the base param was a session
             data = data || [];
-            if( data.length > 1 && param[ '1:service' ] == 'session' && !withProxyData){ // in case of proxyData (OTT) we request a session but KS doesn't exist
+            if( data.length > 1 && param[ '1:service' ] == 'session' && !withProxyData){ // in case of proxyData (OTT) we request a session but VS doesn't exist
 																						 // so the response doesn't contain it so don't handle
-				//Set the returned ks
-	            _this.setKs(data[0].ks);
+				//Set the returned vs
+	            _this.setVs(data[0].vs);
 	            // if original request was not a multirequest then directly return the data object
 	            // if original request was a multirequest then remove the session from the returned data objects
 	            if (data.length == 2){
@@ -299,8 +299,8 @@ vWidget.api.prototype = {
 		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Vidiun.LiveStatsServiceUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Vidiun.LiveStatsServiceUrl' );
 		}
-		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Kaltura.AnalyticsUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.AnalyticsUrl' );
+		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Vidiun.AnalyticsUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.AnalyticsUrl' );
 		}
         if (apiHost ) {
             serviceUrl = mw.getConfig( apiHost );

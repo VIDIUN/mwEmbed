@@ -1,5 +1,5 @@
 /**
- * Created by mark.feder Kaltura.
+ * Created by mark.feder Vidiun.
  *
  * */
 (function (mw, $) {
@@ -64,7 +64,7 @@
                 _this.KIVQModule = new mw.KIVQModule(embedPlayer, _this);
                 _this.KIVQModule.isKPlaylist = (typeof (embedPlayer.playlist) === "undefined" ) ? false : true;
 
-                if (embedPlayer.kalturaPlayerMetaData.capabilities === "quiz.quiz"){
+                if (embedPlayer.vidiunPlayerMetaData.capabilities === "quiz.quiz"){
                     if (embedPlayer.autoplay) {
                         embedPlayer.autoplay = false;
                     }
@@ -80,8 +80,8 @@
 
                     _this.KIVQScreenTemplate = new mw.KIVQScreenTemplate(embedPlayer);
 
-                    if(_this.KIVQModule.isKPlaylist){
-                        _this.KIVQModule.unloadQuizPlugin(embedPlayer);
+                    if(_this.VIVQModule.isVPlaylist){
+                        _this.VIVQModule.unloadQuizPlugin(embedPlayer);
                         embedPlayer.stop();
                     }else{
                         if(!_this.multiStreamWelcomeSkip){
@@ -93,7 +93,7 @@
                     _this.KIVQModule.checkCuepointsReady(function(){
                         _this.addBindings();
 
-                        if(_this.KIVQModule.isKPlaylist){
+                        if(_this.VIVQModule.isVPlaylist){
                             embedPlayer.stop();//
                             _this.enablePlayDuringScreen = false;
                             _this.ssWelcome();
@@ -110,7 +110,7 @@
 
                     try {
                         var cssLink = "modules/Quiz/resources/css/quizFonts.css";
-                        cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : kWidget.getPath() + cssLink;
+                        cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : vWidget.getPath() + cssLink;
                         if (!$("link[href=cssLink]").length){
                             $('head', window.parent.document).append('<link type="text/css" rel="stylesheet" href="' + cssLink + '"/>');
                         }
@@ -120,10 +120,10 @@
                     }
                 }
                 else{
-                    _this.KIVQModule.unloadQuizPlugin(embedPlayer);
+                    _this.VIVQModule.unloadQuizPlugin(embedPlayer);
                     embedPlayer.enablePlayControls();
-                    if(_this.KIVQModule.isKPlaylist){
-                        _this.embedPlayer.setKDPAttribute('playlistAPI','autoContinue',true);
+                    if(_this.VIVQModule.isVPlaylist){
+                        _this.embedPlayer.setVDPAttribute('playlistAPI','autoContinue',true);
                     };
                  }
             });
@@ -133,7 +133,7 @@
             var embedPlayer = this.getPlayer();
             mw.log("Quiz: Add Bindings ");
             if (!_this.multiStreamWelcomeSkip){
-                this.bind('prePlayAction'+_this.KIVQModule.bindPostfix, function (e, data) {
+                this.bind('prePlayAction'+_this.VIVQModule.bindPostfix, function (e, data) {
                     mw.log("Quiz: Bind PrePlay");
                     if(!_this.KIVQModule.isKPlaylist){
                         if(_this.getPlayer().firstPlay && _this.KIVQModule.showWelcomePage) {
@@ -143,24 +143,24 @@
                             _this.ssWelcome();
 
                         }else{
-                            _this.KIVQModule.showQuizOnScrubber();
+                            _this.VIVQModule.showQuizOnScrubber();
                             mw.log("Quiz: preplay Show Quiz on Scrubber");
                         };
                     };
-                    _this.unbind('prePlayAction' + _this.KIVQModule.bindPostfix);
+                    _this.unbind('prePlayAction' + _this.VIVQModule.bindPostfix);
                 });
             }else{
-                this.bind('prePlayAction'+_this.KIVQModule.bindPostfix, function (e, data) {
-                    _this.KIVQModule.showQuizOnScrubber();
+                this.bind('prePlayAction'+_this.VIVQModule.bindPostfix, function (e, data) {
+                    _this.VIVQModule.showQuizOnScrubber();
                 });
-                _this.KIVQModule.continuePlay();
+                _this.VIVQModule.continuePlay();
             };
-            this.bind('KalturaSupport_CuePointReached'+_this.KIVQModule.bindPostfix, function (e, cuePointObj) {
+            this.bind('VidiunSupport_CuePointReached'+_this.VIVQModule.bindPostfix, function (e, cuePointObj) {
                 if(!_this.isSeekingIVQ){
                     if ((_this.seekToQuestionTime ===  cuePointObj.cuePoint.startTime)
                         || (_this.seekToQuestionTime === null))
                          {
-                        _this.KIVQModule.cuePointReachedHandler(e, cuePointObj);
+                        _this.VIVQModule.cuePointReachedHandler(e, cuePointObj);
                         _this.seekToQuestionTime = null;
                         mw.log("Quiz: CuePoint Reached time: " + cuePointObj.cuePoint.startTime);
                     }
@@ -181,44 +181,44 @@
                 }, 0);
             });
 
-            embedPlayer.bindHelper('seeking'+_this.KIVQModule.bindPostfix, function () {
+            embedPlayer.bindHelper('seeking'+_this.VIVQModule.bindPostfix, function () {
                 _this.isSeekingIVQ = true;
                 mw.log("Quiz: Seeking.. ");
             });
 
-            embedPlayer.bindHelper('playbackComplete'+_this.KIVQModule.bindPostfix, function(){
-                _this.KIVQModule.quizEndScenario();
+            embedPlayer.bindHelper('playbackComplete'+_this.VIVQModule.bindPostfix, function(){
+                _this.VIVQModule.quizEndScenario();
                 mw.log("Quiz: playbackComplete");
             });
 
-            embedPlayer.bindHelper('onOpenFullScreen'+_this.KIVQModule.bindPostfix, function() {
+            embedPlayer.bindHelper('onOpenFullScreen'+_this.VIVQModule.bindPostfix, function() {
                 _this.inFullScreen = true;
                 if (!_this.isScreenVisible()) {
-                    _this.KIVQModule.showQuizOnScrubber();
+                    _this.VIVQModule.showQuizOnScrubber();
                 }
             });
-            embedPlayer.bindHelper('onCloseFullScreen'+_this.KIVQModule.bindPostfix, function() {
+            embedPlayer.bindHelper('onCloseFullScreen'+_this.VIVQModule.bindPostfix, function() {
                 _this.inFullScreen = false;
                 if (!_this.isScreenVisible()) {
                     _this.VIVQModule.showQuizOnScrubber();
                 }
             });
-            embedPlayer.bindHelper( 'preShowScreen'+_this.KIVQModule.bindPostfix, function( event, screenName ){
+            embedPlayer.bindHelper( 'preShowScreen'+_this.VIVQModule.bindPostfix, function( event, screenName ){
                 if ( !embedPlayer.isInSequence() ){
                     embedPlayer.disablePlayControls();
                     embedPlayer.triggerHelper( 'onDisableKeyboardBinding');
                 }
-                _this.KIVQModule.hideQuizOnScrubber();
+                _this.VIVQModule.hideQuizOnScrubber();
             });
-            embedPlayer.bindHelper( 'preHideScreen'+_this.KIVQModule.bindPostfix, function( event, screenName ){
+            embedPlayer.bindHelper( 'preHideScreen'+_this.VIVQModule.bindPostfix, function( event, screenName ){
                 if (screenName != 'quiz' && !_this.getPlayer().firstPlay){
-                    _this.KIVQModule.showQuizOnScrubber();
+                    _this.VIVQModule.showQuizOnScrubber();
                 }
             });
-            embedPlayer.bindHelper('hideScreen'+_this.KIVQModule.bindPostfix, function(event, screenName){
+            embedPlayer.bindHelper('hideScreen'+_this.VIVQModule.bindPostfix, function(event, screenName){
                 if(screenName === 'quiz'){
                     if (!_this.embedPlayer._playContorls){
-                        _this.KIVQModule.showQuizOnScrubber();
+                        _this.VIVQModule.showQuizOnScrubber();
                         embedPlayer.enablePlayControls();
                         mw.log("Quiz: Continue Play Hide Screen");
                         embedPlayer.play();
@@ -236,9 +236,9 @@
             }
             
           },
-        getKClient: function () {
-            if (!this.kClient) {
-                this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+        getVClient: function () {
+            if (!this.vClient) {
+                this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
             }
             return this.vClient;
         },
@@ -299,7 +299,7 @@
                     + gM('mwe-quiz-pdf')+'</div>');
 
                     $(".pdf-download-img").on('click',function(){
-                        _this.KIVQModule.getIvqPDF(_this.embedPlayer.kentryid);
+                        _this.VIVQModule.getIvqPDF(_this.embedPlayer.ventryid);
                     });
                     // making "download PDF" button accessible:
                     $(".pdf-download-img").attr('role', 'button').attr('tabindex', 5).attr('aria-label', 'Pre-Test - Download PDF').on('keydown', _this.keyDownHandler);
@@ -360,7 +360,7 @@
             var _this = this,embedPlayer = this.getPlayer();;
 
             _this.ivqShowScreen();
-            _this.KIVQScreenTemplate.tmplAlmostDone();
+            _this.VIVQScreenTemplate.tmplAlmostDone();
 
             $(".title-text").html(gM('mwe-quiz-almostDone'));
             $(".sub-text").html(gM('mwe-quiz-remainUnAnswered') + '</br>' + gM('mwe-quiz-pressRelevatToAnswer'))
@@ -597,7 +597,7 @@
         },
         ssAllCompleted: function () {
             var _this = this;
-            _this.KIVQModule.reviewMode = true;
+            _this.VIVQModule.reviewMode = true;
             _this.ivqShowScreen();
             _this.VIVQScreenTemplate.tmplAllCompleted();
 
@@ -720,12 +720,12 @@
             $(".confirm-box").html(gM('mwe-quiz-done'))
                 .on('click', function () {
                     if (mw.isMobileDevice() || _this.embedPlayer.getPlayerElementTime() === 0 ){
-                        _this.KIVQModule.continuePlay();
+                        _this.VIVQModule.continuePlay();
                     }else {
-                        _this.KIVQScreenTemplate.tmplThankYou();
+                        _this.VIVQScreenTemplate.tmplThankYou();
                         $(".title-text").html(gM('mwe-quiz-thankYou'));
                         $(this).delay(1000).fadeIn(function () {
-                            _this.KIVQModule.quizEndFlow = false;
+                            _this.VIVQModule.quizEndFlow = false;
                             if (_this.embedPlayer.getPlayerElementTime() > 0) {
                                 _this.ivqHideScreen();
                                 _this.embedPlayer.seek(0, false);
@@ -735,9 +735,9 @@
                             }
                         });
                     }
-                    if(_this.KIVQModule.isKPlaylist){
+                    if(_this.VIVQModule.isVPlaylist){
                         mw.log("Quiz: Playlist Auto Continue After Submitted");
-                        _this.embedPlayer.setKDPAttribute('playlistAPI','autoContinue',true);
+                        _this.embedPlayer.setVDPAttribute('playlistAPI','autoContinue',true);
                     }
                 })
                 .attr({'tabindex': '5','role': 'button','title':'Quiz is done. Click to continue watching the video.'})
@@ -828,7 +828,7 @@
         // (i.e. the answers user didn't choose, or all if the user never chose an answer for a given question)
         _selectAnswerConroller: function (cPo, questionNr) {
             var _this = this;
-            if (_this.KIVQModule.quizSubmitted) {return false};
+            if (_this.VIVQModule.quizSubmitted) {return false};
 
             if (_this.selectedAnswer &&! cPo.selectedAnswer ){
                 _this.showSelectedQuestion(questionNr);
@@ -934,7 +934,7 @@
             _this.hideScreen();
             _this.embedPlayer.enablePlayControls();
             _this.embedPlayer.triggerHelper( 'onEnableKeyboardBinding' );
-            _this.KIVQModule.showQuizOnScrubber();
+            _this.VIVQModule.showQuizOnScrubber();
             $(".icon-close").css("display", "");
             mw.log("showing flash player");
             $('#kplayer_pid_kplayer').css('visibility', 'visible');
@@ -999,7 +999,7 @@
                 }).on('keydown', _this.keyDownHandler).attr({'tabindex': 6.3, "role" : "button"});
                 return;
             }
-            if (_this.KIVQModule.reviewMode) {
+            if (_this.VIVQModule.reviewMode) {
                 $(".ftr-left").append ($('<span>   ' +  gM('mwe-quiz-review').toUpperCase()
                 + ' ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
                 + '/' + $.cpObject.cpArray.length + '</span>'));
@@ -1030,7 +1030,7 @@
                     }).on('keydown', _this.keyDownHandler).attr('tabindex', 5).attr('role', 'button');
                 }else if(!_this.KIVQModule.canSkip &&  ( $.cpObject.cpArray[questionNr].isAnswerd || _this.isReflectionPoint($.cpObject.cpArray[questionNr])) ){
                     $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                        _this.KIVQModule.checkIfDone(questionNr)
+                        _this.VIVQModule.checkIfDone(questionNr)
                     });
                 }
                 $(".ftr-right").attr('tabindex', 5).attr('role', 'button').attr('title', gM('mwe-quiz-skipForNow')).on('keydown', _this.keyDownHandler);

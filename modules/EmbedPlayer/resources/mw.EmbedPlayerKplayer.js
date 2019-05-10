@@ -1005,8 +1005,8 @@
 			}
 		},
 
-		setKPlayerAttribute: function (host, prop, val) {
-			this.playerObject.setKDPAttribute(host, prop, val);
+		setVPlayerAttribute: function (host, prop, val) {
+			this.playerObject.setVDPAttribute(host, prop, val);
 		},
 		clean: function () {
 			this.unbindHelper(this.bindPostfix);

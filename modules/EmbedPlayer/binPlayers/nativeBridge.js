@@ -215,7 +215,7 @@
 		$(".mwPlayerContainer").one("playerError", function (e, errObj) {
 			NativeBridge.videoPlayer.notifyErrorOccurred(errObj);
 		});
-		kWidget.addReadyCallback(function () {
+		vWidget.addReadyCallback(function () {
 			NativeBridge.videoPlayer.isJsCallbackReady = true;
 			NativeBridge.videoPlayer.notifyJsReadyFunc();
 		});

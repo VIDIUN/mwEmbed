@@ -151,7 +151,7 @@
 			}
 			this.getPlayer().triggerHelper( 'moderationSubmit', flagObj.flagType );
 			this.getPlayer().addPlayerSpinner();
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'baseentry',
 				'action' : 'flag',
 				'moderationFlag:objectType' : 'VidiunModerationFlag',
@@ -166,7 +166,7 @@
 						$( '<div />' ).append(
 							$( '<div />' )
 								.addClass( 'reportButton' )
-								.text( gM("ks-MODERATION-DONE") )
+								.text( gM("vs-MODERATION-DONE") )
 								.click(function() {
 									_this.getPlayer().triggerHelper( 'onEnableKeyboardBinding' );
 									_this.closeModal();

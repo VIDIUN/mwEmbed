@@ -384,12 +384,12 @@ class mwEmbedLoader {
 		return $loaderJs;
 	}
 	private function getExportedConfig(){
-		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgKalturaUseManifestUrls,
-			$wgKalturaUseManifestUrls, $wgHTTPProtocol, $wgKalturaServiceUrl, $wgKalturaServiceBase,
-			$wgKalturaCDNUrl, $wgKalturaStatsServiceUrl,$wgKalturaLiveStatsServiceUrl, $wgKalturaAnalyticsServiceUrl, $wgKalturaIframeRewrite, $wgEnableIpadHTMLControls,
-			$wgKalturaAllowIframeRemoteService, $wgKalturaUseAppleAdaptive, $wgKalturaEnableEmbedUiConfJs,
-			$wgKalturaGoogleAnalyticsUA, $wgHTML5PsWebPath, $wgAllowedVars, $wgAllowedPluginVars, $wgAllowedPluginVarsValPartials, $wgAllowedVarsKeyPartials,
-			$wgCacheTTL, $wgMaxCacheEntries, $wgKalturaSupressNonProductionUrlsWarning;
+		global $wgEnableScriptDebug, $wgResourceLoaderUrl, $wgMwEmbedVersion, $wgMwEmbedProxyUrl, $wgVidiunUseManifestUrls,
+			$wgVidiunUseManifestUrls, $wgHTTPProtocol, $wgVidiunServiceUrl, $wgVidiunServiceBase,
+			$wgVidiunCDNUrl, $wgVidiunStatsServiceUrl,$wgVidiunLiveStatsServiceUrl, $wgVidiunAnalyticsServiceUrl, $wgVidiunIframeRewrite, $wgEnableIpadHTMLControls,
+			$wgVidiunAllowIframeRemoteService, $wgVidiunUseAppleAdaptive, $wgVidiunEnableEmbedUiConfJs,
+			$wgVidiunGoogleAnalyticsUA, $wgHTML5PsWebPath, $wgAllowedVars, $wgAllowedPluginVars, $wgAllowedPluginVarsValPartials, $wgAllowedVarsKeyPartials,
+			$wgCacheTTL, $wgMaxCacheEntries, $wgVidiunSupressNonProductionUrlsWarning;
 		$exportedJS ='';
 		// Set up globals to be exported as mwEmbed config:
 		$exportedJsConfig= array(
