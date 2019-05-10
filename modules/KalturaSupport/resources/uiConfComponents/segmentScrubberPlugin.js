@@ -3,13 +3,13 @@
 */
 ( function( mw, $ ) { "use strict";
 
-	mw.PluginManager.add( 'segmentScrubber', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'segmentScrubber', mw.VBasePlugin.extend({
 		setup: function(){
 			var _this = this;
 			this.bind('playerReady', function(){
 				_this.updateTimeOffsets();
 			});
-			this.bind('Kaltura_SetKDPAttribute', function(e, componentName, property){
+			this.bind('Vidiun_SetVDPAttribute', function(e, componentName, property){
 				if( componentName == "mediaProxy" &&
 					( property == 'mediaPlayFrom' || property =='mediaPlayTo' ) ){
 					_this.updateTimeOffsets();

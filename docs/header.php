@@ -9,12 +9,12 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			 </a>
-			 <a href="http://player.kaltura.com" class="brand"><img src="<?php echo $pathPrefix ?>images/logo-145.png" alt="Kaltura" width="149" height="79"></a>
+			 <a href="http://player.vidiun.com" class="brand"><img src="<?php echo $pathPrefix ?>images/logo-145.png" alt="Vidiun" width="149" height="79"></a>
 			<div class="search-container pull-right">
 				 <form class="navbar-search pull-right">
 					<input id="kdoc-search" type="text" class="search-query" placeholder="Search Features" autocomplete="off">
 					<i class="icon-search" style="position:relative;left:-24px;top:-1px;"></i>
-					<a href="http://corp.kaltura.com/free-trial" target="_new">
+					<a href="http://corp.vidiun.com/free-trial" target="_new">
 						<img alt="free trial" style="width:120px;position:relative;top:-5px;" src="images/free-trial.png">
 					</a>
 				</form>
@@ -48,7 +48,7 @@
 				
 					$('#kdoc-search').change( function(){
 						var tval = $(this).val();
-						$('#kdoc-navbarcontainer a').each(function(){
+						$('#vdoc-navbarcontainer a').each(function(){
 							if( tval == $(this).text() ){
 								$(this).click();
 							}	

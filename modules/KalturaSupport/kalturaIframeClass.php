@@ -1,11 +1,11 @@
 <?php 
 /**
- * Kaltura iFrame class:
+ * Vidiun iFrame class:
  */
 require_once 'KalturaCommon.php';
 require_once 'KalturaDependencyResolver.php';
 
-class kalturaIframeClass {
+class vidiunIframeClass {
 
 	var $request = null;
 	var $uiConfResult = null; // lazy init
@@ -72,11 +72,11 @@ class kalturaIframeClass {
 	function getWidget( $widgetId = null ) {
 		if( $widgetId ) {
 			$client = $this->client->getClient();
-			$kparams = array();
+			$vparams = array();
 			try {
 				$result = $client->widget->get($widgetId);
 			} catch( Exception $e ){
-				throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+				throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 			}
 			if( $result ) {
 				return $result;
@@ -156,9 +156,9 @@ class kalturaIframeClass {
 	}
 	private function getVideoHTML(){
 		$videoTagMap = array(
-			'entry_id' => 'kentryid',
-			'uiconf_id' => 'kuiconfid',
-			'wid' => 'kwidgetid',
+			'entry_id' => 'ventryid',
+			'uiconf_id' => 'vuiconfid',
+			'wid' => 'vwidgetid',
 			'autoplay' => 'autoplay'
 		);
 
@@ -188,7 +188,7 @@ class kalturaIframeClass {
 			}
 		}
 
-		$o.= ' kpartnerid="' . $this->getEntryResult()->getPartnerId() . '" ';
+		$o.= ' vpartnerid="' . $this->getEntryResult()->getPartnerId() . '" ';
 		if( $this->playerError !== false ){
 			// TODO should move this to i8ln keys instead of raw msgs
 			$o.= ' data-playerError="' . htmlentities( $this->playerError ) . '" ';
@@ -246,7 +246,7 @@ class kalturaIframeClass {
 	 * Get custom player includes for css and javascript
 	 */
 	private function getCustomPlayerIncludes($onPageOnly = false){
-		global $wgKalturaPSHtml5SettingsPath; 
+		global $wgVidiunPSHtml5SettingsPath; 
 		$resourceIncludes = array();
 		$onPageIncludes = array();
 
@@ -312,14 +312,14 @@ class kalturaIframeClass {
 		}
 		
 		// first try .json file directly
-		$psJsonPluginPaths = dirname( $wgKalturaPSHtml5SettingsPath ) . '/../ps/pluginPathMap.json';
+		$psJsonPluginPaths = dirname( $wgVidiunPSHtml5SettingsPath ) . '/../ps/pluginPathMap.json';
 		$psPluginList = array();
 		if( is_file( $psJsonPluginPaths ) ){
 			$psPluginList = json_decode( file_get_contents( $psJsonPluginPaths ), TRUE );
 		}
 		// TODO remove legacy php file support:
-		// Check for any plugins that are defined in kwidget-ps ( without server side path listing )
-		$psPluginPath =  dirname( $wgKalturaPSHtml5SettingsPath ) . '/../pluginPathMap.php';
+		// Check for any plugins that are defined in vwidget-ps ( without server side path listing )
+		$psPluginPath =  dirname( $wgVidiunPSHtml5SettingsPath ) . '/../pluginPathMap.php';
 		if( count( $psPluginList ) == 0 && is_file( $psPluginPath ) ){
 			$psPluginList = include( $psPluginPath );
 		}
@@ -340,7 +340,7 @@ class kalturaIframeClass {
 		return $resourceIncludes;
 	}
 	/**
-	 * Gets a series of mw.config.set calls set via the uiConf of the kaltura player
+	 * Gets a series of mw.config.set calls set via the uiConf of the vidiun player
 	 * TODO: we should use getWidgetUiVars instead of parsing the XML
 	 * */
 	private function getEnvironmentConfig(){
@@ -358,10 +358,10 @@ class kalturaIframeClass {
 		return $this->envConfig;
 	}
 	private function getSwfUrl(){
-		$kwidgetParams = array( 'wid', 'uiconf_id', 'entry_id', 'cache_st' );
-		$swfUrl = $this->request->getServiceConfig('ServiceUrl') . '/index.php/kwidget';
+		$vwidgetParams = array( 'wid', 'uiconf_id', 'entry_id', 'cache_st' );
+		$swfUrl = $this->request->getServiceConfig('ServiceUrl') . '/index.php/vwidget';
 		// pass along player attributes to the swf:
-		foreach($kwidgetParams as $key ){
+		foreach($vwidgetParams as $key ){
 			$val = $this->request->get( $key );
 			if( $val ){
 				$swfUrl.='/' . $key . '/' . $val;
@@ -414,7 +414,7 @@ class kalturaIframeClass {
 		if( $lastModified === null ){
 			$lastModified = time();
 		}
-		// Cache for $wgKalturaUiConfCacheTime
+		// Cache for $wgVidiunUiConfCacheTime
 		header( "Cache-Control: public, max-age=$expireTime, max-stale=0");
 		header( "Last-Modified: " . gmdate( "D, d M Y H:i:s", $lastModified) . " GMT");
 		header( "Expires: " . gmdate( "D, d M Y H:i:s", $lastModified + $expireTime ) . " GMT" );
@@ -640,7 +640,7 @@ HTML;
 		// provide default layout if none exisits. 
 		if( !isset( $playerConfig['layout'] ) ){
 			$playerConfig['layout'] = array(
-				"skin"=> "kdark",
+				"skin"=> "vdark",
 				"cssFiles" => array()
 			);
 		}
@@ -658,7 +658,7 @@ HTML;
 		return str_replace( 'load.php', '', $wgResourceLoaderUrl );
 	}
 	/**
-	 * Get all the kaltura defined modules from player config
+	 * Get all the vidiun defined modules from player config
 	 * */
 	function outputKalturaModules(){
 		global $wgMwEmbedEnabledModules, $wgKwidgetPsEnabledModules, $wgKalturaPSHtml5ModulesDir, $psRelativePath,
@@ -668,7 +668,7 @@ HTML;
 		$moduleList = array( 'mw.MwEmbedSupport' );
 
 		// Check player config per plugin id mapping
-		$kalturaSupportModules = array();
+		$vidiunSupportModules = array();
 		$moduleDir = realpath( dirname( __FILE__ ) )  . '/..';
 		foreach( $wgMwEmbedEnabledModules as $moduleName ){
 			$modListPath = $moduleDir . '/' . $moduleName . '/' . $moduleName . '.';
@@ -720,7 +720,7 @@ HTML;
 		// export the loading spinner config early on:
 		$o.= <<<HTML
 		// Export our HTML templates
-		window.kalturaIframePackageData.templates =  {$JST};
+		window.vidiunIframePackageData.templates =  {$JST};
 
 		var moduleList = {$jsonModuleList};
 		var psModuleList = {$jsonPsModuleList};
@@ -911,14 +911,14 @@ HTML;
 			window.preMwEmbedConfig['EmbedPlayer.IsIframeServer'] = true;
 			// in iframe context we explitly rewrite the embed player target once payload is ready:
 			window.preMwEmbedConfig['EmbedPlayer.RewriteSelector'] = null;
-			// Check if we can refrence kWidget from the parent context ( else include mwEmbedLoader.php locally )
-			// TODO this could be optimized. We only need a subset of ~kWidget~ included. 
-			// but remote embeding ( no parent kWidget ) is not a very common use case to optimize for at this point in 
+			// Check if we can refrence vWidget from the parent context ( else include mwEmbedLoader.php locally )
+			// TODO this could be optimized. We only need a subset of ~vWidget~ included. 
+			// but remote embeding ( no parent vWidget ) is not a very common use case to optimize for at this point in 
 			// time.
 			try {
-				if( window['parent'] && window['parent']['kWidget'] ){
-					// import kWidget and mw into the current context:
-					window['kWidget'] = window['parent']['kWidget']; 
+				if( window['parent'] && window['parent']['vWidget'] ){
+					// import vWidget and mw into the current context:
+					window['vWidget'] = window['parent']['vWidget']; 
 				} else {
 					// include kWiget script if not already avaliable
 					<?php
@@ -933,11 +933,11 @@ HTML;
 					?>
 				}
 			} catch( e ) {
-				// include kWiget script if not already avaliable
+				// include vWiget script if not already avaliable
 				document.write( '<script src="<?php echo $this->getMwEmbedLoaderLocation() ?>"></scr' + 'ipt>' );
 			}
 		</script>
-		<!-- kaltura ui cong js logic should be loaded at the loader level-->
+		<!-- vidiun ui cong js logic should be loaded at the loader level-->
 		<!-- Output any iframe based packaged data -->
 		<script type="text/javascript">
 			// Initialize the iframe with associated setup
@@ -952,7 +952,7 @@ HTML;
 					// Skin resources
 					'skinResources' => $this->getSkinResources(),
 					// Api features
-					'apiFeatures' => $wgKalturaApiFeatures,
+					'apiFeatures' => $wgVidiunApiFeatures,
 				);
 				try{
 					// If playlist add playlist and entry playlist entry to payload
@@ -1025,9 +1025,9 @@ HTML;
 					resource = loadSet[i];
 					if( resource.type == 'js' ){
 						// use appendScript for clean errors
-						kWidget.appendScriptUrl( resource.src, checkLoadDone, document );
+						vWidget.appendScriptUrl( resource.src, checkLoadDone, document );
 					} else if ( resource.type == 'css' ){
-						kWidget.appendCssUrl( resource.src, document );
+						vWidget.appendCssUrl( resource.src, document );
 						checkLoadDone();
 					}
 				}
@@ -1140,7 +1140,7 @@ HTML;
 		var customResources = <?php echo json_encode( $urlResourceSet ) ?>;
 		// IE8 has some issues with RL, so we load skin assets directly
 		if( isIE8 ){
-			customResources = customResources.concat( kalturaIframePackageData.skinResources );
+			customResources = customResources.concat( vidiunIframePackageData.skinResources );
 		}
 		loadCustomResourceIncludes( customResources, function(){
             <?php echo $callbackJS ?>
@@ -1153,30 +1153,30 @@ HTML;
 		ob_start();
 		?>
 		<script>
-		var waitForKWidgetCount = 0;
-		waitForKWidget = function( callback ){
-			waitForKWidgetCount++;
-			if( waitForKWidgetCount > 200 ){
+		var waitForVWidgetCount = 0;
+		waitForVWidget = function( callback ){
+			waitForVWidgetCount++;
+			if( waitForVWidgetCount > 200 ){
 				if( console ){
-					console.log( "Error kWidget never ready" );
+					console.log( "Error vWidget never ready" );
 				}
 				return ;
 			}
-			if( ! window.kWidget ){
+			if( ! window.vWidget ){
 				setTimeout(function(){
-					waitForKWidget( callback );
+					waitForVWidget( callback );
 				}, 5 );
 				return ;
 			}
 			callback();
 		}
-		waitForKWidget( function(){
-			if( kWidget.isUiConfIdHTML5( '<?php echo $uiConfId ?>' ) ){
+		waitForVWidget( function(){
+			if( vWidget.isUiConfIdHTML5( '<?php echo $uiConfId ?>' ) ){
 				loadMw( function(){
 					// Load skin resources after other modules loaded
 					if( isIE8 ){
 						$( mw ).bind( 'EmbedPlayerNewPlayer', function(){
-							loadCustomResourceIncludes(kalturaIframePackageData.skinResources);
+							loadCustomResourceIncludes(vidiunIframePackageData.skinResources);
 						});
 					}
 					<?php
@@ -1193,11 +1193,11 @@ HTML;
 					var bodyElement = document.getElementsByTagName('body')[0];
 					bodyElement.innerHTML = '';
 					var container = document.createElement('div');
-					container.id = window.kalturaIframePackageData.playerId + '_container';
+					container.id = window.vidiunIframePackageData.playerId + '_container';
 					container.style.cssText = 'width: 100%; height: 100%;';
 					bodyElement.appendChild(container);
-					var playerId = window.kalturaIframePackageData.playerId;
-					kWidget.outputFlashObject(playerId + '_container', <?php echo json_encode($this->getFlashObjectSettings());?>, document);
+					var playerId = window.vidiunIframePackageData.playerId;
+					vWidget.outputFlashObject(playerId + '_container', <?php echo json_encode($this->getFlashObjectSettings());?>, document);
 					
 				});
 			}
@@ -1248,7 +1248,7 @@ HTML;
 	</script>
 </head>
 <body>
-<?php echo $this->getKalturaIframeScripts(); ?>
+<?php echo $this->getVidiunIframeScripts(); ?>
 <?php
 	// wrap in a top level playlist in the iframe to avoid javascript base .wrap call that breaks video playback in iOS
 	if( $this->getUiConfResult()->isPlaylist() ){
@@ -1284,7 +1284,7 @@ HTML;
 	 * Output a fatal error and exit with error code 1
 	 */
 	private function fatalError( $errorTitle, $errorMsg = false ){
-		global $wgKalturaErrorCacheTime;
+		global $wgVidiunErrorCacheTime;
 		// check for multi line errorTitle array:
 		if( strpos( $errorTitle, "\n" ) !== false ){
 			list( $errorTitle, $errorMsg ) = explode( "\n", $errorTitle);
@@ -1300,9 +1300,9 @@ HTML;
 		ob_start();
 		
 		// Send expire headers
-		// Note: we can't use normal iframeHeader method because it calls the kalturaResultObject
+		// Note: we can't use normal iframeHeader method because it calls the vidiunResultObject
 		// constructor that could be the source of the fatalError
-		$this->sendPublicHeaders( $wgKalturaErrorCacheTime );
+		$this->sendPublicHeaders( $wgVidiunErrorCacheTime );
 
 		// Optional errorTitle:
 		if( $errorMsg === false ){

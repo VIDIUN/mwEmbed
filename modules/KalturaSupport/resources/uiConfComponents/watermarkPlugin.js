@@ -1,5 +1,5 @@
 ( function( mw, $ ) { "use strict";
-	mw.PluginManager.add( 'watermark', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'watermark', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "videoHolder",

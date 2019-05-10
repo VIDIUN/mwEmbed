@@ -1,6 +1,6 @@
 /**
 * NielsenVideoCensus implemented per document outlined here:
-* https://portal.kaltura.com/product/Shared%20Documents/Solution%20Architects/_Generic%20PRDs/Nielsen/KDP%20Nielsen%20Video%20Census%20Plugin%20PRD.docx
+* https://portal.vidiun.com/product/Shared%20Documents/Solution%20Architects/_Generic%20PRDs/Nielsen/VDP%20Nielsen%20Video%20Census%20Plugin%20PRD.docx
 */
 
 mw.NielsenVideoCensus = function( embedPlayer, callback ){
@@ -56,7 +56,7 @@ mw.NielsenVideoCensus.prototype = {
 		// Send beacon for midrolls
 		var inMidroll = false;
 		// TODO this should bind to "midSequenceComplete" not a nested AdSupport_EndAdPlayback
-		_this.embedPlayer.bindHelper('KalturaSupport_AdOpportunity' + _this.bindPostfix, function(){
+		_this.embedPlayer.bindHelper('VidiunSupport_AdOpportunity' + _this.bindPostfix, function(){
 			inMidroll = true;
 		});
 		_this.embedPlayer.bindHelper( 'AdSupport_EndAdPlayback' + _this.bindName, function(){
@@ -150,6 +150,6 @@ mw.NielsenVideoCensus.prototype = {
 		return lpParam ;
 	},
 	getConfig: function( key ){
-		return this.embedPlayer.getKalturaConfig( 'nielsenVideoCensus', key );
+		return this.embedPlayer.getVidiunConfig( 'nielsenVideoCensus', key );
 	}
 }

@@ -1,5 +1,5 @@
 ( function( mw, $ ) { "use strict";
-	mw.addKalturaPlugin( ['mw.Peer5'], 'peer5', function( embedPlayer, callback){
+	mw.addVidiunPlugin( ['mw.Peer5'], 'peer5', function( embedPlayer, callback){
 		var ua = navigator.userAgent;
 		if( /chrome/i.test(ua)) {
 			var uaArray = ua.split(' ');

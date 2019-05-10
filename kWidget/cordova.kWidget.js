@@ -7,7 +7,7 @@
  */
 
 /**
- * Cordova kWidget lib
+ * Cordova vWidget lib
  */
 (function(kWidget){ "use strict";
 	if( !kWidget ){
@@ -15,7 +15,7 @@
 	}
 	var init = function(){
 
-		if ( kWidget.isAndroid() ){
+		if ( vWidget.isAndroid() ){
 			var executeCordova;
 
 			cordova.define("cordova/plugin/NativeComponentPlugin",
@@ -32,7 +32,7 @@
 				window.plugins.NativeComponentPlugin = cordova.require( "cordova/plugin/NativeComponentPlugin" );
 			}
 		}
-		cordova.kWidget = {
+		cordova.vWidget = {
 			// This element is populated by cordova
 			proxyElement: null,
 			// callbacks to auth object events go here:
@@ -41,7 +41,7 @@
 				this.target = document.getElementById( targetId );
 
 				if( !this.target ){
-					kWidget.log( "Error could not find target id, for cordova embed" );
+					vWidget.log( "Error could not find target id, for cordova embed" );
 				}
 
 				this.target.style.backgroundColor += "transparent";
@@ -52,8 +52,8 @@
 				this.iframeUrl = this.iframeUrl.replace(/'/g,"");
 				this.addApi( this.target );
 
-				// Setting kplayer id for jsCallbackReady
-				this.setKPlayerId( targetId );
+				// Setting vplayer id for jsCallbackReady
+				this.setVPlayerId( targetId );
 
 				if ( settings.playOnlyFullscreen )  {
 					kWidget.addThumbCssRules();
@@ -66,7 +66,7 @@
 						'></div></div>';
 					// Add a click binding to do the really embed:
 					var playBtn = document.getElementById( targetId + '_playBtn' );
-					kWidget.addEvent(playBtn, 'touchstart', function(){
+					vWidget.addEvent(playBtn, 'touchstart', function(){
 						_this.drawPlayer( _this.target, true );
 						_this.exec( "setIframeUrl", [ _this.iframeUrl ], "NativeComponentPlugin" );
 					});
@@ -75,7 +75,7 @@
 					this.exec( "setIframeUrl", [ this.iframeUrl ], "NativeComponentPlugin" );
 					window.addEventListener('orientationchange', function(){
 						//when we get this event the new dimensions aren't set yet
-						if ( kWidget.isAndroid() ){
+						if ( vWidget.isAndroid() ){
 							setTimeout( function() {
 								_this.drawPlayer( _this.target );
 							}, 250 );
@@ -91,7 +91,7 @@
 				target.sendNotification = this.sendNotification;
 				target.addJsListener = this.addJsListener;
 				target.asyncEvaluate = this.asyncEvaluate;
-				target.setKDPAttribute = this.setKDPAttribute;
+				target.setVDPAttribute = this.setVDPAttribute;
 				target.removeJsListener = this.removeJsListener;
 			},
 			exec: function( command, args, pluginName ){
@@ -105,7 +105,7 @@
 					pluginName = "NativeComponentPlugin";
 				}
 
-				if ( kWidget.isAndroid() ){
+				if ( vWidget.isAndroid() ){
 					cordova.exec = executeCordova;
 				}
 				cordova.exec(null, null, pluginName, command, args);
@@ -143,10 +143,10 @@
 
 				this.exec( "drawVideoNativeComponent", [ x, y, w, h, isFullscreen ], "NativeComponentPlugin" );
 			},
-			setKPlayerId: function( targetId ){
-				this.exec( "setKPlayerId", [ targetId ], "NativeComponentPlugin" );
+			setVPlayerId: function( targetId ){
+				this.exec( "setVPlayerId", [ targetId ], "NativeComponentPlugin" );
 			}
 		};
 	}
 	document.addEventListener( "deviceready", init, false );
-})( window.kWidget );
+})( window.vWidget );

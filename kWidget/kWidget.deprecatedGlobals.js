@@ -1,58 +1,58 @@
-(function(mw, kWidget){
+(function(mw, vWidget){
 
-	kWidget.deprecatedGlobals = function(){
+	vWidget.deprecatedGlobals = function(){
 		// Note not all these were likely to be used externally,
 		// we can more aggressively remove in a later library version.
 		var globalFunctionMap = {
-				'kIsIOS': 'isIOS',
-				'kSupportsHTML5': 'supportsHTML5',
-				'kGetFlashVersion': 'getFlashVersion',
-				'kSupportsFlash': 'supportsFlash',
-				'kalturaIframeEmbed': 'embed',
-				'kOutputFlashObject': 'outputFlashObject',
-				'kIsHTML5FallForward': 'isHTML5FallForward',
-				'kIframeWithoutApi': 'outputIframeWithoutApi',
-				'kDirectDownloadFallback': 'outputDirectDownload',
-				'kGetKalturaEmbedSettings': 'getEmbedSetting',
-				'kGetKalturaPlayerList': 'getKalutaObjectList',
-				'kCheckAddScript': 'rewriteObjectTags',
-				'kAddScript' : 'loadHTML5Lib',
-				'kPageHasAudioOrVideoTags' : 'pageHasAudioOrVideoTags',
-				'kLoadJsRequestSet' : 'loadRequestSet',
-				'kOverideJsFlashEmbed' : 'overrideFlashEmbedMethods',
-				'kDoIframeRewriteList' : 'embedFromObjects',
-				'kEmbedSettingsToUrl' : 'embedSettingsToUrl',
-				'kGetAdditionalTargetCss' : 'getAdditionalTargetCss',
-				'kAppendCssUrl' : 'appendCssUrl',
-				'kAppendScriptUrl' : 'appendScriptUrl',
-				'kFlashVars2Object' : 'flashVars2Object',
-				'kFlashVarsToUrl' : 'flashVarsToUrl',
-				'kFlashVarsToString' : 'flashVarsToString',
-				'kServiceConfigToUrl' : 'serviceConfigToUrl',
-				'kRunMwDomReady': 'rewriteObjectTags',
+				'vIsIOS': 'isIOS',
+				'vSupportsHTML5': 'supportsHTML5',
+				'vGetFlashVersion': 'getFlashVersion',
+				'vSupportsFlash': 'supportsFlash',
+				'vidiunIframeEmbed': 'embed',
+				'vOutputFlashObject': 'outputFlashObject',
+				'vIsHTML5FallForward': 'isHTML5FallForward',
+				'vIframeWithoutApi': 'outputIframeWithoutApi',
+				'vDirectDownloadFallback': 'outputDirectDownload',
+				'vGetVidiunEmbedSettings': 'getEmbedSetting',
+				'vGetVidiunPlayerList': 'getVidiunObjectList',
+				'vCheckAddScript': 'rewriteObjectTags',
+				'vAddScript' : 'loadHTML5Lib',
+				'vPageHasAudioOrVideoTags' : 'pageHasAudioOrVideoTags',
+				'vLoadJsRequestSet' : 'loadRequestSet',
+				'vOverideJsFlashEmbed' : 'overrideFlashEmbedMethods',
+				'vDoIframeRewriteList' : 'embedFromObjects',
+				'vEmbedSettingsToUrl' : 'embedSettingsToUrl',
+				'vGetAdditionalTargetCss' : 'getAdditionalTargetCss',
+				'vAppendCssUrl' : 'appendCssUrl',
+				'vAppendScriptUrl' : 'appendScriptUrl',
+				'vFlashVars2Object' : 'flashVars2Object',
+				'vFlashVarsToUrl' : 'flashVarsToUrl',
+				'vFlashVarsToString' : 'flashVarsToString',
+				'vServiceConfigToUrl' : 'serviceConfigToUrl',
+				'vRunMwDomReady': 'rewriteObjectTags',
 				// fully deprecated ( have no purpose any more )
-				'restoreKalturaKDPCallback': false
+				'restoreVidiunVDPCallback': false
 		}
 		for( var gName in globalFunctionMap ){
 			(function( gName ){
 				window[ gName ] = function(){
 					// functions that have no server any purpose
 					if( globalFunctionMap[ gName] === false ){
-						kWidget.log( gName + ' is deprecated. This method no longer serves any purpose.' );
+						vWidget.log( gName + ' is deprecated. This method no longer serves any purpose.' );
 						return ;
 					}
-					kWidget.log( gName + ' is deprecated. Please use kWidget.' + globalFunctionMap[ gName] );
+					vWidget.log( gName + ' is deprecated. Please use vWidget.' + globalFunctionMap[ gName] );
 					var args = Array.prototype.slice.call( arguments, 0 );
-					if( typeof kWidget[ globalFunctionMap[ gName] ] != 'function' ){
-						kWidget.log( "Error kWidget missing method: " + globalFunctionMap[ gName] );
+					if( typeof vWidget[ globalFunctionMap[ gName] ] != 'function' ){
+						vWidget.log( "Error vWidget missing method: " + globalFunctionMap[ gName] );
 						return ;
 					}
-					return kWidget[ globalFunctionMap[ gName ] ].apply( kWidget, args );
+					return vWidget[ globalFunctionMap[ gName ] ].apply( vWidget, args );
 				}
 			})( gName );
 		}
 	}
 	// Add all the deprecated globals:
-	kWidget.deprecatedGlobals();
+	vWidget.deprecatedGlobals();
 
-})( window.mw, window.kWidget );
+})( window.mw, window.vWidget );

@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateStatus
+class VidiunEventNotificationTemplateStatus
 {
 	const DISABLED = 1;
 	const ACTIVE = 2;
@@ -47,10 +47,10 @@ class KalturaEventNotificationTemplateStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationEventObjectType
+class VidiunEventNotificationEventObjectType
 {
 	const AD_CUE_POINT = "adCuePointEventNotifications.AdCuePoint";
 	const ANNOTATION = "annotationEventNotifications.Annotation";
@@ -65,17 +65,17 @@ class KalturaEventNotificationEventObjectType
 	const ASSET = "3";
 	const FLAVORASSET = "4";
 	const THUMBASSET = "5";
-	const KUSER = "8";
+	const VUSER = "8";
 	const ACCESSCONTROL = "9";
 	const BATCHJOB = "10";
 	const BULKUPLOADRESULT = "11";
-	const CATEGORYKUSER = "12";
+	const CATEGORYVUSER = "12";
 	const CONVERSIONPROFILE2 = "14";
 	const FLAVORPARAMS = "15";
 	const FLAVORPARAMSCONVERSIONPROFILE = "16";
 	const FLAVORPARAMSOUTPUT = "17";
 	const GENERICSYNDICATIONFEED = "18";
-	const KUSERTOUSERROLE = "19";
+	const VUSERTOUSERROLE = "19";
 	const PARTNER = "20";
 	const PERMISSION = "21";
 	const PERMISSIONITEM = "22";
@@ -96,10 +96,10 @@ class KalturaEventNotificationEventObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationEventType
+class VidiunEventNotificationEventType
 {
 	const BATCH_JOB_STATUS = "1";
 	const OBJECT_ADDED = "2";
@@ -116,10 +116,10 @@ class KalturaEventNotificationEventType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateOrderBy
+class VidiunEventNotificationTemplateOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -130,20 +130,20 @@ class KalturaEventNotificationTemplateOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateType
+class VidiunEventNotificationTemplateType
 {
 	const EMAIL = "emailNotification.Email";
 	const HTTP = "httpNotification.Http";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationParameter extends KalturaObjectBase
+class VidiunEventNotificationParameter extends VidiunObjectBase
 {
 	/**
 	 * The key in the subject and body to be replaced with the dynamic value
@@ -164,7 +164,7 @@ class KalturaEventNotificationParameter extends KalturaObjectBase
 	 * The dynamic value to be placed in the final output
 	 * 	 
 	 *
-	 * @var KalturaStringValue
+	 * @var VidiunStringValue
 	 */
 	public $value;
 
@@ -172,10 +172,10 @@ class KalturaEventNotificationParameter extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplate extends KalturaObjectBase
+class VidiunEventNotificationTemplate extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -217,7 +217,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEventNotificationTemplateType
+	 * @var VidiunEventNotificationTemplateType
 	 * @insertonly
 	 */
 	public $type = null;
@@ -225,7 +225,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEventNotificationTemplateStatus
+	 * @var VidiunEventNotificationTemplateStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -266,7 +266,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	 * Define the event that should trigger this notification
 	 * 	 
 	 *
-	 * @var KalturaEventNotificationEventType
+	 * @var VidiunEventNotificationEventType
 	 */
 	public $eventType = null;
 
@@ -274,7 +274,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	 * Define the object that raied the event that should trigger this notification
 	 * 	 
 	 *
-	 * @var KalturaEventNotificationEventObjectType
+	 * @var VidiunEventNotificationEventObjectType
 	 */
 	public $eventObjectType = null;
 
@@ -282,7 +282,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	 * Define the conditions that cause this notification to be triggered
 	 * 	 
 	 *
-	 * @var array of KalturaCondition
+	 * @var array of VidiunCondition
 	 */
 	public $eventConditions;
 
@@ -290,7 +290,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	 * Define the content dynamic parameters
 	 * 	 
 	 *
-	 * @var array of KalturaEventNotificationParameter
+	 * @var array of VidiunEventNotificationParameter
 	 */
 	public $contentParameters;
 
@@ -298,7 +298,7 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 	 * Define the content dynamic parameters
 	 * 	 
 	 *
-	 * @var array of KalturaEventNotificationParameter
+	 * @var array of VidiunEventNotificationParameter
 	 */
 	public $userParameters;
 
@@ -306,15 +306,15 @@ class KalturaEventNotificationTemplate extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateListResponse extends KalturaObjectBase
+class VidiunEventNotificationTemplateListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaEventNotificationTemplate
+	 * @var array of VidiunEventNotificationTemplate
 	 * @readonly
 	 */
 	public $objects;
@@ -331,16 +331,16 @@ class KalturaEventNotificationTemplateListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventFieldCondition extends KalturaCondition
+class VidiunEventFieldCondition extends VidiunCondition
 {
 	/**
 	 * The field to be evaluated at runtime
 	 * 	 
 	 *
-	 * @var KalturaBooleanField
+	 * @var VidiunBooleanField
 	 */
 	public $field;
 
@@ -348,15 +348,15 @@ class KalturaEventFieldCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationArrayParameter extends KalturaEventNotificationParameter
+class VidiunEventNotificationArrayParameter extends VidiunEventNotificationParameter
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $values;
 
@@ -364,7 +364,7 @@ class KalturaEventNotificationArrayParameter extends KalturaEventNotificationPar
 	 * Used to restrict the values to close list
 	 * 	 
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of VidiunStringValue
 	 */
 	public $allowedValues;
 
@@ -372,10 +372,10 @@ class KalturaEventNotificationArrayParameter extends KalturaEventNotificationPar
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationDispatchJobData extends KalturaJobData
+class VidiunEventNotificationDispatchJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -388,7 +388,7 @@ class KalturaEventNotificationDispatchJobData extends KalturaJobData
 	 * Define the content dynamic parameters
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $contentParameters;
 
@@ -396,10 +396,10 @@ class KalturaEventNotificationDispatchJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationScope extends KalturaScope
+class VidiunEventNotificationScope extends VidiunScope
 {
 	/**
 	 * 
@@ -411,7 +411,7 @@ class KalturaEventNotificationScope extends KalturaScope
 	/**
 	 * 
 	 *
-	 * @var KalturaEventNotificationEventObjectType
+	 * @var VidiunEventNotificationEventObjectType
 	 */
 	public $scopeObjectType = null;
 
@@ -419,10 +419,10 @@ class KalturaEventNotificationScope extends KalturaScope
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaEventNotificationTemplateBaseFilter extends KalturaFilter
+abstract class VidiunEventNotificationTemplateBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -469,7 +469,7 @@ abstract class KalturaEventNotificationTemplateBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEventNotificationTemplateType
+	 * @var VidiunEventNotificationTemplateType
 	 */
 	public $typeEqual = null;
 
@@ -483,7 +483,7 @@ abstract class KalturaEventNotificationTemplateBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEventNotificationTemplateStatus
+	 * @var VidiunEventNotificationTemplateStatus
 	 */
 	public $statusEqual = null;
 
@@ -526,10 +526,10 @@ abstract class KalturaEventNotificationTemplateBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventObjectChangedCondition extends KalturaCondition
+class VidiunEventObjectChangedCondition extends VidiunCondition
 {
 	/**
 	 * Comma seperated column names to be tested
@@ -543,22 +543,22 @@ class KalturaEventObjectChangedCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateFilter extends KalturaEventNotificationTemplateBaseFilter
+class VidiunEventNotificationTemplateFilter extends VidiunEventNotificationTemplateBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationTemplateService extends KalturaServiceBase
+class VidiunEventNotificationTemplateService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -566,19 +566,19 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	/**
 	 * Allows you to add a new event notification template object
 	 * 
-	 * @param KalturaEventNotificationTemplate $eventNotificationTemplate 
-	 * @return KalturaEventNotificationTemplate
+	 * @param VidiunEventNotificationTemplate $eventNotificationTemplate 
+	 * @return VidiunEventNotificationTemplate
 	 */
-	function add(KalturaEventNotificationTemplate $eventNotificationTemplate)
+	function add(VidiunEventNotificationTemplate $eventNotificationTemplate)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplate");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplate");
 		return $resultObject;
 	}
 
@@ -586,21 +586,21 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 * Allows you to clone exiting event notification template object and create a new one with similar configuration
 	 * 
 	 * @param int $id Source template to clone
-	 * @param KalturaEventNotificationTemplate $eventNotificationTemplate Overwrite configuration object
-	 * @return KalturaEventNotificationTemplate
+	 * @param VidiunEventNotificationTemplate $eventNotificationTemplate Overwrite configuration object
+	 * @return VidiunEventNotificationTemplate
 	 */
-	function cloneAction($id, KalturaEventNotificationTemplate $eventNotificationTemplate = null)
+	function cloneAction($id, VidiunEventNotificationTemplate $eventNotificationTemplate = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
 		if ($eventNotificationTemplate !== null)
-			$this->client->addParam($kparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "clone", $kparams);
+			$this->client->addParam($vparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "clone", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplate");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplate");
 		return $resultObject;
 	}
 
@@ -608,18 +608,18 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 * Retrieve an event notification template object by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaEventNotificationTemplate
+	 * @return VidiunEventNotificationTemplate
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplate");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplate");
 		return $resultObject;
 	}
 
@@ -627,20 +627,20 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 * Update an existing event notification template object
 	 * 
 	 * @param int $id 
-	 * @param KalturaEventNotificationTemplate $eventNotificationTemplate 
-	 * @return KalturaEventNotificationTemplate
+	 * @param VidiunEventNotificationTemplate $eventNotificationTemplate 
+	 * @return VidiunEventNotificationTemplate
 	 */
-	function update($id, KalturaEventNotificationTemplate $eventNotificationTemplate)
+	function update($id, VidiunEventNotificationTemplate $eventNotificationTemplate)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "eventNotificationTemplate", $eventNotificationTemplate->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplate");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplate");
 		return $resultObject;
 	}
 
@@ -649,19 +649,19 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 * 
 	 * @param int $id 
 	 * @param int $status 
-	 * @return KalturaEventNotificationTemplate
+	 * @return VidiunEventNotificationTemplate
 	 */
 	function updateStatus($id, $status)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "status", $status);
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "updateStatus", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "status", $status);
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "updateStatus", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplate");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplate");
 		return $resultObject;
 	}
 
@@ -673,9 +673,9 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -687,46 +687,46 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	/**
 	 * List event notification template objects
 	 * 
-	 * @param KalturaEventNotificationTemplateFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaEventNotificationTemplateListResponse
+	 * @param VidiunEventNotificationTemplateFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunEventNotificationTemplateListResponse
 	 */
-	function listAction(KalturaEventNotificationTemplateFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunEventNotificationTemplateFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplateListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplateListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * 
 	 * 
-	 * @param KalturaPartnerFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaEventNotificationTemplateListResponse
+	 * @param VidiunPartnerFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunEventNotificationTemplateListResponse
 	 */
-	function listByPartner(KalturaPartnerFilter $filter = null, KalturaFilterPager $pager = null)
+	function listByPartner(VidiunPartnerFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "listByPartner", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "listByPartner", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplateListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplateListResponse");
 		return $resultObject;
 	}
 
@@ -734,15 +734,15 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	 * Dispatch event notification object by id
 	 * 
 	 * @param int $id 
-	 * @param KalturaEventNotificationScope $scope 
+	 * @param VidiunEventNotificationScope $scope 
 	 * @return int
 	 */
-	function dispatch($id, KalturaEventNotificationScope $scope)
+	function dispatch($id, VidiunEventNotificationScope $scope)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "scope", $scope->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "dispatch", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "scope", $scope->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "dispatch", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -754,53 +754,53 @@ class KalturaEventNotificationTemplateService extends KalturaServiceBase
 	/**
 	 * Action lists the template partner event notification templates.
 	 * 
-	 * @param KalturaEventNotificationTemplateFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaEventNotificationTemplateListResponse
+	 * @param VidiunEventNotificationTemplateFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunEventNotificationTemplateListResponse
 	 */
-	function listTemplates(KalturaEventNotificationTemplateFilter $filter = null, KalturaFilterPager $pager = null)
+	function listTemplates(VidiunEventNotificationTemplateFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "listTemplates", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("eventnotification_eventnotificationtemplate", "listTemplates", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaEventNotificationTemplateListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunEventNotificationTemplateListResponse");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEventNotificationClientPlugin extends KalturaClientPlugin
+class VidiunEventNotificationClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaEventNotificationTemplateService
+	 * @var VidiunEventNotificationTemplateService
 	 */
 	public $eventNotificationTemplate = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->eventNotificationTemplate = new KalturaEventNotificationTemplateService($client);
+		$this->eventNotificationTemplate = new VidiunEventNotificationTemplateService($client);
 	}
 
 	/**
-	 * @return KalturaEventNotificationClientPlugin
+	 * @return VidiunEventNotificationClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaEventNotificationClientPlugin($client);
+		return new VidiunEventNotificationClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

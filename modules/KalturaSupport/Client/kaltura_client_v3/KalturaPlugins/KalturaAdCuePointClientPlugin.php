@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunCuePointClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdCuePointOrderBy
+class VidiunAdCuePointOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -57,10 +57,10 @@ class KalturaAdCuePointOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdProtocolType
+class VidiunAdProtocolType
 {
 	const CUSTOM = "0";
 	const VAST = "1";
@@ -69,25 +69,25 @@ class KalturaAdProtocolType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdType
+class VidiunAdType
 {
 	const VIDEO = "1";
 	const OVERLAY = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdCuePoint extends KalturaCuePoint
+class VidiunAdCuePoint extends VidiunCuePoint
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAdProtocolType
+	 * @var VidiunAdProtocolType
 	 * @insertonly
 	 */
 	public $protocolType = null;
@@ -102,7 +102,7 @@ class KalturaAdCuePoint extends KalturaCuePoint
 	/**
 	 * 
 	 *
-	 * @var KalturaAdType
+	 * @var VidiunAdType
 	 */
 	public $adType = null;
 
@@ -133,15 +133,15 @@ class KalturaAdCuePoint extends KalturaCuePoint
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAdCuePointBaseFilter extends KalturaCuePointFilter
+abstract class VidiunAdCuePointBaseFilter extends VidiunCuePointFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAdProtocolType
+	 * @var VidiunAdProtocolType
 	 */
 	public $protocolTypeEqual = null;
 
@@ -205,35 +205,35 @@ abstract class KalturaAdCuePointBaseFilter extends KalturaCuePointFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdCuePointFilter extends KalturaAdCuePointBaseFilter
+class VidiunAdCuePointFilter extends VidiunAdCuePointBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdCuePointClientPlugin extends KalturaClientPlugin
+class VidiunAdCuePointClientPlugin extends VidiunClientPlugin
 {
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * @return KalturaAdCuePointClientPlugin
+	 * @return VidiunAdCuePointClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaAdCuePointClientPlugin($client);
+		return new VidiunAdCuePointClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

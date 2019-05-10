@@ -2,12 +2,12 @@
 /**
 * This demonstrates grabbing a admin KS for a particular action ( sview ) being granted to the current user / session.
 */
-$wgMwEmbedApiServices['KSTest'] = 'mweApiKSTest';
+$wgMwEmbedApiServices['VSTest'] = 'mweApiVSTest';
 
-// Include the kaltura client
-require_once( dirname( __FILE__ ) . '../../Client/KalturaClientHelper.php' );
+// Include the vidiun client
+require_once( dirname( __FILE__ ) . '../../Client/VidiunClientHelper.php' );
 
-class mweApiKSTest {
+class mweApiVSTest {
 	function run(){
 		global $wgKalturaUserSecret;
 		// validate params ( hard coded to test a particular test file / account )
@@ -36,23 +36,23 @@ class mweApiKSTest {
 			);
 		
 		header( 'Content-type: text/javascript');
-		echo json_encode(array('ks' => $ks ) );
+		echo json_encode(array('vs' => $vs ) );
 	}
 	function getClient(){
-		$conf = new KalturaConfiguration( $this->partnerId );
+		$conf = new VidiunConfiguration( $this->partnerId );
 		$conf->serviceUrl = $this->getServiceConfig( 'ServiceUrl' );
 		$conf->serviceBase = $this->getServiceConfig( 'ServiceBase' );
-		return new KalturaClient( $conf );
+		return new VidiunClient( $conf );
 	}
 	function getServiceConfig( $name ){
 		switch( $name ){
 			case 'ServiceUrl' : 
-				global $wgKalturaServiceUrl;
-				return $wgKalturaServiceUrl;
+				global $wgVidiunServiceUrl;
+				return $wgVidiunServiceUrl;
 				break;
 			case 'ServiceBase':
-				global $wgKalturaServiceBase;
-				return $wgKalturaServiceBase;
+				global $wgVidiunServiceBase;
+				return $wgVidiunServiceBase;
 				break;
 		}
 	}

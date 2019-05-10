@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'closedCaptions', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'closedCaptions', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",
@@ -334,14 +334,14 @@
 			return false;
 		},
 		loadCaptionsFromApi: function( callback ){
-			if(!this.getPlayer().kentryid){
+			if(!this.getPlayer().ventryid){
 				this.log('loadCaptionsFromApi:: Entry Id not found, exit.');
 				callback([]);
 				return;
 
 			}
 			var _this = this;
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'caption_captionasset',
 				'action' : 'list',
 				'filter:objectType' : 'KalturaAssetFilter',
@@ -391,7 +391,7 @@
 				captionIds.push( caption.id );
 			});
 			if ( multiRequest.length ) {
-				this.getKalturaClient().doRequest( multiRequest, function( result ) {
+				this.getVidiunClient().doRequest( multiRequest, function( result ) {
 					var captionsURLs = {};
 					if( typeof result == 'string'){
 						captionsURLs[ captionIds[ 0 ] ] = result;
@@ -506,8 +506,8 @@
                 }
             }
 			// Get from $_SERVER['HTTP_ACCEPT_LANGUAGE']
-			if( !this.selectedSource && mw.getConfig('Kaltura.UserLanguage') ){
-				$.each(mw.getConfig('Kaltura.UserLanguage'), function(lang, priority){
+			if( !this.selectedSource && mw.getConfig('Vidiun.UserLanguage') ){
+				$.each(mw.getConfig('Vidiun.UserLanguage'), function(lang, priority){
 					source = _this.selectSourceByLangKey( lang );
 					if( source ){
 						_this.log('autoSelectSource: select by browser language: ' + lang);
@@ -950,7 +950,7 @@
 		},
 		getMenu: function(){
 			if( !this.menu ) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex')
 				});
 			}

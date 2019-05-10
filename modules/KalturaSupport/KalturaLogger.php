@@ -1,6 +1,6 @@
 <?php
 
-class KalturaLogger implements IKalturaLogger {
+class VidiunLogger implements IVidiunLogger {
 
 	var $logDir = null;
 	var $enabled = false;

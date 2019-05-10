@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,36 +28,36 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/KalturaClientBase.php");
+require_once(dirname(__FILE__) . "/VidiunClientBase.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAppearInListType
+class VidiunAppearInListType
 {
 	const PARTNER_ONLY = 1;
 	const CATEGORY_MEMBERS_ONLY = 3;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsDeletePolicy
+class VidiunAssetParamsDeletePolicy
 {
 	const KEEP = 0;
 	const DELETE = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsOrigin
+class VidiunAssetParamsOrigin
 {
 	const CONVERT = 0;
 	const INGEST = 1;
@@ -65,10 +65,10 @@ class KalturaAssetParamsOrigin
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetStatus
+class VidiunAssetStatus
 {
 	const ERROR = -1;
 	const QUEUED = 0;
@@ -79,24 +79,24 @@ class KalturaAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobErrorTypes
+class VidiunBatchJobErrorTypes
 {
 	const APP = 0;
 	const RUNTIME = 1;
 	const HTTP = 2;
 	const CURL = 3;
-	const KALTURA_API = 4;
-	const KALTURA_CLIENT = 5;
+	const VIDIUN_API = 4;
+	const VIDIUN_CLIENT = 5;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobStatus
+class VidiunBatchJobStatus
 {
 	const PENDING = 0;
 	const QUEUED = 1;
@@ -114,20 +114,20 @@ class KalturaBatchJobStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBitRateMode
+class VidiunBitRateMode
 {
 	const CBR = 1;
 	const VBR = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryStatus
+class VidiunCategoryEntryStatus
 {
 	const PENDING = 1;
 	const ACTIVE = 2;
@@ -136,10 +136,10 @@ class KalturaCategoryEntryStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryStatus
+class VidiunCategoryStatus
 {
 	const UPDATING = 1;
 	const ACTIVE = 2;
@@ -148,10 +148,10 @@ class KalturaCategoryStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserPermissionLevel
+class VidiunCategoryUserPermissionLevel
 {
 	const MANAGER = 0;
 	const MODERATOR = 1;
@@ -161,10 +161,10 @@ class KalturaCategoryUserPermissionLevel
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserStatus
+class VidiunCategoryUserStatus
 {
 	const ACTIVE = 1;
 	const PENDING = 2;
@@ -173,30 +173,30 @@ class KalturaCategoryUserStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCommercialUseType
+class VidiunCommercialUseType
 {
 	const NON_COMMERCIAL_USE = 0;
 	const COMMERCIAL_USE = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContributionPolicyType
+class VidiunContributionPolicyType
 {
 	const ALL = 1;
 	const MEMBERS_WITH_CONTRIBUTION_PERMISSION = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaControlPanelCommandStatus
+class VidiunControlPanelCommandStatus
 {
 	const PENDING = 1;
 	const HANDLED = 2;
@@ -205,10 +205,10 @@ class KalturaControlPanelCommandStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaControlPanelCommandTargetType
+class VidiunControlPanelCommandTargetType
 {
 	const DATA_CENTER = 1;
 	const SCHEDULER = 2;
@@ -218,69 +218,69 @@ class KalturaControlPanelCommandTargetType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaControlPanelCommandType
+class VidiunControlPanelCommandType
 {
 	const KILL = 4;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCountryRestrictionType
+class VidiunCountryRestrictionType
 {
 	const RESTRICT_COUNTRY_LIST = 0;
 	const ALLOW_COUNTRY_LIST = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDVRStatus
+class VidiunDVRStatus
 {
 	const DISABLED = 0;
 	const ENABLED = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDirectoryRestrictionType
+class VidiunDirectoryRestrictionType
 {
 	const DONT_DISPLAY = 0;
 	const DISPLAY_WITH_LINK = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEditorType
+class VidiunEditorType
 {
 	const SIMPLE = 1;
 	const ADVANCED = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailIngestionProfileStatus
+class VidiunEmailIngestionProfileStatus
 {
 	const INACTIVE = 0;
 	const ACTIVE = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryModerationStatus
+class VidiunEntryModerationStatus
 {
 	const PENDING_MODERATION = 1;
 	const APPROVED = 2;
@@ -290,10 +290,10 @@ class KalturaEntryModerationStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFeatureStatusType
+class VidiunFeatureStatusType
 {
 	const LOCK_CATEGORY = 1;
 	const CATEGORY = 2;
@@ -304,10 +304,10 @@ class KalturaFeatureStatusType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAssetStatus
+class VidiunFlavorAssetStatus
 {
 	const ERROR = -1;
 	const QUEUED = 0;
@@ -323,10 +323,10 @@ class KalturaFlavorAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorReadyBehaviorType
+class VidiunFlavorReadyBehaviorType
 {
 	const NO_IMPACT = 0;
 	const INHERIT_FLAVOR_PARAMS = 0;
@@ -335,10 +335,10 @@ class KalturaFlavorReadyBehaviorType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGender
+class VidiunGender
 {
 	const UNKNOWN = 0;
 	const MALE = 1;
@@ -346,30 +346,30 @@ class KalturaGender
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaInheritanceType
+class VidiunInheritanceType
 {
 	const INHERIT = 1;
 	const MANUAL = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIpAddressRestrictionType
+class VidiunIpAddressRestrictionType
 {
 	const RESTRICT_LIST = 0;
 	const ALLOW_LIST = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLicenseType
+class VidiunLicenseType
 {
 	const UNKNOWN = -1;
 	const NONE = 0;
@@ -391,30 +391,30 @@ class KalturaLicenseType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLimitFlavorsRestrictionType
+class VidiunLimitFlavorsRestrictionType
 {
 	const RESTRICT_LIST = 0;
 	const ALLOW_LIST = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLivePublishStatus
+class VidiunLivePublishStatus
 {
 	const DISABLED = 0;
 	const ENABLED = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMailJobStatus
+class VidiunMailJobStatus
 {
 	const PENDING = 1;
 	const SENT = 2;
@@ -423,20 +423,20 @@ class KalturaMailJobStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaServerIndex
+class VidiunMediaServerIndex
 {
 	const PRIMARY = 0;
 	const SECONDARY = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaType
+class VidiunMediaType
 {
 	const VIDEO = 1;
 	const IMAGE = 2;
@@ -448,10 +448,10 @@ class KalturaMediaType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaModerationFlagType
+class VidiunModerationFlagType
 {
 	const SEXUAL_CONTENT = 1;
 	const VIOLENT_REPULSIVE = 2;
@@ -462,32 +462,32 @@ class KalturaModerationFlagType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMrssExtensionMode
+class VidiunMrssExtensionMode
 {
 	const APPEND = 1;
 	const REPLACE = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaNotificationObjectType
+class VidiunNotificationObjectType
 {
 	const ENTRY = 1;
-	const KSHOW = 2;
+	const VSHOW = 2;
 	const USER = 3;
 	const BATCH_JOB = 4;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaNotificationStatus
+class VidiunNotificationStatus
 {
 	const PENDING = 1;
 	const SENT = 2;
@@ -499,10 +499,10 @@ class KalturaNotificationStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaNotificationType
+class VidiunNotificationType
 {
 	const ENTRY_ADD = 1;
 	const ENTR_UPDATE_PERMISSIONS = 2;
@@ -516,10 +516,10 @@ class KalturaNotificationType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaNullableBoolean
+class VidiunNullableBoolean
 {
 	const NULL_VALUE = -1;
 	const FALSE_VALUE = 0;
@@ -527,10 +527,10 @@ class KalturaNullableBoolean
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerGroupType
+class VidiunPartnerGroupType
 {
 	const PUBLISHER = 1;
 	const VAR_GROUP = 2;
@@ -539,10 +539,10 @@ class KalturaPartnerGroupType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerStatus
+class VidiunPartnerStatus
 {
 	const DELETED = 0;
 	const ACTIVE = 1;
@@ -551,12 +551,12 @@ class KalturaPartnerStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerType
+class VidiunPartnerType
 {
-	const KMC = 1;
+	const VMC = 1;
 	const WIKI = 100;
 	const WORDPRESS = 101;
 	const DRUPAL = 102;
@@ -570,10 +570,10 @@ class KalturaPartnerType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionStatus
+class VidiunPermissionStatus
 {
 	const ACTIVE = 1;
 	const BLOCKED = 2;
@@ -581,10 +581,10 @@ class KalturaPermissionStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionType
+class VidiunPermissionType
 {
 	const NORMAL = 1;
 	const SPECIAL_FEATURE = 2;
@@ -593,10 +593,10 @@ class KalturaPermissionType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaylistType
+class VidiunPlaylistType
 {
 	const STATIC_LIST = 3;
 	const DYNAMIC = 10;
@@ -604,10 +604,10 @@ class KalturaPlaylistType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPrivacyType
+class VidiunPrivacyType
 {
 	const ALL = 1;
 	const AUTHENTICATED_USERS = 2;
@@ -615,20 +615,20 @@ class KalturaPrivacyType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRecordStatus
+class VidiunRecordStatus
 {
 	const DISABLED = 0;
 	const ENABLED = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportType
+class VidiunReportType
 {
 	const TOP_CONTENT = 1;
 	const CONTENT_DROPOFF = 2;
@@ -654,10 +654,10 @@ class KalturaReportType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaResponseType
+class VidiunResponseType
 {
 	const RESPONSE_TYPE_JSON = 1;
 	const RESPONSE_TYPE_XML = 2;
@@ -669,20 +669,20 @@ class KalturaResponseType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchOperatorType
+class VidiunSearchOperatorType
 {
 	const SEARCH_AND = 1;
 	const SEARCH_OR = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchProviderType
+class VidiunSearchProviderType
 {
 	const FLICKR = 3;
 	const YOUTUBE = 4;
@@ -693,40 +693,40 @@ class KalturaSearchProviderType
 	const NYPL = 11;
 	const CURRENT = 12;
 	const MEDIA_COMMONS = 13;
-	const KALTURA = 20;
-	const KALTURA_USER_CLIPS = 21;
+	const VIDIUN = 20;
+	const VIDIUN_USER_CLIPS = 21;
 	const ARCHIVE_ORG = 22;
-	const KALTURA_PARTNER = 23;
+	const VIDIUN_PARTNER = 23;
 	const METACAFE = 24;
 	const SEARCH_PROXY = 28;
 	const PARTNER_SPECIFIC = 100;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSessionType
+class VidiunSessionType
 {
 	const USER = 0;
 	const ADMIN = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSiteRestrictionType
+class VidiunSiteRestrictionType
 {
 	const RESTRICT_SITE_LIST = 0;
 	const ALLOW_SITE_LIST = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStatsEventType
+class VidiunStatsEventType
 {
 	const WIDGET_LOADED = 1;
 	const MEDIA_LOADED = 2;
@@ -771,20 +771,20 @@ class KalturaStatsEventType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStatsFeatureType
+class VidiunStatsFeatureType
 {
 	const NONE = 0;
 	const RELATED = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStatsKmcEventType
+class VidiunStatsVmcEventType
 {
 	const CONTENT_PAGE_VIEW = 1001;
 	const CONTENT_ADD_PLAYLIST = 1010;
@@ -800,7 +800,7 @@ class KalturaStatsKmcEventType
 	const CONTENT_APPROVE_MODERATION = 1020;
 	const CONTENT_REJECT_MODERATION = 1021;
 	const CONTENT_BULK_UPLOAD = 1022;
-	const CONTENT_ADMIN_KCW_UPLOAD = 1023;
+	const CONTENT_ADMIN_VCW_UPLOAD = 1023;
 	const ACCOUNT_CHANGE_PARTNER_INFO = 1030;
 	const ACCOUNT_CHANGE_LOGIN_INFO = 1031;
 	const ACCOUNT_CONTACT_US_USAGE = 1032;
@@ -853,30 +853,30 @@ class KalturaStatsKmcEventType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileDeliveryStatus
+class VidiunStorageProfileDeliveryStatus
 {
 	const ACTIVE = 1;
 	const BLOCKED = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileReadyBehavior
+class VidiunStorageProfileReadyBehavior
 {
 	const NO_IMPACT = 0;
 	const REQUIRED = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileStatus
+class VidiunStorageProfileStatus
 {
 	const DISABLED = 1;
 	const AUTOMATIC = 2;
@@ -884,46 +884,46 @@ class KalturaStorageProfileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageServePriority
+class VidiunStorageServePriority
 {
-	const KALTURA_ONLY = 1;
-	const KALTURA_FIRST = 2;
+	const VIDIUN_ONLY = 1;
+	const VIDIUN_FIRST = 2;
 	const EXTERNAL_FIRST = 3;
 	const EXTERNAL_ONLY = 4;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationFeedStatus
+class VidiunSyndicationFeedStatus
 {
 	const DELETED = -1;
 	const ACTIVE = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationFeedType
+class VidiunSyndicationFeedType
 {
 	const GOOGLE_VIDEO = 1;
 	const YAHOO = 2;
 	const ITUNES = 3;
 	const TUBE_MOGUL = 4;
-	const KALTURA = 5;
-	const KALTURA_XSLT = 6;
+	const VIDIUN = 5;
+	const VIDIUN_XSLT = 6;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbAssetStatus
+class VidiunThumbAssetStatus
 {
 	const ERROR = -1;
 	const QUEUED = 0;
@@ -935,10 +935,10 @@ class KalturaThumbAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbCropType
+class VidiunThumbCropType
 {
 	const RESIZE = 1;
 	const RESIZE_WITH_PADDING = 2;
@@ -948,20 +948,20 @@ class KalturaThumbCropType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfCreationMode
+class VidiunUiConfCreationMode
 {
 	const WIZARD = 2;
 	const ADVANCED = 3;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfObjType
+class VidiunUiConfObjType
 {
 	const PLAYER = 1;
 	const CONTRIBUTION_WIZARD = 2;
@@ -969,37 +969,37 @@ class KalturaUiConfObjType
 	const ADVANCED_EDITOR = 4;
 	const PLAYLIST = 5;
 	const APP_STUDIO = 6;
-	const KRECORD = 7;
+	const VRECORD = 7;
 	const PLAYER_V3 = 8;
-	const KMC_ACCOUNT = 9;
-	const KMC_ANALYTICS = 10;
-	const KMC_CONTENT = 11;
-	const KMC_DASHBOARD = 12;
-	const KMC_LOGIN = 13;
+	const VMC_ACCOUNT = 9;
+	const VMC_ANALYTICS = 10;
+	const VMC_CONTENT = 11;
+	const VMC_DASHBOARD = 12;
+	const VMC_LOGIN = 13;
 	const PLAYER_SL = 14;
 	const CLIENTSIDE_ENCODER = 15;
-	const KMC_GENERAL = 16;
-	const KMC_ROLES_AND_PERMISSIONS = 17;
+	const VMC_GENERAL = 16;
+	const VMC_ROLES_AND_PERMISSIONS = 17;
 	const CLIPPER = 18;
-	const KSR = 19;
-	const KUPLOAD = 20;
+	const VSR = 19;
+	const VUPLOAD = 20;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUpdateMethodType
+class VidiunUpdateMethodType
 {
 	const MANUAL = 0;
 	const AUTOMATIC = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadErrorCode
+class VidiunUploadErrorCode
 {
 	const NO_ERROR = 0;
 	const GENERAL_ERROR = 1;
@@ -1007,10 +1007,10 @@ class KalturaUploadErrorCode
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadTokenStatus
+class VidiunUploadTokenStatus
 {
 	const PENDING = 0;
 	const PARTIAL_UPLOAD = 1;
@@ -1021,20 +1021,20 @@ class KalturaUploadTokenStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserAgentRestrictionType
+class VidiunUserAgentRestrictionType
 {
 	const RESTRICT_LIST = 0;
 	const ALLOW_LIST = 1;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserJoinPolicyType
+class VidiunUserJoinPolicyType
 {
 	const AUTO_JOIN = 1;
 	const REQUEST_TO_JOIN = 2;
@@ -1042,10 +1042,10 @@ class KalturaUserJoinPolicyType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRoleStatus
+class VidiunUserRoleStatus
 {
 	const ACTIVE = 1;
 	const BLOCKED = 2;
@@ -1053,10 +1053,10 @@ class KalturaUserRoleStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserStatus
+class VidiunUserStatus
 {
 	const BLOCKED = 0;
 	const ACTIVE = 1;
@@ -1064,30 +1064,30 @@ class KalturaUserStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidgetSecurityType
+class VidiunWidgetSecurityType
 {
 	const NONE = 1;
 	const TIMEHASH = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlOrderBy
+class VidiunAccessControlOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlProfileOrderBy
+class VidiunAccessControlProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -1096,10 +1096,10 @@ class KalturaAccessControlProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdminUserOrderBy
+class VidiunAdminUserOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -1108,20 +1108,20 @@ class KalturaAdminUserOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAkamaiUniversalStreamType
+class VidiunAkamaiUniversalStreamType
 {
 	const HD_IPHONE_IPAD_LIVE = "HD iPhone/iPad Live";
 	const UNIVERSAL_STREAMING_LIVE = "Universal Streaming Live";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAmazonS3StorageProfileFilesPermissionLevel
+class VidiunAmazonS3StorageProfileFilesPermissionLevel
 {
 	const ACL_AUTHENTICATED_READ = "authenticated-read";
 	const ACL_PRIVATE = "private";
@@ -1130,10 +1130,10 @@ class KalturaAmazonS3StorageProfileFilesPermissionLevel
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAmazonS3StorageProfileOrderBy
+class VidiunAmazonS3StorageProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -1142,10 +1142,10 @@ class KalturaAmazonS3StorageProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiActionPermissionItemOrderBy
+class VidiunApiActionPermissionItemOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -1156,10 +1156,10 @@ class KalturaApiActionPermissionItemOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemAction
+class VidiunApiParameterPermissionItemAction
 {
 	const USAGE = "all";
 	const INSERT = "insert";
@@ -1168,10 +1168,10 @@ class KalturaApiParameterPermissionItemAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemOrderBy
+class VidiunApiParameterPermissionItemOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -1182,10 +1182,10 @@ class KalturaApiParameterPermissionItemOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetOrderBy
+class VidiunAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -1198,18 +1198,18 @@ class KalturaAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsOrderBy
+class VidiunAssetParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetType
+class VidiunAssetType
 {
 	const ATTACHMENT = "attachment.Attachment";
 	const CAPTION = "caption.Caption";
@@ -1223,10 +1223,10 @@ class KalturaAssetType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAudioCodec
+class VidiunAudioCodec
 {
 	const NONE = "";
 	const AAC = "aac";
@@ -1243,10 +1243,10 @@ class KalturaAudioCodec
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseEntryOrderBy
+class VidiunBaseEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const END_DATE_ASC = "+endDate";
@@ -1273,10 +1273,10 @@ class KalturaBaseEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseSyndicationFeedOrderBy
+class VidiunBaseSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";
@@ -1291,10 +1291,10 @@ class KalturaBaseSyndicationFeedOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobOrderBy
+class VidiunBatchJobOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ESTIMATED_EFFORT_ASC = "+estimatedEffort";
@@ -1317,10 +1317,10 @@ class KalturaBatchJobOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobType
+class VidiunBatchJobType
 {
 	const PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset";
 	const DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete";
@@ -1375,10 +1375,10 @@ class KalturaBatchJobType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadAction
+class VidiunBulkUploadAction
 {
 	const ADD = "1";
 	const UPDATE = "2";
@@ -1389,10 +1389,10 @@ class KalturaBulkUploadAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadObjectType
+class VidiunBulkUploadObjectType
 {
 	const ENTRY = "1";
 	const CATEGORY = "2";
@@ -1402,18 +1402,18 @@ class KalturaBulkUploadObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadOrderBy
+class VidiunBulkUploadOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultObjectType
+class VidiunBulkUploadResultObjectType
 {
 	const ENTRY = "1";
 	const CATEGORY = "2";
@@ -1423,10 +1423,10 @@ class KalturaBulkUploadResultObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultStatus
+class VidiunBulkUploadResultStatus
 {
 	const ERROR = "1";
 	const OK = "2";
@@ -1434,10 +1434,10 @@ class KalturaBulkUploadResultStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadType
+class VidiunBulkUploadType
 {
 	const CSV = "bulkUploadCsv.CSV";
 	const FILTER = "bulkUploadFilter.FILTER";
@@ -1446,30 +1446,30 @@ class KalturaBulkUploadType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryAdvancedOrderBy
+class VidiunCategoryEntryAdvancedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryOrderBy
+class VidiunCategoryEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryIdentifierField
+class VidiunCategoryIdentifierField
 {
 	const FULL_NAME = "fullName";
 	const ID = "id";
@@ -1477,10 +1477,10 @@ class KalturaCategoryIdentifierField
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryOrderBy
+class VidiunCategoryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DEPTH_ASC = "+depth";
@@ -1505,10 +1505,10 @@ class KalturaCategoryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserOrderBy
+class VidiunCategoryUserOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -1517,10 +1517,10 @@ class KalturaCategoryUserOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConditionType
+class VidiunConditionType
 {
 	const EVENT_NOTIFICATION_FIELD = "eventNotification.BooleanField";
 	const EVENT_NOTIFICATION_OBJECT_CHANGED = "eventNotification.ObjectChanged";
@@ -1539,10 +1539,10 @@ class KalturaConditionType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContainerFormat
+class VidiunContainerFormat
 {
 	const _3GP = "3gp";
 	const APPLEHTTP = "applehttp";
@@ -1572,10 +1572,10 @@ class KalturaContainerFormat
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContextType
+class VidiunContextType
 {
 	const PLAY = "1";
 	const DOWNLOAD = "2";
@@ -1585,10 +1585,10 @@ class KalturaContextType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaControlPanelCommandOrderBy
+class VidiunControlPanelCommandOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -1597,28 +1597,28 @@ class KalturaControlPanelCommandOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileAssetParamsOrderBy
+class VidiunConversionProfileAssetParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileOrderBy
+class VidiunConversionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileStatus
+class VidiunConversionProfileStatus
 {
 	const DISABLED = "1";
 	const ENABLED = "2";
@@ -1626,20 +1626,20 @@ class KalturaConversionProfileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileType
+class VidiunConversionProfileType
 {
 	const MEDIA = "1";
 	const LIVE_STREAM = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDataEntryOrderBy
+class VidiunDataEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const END_DATE_ASC = "+endDate";
@@ -1666,10 +1666,10 @@ class KalturaDataEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDurationType
+class VidiunDurationType
 {
 	const LONG = "long";
 	const MEDIUM = "medium";
@@ -1678,28 +1678,28 @@ class KalturaDurationType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDynamicEnum
+class VidiunDynamicEnum
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryIdentifierField
+class VidiunEntryIdentifierField
 {
 	const ID = "id";
 	const REFERENCE_ID = "referenceId";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryReplacementStatus
+class VidiunEntryReplacementStatus
 {
 	const NONE = "0";
 	const APPROVED_BUT_NOT_READY = "1";
@@ -1708,10 +1708,10 @@ class KalturaEntryReplacementStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryStatus
+class VidiunEntryStatus
 {
 	const ERROR_IMPORTING = "-2";
 	const ERROR_CONVERTING = "-1";
@@ -1728,10 +1728,10 @@ class KalturaEntryStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryType
+class VidiunEntryType
 {
 	const AUTOMATIC = "-1";
 	const EXTERNAL_MEDIA = "externalMedia.externalMedia";
@@ -1745,19 +1745,19 @@ class KalturaEntryType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAssetObjectType
+class VidiunFileAssetObjectType
 {
 	const UI_CONF = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAssetStatus
+class VidiunFileAssetStatus
 {
 	const PENDING = "0";
 	const UPLOADING = "1";
@@ -1767,10 +1767,10 @@ class KalturaFileAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileSyncObjectType
+class VidiunFileSyncObjectType
 {
 	const DISTRIBUTION_PROFILE = "contentDistribution.DistributionProfile";
 	const ENTRY_DISTRIBUTION = "contentDistribution.EntryDistribution";
@@ -1790,10 +1790,10 @@ class KalturaFileSyncObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAssetOrderBy
+class VidiunFlavorAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -1806,44 +1806,26 @@ class KalturaFlavorAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsOrderBy
+class VidiunFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsOutputOrderBy
+class VidiunFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericSyndicationFeedOrderBy
-{
-	const CREATED_AT_ASC = "+createdAt";
-	const NAME_ASC = "+name";
-	const PLAYLIST_ID_ASC = "+playlistId";
-	const TYPE_ASC = "+type";
-	const UPDATED_AT_ASC = "+updatedAt";
-	const CREATED_AT_DESC = "-createdAt";
-	const NAME_DESC = "-name";
-	const PLAYLIST_ID_DESC = "-playlistId";
-	const TYPE_DESC = "-type";
-	const UPDATED_AT_DESC = "-updatedAt";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaGenericXsltSyndicationFeedOrderBy
+class VidiunGenericSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";
@@ -1858,29 +1840,47 @@ class KalturaGenericXsltSyndicationFeedOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGeoCoderType
+class VidiunGenericXsltSyndicationFeedOrderBy
 {
-	const KALTURA = "1";
+	const CREATED_AT_ASC = "+createdAt";
+	const NAME_ASC = "+name";
+	const PLAYLIST_ID_ASC = "+playlistId";
+	const TYPE_ASC = "+type";
+	const UPDATED_AT_ASC = "+updatedAt";
+	const CREATED_AT_DESC = "-createdAt";
+	const NAME_DESC = "-name";
+	const PLAYLIST_ID_DESC = "-playlistId";
+	const TYPE_DESC = "-type";
+	const UPDATED_AT_DESC = "-updatedAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGoogleSyndicationFeedAdultValues
+class VidiunGeoCoderType
+{
+	const VIDIUN = "1";
+}
+
+/**
+ * @package Vidiun
+ * @subpackage Client
+ */
+class VidiunGoogleSyndicationFeedAdultValues
 {
 	const NO = "No";
 	const YES = "Yes";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGoogleVideoSyndicationFeedOrderBy
+class VidiunGoogleVideoSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";
@@ -1895,10 +1895,10 @@ class KalturaGoogleVideoSyndicationFeedOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaITunesSyndicationFeedAdultValues
+class VidiunITunesSyndicationFeedAdultValues
 {
 	const CLEAN = "clean";
 	const NO = "no";
@@ -1906,10 +1906,10 @@ class KalturaITunesSyndicationFeedAdultValues
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaITunesSyndicationFeedCategories
+class VidiunITunesSyndicationFeedCategories
 {
 	const ARTS = "Arts";
 	const ARTS_DESIGN = "Arts/Design";
@@ -1981,10 +1981,10 @@ class KalturaITunesSyndicationFeedCategories
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaITunesSyndicationFeedOrderBy
+class VidiunITunesSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";
@@ -1999,10 +1999,10 @@ class KalturaITunesSyndicationFeedOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLanguage
+class VidiunLanguage
 {
 	const AB = "Abkhazian";
 	const AA = "Afar";
@@ -2150,10 +2150,10 @@ class KalturaLanguage
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLanguageCode
+class VidiunLanguageCode
 {
 	const AA = "aa";
 	const AB = "ab";
@@ -2301,10 +2301,10 @@ class KalturaLanguageCode
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveAssetOrderBy
+class VidiunLiveAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -2317,10 +2317,10 @@ class KalturaLiveAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelOrderBy
+class VidiunLiveChannelOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2357,10 +2357,10 @@ class KalturaLiveChannelOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentOrderBy
+class VidiunLiveChannelSegmentOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const START_TIME_ASC = "+startTime";
@@ -2371,20 +2371,20 @@ class KalturaLiveChannelSegmentOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentStatus
+class VidiunLiveChannelSegmentStatus
 {
 	const ACTIVE = "2";
 	const DELETED = "3";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentTriggerType
+class VidiunLiveChannelSegmentTriggerType
 {
 	const CHANNEL_RELATIVE = "1";
 	const ABSOLUTE_TIME = "2";
@@ -2393,19 +2393,19 @@ class KalturaLiveChannelSegmentTriggerType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentType
+class VidiunLiveChannelSegmentType
 {
 	const VIDEO_AND_AUDIO = "1";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveEntryOrderBy
+class VidiunLiveEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2442,18 +2442,18 @@ class KalturaLiveEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveParamsOrderBy
+class VidiunLiveParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamAdminEntryOrderBy
+class VidiunLiveStreamAdminEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2490,10 +2490,10 @@ class KalturaLiveStreamAdminEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamEntryOrderBy
+class VidiunLiveStreamEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2530,28 +2530,28 @@ class KalturaLiveStreamEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMailType
+class VidiunMailType
 {
-	const MAIL_TYPE_KALTURA_NEWSLETTER = "10";
+	const MAIL_TYPE_VIDIUN_NEWSLETTER = "10";
 	const MAIL_TYPE_ADDED_TO_FAVORITES = "11";
 	const MAIL_TYPE_ADDED_TO_CLIP_FAVORITES = "12";
 	const MAIL_TYPE_NEW_COMMENT_IN_PROFILE = "13";
-	const MAIL_TYPE_CLIP_ADDED_YOUR_KALTURA = "20";
+	const MAIL_TYPE_CLIP_ADDED_YOUR_VIDIUN = "20";
 	const MAIL_TYPE_VIDEO_ADDED = "21";
 	const MAIL_TYPE_ROUGHCUT_CREATED = "22";
-	const MAIL_TYPE_ADDED_KALTURA_TO_YOUR_FAVORITES = "23";
-	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA = "24";
+	const MAIL_TYPE_ADDED_VIDIUN_TO_YOUR_FAVORITES = "23";
+	const MAIL_TYPE_NEW_COMMENT_IN_VIDIUN = "24";
 	const MAIL_TYPE_CLIP_ADDED = "30";
 	const MAIL_TYPE_VIDEO_CREATED = "31";
-	const MAIL_TYPE_ADDED_KALTURA_TO_HIS_FAVORITES = "32";
-	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA_YOU_CONTRIBUTED = "33";
+	const MAIL_TYPE_ADDED_VIDIUN_TO_HIS_FAVORITES = "32";
+	const MAIL_TYPE_NEW_COMMENT_IN_VIDIUN_YOU_CONTRIBUTED = "33";
 	const MAIL_TYPE_CLIP_CONTRIBUTED = "40";
 	const MAIL_TYPE_ROUGHCUT_CREATED_SUBSCRIBED = "41";
-	const MAIL_TYPE_ADDED_KALTURA_TO_HIS_FAVORITES_SUBSCRIBED = "42";
-	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA_YOU_SUBSCRIBED = "43";
+	const MAIL_TYPE_ADDED_VIDIUN_TO_HIS_FAVORITES_SUBSCRIBED = "42";
+	const MAIL_TYPE_NEW_COMMENT_IN_VIDIUN_YOU_SUBSCRIBED = "43";
 	const MAIL_TYPE_REGISTER_CONFIRM = "50";
 	const MAIL_TYPE_PASSWORD_RESET = "51";
 	const MAIL_TYPE_LOGIN_MAIL_RESET = "52";
@@ -2577,10 +2577,10 @@ class KalturaMailType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaEntryOrderBy
+class VidiunMediaEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2617,44 +2617,44 @@ class KalturaMediaEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParamsOrderBy
+class VidiunMediaFlavorParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParamsOutputOrderBy
+class VidiunMediaFlavorParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaInfoOrderBy
+class VidiunMediaInfoOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaParserType
+class VidiunMediaParserType
 {
 	const MEDIAINFO = "0";
 	const FFMPEG = "1";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaServerOrderBy
+class VidiunMediaServerOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -2663,10 +2663,10 @@ class KalturaMediaServerOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMixEntryOrderBy
+class VidiunMixEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2701,30 +2701,30 @@ class KalturaMixEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaModerationFlagStatus
+class VidiunModerationFlagStatus
 {
 	const PENDING = "1";
 	const MODERATED = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaModerationObjectType
+class VidiunModerationObjectType
 {
 	const ENTRY = "2";
 	const USER = "3";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerOrderBy
+class VidiunPartnerOrderBy
 {
 	const ADMIN_EMAIL_ASC = "+adminEmail";
 	const ADMIN_NAME_ASC = "+adminName";
@@ -2743,10 +2743,10 @@ class KalturaPartnerOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionItemOrderBy
+class VidiunPermissionItemOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -2757,20 +2757,20 @@ class KalturaPermissionItemOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionItemType
+class VidiunPermissionItemType
 {
-	const API_ACTION_ITEM = "kApiActionPermissionItem";
-	const API_PARAMETER_ITEM = "kApiParameterPermissionItem";
+	const API_ACTION_ITEM = "vApiActionPermissionItem";
+	const API_PARAMETER_ITEM = "vApiParameterPermissionItem";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionOrderBy
+class VidiunPermissionOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -2783,10 +2783,10 @@ class KalturaPermissionOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlayableEntryOrderBy
+class VidiunPlayableEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -2821,10 +2821,10 @@ class KalturaPlayableEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaybackProtocol
+class VidiunPlaybackProtocol
 {
 	const APPLE_HTTP = "applehttp";
 	const AUTO = "auto";
@@ -2840,10 +2840,10 @@ class KalturaPlaybackProtocol
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaylistOrderBy
+class VidiunPlaylistOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const END_DATE_ASC = "+endDate";
@@ -2870,30 +2870,30 @@ class KalturaPlaylistOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportInterval
+class VidiunReportInterval
 {
 	const DAYS = "days";
 	const MONTHS = "months";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportOrderBy
+class VidiunReportOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRuleActionType
+class VidiunRuleActionType
 {
 	const BLOCK = "1";
 	const PREVIEW = "2";
@@ -2902,10 +2902,10 @@ class KalturaRuleActionType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSchemaType
+class VidiunSchemaType
 {
 	const BULK_UPLOAD_RESULT_XML = "bulkUploadXml.bulkUploadResultXML";
 	const BULK_UPLOAD_XML = "bulkUploadXml.bulkUploadXML";
@@ -2916,10 +2916,10 @@ class KalturaSchemaType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchConditionComparison
+class VidiunSearchConditionComparison
 {
 	const EQUAL = "1";
 	const GREATER_THAN = "2";
@@ -2929,10 +2929,10 @@ class KalturaSearchConditionComparison
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSourceType
+class VidiunSourceType
 {
 	const VELOCIX_LIVE = "velocix.VELOCIX_LIVE";
 	const FILE = "1";
@@ -2949,10 +2949,10 @@ class KalturaSourceType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileOrderBy
+class VidiunStorageProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -2961,13 +2961,13 @@ class KalturaStorageProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileProtocol
+class VidiunStorageProfileProtocol
 {
 	const KONTIKI = "kontiki.KONTIKI";
-	const KALTURA_DC = "0";
+	const VIDIUN_DC = "0";
 	const FTP = "1";
 	const SCP = "2";
 	const SFTP = "3";
@@ -2976,30 +2976,30 @@ class KalturaStorageProfileProtocol
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationFeedEntriesOrderBy
+class VidiunSyndicationFeedEntriesOrderBy
 {
 	const CREATED_AT_DESC = "-createdAt";
 	const RECENT = "recent";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTaggedObjectType
+class VidiunTaggedObjectType
 {
 	const ENTRY = "1";
 	const CATEGORY = "2";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbAssetOrderBy
+class VidiunThumbAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -3012,26 +3012,26 @@ class KalturaThumbAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsOrderBy
+class VidiunThumbParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsOutputOrderBy
+class VidiunThumbParamsOutputOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTubeMogulSyndicationFeedCategories
+class VidiunTubeMogulSyndicationFeedCategories
 {
 	const ANIMALS_AND_PETS = "Animals &amp; Pets";
 	const ARTS_AND_ANIMATION = "Arts &amp; Animation";
@@ -3051,10 +3051,10 @@ class KalturaTubeMogulSyndicationFeedCategories
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTubeMogulSyndicationFeedOrderBy
+class VidiunTubeMogulSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";
@@ -3069,10 +3069,10 @@ class KalturaTubeMogulSyndicationFeedOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfOrderBy
+class VidiunUiConfOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -3081,28 +3081,28 @@ class KalturaUiConfOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadTokenOrderBy
+class VidiunUploadTokenOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserLoginDataOrderBy
+class VidiunUserLoginDataOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserOrderBy
+class VidiunUserOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -3111,10 +3111,10 @@ class KalturaUserOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRoleOrderBy
+class VidiunUserRoleOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -3127,10 +3127,10 @@ class KalturaUserRoleOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVideoCodec
+class VidiunVideoCodec
 {
 	const NONE = "";
 	const APCH = "apch";
@@ -3158,30 +3158,30 @@ class KalturaVideoCodec
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidgetOrderBy
+class VidiunWidgetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaYahooSyndicationFeedAdultValues
+class VidiunYahooSyndicationFeedAdultValues
 {
 	const ADULT = "adult";
 	const NON_ADULT = "nonadult";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaYahooSyndicationFeedCategories
+class VidiunYahooSyndicationFeedCategories
 {
 	const ACTION = "Action";
 	const ANIMALS = "Animals";
@@ -3206,10 +3206,10 @@ class KalturaYahooSyndicationFeedCategories
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaYahooSyndicationFeedOrderBy
+class VidiunYahooSyndicationFeedOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const NAME_ASC = "+name";

@@ -1,4 +1,4 @@
-kWidget.addReadyCallback( function( playerId ){ 
+vWidget.addReadyCallback( function( playerId ){ 
 	/**
 	 * The main omnitureOnPage object:
 	 */
@@ -21,10 +21,10 @@ kWidget.addReadyCallback( function( playerId ){
 
 		init: function( player ){
 			var _this = this;
-			this.kdp = player;
+			this.vdp = player;
 			this.log( 'init' );
 			// unbind any existing bindings:
-			this.kdp.kUnbind( '.' + this.instanceName );
+			this.vdp.vUnbind( '.' + this.instanceName );
 			// We bind to event
 			_this.bindPlayer();
 
@@ -48,11 +48,11 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		cacheEntryMetadata: function(){
 			this.entryData = {
-				id: this.kdp.evaluate( '{mediaProxy.entry.id}' ),
-				referenceId: this.kdp.evaluate( '{mediaProxy.entry.referenceId}' ),
-				mediaType: this.kdp.evaluate( '{mediaProxy.entry.mediaType}' ),
-				name: this.kdp.evaluate( '{mediaProxy.entry.name}' ),
-				duration: this.kdp.evaluate( '{mediaProxy.entry.duration}' )
+				id: this.vdp.evaluate( '{mediaProxy.entry.id}' ),
+				referenceId: this.vdp.evaluate( '{mediaProxy.entry.referenceId}' ),
+				mediaType: this.vdp.evaluate( '{mediaProxy.entry.mediaType}' ),
+				name: this.vdp.evaluate( '{mediaProxy.entry.name}' ),
+				duration: this.vdp.evaluate( '{mediaProxy.entry.duration}' )
 			};
 		},
 		getSCodeName: function(){
@@ -137,7 +137,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		/** Getters **/
 		getMediaPlayerName: function(){
-			return 'Kaltura Omniture OnPage v' + mw.getConfig('version'); 
+			return 'Vidiun Omniture OnPage v' + mw.getConfig('version'); 
 		},
 
 		trimSpaces: function(str) {
@@ -334,7 +334,7 @@ kWidget.addReadyCallback( function( playerId ){
 			};
 
 			this.bind('entryReady', function() {
-				kWidget.log( 'omnitureOnPage: entryReady' );
+				vWidget.log( 'omnitureOnPage: entryReady' );
 				_this.cacheEntryMetadata();
 			});
 			// Run open on first play:
@@ -448,8 +448,8 @@ kWidget.addReadyCallback( function( playerId ){
 		 * Get the media content type
 		 */
 		getCType: function(){
-			// kaltura mediaTypes are defined here: 
-			// http://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaMediaType
+			// vidiun mediaTypes are defined here: 
+			// http://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunMediaType
 			switch( this.entryData.mediaType ){
 				case 1:
 					return 'vid';
@@ -604,7 +604,7 @@ kWidget.addReadyCallback( function( playerId ){
 
 	 		// check if we have associated eVars:
 	 		s.linkTrackVars ='';
-	 		if( ! kWidget.isEmptyObject( propsAndEvars ) ){
+	 		if( ! vWidget.isEmptyObject( propsAndEvars ) ){
 	 			//s.Media.trackEvents += ',eVars';
 	 			// Build props and evars
 	 			var coma='';
@@ -638,7 +638,7 @@ kWidget.addReadyCallback( function( playerId ){
 	 		
 	 	},	 	
 		normalizeAttrValue: function( attrValue ){
-			// normalize flash kdp string values
+			// normalize flash vdp string values
 			switch( attrValue ){
 				case "null":
 					return null;
@@ -653,20 +653,20 @@ kWidget.addReadyCallback( function( playerId ){
 			return attrValue;
 		},
 		log: function( msg ){
-			kWidget.log( this.instanceName + ': ' + msg );
+			vWidget.log( this.instanceName + ': ' + msg );
 		},
 		bind: function( eventName, callback ){
 			// postfix the instanceName to namespace all the bindings
-			this.kdp.kBind( eventName + '.' + this.instanceName, callback );
+			this.vdp.vBind( eventName + '.' + this.instanceName, callback );
 		},
 		getAttr: function( attr ){
 			return this.normalizeAttrValue(
-				this.kdp.evaluate( '{' + attr + '}' )
+				this.vdp.evaluate( '{' + attr + '}' )
 			);
 		},
 		getConfig : function( attr ){
 			return this.normalizeAttrValue(
-				this.kdp.evaluate( '{' + this.instanceName + '.' + attr + '}' )
+				this.vdp.evaluate( '{' + this.instanceName + '.' + attr + '}' )
 			);
 		}
 	}

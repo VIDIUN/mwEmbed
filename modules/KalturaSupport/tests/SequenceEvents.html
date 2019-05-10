@@ -6,7 +6,7 @@
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	
 	// Name this module
 	module( "Sequence Events" );
@@ -25,7 +25,7 @@ function jsKalturaPlayerTest( videoId ){
 		document.getElementById('sequenceLog').innerHTML = document.getElementById('sequenceLog').innerHTML + "\n" + eventName;
 	}
 
-	var eventList = ['kdpEmpty',
+	var eventList = ['vdpEmpty',
                       'playerUpdatePlayhead',
                       'playerPlayEnd'
                      ];
@@ -33,42 +33,42 @@ function jsKalturaPlayerTest( videoId ){
 	
 	function jsCallbackReady( videoId ){
 		logEvent( 'jsCallbackReady: ' + videoId );
-		var kdp = $('#' + videoId )[0];
+		var vdp = $('#' + videoId )[0];
 		for( var i in eventList ){
 			( function( eventName ){
 				window[ 'on_' + eventName ] = function(){
 					//remove listener: 
-					kdp.removeJsListener( eventName, 'on_' + eventName );
+					vdp.removeJsListener( eventName, 'on_' + eventName );
 					window.logEvent( eventName );
 				}
 				console.log( 'Add listner: ' + eventName );
-				kdp.addJsListener( eventName , 'on_' + eventName );
+				vdp.addJsListener( eventName , 'on_' + eventName );
 			})(  eventList[i]);
 		}
 		for( var i in eventListNoBindRemove){
 			( function( eventName ){
 				window[ 'onnb_' + eventName ] = function(){
 					//remove listener: 
-					kdp.removeJsListener( eventName, 'on_' + eventName );
+					vdp.removeJsListener( eventName, 'on_' + eventName );
 					window.logEvent( eventName );
 				}
-				kdp.addJsListener( eventName , 'onnb_' + eventName );
+				vdp.addJsListener( eventName , 'onnb_' + eventName );
 			})(  eventListNoBindRemove[i]);
 		}
 		window['doPlayMedia'] = function(){
-			kdp.sendNotification( 'doPlay' );
+			vdp.sendNotification( 'doPlay' );
 		}
-		// add an addition listener for kdpEmpty to call change media: 
+		// add an addition listener for vdpEmpty to call change media: 
 		window['doChangeMedia']= function(){
-			kdp.sendNotification('changeMedia', { 'entryId' : '0_uka1msg4' });
+			vdp.sendNotification('changeMedia', { 'entryId' : '0_uka1msg4' });
 		}
-		kdp.addJsListener( 'kdpEmpty', 'doChangeMedia');
-		kdp.addJsListener( 'changeMedia', 'doPlayMedia');
+		vdp.addJsListener( 'vdpEmpty', 'doChangeMedia');
+		vdp.addJsListener( 'changeMedia', 'doPlayMedia');
 	}
 </script>
 
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Sequence Events test </h2>
@@ -86,7 +86,7 @@ var embedSettings ={
 	'wid' : '_243342'
 } 
 $('#adPlayer').click(function(){
-	var dcUrl = 'http://ad.doubleclick.net/pfadx/AngelaSite;kw=html5linearnonlinear;sz=300x300;ord=5036130;dcmt=text/xml&vast.presequence=1&vast.timeout=4&vast.htmlCompanions=testCompanion:300:250;testLongCompanion:728:90;';
+	var dcUrl = 'http://ad.doubleclick.net/pfadx/AngelaSite;vw=html5linearnonlinear;sz=300x300;ord=5036130;dcmt=text/xml&vast.presequence=1&vast.timeout=4&vast.htmlCompanions=testCompanion:300:250;testLongCompanion:728:90;';
 	embedSettings.flashvars = {
 		'vast.plugin' : true,
 		
@@ -95,7 +95,7 @@ $('#adPlayer').click(function(){
 		'skipBtn.type' : 'labelButton',
 		'skipBtn.color1' : "14540253",
 		'skipBtn.color2': "16777215",
-		'skipBtn.kClick' : "sendNotification('sequenceSkipNext')",
+		'skipBtn.vClick' : "sendNotification('sequenceSkipNext')",
 		
 		'vast.numPreroll' : 1,
 		'vast.prerollInterval' : 1,
@@ -107,12 +107,12 @@ $('#adPlayer').click(function(){
 		'vast.postrollstartwith' : 1,
 		'vast.postrollUrl': dcUrl
 	}
-	kWidget.embed(embedSettings);
+	vWidget.embed(embedSettings);
 	return false;
 });
 $('#noAdPlayer').click(function(){
 	embedSettings.flashvars = {}
-	kWidget.embed( embedSettings );
+	vWidget.embed( embedSettings );
 	return false;
 });
 

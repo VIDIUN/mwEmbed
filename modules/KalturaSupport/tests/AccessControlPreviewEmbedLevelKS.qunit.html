@@ -1,32 +1,32 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Access Control Preview embed level ks</title>
+<title>Access Control Preview embed level vs</title>
 <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
-function jsKalturaPlayerTest( videoId ){
-	module( "Access Control Preview, embed level ks" );
+function jsVidiunPlayerTest( videoId ){
+	module( "Access Control Preview, embed level vs" );
 	
-	var kdp = $('#' + videoId)[0];
+	var vdp = $('#' + videoId)[0];
 	
 	asyncTest("Playback full content", 1, function(){
 		window['onDoSeek'] = function(){
-			kdp.sendNotification( 'doPlay' );
+			vdp.sendNotification( 'doPlay' );
 
 			testDone = false;
 			window.checkTestDone = function(){
-				if( kdp.evaluate('{video.player.currentTime}') > 11 ){
+				if( vdp.evaluate('{video.player.currentTime}') > 11 ){
 					testDone = true;
-					kdp.removeJsListener('playerUpdatePlayhead', 'checkTestDone' );
-					ok( kdp.evaluate('{video.player.currentTime}') > 11, 'Playing content past 11 seconds');
-					kdp.sendNotification('doPause');
+					vdp.removeJsListener('playerUpdatePlayhead', 'checkTestDone' );
+					ok( vdp.evaluate('{video.player.currentTime}') > 11, 'Playing content past 11 seconds');
+					vdp.sendNotification('doPause');
 					// done will all tests
 					start();
 				}
 			};
-			kdp.addJsListener('playerUpdatePlayhead', 'checkTestDone' );
+			vdp.addJsListener('playerUpdatePlayhead', 'checkTestDone' );
 			setTimeout( function(){
 				if( !testDone ){
 					// test seek timed out:
@@ -37,16 +37,16 @@ function jsKalturaPlayerTest( videoId ){
 		};
 		
 		window['onFreePreviewEnd'] = function(){
-			ok( false, "Recived free preview end event on ks content");
+			ok( false, "Recived free preview end event on vs content");
 		}
-		kdp.addJsListener( 'freePreviewEnd', 'onFreePreviewEnd' );
-		kdp.addJsListener('doSeek', 'onDoSeek' );
+		vdp.addJsListener( 'freePreviewEnd', 'onFreePreviewEnd' );
+		vdp.addJsListener('doSeek', 'onDoSeek' );
 		
 	});
 }
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Access Control Preview embed level ks </h2>
@@ -59,7 +59,7 @@ View source code of sample <a href="https://github.com/kaltura/mwEmbed/blob/mast
 			$('#playerTarget').text( 'error getting ks');
 			return ;
 		}
-		kWidget.embed( 'playerTarget', {
+		vWidget.embed( 'playerTarget', {
 			'wid' : '_243342',
 			'uiconf_id' : '8145862',
 			'entry_id' : '0_mjbelixh',
@@ -69,11 +69,11 @@ View source code of sample <a href="https://github.com/kaltura/mwEmbed/blob/mast
 				'loadThumbnailWithKs': true
 			},
 			'readyCallback': function( playerId ){
-				var kdp = $('#' + playerId )[0];
+				var vdp = $('#' + playerId )[0];
 				// if testing start playback:
 				if( window.QUnit ){
-					kdp.kBind('mediaReady', function(){
-						kdp.sendNotification( 'doSeek', 9 );
+					vdp.vBind('mediaReady', function(){
+						vdp.sendNotification( 'doSeek', 9 );
 					})
 				}
 			}
