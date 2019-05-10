@@ -237,9 +237,9 @@
 					var currentSelectedItem = document.activeElement;
 					var currentSelectedObj = $( currentSelectedItem );
 					var currentSelectedObjType = currentSelectedObj.data( "boxType" );
-					if ( currentSelectedObjType === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER ) {
+					if ( currentSelectedObjType === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER ) {
 						chapter = currentSelectedItem;
-					} else if ( currentSelectedObjType === mw.KCuePoints.THUMB_SUB_TYPE.SLIDE ) {
+					} else if ( currentSelectedObjType === mw.VCuePoints.THUMB_SUB_TYPE.SLIDE ) {
 						var slideChapterIndex = currentSelectedObj.data( "chapterIndex" );
 						chapter = _this.getMediaListDomElements()
 								.filter( ".chapterBox[data-chapter-index=" + slideChapterIndex + "]" );
@@ -457,13 +457,13 @@
 				if ((_this.getPlayer().isLive() && _this.getPlayer().isDVR()) || !_this.getPlayer().isLive()) {
 					mediaItem.startTimeDisplay = _this.formatTimeDisplayValue(mw.seconds2npt(item.startTime / 1000));
 				}
-				if (mediaItem.type === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER) {
+				if (mediaItem.type === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER) {
 					//Save reference to chapters in chapter map object
 					mediaItem.children = [];
 					_this.chaptersMap.push(mediaItem);
 					//Set chapter number
 					mediaItem.chapterNumber = _this.chaptersMap.length - 1;
-				} else if (mediaItem.type === mw.KCuePoints.THUMB_SUB_TYPE.SLIDE){
+				} else if (mediaItem.type === mw.VCuePoints.THUMB_SUB_TYPE.SLIDE){
 					_this.slidesMap.push(mediaItem);
 					//Reference child elements of chapter if it exist
 					var currentChapter = _this.chaptersMap[_this.chaptersMap.length - 1];
@@ -556,12 +556,12 @@
 		setMediaItemTime: function (mediaItem) {
 			var duration = this.getPlayer().duration;
 			$.each(mediaItem, function (index, item) {
-				if (item.type !== mw.KCuePoints.THUMB_SUB_TYPE.SLIDE){
+				if (item.type !== mw.VCuePoints.THUMB_SUB_TYPE.SLIDE){
 					return true;
 				}
 				var runningIndex = index + 1;
 				while (mediaItem[runningIndex]){
-					if (mediaItem[runningIndex].type === mw.KCuePoints.THUMB_SUB_TYPE.SLIDE){
+					if (mediaItem[runningIndex].type === mw.VCuePoints.THUMB_SUB_TYPE.SLIDE){
 						break;
 					}
 					runningIndex++;
@@ -829,7 +829,7 @@
 				request['filter:updatedAtLessThanOrEqual'] = this.getPlayer().vCuePoints.getLastUpdateTime();
 			}
 
-			this.getKalturaClient().doRequest(request,
+			this.getVidiunClient().doRequest(request,
 					function (data) {
 						if (!_this.isValidResult(data)) {
 							return;
@@ -950,8 +950,8 @@
 		renderBottomBar: function(){
 			this.getMedialistFooterComponent().empty();
 			var bottomBar = $("<div/>", {"class": "footerWrapper"} )
-					.append($("<span/>", {"class": "slideLocator icon-locator", "title": gM("ks-chapters-locate-active-media")}))
-					.append($("<span/>", {"class": "toggleAll icon-toggleAll", "title": gM("ks-chapters-toggle-all-chapter")}));
+					.append($("<span/>", {"class": "slideLocator icon-locator", "title": gM("vs-chapters-locate-active-media")}))
+					.append($("<span/>", {"class": "toggleAll icon-toggleAll", "title": gM("vs-chapters-toggle-all-chapter")}));
 			this.getMedialistFooterComponent().append(bottomBar);
 		},
 		isValidResult: function (data) {
@@ -1251,7 +1251,7 @@
 				this.doOnSlideAnimationEnded(function(){
 					var mediaBox = _this.getMediaListDomElements()
 							.filter( ".mediaBox[data-mediaBox-index=" + item.order + "]" );
-					if ( item.type === mw.KCuePoints.THUMB_SUB_TYPE.SLIDE ) {
+					if ( item.type === mw.VCuePoints.THUMB_SUB_TYPE.SLIDE ) {
 						if ( item.hasParent ) {
 							if ( mediaBox.hasClass( "collapsed" ) ) {
 								var chapter = _this.getMediaListDomElements()

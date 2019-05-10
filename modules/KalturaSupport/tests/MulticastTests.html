@@ -30,7 +30,7 @@
     //var hlssource='http://'+localhost+':1935/live/abc123/playlist.m3u8';
     //var hlssource='http://vidsegsec-a.akamaihd.net/dc-1/m/ny-live-publish3/vLive/smil:1_oorxcge2_publish.smil/chunklist_b2096000.m3u8';
 
-   // var multicast='http://'+localhost+':9000/kMulticast/'+hlssource;
+   // var multicast='http://'+localhost+':9000/vMulticast/'+hlssource;
 //    var multicast='234.2.2.3:12340';
 
     var replaceSources=[];
@@ -61,8 +61,8 @@
     if (replaceSources.length>0) {
         mw.setConfig('EmbedPlayer.ReplaceSources', replaceSources);
     }
-    kWidget.featureConfig({
-        'targetId': 'kaltura_player',
+    vWidget.featureConfig({
+        'targetId': 'vidiun_player',
         'wid': '_1802381',
         'uiconf_id' : '30139111',
         'flashvars': {

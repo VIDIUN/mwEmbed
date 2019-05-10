@@ -2,7 +2,7 @@
         "use strict";
         mw.dualScreen = mw.dualScreen || {};
 
-        mw.dualScreen.externalControlManager = mw.KBasePlugin.extend({
+        mw.dualScreen.externalControlManager = mw.VBasePlugin.extend({
             setup : function()
             {
 

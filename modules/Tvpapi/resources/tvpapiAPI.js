@@ -1,7 +1,7 @@
 (function (mw, $) {
     "use strict";
 
-    var tvpapiAPI = mw.KBasePlugin.extend( {
+    var tvpapiAPI = mw.VBasePlugin.extend( {
 
         setup: function ( ) {
             this.addBindings();
@@ -9,12 +9,12 @@
 
         getProxyConfig: function( attr, raw ) {
             if( raw ){
-                return this.embedPlayer.getRawKalturaConfig( "proxyData", attr );
+                return this.embedPlayer.getRawVidiunConfig( "proxyData", attr );
             }
-            return this.embedPlayer.getKalturaConfig( "proxyData", attr );
+            return this.embedPlayer.getVidiunConfig( "proxyData", attr );
         },
         setProxyConfig: function( attr, value ) {
-            this.embedPlayer.setKalturaConfig("proxyData", attr, value);
+            this.embedPlayer.setVidiunConfig("proxyData", attr, value);
         },
 
         addBindings: function () {
