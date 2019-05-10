@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Widevine Media Optimizer</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+// Enable uiconf js which includes external resources 
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
+
+
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2>Widevine Media Optimizer</h2>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
+<script>
+//////////////////////////////////////////////////////////////////////////////////////
+// TODO: 
+// update widevine path to "widevinePlugin.swf" after VDP v3.7.2 is available, 
+// until then edit player attributes won't work. 
+/////////////////////////////////////////////////////////////////////////////////////
+vWidget.featureConfig({
+	'cache_st': 23,
+	'targetId' : 'vidiun_player',
+	'wid' : '_243342',
+	'uiconf_id' : '9677891',
+	'entry_id' : '0_uka1msg4',
+	'flashvars': {
+		'widevine':{
+			'plugin': true,
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
+			//'asyncInit': 'true',
+			'includeInLayout': 'false',
+			'relativeTo': 'video',
+			'position': 'before',
+			'onPageJs1': "{onPagePluginPath}/widevineMediaOptimizer/widevineMediaOptimizer.js"
+		}
+	}
+})
+</script>
+
+</body>
+</html>
