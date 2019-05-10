@@ -2,16 +2,16 @@
     "QnA": {
         "scripts": [
             "resources/knockout-3.3.0.js",
-            "resources/qnaKOExtensions.js",
+            "resources/qnaVOExtensions.js",
             "resources/qnaModule.js",
             "resources/qnaService.js",
             "resources/qna.js"
         ],
         "dependencies": [
-        	"mw.KBaseScreen",
+        	"mw.VBaseScreen",
         	"nanoScroller"
         ],
-        "kalturaPluginName": "qna",
+        "vidiunPluginName": "qna",
         "styles": [
         	"resources/css/qna.css",
         	"resources/css/qna-announcements.css",

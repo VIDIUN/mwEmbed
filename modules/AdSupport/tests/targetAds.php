@@ -1,11 +1,11 @@
 <?php 
 $adClick ='http://www.hooroo.com/'; 
-$adMedia ='http://cdnbakmi.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_51rxup7z/flavorId/1_gwbqwpp6/format/url/protocol/http/a.mp4';
+$adMedia ='http://cdnbakmi.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_51rxup7z/flavorId/1_gwbqwpp6/format/url/protocol/http/a.mp4';
 // Update to hotel sample if target set:
 // horo
 if( $_REQUEST['target'] == 'hotel' ) {
 	$adClick = 'http://www.homeaway.com/';
-	$adMedia = 'http://cdnapi.kaltura.com/p/777122/sp/77712200/playManifest/entryId/0_vriq23ct/flavorId/0_g0vnoj5i/format/url/protocol/http/a.mp4';
+	$adMedia = 'http://cdnapi.vidiun.com/p/777122/sp/77712200/playManifest/entryId/0_vriq23ct/flavorId/0_g0vnoj5i/format/url/protocol/http/a.mp4';
 }
 
 header ("Content-Type:text/xml");
@@ -19,23 +19,23 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
             <AdTitle></AdTitle>
             <Description></Description>
             <Survey></Survey>
-            <Impression id="DART"><![CDATA[http://ad.doubleclick.net/imp;v7;x;232859236;0-0;1;13452535;200/200;39455789/39473576/1;;~aopt=2/1/ff/1;~okv=;kw=angelahtml5;sz=200x200;dcmt=text/xml;~cs=l%3fhttp://s0.2mdn.net/dot.gif]]></Impression>
+            <Impression id="DART"><![CDATA[http://ad.doubleclick.net/imp;v7;x;232859236;0-0;1;13452535;200/200;39455789/39473576/1;;~aopt=2/1/ff/1;~okv=;vw=angelahtml5;sz=200x200;dcmt=text/xml;~cs=l%3fhttp://s0.2mdn.net/dot.gif]]></Impression>
 
             <Creatives>
                 <Creative>
                     <CompanionAds>
                     <Companion id="banner" width="468" height="60" >
                         <StaticResource creativeType="image/png">
-                            <![CDATA[ttp://projects.kaltura.com/mdale/adcreatives/468x60.png]]>
+                            <![CDATA[ttp://projects.vidiun.com/mdale/adcreatives/468x60.png]]>
                         </StaticResource>
                         <CompanionClickThrough>
-                            <![CDATA[http://kaltura.com]]>                
+                            <![CDATA[http://vidiun.com]]>                
                         </CompanionClickThrough>
                     </Companion>
                     <Companion id="expanding_banner" width="300" height="250" expandedWidth="300" expandedHeight="250" >
-                        <StaticResource creativeType="image/png"><![CDATA[http://projects.kaltura.com/mdale/adcreatives/300x250.png]]></StaticResource>
+                        <StaticResource creativeType="image/png"><![CDATA[http://projects.vidiun.com/mdale/adcreatives/300x250.png]]></StaticResource>
                         <CompanionClickThrough>
-                            <![CDATA[http://kaltura.com]]>
+                            <![CDATA[http://vidiun.com]]>
                         </CompanionClickThrough>
                     </Companion>
                 </CompanionAds>
@@ -71,14 +71,14 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
                 <Creative sequence="1" AdID="">
                     <CompanionAds>
                         <Companion id="1" width="300" height="250">
-                            <StaticResource creativeType="image/png"><![CDATA[http://projects.kaltura.com/mdale/adcreatives/300x250.png]]></StaticResource>
-                            <CompanionClickThrough><![CDATA[http://kaltura.com]]></CompanionClickThrough>
+                            <StaticResource creativeType="image/png"><![CDATA[http://projects.vidiun.com/mdale/adcreatives/300x250.png]]></StaticResource>
+                            <CompanionClickThrough><![CDATA[http://vidiun.com]]></CompanionClickThrough>
                             <AltText></AltText>
                             <AdParameters></AdParameters>
                         </Companion>
                         <Companion id="2" width="728" height="90">
-                            <StaticResource creativeType="image/png"><![CDATA[http://projects.kaltura.com/mdale/adcreatives/728x90.png]]></StaticResource>
-                            <CompanionClickThrough><![CDATA[http://kaltura.com]]></CompanionClickThrough>
+                            <StaticResource creativeType="image/png"><![CDATA[http://projects.vidiun.com/mdale/adcreatives/728x90.png]]></StaticResource>
+                            <CompanionClickThrough><![CDATA[http://vidiun.com]]></CompanionClickThrough>
                             <AltText></AltText>
                             <AdParameters></AdParameters>
                         </Companion>

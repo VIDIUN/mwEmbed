@@ -36,7 +36,7 @@ onload = function () {
 	mediaManager = new cast.receiver.MediaManager(mediaElement);
 
 	castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-	messageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.kaltura.cast.player');
+	messageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.vidiun.cast.player');
 
 	setCastReceiverManagerEvents();
 	initApp();

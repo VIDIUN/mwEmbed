@@ -17,16 +17,16 @@
 	<body>
 	<h2> Swipe events with Hammer.js </h2>
 		<br />
-	<div id="kaltura_player" style="width:600px;height:336px;float:left">
+	<div id="vidiun_player" style="width:600px;height:336px;float:left">
 	</div>
-	<span id="kdoc-more-desc"><br>
+	<span id="vdoc-more-desc"><br>
 		You can learn more about <a target="_new" href="http://hammerjs.github.io/api/#hammer.defaults">supported options</a> and
 		<a target="_new" href="http://hammerjs.github.io/api/#hammer.input-event">event listeners</a> in hammer.js documentation.
 	</span>
-	<script type="text/javascript" src="../../tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<script type="text/javascript" src="../../tests/resources/qunit-vidiun-bootstrap.js"></script>
 	<script>
-		kWidget.featureConfig({
-			'targetId': 'kaltura_player',
+		vWidget.featureConfig({
+			'targetId': 'vidiun_player',
 			'wid' : '_243342',
 			'uiconf_id' : '20540612',
 			'entry_id' : '1_sf5ovm7u',
@@ -38,8 +38,8 @@
 				}
 			},
 			'readyCallback': function(playerId){
-				var kdp = $("#" + playerId )[0];
-				kdp.kBind('hammerEvent', function(hammerEvent){
+				var vdp = $("#" + playerId )[0];
+				vdp.vBind('hammerEvent', function(hammerEvent){
 					// remove some pointers: 
 					delete hammerEvent['changedPointers'];
 					delete hammerEvent['srcEvent'];

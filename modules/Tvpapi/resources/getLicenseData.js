@@ -1,7 +1,7 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add( 'tvpapiGetLicenseData', mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'tvpapiGetLicenseData', mw.VBasePlugin.extend( {
 
 		defaultConfig: {},
 
@@ -13,9 +13,9 @@
 
 		getProxyConfig: function( attr, raw ) {
 			if( raw ){
-				return this.embedPlayer.getRawKalturaConfig( "proxyData", attr );
+				return this.embedPlayer.getRawVidiunConfig( "proxyData", attr );
 			}
-			return this.embedPlayer.getKalturaConfig( "proxyData", attr );
+			return this.embedPlayer.getVidiunConfig( "proxyData", attr );
 		},
 
 		addBindings: function () {

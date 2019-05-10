@@ -124,7 +124,7 @@ $wgExternalPlayersSupportedTypes = array('YouTube');
 
 //Embedded services
 //To enable service re routing for entryResult calls
-$wgEnableKalturaEmbedServicesRouting = true;
+$wgEnableVidiunEmbedServicesRouting = true;
 
 // To include signed headers with user IPs for IP restriction lookups, input a salt string for 
 // $wgVidiunRemoteAddressSalt configuration option. 
@@ -229,7 +229,7 @@ $wgVidiunApiFeatures = array();
 /*********************************************************
  * Override Domain:
 ********************************************************/
-$wgEnableKalturaOverrideDomain = true;
+$wgEnableVidiunOverrideDomain = true;
 
 /*********************************************************
  * A comma-delimited string of allowed flashavrs to be passed to server on dynamic embed call:
@@ -276,7 +276,7 @@ if (!empty($wgKalturaPSHtml5ModulesDir)){
 //Set global configs into $wgMwEmbedModuleConfig in order to enable
 //resource loader to output the config in the response
 // if Manifest urls should be used:
-$wgMwEmbedModuleConfig['Kaltura.UseManifestUrls'] = $wgKalturaUseManifestUrls;
+$wgMwEmbedModuleConfig['Vidiun.UseManifestUrls'] = $wgVidiunUseManifestUrls;
 //Add license server config:
 global $wgKalturaLicenseServerUrl, $wgKalturaUdrmLicenseServerUrl;
 $wgMwEmbedModuleConfig['Kaltura.LicenseServerURL'] = $wgKalturaLicenseServerUrl;

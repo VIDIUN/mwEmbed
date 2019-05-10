@@ -8,7 +8,7 @@
 
 	<script type="text/javascript">
 		// Enable uiconf js which includes external resources
-		mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 	</script>
 
 
@@ -26,11 +26,11 @@
 	<li><b>horizontalScrollItems</b>: Number of items to scroll horizontally when clicking the scroll button.</li>
 	<li><b>mediaItemHeight</b>: Sets the height of the playlist items.</li>
 </ul>
-<div id='kaltura_player' style="height:450px;width:550px"></div>
+<div id='vidiun_player' style="height:450px;width:550px"></div>
 <script>
 	var basePath = document.location.toString().split("PlaylistPagingTemplate")[0];
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '25975211',
 		'flashvars': {
@@ -44,8 +44,8 @@
 				'containerPosition': 'bottom',
 				'hideClipPoster': true,
 				'onPageCss1' : basePath + 'externalResources/customplaylist.css',
-				'kpl0Name': "50 items playlist",
-				'kpl0Id': '1_giunvyzh',
+				'vpl0Name': "50 items playlist",
+				'vpl0Id': '1_giunvyzh',
 				'paging': true,
 				'pageSize': 10,
 				'MinClips': 5,
@@ -61,8 +61,8 @@
 <p>Sample Code:</p>
 <pre class="prettyprint linenums">
 var basePath = document.location.toString().split("PlaylistPagingTemplate")[0];
-kWidget.featureConfig({
-	'targetId': 'kaltura_player',
+vWidget.featureConfig({
+	'targetId': 'vidiun_player',
 	'wid': '_243342',
 	'uiconf_id': '25975211',
 	'flashvars': {
@@ -76,8 +76,8 @@ kWidget.featureConfig({
 			'containerPosition': 'bottom',
 			'hideClipPoster': true,
 			'onPageCss1' : basePath + 'externalResources/customplaylist.css',
-			'kpl0Name': "50 items playlist",
-			'kpl0Id': '1_giunvyzh',
+			'vpl0Name': "50 items playlist",
+			'vpl0Id': '1_giunvyzh',
 			'paging': true,
 			'pageSize': 10,
 			'MinClips': 5,

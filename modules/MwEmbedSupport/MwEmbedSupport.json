@@ -31,7 +31,7 @@
             "skins/common/MwEmbedCommonStyle.css"
         ],
         "skinStyles": {
-            "kaltura-dark": "skins/jquery.ui.themes/kaltura-dark/jquery-ui-1.7.2.css"
+            "vidiun-dark": "skins/jquery.ui.themes/vidiun-dark/jquery-ui-1.7.2.css"
         }
     },
     "mediawiki.UtilitiesTime": {

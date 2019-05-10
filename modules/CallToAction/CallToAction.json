@@ -4,10 +4,10 @@
         "styles": "resources/call-to-action.css",
         "dependencies": [
             "mw.EmbedPlayer",
-            "mw.KBaseScreen"
+            "mw.VBaseScreen"
         ],
         "templates": "../CallToAction/templates/action-buttons.tmpl.html",
-        "kalturaPluginName": "actionButtons"
+        "vidiunPluginName": "actionButtons"
     },
     "actionForm": {
         "scripts": "resources/actionForm.js",
@@ -15,9 +15,9 @@
         "dependencies": [
             "mw.EmbedPlayer",
             "jquery.serialize-object",
-            "mw.KBaseScreen"
+            "mw.VBaseScreen"
         ],
         "templates": "../CallToAction/templates/collect-form.tmpl.html",
-        "kalturaPluginName": "actionForm"
+        "vidiunPluginName": "actionForm"
     }
 }

@@ -29,15 +29,15 @@ vWidget.checkUserAgentPlayerRules = function( ruleSet, getMsg ){
 		val: true
 	};
 
-    var noFlashMessage = ( mw.getConfig( 'strings.ks-no-flash-installed' ) )?
-        mw.getConfig( 'strings.ks-no-flash-installed' ) : "Flash does not appear to be installed or active. Please install or activate Flash.";
+    var noFlashMessage = ( mw.getConfig( 'strings.vs-no-flash-installed' ) )?
+        mw.getConfig( 'strings.vs-no-flash-installed' ) : "Flash does not appear to be installed or active. Please install or activate Flash.";
 
     var msgMode = {
         mode: 'forceMsg',
         val: noFlashMessage
     };
     //check if we run on IE8 and flash is not supported
-    if ( kWidget.isIE8() && !kWidget.supportsFlash() ){
+    if ( vWidget.isIE8() && !vWidget.supportsFlash() ){
         return msgMode;
     }
 	// Check for current user agent rules

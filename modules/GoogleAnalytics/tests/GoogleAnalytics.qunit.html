@@ -27,8 +27,8 @@
 			}
 		};
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 	<script type="text/javascript">
 		var testEventObject = {};
 
@@ -45,9 +45,9 @@
 			}
 		}
 
-		function jsKalturaPlayerTest(videoId) {
+		function jsVidiunPlayerTest(videoId) {
 			module("Google Analytics Events Test");
-			var kdp = $('#kaltura_player')[ 0 ];
+			var vdp = $('#vidiun_player')[ 0 ];
 
 			asyncTest("mediaReady event sent", function () {
 				var runTest = function (testEvent) {
@@ -77,10 +77,10 @@
 					equal(testEvent.opt_value, "10", "opt_value doSeek set to seek time");
 					start();
 				});
-				kdp.sendNotification('doPlay');
+				vdp.sendNotification('doPlay');
 				setTimeout(function () {
-					kdp.sendNotification('doPause');
-					kdp.sendNotification('doSeek', 10);
+					vdp.sendNotification('doPause');
+					vdp.sendNotification('doSeek', 10);
 				}, 1000);
 			});
 
@@ -92,15 +92,15 @@
 <h2> Google Analytics </h2>
 <br/>
 
-<div id="kaltura_player" style="width:400px;height:330px"></div>
-<div id="kdoc-more-desc"><br>This google analytics example highlights custom tracking events. Notice the 
+<div id="vidiun_player" style="width:400px;height:330px"></div>
+<div id="vdoc-more-desc"><br>This google analytics example highlights custom tracking events. Notice the 
 "related" event within the GA log when selecting a related video.<br>
 Time spent buffering tracked via <a href="../../../docs/api#video.buffer.lastBufferDuration">lastBufferDuration</a></div>
 <script>
-	// Use the configured analtyics ua or hard code the player.kaltura.com acocunt:
-	var googleAnalyticsAccountId = mw.getConfig( 'Kaltura.PageGoogleAnalytics' ) ? mw.getConfig( 'Kaltura.PageGoogleAnalytics' ): "UA-2078931-34";
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	// Use the configured analtyics ua or hard code the player.vidiun.com acocunt:
+	var googleAnalyticsAccountId = mw.getConfig( 'Vidiun.PageGoogleAnalytics' ) ? mw.getConfig( 'Vidiun.PageGoogleAnalytics' ): "UA-2078931-34";
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '12905712',
 		'entry_id': '0_uka1msg4',
@@ -115,8 +115,8 @@ Time spent buffering tracked via <a href="../../../docs/api#video.buffer.lastBuf
 				'anonymizeIp': false,
 				'customEvent': 'doPlay,relatedVideoSelect,playerReady,NoSourcesCustomError,bufferEndEvent,mediaError,embedPlayerError',
 
-				'trackingCategory': "Kaltura Video Events",
-				'optionalLabel': "{mediaProxy.entry.referenceId}|{mediaProxy.entry.name}|{mediaProxy.entry.id}|{configProxy.kw.id}|{configProxy.kw.uiConfId}",
+				'trackingCategory': "Vidiun Video Events",
+				'optionalLabel': "{mediaProxy.entry.referenceId}|{mediaProxy.entry.name}|{mediaProxy.entry.id}|{configProxy.vw.id}|{configProxy.vw.uiConfId}",
 				
 				'doPlayCategory': "Custom Events",
 				
@@ -156,15 +156,15 @@ Time spent buffering tracked via <a href="../../../docs/api#video.buffer.lastBuf
 			}
 		},
 		'readyCallback': function (playerId) {
-			var kdp = document.getElementById(playerId);
+			var vdp = document.getElementById(playerId);
 			// clear the text box:
 			$('#gAnalyticsLog tr:not(#eventRowDesc)').remove();
 			$('.changeMedia').click(function () {
-				kdp.sendNotification('changeMedia', {'entryId': '1_sf5ovm7u' });
+				vdp.sendNotification('changeMedia', {'entryId': '1_sf5ovm7u' });
 				return false;
 			})
 			$('.changeMediaInvalid').click(function(){
-				kdp.sendNotification('changeMedia', {'entryId': '1_invalid' });
+				vdp.sendNotification('changeMedia', {'entryId': '1_invalid' });
 				return false;
 			});
 			$('.mediaError').click(function(){

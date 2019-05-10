@@ -4,15 +4,15 @@
 (function(mw, $) {
     'use strict';
 
-    $.extend(KalturaHeartbeatDelegate.prototype, ADB.va.HeartbeatDelegate.prototype);
+    $.extend(VidiunHeartbeatDelegate.prototype, ADB.va.HeartbeatDelegate.prototype);
 
-    function KalturaHeartbeatDelegate() {
+    function VidiunHeartbeatDelegate() {
     }
 
-    KalturaHeartbeatDelegate.prototype.onError = function(errorInfo) {
+    VidiunHeartbeatDelegate.prototype.onError = function(errorInfo) {
         mw.log("HeartBeat plugin ::  HeartbeatDelegate error: " + errorInfo.getMessage() + " | " + errorInfo.getDetails());
     };
 
     // Export symbols.
-    window.KalturaHeartbeatDelegate = KalturaHeartbeatDelegate;
+    window.VidiunHeartbeatDelegate = VidiunHeartbeatDelegate;
 })(window.mw, window.jQuery);

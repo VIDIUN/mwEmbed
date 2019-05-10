@@ -145,7 +145,7 @@
 // Include our configuration file
 require_once( realpath( dirname( __FILE__ ) ) . '/includes/DefaultSettings.php' );
 
-require_once( dirname( __FILE__ ) . '/modules/KalturaSupport/KalturaCommon.php' );
+require_once( dirname( __FILE__ ) . '/modules/VidiunSupport/VidiunCommon.php' );
 $requestHelper = $container['request_helper'];
 
 function isValidHost( $url = null ){
@@ -208,7 +208,7 @@ if ( !$url ) {
 	
 } else if( !isValidHost($url) ) {
 	// URL host is not whitelisted
-	$contents = 'ERROR: URL not in Kaltura domain whitelist [DENIED]';
+	$contents = 'ERROR: URL not in Vidiun domain whitelist [DENIED]';
 	$status = array( 'http_code' => 'ERROR' );
 } else {
 	$ch = curl_init( $url );
@@ -245,7 +245,7 @@ if ( !$url ) {
 	// Forward the client ip for GeoLookup: ( geo-lookup server hopefully is not dumb and uses X-Forwarded-For ) 
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 		'X-Forwarded-For: ' . $_SERVER['REMOTE_ADDR'],
-		// Add kaltura x-remote-address headers:
+		// Add vidiun x-remote-address headers:
 		$requestHelper->getRemoteAddrHeader(),
 		'Expect:' // used to ignore "100 Continue Header" when using POST
 	));

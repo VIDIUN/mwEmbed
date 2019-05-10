@@ -7,7 +7,7 @@
 		mediaPlayers.addPlayer( chromecastPlayer );
 	});
 
-	mw.PluginManager.add( 'chromecast', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'chromecast', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',
