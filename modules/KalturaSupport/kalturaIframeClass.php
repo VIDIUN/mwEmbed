@@ -78,7 +78,7 @@ class vidiunIframeClass {
 			try {
 				$result = $client->widget->get($widgetId);
 			} catch( Exception $e ){
-				throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . htmlspecialchars($e->getMessage()) );
+				throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . htmlspecialchars($e->getMessage()) );
 			}
 			if( $result ) {
 				return $result;

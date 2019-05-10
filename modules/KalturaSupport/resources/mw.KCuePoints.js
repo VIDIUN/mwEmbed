@@ -426,7 +426,7 @@
 				"monitorEvent" + this.bindPostfix +
 				" seeked" + this.bindPostfix +
 				" onplay" + this.bindPostfix +
-				" KalturaSupport_ThumbCuePointsUpdated" + this.bindPostfix,
+				" VidiunSupport_ThumbCuePointsUpdated" + this.bindPostfix,
 				function (e) {
 					var currentTime = embedPlayer.getPlayerElementTime() * 1000;
 					//In case of seeked the current cuepoint needs to be updated to new seek time before
