@@ -1,6 +1,6 @@
 ( function( mw, $ ) { "use strict";
 
-	mw.addKalturaPlugin( ['mw.Tremor'], 'tremor', function( embedPlayer, callback){
+	mw.addVidiunPlugin( ['mw.Tremor'], 'tremor', function( embedPlayer, callback){
 		embedPlayer.tremor = new mw.Tremor( embedPlayer, callback );
 	});
 

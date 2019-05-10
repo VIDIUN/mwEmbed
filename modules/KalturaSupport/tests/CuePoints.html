@@ -30,7 +30,7 @@
 		);
 	};
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script type="text/javascript">	
 var testEventObject = {};
 //we use this round about way of tracking events
@@ -42,14 +42,14 @@ function trackEventForTests( qPoint ) {
 		$( testEventObject ).trigger( 'cueEvent', qPoint );
 	}
 }
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "CuePoints" );
 
-	var kdp = $( '#' + videoId )[0];
+	var vdp = $( '#' + videoId )[0];
 	
 	asyncTest("start cue point", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			$( testEventObject ).bind('preCueEvent', function(event, qPoint){
 				var type = (qPoint.context) ? 'Ad' : 'Code';
 				equal( qPoint.cuePoint.title, "Preroll", "Preroll event sent" );
@@ -57,7 +57,7 @@ function jsKalturaPlayerTest( videoId ){
 				// continue testing
 				start();
 			});
-			kdp.sendNotification('doPlay');
+			vdp.sendNotification('doPlay');
 		});
 	});
 	asyncTest("CuePoint 1 at 5 seconds", function(){
@@ -65,7 +65,7 @@ function jsKalturaPlayerTest( videoId ){
 			equal( qPoint.cuePoint.description, "Code Cue Point", "Code Cue Point event text sent");
 			equal( qPoint.cuePoint.startTime, 3000, "Code Cue Point event sent" );
 			// Finish tests:
-			kdp.sendNotification('doPause');
+			vdp.sendNotification('doPause');
 			start();
 		});		
 	});
@@ -74,12 +74,12 @@ function jsKalturaPlayerTest( videoId ){
 </script>
 </head>
 <body>
-<h2> Cue Points for kdp flash player and html5 player </h2>
+<h2> Cue Points for vdp flash player and html5 player </h2>
 <h4> Preroll from uiConf, other ads from cue points</h4>
 <br /><br />
 
 <div style="float:left">
-<object id="kaltura_player" name="kaltura_player" 
+<object id="vidiun_player" name="vidiun_player" 
 	type="application/x-shockwave-flash" 
 	allowFullScreen="true" allowNetworking="all" 
 	allowScriptAccess="always" 
@@ -87,13 +87,13 @@ function jsKalturaPlayerTest( videoId ){
 	xmlns:dc="http://purl.org/dc/terms/" 
 	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
 	rel="media:video" 
-	resource="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" 
-	data="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy">
+	resource="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" 
+	data="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy">
 	<param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" />
 	<param name="allowScriptAccess" value="always" />
 	<param name="bgcolor" value="#000000" />
 	<param name="flashVars" value="&externalInterfaceDisabled=false&getCuePointsData=true" />
-	<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" />
+	<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" />
 </object>
 </div>
 <div style="float:left;padding-left:20px" >

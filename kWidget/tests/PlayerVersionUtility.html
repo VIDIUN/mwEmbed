@@ -11,16 +11,16 @@
 <script type="text/javascript" src="resources/ace/mode-json.js" charset="utf-8"></script>
 <script>
 // don't show qunit test links
-window.isKalturaDocsIframe = true;
+window.isVidiunDocsIframe = true;
 </script>
 </head>
 <body>
 <h2>Player Version Utility</h2>
 Enables easy management of player version, based on 
-<a target="_new" href="https://github.com/kaltura/mwEmbed/releases">player releases</a>.<br> <br>
+<a target="_new" href="https://github.com/vidiun/mwEmbed/releases">player releases</a>.<br> <br>
 <div class="alert" style="width:600px;"><strong>Warning:</strong> a change to player version or JSON config can break functionality.<br>
 <strong>Warning:</strong> Pre-releases are for testing only, do not use production sites!<br>
-Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">Contact Kaltura Support</a></div>
+Still have doubts? <a href="http://corp.vidiun.com/content/technical-support">Contact Vidiun Support</a></div>
 
 <div id="hostedAuthWidget"></div>
 <br>
@@ -51,7 +51,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 		"closedCaptions": {},
 		"watermark": {
 			"cssClass": "topLeft",
-			"img": "http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png"
+			"img": "http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png"
 		},
 		"logo": {},
 		"infoScreen": {}
@@ -64,7 +64,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 		}
 	],
 	"layout":{
-		"skin": "kdark",
+		"skin": "vdark",
 		"cssFiles":[]
 	}
 }</div>
@@ -98,17 +98,17 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 	updatePlayerReq = {
 		'service': 'uiconf',
 		'action':'update',
-		'uiConf:objectType': 'KalturaUiConf'
+		'uiConf:objectType': 'VidiunUiConf'
 	},
 	aceEditor = null,
 	currentPlayerData = null,
-	kApi = null;
+	vApi = null;
 	
-	kWidget.auth.getWidget( "hostedAuthWidget", function( userObject ){
+	vWidget.auth.getWidget( "hostedAuthWidget", function( userObject ){
 		// create api object: 
-		kApi = new kWidget.api( { 
+		vApi = new vWidget.api( { 
 			'wid': userObject.partnerId, 
-			'ks': userObject.ks,
+			'vs': userObject.vs,
 			'type': 'POST'
 		});
 		showGetPlayerForm();
@@ -131,7 +131,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 				// update the last used: 
 				localStorage[ 'PlayerVersionLastUsed' ] = $('#playerId').val();
 				// display current version. and config mode. 
-				kApi.doRequest( $.extend( {}, getPlayerReq, { 'id': $('#playerId').val() } ), function(data){
+				vApi.doRequest( $.extend( {}, getPlayerReq, { 'id': $('#playerId').val() } ), function(data){
 					if( data.code && data.message ){
 						return showErrorAndRestart( data.message ) ;
 					}
@@ -169,7 +169,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 				// release api is in preview mode: 
 				request.setRequestHeader("Accept", 'application/vnd.github.manifold-preview');
 			},
-			url: "https://api.github.com/repos/kaltura/mwEmbed/releases",
+			url: "https://api.github.com/repos/vidiun/mwEmbed/releases",
 			processData: true,
 			success: function( releases ) {
 				setCache('gitHubReleases', releases);
@@ -200,7 +200,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 		getReleaseNotesHTML( version, releaseNotes, function( resultHTML ){
 			$('#releaseNotes').empty().append(
 				$('<h2>').html('Release Notes for <a target="_new" ' + 
-					'href="https://github.com/kaltura/mwEmbed/releases/tag/' + version +'">' + version + '</a>'),
+					'href="https://github.com/vidiun/mwEmbed/releases/tag/' + version +'">' + version + '</a>'),
 				resultHTML
 			)
 		});
@@ -250,7 +250,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 		$('#html5Url')
 			.val( '/html5/html5lib/' + version + '/mwEmbedLoader.php' );
 		// update player version ( check that its valid url, if not fallback on github check )
-		urlExists( 'http://cdnapi.kaltura.com/' + $('#html5Url').val(), function(exists){
+		urlExists( 'http://cdnapi.vidiun.com/' + $('#html5Url').val(), function(exists){
 			if( exists ){
 				// ok
 				$('#updatePlayerBtn,#html5Url').removeAttr( 'disabled' );
@@ -258,7 +258,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 			}
 			$('#html5Url').val( 'http://kgit.html5video.org/tags/' + version + '/mwEmbedLoader.php' + 
 				'/uiconf_id/' + currentPlayerData.id +
-				'/wid/_' + kApi.wid
+				'/wid/_' + vApi.wid
 			);
 			// else try kgit
 			urlExists( $('#html5Url').val(), function(exists){
@@ -294,7 +294,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 				$("<div>").addClass('alert').text( 'Updating...' )
 			);
 			$saveBtn.hide();
-			kApi.doRequest( $.extend( {}, updatePlayerReq, { 
+			vApi.doRequest( $.extend( {}, updatePlayerReq, { 
 				'id': playerData.id,
 				'uiConf:config': code,
 			}), 
@@ -343,7 +343,7 @@ Still have doubts? <a href="http://corp.kaltura.com/content/technical-support">C
 				})
 			),
 			$('<button type="submit" class="btn btn-default" id="updatePlayerBtn">Update Player Version</button>').click(function(){
-				kApi.doRequest( $.extend( {}, updatePlayerReq, 
+				vApi.doRequest( $.extend( {}, updatePlayerReq, 
 					{ 
 						'id': currentPlayerData.id,
 						'uiConf:html5Url': $('#html5Url').val()

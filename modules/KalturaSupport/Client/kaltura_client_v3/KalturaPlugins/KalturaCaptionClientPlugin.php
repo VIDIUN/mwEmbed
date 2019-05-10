@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetStatus
+class VidiunCaptionAssetStatus
 {
 	const ERROR = -1;
 	const QUEUED = 0;
@@ -50,10 +50,10 @@ class KalturaCaptionAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetOrderBy
+class VidiunCaptionAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -66,18 +66,18 @@ class KalturaCaptionAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionParamsOrderBy
+class VidiunCaptionParamsOrderBy
 {
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionType
+class VidiunCaptionType
 {
 	const SRT = "1";
 	const DFXP = "2";
@@ -85,10 +85,10 @@ class KalturaCaptionType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAsset extends KalturaAsset
+class VidiunCaptionAsset extends VidiunAsset
 {
 	/**
 	 * The Caption Params used to create this Caption Asset
@@ -103,7 +103,7 @@ class KalturaCaptionAsset extends KalturaAsset
 	 * The language of the caption asset content
 	 * 	 
 	 *
-	 * @var KalturaLanguage
+	 * @var VidiunLanguage
 	 */
 	public $language = null;
 
@@ -111,7 +111,7 @@ class KalturaCaptionAsset extends KalturaAsset
 	 * The language of the caption asset content
 	 * 	 
 	 *
-	 * @var KalturaLanguageCode
+	 * @var VidiunLanguageCode
 	 * @readonly
 	 */
 	public $languageCode = null;
@@ -120,7 +120,7 @@ class KalturaCaptionAsset extends KalturaAsset
 	 * Is default caption asset of the entry
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefault = null;
 
@@ -136,7 +136,7 @@ class KalturaCaptionAsset extends KalturaAsset
 	 * The caption format
 	 * 	 
 	 *
-	 * @var KalturaCaptionType
+	 * @var VidiunCaptionType
 	 * @insertonly
 	 */
 	public $format = null;
@@ -145,7 +145,7 @@ class KalturaCaptionAsset extends KalturaAsset
 	 * The status of the asset
 	 * 	 
 	 *
-	 * @var KalturaCaptionAssetStatus
+	 * @var VidiunCaptionAssetStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -154,15 +154,15 @@ class KalturaCaptionAsset extends KalturaAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetListResponse extends KalturaObjectBase
+class VidiunCaptionAssetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCaptionAsset
+	 * @var array of VidiunCaptionAsset
 	 * @readonly
 	 */
 	public $objects;
@@ -179,16 +179,16 @@ class KalturaCaptionAssetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionParams extends KalturaAssetParams
+class VidiunCaptionParams extends VidiunAssetParams
 {
 	/**
 	 * The language of the caption content
 	 * 	 
 	 *
-	 * @var KalturaLanguage
+	 * @var VidiunLanguage
 	 * @insertonly
 	 */
 	public $language = null;
@@ -197,7 +197,7 @@ class KalturaCaptionParams extends KalturaAssetParams
 	 * Is default caption asset of the entry
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefault = null;
 
@@ -213,7 +213,7 @@ class KalturaCaptionParams extends KalturaAssetParams
 	 * The caption format
 	 * 	 
 	 *
-	 * @var KalturaCaptionType
+	 * @var VidiunCaptionType
 	 * @insertonly
 	 */
 	public $format = null;
@@ -230,15 +230,15 @@ class KalturaCaptionParams extends KalturaAssetParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionParamsListResponse extends KalturaObjectBase
+class VidiunCaptionParamsListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCaptionParams
+	 * @var array of VidiunCaptionParams
 	 * @readonly
 	 */
 	public $objects;
@@ -255,10 +255,10 @@ class KalturaCaptionParamsListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCaptionAssetBaseFilter extends KalturaAssetFilter
+abstract class VidiunCaptionAssetBaseFilter extends VidiunAssetFilter
 {
 	/**
 	 * 
@@ -277,7 +277,7 @@ abstract class KalturaCaptionAssetBaseFilter extends KalturaAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCaptionType
+	 * @var VidiunCaptionType
 	 */
 	public $formatEqual = null;
 
@@ -291,7 +291,7 @@ abstract class KalturaCaptionAssetBaseFilter extends KalturaAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCaptionAssetStatus
+	 * @var VidiunCaptionAssetStatus
 	 */
 	public $statusEqual = null;
 
@@ -313,15 +313,15 @@ abstract class KalturaCaptionAssetBaseFilter extends KalturaAssetFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCaptionParamsBaseFilter extends KalturaAssetParamsFilter
+abstract class VidiunCaptionParamsBaseFilter extends VidiunAssetParamsFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaCaptionType
+	 * @var VidiunCaptionType
 	 */
 	public $formatEqual = null;
 
@@ -336,31 +336,31 @@ abstract class KalturaCaptionParamsBaseFilter extends KalturaAssetParamsFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetFilter extends KalturaCaptionAssetBaseFilter
+class VidiunCaptionAssetFilter extends VidiunCaptionAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionParamsFilter extends KalturaCaptionParamsBaseFilter
+class VidiunCaptionParamsFilter extends VidiunCaptionParamsBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetService extends KalturaServiceBase
+class VidiunCaptionAssetService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -369,20 +369,20 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 * Add caption asset
 	 * 
 	 * @param string $entryId 
-	 * @param KalturaCaptionAsset $captionAsset 
-	 * @return KalturaCaptionAsset
+	 * @param VidiunCaptionAsset $captionAsset 
+	 * @return VidiunCaptionAsset
 	 */
-	function add($entryId, KalturaCaptionAsset $captionAsset)
+	function add($entryId, VidiunCaptionAsset $captionAsset)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "captionAsset", $captionAsset->toParams());
-		$this->client->queueServiceActionCall("caption_captionasset", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "captionAsset", $captionAsset->toParams());
+		$this->client->queueServiceActionCall("caption_captionasset", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAsset");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAsset");
 		return $resultObject;
 	}
 
@@ -390,20 +390,20 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 * Update content of caption asset
 	 * 
 	 * @param string $id 
-	 * @param KalturaContentResource $contentResource 
-	 * @return KalturaCaptionAsset
+	 * @param VidiunContentResource $contentResource 
+	 * @return VidiunCaptionAsset
 	 */
-	function setContent($id, KalturaContentResource $contentResource)
+	function setContent($id, VidiunContentResource $contentResource)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "contentResource", $contentResource->toParams());
-		$this->client->queueServiceActionCall("caption_captionasset", "setContent", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "contentResource", $contentResource->toParams());
+		$this->client->queueServiceActionCall("caption_captionasset", "setContent", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAsset");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAsset");
 		return $resultObject;
 	}
 
@@ -411,20 +411,20 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 * Update caption asset
 	 * 
 	 * @param string $id 
-	 * @param KalturaCaptionAsset $captionAsset 
-	 * @return KalturaCaptionAsset
+	 * @param VidiunCaptionAsset $captionAsset 
+	 * @return VidiunCaptionAsset
 	 */
-	function update($id, KalturaCaptionAsset $captionAsset)
+	function update($id, VidiunCaptionAsset $captionAsset)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "captionAsset", $captionAsset->toParams());
-		$this->client->queueServiceActionCall("caption_captionasset", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "captionAsset", $captionAsset->toParams());
+		$this->client->queueServiceActionCall("caption_captionasset", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAsset");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAsset");
 		return $resultObject;
 	}
 
@@ -437,10 +437,10 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function serveByEntryId($entryId, $captionParamId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "captionParamId", $captionParamId);
-		$this->client->queueServiceActionCall("caption_captionasset", "serveByEntryId", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "captionParamId", $captionParamId);
+		$this->client->queueServiceActionCall("caption_captionasset", "serveByEntryId", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -455,10 +455,10 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function getUrl($id, $storageId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "storageId", $storageId);
-		$this->client->queueServiceActionCall("caption_captionasset", "getUrl", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "storageId", $storageId);
+		$this->client->queueServiceActionCall("caption_captionasset", "getUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -471,18 +471,18 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 * Get remote storage existing paths for the asset
 	 * 
 	 * @param string $id 
-	 * @return KalturaRemotePathListResponse
+	 * @return VidiunRemotePathListResponse
 	 */
 	function getRemotePaths($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("caption_captionasset", "getRemotePaths", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("caption_captionasset", "getRemotePaths", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaRemotePathListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunRemotePathListResponse");
 		return $resultObject;
 	}
 
@@ -494,9 +494,9 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function serve($captionAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionAssetId", $captionAssetId);
-		$this->client->queueServiceActionCall("caption_captionasset", "serve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionAssetId", $captionAssetId);
+		$this->client->queueServiceActionCall("caption_captionasset", "serve", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -513,12 +513,12 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function serveWebVTT($captionAssetId, $segmentDuration = 30, $segmentIndex = null, $localTimestamp = 10000)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionAssetId", $captionAssetId);
-		$this->client->addParam($kparams, "segmentDuration", $segmentDuration);
-		$this->client->addParam($kparams, "segmentIndex", $segmentIndex);
-		$this->client->addParam($kparams, "localTimestamp", $localTimestamp);
-		$this->client->queueServiceActionCall("caption_captionasset", "serveWebVTT", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionAssetId", $captionAssetId);
+		$this->client->addParam($vparams, "segmentDuration", $segmentDuration);
+		$this->client->addParam($vparams, "segmentIndex", $segmentIndex);
+		$this->client->addParam($vparams, "localTimestamp", $localTimestamp);
+		$this->client->queueServiceActionCall("caption_captionasset", "serveWebVTT", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -532,9 +532,9 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function setAsDefault($captionAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionAssetId", $captionAssetId);
-		$this->client->queueServiceActionCall("caption_captionasset", "setAsDefault", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionAssetId", $captionAssetId);
+		$this->client->queueServiceActionCall("caption_captionasset", "setAsDefault", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -547,41 +547,41 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param string $captionAssetId 
-	 * @return KalturaCaptionAsset
+	 * @return VidiunCaptionAsset
 	 */
 	function get($captionAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionAssetId", $captionAssetId);
-		$this->client->queueServiceActionCall("caption_captionasset", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionAssetId", $captionAssetId);
+		$this->client->queueServiceActionCall("caption_captionasset", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAsset");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAsset");
 		return $resultObject;
 	}
 
 	/**
 	 * List caption Assets by filter and pager
 	 * 
-	 * @param KalturaAssetFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaCaptionAssetListResponse
+	 * @param VidiunAssetFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunCaptionAssetListResponse
 	 */
-	function listAction(KalturaAssetFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunAssetFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("caption_captionasset", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("caption_captionasset", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAssetListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAssetListResponse");
 		return $resultObject;
 	}
 
@@ -593,9 +593,9 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 	 */
 	function delete($captionAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionAssetId", $captionAssetId);
-		$this->client->queueServiceActionCall("caption_captionasset", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionAssetId", $captionAssetId);
+		$this->client->queueServiceActionCall("caption_captionasset", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -606,12 +606,12 @@ class KalturaCaptionAssetService extends KalturaServiceBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionParamsService extends KalturaServiceBase
+class VidiunCaptionParamsService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -619,19 +619,19 @@ class KalturaCaptionParamsService extends KalturaServiceBase
 	/**
 	 * Add new Caption Params
 	 * 
-	 * @param KalturaCaptionParams $captionParams 
-	 * @return KalturaCaptionParams
+	 * @param VidiunCaptionParams $captionParams 
+	 * @return VidiunCaptionParams
 	 */
-	function add(KalturaCaptionParams $captionParams)
+	function add(VidiunCaptionParams $captionParams)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "captionParams", $captionParams->toParams());
-		$this->client->queueServiceActionCall("caption_captionparams", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "captionParams", $captionParams->toParams());
+		$this->client->queueServiceActionCall("caption_captionparams", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionParams");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionParams");
 		return $resultObject;
 	}
 
@@ -639,18 +639,18 @@ class KalturaCaptionParamsService extends KalturaServiceBase
 	 * Get Caption Params by ID
 	 * 
 	 * @param int $id 
-	 * @return KalturaCaptionParams
+	 * @return VidiunCaptionParams
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("caption_captionparams", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("caption_captionparams", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionParams");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionParams");
 		return $resultObject;
 	}
 
@@ -658,20 +658,20 @@ class KalturaCaptionParamsService extends KalturaServiceBase
 	 * Update Caption Params by ID
 	 * 
 	 * @param int $id 
-	 * @param KalturaCaptionParams $captionParams 
-	 * @return KalturaCaptionParams
+	 * @param VidiunCaptionParams $captionParams 
+	 * @return VidiunCaptionParams
 	 */
-	function update($id, KalturaCaptionParams $captionParams)
+	function update($id, VidiunCaptionParams $captionParams)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "captionParams", $captionParams->toParams());
-		$this->client->queueServiceActionCall("caption_captionparams", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "captionParams", $captionParams->toParams());
+		$this->client->queueServiceActionCall("caption_captionparams", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionParams");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionParams");
 		return $resultObject;
 	}
 
@@ -683,9 +683,9 @@ class KalturaCaptionParamsService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("caption_captionparams", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("caption_captionparams", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -697,59 +697,59 @@ class KalturaCaptionParamsService extends KalturaServiceBase
 	/**
 	 * List Caption Params by filter with paging support (By default - all system default params will be listed too)
 	 * 
-	 * @param KalturaCaptionParamsFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaCaptionParamsListResponse
+	 * @param VidiunCaptionParamsFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunCaptionParamsListResponse
 	 */
-	function listAction(KalturaCaptionParamsFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunCaptionParamsFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("caption_captionparams", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("caption_captionparams", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionParamsListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionParamsListResponse");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionClientPlugin extends KalturaClientPlugin
+class VidiunCaptionClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaCaptionAssetService
+	 * @var VidiunCaptionAssetService
 	 */
 	public $captionAsset = null;
 
 	/**
-	 * @var KalturaCaptionParamsService
+	 * @var VidiunCaptionParamsService
 	 */
 	public $captionParams = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->captionAsset = new KalturaCaptionAssetService($client);
-		$this->captionParams = new KalturaCaptionParamsService($client);
+		$this->captionAsset = new VidiunCaptionAssetService($client);
+		$this->captionParams = new VidiunCaptionParamsService($client);
 	}
 
 	/**
-	 * @return KalturaCaptionClientPlugin
+	 * @return VidiunCaptionClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaCaptionClientPlugin($client);
+		return new VidiunCaptionClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -5,27 +5,27 @@
  * See includes/DefaultSettings.php for a configuration options
  */
 
-// Old kConf path
-$kConfPath = '../../../app/alpha/config/kConf.php';
-if( ! file_exists( $kConfPath ) ) {
-	// New kConf path
-	$kConfPath = '../../../app/infra/kConf.php';
-	if( ! file_exists( $kConfPath ) ) {
-		die('Error: Unable to find kConf.php at ' . $kConfPath);
+// Old vConf path
+$vConfPath = '../../../app/alpha/config/vConf.php';
+if( ! file_exists( $vConfPath ) ) {
+	// New vConf path
+	$vConfPath = '../../../app/infra/vConf.php';
+	if( ! file_exists( $vConfPath ) ) {
+		die('Error: Unable to find vConf.php at ' . $vConfPath);
 	}
 }
-// Load kaltura configuration file
-require_once( $kConfPath );
+// Load vidiun configuration file
+require_once( $vConfPath );
 
-$kConf = new kConf();
+$vConf = new vConf();
 
-// Kaltura HTML5lib Version
-$wgKalturaVersion = basename(getcwd()); // Gets the version by the folder name
+// Vidiun HTML5lib Version
+$wgVidiunVersion = basename(getcwd()); // Gets the version by the folder name
 
-// The default Kaltura service url:
-$wgKalturaServiceUrl = wgGetUrl('cdn_api_host');
-// Default Kaltura CDN url:
-$wgKalturaCDNUrl = wgGetUrl('cdn_host');
+// The default Vidiun service url:
+$wgVidiunServiceUrl = wgGetUrl('cdn_api_host');
+// Default Vidiun CDN url:
+$wgVidiunCDNUrl = wgGetUrl('cdn_host');
 // Default Stats URL
 $wgKalturaStatsServiceUrl = wgGetUrl('stats_host');
 // Default Live Stats URL
@@ -44,42 +44,42 @@ if( $wgHTTPProtocol == 'https' ){
 }
 
 // Default Asset CDN Path (used in ResouceLoader.php):
-$wgCDNAssetPath = $wgKalturaCDNUrl;
+$wgCDNAssetPath = $wgVidiunCDNUrl;
 
-// Default Kaltura Cache Path
-$wgScriptCacheDirectory = $kConf->get('cache_root_path') . '/html5/' . $wgKalturaVersion;
+// Default Vidiun Cache Path
+$wgScriptCacheDirectory = $vConf->get('cache_root_path') . '/html5/' . $wgVidiunVersion;
 
 if (strpos($_SERVER["HTTP_HOST"], "kaltura.com")){
 	$wgLoadScript = $wgKalturaServiceUrl . '/html5/html5lib/' . $wgKalturaVersion . '/load.php';
 	$wgResourceLoaderUrl = $wgLoadScript;
 }
 
-// Salt for proxy the user IP address to Kaltura API
-if( $kConf->hasParam('remote_addr_header_salt') ) {
-	$wgKalturaRemoteAddressSalt = $kConf->get('remote_addr_header_salt');
+// Salt for proxy the user IP address to Vidiun API
+if( $vConf->hasParam('remote_addr_header_salt') ) {
+	$wgVidiunRemoteAddressSalt = $vConf->get('remote_addr_header_salt');
 }
 
-// Disable Apple HLS if defined in kConf
-if( $kConf->hasParam('use_apple_adaptive') ) {
-	$wgKalturaUseAppleAdaptive = $kConf->get('use_apple_adaptive');
+// Disable Apple HLS if defined in vConf
+if( $vConf->hasParam('use_apple_adaptive') ) {
+	$wgVidiunUseAppleAdaptive = $vConf->get('use_apple_adaptive');
 }
 
-// Get Kaltura Supported API Features
-if( $kConf->hasParam('features') ) {
-	$wgKalturaApiFeatures = $kConf->get('features');
+// Get Vidiun Supported API Features
+if( $vConf->hasParam('features') ) {
+	$wgVidiunApiFeatures = $vConf->get('features');
 }
 
 // Allow Iframe to connect remote service
-$wgKalturaAllowIframeRemoteService = true;
+$wgVidiunAllowIframeRemoteService = true;
 
 // Set debug for true (testing only)
 $wgEnableScriptDebug = false;
 
 // Get PlayReady License URL
-if( $kConf->hasMap('playReady') ) {
-	$playReadyMap = $kConf->getMap('playReady');
+if( $vConf->hasMap('playReady') ) {
+	$playReadyMap = $vConf->getMap('playReady');
 	if($playReadyMap)
-		$wgKalturaLicenseServerUrl = $playReadyMap['license_server_url'];
+		$wgVidiunLicenseServerUrl = $playReadyMap['license_server_url'];
 }
 
 // Get PlayReady License URL
@@ -99,9 +99,9 @@ if( $kConf->hasParam('enableEmbedServicesRouting') ) {
 
 // A helper function to get full URL of host
 function wgGetUrl( $hostKey = null ) {
-	global $wgHTTPProtocol, $wgServerPort, $kConf;
-	if( $hostKey && $kConf->hasParam($hostKey) ) {
-		return $wgHTTPProtocol . '://' . $kConf->get($hostKey) . $wgServerPort;
+	global $wgHTTPProtocol, $wgServerPort, $vConf;
+	if( $hostKey && $vConf->hasParam($hostKey) ) {
+		return $wgHTTPProtocol . '://' . $vConf->get($hostKey) . $wgServerPort;
 	}
 	return null;
 }

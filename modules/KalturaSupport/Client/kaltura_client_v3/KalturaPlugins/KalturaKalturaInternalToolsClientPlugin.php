@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaInternalToolsSession extends KalturaObjectBase
+class VidiunInternalToolsSession extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -65,7 +65,7 @@ class KalturaInternalToolsSession extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaSessionType
+	 * @var VidiunSessionType
 	 */
 	public $type = null;
 
@@ -102,32 +102,32 @@ class KalturaInternalToolsSession extends KalturaObjectBase
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
+class VidiunVidiunInternalToolsSystemHelperService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * KS from Secure String
+	 * VS from Secure String
 	 * 
 	 * @param string $str 
-	 * @return KalturaInternalToolsSession
+	 * @return VidiunInternalToolsSession
 	 */
 	function fromSecureString($str)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "str", $str);
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "fromSecureString", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "str", $str);
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "fromSecureString", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaInternalToolsSession");
+		$this->client->validateObjectType($resultObject, "VidiunInternalToolsSession");
 		return $resultObject;
 	}
 
@@ -139,9 +139,9 @@ class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
 	 */
 	function iptocountry($remote_addr)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "remote_addr", $remote_addr);
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "iptocountry", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "remote_addr", $remote_addr);
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "iptocountry", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -157,8 +157,8 @@ class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
 	 */
 	function getRemoteAddress()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("kalturainternaltools_kalturainternaltoolssystemhelper", "getRemoteAddress", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("vidiuninternaltools_vidiuninternaltoolssystemhelper", "getRemoteAddress", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -168,37 +168,37 @@ class KalturaKalturaInternalToolsSystemHelperService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaKalturaInternalToolsClientPlugin extends KalturaClientPlugin
+class VidiunVidiunInternalToolsClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaKalturaInternalToolsSystemHelperService
+	 * @var VidiunVidiunInternalToolsSystemHelperService
 	 */
-	public $KalturaInternalToolsSystemHelper = null;
+	public $VidiunInternalToolsSystemHelper = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->KalturaInternalToolsSystemHelper = new KalturaKalturaInternalToolsSystemHelperService($client);
+		$this->VidiunInternalToolsSystemHelper = new VidiunVidiunInternalToolsSystemHelperService($client);
 	}
 
 	/**
-	 * @return KalturaKalturaInternalToolsClientPlugin
+	 * @return VidiunVidiunInternalToolsClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaKalturaInternalToolsClientPlugin($client);
+		return new VidiunVidiunInternalToolsClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{
 		$services = array(
-			'KalturaInternalToolsSystemHelper' => $this->KalturaInternalToolsSystemHelper,
+			'VidiunInternalToolsSystemHelper' => $this->VidiunInternalToolsSystemHelper,
 		);
 		return $services;
 	}
@@ -208,7 +208,7 @@ class KalturaKalturaInternalToolsClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'KalturaInternalTools';
+		return 'VidiunInternalTools';
 	}
 }
 

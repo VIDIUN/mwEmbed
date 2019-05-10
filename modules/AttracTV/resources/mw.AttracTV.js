@@ -14,11 +14,11 @@ mw.AttracTV.prototype = {
 		this.embedPlayer = embedPlayer;
 		this.bindPlayer();
 		
-		/* var kdp = document.getElementById( "myVideoTarget" );
-		kdp.sendNotification( "changeMedia", { 'entryId' : "1_hjbaye7l" });
+		/* var vdp = document.getElementById( "myVideoTarget" );
+		vdp.sendNotification( "changeMedia", { 'entryId' : "1_hjbaye7l" });
 		*/
 		
-		mw.setConfig('Kaltura.LeadWithHTML5', true);
+		mw.setConfig('Vidiun.LeadWithHTML5', true);
 
 		callback();
 	},
@@ -27,9 +27,9 @@ mw.AttracTV.prototype = {
 		
 		var _this = this;
 		
-		kWidget.appendScriptUrl("http://services.attractv.net/newtvhive/rest/asset/atvloader.js", function() {
-		//kWidget.appendScriptUrl("http://www.atv.local/ATV5/Trunk/atv/js/atvloader.js", function() {
-			ATV.KalturaPlayer = _this.embedPlayer;
+		vWidget.appendScriptUrl("http://services.attractv.net/newtvhive/rest/asset/atvloader.js", function() {
+		//vWidget.appendScriptUrl("http://www.atv.local/ATV5/Trunk/atv/js/atvloader.js", function() {
+			ATV.VidiunPlayer = _this.embedPlayer;
 			ATV.init(_this.getConfig("publisherKey"),"http://services.attractv.net/newtvhive/cxf",_this.getConfig("barId"),"ATVBox");
 		}, document);
 	},
@@ -75,7 +75,7 @@ mw.AttracTV.prototype = {
 	
 	getConfig: function( propId ){
 		// return the attribute value
-		return this.embedPlayer.getKalturaConfig( 'AttracTV', propId );
+		return this.embedPlayer.getVidiunConfig( 'AttracTV', propId );
 	}
 }
 

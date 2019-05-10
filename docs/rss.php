@@ -1,11 +1,11 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\n";
 // Path to local git binnary
-$kgGitBinPath = '/usr/bin/git';
+$vgGitBinPath = '/usr/bin/git';
 
 /* get the config */
 chdir( dirname( __FILE__ ) . '/../' );
 require_once( 'includes/DefaultSettings.php' );
-require_once( 'modules/KalturaSupport/KalturaCommon.php' );
+require_once( 'modules/VidiunSupport/VidiunCommon.php' );
 
 $cache = $container['cache_helper'];
 /* check the cache */
@@ -27,9 +27,9 @@ function generate_docs_rss(){
 ?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
-	<title>Kaltura Feature Hub</title>
+	<title>Vidiun Feature Hub</title>
 	<link><?php echo $baseUrl ?></link>
-	<description>Demos, Configuration Options and Tools for Integrating the Kaltura Player</description>
+	<description>Demos, Configuration Options and Tools for Integrating the Vidiun Player</description>
 <?php 
 $featureSet = include( 'featureList.php' );
 foreach( $featureSet as $featureCategoryKey => $featureCategory ){
@@ -50,7 +50,7 @@ foreach( $featureSet as $featureCategoryKey => $featureCategory ){
 				$authorName = trim( execGit( 'log -1 --format="%an" -- ' . $filePath ) );
 			} else {
 				$dateHR = date( DATE_RFC822, filemtime($filePath) );
-				$authorName = "kaltura";
+				$authorName = "vidiun";
 			}
 			echo "\n";
 			?>
@@ -98,12 +98,12 @@ function parseTestPage( $filePath ){
 }
 
 function execGit( $args ){
-	global $wgGitRepoPath, $kgGitBinPath;
+	global $wgGitRepoPath, $vgGitBinPath;
 
 	// Make sure we are "in the repo" dir:
 	if( is_dir( $wgGitRepoPath ) ){
 		chdir( $wgGitRepoPath );
 	}
-	$gitOutput = shell_exec( $kgGitBinPath . ' ' . $args );
+	$gitOutput = shell_exec( $vgGitBinPath . ' ' . $args );
 	return $gitOutput;
 }

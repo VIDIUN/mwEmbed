@@ -19,7 +19,7 @@
 	selectedOverIcon="unlike"
 	selectedDownIcon="unlike"
 	selectedDisabledIcon="unlike"
-	kClick="sendNotification('doLike')"
+	vClick="sendNotification('doLike')"
 	color1="11184810"
 	color2="16777215"
 	color3="16777215"
@@ -63,7 +63,7 @@
 					'w': 28,
 					'o': function( ctrlObj ) {
 						var $textButton = $( '<div />' )
-							.attr( 'title', embedPlayer.getKalturaConfig( 'likeButton', 'tooltip' ) )
+							.attr( 'title', embedPlayer.getVidiunConfig( 'likeButton', 'tooltip' ) )
 							.addClass( "ui-state-default ui-corner-all ui-icon_link rButton like-btn" )
 							.append( $( '<span />' ).addClass( "ui-icon ui-icon-like-on" ) )
 							.buttonHover()
@@ -83,10 +83,10 @@
 			var _this = this;
 			var embedPlayer = this.embedPlayer;
 
-			_this.getKalturaClient().doRequest( {
+			_this.getVidiunClient().doRequest( {
 				'service' : 'like_like',
 				'action' : 'checkLikeExists',
-				'entryId' : embedPlayer.kentryid
+				'entryId' : embedPlayer.ventryid
 			}, function( data ) {
 				var like = false;
 				if ( data === true ) {
@@ -109,11 +109,11 @@
 				$likeButton.removeClass( "ui-icon-like-on ui-icon-like-off" );
 				if ( like ) {
 					$likeButton.addClass( "ui-icon-like-off" );
-					$likeButton.parent().attr( 'title', embedPlayer.getKalturaConfig( 'likeButton', 'selectedTooltip' ) );
+					$likeButton.parent().attr( 'title', embedPlayer.getVidiunConfig( 'likeButton', 'selectedTooltip' ) );
 				}
 				else {
 					$likeButton.addClass( "ui-icon-like-on" );
-					$likeButton.parent().attr( 'title', embedPlayer.getKalturaConfig( 'likeButton', 'tooltip' ) );
+					$likeButton.parent().attr( 'title', embedPlayer.getVidiunConfig( 'likeButton', 'tooltip' ) );
 				}
 				$likeButton.unbind( 'click' );
 				$likeButton.click( function() {
@@ -133,10 +133,10 @@
 			if ( !like ) {
 				action = 'unlike';
 			}
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'like_like',
 				'action' : action,
-				'entryId' : embedPlayer.kentryid
+				'entryId' : embedPlayer.ventryid
 			}, function( data ) {
 				if ( data === true ) {
 					embedPlayer.triggerHelper( 'likeSubmitted', like );
@@ -147,16 +147,16 @@
 			} );
 
 		},
-		getKalturaClient: function() {
-			if( ! this.kClient ) {
-				this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+		getVidiunClient: function() {
+			if( ! this.vClient ) {
+				this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 			}
-			return this.kClient;
+			return this.vClient;
 		}
 	 };
 
 	// Check if the like plugin is enabled:
-	mw.addKalturaPlugin( 'likeAPI', function( embedPlayer, callback ){
+	mw.addVidiunPlugin( 'likeAPI', function( embedPlayer, callback ){
 		likeAPI.init( embedPlayer );
 		// Continue player build-out
 		callback();

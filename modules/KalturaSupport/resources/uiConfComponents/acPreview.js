@@ -8,10 +8,10 @@ var acPreview = function( embedPlayer ){
 	 * Trigger an access control preview dialog
 	 */
 	function acEndPreview(){
-		mw.log( 'KWidgetSupport:: acEndPreview >' );
-		$( embedPlayer ).trigger( 'KalturaSupport_FreePreviewEnd' );
+		mw.log( 'VWidgetSupport:: acEndPreview >' );
+		$( embedPlayer ).trigger( 'VidiunSupport_FreePreviewEnd' );
 		// Don't run normal onend action:
-		mw.log( 'KWidgetSupport:: KalturaSupport_FreePreviewEnd set onDoneInterfaceFlag = false' );
+		mw.log( 'VWidgetSupport:: VidiunSupport_FreePreviewEnd set onDoneInterfaceFlag = false' );
 		embedPlayer.onDoneInterfaceFlag = false;
 		var closeAcMessage = function(){
 			$( embedPlayer ).unbind( '.acpreview' );
@@ -23,11 +23,11 @@ var acPreview = function( embedPlayer ){
 		// Display player dialog
 		// TODO i8ln!!
 		// TODO migrate to displayAlert call
-		if( embedPlayer.getKalturaConfig('', 'disableAlerts' ) !== true ){
+		if( embedPlayer.getVidiunConfig('', 'disableAlerts' ) !== true ){
 			embedPlayer.layoutBuilder.displayMenuOverlay(
 				$('<div />').append(
-					$('<h3 />').append( embedPlayer.getKalturaMsg('FREE_PREVIEW_END_TITLE') ),
-					$('<span />').text( embedPlayer.getKalturaMsg('FREE_PREVIEW_END') ),
+					$('<h3 />').append( embedPlayer.getVidiunMsg('FREE_PREVIEW_END_TITLE') ),
+					$('<span />').text( embedPlayer.getVidiunMsg('FREE_PREVIEW_END') ),
 					$('<br />'),$('<br />'),
 					$('<button />').attr({'type' : "button"})
 					.addClass( "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" )
@@ -43,7 +43,7 @@ var acPreview = function( embedPlayer ){
 	// clear out any old bindings:
 	$(embedPlayer).unbind( '.acPreview' );
 
-	var ac  = embedPlayer.kalturaContextData;
+	var ac  = embedPlayer.vidiunContextData;
 	// Check for preview access control and add special onEnd binding:
 	if( ac.isAdmin === false && ac.isSessionRestricted === true && ac.previewLength && ac.previewLength != -1 ){
 		$( embedPlayer ).bind('postEnded.acPreview', function(){
@@ -64,8 +64,8 @@ var acPreview = function( embedPlayer ){
 };
 
 //Check for new Embed Player events:
-mw.addKalturaConfCheck( function( embedPlayer, callback ){
-	if( embedPlayer.kalturaContextData ){
+mw.addVidiunConfCheck( function( embedPlayer, callback ){
+	if( embedPlayer.vidiunContextData ){
 		acPreview( embedPlayer );
 	}
 	callback();
