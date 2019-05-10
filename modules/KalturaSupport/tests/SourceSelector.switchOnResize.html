@@ -45,16 +45,16 @@ Demonstrate switching sources as player changes sizes.
 				"hover": false
 			}
 		}, 
-		"confFilePath": "{libPath}/modules/KalturaSupport/tests/confFiles/jsonConfig.json",
+		"confFilePath": "{libPath}/modules/VidiunSupport/tests/confFiles/jsonConfig.json",
 		'readyCallback':function(playerId){
-			var kdp = $('#' + playerId )[0];
+			var vdp = $('#' + playerId )[0];
 			$('<div>').append(
 				$('<a href="#">hide</a>').click(function(){
-					kdp.setKDPAttribute( 'sourceSelector', 'visible', false);
+					vdp.setVDPAttribute( 'sourceSelector', 'visible', false);
 				}),
 				$('<span>').text(' / '),
 				$('<a href="#">show</a>').click(function(){
-					kdp.setKDPAttribute( 'sourceSelector', 'visible', true);
+					vdp.setVDPAttribute( 'sourceSelector', 'visible', true);
 				}),
 				$('<span>').text( ' source selector ')
 			).insertAfter( '#sizes' )

@@ -453,14 +453,14 @@
             var requestObj = {
                 'service' : service,
                 'action' : 'islive',
-                'id' : embedPlayer.kentryid,
+                'id' : embedPlayer.ventryid,
                 'protocol' : protocol,
-                'partnerId': embedPlayer.kpartnerid
+                'partnerId': embedPlayer.vpartnerid
             };
             if ( mw.isIOS8_9() ) {
                 requestObj.rnd = Math.random();
             }
-			_this.getKalturaClient().doRequest( requestObj, function( data ) {
+			_this.getVidiunClient().doRequest( requestObj, function( data ) {
 				var onAirStatus = false;
 				if ( data === true ) {
 					onAirStatus = true;
@@ -469,7 +469,7 @@
 					callback( onAirStatus );
 				}
 				embedPlayer.triggerHelper( 'liveStreamStatusUpdate', { 'onAirStatus' : onAirStatus } );
-			},mw.getConfig("SkipKSOnIsLiveRequest"),function(){
+			},mw.getConfig("SkipVSOnIsLiveRequest"),function(){
 				mw.log("Error occur while trying to check onAir status");
 				embedPlayer.triggerHelper( 'liveStreamStatusUpdate', { 'onAirStatus' : false } );
 			} );

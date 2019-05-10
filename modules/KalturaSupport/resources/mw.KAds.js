@@ -3,12 +3,12 @@
  */
 ( function( mw, $ ) { "use strict";
 
-	mw.KAds = function( embedPlayer, callback) {
+	mw.VAds = function( embedPlayer, callback) {
 		// Create a Player Manager
 		return this.init( embedPlayer, callback );
 	};
 
-	mw.KAds.prototype = {
+	mw.VAds.prototype = {
 		// The ad types
 		namedAdTimelineTypes : [ 'preroll', 'postroll', 'midroll', 'overlay' ],
 		// Ad attribute map
@@ -18,7 +18,7 @@
 		},
 		displayedCuePoints: [],
 
-		bindPostfix: '.KAds',
+		bindPostfix: '.VAds',
 		confPrefix: 'vast',
 		config:{},
 
@@ -42,7 +42,7 @@
 			_this.adLoader = new mw.AdLoader( embedPlayer );
 
 			// Setup the ad player:
-			_this.adPlayer = new mw.KAdPlayer( embedPlayer );
+			_this.adPlayer = new mw.VAdPlayer( embedPlayer );
 
 			// Clear any existing bindings:
 			_this.destroy();
@@ -60,8 +60,8 @@
 
 			// We can add this binding here, because we will always have vast in the uiConf when having cue points
 			// Catch Ads from adOpportunity event
-			if( embedPlayer.getKalturaConfig('vast', 'trackCuePoints') === true ) {
-				$( embedPlayer ).bind('KalturaSupport_AdOpportunity' + _this.bindPostfix, function( event, cuePointWrapper ) {
+			if( embedPlayer.getVidiunConfig('vast', 'trackCuePoints') === true ) {
+				$( embedPlayer ).bind('VidiunSupport_AdOpportunity' + _this.bindPostfix, function( event, cuePointWrapper ) {
 					// Check for  protocolType == 1 ( type = vast )
 					if( cuePointWrapper.cuePoint.protocolType == 1 ){
 						_this.handleAdOpportunity( cuePointWrapper );
@@ -74,7 +74,7 @@
 			}
 
 			// Disable seek for VAST in iPhone
-			if( !embedPlayer.getKalturaConfig('vast', 'allowSeekWithNativeControls') && mw.isIphone() ) {
+			if( !embedPlayer.getVidiunConfig('vast', 'allowSeekWithNativeControls') && mw.isIphone() ) {
 				$( embedPlayer ).bind('onAdOpen' + _this.bindPostfix, function() {
 					if( !_this.seekIntervalID ) {
 						_this.seekIntervalID = _this.seekIntervalTrigger();
@@ -117,12 +117,12 @@
 			}
 			// load the Ads from uiConf
 			_this.loadAds( function(){
-				mw.log( "KAds::All ads have been loaded" );
+				mw.log( "VAds::All ads have been loaded" );
 				callback();
 			});
 			// disable overlays on native devices
 			if (embedPlayer.useNativePlayerControls()){
-				_this.embedPlayer.setKalturaConfig('vast', 'supportOverlays', false);
+				_this.embedPlayer.setVidiunConfig('vast', 'supportOverlays', false);
 			}
 		},
 		handleAdsOnPlay: function( embedPlayer ){
@@ -168,12 +168,12 @@
 		 * @return
 		 */
 		getConfig: function( attr ){
-			return this.embedPlayer.getKalturaConfig( 'vast', attr );
+			return this.embedPlayer.getVidiunConfig( 'vast', attr );
 		},
 
 		handleAdOpportunity: function( cuePointWrapper ) {
 			var _this = this;
-			switch( _this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper ) ) {
+			switch( _this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper ) ) {
 				case 'preroll':
 				case 'postroll':
 					_this.loadAndAddToSequence( cuePointWrapper );
@@ -189,7 +189,7 @@
 		loadAndAddToSequence: function( cuePointWrapper ) {
 			var _this = this;
 			var cuePoint = cuePointWrapper.cuePoint;
-			var adType = _this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper );
+			var adType = _this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper );
 
 			// Check for empty ad:
 			if( !cuePoint.sourceUrl || $.trim( cuePoint.sourceUrl ) === '' ) {
@@ -230,7 +230,7 @@
 				return;
 			}
 			var cuePoint = cuePointWrapper.cuePoint;
-			var adType = this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper );
+			var adType = this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper );
 			var adDuration = Math.round( cuePoint.duration / 1000);
 
 			// Check if cue point already displayed
@@ -243,7 +243,7 @@
 			// Trigger midSequenceStart event (TODO: should moved to AdTimeline)
 			$( embedPlayer ).trigger('midSequenceStart');
 
-			mw.log('kAds::loadAndDisplayAd:: load ' + adType + ', duration: ' + adDuration, cuePoint);
+			mw.log('vAds::loadAndDisplayAd:: load ' + adType + ', duration: ' + adDuration, cuePoint);
 
 			// Load adTimeline
 			if (!_this.embedPlayer.adTimeline) {
@@ -327,7 +327,7 @@
 
 								// on iOS player we can set current time only while playing
 								if( mw.isIOS() ) {
-									mw.log( "KAds:: doneCallback:: if iOS first play then setCurrentTime");
+									mw.log( "VAds:: doneCallback:: if iOS first play then setCurrentTime");
 									embedPlayer.play();
 								}
 
@@ -391,7 +391,7 @@
 								_this.addSequenceProxyBinding( adType, adConfigSet, _this.getSequenceIndex( adType ) );
 							}
 						}
-						if( adType == 'overlay' && _this.embedPlayer.getKalturaConfig('vast', 'supportOverlays') !== false ){
+						if( adType == 'overlay' && _this.embedPlayer.getVidiunConfig('vast', 'supportOverlays') !== false ){
 							_this.addOverlayBinding( adConfigSet[ adType ] );
 						}
 					}
@@ -406,7 +406,7 @@
 		 */
 		setPersistentConfig: function( key, value ) {
 			// check if we are storing ads session:
-			if( this.embedPlayer.getKalturaConfig( this.confPrefix, 'storeSession' ) ){
+			if( this.embedPlayer.getVidiunConfig( this.confPrefix, 'storeSession' ) ){
 				// no object usage for this
 				$.cookie( this.confPrefix + '_' + key, value, {path: '/'} );
 			}
@@ -422,7 +422,7 @@
 		},
 		getPersistentConfig: function( attr ) {
 			// check if we are storing ads session
-			if( this.embedPlayer.getKalturaConfig( this.confPrefix, 'storeSession' ) ){
+			if( this.embedPlayer.getVidiunConfig( this.confPrefix, 'storeSession' ) ){
 				return $.cookie( this.confPrefix + '_' + attr );
 			}
 
@@ -517,7 +517,7 @@
 				return this.getConfig( adKey );
 			}
 			// else get raw and evaluate manually:
-			var rawAdUrl = this.embedPlayer.getRawKalturaConfig( 'vast', adKey );
+			var rawAdUrl = this.embedPlayer.getRawVidiunConfig( 'vast', adKey );
 			return this.embedPlayer.evaluate( rawAdUrl );
 		},
 		addOverlayBinding: function( overlayConfig ){
@@ -525,7 +525,7 @@
 			var embedPlayer = this.embedPlayer;
 			var startOvelrayDisplayed = false;
 			var lastDisplay = 0;
-			var timeout = this.embedPlayer.getKalturaConfig( 'vast', 'timeout' );
+			var timeout = this.embedPlayer.getVidiunConfig( 'vast', 'timeout' );
 
 			// turn start time from string to number
 			timeout = parseInt( timeout );
@@ -542,7 +542,7 @@
 					overlayConfig,
 					function(){
 						startOvelrayDisplayed = false;
-						mw.log("KAds::overlay done");
+						mw.log("VAds::overlay done");
 					},
 					timeout
 				)
@@ -552,12 +552,12 @@
 				if( (embedPlayer.currentTime > overlayConfig.start) && (embedPlayer.currentTime < overlayConfig.end) && !startOvelrayDisplayed && !embedPlayer.evaluate('{sequenceProxy.isInSequence}') ){
 					lastDisplay = embedPlayer.currentTime;
 					startOvelrayDisplayed = true;
-					mw.log("KAds::displayOverlay::startOvelrayDisplayed " + startOvelrayDisplayed)
+					mw.log("VAds::displayOverlay::startOvelrayDisplayed " + startOvelrayDisplayed)
 					displayOverlay();
 				}
 				if( startOvelrayDisplayed && embedPlayer.currentTime > ( lastDisplay + parseInt( overlayConfig.frequency ) ) && !embedPlayer.evaluate('{sequenceProxy.isInSequence}') ){
 					// reset the lastDisplay time:
-					mw.log("KAds::displayOverlay::overlayConfig.frequency ct:" +embedPlayer.currentTime + ' > ' + ( lastDisplay + parseInt( overlayConfig.frequency) ) )
+					mw.log("VAds::displayOverlay::overlayConfig.frequency ct:" +embedPlayer.currentTime + ' > ' + ( lastDisplay + parseInt( overlayConfig.frequency) ) )
 					displayOverlay();
 					lastDisplay =  embedPlayer.currentTime;
 				}
@@ -573,9 +573,9 @@
 			};
 
 			// Setup local pointer:
-			var notice = embedPlayer.getRawKalturaConfig('noticeMessage');
-			var skipBtn = embedPlayer.getRawKalturaConfig('skipBtn');
-			var skipNotice = embedPlayer.getRawKalturaConfig('skipNotice');
+			var notice = embedPlayer.getRawVidiunConfig('noticeMessage');
+			var skipBtn = embedPlayer.getRawVidiunConfig('skipBtn');
+			var skipNotice = embedPlayer.getRawVidiunConfig('skipNotice');
 			// Add notice if present
 			if( notice && notice['plugin'] !== false){
 				config.notice = {
@@ -628,7 +628,7 @@
 					loadQueueCount++;
 					// Load and parse the adXML into displayConf format
 					_this.adLoader.load( _this.getAdUrl( adType ) , function( adDisplayConf ){
-						mw.log("KalturaAds loaded: " + adType );
+						mw.log("VidiunAds loaded: " + adType );
 						loadQueueCount--;
 						addAdCheckLoadDone( adType,  $.extend({}, _this.getBaseAdConf( adType ), adDisplayConf ));
 					},

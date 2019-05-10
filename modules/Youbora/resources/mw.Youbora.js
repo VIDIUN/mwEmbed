@@ -6,7 +6,7 @@
 	 * http://support.youbora.com/hc/en-us/article_attachments/201042582/Youbora_Analytics_-_Player_Plugin_Open_REST_API_-_v2.1.0.pdf
 	 */
 	
-	mw.PluginManager.add( 'youbora', mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'youbora', mw.VBasePlugin.extend( {
 
 		defaultConfig: {
 			"contentMetadata": {
@@ -33,7 +33,7 @@
 			// default custom params: 
 			"param1": "{playerStatusProxy.loadTime}",
 			// player id
-			"param2": "{configProxy.kw.uiconfid}"
+			"param2": "{configProxy.vw.uiconfid}"
 		},
 		// the view index is incremented as users views multiple clips in a given play session.
 		viewIndex: 0,
@@ -167,7 +167,7 @@
 			var paramObj = {};
 			for( var i = 1; i < 10; i++ ){
 				// see if the param config is populated ( don't use getConfig evaluated value, as it could evaluate to false ) 
-				if( this.embedPlayer.getRawKalturaConfig( "youbora", "param" + i ) ){
+				if( this.embedPlayer.getRawVidiunConfig( "youbora", "param" + i ) ){
 					paramObj[ "param" + i ] = this.getConfig( "param" + i );
 				}
 			}
@@ -373,7 +373,7 @@
 			return parms;
 		},
 		getPluginVersion:function(){
-			var playerVersion = 'kaltura-player-v' + MWEMBED_VERSION;
+			var playerVersion = 'vidiun-player-v' + MWEMBED_VERSION;
 			return this.getConfig('youboraVersion') + '_' + playerVersion;
 		},
 		hanldeQueue: function(){

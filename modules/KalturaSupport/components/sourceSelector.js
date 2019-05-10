@@ -92,7 +92,7 @@
 						_this.updateLayoutTimout = setTimeout(function() {
 							_this.inUpdateLayout = false;
 						},1000);
-						//if we're working with kplayer - mp4 can't be seeked - so disable this feature
+						//if we're working with vplayer - mp4 can't be seeked - so disable this feature
 						//this only effect native for now
 						if (_this.embedPlayer.instanceOf === "Native" && !_this.embedPlayer.isInSequence() ) {
 							// TODO add additional logic for "auto" where multiple bitrates
@@ -266,7 +266,7 @@
             }
 
             if ( this.getPlayer().streamerType != "http" && !this.getPlayer().isPlaying() ){
-                if(this.getPlayer().streamerType !== "hls" && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('kplayer')){ //If flash disabled, player fallback to http progressive, but the streamerType might still be hdnetwork
+                if(this.getPlayer().streamerType !== "hls" && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('vplayer')){ //If flash disabled, player fallback to http progressive, but the streamerType might still be hdnetwork
                     return true;
                 }
                 this.addAutoToMenu();

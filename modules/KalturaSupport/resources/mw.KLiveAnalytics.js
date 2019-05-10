@@ -4,7 +4,7 @@
 ( function( mw, $ ) {
 	"use strict";
 
-	mw.PluginManager.add( 'liveAnalytics' , mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'liveAnalytics' , mw.VBasePlugin.extend( {
 
 			defaultConfig: {
 				'forceLoad': false
@@ -65,10 +65,10 @@
 				        _this.currentBitRate = -1;
 						_this.addBindings();
 				        if (_this.embedPlayer &&
-					        _this.embedPlayer.kalturaContextData &&
-					        _this.embedPlayer.kalturaContextData.flavorAssets &&
-					        _this.embedPlayer.kalturaContextData.flavorAssets.length === 1){
-					        _this.currentBitRate = _this.embedPlayer.kalturaContextData.flavorAssets[0].bitrate;
+					        _this.embedPlayer.vidiunContextData &&
+					        _this.embedPlayer.vidiunContextData.flavorAssets &&
+					        _this.embedPlayer.vidiunContextData.flavorAssets.length === 1){
+					        _this.currentBitRate = _this.embedPlayer.vidiunContextData.flavorAssets[0].bitrate;
 				        }
 					}
 				} );
@@ -155,7 +155,7 @@
 					return;
 				}
 				_this.isLiveEventsOn = true;
-				_this.kClient = mw.kApiGetPartnerClient( _this.embedPlayer.kwidgetid );
+				_this.vClient = mw.vApiGetPartnerClient( _this.embedPlayer.vwidgetid );
 				_this.monitorIntervalObj.cancel = false;
 				if ( _this.firstPlay ){
 					_this.sendLiveAnalytics();
@@ -169,13 +169,13 @@
 			sendLiveAnalytics : function(){
 				var _this = this;
 				_this.calculateBuffer(true);
-				_this.kClient = mw.kApiGetPartnerClient( _this.embedPlayer.kwidgetid );
+				_this.vClient = mw.vApiGetPartnerClient( _this.embedPlayer.vwidgetid );
 				if ( _this.embedPlayer.isMulticast && $.isFunction( _this.embedPlayer.getMulticastBitrate ) ) {
 					_this.currentBitRate = _this.embedPlayer.getMulticastBitrate();
 				}
 				var liveStatsEvent = {
-					'entryId'     : _this.embedPlayer.kentryid,
-					'partnerId'   : _this.embedPlayer.kpartnerid,
+					'entryId'     : _this.embedPlayer.ventryid,
+					'partnerId'   : _this.embedPlayer.vpartnerid,
 					'eventType'  :  _this.eventType,
 					'sessionId'   : _this.embedPlayer.evaluate('{configProxy.sessionId}'),
 					'eventIndex'  : _this.eventIndex,
@@ -193,7 +193,7 @@
 				_this.bufferTime = 0;
 				_this.eventIndex +=1;
 				_this.embedPlayer.triggerHelper( 'liveAnalyticsEvent' , liveStatsEvent);
-				_this.kClient.doRequest( eventRequest, function(data){
+				_this.vClient.doRequest( eventRequest, function(data){
 					try {
 						if (!_this.startTime ) {
 							_this.startTime = data;

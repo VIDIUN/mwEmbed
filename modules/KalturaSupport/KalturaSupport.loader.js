@@ -12,16 +12,16 @@
 	// Add Vidiun specific attributes to the embedPlayer
 	$( mw ).bind( 'MwEmbedSupportReady', function(){
 		mw.mergeConfig( 'EmbedPlayer.Attributes', {
-			'kentryid' : null, // mediaProxy.entry.id
-			'kwidgetid' : null,
-			'kuiconfid' : null,
+			'ventryid' : null, // mediaProxy.entry.id
+			'vwidgetid' : null,
+			'vuiconfid' : null,
 			'referenceId': null,
-			// helps emulate the kdp behavior of not updating currentTime until a seek is complete.
-			'kPreSeekTime': null,
-			// Kaltura player Metadata exported across the iframe
-			'kalturaPlayerMetaData' : null,
-			'kalturaEntryMetaData' : null,
-			'kalturaPlaylistData' : null,
+			// helps emulate the vdp behavior of not updating currentTime until a seek is complete.
+			'vPreSeekTime': null,
+			// Vidiun player Metadata exported across the iframe
+			'vidiunPlayerMetaData' : null,
+			'vidiunEntryMetaData' : null,
+			'vidiunPlaylistData' : null,
 			'playerConfig': null,
 			'rawCuePoints' : null
 		});

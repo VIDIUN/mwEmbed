@@ -1,7 +1,7 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add('chapters', mw.KBaseMediaList.extend({
+	mw.PluginManager.add('chapters', mw.VBaseMediaList.extend({
 
 		defaultConfig: {
 			'parent': 'sideBarContainer',
@@ -11,9 +11,9 @@
 			"displayImportance": 'high',
 			'templatePath': 'components/chapters/chapters.tmpl.html',
 			'cuePointType': [{
-				"main": mw.KCuePoints.TYPE.THUMB,
-				"sub": [mw.KCuePoints.THUMB_SUB_TYPE.SLIDE,
-					mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER]
+				"main": mw.VCuePoints.TYPE.THUMB,
+				"sub": [mw.VCuePoints.THUMB_SUB_TYPE.SLIDE,
+					mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER]
 			}],
 			'oneSecRotatorSlidesLimit': 61,
 			'twoSecRotatorSlidesLimit': 250,
@@ -24,7 +24,7 @@
 			'onPage': false,
 			'includeHeader': true,
 			'enableSearch': true,
-			'cssFileName': 'modules/KalturaSupport/components/chapters/chapters.css',
+			'cssFileName': 'modules/VidiunSupport/components/chapters/chapters.css',
 			'minDisplayWidth': 0,
 			'minDisplayHeight': 0,
 			'chapterSlideBoxRatio': (2/3),
@@ -65,7 +65,7 @@
 		addBindings: function () {
 			var _this = this;
 
-			this.bind('KalturaSupport_ThumbCuePointsReady', function () {
+			this.bind('VidiunSupport_ThumbCuePointsReady', function () {
 				if (!_this.maskChangeStreamEvents) {
 					//Get chapters data from cuepoints
 					var chaptersRawData = _this.getCuePoints();
@@ -81,10 +81,10 @@
 							} else if (a.startTime - b.startTime < 0){
 								return -1;
 							} else if (a.startTime - b.startTime === 0){
-								if (b.subType === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER){
+								if (b.subType === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER){
 									return 1;
 								}
-								if (a.subType === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER){
+								if (a.subType === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER){
 									return -1;
 								}
 								return 0;
@@ -113,7 +113,7 @@
 				}
 			});
 
-			this.bind('KalturaSupport_ThumbCuePointsUpdated', function (e, cuepoints) {
+			this.bind('VidiunSupport_ThumbCuePointsUpdated', function (e, cuepoints) {
 				if (!_this.dataIntialized) {
 					_this.dataIntialized = true;
 				}
@@ -208,7 +208,7 @@
 			this.bind('mediaListLayoutReady slideAnimationEnded updateLayout', function () {
 				setTimeout(function(){
 					_this.getComponent()
-						.find(".k-title-container.mediaBoxText, .k-description-container.mediaBoxText").dotdotdot();
+						.find(".v-title-container.mediaBoxText, .v-description-container.mediaBoxText").dotdotdot();
 				}, 100);
 			});
 
@@ -360,10 +360,10 @@
 		getCuePoints: function(){
 			var cuePoints = [];
 			var _this = this;
-			if ( this.getPlayer().kCuePoints ) {
+			if ( this.getPlayer().vCuePoints ) {
 				$.each( _this.getConfig( 'cuePointType' ), function ( i, cuePointType ) {
 					$.each( cuePointType.sub, function ( j, cuePointSubType ) {
-						var filteredCuePoints = _this.getPlayer().kCuePoints.getCuePointsByType( cuePointType.main, cuePointSubType );
+						var filteredCuePoints = _this.getPlayer().vCuePoints.getCuePointsByType( cuePointType.main, cuePointSubType );
 						cuePoints = cuePoints.concat( filteredCuePoints );
 					} );
 				} );
@@ -410,13 +410,13 @@
 		getMetaData: function(){
 			var metaData = this._super();
 			metaData.titles = {
-				chapterNumber: gM("ks-chapters-chapterNumber"),
-				chapterStartTime: gM("ks-chapters-chapter-start-time"),
-				chapterDuration: gM("ks-chapters-chapter-duration"),
-				chapterToggle: gM("ks-chapters-toggle-chapter"),
-				slideNumber: gM("ks-chapters-slideNumber"),
-				slideStartTime: gM("ks-chapters-slide-start-time"),
-				slideDuration: gM("ks-chapters-slide-duration")
+				chapterNumber: gM("vs-chapters-chapterNumber"),
+				chapterStartTime: gM("vs-chapters-chapter-start-time"),
+				chapterDuration: gM("vs-chapters-chapter-duration"),
+				chapterToggle: gM("vs-chapters-toggle-chapter"),
+				slideNumber: gM("vs-chapters-slideNumber"),
+				slideStartTime: gM("vs-chapters-slide-start-time"),
+				slideDuration: gM("vs-chapters-slide-duration")
 
 			};
 			return metaData;
@@ -491,7 +491,7 @@
 			//Get media box height by mediaItemRatio and by media item type (Chapter/Slide)
 			var	width = this.getMedialistComponent().width();
 			var	newHeight = width * (1 / this.getConfig("mediaItemRatio"));
-			newHeight = (mediaItem.type === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER)?
+			newHeight = (mediaItem.type === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER)?
 				newHeight :
 				(newHeight * this.getConfig('chapterSlideBoxRatio'));
 			return newHeight;
@@ -500,7 +500,7 @@
 			//Get media box width by mediaItemRatio and by media item type (Chapter/Slide)
 			var	height = this.getMedialistComponent().height();
 			var	newWidth = height * (1 / this.getConfig("mediaItemRatio"));
-			newWidth = (mediaItem.type === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER)?
+			newWidth = (mediaItem.type === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER)?
 				newWidth :
 				(newWidth * this.getConfig('chapterSlideBoxRatio'));
 			return newWidth;
@@ -541,7 +541,7 @@
 			});
 
 			// do the api request
-			this.getKalturaClient().doRequest(requestArray, function (data) {
+			this.getVidiunClient().doRequest(requestArray, function (data) {
 				// Validate result
 				if (!_this.isValidResult(data)) {
 					return;
@@ -608,7 +608,7 @@
 					id: 'searchBox',
 					type: 'text',
 					tabindex: 100,
-					placeholder: gM('ks-chapters-search-placeholder'),
+					placeholder: gM('vs-chapters-search-placeholder'),
 					autocapitalize: "off",
 					autocorrect :"off",
 
@@ -619,7 +619,7 @@
 				var clearSearchBoxContainer = $( "<div/>", {
 						'class': 'searchIcon icon-clear tooltipBelow',
 						'id': 'searchBoxCancelIcon',
-						'title': gM('ks-chapters-search-clear'),
+						'title': gM('vs-chapters-search-clear'),
 						'data-show-tooltip': true
 					} )
 					.on( "click touchend", function (e) {
@@ -741,7 +741,7 @@
 							},
 							empty: [
 								'<div class="empty-message">',
-								gM("ks-chapters-search-empty-result"),
+								gM("vs-chapters-search-empty-result"),
 								'</div>'
 							].join('\n')
 						},
@@ -820,13 +820,13 @@
 			var request = {
 				'service': 'cuepoint_cuepoint',
 				'action': 'list',
-				'filter:entryIdEqual': _this.embedPlayer.kentryid,
-				'filter:objectType': 'KalturaCuePointFilter',
+				'filter:entryIdEqual': _this.embedPlayer.ventryid,
+				'filter:objectType': 'VidiunCuePointFilter',
 				'filter:freeText': expression + "*"
 			};
 			// If in live mode, then search only in cuepoints which are already available at current live timeline
 			if (liveCheck){
-				request['filter:updatedAtLessThanOrEqual'] = this.getPlayer().kCuePoints.getLastUpdateTime();
+				request['filter:updatedAtLessThanOrEqual'] = this.getPlayer().vCuePoints.getLastUpdateTime();
 			}
 
 			this.getKalturaClient().doRequest(request,

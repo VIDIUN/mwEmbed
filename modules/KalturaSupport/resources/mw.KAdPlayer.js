@@ -121,7 +121,7 @@ mw.VAdPlayer.prototype = {
 		// Setup some configuration for done state:
 		adSlot.doneFunctions = [];
 		// skip offset can be stored on the button or the vast plugin :(
-		var skipOffset =  _this.embedPlayer.getKalturaConfig( 'skipBtn', 'skipOffset' ) ||  _this.embedPlayer.getKalturaConfig( 'vast', 'skipOffset' )
+		var skipOffset =  _this.embedPlayer.getVidiunConfig( 'skipBtn', 'skipOffset' ) ||  _this.embedPlayer.getVidiunConfig( 'vast', 'skipOffset' )
 		// set skip offset from config for all adds if defined 
 		if( skipOffset ){
 			var i = 0;
@@ -131,7 +131,7 @@ mw.VAdPlayer.prototype = {
 		}
 
 		adSlot.playbackDone = function( hardStop ){
-			mw.log("KAdPlayer:: display: adSlot.playbackDone" );
+			mw.log("VAdPlayer:: display: adSlot.playbackDone" );
 
 			if( adSlot.ads[adSlot.adIndex] ) {
 				// trigger ad complete event for tracking. Taking current time from currentTimeLabel plugin since the embedPlayer currentTime is already 0
@@ -320,7 +320,7 @@ mw.VAdPlayer.prototype = {
 		}
 		// Stop display of overlay if video playback is no longer active
 		if( typeof vid == 'undefined' || _this.embedPlayer.getPlayerElementTime() - startTime > displayDuration ){
-			mw.log( "KAdPlayer::display:" + adSlot.type + " Playback done because vid does not exist or > displayDuration " + displayDuration );
+			mw.log( "VAdPlayer::display:" + adSlot.type + " Playback done because vid does not exist or > displayDuration " + displayDuration );
 			_this.overrideDisplayDuration = 0;
 			adSlot.playbackDone();
 
@@ -541,7 +541,7 @@ mw.VAdPlayer.prototype = {
 	openClickthrough: function(adSlot,clickthrough){
 		this.embedPlayer.sendNotification( 'adClick', {url: clickthrough} );
 		if ( adSlot.videoClickTracking && adSlot.videoClickTracking.length > 0  ) {
-			mw.log("KAdPlayer:: sendBeacon to: " + adSlot.videoClickTracking[0] );
+			mw.log("VAdPlayer:: sendBeacon to: " + adSlot.videoClickTracking[0] );
 			for (var i=0; i < adSlot.videoClickTracking.length ; i++){
 				mw.sendBeaconUrl( adSlot.videoClickTracking [i]);
 			}
@@ -550,7 +550,7 @@ mw.VAdPlayer.prototype = {
 				for ( var i = 0, iMax = adSlot.wrapperData.length; i < iMax; i++) {
 					adSlot.wrapperData[i].contents().find('ClickTracking').each(function(a,b){
 						mw.sendBeaconUrl($(b).contents().text());
-						mw.log("KAdPlayer:: sendBeacon to (wrapper): " + $(b).contents().text() );
+						mw.log("VAdPlayer:: sendBeacon to (wrapper): " + $(b).contents().text() );
 					})
 				}
 			}
@@ -720,7 +720,7 @@ mw.VAdPlayer.prototype = {
 		adConf.skipOffset = skipOffsetInSecs;
 		mw.log("VAdPlayer:: source updated, add tracking");
 		// Always track ad progress:
-		if( vid.readyState > 0 && embedPlayer.selectedPlayer.library !== 'Kplayer' ) {
+		if( vid.readyState > 0 && embedPlayer.selectedPlayer.library !== 'Vplayer' ) {
 			setTimeout(function(){
 				if ( vid.duration != 0 ) {
 					embedPlayer.triggerHelper( 'AdSupport_AdUpdateDuration', vid.duration ); // Trigger duration event
@@ -844,7 +844,7 @@ mw.VAdPlayer.prototype = {
 		var sendBeacon = function(eventName, companion){
 			for(var i =0;i < companion.trackingEvents.length; i++){
 				if( eventName == companion.trackingEvents[ i ].eventName ){
-					mw.log("KAdPlayer:: sendBeacon: " + eventName + ' to: ' + companion.trackingEvents[ i ].beaconUrl );
+					mw.log("VAdPlayer:: sendBeacon: " + eventName + ' to: ' + companion.trackingEvents[ i ].beaconUrl );
 					mw.sendBeaconUrl( companion.trackingEvents[ i ].beaconUrl );
 				}
 			}
@@ -920,8 +920,8 @@ mw.VAdPlayer.prototype = {
 		var overlayId = this.getOverlayId();
 		var nonLinearConf = _this.selectFromArray( adConf.nonLinear );
 		if (nonLinearConf.minSuggestedDuration){
-			_this.overrideDisplayDuration = kWidget.npt2seconds( nonLinearConf.minSuggestedDuration );
-			mw.log( "KAdPlayer::displayNonLinear - override duration from vast:" + _this.overrideDisplayDuration );
+			_this.overrideDisplayDuration = vWidget.npt2seconds( nonLinearConf.minSuggestedDuration );
+			mw.log( "VAdPlayer::displayNonLinear - override duration from vast:" + _this.overrideDisplayDuration );
 		}
 		var sendBeacon = function(eventName){
 			for(var i =0;i < adConf.trackingEvents.length; i++){
@@ -1053,7 +1053,7 @@ mw.VAdPlayer.prototype = {
 			// See if we have any beacons by that name:
 			for(var i =0;i < trackingEvents.length; i++){
 				if( eventName == trackingEvents[ i ].eventName ){
-					mw.log("KAdPlayer:: sendBeacon: " + eventName + ' to: ' + trackingEvents[ i ].beaconUrl );
+					mw.log("VAdPlayer:: sendBeacon: " + eventName + ' to: ' + trackingEvents[ i ].beaconUrl );
 					mw.sendBeaconUrl( trackingEvents[ i ].beaconUrl );
 				}
 			}
@@ -1336,7 +1336,7 @@ mw.VAdPlayer.prototype = {
 			this.embedPlayer.getVideoHolder().append( $vidSibContainer );
 			if ( source && source.getMIMEType() ) {
 				var targetPlayer =  mw.EmbedTypes.getMediaPlayers().getDefaultPlayer( source.mimeType );
-				if ( targetPlayer.library == "Kplayer" ) {
+				if ( targetPlayer.library == "Vplayer" ) {
 					this.adSibling = new mw.PlayerElementFlash( vidSibContainerId, this.getVideoAdSiblingId(), {autoPlay: true} );
 					// TODO: DELETE THIS!
 					// We need to figure out if we're using Flash player or HTML5 player
@@ -1460,7 +1460,7 @@ mw.VAdPlayer.prototype = {
 							localNoticeCB();
 						}
 
-						// add support for volume control over KDP during Flash ad playback
+						// add support for volume control over VDP during Flash ad playback
 						$( _this.embedPlayer ).bind( 'volumeChanged' + _this.trackingBindPostfix, function ( e, changeValue ) {
 							if ( typeof VPAIDObj.playerElement.sendNotification === "function" ) {
 								VPAIDObj.playerElement.sendNotification( 'changeVolume', changeValue );

@@ -157,7 +157,7 @@
 
 		// Build the licenseUri (if needed) and send it to the native component as the "licenseUri" attribute.
 		pushLicenseUri: function () {
-			var licenseServer = mw.getConfig('Kaltura.UdrmServerURL');
+			var licenseServer = mw.getConfig('Vidiun.UdrmServerURL');
 			var licenseParams = this.mediaElement.getLicenseUriComponent();
 
 			if (licenseServer && licenseParams) {

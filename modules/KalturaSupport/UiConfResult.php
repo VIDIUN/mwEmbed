@@ -329,7 +329,7 @@ class UiConfResult {
 			// http://html5video.org/wiki/Vidiun_HTML5_Configuration
 			if( $pluginId == 'Vidiun' || 
 				$pluginId == 'EmbedPlayer' || 
-				$pluginId == 'KalturaSupport'
+				$pluginId == 'VidiunSupport'
 			){
 				continue;
 			}
@@ -395,7 +395,7 @@ class UiConfResult {
 			$pluginAttribute = $pluginKeys[1];
 			 if( $pluginId == 'Vidiun' ||
 					$pluginId == 'EmbedPlayer' ||
-					$pluginId == 'KalturaSupport'
+					$pluginId == 'VidiunSupport'
 					){
 						continue;
 					}
@@ -817,9 +817,9 @@ class UiConfResult {
 		if( $this->request->getEntryId() ) {
 			$addtionalData['entryId'] = $this->request->getEntryId();
 		}
-		// Add KS to uiVars only if part of request: 
-		if( $this->request->hasKS() ){
-			$this->playerConfig['vars']['ks'] = $this->client->getKS();
+		// Add VS to uiVars only if part of request: 
+		if( $this->request->hasVS() ){
+			$this->playerConfig['vars']['vs'] = $this->client->getVS();
 		}
 		return array_merge($addtionalData, $this->playerConfig);
 	}

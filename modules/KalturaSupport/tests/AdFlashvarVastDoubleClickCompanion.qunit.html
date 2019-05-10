@@ -68,12 +68,12 @@ function jsVidiunPlayerTest( videoId ){
 <h3> Player API logging </h3>
 <textarea id="eventLog" style="width:430px;height:300px;"></textarea>
 <script>
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	$('#sampleActions .btn').click(function(){
-		kdp.sendNotification( $(this).text() );
+		vdp.sendNotification( $(this).text() );
 	});
-	kdp.kBind("onPlayerStateChange", function(state){
+	vdp.vBind("onPlayerStateChange", function(state){
 		$('#eventLog').append( state + "\n");	
 	});
 });
@@ -83,7 +83,7 @@ kWidget.addReadyCallback( function( playerId ){
 	$('#testLongCompanion').text('( long companion target )');
 	$('#testCompanion').text( '( companion target )' );
 	
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'cache_st': 101,
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
@@ -95,7 +95,7 @@ kWidget.addReadyCallback( function( playerId ){
 				'skipOffset': 5,
 				'storeSession': false,
 				'htmlCompanions' : "testCompanion:300:250;testLongCompanion:728:90;",
-				'prerollUrl' : 'http://projects.kaltura.com/mdale/hotelVastAd.xml?myRefurl=http%3A//myref.com/%3Ffoo%3Dbar%26cat%3Ddog{utility.nativeAdId}',
+				'prerollUrl' : 'http://projects.vidiun.com/mdale/hotelVastAd.xml?myRefurl=http%3A//myref.com/%3Ffoo%3Dbar%26cat%3Ddog{utility.nativeAdId}',
 				'timeout' : 4,
 				'preSequence' : 1,
 				'unescapeAdUrls': false

@@ -7,6 +7,6 @@
       "mw.EmbedPlayer",
       "mw.ajaxProxy"
     ],
-    "kalturaPluginName": "comScoreStreamingTag"
+    "vidiunPluginName": "comScoreStreamingTag"
   }
 }

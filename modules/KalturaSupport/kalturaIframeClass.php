@@ -127,14 +127,14 @@ class vidiunIframeClass {
 	    return $entryResult;
 	}
 	function shouldRouteServiceUrl(){
-	    $allowIframeRemoteService = $this->getUiConfResult()->getPlayerConfig(null, 'Kaltura.AllowIframeRemoteService');
-        $serviceUrl = $this->getUiConfResult()->getPlayerConfig(null, 'Kaltura.ServiceUrl');
+	    $allowIframeRemoteService = $this->getUiConfResult()->getPlayerConfig(null, 'Vidiun.AllowIframeRemoteService');
+        $serviceUrl = $this->getUiConfResult()->getPlayerConfig(null, 'Vidiun.ServiceUrl');
         return ($this->request->isEmbedServicesEnabled() && $this->request->isEmbedServicesRequest() &&
             ($allowIframeRemoteService === true) &&
             !empty($serviceUrl));
     }
     function reRouteServiceUrl(){
-        $this->client->getClient()->getConfig()->serviceUrl = $this->getUiConfResult()->getPlayerConfig( null, 'Kaltura.ServiceUrl' );
+        $this->client->getClient()->getConfig()->serviceUrl = $this->getUiConfResult()->getPlayerConfig( null, 'Vidiun.ServiceUrl' );
     }
     function resetServiceUrl(){
         $this->client->getClient()->getConfig()->serviceUrl = $this->request->getServiceConfig('ServiceUrl');
@@ -223,9 +223,9 @@ class vidiunIframeClass {
 			$settings['entry_id'] = $this->request->get('entry_id');
 		}
 
-		// Only add KS if it was part of the request, else the client should re-generate in multi-request for any subsequent request: 
-		if( $this->request->hasKS() ){
-			$settings['flashvars']['ks'] = $this->client->getKS();
+		// Only add VS if it was part of the request, else the client should re-generate in multi-request for any subsequent request: 
+		if( $this->request->hasVS() ){
+			$settings['flashvars']['vs'] = $this->client->getVS();
 		}
 		// add referrer flashvar
 		$settings['flashvars']['referrer'] = htmlspecialchars( $this->request->getReferer() );
@@ -572,10 +572,10 @@ class vidiunIframeClass {
 				return $baseEntry['meta']->name;
 				}
 			} catch (Exception $e){
-			return "Kaltura Embed Player iFrame";
+			return "Vidiun Embed Player iFrame";
 			}
 		}
-		return "Kaltura Embed Player iFrame";
+		return "Vidiun Embed Player iFrame";
 	}
 
 	/**
@@ -674,27 +674,27 @@ HTML;
 			$modListPath = $moduleDir . '/' . $moduleName . '/' . $moduleName . '.';
 			if( is_file( $modListPath . "json") ){
 			    $moduleInfo = json_decode( file_get_contents($modListPath. 'json'), TRUE );
-                $kalturaSupportModules = array_merge( $kalturaSupportModules, $moduleInfo);
+                $vidiunSupportModules = array_merge( $vidiunSupportModules, $moduleInfo);
             } elseif( is_file( $modListPath . "php") ){
-				$kalturaSupportModules = array_merge( $kalturaSupportModules, 
+				$vidiunSupportModules = array_merge( $vidiunSupportModules, 
 					include( $modListPath . "php")
 				);
 			}
 		}
 
-		$kalturaSupportPsModules = array();
+		$vidiunSupportPsModules = array();
 
-		foreach( $wgKwidgetPsEnabledModules as $moduleName ){
-            $modListPath = $wgKalturaPSHtml5ModulesDir . '/' . $moduleName . '/' . $moduleName . '.json';
+		foreach( $wgVwidgetPsEnabledModules as $moduleName ){
+            $modListPath = $wgVidiunPSHtml5ModulesDir . '/' . $moduleName . '/' . $moduleName . '.json';
             if( is_file( $modListPath) ){
                 $moduleInfo = json_decode( file_get_contents( $modListPath ), TRUE );
-                $kalturaSupportPsModules = array_merge( $kalturaSupportPsModules, $moduleInfo);
+                $vidiunSupportPsModules = array_merge( $vidiunSupportPsModules, $moduleInfo);
             }
         }
 
 		$playerConfig = $this->getUiConfResult()->getPlayerConfig();
-		$moduleList = array_merge($moduleList, $this->getNeededModules($kalturaSupportModules, $playerConfig));
-		$psModuleList = $this->getNeededModules($kalturaSupportPsModules, $playerConfig, $wgKalturaPSHtml5ModulesDir);
+		$moduleList = array_merge($moduleList, $this->getNeededModules($vidiunSupportModules, $playerConfig));
+		$psModuleList = $this->getNeededModules($vidiunSupportPsModules, $playerConfig, $wgVidiunPSHtml5ModulesDir);
 
 		// Special cases: handle plugins that have more complex conditional load calls
 		// always include mw.EmbedPlayer
@@ -754,22 +754,22 @@ HTML;
 	function getNeededModules($modules, $playerConfig, $basePath = null){
 	    $moduleList = array();
 	    foreach( $modules as $name => $module ){
-            if( isset( $module[ 'kalturaLoad' ] ) &&  $module['kalturaLoad'] == 'always' ){
+            if( isset( $module[ 'vidiunLoad' ] ) &&  $module['vidiunLoad'] == 'always' ){
                 $this->addModuleTemplate( $module, $basePath );
                 $moduleList[] = $name;
             }
-            // Check if the module has a kalturaPluginName and load if set in playerConfig
-            if( isset( $module[ 'kalturaPluginName' ] ) ){
-                if( is_array( $module[ 'kalturaPluginName' ] ) ){
-                    foreach($module[ 'kalturaPluginName' ] as $subModuleName ){
+            // Check if the module has a vidiunPluginName and load if set in playerConfig
+            if( isset( $module[ 'vidiunPluginName' ] ) ){
+                if( is_array( $module[ 'vidiunPluginName' ] ) ){
+                    foreach($module[ 'vidiunPluginName' ] as $subModuleName ){
                         if( isset( $playerConfig['plugins'][ $subModuleName] )){
                             $this->addModuleTemplate( $module, $playerConfig['plugins'][ $subModuleName ], $basePath );
                             $moduleList[] = $name;
                             continue;
                         }
                     }
-                } else if( isset( $playerConfig['plugins'][ $module[ 'kalturaPluginName' ] ] ) ){
-                    $this->addModuleTemplate( $module, $playerConfig['plugins'][ $module[ 'kalturaPluginName' ] ], $basePath );
+                } else if( isset( $playerConfig['plugins'][ $module[ 'vidiunPluginName' ] ] ) ){
+                    $this->addModuleTemplate( $module, $playerConfig['plugins'][ $module[ 'vidiunPluginName' ] ], $basePath );
                     $moduleList[] = $name;
                 }
             }
@@ -1038,12 +1038,12 @@ HTML;
 	}
 
 	function getFilePath( $path = null, $basePath = null ){
-		global $wgKalturaPSHtml5SettingsPath;
+		global $wgVidiunPSHtml5SettingsPath;
 
 		if (!empty($basePath)){
 			$path = $basePath . '/' . $path;
 		} elseif( strpos( $path, '{html5ps}' ) === 0 ) {
-			$basePath = realpath( dirname( $wgKalturaPSHtml5SettingsPath ) . '/../ps/' );
+			$basePath = realpath( dirname( $wgVidiunPSHtml5SettingsPath ) . '/../ps/' );
 			$path = str_replace('{html5ps}', $basePath, $path) ;
 		} else {
 			$basePath = realpath( __DIR__ );

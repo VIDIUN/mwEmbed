@@ -1,6 +1,6 @@
 {
     "mw.AkamaiMediaAnalytics": {
         "scripts": "resources/mw.AkamaiAnalytics.js",
-        "kalturaPluginName": "akamaiMediaAnalytics"
+        "vidiunPluginName": "akamaiMediaAnalytics"
     }
 }

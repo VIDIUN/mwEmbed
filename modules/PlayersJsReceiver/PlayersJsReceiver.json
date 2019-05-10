@@ -2,10 +2,10 @@
 	"mw.PlayersJsReceiver": {
 		"scripts": "resources/mw.PlayersJsReceiver.js",
 		"dependencies" : [
-			"mw.KBasePlugin",
+			"mw.VBasePlugin",
 			"playerjs"
 		],
-		"kalturaPluginName": "playersJsReceiver"
+		"vidiunPluginName": "playersJsReceiver"
 	},
 	"playerjs" : {
 		"scripts": "resources/embedly/player-0.0.10.min.js"

@@ -28,10 +28,10 @@
 // ===================================================================================================
 
 /**
-* @package Kaltura
+* @package Vidiun
 * @subpackage Client
 */
-class KalturaFlavorAssetUrlOptions extends KalturaObjectBase
+class VidiunFlavorAssetUrlOptions extends VidiunObjectBase
 {
 		/**
  		* The name of the downloaded file
@@ -43,7 +43,7 @@ class KalturaFlavorAssetUrlOptions extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
 require_once(dirname(__FILE__) . "/VidiunClientBase.php");

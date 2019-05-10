@@ -11,7 +11,7 @@
 
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script>
-		mw.setConfig('Kaltura.LeadWithHTML5', true);
+		mw.setConfig('Vidiun.LeadWithHTML5', true);
 	</script>
 
 </head>
@@ -23,7 +23,7 @@
 			<li class="pane1" style="width: 1280px;">
 				<h2>Swipe...</h2>
 				<div style="width: 60%;display: inline-block;position: relative;">
-						<div id="kaltura-player2" style="width:500px;height:300px;">
+						<div id="vidiun-player2" style="width:500px;height:300px;">
 						</div>
 				</div>
 
@@ -58,8 +58,8 @@
 		carousel.init();
 	
 		// embed the player
-		kWidget.embed({
-			'targetId': 'kaltura-player2',
+		vWidget.embed({
+			'targetId': 'vidiun-player2',
 			'wid': '_243342',
 			'uiconf_id' : '12868012',
 			'entry_id' : '1_sf5ovm7u',
@@ -75,8 +75,8 @@
 				}
 			},
 			'readyCallback':function( playerId ){
-				var kdp = $('#' + playerId)[0];
-				kdp.kBind("hammerEvent", function( hammerEvent ){
+				var vdp = $('#' + playerId)[0];
+				vdp.vBind("hammerEvent", function( hammerEvent ){
 					carousel.handleHammer( hammerEvent );
 				});
 			}

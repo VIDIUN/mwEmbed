@@ -1,6 +1,6 @@
 {
     "nielsenCombined": {
-        "description": "Supports sending player analytics events to Nielsen Combined.\r\n\t\tKaltura integration supports the full Combined beacon event flow.",
+        "description": "Supports sending player analytics events to Nielsen Combined.\r\n\t\tVidiun integration supports the full Combined beacon event flow.",
         "attributes": {
             "clientId": {
                 "doc": "The client ID.",

@@ -13,5 +13,5 @@
   "dependencies": {
     "mwEmbed-Dash-Everywhere": "git+ssh://git@github.com:kaltura/mwEmbed-Dash-Everywhere.git#v3.3.1"
   },
-  "homepage": "https://github.com/kaltura/mwEmbed/"
+  "homepage": "https://github.com/vidiun/mwEmbed/"
 }
