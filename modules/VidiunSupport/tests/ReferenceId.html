@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Vidiun Entry by Reference ID</title>
+
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script>
+function changeMedia() {
+	document.getElementById( 'vidiun_player' ).sendNotification( 'changeMedia', { referenceId : "vidiun_promo_video" } );
+}
+</script>
+</head>
+<body>
+<h2>Vidiun Entry by Reference ID </h2>	
+Vidiun allows to set reference Id per entry. You can use reference Id to set custom id for vidiun entry.<br />
+This test allow to load the player with reference Id (without entry Id) and to use changeMedia with reference Id<br />
+<i>Note: if you include both entry_id and reference Id the player will use the entry id. </i>
+<br><br>
+<b>How to use:</b><br>
+Embedding with reference Id:
+<pre class="prettyprint linenums">
+vWidget.embed({<br/>	'targetId': 'vidiun_player',<br/>	'wid': '_243342',<br/>	'uiconf_id' : '12905712',<br/>	'flashvars':{<br/>		'referenceId': 'coffee'<br/>	}<br/>});
+</pre>
+Dynamic <a href="#" onclick="changeMedia();">change media</a> via Reference Id on active player: 
+<pre class="prettyprint linenums">
+document.getElementById( 'vidiun_player' ).sendNotification( 'changeMedia', { referenceId : &quot;vidiun_promo_video&quot; } );
+</pre>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
+<script>
+vWidget.embed({
+	'targetId': 'vidiun_player',
+	'wid': '_243342',
+	'uiconf_id' : '12905712',
+	'flashvars':{
+		'referenceId': 'coffee'
+	}
+});
+</script>
+
+
+</body>
+</html>
