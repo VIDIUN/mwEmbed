@@ -2,7 +2,7 @@
         "use strict";
         mw.dualScreen = mw.dualScreen || {};
 
-        mw.dualScreen.displays = mw.KBasePlugin.extend({
+        mw.dualScreen.displays = mw.VBasePlugin.extend({
             display: {},
 
             setup: function(){

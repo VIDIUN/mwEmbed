@@ -2,7 +2,7 @@
     "use strict";
     mw.dualScreen = mw.dualScreen || {};
 
-    mw.dualScreen.videoSync = mw.KBasePlugin.extend({
+    mw.dualScreen.videoSync = mw.VBasePlugin.extend({
         setup: function () {
             this.addBinding();
         },

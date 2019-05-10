@@ -1,9 +1,9 @@
 ( function( mw, $ ) {"use strict";
-	var kplayer = null;
+	var vplayer = null;
 	var isKontiki = false;
 	var kontikiClientTimeout = null;
 
-	var kontikiPlugin =  mw.KBasePlugin.extend({
+	var kontikiPlugin =  mw.VBasePlugin.extend({
 		asyncInit: true,
 
 		defaultConfig: {
@@ -11,13 +11,13 @@
 		},
 
 		setup: function() {
-			mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
-			kplayer = this.getPlayer();
+			mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
+			vplayer = this.getPlayer();
 			this.bind( 'updateComponentsVisibilityStart', function() {
 				//hide source selector since it has no meaning in kontiki case
 				if ( isKontiki ) {
-					if ( kplayer.plugins && kplayer.plugins.sourceSelector )
-						kplayer.plugins.sourceSelector.hide();
+					if ( vplayer.plugins && vplayer.plugins.sourceSelector )
+						vplayer.plugins.sourceSelector.hide();
 				}
 			});
 			var that = this;
@@ -142,8 +142,8 @@
 			      	document.body.appendChild( flashDiv );
 					var flashvars = { url: clientUrl };
 				    // pass the current document as the context to make sure that the swf will be written to the current
-				    // page and not to the page where kWidget lives on
-					kWidget.outputFlashObject( "kontikiAgent", { src: AGENT_FLASH_LOADER_URL, flashvars: flashvars }, document);
+				    // page and not to the page where vWidget lives on
+					vWidget.outputFlashObject( "kontikiAgent", { src: AGENT_FLASH_LOADER_URL, flashvars: flashvars }, document);
 			    } 
 			    //wait until body is loaded  
 			    else{  
@@ -388,10 +388,10 @@
 	// end of kontiki code
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	function onKaReady() {
+	function onVidReady() {
 		clearTimeout(kontikiClientTimeout);
 		mw.log('Kontiki callback. Kontiki client is ' + ((gKontikiAgentData !== undefined) ? 'available' : 'not available'));
-		kplayer.plugins.kontiki.initCompleteCallback();
+		vplayer.plugins.kontiki.initCompleteCallback();
 		setKontikiFlavorTags();
 	}
 
@@ -402,8 +402,8 @@
 			if ( sources && sources.length ) {
 				mw.log('Kontiki source was found, setting flavorTags to "kontiki"');
 				isKontiki = true;
-				kplayer.setFlashvars( 'flavorTags', 'kontiki' );
-				kplayer.setKalturaConfig( 'kdpVars', 'kontiki', { plugin: 'true' });
+				vplayer.setFlashvars( 'flavorTags', 'kontiki' );
+				vplayer.setVidiunConfig( 'vdpVars', 'kontiki', { plugin: 'true' });
 
 			}
 			else {
@@ -420,7 +420,7 @@
 		if (location.protocol === "https:") {
 			loadFlash = true;
 		}
-		var params = {callback: onKaReady, flash_loader: loadFlash};
+		var params = {callback: onVidReady, flash_loader: loadFlash};
 		window.kontikiAgent = new KontikiAgent(params);
 	}
 

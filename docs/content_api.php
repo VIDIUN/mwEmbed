@@ -136,7 +136,7 @@ require_once( realpath( dirname( __FILE__ ) ) . '/api_evaluates.php' );
 					$var['notificationDataValue'] = array( $var['notificationDataValue'] );
 				}
 				foreach( $var['notificationDataValue'] as $k => $v ){
-					$o.='<pre class="prettyprint linenums">kdp.sendNotification("'. $key . '", ' .  $v . ');</pre>';
+					$o.='<pre class="prettyprint linenums">vdp.sendNotification("'. $key . '", ' .  $v . ');</pre>';
 				}
 			}
 			if( isset( $var['default'] ) && $var['default'] != '' ){
@@ -259,47 +259,47 @@ $(function(){
 <h2>Vidiun Player API</h2>
 <p>This documentation covers version <strong><i><?php global $wgMwEmbedVersion; echo $wgMwEmbedVersion ?></i></strong> of the html5 library. </p>
 <p>
-<a href="#kWidget" class="btn btn btn-info">kWidget API &raquo;</a>
+<a href="#vWidget" class="btn btn btn-info">vWidget API &raquo;</a>
 <a href="#uiVars" class="btn btn btn-info">UiVars &raquo;</a>
-<a href="#kdpAPI" class="btn btn btn-info">Player API &raquo;</a>
-<a href="#kWidgetApi" class="btn btn btn-info">KWidget Server API &raquo;</a>
+<a href="#vdpAPI" class="btn btn btn-info">Player API &raquo;</a>
+<a href="#vWidgetApi" class="btn btn btn-info">VWidget Server API &raquo;</a>
 </p>
 
-<a name="kWidget"></a>
-<h2>kWidget Embedding API</h2>
-The kWidget API is available after you include the Kaltura player library. kWidget provides embedding and basic utility functions.
-The Kaltura player library can be embeded into both <a href="http://knowledge.kaltura.com/kaltura-player-sdk-android">Native Android</a>
- and <a href="http://knowledge.kaltura.com/kaltura-player-sdk-ios">Native iOS</a>.
-<br><br>Sample JavaScript Kaltura player library include :
+<a name="vWidget"></a>
+<h2>vWidget Embedding API</h2>
+The vWidget API is available after you include the Vidiun player library. vWidget provides embedding and basic utility functions.
+The Vidiun player library can be embeded into both <a href="http://knowledge.vidiun.com/vidiun-player-sdk-android">Native Android</a>
+ and <a href="http://knowledge.vidiun.com/vidiun-player-sdk-ios">Native iOS</a>.
+<br><br>Sample JavaScript Vidiun player library include :
 <pre class="prettyprint linenums">
 &lt!-- Substitute {partner_id} for your Vidiun partner id, {uiconf_id} for uiconf player id --&gt;
 &lt;script src=&quot;http://cdnapi.vidiun.com/p/{partner_id}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiconf_id}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
 </pre>
-After you include the Kaltura player library, the following kWidget API is available:
+After you include the Vidiun player library, the following vWidget API is available:
 <div class="docblock">
-	<?php echo getDocs( array( 'kWidget.embed', 'kWidget.thumbEmbed', 'kWidget.getKalturaThumbUrl','kWidget.addReadyCallback','kWidget.destroy' ) ) ?>
-	<h3 class="linkable" id="kwidget-feature-and-user-agent"> User Agent and Feature Detection </h2>
-	<?php echo getDocs( array( 'kWidget.isMobileDevice', 'kWidget.supportsHTML5', 'kWidget.supportsFlash','kWidget.isIOS' ,'kWidget.isIE','kWidget.isIE8', 'kWidget.isAndroid','kWidget.isWindowsDevice') ) ?>
-	<h3 class="linkable" id="kwidget-settingsObject"> Settings Embed Object:</h2>
-	<?php echo getObjectDocs( array( 'kWidget.settingsObject' ) ) ?>
+	<?php echo getDocs( array( 'vWidget.embed', 'vWidget.thumbEmbed', 'vWidget.getVidiunThumbUrl','vWidget.addReadyCallback','vWidget.destroy' ) ) ?>
+	<h3 class="linkable" id="vwidget-feature-and-user-agent"> User Agent and Feature Detection </h2>
+	<?php echo getDocs( array( 'vWidget.isMobileDevice', 'vWidget.supportsHTML5', 'vWidget.supportsFlash','vWidget.isIOS' ,'vWidget.isIE','vWidget.isIE8', 'vWidget.isAndroid','vWidget.isWindowsDevice') ) ?>
+	<h3 class="linkable" id="vwidget-settingsObject"> Settings Embed Object:</h2>
+	<?php echo getObjectDocs( array( 'vWidget.settingsObject' ) ) ?>
 </div><br><br>
 <a name="vWidgetApi"></a>
 <h3>Server API requests ( vWidget.api )</h3>
 vWidget Server API enables direct <a href="http://www.vidiun.com/api_v3/testmeDoc/index.php">Vidiun Server API</a> calls from JavaScript. 
 This should not be confused with the <a href="http://www.vidiun.com/api_v3/testme/client-libs.php">JavaScript client library</a>, 
 which offers object mappings and works with the code generated in the 
-<a href="http://www.kaltura.com/api_v3/testme/index.php">test me console</a>. <br>
-The Kaltura Server API offers minimal object validation, in exchange for being much smaller, and included with every kaltura player library include.<br><br>
-Creating a kWidget API object, issue a playlist request, log the result:
+<a href="http://www.vidiun.com/api_v3/testme/index.php">test me console</a>. <br>
+The Vidiun Server API offers minimal object validation, in exchange for being much smaller, and included with every vidiun player library include.<br><br>
+Creating a vWidget API object, issue a playlist request, log the result:
 <pre class="prettyprint linenums">
-new kWidget.api( { 'wid' : '_243342', })
+new vWidget.api( { 'wid' : '_243342', })
 .doRequest({'service':'playlist', 'action': 'execute', 'id': '1_e387kavu'}, 
 	function( data ){
 		console.log( data );
 	}
 );
 </pre> 
-For more examples see the <a href="../kWidget/tests/kWidget.api.html">kWidget.api test page.</a>
+For more examples see the <a href="../vWidget/tests/vWidget.api.html">vWidget.api test page.</a>
 <div class="docblock">
 	<?php echo getDocs('vWidget.api' ) ?>
 	<?php echo getObjectDocs( array( 'vWidget.apiOptions' ) ) ?>
@@ -323,12 +323,12 @@ UiVars enable configuration of all player features. There are two classes of UiV
 </ul>
 These values can be set a few ways:<br> <br> 
 <p>
-Within the <a href="http://knowledge.kaltura.com/universal-studio-information-guide">player studio</a>
+Within the <a href="http://knowledge.vidiun.com/universal-studio-information-guide">player studio</a>
 UiVar configuration appears plugins -> uivars:<br>
-<img src="http://knowledge.kaltura.com/sites/default/files/styles/large/public/ui_variables_2.png">
+<img src="http://knowledge.vidiun.com/sites/default/files/styles/large/public/ui_variables_2.png">
 </p>
 <p>
-You can control the raw JSON code for UiVars by modifying the "uiVars" section of the JSON config using the <a href="http://player.kaltura.com/kWidget/tests/PlayerVersionUtility.html">player version utility</a>. 
+You can control the raw JSON code for UiVars by modifying the "uiVars" section of the JSON config using the <a href="http://player.vidiun.com/vWidget/tests/PlayerVersionUtility.html">player version utility</a>. 
 </p>
 <pre class="prettyprint linenums">
 {
@@ -344,7 +344,7 @@ You can control the raw JSON code for UiVars by modifying the "uiVars" section o
 </pre>
 Player configuration can be set at embed time as "flashvars": 
 <pre class="prettyprint linenums">
-kWidget.embed({
+vWidget.embed({
 	...
 	flashvars:{
 		"autoPlay": false
@@ -355,11 +355,11 @@ kWidget.embed({
 </pre>
 All player properties can also be retrieved at runtime or used in plugins macro evaluations. 
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback( function(playerId){
+vWidget.addReadyCallback( function(playerId){
 	alert( document.getElementById( playerId ).evaluate("{autoPlay}") );
 })
 </pre>
-Finally many properties can be upated at runtime using <a href="#setKDPAttribute-desc">setKDPAttribute</a>.
+Finally many properties can be upated at runtime using <a href="#setVDPAttribute-desc">setVDPAttribute</a>.
 <br>
 
 <?php
@@ -376,8 +376,8 @@ Finally many properties can be upated at runtime using <a href="#setKDPAttribute
 ?>
 
 </div><br><br>
-<h3>KDP Components & Plugins:</h3>
-<p>Using a standard OOP dot notation, each KDP component and plugin attribute can be overridden via Flashvars: objectId.parameter=value.<br>For example, to set the playlist to load automatically, pass the following Flashvar: playlistAPI.autoPlay=true</p><br><br>
+<h3>VDP Components & Plugins:</h3>
+<p>Using a standard OOP dot notation, each VDP component and plugin attribute can be overridden via Flashvars: objectId.parameter=value.<br>For example, to set the playlist to load automatically, pass the following Flashvar: playlistAPI.autoPlay=true</p><br><br>
 
 Code sample:<br>
 <pre class="prettyprint linenums">
@@ -416,17 +416,17 @@ vWidget.embed({
 <p>The JavaScript API is a two-way communication channel that lets the player communicate what it is doing and lets you instruct the player to perform operations.
 <br>For more information: <a href="http://knowledge.vidiun.com/javascript-api-vidiun-media-players#UnderstandingtheJavaScriptAPIWorkflow" target="_blank">JavaScript API for Vidiun Media Players</a></p>
 <p>Available JavaScript API:</p>
-<a class="btn btn btn-info" href="#kWidget.addReadyCallback-desc">Ready Notifications</a>
+<a class="btn btn btn-info" href="#vWidget.addReadyCallback-desc">Ready Notifications</a>
 <a class="btn btn btn-info" href="#sendNotification-desc">sendNotification</a>
-<a class="btn btn btn-info" href="#kBind-desc">Bind</a>
-<a class="btn btn btn-info" href="kUnbind-desc">unBind</a>
+<a class="btn btn btn-info" href="#vBind-desc">Bind</a>
+<a class="btn btn btn-info" href="vUnbind-desc">unBind</a>
 <a class="btn btn btn-info" href="#evaluate-desc">Evaluate</a>
-<a class="btn btn btn-info" href="#setKDPAttribute-desc">Update properties</a>
+<a class="btn btn btn-info" href="#setVDPAttribute-desc">Update properties</a>
 
 
-<a name="kWidget.addReadyCallback-desc"></a>
+<a name="vWidget.addReadyCallback-desc"></a>
 <h3>Receiving notification that the player API is ready</h3>
-<p>See <a href="#kWidget.addReadyCallback">kWidget.addReadyCallback</a> or the "<a href="#kWidget.settingsObject">readyCallback</a>" function within a dynamic embed.</p>
+<p>See <a href="#vWidget.addReadyCallback">vWidget.addReadyCallback</a> or the "<a href="#vWidget.settingsObject">readyCallback</a>" function within a dynamic embed.</p>
 
 <a name="sendNotification-desc"></a>
 <h3>Calling a player method from JavaScript</h3>
@@ -434,11 +434,11 @@ vWidget.embed({
 <?php echo getDocs( array( 'sendNotification' ) ) ?>
 <br><br>Code sample:<br>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
-	kdp.kBind( 'mediaReady', function(){
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
+	vdp.vBind( 'mediaReady', function(){
 		// Seek to 30 seconds from the start of the video
-		kdp.sendNotification("doSeek", 30);
+		vdp.sendNotification("doSeek", 30);
 	})
 });
 </pre>
@@ -448,34 +448,34 @@ echo '<div class="docblock">' .
 		getOutlineContent( $sendNotificationActions) .
 	'</div><br>';
 ?>
-<a name="kBind-desc"></a>
-<h4>Registering to a player event ( kBind )</h4>
-<p>Use the <b>kBind</b> method to add listen for a specific notification that something happened in the player,
+<a name="vBind-desc"></a>
+<h4>Registering to a player event ( vBind )</h4>
+<p>Use the <b>vBind</b> method to add listen for a specific notification that something happened in the player,
 such as the video is playing or is paused.</p>
-<?php echo getDocs( array( 'kBind' ) ) ?>
+<?php echo getDocs( array( 'vBind' ) ) ?>
 <br><br>Code sample:<br>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback(function( playerId ){
+	var vdp = document.getElementById( playerId );
 	// binds an event and namespces it to "myPluginName"
-	kdp.kBind("playerUpdatePlayhead.myPluginName", function( data, id ){
+	vdp.vBind("playerUpdatePlayhead.myPluginName", function( data, id ){
 		// data = the player's progress time in seconds
 		// id = the ID of the player that fired the notification
 	});
 });
 </pre>
-<a name="kUnbind-desc"></a>
+<a name="vUnbind-desc"></a>
 <h3>Un-registering a player event</h3>
-<p>Use the <b>kUnbind</b> method to remove a listener that is no longer needed.</p>
+<p>Use the <b>vUnbind</b> method to remove a listener that is no longer needed.</p>
 Removing event listeners that are no longer needed can improve performance 
 <br><br>Code sample:<br>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback(function( playerId ){
+	var vdp = document.getElementById( playerId );
 	// removes all events namespaced with "myPluginName"
-	kdp.kUnbind(".myPluginName");
+	vdp.vUnbind(".myPluginName");
 	// removes events by event name: 
-	kdp.kUnbind("playerUpdatePlayhead");
+	vdp.vUnbind("playerUpdatePlayhead");
 });
 </pre>
 
@@ -499,19 +499,19 @@ kWidget.addReadyCallback(function( playerId ){
 <?php echo getDocs( array( 'evaluate' ) ) ?>
 <br><br>Code sample:<br>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback(function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback(function( playerId ){
+	var vdp = document.getElementById( playerId );
 	// alert the entry name
-	alert('Entry name: '+ kdp.evaluate('{mediaProxy.entry.name}') );
+	alert('Entry name: '+ vdp.evaluate('{mediaProxy.entry.name}') );
 });
 </pre>
 <h3>Available Properties:</h3>
 <?php echo getOutlineContent( $evaluates ) ?>
 
 
-<a name="setKDPAttribute-desc"></a>
+<a name="setVDPAttribute-desc"></a>
 <h3>Setting a player attribute</h3>
-<p>Use the <b>setKDPAttribute</b> method to change a player attribute by setting its value.</p>
+<p>Use the <b>setVDPAttribute</b> method to change a player attribute by setting its value.</p>
 <br>Code sample:<br>
 <pre class="prettyprint linenums">
 vdp.setVDPAttribute("configProxy.flashvars","autoPlay","true")
@@ -522,11 +522,11 @@ vdp.setVDPAttribute("configProxy.flashvars","autoPlay","true")
 var vdp = document.getElementById('vVideoTarget');
 vdp.setVDPAttribute("theme", "buttonsSize", "14");
 </pre>
-<?php echo getDocs( array( 'setKDPAttribute' ) ) ?>
+<?php echo getDocs( array( 'setVDPAttribute' ) ) ?>
 
 <h3 id="standAlonePlayerModes" > Stand Alone Player Modes </h3>
-	Kaltura player supports several modes for associating content and configuration with the player. To 
-	evaluate of what is best for your integration requirements we strongly recommend consulting with Kaltura 
+	Vidiun player supports several modes for associating content and configuration with the player. To 
+	evaluate of what is best for your integration requirements we strongly recommend consulting with Vidiun 
 	Solutions team.<br><br>
 	
 	<ul>
@@ -539,16 +539,16 @@ vdp.setVDPAttribute("theme", "buttonsSize", "14");
 			</ul>
 		</li>
 		<li> <b>Embed Services Lib</b> -- The "embed service" library includes tools for translating your own entitiy 
-		 and player JSON data store against Kaltura player provided identifiers.
+		 and player JSON data store against Vidiun player provided identifiers.
 		 	<ul>
-				<li> Recommended approach for connecting the player to multiple entity services outside of Kaltura API</li>
+				<li> Recommended approach for connecting the player to multiple entity services outside of Vidiun API</li>
 				<li> Retains portability, native apps, and player iframe services.</li>
 				<li> Compatible with entity baaed plugins or clip lists ( playlist, related videos, etc. ) </li>
 			</ul>
 		</li>
-		<li> <b> Kaltura Platform API </b> -- baseline platform data provider 
+		<li> <b> Vidiun Platform API </b> -- baseline platform data provider 
 			<ul>
-				<li> Uses Kaltura provided entries with flexible custom MetaData store, internal and external asset urls references etc.</li>
+				<li> Uses Vidiun provided entries with flexible custom MetaData store, internal and external asset urls references etc.</li>
 			</ul>
 		</li>  
 	</ul> 

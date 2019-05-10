@@ -1,6 +1,6 @@
 {
     "omnitureOnPage": {
-        "description": "The Omniture s_code config version of the plugin, allows you to connect the Omniture plugin to your existing s_code.js\r\n\t\t\tconfiguration for easy integration of video analytics into an Omniture site.<br>For full implementation guide see <a target=\"_new\" href=\"http://knowledge.kaltura.com/omniture-plugin-setup-and-information-guide\">Omniture on page</a> in the Knowledge Center",
+        "description": "The Omniture s_code config version of the plugin, allows you to connect the Omniture plugin to your existing s_code.js\r\n\t\t\tconfiguration for easy integration of video analytics into an Omniture site.<br>For full implementation guide see <a target=\"_new\" href=\"http://knowledge.vidiun.com/omniture-plugin-setup-and-information-guide\">Omniture on page</a> in the Knowledge Center",
         "attributes": {
             "s_codeUrl": {
                 "doc": "The URL to the Ominture generated sCode file that must be set in the uiConf (not via flashvars). This parameter is required for the plugin to work.",
@@ -35,8 +35,8 @@
                 "type": "string"
             },
             "customEvents": {
-                "doc": "A comma separated list of Kaltura player events you want to track.",
-                "label": "Kaltura player events",
+                "doc": "A comma separated list of Vidiun player events you want to track.",
+                "label": "Vidiun player events",
                 "type": "string"
             },
             "additionalEvarsAndProps": {
@@ -45,8 +45,8 @@
                 "type": "string"
             },
             "additionalEvarsAndPropsValues": {
-                "doc": "A comma separated list of Kaltura values, you want to pass along with every media event.\r\n\t\t\t\tValues will correspond to the evars and props comma separated map defined in additionalEvarsAndProps.",
-                "label": "Kaltura values",
+                "doc": "A comma separated list of Vidiun values, you want to pass along with every media event.\r\n\t\t\t\tValues will correspond to the evars and props comma separated map defined in additionalEvarsAndProps.",
+                "label": "Vidiun values",
                 "type": "string"
             },
             "autoTrack": {
@@ -157,8 +157,8 @@
     "chaptersEdit": {
         "description": "Provides a simple interface for editing chapter annotation data. You \r\n\t\tmust provide your credentials on the \"integrate\" tab and select an entry from your \r\n\t\taccount to edits it's chapter cuePoints.",
         "attributes": {
-            "ks": {
-                "doc": "The authentication ks, required until we have iframe auth system in place",
+            "vs": {
+                "doc": "The authentication vs, required until we have iframe auth system in place",
                 "type": "string",
                 "hideEdit": true
             },
@@ -189,7 +189,7 @@
         }
     },
     "chaptersView": {
-        "description": "Display video chapter information. See <a target=\"_blank\" href=\"http://player.kaltura.com/kWidget/onPagePlugins/chapters/ChapterSamples.html\">chapter samples</a>, for highlighted sample chapter configuration",
+        "description": "Display video chapter information. See <a target=\"_blank\" href=\"http://player.vidiun.com/vWidget/onPagePlugins/chapters/ChapterSamples.html\">chapter samples</a>, for highlighted sample chapter configuration",
         "attributes": {
             "containerId": {
                 "doc": "Default: null, The chapter container id, will override some layout settings and allow you to place the chapters in a target div.",
@@ -296,7 +296,7 @@
             },
             "path": {
                 "doc": "",
-                "initvalue": "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+                "initvalue": "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
                 "type": "hidden"
             },
             "chapterRenderer": {

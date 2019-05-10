@@ -1,24 +1,24 @@
 ( function( mw, $ ) {"use strict";
 
 /* Base API helper */
-mw.KApiPartnerCache = [];
-mw.kApiGetPartnerClient = function( widgetId ){
-	if( !mw.KApiPartnerCache[ widgetId ] ){
-		mw.KApiPartnerCache[ widgetId ] = new kWidget.api( {'wid':widgetId} );
+mw.VApiPartnerCache = [];
+mw.vApiGetPartnerClient = function( widgetId ){
+	if( !mw.VApiPartnerCache[ widgetId ] ){
+		mw.VApiPartnerCache[ widgetId ] = new vWidget.api( {'wid':widgetId} );
 	}
-	return mw.KApiPartnerCache[ widgetId ];
+	return mw.VApiPartnerCache[ widgetId ];
 };
 
 /* Base Widget support*/
-mw.KWidgetSupport = function( options ) {
-	// Create KWidgetSupport instance
+mw.VWidgetSupport = function( options ) {
+	// Create VWidgetSupport instance
 	return this.init( options );
 };
 mw.VWidgetSupport.prototype = {
 
-	// The Kaltura client local reference
-	kClient : null,
-	kSessionId: null, // Used for Analytics events
+	// The Vidiun client local reference
+	vClient : null,
+	vSessionId: null, // Used for Analytics events
 	originalStreamerType: null,
 
 	// Constructor check settings etc
@@ -34,8 +34,8 @@ mw.VWidgetSupport.prototype = {
 		window.getStringByKey = function(key){
 
 
-			var playerConfig = window.kalturaIframePackageData.playerConfig;
-			var localizationCode = window.kalturaIframePackageData.enviornmentConfig["localizationCode"] || false;
+			var playerConfig = window.vidiunIframePackageData.playerConfig;
+			var localizationCode = window.vidiunIframePackageData.enviornmentConfig["localizationCode"] || false;
 			if (playerConfig && playerConfig.plugins && playerConfig.plugins.strings ){
 				if (localizationCode && playerConfig.plugins.strings[localizationCode + "." + key]){ // handle flat localized keys
 					return playerConfig.plugins.strings[localizationCode + "." + key];
@@ -97,7 +97,7 @@ mw.VWidgetSupport.prototype = {
 			return ;
 		}
 		mw.setConfig("nativeVersion", embedPlayer.getFlashvars("nativeVersion"));
-		// Overrides the direct download link to kaltura specific download.php tool for
+		// Overrides the direct download link to vidiun specific download.php tool for
 		// selecting a download / playback flavor based on user agent.
 		embedPlayer.bindHelper( 'directDownloadLink', function( event, downloadUrlCallback ) {
 			var baseUrl = mw.getConfig('wgLoadScript').replace( 'load.php', '' );
@@ -112,22 +112,22 @@ mw.VWidgetSupport.prototype = {
 				downloadUrl += '/entry_id/'+ embedPlayer.ventryid;
 			}
 
-			// Get KS and append to download url ( should be sync call )
-			var client = mw.kApiGetPartnerClient( embedPlayer.kwidgetid );
-			// Append ks & referrer for access control
-			downloadUrl += '/referrer/' +  base64_encode( kWidgetSupport.getHostPageUrl() );
-			var ks = client.getKs();
-			if( ks ){
-				downloadUrl += '/ks/' + ks;
+			// Get VS and append to download url ( should be sync call )
+			var client = mw.vApiGetPartnerClient( embedPlayer.vwidgetid );
+			// Append vs & referrer for access control
+			downloadUrl += '/referrer/' +  base64_encode( vWidgetSupport.getHostPageUrl() );
+			var vs = client.getVs();
+			if( vs ){
+				downloadUrl += '/vs/' + vs;
 			}
 			downloadUrl += '/?playSessionId=' + _this.getGUID();
 
 			downloadUrlCallback( downloadUrl );
 		});
 		
-		// Add hook for check player sources to use local kEntry ID source check:
+		// Add hook for check player sources to use local vEntry ID source check:
 		embedPlayer.bindHelper( 'checkPlayerSourcesEvent', function( event, callback ) {
-			_this.originalStreamerType = embedPlayer.getKalturaConfig( null, 'streamerType' ) ? embedPlayer.getKalturaConfig( null, 'streamerType' ) : 'http';
+			_this.originalStreamerType = embedPlayer.getVidiunConfig( null, 'streamerType' ) ? embedPlayer.getVidiunConfig( null, 'streamerType' ) : 'http';
 			_this.loadAndUpdatePlayerData( embedPlayer, callback );
 		});
 
@@ -142,15 +142,15 @@ mw.VWidgetSupport.prototype = {
 				width: embedPlayer.getWidth(),
 				height: embedPlayer.getHeight()
 			});
-			if( embedPlayer.getFlashvars( 'loadThumbnailWithKs' ) === true ) {
-				thumbUrl += '/ks/' + embedPlayer.getFlashvars('ks');
+			if( embedPlayer.getFlashvars( 'loadThumbnailWithVs' ) === true ) {
+				thumbUrl += '/vs/' + embedPlayer.getFlashvars('vs');
 			}
 			if (mw.getConfig('thumbnailUrl')) {
 				thumbUrl = embedPlayer.evaluate(mw.getConfig('thumbnailUrl'));
 			}
 			var alt = gM('mwe-embedplayer-video-thumbnail-for', embedPlayer.evaluate('{mediaProxy.entry.name}'));
 			embedPlayer.updatePoster( thumbUrl, alt );
-			embedPlayer.isAudioPlayer = ( embedPlayer.kalturaPlayerMetaData.mediaType === 5 );
+			embedPlayer.isAudioPlayer = ( embedPlayer.vidiunPlayerMetaData.mediaType === 5 );
 		});
 
 		// Add black sources:
@@ -184,7 +184,7 @@ mw.VWidgetSupport.prototype = {
 				embedPlayer.handlePlayerError(data);
 				return;
 			}
-			_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.kentryid , function ( sources ) {
+			_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.ventryid , function ( sources ) {
 				// no sources, or access control error.
 				if ( !sources || sources.message ) {
 					embedPlayer.showErrorMsg( sources );
@@ -202,7 +202,7 @@ mw.VWidgetSupport.prototype = {
 		} );
 
 		// Support mediaPlayFrom, mediaPlayTo properties
-		embedPlayer.bindHelper( 'Kaltura_SetKDPAttribute', function(e, componentName, property, value){
+		embedPlayer.bindHelper( 'Vidiun_SetVDPAttribute', function(e, componentName, property, value){
 			if (!value && value !== 0) {
 				return;
 			}
@@ -287,12 +287,12 @@ mw.VWidgetSupport.prototype = {
 			if (playerData.contextData &&
 				$.isArray(playerData.contextData.accessControlActions)) {
 
-				var kalturaAccessControlModifyRequestHostRegexActions= $.grep(playerData.contextData.accessControlActions,function(action) {
-					return action.type===7;////KalturaAccessControlModifyRequestHostRegexAction
+				var vidiunAccessControlModifyRequestHostRegexActions= $.grep(playerData.contextData.accessControlActions,function(action) {
+					return action.type===7;////VidiunAccessControlModifyRequestHostRegexAction
 				});
 
-				if (kalturaAccessControlModifyRequestHostRegexActions.length>0) {
-					var action=kalturaAccessControlModifyRequestHostRegexActions[0];
+				if (vidiunAccessControlModifyRequestHostRegexActions.length>0) {
+					var action=vidiunAccessControlModifyRequestHostRegexActions[0];
 
 					if (action.pattern && action.replacement) {
 						var regExp=new RegExp(action.pattern, "i");
@@ -328,7 +328,7 @@ mw.VWidgetSupport.prototype = {
             !mw.getConfig('forceHDS') ){
 
 			mw.setConfig("LeadWithHLSOnFlash",true);
-            mw.setConfig("isLiveKalturaHLS",true);
+            mw.setConfig("isLiveVidiunHLS",true);
 
 		}
 
@@ -363,7 +363,7 @@ mw.VWidgetSupport.prototype = {
 				// Set live property to true
 				embedPlayer.setLive( true );
 			}
-		} else if ( mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'kplayer' ) ) {
+		} else if ( mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'vplayer' ) ) {
 			var streamerType = this.resolveFlashStreamerType(embedPlayer, playerData);
 			// Add live stream source
 			this.addLiveEntrySource( embedPlayer, playerData.meta, true, false, streamerType );
@@ -371,7 +371,7 @@ mw.VWidgetSupport.prototype = {
 			// Set live property to true
 			embedPlayer.setLive( true );
 		} else if ( !isStreamSupported ) {
-			embedPlayer.setError( embedPlayer.getKalturaMsg('LIVE-STREAM-NOT-SUPPORTED') );
+			embedPlayer.setError( embedPlayer.getVidiunMsg('LIVE-STREAM-NOT-SUPPORTED') );
 		}
 	},
 	hasLivestreamConfig: function ( playerData, protocol ) {
@@ -444,7 +444,7 @@ mw.VWidgetSupport.prototype = {
 	},
 	resolveFlashStreamerType: function(embedPlayer, playerData){
 		var streamerType;
-		var streamerTypeFV = embedPlayer.getKalturaConfig( null, 'streamerType' );
+		var streamerTypeFV = embedPlayer.getVidiunConfig( null, 'streamerType' );
 		if ( streamerTypeFV && this.hasLivestreamConfig( playerData, streamerTypeFV ) ) {
 			streamerType = streamerTypeFV;
 		}
@@ -506,7 +506,7 @@ mw.VWidgetSupport.prototype = {
 		}
 
 		//Set proxyData response data
-		embedPlayer.setKalturaConfig( 'proxyData', playerData.meta.partnerData);
+		embedPlayer.setVidiunConfig( 'proxyData', playerData.meta.partnerData);
 	},
 
 	addSessionIdToSrc: function(srcURL){
@@ -539,11 +539,11 @@ mw.VWidgetSupport.prototype = {
 	updateImagePlayerData: function(embedPlayer, playerData){
 		// Check for "image" mediaType ( 2 )
 		if( playerData.meta && playerData.meta.mediaType == 2 ){
-			mw.log( 'KWidgetSupport::updatePlayerData: Add Entry Image' );
+			mw.log( 'VWidgetSupport::updatePlayerData: Add Entry Image' );
 			embedPlayer.mediaElement.tryAddSource(
 				$('<source />')
 					.attr( {
-						'src' : this.getKalturaThumbnailUrl({
+						'src' : this.getVidiunThumbnailUrl({
 							url: playerData.meta.thumbnailUrl,
 							width: embedPlayer.getWidth(),
 							height: embedPlayer.getHeight()
@@ -557,18 +557,18 @@ mw.VWidgetSupport.prototype = {
 	updateExternalPlayerData: function(embedPlayer, playerData){
 		// Check for external media:
 		if( playerData.meta && playerData.meta.type == "externalMedia.externalMedia" ){
-			$( embedPlayer ).trigger( 'KalturaSupport_AddExternalMedia', playerData.meta );
+			$( embedPlayer ).trigger( 'VidiunSupport_AddExternalMedia', playerData.meta );
 		}
 	},
 	isNoEntryId: function(playerData){
 		return playerData.meta && playerData.meta.code == 'ENTRY_ID_NOT_FOUND';
 	},
 	handleNoEntryId: function(embedPlayer){
-		$( embedPlayer ).trigger( 'KalturaSupport_EntryFailed' );
+		$( embedPlayer ).trigger( 'VidiunSupport_EntryFailed' );
 	},
 	updatePlayerEntryData: function(embedPlayer, playerData){
 		// Look for custom metadata in playerData.entryMeta and entryMetadata ( mediaProxy override name )
-		embedPlayer.kalturaEntryMetaData = ( playerData.entryMeta ) ? playerData.entryMeta : playerData.entryMetadata;
+		embedPlayer.vidiunEntryMetaData = ( playerData.entryMeta ) ? playerData.entryMeta : playerData.entryMetadata;
 	},
 	updatePlayerMetaData: function(embedPlayer, playerData){
 		// Lock for "entry" in 'meta' and 'entry' ( mediaProxy override name )
@@ -576,24 +576,24 @@ mw.VWidgetSupport.prototype = {
 		// Apply player entry metadata
 		if( meta ) {
 			// We have to assign embedPlayer metadata as an attribute to bridge the iframe
-			embedPlayer.kalturaPlayerMetaData = meta;
+			embedPlayer.vidiunPlayerMetaData = meta;
 
 			if ( meta.moderationStatus && (!playerData.contextData || !playerData.contextData.isAdmin) ) {
 				if ( meta.moderationStatus == 1 ) {
-					embedPlayer.setError( embedPlayer.getKalturaMsgObject('ks-ENTRY_MODERATE') );
+					embedPlayer.setError( embedPlayer.getVidiunMsgObject('vs-ENTRY_MODERATE') );
 				} else if ( meta.moderationStatus == 3 ) {
-					embedPlayer.setError( embedPlayer.getKalturaMsgObject('ks-ENTRY_REJECTED') );
+					embedPlayer.setError( embedPlayer.getVidiunMsgObject('vs-ENTRY_REJECTED') );
 				}
 			}
 		}
 	},
 	initCuePointsService: function(embedPlayer, playerData){
 		// check for Cuepoint data and load cuePoints,
-		// TODO optimize cuePoints as hard or soft dependency on kWidgetSupport
+		// TODO optimize cuePoints as hard or soft dependency on vWidgetSupport
 		if( (playerData.entryCuePoints && playerData.entryCuePoints.length > 0) ||
 			( embedPlayer.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints") ) ) {
 			embedPlayer.rawCuePoints = playerData.entryCuePoints || [];
-			embedPlayer.kCuePoints = new mw.KCuePoints( embedPlayer );
+			embedPlayer.vCuePoints = new mw.VCuePoints( embedPlayer );
 		}
 	},
 
@@ -817,9 +817,9 @@ mw.VWidgetSupport.prototype = {
 		var doneWithUiConf = function(){
 
 			if( embedPlayer.rawCuePoints || ( embedPlayer.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints") ) ){
-				mw.log("KWidgetSupport:: trigger KalturaSupport_CuePointsReady", embedPlayer.rawCuePoints);
+				mw.log("VWidgetSupport:: trigger VidiunSupport_CuePointsReady", embedPlayer.rawCuePoints);
 				// Allow other plugins to subscribe to cuePoint ready event:
-				$( embedPlayer ).trigger( 'KalturaSupport_CuePointsReady', [embedPlayer.rawCuePoints] );
+				$( embedPlayer ).trigger( 'VidiunSupport_CuePointsReady', [embedPlayer.rawCuePoints] );
 			}
 
 			// Trigger the early player events ( after uiConf handling has a chance to setup bindings
@@ -893,7 +893,7 @@ mw.VWidgetSupport.prototype = {
 			mw.setConfig('EmbedPlayer.ShowPlayerAlerts', false );
 		}
 
-		var mediaProxy = embedPlayer.getKalturaConfig('mediaProxy');
+		var mediaProxy = embedPlayer.getVidiunConfig('mediaProxy');
 		// handle mediaProxy properties
 		if ( mediaProxy ){
 			// check for preferedFlavorBR
@@ -909,9 +909,9 @@ mw.VWidgetSupport.prototype = {
 
 			// Check for mediaPlayFrom
 			// first check in hash
-			var mediaPlayFrom = kWidget.getHashParam("t");
+			var mediaPlayFrom = vWidget.getHashParam("t");
 			if ( mediaPlayFrom ){
-				mediaPlayFrom = kWidget.npt2seconds(mediaPlayFrom);
+				mediaPlayFrom = vWidget.npt2seconds(mediaPlayFrom);
 			}
 			// now cheeck in Flashvars - will override hash params
 			if (mediaProxy.mediaPlayFrom){
@@ -919,7 +919,7 @@ mw.VWidgetSupport.prototype = {
 			}
 			if (mediaPlayFrom && !embedPlayer.startTime) {
 				embedPlayer.startTime = parseFloat( mediaPlayFrom );
-				mw.setConfig( "Kaltura.UseAppleAdaptive" , true) ;
+				mw.setConfig( "Vidiun.UseAppleAdaptive" , true) ;
 			}
 			// Check for mediaPlayTo
 			var mediaPlayTo = mediaProxy.mediaPlayTo;
@@ -1051,9 +1051,9 @@ mw.VWidgetSupport.prototype = {
 	getEntryIdSourcesFromApi:  function( embedPlayer, entryId, callback ){
 		var _this = this;
 		var sources;
-		mw.log( "KWidgetSupport:: getEntryIdSourcesFromApi: w:" + embedPlayer.kwidgetid + ' entry:' + embedPlayer.kentryid );
-		this.kClient = mw.kApiEntryLoader({
-			'widget_id': embedPlayer.kwidgetid,
+		mw.log( "VWidgetSupport:: getEntryIdSourcesFromApi: w:" + embedPlayer.vwidgetid + ' entry:' + embedPlayer.ventryid );
+		this.vClient = mw.vApiEntryLoader({
+			'widget_id': embedPlayer.vwidgetid,
 			'entry_id': entryId
 		}, function( playerData ){
 			// Check access control
@@ -1076,14 +1076,14 @@ mw.VWidgetSupport.prototype = {
 					}];
 			} else {
 				// Get device sources
-				sources = _this.getEntryIdSourcesFromPlayerData( embedPlayer.kpartnerid, playerData );
+				sources = _this.getEntryIdSourcesFromPlayerData( embedPlayer.vpartnerid, playerData );
 			}
 			// Return the valid source set
 			callback( sources );
 		});
 	},
 	/**
-	 * Sets up variables and issues the mw.kEntryLoader call
+	 * Sets up variables and issues the mw.vEntryLoader call
 	 */
 	loadPlayerData: function( embedPlayer, callback ){
 		var _this = this;
@@ -1114,13 +1114,13 @@ mw.VWidgetSupport.prototype = {
 		// Add features
 		playerRequest.features = vidiunIframePackageData.apiFeatures;
 
-		// Set KS from flashVar
-		this.kClient = mw.kApiGetPartnerClient( playerRequest.widget_id );
-		this.kClient.setKs( embedPlayer.getFlashvars( 'ks' ) );
+		// Set VS from flashVar
+		this.vClient = mw.vApiGetPartnerClient( playerRequest.widget_id );
+		this.vClient.setVs( embedPlayer.getFlashvars( 'vs' ) );
 
 			// Check for playlist cache based
-			if( window.kalturaIframePackageData && window.kalturaIframePackageData.playlistResult ){
-				var pl = window.kalturaIframePackageData.playlistResult;
+			if( window.vidiunIframePackageData && window.vidiunIframePackageData.playlistResult ){
+				var pl = window.vidiunIframePackageData.playlistResult;
 				for( var plId in pl ) break;
 				if( pl[plId].content.indexOf('<?xml') === 0 ){
 					// convert to comma seperated entries
@@ -1130,13 +1130,13 @@ mw.VWidgetSupport.prototype = {
 					}
 					pl[plId].content = entryList.join(',');
 				}
-				embedPlayer.kalturaPlaylistData = pl;
-				delete( window.kalturaIframePackageData.playlistResult );
+				embedPlayer.vidiunPlaylistData = pl;
+				delete( window.vidiunIframePackageData.playlistResult );
 			}
 
 			// Check for entry cache:
-			if( window.kalturaIframePackageData && window.kalturaIframePackageData.entryResult ){
-				var entryResult =  window.kalturaIframePackageData.entryResult;
+			if( window.vidiunIframePackageData && window.vidiunIframePackageData.entryResult ){
+				var entryResult =  window.vidiunIframePackageData.entryResult;
 				_this.handlePlayerData( embedPlayer, entryResult );
 				//if we dont have special widgetID or the KS is defined continue as usual
 				var kpartnerid = embedPlayer.kpartnerid ? embedPlayer.kpartnerid : "";
@@ -1152,16 +1152,16 @@ mw.VWidgetSupport.prototype = {
 						embedPlayer.playerConfig.vars.ks = ks;
 						callback( entryResult );
 					},function(){
-						mw.log("Error occur while trying to create widget KS");
+						mw.log("Error occur while trying to create widget VS");
 						callback( entryResult );
 					});
 				}
 				// remove the entryResult from the payload
-				delete( window.kalturaIframePackageData.entryResult );
+				delete( window.vidiunIframePackageData.entryResult );
 				return ;
 			}
 			// Run the request:
-			_this.kClient = mw.kApiEntryLoader( playerRequest, function( playerData ) {
+			_this.vClient = mw.vApiEntryLoader( playerRequest, function( playerData ) {
 				_this.handlePlayerData( embedPlayer , playerData );
 				callback( playerData );
 			});
@@ -1170,17 +1170,17 @@ mw.VWidgetSupport.prototype = {
 	},
 	handlePlayerError: function(embedPlayer, data){
 		var errObj = null;
-		if( data.meta &&  data.meta.code == "INVALID_KS" ){
-			errObj = embedPlayer.getKalturaMsgObject( "NO_KS" );
+		if( data.meta &&  data.meta.code == "INVALID_VS" ){
+			errObj = embedPlayer.getVidiunMsgObject( "NO_VS" );
 		}
 		if( data.meta && (data.meta.status == 1 || data.meta.status == 0) ){
 			errObj = embedPlayer.getKalturaMsgObject( "ks-ENTRY_CONVERTING" );
 		}
 		if( data.error ) {
-			errObj = embedPlayer.getKalturaMsgObject( 'GENERIC_ERROR' );
+			errObj = embedPlayer.getVidiunMsgObject( 'GENERIC_ERROR' );
 			errObj.message = data.error;
 			if( data.contextData &&  data.contextData.isScheduledNow === false ){
-				errObj = embedPlayer.getKalturaMsgObject( "OUT_OF_SCHEDULING" );
+				errObj = embedPlayer.getVidiunMsgObject( "OUT_OF_SCHEDULING" );
 			}
 		}
 
@@ -1342,7 +1342,7 @@ mw.VWidgetSupport.prototype = {
 				source.src = source.src +  qp + flashvarsPlayMainfestParams;
 			}
 
-			mw.log( 'KWidgetSupport:: addSource::' + embedPlayer.id + ' : ' +  source.src + ' type: ' +  source.type);
+			mw.log( 'VWidgetSupport:: addSource::' + embedPlayer.id + ' : ' +  source.src + ' type: ' +  source.type);
 			var sourceElm = $('<source />')
 				.attr( source )
 				.get( 0 );
@@ -1366,7 +1366,7 @@ mw.VWidgetSupport.prototype = {
 			}
 		});
 
-		p += and + 'uiConfId' + equalDelimiter + embedPlayer.kuiconfid;
+		p += and + 'uiConfId' + equalDelimiter + embedPlayer.vuiconfid;
 		return p;
 	},
 	/**
@@ -1691,7 +1691,7 @@ mw.VWidgetSupport.prototype = {
 		}
 
 		//Only support ABR on-the-fly for DRM protected entries
-		if( mw.getConfig('Kaltura.UseFlavorIdsUrls') && !$.isEmptyObject(flavorDrmData)) {
+		if( mw.getConfig('Vidiun.UseFlavorIdsUrls') && !$.isEmptyObject(flavorDrmData)) {
 			var validClipAspect = this.getValidAspect(deviceSources);
 			//Only add mpeg dash CENC on the fly if dash sources exist
 			if (dashAdaptiveFlavors.length) {
@@ -1747,7 +1747,7 @@ mw.VWidgetSupport.prototype = {
 		if( !this.removedAdaptiveFlavors &&
 				(mw.isAndroid() && !mw.isNativeApp()) &&
 				hasH264Flavor &&
-				!mw.getConfig( 'Kaltura.LeadHLSOnAndroid' ) ) {
+				!mw.getConfig( 'Vidiun.LeadHLSOnAndroid' ) ) {
 			deviceSources = this.removeAdaptiveFlavors( deviceSources );
 		}
 
@@ -1756,7 +1756,7 @@ mw.VWidgetSupport.prototype = {
 			deviceSources = this.removeAdaptiveFlavors( deviceSources );
 		}
 
-		// if we have streamertype that is not hls and we support hls on the native player - we'll use kplayer + hls - we want to eliminate  this option
+		// if we have streamertype that is not hls and we support hls on the native player - we'll use vplayer + hls - we want to eliminate  this option
 		// for now the only usecase is microsoft edge browser
 		if ( mw.supportsFlash()  &&
 			this.originalStreamerType &&
@@ -1770,17 +1770,17 @@ mw.VWidgetSupport.prototype = {
 			//remove someone if duplicate
 		}*/
 
-		// Append KS to all source if available
-		// Get KS for playManifest URL ( this should run synchronously since ks should already be available )
-		var ks = this.kClient.getKs();
+		// Append VS to all source if available
+		// Get VS for playManifest URL ( this should run synchronously since vs should already be available )
+		var vs = this.vClient.getVs();
 
-		var ksStr = '';
-		var ksQueryString = '';
+		var vsStr = '';
+		var vsQueryString = '';
 
-		if (ks){
-			var manifestKs = _this.fixPlaymanifestParam( ks );
-			ksStr = '/ks/' + manifestKs;
-			ksQueryString = '&ks=' + manifestKs;
+		if (vs){
+			var manifestVs = _this.fixPlaymanifestParam( vs );
+			vsStr = '/vs/' + manifestVs;
+			vsQueryString = '&vs=' + manifestVs;
 		}
 
 		var referrer =   _this.fixPlaymanifestParam( base64_encode( _this.getHostPageUrl() ) );
@@ -1790,14 +1790,14 @@ mw.VWidgetSupport.prototype = {
 		$.each( deviceSources, function(inx, source){
 			if ( deviceSources[inx]['disableQueryString'] == true ) {
 				var index = deviceSources[inx]['src'].lastIndexOf('/a.');
-				deviceSources[inx]['src'] = deviceSources[inx]['src'].substring(0, index) + ksStr +
+				deviceSources[inx]['src'] = deviceSources[inx]['src'].substring(0, index) + vsStr +
 					'/referrer/' + referrer +
 					'/clientTag/' + clientTag +
 					'/playSessionId/' + _this.getGUID() +
 					deviceSources[inx]['src'].substring(index) ;
 			} else {
 				deviceSources[inx]['src'] = deviceSources[inx]['src'] +
-					'?referrer=' + referrer + ksQueryString +
+					'?referrer=' + referrer + vsQueryString +
 					'&playSessionId=' + _this.getGUID()+
 					'&clientTag=' + clientTag;
 			}
@@ -1833,9 +1833,9 @@ mw.VWidgetSupport.prototype = {
 	getFlavorAssetsDrmData: function(playerData){
 		var flavorDrmData = {};
 		if (playerData.contextData.pluginData &&
-			playerData.contextData.pluginData.KalturaDrmEntryContextPluginData &&
-			playerData.contextData.pluginData.KalturaDrmEntryContextPluginData.flavorData){
-			flavorDrmData = playerData.contextData.pluginData.KalturaDrmEntryContextPluginData.flavorData;
+			playerData.contextData.pluginData.VidiunDrmEntryContextPluginData &&
+			playerData.contextData.pluginData.VidiunDrmEntryContextPluginData.flavorData){
+			flavorDrmData = playerData.contextData.pluginData.VidiunDrmEntryContextPluginData.flavorData;
 		}
 		return flavorDrmData;
 	},
@@ -1920,24 +1920,24 @@ mw.VWidgetSupport.prototype = {
 		} else {
 			embedPlayer.setFlashvars( 'streamerType', 'http' );
 			extension = 'm3u8';
-			protocol = mw.getConfig('Kaltura.Protocol');
+			protocol = mw.getConfig('Vidiun.Protocol');
 			if( !protocol ){
 				protocol = window.location.protocol.replace(':','');
 			}
 			mimeType = 'application/vnd.apple.mpegurl';
 		}
 
-		var srcUrl = this.getBaseFlavorUrl(entry.partnerId) + '/entryId/' + entry.id + '/format/' + format + '/protocol/' + protocol + '/uiConfId/' + embedPlayer.kuiconfid +  '/a.' + extension;
-		// Append KS & Referrer
+		var srcUrl = this.getBaseFlavorUrl(entry.partnerId) + '/entryId/' + entry.id + '/format/' + format + '/protocol/' + protocol + '/uiConfId/' + embedPlayer.vuiconfid +  '/a.' + extension;
+		// Append VS & Referrer
 		srcUrl += '?referrer=' + base64_encode( _this.getHostPageUrl() ) + '&playSessionId=' + _this.getGUID();
 		var deferred = $.Deferred();
-		var ks = _this.kClient.getKs();
-		if( ks ){
-			srcUrl += '&ks=' + ks;
+		var vs = _this.vClient.getVs();
+		if( vs ){
+			srcUrl += '&vs=' + vs;
 		}
 
 		//add source
-		mw.log( 'KWidgetSupport::addLiveEntrySource: Add Live Entry Source - ' + srcUrl );
+		mw.log( 'VWidgetSupport::addLiveEntrySource: Add Live Entry Source - ' + srcUrl );
 		embedPlayer.mediaElement.tryAddSource(
 			$('<source />')
 				.attr({
@@ -2002,7 +2002,7 @@ if( !window.vWidgetSupport ){
  * Register a global shortcuts for the Vidiun sources query
  */
 mw.getEntryIdSourcesFromApi = function( embedPlayer, entryId, callback ){
-	kWidgetSupport.getEntryIdSourcesFromApi( embedPlayer, entryId, callback);
+	vWidgetSupport.getEntryIdSourcesFromApi( embedPlayer, entryId, callback);
 };
 
 })( window.mw, jQuery );

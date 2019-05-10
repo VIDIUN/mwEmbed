@@ -1,5 +1,5 @@
 (function() {
-	if ( !mw.isChrome() || navigator.userAgent.match(/kalturaNativeCordovaPlayer/) ) {
+	if ( !mw.isChrome() || navigator.userAgent.match(/vidiunNativeCordovaPlayer/) ) {
 		return;
 	}
 	var chrome = window.chrome || {};

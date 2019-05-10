@@ -14,16 +14,16 @@
 	<div id="vidiun_player" style="width: 585px; height: 330px;float: left;"></div>
 	<br style="clear: both;" /><br />
 <script>
-	var kdp;
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	var vdp;
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'readyCallback': function(playerId){
-			kdp = $('#' + playerId)[0];
+			vdp = $('#' + playerId)[0];
 			$("#show").click( function(){
-				kdp.setKDPAttribute('largePlayBtn', 'visible', false);
-				kdp.sendNotification('showSpinner');
+				vdp.setVDPAttribute('largePlayBtn', 'visible', false);
+				vdp.sendNotification('showSpinner');
 				return false;
 			})
 			$("#hide").click(function(){

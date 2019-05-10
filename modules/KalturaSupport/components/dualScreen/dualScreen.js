@@ -1,6 +1,6 @@
 (function ( mw, $ ) {
 	"use strict";
-	mw.PluginManager.add( 'dualScreen', mw.KBaseComponent.extend( {
+	mw.PluginManager.add( 'dualScreen', mw.VBaseComponent.extend( {
 
 			defaultConfig: {
 				"parent": "videoHolder",
@@ -8,8 +8,8 @@
 				"showTooltip": false,
 				"displayImportance": "high",
 				"cuePointType": [{
-					"main": mw.KCuePoints.TYPE.THUMB,
-					"sub": [mw.KCuePoints.THUMB_SUB_TYPE.SLIDE]
+					"main": mw.VCuePoints.TYPE.THUMB,
+					"sub": [mw.VCuePoints.THUMB_SUB_TYPE.SLIDE]
 				}],
 				"prefetch": {
 					"durationPercentageUntilNextSequence": 60,

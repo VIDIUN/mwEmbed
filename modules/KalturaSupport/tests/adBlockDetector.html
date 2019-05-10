@@ -11,11 +11,11 @@
 <body>
 <h1> Player error loading message test </h1>
 
-<div id="kaltura_player" style="width:400px;height:330px"></div>
+<div id="vidiun_player" style="width:400px;height:330px"></div>
 <br style="clear: both;" /><br />
 <script>
-    kWidget.featureConfig({
-        "targetId": "kaltura_player",
+    vWidget.featureConfig({
+        "targetId": "vidiun_player",
         "wid": "_243342",
         "uiconf_id": 21099702,
         "flashvars": {
@@ -30,7 +30,7 @@
             'adsOnReplay':true,
             "adBlockDetector": {
                 "plugin": true,
-                scriptPath: "modules/KalturaSupport/components/adBlockDetector/advertisement.js",
+                scriptPath: "modules/VidiunSupport/components/adBlockDetector/advertisement.js",
                 enableResumePlayback: false,
                 "title": "Ad Block Detected",
                 "message": "Ad Block Detected, Please disable ad block in order to watch content",
@@ -59,8 +59,8 @@
         textBox.appendChild(p)
     }
     function jsCallbackReady(playerId){
-        var kdp = document.getElementById(playerId);
-        kdp.kBind("adBlockDetected", function(){
+        var vdp = document.getElementById(playerId);
+        vdp.vBind("adBlockDetected", function(){
             var textBox = document.getElementById("textBox");
             var p = document.createElement("p");
             p.innerText = "Event adBlockDetected was triggered!";

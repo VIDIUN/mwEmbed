@@ -7,7 +7,7 @@
 <h2> vWidget Dynamic Player Embed </h2>
 
 <br /><br />
-<a id="doIncludeLib" href="#">Include mwEmbed, then run kWidget.embed</a> </br>
+<a id="doIncludeLib" href="#">Include mwEmbed, then run vWidget.embed</a> </br>
 <div id="myVideoTarget" style="width:600px;height:340px;">
 	<!--  SEO and video metadata go here -->
 	<span property="dc:description" content="test folgers coffe"></span>
@@ -54,9 +54,9 @@
 	doEmbedAndLink.onclick = function(){
 		// add the mwEmbed lib: 
 		appendScriptUrl('../../../mwEmbedLoader.php', function(){
-			mw.setConfig('Kaltura.LeadWithHTML5', true);
-			// do the kWidget embed: 
-			kWidget.embed({
+			mw.setConfig('Vidiun.LeadWithHTML5', true);
+			// do the vWidget embed: 
+			vWidget.embed({
 				'targetId': 'myVideoTarget',
 				'wid': '_243342',
 				'uiconf_id' : '20540612',

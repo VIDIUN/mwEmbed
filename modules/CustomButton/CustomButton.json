@@ -1,8 +1,8 @@
 {
   "customButton":{
     "scripts" :["resources/customButton.js"],
-    "dependencies": "mw.KBaseButton",
-    "kalturaPluginName": "customButton",
+    "dependencies": "mw.VBaseButton",
+    "vidiunPluginName": "customButton",
     "styles": "resources/css/customButton.css",
     "messageFile": "CustomButton.i18n.json"
   }

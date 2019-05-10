@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'debugInfo', mw.KBaseComponent.extend({
+mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
 
 	defaultConfig: {
 		templatePath: '../DebugInfo/resources/DebugInfo.tmpl.html',
@@ -168,15 +168,15 @@ mw.PluginManager.add( 'debugInfo', mw.KBaseComponent.extend({
 	},
     getHTML : function(data){
         var templatePath = this.getConfig( 'templatePath' );
-        var rawHTML = window.kalturaIframePackageData.templates[ templatePath ];
+        var rawHTML = window.vidiunIframePackageData.templates[ templatePath ];
 
         return rawHTML;
     },
     refresh: function() {
         var player=this.embedPlayer;
         this.$scope.version=MWEMBED_VERSION;
-        this.$scope.entryid= player.kentryid;
-        this.$scope.kuiconf= player.kuiconfid;
+        this.$scope.entryid= player.ventryid;
+        this.$scope.vuiconf= player.vuiconfid;
         this.$scope.src= player.getSrc();
         var source= player.getSource();
         if (source) {

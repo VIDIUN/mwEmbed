@@ -57,22 +57,22 @@ vWidget.api.prototype = {
 	getVs: function(){
 		return this.vs;
 	},
-	forceKs:function(wid,callback,errorCallback){
-		if( this.getKs() ){
-			callback( this.getKs() );
+	forceVs:function(wid,callback,errorCallback){
+		if( this.getVs() ){
+			callback( this.getVs() );
 			return true;
 		}
 		var _this = this;
-		// Add the Kaltura session ( if not already set )
-		var ksParam = {
+		// Add the Vidiun session ( if not already set )
+		var vsParam = {
 			'action' : 'startwidgetsession',
 			'widgetId': wid
 		};
 		// add in the base parameters:
-		var param = kWidget.extend( { 'service' : 'session' }, this.baseParam, ksParam );
+		var param = vWidget.extend( { 'service' : 'session' }, this.baseParam, vsParam );
 		this.doRequest( param, function( data ){
-			_this.ks = data.ks;
-			callback( _this.ks );
+			_this.vs = data.vs;
+			callback( _this.vs );
 		},null,errorCallback);
 	},
 	/**
@@ -82,7 +82,7 @@ vWidget.api.prototype = {
 		var _this = this;
 		var param = {};
 		var globalCBName = null;
-		// If we have Kaltura.NoApiCache flag, pass 'nocache' param to the client
+		// If we have Vidiun.NoApiCache flag, pass 'nocache' param to the client
 		if( this.disableCache === true ) {
 			param['nocache'] = 'true';
 		}
@@ -94,9 +94,9 @@ vWidget.api.prototype = {
 			}
 		};
 
-		// Check for "user" service queries ( no ks or wid is provided  )
-		if( requestObject['service'] != 'user' && !skipKS ){
-			kWidget.extend( param, this.handleKsServiceRequest( requestObject ) );
+		// Check for "user" service queries ( no vs or wid is provided  )
+		if( requestObject['service'] != 'user' && !skipVS ){
+			vWidget.extend( param, this.handleVsServiceRequest( requestObject ) );
 		} else {
 			vWidget.extend( param, requestObject );
 		}
@@ -104,8 +104,8 @@ vWidget.api.prototype = {
 		// set format to JSON ( Access-Control-Allow-Origin:* )
 		param['format'] = 1;
 
-		// Add kalsig to query:
-		param[ 'kalsig' ] = this.hashCode( kWidget.param( param ) );
+		// Add vidsig to query:
+		param[ 'vidsig' ] = this.hashCode( vWidget.param( param ) );
 		
 		// Remove service tag ( hard coded into the api url )
 		var serviceType = param['service'];
@@ -119,7 +119,7 @@ vWidget.api.prototype = {
 				errorCallback();
 			}
 			//mw.log("Timeout occur in doApiRequest");
-		},mw.getConfig("Kaltura.APITimeout"));
+		},mw.getConfig("Vidiun.APITimeout"));
 
 		var handleDataResult = function( data ){
 			clearTimeout(timeoutError);
@@ -159,16 +159,16 @@ vWidget.api.prototype = {
 			});
 		} catch(e){
 			param['format'] = 9; // jsonp
-			//Delete previous kalSig
-			delete param[ 'kalsig' ];
-			//Regenerate kalSig with amended format
-			var kalSig = this.hashCode( kWidget.param( param ) );
-			// Add kalsig to query:
-			param[ 'kalsig' ] = kalSig;
+			//Delete previous vidSig
+			delete param[ 'vidsig' ];
+			//Regenerate vidSig with amended format
+			var vidSig = this.hashCode( vWidget.param( param ) );
+			// Add vidsig to query:
+			param[ 'vidsig' ] = vidSig;
 			// build the request url: 
 			var requestURL = _this.getApiUrl( serviceType ) + '&' + vWidget.param( param );
 			// try with callback:
-			globalCBName = 'kapi_' + kalSig;
+			globalCBName = 'vapi_' + vidSig;
 			if( window[ globalCBName ] ){
 				// Update the globalCB name inx.
 				this.callbackIndex++;
@@ -280,7 +280,7 @@ vWidget.api.prototype = {
 	parseParam: function(data){
 		var param = data;
 		//Check if we need to request session
-		if (!this.getKs() && (param !== undefined)) {
+		if (!this.getVs() && (param !== undefined)) {
 			//check if request contains dependent params and if so then update reference object num -
 			// because reference index changed due to addition of multirequest startWidgetSession service
 			var paramParts = param.toString().match( /\{(\d+)(:result:.*)\}/ );
@@ -292,12 +292,12 @@ vWidget.api.prototype = {
 		return param;
 	},
 	getApiUrl : function( serviceType ){
-		var serviceUrl = mw.getConfig( 'Kaltura.ServiceUrl' );
-		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Kaltura.StatsServiceUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.StatsServiceUrl' );
+		var serviceUrl = mw.getConfig( 'Vidiun.ServiceUrl' );
+		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Vidiun.StatsServiceUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.StatsServiceUrl' );
 		}
-		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Kaltura.LiveStatsServiceUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.LiveStatsServiceUrl' );
+		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Vidiun.LiveStatsServiceUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.LiveStatsServiceUrl' );
 		}
 		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Kaltura.AnalyticsUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Kaltura.AnalyticsUrl' );

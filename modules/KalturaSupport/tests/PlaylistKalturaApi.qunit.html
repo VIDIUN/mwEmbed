@@ -8,18 +8,18 @@
 
 <script type="text/javascript">
 	// Enable uiconf js which includes external resources
-	mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+	mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-	function jsKalturaPlayerTest( videoId ){
+	function jsVidiunPlayerTest( videoId ){
 		// Name this module
 		module( "playlist" );
-		var kdp = $('#' + videoId )[0];
+		var vdp = $('#' + videoId )[0];
 		var $iframe = $('#' + videoId + '_ifp').contents();
 
 		asyncTest( "Playlist API test #1", function(){
-			kalturaQunitWaitForPlayer(function(){
+			vidiunQunitWaitForPlayer(function(){
 				// look for the playlist:
-				ok( $( $iframe).find( '.medialistContainer.k-vertical' ).length > 0 , "Found vertical playlist" );
+				ok( $( $iframe).find( '.medialistContainer.v-vertical' ).length > 0 , "Found vertical playlist" );
 				equal ( $( $iframe).find('.playlistTitle').text(), "simple two clip pl", "Current playlist index is 0");
 				start();
 			});
@@ -28,21 +28,21 @@
 
 		asyncTest('Playlist API test #2', function() {
 
-			kdp.setKDPAttribute('tabBar', 'selectedIndex', 1);
+			vdp.setVDPAttribute('tabBar', 'selectedIndex', 1);
 
 			setTimeout(function() {
 				start(); // this would tell QUnit to start the test
 				equal ( $( $iframe).find('.playlistTitle').text(), "electric sheep test", "Current playlist index changed to 1");
-				kdp.setKDPAttribute("playlistAPI.dataProvider", "selectedIndex", 1 );
-				equal ( kdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 1, "second clip was selected");
-				ok( typeof($( kdp.evaluate('{playlistAPI.dataProvider}')) === "object") , "dataProvider object was set" );
+				vdp.setVDPAttribute("playlistAPI.dataProvider", "selectedIndex", 1 );
+				equal ( vdp.evaluate('{playlistAPI.dataProvider.selectedIndex}'), 1, "second clip was selected");
+				ok( typeof($( vdp.evaluate('{playlistAPI.dataProvider}')) === "object") , "dataProvider object was set" );
 			}, 3000);
 		});
 	}
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 
 <script>
@@ -83,10 +83,10 @@ vWidget.featureConfig({
 		'playlistAPI': {
 			'plugin' : true,
 			'includeInLayout': true,
-			'kpl0Url': "http://www.kaltura.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&ks={ks}",
-			'kpl0Name': "simple two clip pl",
-			'kpl1Url': "http://www.kaltura.com/index.php/partnerservices2/executeplaylist?playlist_id=0_9ahdych6&partner_id=243342&subp_id=24334200&format=8&ks={ks}",
-			'kpl1Name': "electric sheep test",
+			'vpl0Url': "http://www.vidiun.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&vs={vs}",
+			'vpl0Name': "simple two clip pl",
+			'vpl1Url': "http://www.vidiun.com/index.php/partnerservices2/executeplaylist?playlist_id=0_9ahdych6&partner_id=243342&subp_id=24334200&format=8&vs={vs}",
+			'vpl1Name': "electric sheep test",
 			'autoContinue': true,
 			'autoPlay': false,
 			//'initItemEntryId': '0_swup5zao',

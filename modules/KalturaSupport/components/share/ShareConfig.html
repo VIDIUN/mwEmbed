@@ -9,12 +9,12 @@
 <body>
 <h2>Share Plugin Configuration - Adding a social network</h2>
 <br />
-<div id="kdp" style="width:600px;height:370px;float:left"></div>
-<script type="text/javascript" src="../../tests/resources/qunit-kaltura-bootstrap.js"></script>
+<div id="vdp" style="width:600px;height:370px;float:left"></div>
+<script type="text/javascript" src="../../tests/resources/qunit-vidiun-bootstrap.js"></script>
 <script>
 	function onReadyCallback(playerID){
-		window.kdp = document.getElementById( playerID );
-		kdp.kBind( 'shareEvent', function(event){
+		window.vdp = document.getElementById( playerID );
+		vdp.vBind( 'shareEvent', function(event){
 			// retrieve the share link
 			var shareLink = event.shareLink;
 			$("#shareLink").text(shareLink);
@@ -22,17 +22,17 @@
 		});
 
 		$('#triggerShare').click(function () {
-			window.kdp.sendNotification('doShare');
+			window.vdp.sendNotification('doShare');
 		});
 
 		$('#triggerShareOffset').click(function () {
-			window.kdp.sendNotification('doShare',{"timeOffset":"30"});
+			window.vdp.sendNotification('doShare',{"timeOffset":"30"});
 		});
 	}
 
 
-	kWidget.featureConfig({
-		'targetId': 'kdp',
+	vWidget.featureConfig({
+		'targetId': 'vdp',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'entry_id' : '1_sf5ovm7u',
@@ -54,7 +54,7 @@
 					},
 					"pinterest": {
 						"name": "Pinterest",
-						"icon": "http://projects.kaltura.com/amir/pinterest_blue36x36.png",
+						"icon": "http://projects.vidiun.com/amir/pinterest_blue36x36.png",
 						"cssClass": "",
 						"template": "http://pinterest.com/pin/create/button/?url={share.shareURL}&media={mediaProxy.entry.thumbnailUrl}/width/400&description={mediaProxy.entry.description}",
 						"redirectUrl": ''
@@ -104,8 +104,8 @@ In the example below, the Pinterest social network was added to the Share plugin
 <br>
 Sample code for Share configuration:
 <pre class="prettyprint linenums">
-kWidget.featureConfig({
-		'targetId': 'kdp',
+vWidget.featureConfig({
+		'targetId': 'vdp',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'entry_id' : '1_sf5ovm7u',
@@ -127,7 +127,7 @@ kWidget.featureConfig({
 					},
 					"pinterest": {
 						"name": "Pinterest",
-						"icon": "http://projects.kaltura.com/amir/pinterest_blue36x36.png",
+						"icon": "http://projects.vidiun.com/amir/pinterest_blue36x36.png",
 						"cssClass": "",
 						"template": "http://pinterest.com/pin/create/button/?url={share.shareURL}&media={mediaProxy.entry.thumbnailUrl}/width/400&description={mediaProxy.entry.description}",
 						"redirectUrl": ''

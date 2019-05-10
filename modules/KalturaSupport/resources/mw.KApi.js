@@ -49,7 +49,7 @@ mw.VApi.prototype = {
 	getWidgetId: function( ){
 		return this.widgetId;
 	},
-	doRequest : function( requestObject, callback ,skipKS, errorCallback ){
+	doRequest : function( requestObject, callback ,skipVS, errorCallback ){
 		var _this = this;
 		var param = {};
 		// Convert into a multi-request if no session is set ( vs will be added below )
@@ -101,7 +101,7 @@ mw.VApi.prototype = {
 		// Make sure we have the vidiun session
 		// ideally this could be part of the multi-request but could not get it to work
 		// see commented out code above.
-        if (skipKS) {
+        if (skipVS) {
             _this.doApiRequest( param, callback, errorCallback);
         }else {
             this.getVS( function( vs ){
@@ -150,7 +150,7 @@ mw.VApi.prototype = {
 
 
 
-		var globalCBName = 'kapi_' + _this.getSignature( param );
+		var globalCBName = 'vapi_' + _this.getSignature( param );
 		while( window[ globalCBName ] ){
 			mw.log("Error global callback name already exists: " + globalCBName );
 			// Update the globalCB name inx.
@@ -173,12 +173,12 @@ mw.VApi.prototype = {
 				errorCallback();
 			}
 			mw.log("Timeout occur in doApiRequest:" + requestURL);
-		},mw.getConfig("Kaltura.APITimeout"));
+		},mw.getConfig("Vidiun.APITimeout"));
 		requestURL+= '&callback=' + globalCBName;
-		mw.log("kAPI:: doApiRequest: " + requestURL);
+		mw.log("vAPI:: doApiRequest: " + requestURL);
 		$.ajax( {
 			url: requestURL,
-			cache: mw.getConfig("Kaltura.CacheApiCalls") || true,
+			cache: mw.getConfig("Vidiun.CacheApiCalls") || true,
 			dataType: "script"
 		});
 	},
@@ -187,8 +187,8 @@ mw.VApi.prototype = {
 		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Vidiun.StatsServiceUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Vidiun.StatsServiceUrl' );
 		}
-		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Kaltura.LiveStatsServiceUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.LiveStatsServiceUrl' );
+		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Vidiun.LiveStatsServiceUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.LiveStatsServiceUrl' );
 		}
 		if( serviceType && serviceType == 'analytics' &&  mw.getConfig( 'Kaltura.AnalyticsUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Kaltura.AnalyticsUrl' );

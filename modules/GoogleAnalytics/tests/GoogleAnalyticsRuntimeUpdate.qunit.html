@@ -27,8 +27,8 @@
 			}
 		};
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 	<script type="text/javascript">
 		var testEventObject = {};
 
@@ -45,9 +45,9 @@
 			}
 		}
 
-		function jsKalturaPlayerTest(videoId) {
+		function jsVidiunPlayerTest(videoId) {
 			module("Google Analytics Events Test");
-			var kdp = $('#kaltura_player')[ 0 ];
+			var vdp = $('#vidiun_player')[ 0 ];
 
 			asyncTest("mediaReady event sent", function () {
 				var runTest = function (testEvent) {
@@ -77,10 +77,10 @@
 					equal(testEvent.opt_value, "10", "opt_value doSeek set to seek time");
 					start();
 				});
-				kdp.sendNotification('doPlay');
+				vdp.sendNotification('doPlay');
 				setTimeout(function () {
-					kdp.sendNotification('doPause');
-					kdp.sendNotification('doSeek', 10);
+					vdp.sendNotification('doPause');
+					vdp.sendNotification('doSeek', 10);
 				}, 1000);
 			});
 
@@ -92,14 +92,14 @@
 <h2> Google Analytics </h2>
 <br/>
 
-<div id="kaltura_player" style="width:400px;height:300px"></div>
-<div id="kdoc-more-desc"><br>This google analytics example highlights custom tracking events. Notice the
+<div id="vidiun_player" style="width:400px;height:300px"></div>
+<div id="vdoc-more-desc"><br>This google analytics example highlights custom tracking events. Notice the
 	"related" event within the GA log when selecting a related video.</div>
 <script>
-	// Use the configured analtyics ua or hard code the player.kaltura.com acocunt:
-	var googleAnalyticsAccountId = mw.getConfig( 'Kaltura.PageGoogleAnalytics' ) ? mw.getConfig( 'Kaltura.PageGoogleAnalytics' ): "UA-2078931-34";
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	// Use the configured analtyics ua or hard code the player.vidiun.com acocunt:
+	var googleAnalyticsAccountId = mw.getConfig( 'Vidiun.PageGoogleAnalytics' ) ? mw.getConfig( 'Vidiun.PageGoogleAnalytics' ): "UA-2078931-34";
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '12905712',
 		'entry_id': '0_uka1msg4',
@@ -135,11 +135,11 @@
 			}
 		},
 		'readyCallback': function (playerId) {
-			var kdp = document.getElementById(playerId);
+			var vdp = document.getElementById(playerId);
 
 			$('#log').append( "Player ready -- current urchinCode is: " + googleAnalyticsAccountId + "<br />"	);
 
-			kdp.kBind('Kaltura_ConfigChanged', function(pluginName, property, value){
+			vdp.vBind('Vidiun_ConfigChanged', function(pluginName, property, value){
 				if( property === "urchinCode") {
 					$('#log').append("urchinCode changed -- new urchinCode is: " + value + "<br />");
 				}
@@ -148,7 +148,7 @@
 			// clear the text box:
 			$('#gAnalyticsLog tr:not(#eventRowDesc)').remove();
 			$('.changeUrchinCode').click(function () {
-				kdp.setKDPAttribute('googleAnalytics','urchinCode',"Example-UA-6048931-94");
+				vdp.setVDPAttribute('googleAnalytics','urchinCode',"Example-UA-6048931-94");
 			})
 		}
 	})
@@ -156,7 +156,7 @@
 <br>
 <a class="changeUrchinCode" href=#">Change Account urchinCode</a><br/><br>
 <pre class="prettyprint linenums">
-kdp.setKDPAttribute('googleAnalytics','urchinCode',"Example-UA-6048931-94");
+vdp.setVDPAttribute('googleAnalytics','urchinCode',"Example-UA-6048931-94");
 </pre>
 <br>
 <i>Event Log: </i>

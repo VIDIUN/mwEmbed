@@ -87,7 +87,7 @@
 						_this.updateLayoutTimout = setTimeout(function() {
 							_this.inUpdateLayout = false;
 						},1000);
-						//if we're working with kplayer - mp4 can't be seeked - so disable this feature
+						//if we're working with vplayer - mp4 can't be seeked - so disable this feature
 						//this only effect native for now
 						if (_this.embedPlayer.instanceOf === "Native" && !_this.embedPlayer.isInSequence() ) {
 							// TODO add additional logic for "auto" where multiple bitrates

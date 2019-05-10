@@ -380,8 +380,8 @@
 			this.getVidiunClient().doRequest( {
 				'service' : 'caption_captionasset',
 				'action' : 'list',
-				'filter:objectType' : 'KalturaAssetFilter',
-				'filter:entryIdEqual' : this.getPlayer().kentryid,
+				'filter:objectType' : 'VidiunAssetFilter',
+				'filter:entryIdEqual' : this.getPlayer().ventryid,
 				'filter:statusEqual' : 2,
 				'pager:pageSize': 50
 			}, function( data ) {
@@ -465,7 +465,7 @@
 			var captionsSrc;
 			if( mw.isIphone() && !mw.getConfig('disableTrackElement') && !this.getConfig('forceLoadLanguage') || this.getConfig("forceWebVTT") ) {
 				// getting generated vtt file from dfxp/srt
-				captionsSrc = mw.getConfig('Kaltura.ServiceUrl') +
+				captionsSrc = mw.getConfig('Vidiun.ServiceUrl') +
 							"/api_v3/index.php/service/caption_captionasset/action/serveWebVTT/captionAssetId/" +
 							dbTextSource.id +
 							"/segmentIndex/-1/version/2/captions.vtt";
