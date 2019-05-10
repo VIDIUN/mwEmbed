@@ -25,10 +25,10 @@
 			});
 		},
 		downloadMedia: function() {
-			var ks =  this.getKalturaClient().getKs();
-			var downloadUrl = mw.getMwEmbedPath() + '/modules/KalturaSupport/download.php/wid/';
-				downloadUrl += this.getPlayer().kwidgetid + '/uiconf_id/' + this.getPlayer().kuiconfid;
-				downloadUrl += '/entry_id/' + this.getPlayer().kentryid + '?forceDownload=true';
+			var vs =  this.getVidiunClient().getVs();
+			var downloadUrl = mw.getMwEmbedPath() + '/modules/VidiunSupport/download.php/wid/';
+				downloadUrl += this.getPlayer().vwidgetid + '/uiconf_id/' + this.getPlayer().vuiconfid;
+				downloadUrl += '/entry_id/' + this.getPlayer().ventryid + '?forceDownload=true';
 				downloadUrl += '&downloadName=' + encodeURIComponent(this.getConfig('downloadName'));
 				if (this.isSourceOnly()) {
 					downloadUrl += '&flavorParamsId=0'
@@ -44,8 +44,8 @@
 					}
 				}
 
-				if( ks ){
-					downloadUrl += '&ks=' + ks;
+				if( vs ){
+					downloadUrl += '&vs=' + vs;
 				}
 			
 			window.open( downloadUrl );

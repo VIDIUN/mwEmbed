@@ -221,11 +221,11 @@
     }
 
 
-    mw.KQnaService = function (embedPlayer,qnaPlugin) {
+    mw.VQnaService = function (embedPlayer,qnaPlugin) {
         return this.init(embedPlayer,qnaPlugin);
     };
 
-    mw.KQnaService.prototype = {
+    mw.VQnaService.prototype = {
 
         // The bind postfix:
         bindPostfix: '.KQnaService',
@@ -233,7 +233,7 @@
         AnswerOnAirQueue: ko.observableArray(),
         QandA_ResponseProfile: "QandA_ResponseProfile",
         QandA_ResponseProfileSystemName: "QandA",
-        QandA_MetadataProfileSystemName: "Kaltura-QnA",
+        QandA_MetadataProfileSystemName: "Vidiun-QnA",
         QandA_cuePointTag: "qna",
         QandA_publicNotificationName: "PUBLIC_QNA_NOTIFICATIONS",
         QandA_UserNotificationName: "USER_QNA_NOTIFICATIONS",
@@ -294,11 +294,11 @@
             $(this.embedPlayer).unbind(this.bindPostfix);
         },
 
-        getKClient: function () {
-            if (!this.kClient) {
-                this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+        getVClient: function () {
+            if (!this.vClient) {
+                this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
 
         //returns questions, answers and announcement

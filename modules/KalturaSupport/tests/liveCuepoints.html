@@ -11,11 +11,11 @@
 <body>
 <h1> Live cuepoints </h1>
 
-<div id="kaltura_player" style="width:640px;height:360px"></div>
+<div id="vidiun_player" style="width:640px;height:360px"></div>
 <br style="clear: both;" /><br />
 <script>
     var options = {
-        "targetId": "kaltura_player",
+        "targetId": "vidiun_player",
         "wid": "_1726172",
         "uiconf_id": 25737631,
         "flashvars": {
@@ -27,17 +27,17 @@
         "entry_id": "0_m1fwwjtl"
     };
 
-    kWidget.featureConfig(options);
+    vWidget.featureConfig(options);
 
 
     function jsCallbackReady(playerId){
-        var kdp = document.getElementById(playerId);
-        kdp.kBind("KalturaSupport_ThumbCuePointsUpdated", function(){
-            $("#textBox").append($("<p>" ).html("Event KalturaSupport_ThumbCuePointsUpdated was triggered - new Thumb cuepoints retrieved from server"));
+        var vdp = document.getElementById(playerId);
+        vdp.vBind("VidiunSupport_ThumbCuePointsUpdated", function(){
+            $("#textBox").append($("<p>" ).html("Event VidiunSupport_ThumbCuePointsUpdated was triggered - new Thumb cuepoints retrieved from server"));
         });
-        kdp.kBind("KalturaSupport_CuePointsUpdated", function(count){
+        vdp.vBind("VidiunSupport_CuePointsUpdated", function(count){
             if (count > 0) {
-                $( "#textBox" ).append( $( "<p>" ).html( "Event KalturaSupport_CuePointsUpdated was triggered - new Thumb cuepoints retrieved from server" ) );
+                $( "#textBox" ).append( $( "<p>" ).html( "Event VidiunSupport_CuePointsUpdated was triggered - new Thumb cuepoints retrieved from server" ) );
             }
         });
     }
@@ -49,15 +49,15 @@ Default polling interval for new cuepoints is 10 seconds.
 </br>
 <form class="form-horizontal" id="cuePointsForm">
     <div class="control-group">
-        <label class="control-label" for="inputKs">ks</label>
+        <label class="control-label" for="inputVs">vs</label>
         <div class="controls">
-            <input type="text" id="inputKs" placeholder="ks" required="required">
+            <input type="text" id="inputVs" placeholder="vs" required="required">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputServiceUrl">Service Url</label>
         <div class="controls">
-            <input type="url" id="inputServiceUrl" placeholder="Service Url" value="https://www.kaltura.com" required="required">
+            <input type="url" id="inputServiceUrl" placeholder="Service Url" value="https://www.vidiun.com" required="required">
         </div>
     </div>
     <div class="control-group" id="formSubmit">
@@ -86,9 +86,9 @@ Default polling interval for new cuepoints is 10 seconds.
     }
 
 
-    function apiCall(params, ks, serviceUrl) {
-        serviceUrl = serviceUrl || "https://www.kaltura.com";
-        params.ks = ks;
+    function apiCall(params, vs, serviceUrl) {
+        serviceUrl = serviceUrl || "https://www.vidiun.com";
+        params.vs = vs;
         params.format = 1; //return JSONP
         var recursiveEncoded = $.param( params ); //convert params to url query
         var url = serviceUrl + "/api_v3/index.php?"+recursiveEncoded;
@@ -102,14 +102,14 @@ Default polling interval for new cuepoints is 10 seconds.
         var successHandler = function (result) {
             if ( !result || result.code ) {
                 var error = result && result.code;
-                $("#textBox").append($("<p>" ).html("Kaltura service URL: error returned - " + error));
+                $("#textBox").append($("<p>" ).html("Vidiun service URL: error returned - " + error));
                 return;
             }
-            $("#textBox").append($("<p>" ).html("Kaltura service URL: cue point "+ result.id +" created"));
+            $("#textBox").append($("<p>" ).html("Vidiun service URL: cue point "+ result.id +" created"));
         };
 
         var errorHandler = function (result) {
-            $("#textBox").append($("<p>" ).html("Error while calling Kaltura service URL: " + result));
+            $("#textBox").append($("<p>" ).html("Error while calling Vidiun service URL: " + result));
         };
 
         $.ajax({
@@ -125,9 +125,9 @@ Default polling interval for new cuepoints is 10 seconds.
 
     $("#cuePointsForm" ).on("submit", function(e){
         e.preventDefault();
-        var ks = $(this ).find("#inputKs" ).val();
+        var vs = $(this ).find("#inputVs" ).val();
         var serviceUrl = $(this ).find("#inputServiceUrl" ).val();
-        var api = new kWidget.api( { 'wid' : options.wid, 'ks' : ks } );
+        var api = new vWidget.api( { 'wid' : options.wid, 'vs' : vs } );
         $(this ).find(".cpData" ).each(function(index, cpData){
             var data = {};
             $(this).find("input").each(function(index, input){
@@ -138,13 +138,13 @@ Default polling interval for new cuepoints is 10 seconds.
             apiCall({
                 service: "cuePoint_cuePoint",
                 action: "add",
-                "cuePoint:objectType":"KalturaThumbCuePoint",
+                "cuePoint:objectType":"VidiunThumbCuePoint",
                 "cuePoint:entryId": options["entry_id"],
                 "cuePoint:startTime": data["inputTime"],
                 "cuePoint:title": data["inputTitle"],
                 "cuePoint:description": data["inputDesc"],
                 "cuePoint:assetid": data["inputAssetId"]
-            }, ks, serviceUrl);
+            }, vs, serviceUrl);
         });
     });
     $(document).ready(function() {

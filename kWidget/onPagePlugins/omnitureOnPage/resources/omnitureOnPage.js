@@ -86,7 +86,7 @@ vWidget.addReadyCallback( function( playerId ){
 				}
 			}, function(){
 				// failed to load scode:
-				_this.kdp.sendNotification("omnitureScodeError");
+				_this.vdp.sendNotification("omnitureScodeError");
 				_this.log( "Error: failed to load s-code")
 			})
 		},
@@ -107,14 +107,14 @@ vWidget.addReadyCallback( function( playerId ){
 			// check if we are waiting: 
 			if( waitedTime > this.getTimeoutMs() ){
 				// failed waitTime is > then sCodeAvailableTimeout load local copy: 
-				kWidget.appendScriptUrl( _this.getConfig('s_codeUrl'), function(){
+				vWidget.appendScriptUrl( _this.getConfig('s_codeUrl'), function(){
 					if( _this.isScodeReady() ){
 						readyCallback();
 					} else {
 						failedCallback();
 					}
 				} );
-				// kWidget does not have a failed timeout, give it 10 seconds to load
+				// vWidget does not have a failed timeout, give it 10 seconds to load
 				setTimeout(function(){
 					// only issue a fail if we never got success callback: 
 					// Note this will result in two fails where s_codeUrl is invalid )
@@ -171,7 +171,7 @@ vWidget.addReadyCallback( function( playerId ){
 			// this allows to override the media name by configuration E.G. MY_PREFIX_{mediaProxy.entry.id}
 			// will output a media name with prefix.
 			if(_this.getConfig( 'mediaName' )) {
-				return _this.kdp.evaluate(_this.getConfig( 'mediaName' ));
+				return _this.vdp.evaluate(_this.getConfig( 'mediaName' ));
 			}
 
 			return this.entryData.name;
@@ -207,7 +207,7 @@ vWidget.addReadyCallback( function( playerId ){
 				var extraEvarsValuesDelimiter = this.getConfig('additionalEvarsAndPropsValuesDelimiter') || ',';
 				extraEvarsValues = additionalEvarsAndPropsValues.split(extraEvarsValuesDelimiter);
 				for( var j=0; j < extraEvarsValues.length; j++ ) {
-					extraEvarsValues[j] = this.kdp.evaluate(extraEvarsValues[j]);
+					extraEvarsValues[j] = this.vdp.evaluate(extraEvarsValues[j]);
 				}
 			}
 			// Compare length between eVars and eVars values

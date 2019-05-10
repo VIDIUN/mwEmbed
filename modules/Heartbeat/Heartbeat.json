@@ -2,13 +2,13 @@
   "heartbeat": {
     "scripts": [
       "resources/VideoHeartbeat.min.js",
-      "resources/KalturaVideoPlayerPluginDelegate.js",
-      "resources/KalturaAdobeAnalyticsPluginDelegate.js",
-      "resources/KalturaHeartbeatPluginDelegate.js",
-      "resources/KalturaHeartbeatDelegate.js",
+      "resources/VidiunVideoPlayerPluginDelegate.js",
+      "resources/VidiunAdobeAnalyticsPluginDelegate.js",
+      "resources/VidiunHeartbeatPluginDelegate.js",
+      "resources/VidiunHeartbeatDelegate.js",
       "resources/heartbeat.js"
     ],
-    "dependencies": "mw.KBasePlugin",
-    "kalturaPluginName": "heartbeat"
+    "dependencies": "mw.VBasePlugin",
+    "vidiunPluginName": "heartbeat"
   }
 }

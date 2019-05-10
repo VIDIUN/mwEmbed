@@ -1,6 +1,6 @@
 {
     "googleAnalytics": {
-        "description": "Supports sending player analytics events to Google.<br>\r\n\t\tFor full implementation guide see <a target=\"_new\" href=\"http://knowledge.kaltura.com/google-analytics-kaltura-player\">Google Analytics</a> \r\n\t\tin the Knowledge Center",
+        "description": "Supports sending player analytics events to Google.<br>\r\n\t\tFor full implementation guide see <a target=\"_new\" href=\"http://knowledge.vidiun.com/google-analytics-vidiun-player\">Google Analytics</a> \r\n\t\tin the Knowledge Center",
         "attributes": {
             "urchinCode": {
                 "doc": "The Google urchin code i.e. UA-30149691-1",

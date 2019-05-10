@@ -19,7 +19,7 @@
 		embedPlayer: null,
 
 		// The category for all the tracking events.
-		trackingCategory: 'Kaltura Video Events',
+		trackingCategory: 'Vidiun Video Events',
 
 		// pageTracker object ( if set to null async tracking is used via _gaq.push calls )
 		googlePageTracker: null,
@@ -35,7 +35,7 @@
 
 		// The Default Track List
 		defaultTrackList: [
-			'kdpReady',
+			'vdpReady',
 			'mediaReady',
 			'doPause',
 			'playerPlayed',
@@ -60,7 +60,7 @@
 		],
 
 		getConfig: function (attr) {
-			return this.embedPlayer.getKalturaConfig('googleAnalytics', attr);
+			return this.embedPlayer.getVidiunConfig('googleAnalytics', attr);
 		},
 
 		init: function (embedPlayer, callback) {
@@ -155,7 +155,7 @@
 				});
 			});
 
-			_this.embedPlayer.bindHelper('Kaltura_ConfigChanged', function(event, pluginName, property, value){
+			_this.embedPlayer.bindHelper('Vidiun_ConfigChanged', function(event, pluginName, property, value){
 				if( pluginName === "googleAnalytics" ){
 					if(property === "urchinCode") {
 						window._gaq.push(['_setAccount', _this.getConfig('urchinCode')]);
@@ -166,7 +166,7 @@
 
 		/**
 		 * Handles the mapping for special case eventNames that
-		 * don't match their corresponding kaltura listener binding name
+		 * don't match their corresponding vidiun listener binding name
 		 */
 		getEventNameBinding: function (eventName) {
 			// Explicitly casting eventName to string - iOS 4.3.1 tweak
@@ -297,11 +297,11 @@
 		 */
 		getOptionalLabel: function (methodName, data) {
 			methodName = methodName.toString();
-			var clipTitle = ( this.embedPlayer.kalturaPlayerMetaData && this.embedPlayer.kalturaPlayerMetaData.name ) ? this.embedPlayer.kalturaPlayerMetaData.name : '';
-			var entryId = this.embedPlayer.kentryid;
-			var uiconfId = this.embedPlayer.kuiconfid;
-			var widgetId = this.embedPlayer.kwidgetid;
-			var refId = this.embedPlayer.kalturaPlayerMetaData.referenceId;
+			var clipTitle = ( this.embedPlayer.vidiunPlayerMetaData && this.embedPlayer.vidiunPlayerMetaData.name ) ? this.embedPlayer.vidiunPlayerMetaData.name : '';
+			var entryId = this.embedPlayer.ventryid;
+			var uiconfId = this.embedPlayer.vuiconfid;
+			var widgetId = this.embedPlayer.vwidgetid;
+			var refId = this.embedPlayer.vidiunPlayerMetaData.referenceId;
 			var refString = "";
 			if (refId && this.getConfig('sendRefId') == true)
 				refString = refId + "|";

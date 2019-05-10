@@ -1,7 +1,7 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add('share', mw.KBaseScreen.extend({
+	mw.PluginManager.add('share', mw.VBaseScreen.extend({
 
 		defaultConfig: {
 			parent: "topBarContainer",
@@ -292,7 +292,7 @@
 			};
 		},
 
-		// overwrite addScreenBindings function of mw.KBaseScreen
+		// overwrite addScreenBindings function of mw.VBaseScreen
 		addScreenBindings: function(){
 			var _this = this;
 			//add IE8 support for rounded corners using the PIE library
@@ -358,17 +358,17 @@
 			});
 
 			// handle secured embed
-			if ( mw.getConfig("Kaltura.ServiceUrl").indexOf(".kaltura.com") !== -1 ){
+			if ( mw.getConfig("Vidiun.ServiceUrl").indexOf(".vidiun.com") !== -1 ){
 				$(".share-secured").on("click", function(){
 					var embedCode = $(".embed-input").val();
 					if ($(this).is(':checked')){
-						embedCode = embedCode.split("http://cdnapi.kaltura.com").join("https://cdnapisec.kaltura.com");
+						embedCode = embedCode.split("http://cdnapi.vidiun.com").join("https://cdnapisec.vidiun.com");
 					}else{
-						embedCode = embedCode.split("https://cdnapisec.kaltura.com").join("http://cdnapi.kaltura.com");
+						embedCode = embedCode.split("https://cdnapisec.vidiun.com").join("http://cdnapi.vidiun.com");
 					}
 					$(".embed-input").val(embedCode);
 				});
-				$('.share-secured').prop('checked', mw.getConfig("Kaltura.ServiceUrl").indexOf("https") === 0); // initial check state according to ServiceUrl
+				$('.share-secured').prop('checked', mw.getConfig("Vidiun.ServiceUrl").indexOf("https") === 0); // initial check state according to ServiceUrl
 			}else{
 				// on prem - hide the security checkbox as the security settings are derived from the ServiceUrl
 				$(".share-secured, .share-secure-lbl").hide();
@@ -534,7 +534,7 @@
 			}
 		},
 		getThumbnailURL: function () {
-			return kWidgetSupport.getKalturaThumbnailUrl({
+			return vWidgetSupport.getVidiunThumbnailUrl({
 				url: this.getPlayer().evaluate('{mediaProxy.entry.thumbnailUrl}'),
 				width: this.getPlayer().getWidth(),
 				height: this.getPlayer().getHeight()
@@ -548,7 +548,7 @@
 
 			// replace properties that come from configuration
 			if (embedConfig["uiconfID"]){
-				embedCode = embedCode.split("{configProxy.kw.uiConfId}").join(embedConfig["uiconfID"]);
+				embedCode = embedCode.split("{configProxy.vw.uiConfId}").join(embedConfig["uiconfID"]);
 			}
 			if ( embedConfig["streamerType"] ){
 				embedCode = embedCode.replace( /streamerType\]=(.*?)"/ ,'streamerType]=' + embedConfig["streamerType"] + '"');
@@ -585,7 +585,7 @@
 			}
 		},
 		getSmartURL: function () {
-			var shareURL = this.getKalturaShareURL();
+			var shareURL = this.getVidiunShareURL();
 			if (mw.getConfig('EmbedPlayer.IsFriendlyIframe')) {
 				try {
 					var $parentDoc = $(window['parent'].document);
@@ -599,12 +599,12 @@
 			}
 			return shareURL;
 		},
-		getKalturaShareURL: function () {
-			var uiConfId = this.getConfig("shareUiconfID") ? this.getConfig("shareUiconfID") : this.getPlayer().kuiconfid;
-			return mw.getConfig('Kaltura.ServiceUrl') + '/index.php/extwidget/preview' +
-				'/partner_id/' + this.getPlayer().kpartnerid +
+		getVidiunShareURL: function () {
+			var uiConfId = this.getConfig("shareUiconfID") ? this.getConfig("shareUiconfID") : this.getPlayer().vuiconfid;
+			return mw.getConfig('Vidiun.ServiceUrl') + '/index.php/extwidget/preview' +
+				'/partner_id/' + this.getPlayer().vpartnerid +
 				'/uiconf_id/' + uiConfId +
-				'/entry_id/' + this.getPlayer().kentryid + '/embed/dynamic';
+				'/entry_id/' + this.getPlayer().ventryid + '/embed/dynamic';
 		},
 		getParentURL: function () {
 			var res;

@@ -83,9 +83,9 @@ mw.VAnalytics.prototype = {
         }
 		// Setup the local reference to the embed player
 		this.embedPlayer = embedPlayer;
-		if( ! this.kClient ) {
-			this.kClient = mw.kApiGetPartnerClient( embedPlayer.kwidgetid );
-			this.delay = this.embedPlayer.getKalturaConfig( 'statistics' , 'delay' ) ? this.embedPlayer.getKalturaConfig( 'statistics' , 'delay' ) * 1000 : 0;
+		if( ! this.vClient ) {
+			this.vClient = mw.vApiGetPartnerClient( embedPlayer.vwidgetid );
+			this.delay = this.embedPlayer.getVidiunConfig( 'statistics' , 'delay' ) ? this.embedPlayer.getVidiunConfig( 'statistics' , 'delay' ) * 1000 : 0;
 		}
 		// Remove any old bindings:
 		$( embedPlayer ).unbind( this.bindPostFix );
@@ -120,8 +120,8 @@ mw.VAnalytics.prototype = {
 	 */
 	sendAnalyticsEvent: function( VidiunStatsEventKey ){
 		var _this = this;
-		mw.log("KAnalytics :: doSendAnalyticsEvent > " + KalturaStatsEventKey );
-		// Kalutra analytics does not collect info for ads:
+		mw.log("VAnalytics :: doSendAnalyticsEvent > " + VidiunStatsEventKey );
+		// Vidiun analytics does not collect info for ads:
 		if( this.embedPlayer.evaluate('{sequenceProxy.isInSequence}') ){
 			return ;
 		}
@@ -192,12 +192,12 @@ mw.VAnalytics.prototype = {
 		}
 		// check for the vars in the correct location:
 		for( var fvKey in flashVarEvents){
-			if( this.embedPlayer.getKalturaConfig( 'statistics', fvKey ) ){
-				eventSet[ flashVarEvents[ fvKey ] ] = encodeURIComponent( this.embedPlayer.getKalturaConfig('statistics', fvKey ) );
+			if( this.embedPlayer.getVidiunConfig( 'statistics', fvKey ) ){
+				eventSet[ flashVarEvents[ fvKey ] ] = encodeURIComponent( this.embedPlayer.getVidiunConfig('statistics', fvKey ) );
 			}
 		}
 		// hideUserId will remove the userId from the analytics call EVEN if the embed code sends one (unless hashedUserId is in use)
-		if(this.embedPlayer.getKalturaConfig( 'statistics' , 'hideUserId') && eventSet.userId){
+		if(this.embedPlayer.getVidiunConfig( 'statistics' , 'hideUserId') && eventSet.userId){
 			delete(eventSet.userId);
 		}
 
@@ -243,18 +243,18 @@ mw.VAnalytics.prototype = {
 				// error in calling parent page event
 			}
 		}
-		//hideKS is an attribute that will prevent the request from sending the KS even if the embed code receives one
-		if (this.embedPlayer.getFlashvars('ks') && !this.embedPlayer.getKalturaConfig( 'statistics' , 'hideKs') ){
-			eventRequest['ks'] = this.embedPlayer.getFlashvars('ks');
+		//hideVS is an attribute that will prevent the request from sending the VS even if the embed code receives one
+		if (this.embedPlayer.getFlashvars('vs') && !this.embedPlayer.getVidiunConfig( 'statistics' , 'hideVs') ){
+			eventRequest['vs'] = this.embedPlayer.getFlashvars('vs');
 		}
 
 		// Do the api request:
 		if (this.delay) {
 			setTimeout( function () {
-				_this.kClient.doRequest( eventRequest , null , true );
+				_this.vClient.doRequest( eventRequest , null , true );
 			} , this.delay );
 		} else {
-			this.kClient.doRequest( eventRequest , null , true );
+			this.vClient.doRequest( eventRequest , null , true );
 		}
 	},
 

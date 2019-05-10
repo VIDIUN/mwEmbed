@@ -1,14 +1,14 @@
-( function( mw, $, kWidget ) {"use strict";
+( function( mw, $, vWidget ) {"use strict";
 
-	mw.PluginManager.add( 'adBlockDetector', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'adBlockDetector', mw.VBasePlugin.extend({
 
 		defaultConfig: {
-			scriptPath: "modules/KalturaSupport/components/adBlockDetector/advertisement.js",
+			scriptPath: "modules/VidiunSupport/components/adBlockDetector/advertisement.js",
 			enableResumePlayback: false,
-			title: gM( 'ks-adBlockDetector-title' ),
-			message: gM( 'ks-adBlockDetector-message' ),
+			title: gM( 'vs-adBlockDetector-title' ),
+			message: gM( 'vs-adBlockDetector-message' ),
 			buttons: [
-				gM( 'ks-adBlockDetector-btn-close' )
+				gM( 'vs-adBlockDetector-btn-close' )
 			],
 			noButtons: true,
 			callbackFunction: null,
@@ -30,7 +30,7 @@
 		},
 		addBindings: function(){
 			var _this = this;
-			this.bind("KalturaSupport_DoneWithUiConf", function(){
+			this.bind("VidiunSupport_DoneWithUiConf", function(){
 				_this.tryAndDownload();
 			});
 			this.bind("onChangeMedia", function(){
@@ -51,7 +51,7 @@
 			};
 
 			//Issue call to dummy advertisment.js script
-			kWidget.appendScriptUrl(fullScriptPath, successHandler, document, errorHandler);
+			vWidget.appendScriptUrl(fullScriptPath, successHandler, document, errorHandler);
 
 			//Fallback check for cross-domain blocking issues
 			setTimeout(function(){
@@ -84,7 +84,7 @@
 					alertConfig.callbackFunction = function () {
 						_this.enableContinue();
 					};
-					alertConfig.buttons = [gM( 'ks-adBlockDetector-btn-resume' )];
+					alertConfig.buttons = [gM( 'vs-adBlockDetector-btn-resume' )];
 				}
 
 				//Remove data attribute flag used for empty players or a player where you want to dynamically set sources
@@ -103,4 +103,4 @@
 		}
 	}));
 
-} )( window.mw, window.jQuery, window.kWidget );
+} )( window.mw, window.jQuery, window.vWidget );

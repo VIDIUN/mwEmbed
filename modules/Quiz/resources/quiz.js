@@ -240,7 +240,7 @@
             if (!this.kClient) {
                 this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
         getTemplateHTML: function (data) {
             var defer = $.Deferred();
@@ -650,7 +650,7 @@
                     + '<span class="scoreBig">' + score + '</span>' + ' %' + '</br>'
                     + gM('mwe-quiz-reviewSubmit'));
 
-                    _this.KIVQModule.displayHex(_this.KIVQModule.setHexContainerPos("current"),cpArray);
+                    _this.VIVQModule.displayHex(_this.VIVQModule.setHexContainerPos("current"),cpArray);
 
                     $(document).off('click','.q-box:not(.reflection-point-question)')
                         .on('click', '.q-box:not(.reflection-point-question)', function () {
@@ -993,7 +993,7 @@
             var _this = this;
             _this.addQuePointsNavigationButtons(questionNr);
 
-            if (_this.KIVQModule.quizSubmitted) {
+            if (_this.VIVQModule.quizSubmitted) {
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
                     _this.KIVQModule.continuePlay();
                 }).on('keydown', _this.keyDownHandler).attr({'tabindex': 6.3, "role" : "button"});
@@ -1008,14 +1008,14 @@
                     _this.KIVQModule.continuePlay();
                 }).attr({'tabindex': 6.3, "role" : "button"}).on('keydown', _this.keyDownHandler);
             } else {
-                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.KIVQModule.i2q(questionNr)
+                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
                 + '/' + $.cpObject.cpArray.length + '</span>')
                     .css("float", "right")
                     .css("cursor","default"))
                     .append($('<div></div>')
                         .addClass("pie")
                         .css("float", "right"))
-                    .append($('<span>' + (_this.KIVQModule.getUnansweredQuestNrs()).length + ' '
+                    .append($('<span>' + (_this.VIVQModule.getUnansweredQuestNrs()).length + ' '
                     + gM('mwe-quiz-unanswered') + '</span>')
                         .css("float", "right")
                         .css("cursor","default"));

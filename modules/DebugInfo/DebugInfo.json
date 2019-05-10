@@ -1,8 +1,8 @@
 {
   "DebugInfo":{
 	"scripts":["resources/simpleBindingHelper.js","resources/DebugInfo.js"],
-	"dependencies": ["mw.KBaseComponent"],
-	"kalturaPluginName": "debugInfo",
+	"dependencies": ["mw.VBaseComponent"],
+	"vidiunPluginName": "debugInfo",
 	"styles": "resources/DebugInfo.css",
 	"templates":"../DebugInfo/resources/DebugInfo.tmpl.html"
   }

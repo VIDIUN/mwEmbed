@@ -9,31 +9,31 @@
     "Kaltura.LeadHLSOnAndroid": true,
     "Kaltura.MissingFlavorSources": [
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_ktavj42z/format/url/protocol/http/a.mp4",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_ktavj42z/format/url/protocol/http/a.mp4",
             "type": "video/h264"
         },
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_gtm9gzz2/format/url/protocol/http/a.ogg",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_gtm9gzz2/format/url/protocol/http/a.ogg",
             "type": "video/ogg"
         },
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_bqsosjph/format/url/protocol/http/a.webm",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_g18we0u3/flavorId/1_bqsosjph/format/url/protocol/http/a.webm",
             "type": "video/webm"
         }
     ],
-    "Kaltura.BlackVideoSources": [
+    "Vidiun.BlackVideoSources": [
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/http/a.mp4",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/http/a.mp4",
             "type": "video/h264"
         },
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_oiyfyphl/format/url/protocol/http/a.webm",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_oiyfyphl/format/url/protocol/http/a.webm",
             "type": "video/webm"
         },
         {
-            "src": "//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6yqa4nmd/format/url/protocol/http/a.ogg",
+            "src": "//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6yqa4nmd/format/url/protocol/http/a.ogg",
             "type": "video/ogg"
         }
     ],
-    "SkipKSOnIsLiveRequest": true
+    "SkipVSOnIsLiveRequest": true
 }

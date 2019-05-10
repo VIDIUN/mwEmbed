@@ -162,7 +162,7 @@
 				_this.getPlayer().hideSpinner();
 				var $flagScreen = $( '<div />' )
 					.append(
-						$( '<h3 />' ).text( gM("ks-MODERATION-THANKS") ),
+						$( '<h3 />' ).text( gM("vs-MODERATION-THANKS") ),
 						$( '<div />' ).append(
 							$( '<div />' )
 								.addClass( 'reportButton' )

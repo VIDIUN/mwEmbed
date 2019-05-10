@@ -117,7 +117,7 @@ if( document.URL.indexOf('runQunitTests') != -1 || document.URL.indexOf('runFlas
 		// check for only display player flag: 
 		jQuery( document ).ready( function(){
 			if( document.URL.indexOf( 'onlyDisplayPlayer') != -1  ){
-				$('h1,h2,h3,h4,h5,h6,#kdoc-more-desc').hide();
+				$('h1,h2,h3,h4,h5,h6,#vdoc-more-desc').hide();
 			} else {
 				jQuery(document).ready( window.addRunTestLink );
 			}

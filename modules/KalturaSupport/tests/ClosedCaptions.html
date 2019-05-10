@@ -15,15 +15,15 @@ vWidget.addReadyCallback( function( playerId ) {
 	vdp.vBind('newClosedCaptionsData', function(){
 		$('#log').append( "newClosedCaptionsData -- A caption asset had been loaded<br>");
 	});
-	kdp.kBind('changedClosedCaptions', function(event){
+	vdp.vBind('changedClosedCaptions', function(event){
 		$('#log').append( "ccChanged -- Caption asset has been changed, selected Language is: " + event.language + "<br />"	);
 	});
 
-	kdp.kBind('closedCaptionsHidden', function(){
+	vdp.vBind('closedCaptionsHidden', function(){
 		$('#log').append( "ccHidden -- Caption asset is hidden<br />"	);
 	});
 
-	kdp.kBind('closedCaptionsDisplayed', function(event){
+	vdp.vBind('closedCaptionsDisplayed', function(event){
 		$('#log').append( "ccDisplayed -- Caption asset is displayed, selected Language is: " + event.language + "<br />"	);
 	});
 		
@@ -53,7 +53,7 @@ vWidget.addReadyCallback( function( playerId ) {
 
    <div style="color:red; display:inline;"> Note:</div> if user selected specific caption, it is saved in a cookie,<br>    and the next time that he reloads the page, that cookie will be checked and preferred.
 
- 2. If there was no existing cookie, check if default caption is set for the entry via the <br>    KMC, or FlashVar (defaultLanguageKey), if there is, use it.
+ 2. If there was no existing cookie, check if default caption is set for the entry via the <br>    VMC, or FlashVar (defaultLanguageKey), if there is, use it.
 
    <div style="color:red; display:inline;"> Note:</div> on iOS devices defaultLanguageKey takes effect only if the user device is set to<br>    auto(Recommended), otherwise the caption selected by the user is used.
 
@@ -64,7 +64,7 @@ vWidget.addReadyCallback( function( playerId ) {
 </pre>
 
 <h2> Captions API</h2>
-The Kaltura captions API enables you to hide and show captions via javascript. <br>
+The Vidiun captions API enables you to hide and show captions via javascript. <br>
 
 <a href="#" id="showCaptions">Show Captions</a>
 <pre class="prettyprint linenums">
@@ -119,7 +119,7 @@ vdp.sendNotification( 'showHideClosedCaptions');
 <div style="clear:both"></div>
 <h3>Log caption events:</h3>
 <pre class="prettyprint linenums">
-kdp.kBind('ccDataLoaded', function(){<br/>	$('#log').append( &quot;ccDataLoaded -- All captions has been loaded&lt;br&gt;&quot; );<br/>});<br/>kdp.kBind('newClosedCaptionsData', function(){<br/>	$('#log').append( &quot;newClosedCaptionsData -- A caption asset had been loaded&lt;br&gt;&quot;);<br/>});<br/>kdp.kBind('changedClosedCaptions', function(event){<br/>	$('#log').append( &quot;ccChanged -- Caption asset has been changed, selected language is: " + event.language + "&lt;br&gt;&quot;);<br/>});<br/>kdp.kBind('closedCaptionsHidden', function(){<br/>	$('#log').append( &quot;ccHidden -- Caption asset is hidden&lt;br&gt;&quot;);<br/>});<br/>kdp.kBind('ccDisplayed', function(event){<br/>	$('#log').append( &quot;ccDisplayed -- Caption asset is displayed, selected language is: " + event.language + "&lt;br&gt;&quot;);<br/>});
+vdp.vBind('ccDataLoaded', function(){<br/>	$('#log').append( &quot;ccDataLoaded -- All captions has been loaded&lt;br&gt;&quot; );<br/>});<br/>vdp.vBind('newClosedCaptionsData', function(){<br/>	$('#log').append( &quot;newClosedCaptionsData -- A caption asset had been loaded&lt;br&gt;&quot;);<br/>});<br/>vdp.vBind('changedClosedCaptions', function(event){<br/>	$('#log').append( &quot;ccChanged -- Caption asset has been changed, selected language is: " + event.language + "&lt;br&gt;&quot;);<br/>});<br/>vdp.vBind('closedCaptionsHidden', function(){<br/>	$('#log').append( &quot;ccHidden -- Caption asset is hidden&lt;br&gt;&quot;);<br/>});<br/>vdp.vBind('ccDisplayed', function(event){<br/>	$('#log').append( &quot;ccDisplayed -- Caption asset is displayed, selected language is: " + event.language + "&lt;br&gt;&quot;);<br/>});
 </pre>
 Event Log:
 <div id="log"></div>

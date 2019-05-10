@@ -37,8 +37,8 @@
     tracking is not specified by VPAID).                </li>
     </ol>
 <br>
-<h3>What is implemented in Kaltura?</h3>
-    <h4>Flash - KDP</h4>
+<h3>What is implemented in Vidiun?</h3>
+    <h4>Flash - VDP</h4>
         Full support in VPAID 1.1      <br/>
         Missing items for VPAID 2.0:  <br/>
             <ul>
@@ -83,7 +83,7 @@
 <script>
     var localPath = document.location.href;
     localPath = localPath.split('VPAID_ForceFlash.html')[0];
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '13306622',
@@ -95,7 +95,7 @@
          'ForceFlashOnDesktopSafari': true,
 
       //  'jsTraces':true,
-          //  kdpUrl:'/kdp3/bin-debug/kdp3.swf',
+          //  vdpUrl:'/vdp3/bin-debug/vdp3.swf',
 			'vast': {
 				'plugin' : true,
 				'position': 'before',
@@ -103,15 +103,15 @@
 				'numPreroll':"1",
 				'prerollInterval':"1",
 				'prerollStartWith':"1",
-			   // 'prerollUrl':"http://projects.kaltura.com/Itay/html5VPAID/vpaid.xml",
+			   // 'prerollUrl':"http://projects.vidiun.com/Itay/html5VPAID/vpaid.xml",
 				'prerollUrl':localPath+"liverailOnlyFlash.xml?random={utility.random}&timestamp={utility.timestamp}&referrer_url={utility.referrer_url}&referrer_host={utility.referrer_host}",
 				//'overlayStartAt':"20",
 			//	'overlayInterval':"300",
-			//	'overlayUrl':"http://projects.kaltura.com/MichalR/vast_overlay.xml",
+			//	'overlayUrl':"http://projects.vidiun.com/MichalR/vast_overlay.xml",
 			//	'numPostroll':"1",
 			//	'postrollInterval':"1",
 			//	'postrollStartWith':"1",
-			//	'postrollUrl':"http://projects.kaltura.com/mdale/hotelVastAd.xml",
+			//	'postrollUrl':"http://projects.vidiun.com/mdale/hotelVastAd.xml",
 				'preSequence':"1",
 				'postSequence':"1",
 				'timeout':"4"

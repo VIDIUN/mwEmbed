@@ -16,7 +16,7 @@
 <script>
 	var localPath = document.location.href;
 	localPath = localPath.split('AdParameterTargeting.html')[0];
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '13306622',
@@ -34,13 +34,13 @@
 			'adsOnReplay':true
 		},
 		'readyCallback': function( playerId ){
-			var kdp = $('#' + playerId )[0];
+			var vdp = $('#' + playerId )[0];
 			
 			$('#targetHotel').click(function(){
-				kdp.setKDPAttribute('myAdTarget', 'target', 'hotel');
+				vdp.setVDPAttribute('myAdTarget', 'target', 'hotel');
 			});
 			$('#targetHooro').click(function(){
-				kdp.setKDPAttribute('myAdTarget', 'target', 'hooroo');
+				vdp.setVDPAttribute('myAdTarget', 'target', 'hooroo');
 			})
 		}
 	})
@@ -59,13 +59,13 @@
 
 // Within the button click handler we set the custom property)
 'readyCallback': function( playerId ){
-	var kdp = $('#' + playerId )[0];
+	var vdp = $('#' + playerId )[0];
 	
 	$('#targetHotel').click(function(){
-		kdp.setKDPAttribute('myAdTarget', 'target', 'hotel');
+		vdp.setVDPAttribute('myAdTarget', 'target', 'hotel');
 	});
 	$('#targetHooro').click(function(){
-		kdp.setKDPAttribute('myAdTarget', 'target', 'hooroo');
+		vdp.setVDPAttribute('myAdTarget', 'target', 'hooroo');
 	})
 }
 	</pre>

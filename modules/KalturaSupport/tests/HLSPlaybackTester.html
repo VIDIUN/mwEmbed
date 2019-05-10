@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Kaltura Player HLS URL Tester </title>
+	<title> Vidiun Player HLS URL Tester </title>
 	<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<h2> Kaltura Player HLS URL Tester </h2>
+<h2> Vidiun Player HLS URL Tester </h2>
 
 <div class="form-group">
     <label for="url">HLS URL</label>
@@ -24,7 +24,7 @@
   
   <div class="form-group">
     <label for="urlthumb">Thumbnail</label>
-    <input type="email" class="form-control" id="urlthumb" value="http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640">
+    <input type="email" class="form-control" id="urlthumb" value="http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_sf5ovm7u/version/100003/width/640">
   </div>
 
 <div>
@@ -38,7 +38,7 @@
 <label class="radio inline"><input type="radio" name="streamtype" id="streamtype-live">Live</label>
 </div>
 <div>
-Kaltura Play: Applies only to iOS, Android Browser views. <a href="nativeCallout.html">More about NativeCallout</a><br>
+Vidiun Play: Applies only to iOS, Android Browser views. <a href="nativeCallout.html">More about NativeCallout</a><br>
 <label class="radio inline"><input type="radio" name="nativecallout" id="nativeCallout-web"  checked="checked">Web</label>
 <label class="radio inline"><input type="radio" name="nativecallout" id="nativeCallout-native">Native Callout</label>
 </div>
@@ -75,7 +75,7 @@ Kaltura Play: Applies only to iOS, Android Browser views. <a href="nativeCallout
     <br/>
     <input type="button" id="generate" value="Create Player" />
 <br><br>
-<div id="kaltura_player" style="width:624px; height: 387px;display:block;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+<div id="vidiun_player" style="width:624px; height: 387px;display:block;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
 </div>
 <br/><br/>
 <b>Debug Info for HLS plugin:</b>
@@ -272,8 +272,8 @@ Kaltura Play: Applies only to iOS, Android Browser views. <a href="nativeCallout
 			}
 		}
 		// update page hash 
-		kWidget.embed({
-			"targetId": "kaltura_player",
+		vWidget.embed({
+			"targetId": "vidiun_player",
 			"wid": "_243342",
 			"uiconf_id": "12905712",
 			"flashvars": settings

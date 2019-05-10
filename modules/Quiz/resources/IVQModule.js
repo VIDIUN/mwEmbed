@@ -3,11 +3,11 @@
  */
 (function (mw, $) {
     "use strict";
-    mw.KIVQModule = function (embedPlayer,quizPlugin) {
+    mw.VIVQModule = function (embedPlayer,quizPlugin) {
         return this.init(embedPlayer,quizPlugin);
     };
-    if (!(mw.KIVQModule.prototype = {
-            kQuizUserEntryId: null,
+    if (!(mw.VIVQModule.prototype = {
+            vQuizUserEntryId: null,
             score: null,
             currentScore: null ,
             calculatedScore: null ,
@@ -160,8 +160,8 @@
                     _this.kQuizUserEntryId = data[0].objects[0].id;
                 }
                 else{
-                    _this.KIVQApi.createQuizUserEntryId(function(userData){
-                        if (!_this.checkApiResponse('Add KQ user entry id err -->',userData)){
+                    _this.VIVQApi.createQuizUserEntryId(function(userData){
+                        if (!_this.checkApiResponse('Add VQ user entry id err -->',userData)){
                             return false;
                         }
                         else{
@@ -197,7 +197,7 @@
 
             getIvqPDF:function(entryId){
                 var _this = this;
-                _this.KIVQApi.downloadIvqPDF(entryId, function(data){
+                _this.VIVQApi.downloadIvqPDF(entryId, function(data){
                     window.location.assign(data);
                     if (!_this.checkApiResponse('Download PDF  err -->',data)){
                         return false;
@@ -320,7 +320,7 @@
                     _this.intrVal = false;
                 }
                 _this.intrVal = setInterval(function () {
-                    if (_this.kQuizUserEntryId){
+                    if (_this.vQuizUserEntryId){
                         clearInterval(_this.intrVal);
                         _this.intrVal = false;
                         callback()

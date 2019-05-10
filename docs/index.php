@@ -11,10 +11,10 @@
 	<meta name="description" content="Vidiun Player � Fastest, Most Flexible Online Video Player Toolkit, view feature test files that highlight vidiun player toolkit features.">
 	<meta name="author" content="vidiun">
 
-	<?php if( $wgKalturaGoogleAnalyticsUA ){ ?>
+	<?php if( $wgVidiunGoogleAnalyticsUA ){ ?>
 		<script type="text/javascript">
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '<?php echo $wgKalturaGoogleAnalyticsUA?>']);
+		_gaq.push(['_setAccount', '<?php echo $wgVidiunGoogleAnalyticsUA?>']);
 		_gaq.push(['_trackPageview']);
 
 		(function() {

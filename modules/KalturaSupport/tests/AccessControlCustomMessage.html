@@ -26,24 +26,24 @@ function jsVidiunPlayerTest( videoId ){
 <script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
-<h2>Custom Message AC KS </h2>
-Learn more about <a target="_new" href="http://knowledge.kaltura.com/kaltura-media-access-control-model">kaltura access controls</a> in the knowledge center article. 
+<h2>Custom Message AC VS </h2>
+Learn more about <a target="_new" href="http://knowledge.vidiun.com/vidiun-media-access-control-model">vidiun access controls</a> in the knowledge center article. 
 <br><br>Custom access control messages can be set in the uiConf strings section: 
 <pre class="prettyprint linenums">
 'strings': {
-	'NO_KS': 'My custom string'
+	'NO_VS': 'My custom string'
 }</pre>
 
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
-kWidget.embed({
-	targetId:'kaltura_player',
+vWidget.embed({
+	targetId:'vidiun_player',
 	wid : '_243342',
 	uiconf_id: '7849782',
 	entry_id: '0_89wvaqxn',
 	flashvars:{
 		'strings': {
-			'NO_KS': 'My custom string'
+			'NO_VS': 'My custom string'
 		}
 	}
 });
@@ -60,7 +60,7 @@ vWidget.thumbEmbed({
 	entry_id: '0_89wvaqxn',
 	flashvars:{
 		'strings': {
-			'NO_KS': 'My custom string'
+			'NO_VS': 'My custom string'
 		}
 	}
 })

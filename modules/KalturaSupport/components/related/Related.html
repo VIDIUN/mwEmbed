@@ -6,9 +6,9 @@
 <script type="text/javascript" src="../../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../../docs/js/doc-bootstrap.js"></script>
 
-<script type="text/javascript" src="../../../../kWidget/tests/resources/ace/ace.js" charset="utf-8"></script>
-<script type="text/javascript" src="../../../../kWidget/tests/resources/ace/theme-twilight.js" charset="utf-8"></script>
-<script type="text/javascript" src="../../../../kWidget/tests/resources/ace/mode-html.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../vWidget/tests/resources/ace/ace.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../vWidget/tests/resources/ace/theme-twilight.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../vWidget/tests/resources/ace/mode-html.js" charset="utf-8"></script>
 	
 </head>
 <body>
@@ -28,8 +28,8 @@
     var kdp;
 	var customRelatedEntries = null
 	var doPlayerEmbed = function(){
-		kWidget.featureConfig({
-			'targetId': 'kdp',
+		vWidget.featureConfig({
+			'targetId': 'vdp',
 			'wid': '_243342',
 			'uiconf_id' : '12905712',
 			'entry_id' : '1_sf5ovm7u',
@@ -59,7 +59,7 @@
 					$('#relatedVideoSelectLog').append( "Selected: " + relatedData.entryId  + "<br>" );
 				});
 				// bind custom related data
-				kdp.kBind( 'relatedData', function( callback){
+				vdp.vBind( 'relatedData', function( callback){
 					callback( customRelatedEntries );
 				});
 			}
@@ -73,8 +73,8 @@
 <h3> Tracking related video clicks: </h3>
 <pre class="prettyprint linenums">
 'readyCallback': function( playerId ){
-	var kdp = $('#' + playerId)[0];
-	kdp.kBind( 'relatedVideoSelect', function( relatedData ){
+	var vdp = $('#' + playerId)[0];
+	vdp.vBind( 'relatedVideoSelect', function( relatedData ){
 		$('#relatedVideoSelectLog').append( "Selected: " + relatedData.entryId + "<br>" );
 	});
 }
@@ -90,12 +90,12 @@
 	var baseCustomRelatedEntries =[{  
 			"id":"1_18leun9q",
 			"name":"World Office Sports - Swivel Chair Sprint (Source)",
-			"thumbnailUrl":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_18leun9q/version/100002",
+			"thumbnailUrl":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_18leun9q/version/100002",
 		 },
 		 {  
 			"id":"1_vez3hrud",
 			"name":"Cube Fabulous (Zen Cube) (Source)",
-			"thumbnailUrl":"http://cdnbakmi.kaltura.com/p/243342/sp/24334200/thumbnail/entry_id/1_vez3hrud/version/100002",
+			"thumbnailUrl":"http://cdnbakmi.vidiun.com/p/243342/sp/24334200/thumbnail/entry_id/1_vez3hrud/version/100002",
 		 }
 	];
 		relatedEditor = ace.edit("related-editor");
@@ -120,8 +120,8 @@
 	<br><br><b>Custom relatedData code example:</b> 
 <pre class="prettyprint linenums">
 'readyCallback': function( playerId ){
-	var kdp = $('#' + playerId)[0];
-	kdp.kBind( 'relatedData', function( callback){
+	var vdp = $('#' + playerId)[0];
+	vdp.vBind( 'relatedData', function( callback){
 		callback( customRelatedEntries );
 	});
 }
