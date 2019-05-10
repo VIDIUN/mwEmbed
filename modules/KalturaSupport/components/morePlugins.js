@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'morePlugins', mw.KBaseSmartContainer.extend({
+	mw.PluginManager.add( 'morePlugins', mw.VBaseSmartContainer.extend({
 
 		defaultConfig: {
 			'parent': 'topBarContainer',
