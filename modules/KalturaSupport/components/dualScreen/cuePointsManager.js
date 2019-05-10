@@ -2,7 +2,7 @@
     "use strict";
     mw.dualScreen = mw.dualScreen || {};
 
-    mw.dualScreen.CuePointsManager = mw.KBasePlugin.extend({
+    mw.dualScreen.CuePointsManager = mw.VBasePlugin.extend({
         _nextPendingCuePointIndex: 0,
         _lastHandledServerTime: null,
         setup: function () {
@@ -15,7 +15,7 @@
         getCuePoints : function()
         {
             var player = this.getPlayer();
-            var cuePoints = (player && player.kCuePoints) ? player.kCuePoints.getCuePoints() : null;
+            var cuePoints = (player && player.vCuePoints) ? player.vCuePoints.getCuePoints() : null;
 
             return cuePoints || [];
         },
@@ -26,7 +26,7 @@
             _this._log('addBindings()', 'invoked');
 
             var player = _this.getPlayer();
-            var shouldRun = player && ((player.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || player.kCuePoints);
+            var shouldRun = player && ((player.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || player.vCuePoints);
             if (!shouldRun) {
                 _this._log('addBindings()', 'prerequisites check failed, disabling component');
                 return;

@@ -275,7 +275,7 @@
 			if ( this.getConfig("debugReceiver") ){
 				this.sendMessage({'type': 'show', 'target': 'debug'});
 			}
-			// set kaltura logo if needed
+			// set vidiun logo if needed
 			if ( this.getConfig("logoUrl") && this.getConfig("receiverLogo") ){
 				this.sendMessage({'type': 'setLogo', 'logo': this.getConfig("logoUrl")});
 			}
@@ -507,7 +507,7 @@
 						_this.embedPlayer.play();
 					}
 					_this.updateScreen();
-					// hide kaltura logo
+					// hide vidiun logo
 					if ( _this.getConfig("receiverLogo") ){
 						_this.sendMessage({'type': 'hide', 'target': 'logo'});
 					}
@@ -729,7 +729,7 @@
 					_this.embedPlayer.play();
 				},1000);
 			}else{
-				if ( this.embedPlayer.selectedPlayer.library == "Kplayer" ){
+				if ( this.embedPlayer.selectedPlayer.library == "Vplayer" ){
 					// since we don't have the canSeek promise, we need to reload the media on playerReady, wait for it to load and then preform the seek operation. Add a timeout as seek is not always available on the mediaLoaded event
 					this.bind("playerReady.stopCast", function(){
 						_this.unbind("playerReady.stopCast");
