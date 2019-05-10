@@ -1,6 +1,6 @@
 <?php
 /**
-* Kaltura entry point to resource loader framework
+* Vidiun entry point to resource loader framework
 */
 // Set the request variables:
 $_GET['modules'] = 'startup';

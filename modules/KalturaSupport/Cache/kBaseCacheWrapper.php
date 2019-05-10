@@ -4,7 +4,7 @@
  * @package infra
  * @subpackage cache
  */
-abstract class kBaseCacheWrapper
+abstract class vBaseCacheWrapper
 {	
 	/**
 	 * @param string $key
@@ -77,7 +77,7 @@ abstract class kBaseCacheWrapper
 	 */
 	protected static function safeLog($msg)
 	{
-		if (class_exists('KalturaLog'))
-			KalturaLog::debug($msg);
+		if (class_exists('VidiunLog'))
+			VidiunLog::debug($msg);
 	}
 }

@@ -10,18 +10,18 @@
     <script type="text/javascript">
         $(document).ready(function() {
 			
-			var ks = false;
+			var vs = false;
 
-			var createPlayer = function ( ks ) {
+			var createPlayer = function ( vs ) {
 				console.log( 'create - forceMobileHTML5:' + mw.getConfig( 'forceMobileHTML5' ) );
-				kWidget.embed({
+				vWidget.embed({
 					'targetId': 'myVideoTarget',
 					'wid': '_' + $( '#partnerId' ).val(),
 					'uiconf_id' : '7015551',
 					'entry_id' : $( '#entryId' ).val(),
 					'flashvars':{
 						'externalInterfaceDisabled' : false,
-						'ks' : ks
+						'vs' : vs
 					},
 					'readyCallback': function( playerId ){
 						console.log( 'ready - forceMobileHTML5:' + mw.getConfig( 'forceMobileHTML5' ) );
@@ -38,13 +38,13 @@
                     mw.setConfig( 'forceMobileHTML5', false );
                 }
 
-				if( ks ) {
-					createPlayer( ks );
+				if( vs ) {
+					createPlayer( vs );
 					return ;
 				}
 
                 $.ajax({
-                    url: "http://www.kaltura.com/api_v3/index.php",
+                    url: "http://www.vidiun.com/api_v3/index.php",
                     cache: false,
                     dataType: "jsonp",
                     data: {
@@ -56,8 +56,8 @@
                         secret: $( '#adminSecret' ).val()
                     },
                     success: function(result) {
-                        ks = result;
-						createPlayer( ks );
+                        vs = result;
+						createPlayer( vs );
                     }
                 });
 

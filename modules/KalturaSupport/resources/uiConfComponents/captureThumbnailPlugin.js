@@ -1,6 +1,6 @@
 ( function( mw, $ ) { "use strict";
 
-	mw.PluginManager.add( 'captureThumbnail', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'captureThumbnail', mw.VBaseComponent.extend({
 		defaultConfig: {
 			"parent": "controlsContainer",
 		 	"order": 63,
@@ -21,13 +21,13 @@
 			// Get current time
 			var roundedTime = ( parseFloat( this.getPlayer().currentTime ) ).toFixed( 3 );
 			// Make API request
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'thumbasset',
 				'action' : 'generate',
-				'entryId' : this.getPlayer().kentryid,
+				'entryId' : this.getPlayer().ventryid,
 				'thumbParams:quality': 75,
 				'thumbParams:videoOffset': roundedTime,
-				'thumbParams:objectType': 'KalturaThumbParams',
+				'thumbParams:objectType': 'VidiunThumbParams',
 				'thumbParams:requiredPermissions:-': ''
 			}, function( data ) {
 				// In case of error, print an error message
@@ -37,7 +37,7 @@
 				}
 				var thumbId = data.id;
 				if ( thumbId ) {
-					_this.kClient.doRequest( {
+					_this.vClient.doRequest( {
 						'service' : 'thumbasset',
 						'action' : 'setAsDefault',
 						'thumbAssetId' : thumbId
@@ -60,7 +60,7 @@
 						_this.getPlayer().play();
 					}
 				},
-				'isExternal': false, // KDP defaults to false
+				'isExternal': false, // VDP defaults to false
 				'isModal': true,
 				'props': {
 					'buttonRowSpacing': '5px'

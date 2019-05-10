@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAssetStatus
+class VidiunAttachmentAssetStatus
 {
 	const ERROR = -1;
 	const QUEUED = 0;
@@ -50,10 +50,10 @@ class KalturaAttachmentAssetStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAssetOrderBy
+class VidiunAttachmentAssetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DELETED_AT_ASC = "+deletedAt";
@@ -66,10 +66,10 @@ class KalturaAttachmentAssetOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentType
+class VidiunAttachmentType
 {
 	const TEXT = "1";
 	const MEDIA = "2";
@@ -77,10 +77,10 @@ class KalturaAttachmentType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAsset extends KalturaAsset
+class VidiunAttachmentAsset extends VidiunAsset
 {
 	/**
 	 * The filename of the attachment asset content
@@ -102,7 +102,7 @@ class KalturaAttachmentAsset extends KalturaAsset
 	 * The attachment format
 	 * 	 
 	 *
-	 * @var KalturaAttachmentType
+	 * @var VidiunAttachmentType
 	 */
 	public $format = null;
 
@@ -110,7 +110,7 @@ class KalturaAttachmentAsset extends KalturaAsset
 	 * The status of the asset
 	 * 	 
 	 *
-	 * @var KalturaAttachmentAssetStatus
+	 * @var VidiunAttachmentAssetStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -119,15 +119,15 @@ class KalturaAttachmentAsset extends KalturaAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAssetListResponse extends KalturaObjectBase
+class VidiunAttachmentAssetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAttachmentAsset
+	 * @var array of VidiunAttachmentAsset
 	 * @readonly
 	 */
 	public $objects;
@@ -144,15 +144,15 @@ class KalturaAttachmentAssetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAttachmentAssetBaseFilter extends KalturaAssetFilter
+abstract class VidiunAttachmentAssetBaseFilter extends VidiunAssetFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAttachmentType
+	 * @var VidiunAttachmentType
 	 */
 	public $formatEqual = null;
 
@@ -166,7 +166,7 @@ abstract class KalturaAttachmentAssetBaseFilter extends KalturaAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAttachmentAssetStatus
+	 * @var VidiunAttachmentAssetStatus
 	 */
 	public $statusEqual = null;
 
@@ -188,22 +188,22 @@ abstract class KalturaAttachmentAssetBaseFilter extends KalturaAssetFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAssetFilter extends KalturaAttachmentAssetBaseFilter
+class VidiunAttachmentAssetFilter extends VidiunAttachmentAssetBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentAssetService extends KalturaServiceBase
+class VidiunAttachmentAssetService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -212,20 +212,20 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 * Add attachment asset
 	 * 
 	 * @param string $entryId 
-	 * @param KalturaAttachmentAsset $attachmentAsset 
-	 * @return KalturaAttachmentAsset
+	 * @param VidiunAttachmentAsset $attachmentAsset 
+	 * @return VidiunAttachmentAsset
 	 */
-	function add($entryId, KalturaAttachmentAsset $attachmentAsset)
+	function add($entryId, VidiunAttachmentAsset $attachmentAsset)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entryId", $entryId);
-		$this->client->addParam($kparams, "attachmentAsset", $attachmentAsset->toParams());
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entryId", $entryId);
+		$this->client->addParam($vparams, "attachmentAsset", $attachmentAsset->toParams());
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAttachmentAsset");
+		$this->client->validateObjectType($resultObject, "VidiunAttachmentAsset");
 		return $resultObject;
 	}
 
@@ -233,20 +233,20 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 * Update content of attachment asset
 	 * 
 	 * @param string $id 
-	 * @param KalturaContentResource $contentResource 
-	 * @return KalturaAttachmentAsset
+	 * @param VidiunContentResource $contentResource 
+	 * @return VidiunAttachmentAsset
 	 */
-	function setContent($id, KalturaContentResource $contentResource)
+	function setContent($id, VidiunContentResource $contentResource)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "contentResource", $contentResource->toParams());
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "setContent", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "contentResource", $contentResource->toParams());
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "setContent", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAttachmentAsset");
+		$this->client->validateObjectType($resultObject, "VidiunAttachmentAsset");
 		return $resultObject;
 	}
 
@@ -254,20 +254,20 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 * Update attachment asset
 	 * 
 	 * @param string $id 
-	 * @param KalturaAttachmentAsset $attachmentAsset 
-	 * @return KalturaAttachmentAsset
+	 * @param VidiunAttachmentAsset $attachmentAsset 
+	 * @return VidiunAttachmentAsset
 	 */
-	function update($id, KalturaAttachmentAsset $attachmentAsset)
+	function update($id, VidiunAttachmentAsset $attachmentAsset)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "attachmentAsset", $attachmentAsset->toParams());
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "attachmentAsset", $attachmentAsset->toParams());
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAttachmentAsset");
+		$this->client->validateObjectType($resultObject, "VidiunAttachmentAsset");
 		return $resultObject;
 	}
 
@@ -280,10 +280,10 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 */
 	function getUrl($id, $storageId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "storageId", $storageId);
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "getUrl", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "storageId", $storageId);
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "getUrl", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -296,18 +296,18 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 * Get remote storage existing paths for the asset
 	 * 
 	 * @param string $id 
-	 * @return KalturaRemotePathListResponse
+	 * @return VidiunRemotePathListResponse
 	 */
 	function getRemotePaths($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "getRemotePaths", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "getRemotePaths", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaRemotePathListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunRemotePathListResponse");
 		return $resultObject;
 	}
 
@@ -319,9 +319,9 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 */
 	function serve($attachmentAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "attachmentAssetId", $attachmentAssetId);
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "serve", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "attachmentAssetId", $attachmentAssetId);
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "serve", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -331,41 +331,41 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 * 
 	 * 
 	 * @param string $attachmentAssetId 
-	 * @return KalturaAttachmentAsset
+	 * @return VidiunAttachmentAsset
 	 */
 	function get($attachmentAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "attachmentAssetId", $attachmentAssetId);
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "attachmentAssetId", $attachmentAssetId);
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAttachmentAsset");
+		$this->client->validateObjectType($resultObject, "VidiunAttachmentAsset");
 		return $resultObject;
 	}
 
 	/**
 	 * List attachment Assets by filter and pager
 	 * 
-	 * @param KalturaAssetFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaAttachmentAssetListResponse
+	 * @param VidiunAssetFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunAttachmentAssetListResponse
 	 */
-	function listAction(KalturaAssetFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunAssetFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAttachmentAssetListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunAttachmentAssetListResponse");
 		return $resultObject;
 	}
 
@@ -377,9 +377,9 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	 */
 	function delete($attachmentAssetId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "attachmentAssetId", $attachmentAssetId);
-		$this->client->queueServiceActionCall("attachment_attachmentasset", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "attachmentAssetId", $attachmentAssetId);
+		$this->client->queueServiceActionCall("attachment_attachmentasset", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -389,32 +389,32 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAttachmentClientPlugin extends KalturaClientPlugin
+class VidiunAttachmentClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaAttachmentAssetService
+	 * @var VidiunAttachmentAssetService
 	 */
 	public $attachmentAsset = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->attachmentAsset = new KalturaAttachmentAssetService($client);
+		$this->attachmentAsset = new VidiunAttachmentAssetService($client);
 	}
 
 	/**
-	 * @return KalturaAttachmentClientPlugin
+	 * @return VidiunAttachmentClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaAttachmentClientPlugin($client);
+		return new VidiunAttachmentClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'audioDescription', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'audioDescription', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',

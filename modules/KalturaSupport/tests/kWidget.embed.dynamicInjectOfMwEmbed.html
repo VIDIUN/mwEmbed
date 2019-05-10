@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>kWidget Dynamic Player Embed</title>
+<title>vWidget Dynamic Player Embed</title>
 </head>
 <body>
-<h2> kWidget Dynamic Player Embed </h2>
+<h2> vWidget Dynamic Player Embed </h2>
 
 <br /><br />
 <a id="doIncludeLib" href="#">Include mwEmbed, then run kWidget.embed</a> </br>
@@ -47,7 +47,7 @@
 		head.insertBefore( script, head.firstChild );
 	};
 	window['doPlayCallback'] = function( playerId ){
-		console.log( 'kWidget doPlayCallback ' + playerId );
+		console.log( 'vWidget doPlayCallback ' + playerId );
 		//$('body').append( '<div>started playback</div>' );
 	};
 	var doEmbedAndLink = document.getElementById('doIncludeLib');
@@ -67,9 +67,9 @@
 					'fooBar': 'cats'
 				},
 				'readyCallback': function( playerId ){
-					console.log( "kWidget player ready: " + playerId );
-					var kdp = document.getElementById( playerId );
-					kdp.addJsListener( 'doPlay', 'doPlayCallback');
+					console.log( "vWidget player ready: " + playerId );
+					var vdp = document.getElementById( playerId );
+					vdp.addJsListener( 'doPlay', 'doPlayCallback');
 				}	
 			});
 		});

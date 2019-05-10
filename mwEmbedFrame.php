@@ -21,13 +21,13 @@ $myMwEmbedFrame = new mwEmbedFrame();
 
 $mwEmbedRoot = dirname( __FILE__ );
 
-// @@TODO temporary HACK to override to kalturaIframe 
+// @@TODO temporary HACK to override to vidiunIframe 
 // ( need to refactor embedFrame into an abstract class )
 // @@TODO Need a php based configuration system for modules so they 
 // can extend / override entry points
 
-if( isset( $myMwEmbedFrame->kwidgetid ) || isset($_REQUEST['wid']) ){
-	require(	dirname( __FILE__ ) . '/modules/KalturaSupport/kalturaIframe.php');
+if( isset( $myMwEmbedFrame->vwidgetid ) || isset($_REQUEST['wid']) ){
+	require(	dirname( __FILE__ ) . '/modules/VidiunSupport/vidiunIframe.php');
 	exit();
 }
 
@@ -50,10 +50,10 @@ class mwEmbedFrame {
 		'autoplay',
 		'durationHint',
 		'poster',
-		'kentryid',
-		'kwidgetid',
-		'kuiconfid',
-		'kplaylistid',
+		'ventryid',
+		'vwidgetid',
+		'vuiconfid',
+		'vplaylistid',
 		'skin'
 	);
 	var $playerIframeId = 'iframeVid';
@@ -73,19 +73,19 @@ class mwEmbedFrame {
 	// Parse the embedFrame request and sanitize input
 	private function parseRequest(){
 		// Check for / attribute type request and update "REQUEST" global 
-		// ( uses kaltura standard entry_id/{entryId} request )
+		// ( uses vidiun standard entry_id/{entryId} request )
 		// normalize to the REQUEST object
-		// @@FIXME: this should be moved over to a kaltura specific iframe implementation 
+		// @@FIXME: this should be moved over to a vidiun specific iframe implementation 
 		if( isset( $_SERVER['PATH_INFO'] ) ){
-			$kalturaUrlMap = Array( 
-				'entry_id' => 'kentryid',
-				'uiconf_id' => 'kuiconfid',
-				'wid' => 'kwidgetid',
-				'playlist_id' => 'kplaylistid'
+			$vidiunUrlMap = Array( 
+				'entry_id' => 'ventryid',
+				'uiconf_id' => 'vuiconfid',
+				'wid' => 'vwidgetid',
+				'playlist_id' => 'vplaylistid'
 			);
 			$urlParts = explode( '/', $_SERVER['PATH_INFO'] );
 			foreach( $urlParts as $inx => $urlPart ){
-				foreach( $kalturaUrlMap as $urlKey => $reqeustAttribute ){
+				foreach( $vidiunUrlMap as $urlKey => $reqeustAttribute ){
 					if( $urlPart == $urlKey && isset( $urlParts[$inx+1] ) ){
 						$_REQUEST[ $reqeustAttribute ] = $urlParts[$inx+1];
 					}
@@ -104,7 +104,7 @@ class mwEmbedFrame {
 		if( isset( $_REQUEST['theme'] )	&&
 										in_array($_REQUEST['theme'],
 														 array('darkness','le-frog', 'redmond','start',
-																	 'sunny', 'kdark')) ){
+																	 'sunny', 'vdark')) ){
 									$this->theme = $_REQUEST['theme'];
 								}
 								
@@ -195,7 +195,7 @@ class mwEmbedFrame {
 	<body>	
 	<?php
 	// Check if we have a way to get sources:
-	if( isset( $this->apiTitleKey ) || isset( $this->kentryid ) || count( $this->sources ) != 0 ) {
+	if( isset( $this->apiTitleKey ) || isset( $this->ventryid ) || count( $this->sources ) != 0 ) {
 		echo $this->getVideoTag();
 	} else {
 		echo "Error: mwEmbedFrame missing required parameter for video sources</body></html>";

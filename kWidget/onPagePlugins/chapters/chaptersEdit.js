@@ -1,10 +1,10 @@
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	/**
 	 * The main chaptersEdit object:
 	 */
-	var chaptersEdit = function(kdp){
-		return this.init(kdp);
+	var chaptersEdit = function(vdp){
+		return this.init(vdp);
 	}
 	chaptersEdit.prototype = {
 		// the left offset of the cuepoint 
@@ -19,16 +19,16 @@ kWidget.addReadyCallback( function( playerId ){
 		// Current time of the playhead
 		currentTime: 0,
 		
-		init: function( kdp ){
+		init: function( vdp ){
 			var _this = this;
-			this.kdp = kdp;
+			this.vdp = vdp;
 			
 			// init the cuePoints data controller with the current entryId:
-			this.cuePoints = new kWidget.cuePointsDataController({
-				'wid' : this.getAttr( 'configProxy.kw.id' ),
+			this.cuePoints = new vWidget.cuePointsDataController({
+				'wid' : this.getAttr( 'configProxy.vw.id' ),
 				'entryId' : this.getAttr( 'mediaProxy.entry.id' ),
 				'tags' : this.getConfig('tags') || 'chaptering', // default cuePoint name
-				'ks' : this.getConfig('ks'),
+				'vs' : this.getConfig('vs'),
 				// pass in customDataFields array
 				'customDataFields': this.getConfig( 'customDataFields' ) ? 
 					this.getConfig( 'customDataFields' ).split(',') : 
@@ -38,15 +38,15 @@ kWidget.addReadyCallback( function( playerId ){
 			// setup app targets:
 			this.$prop = this.getConfig( 'editPropId') ? 
 					$('#' + this.getConfig( 'editPropId') ) : 
-					$('<div>').insertAfter( kdp );
+					$('<div>').insertAfter( vdp );
 			
 			this.$timeline =  this.getConfig( 'editTimelineId' ) ?
 					$( '#' + this.getConfig( 'editTimelineId' ) ) : 
 					$('<div>').insertAfter( this.$prop );
 					
 			// Add classes for css styles:
-			this.$prop.addClass( 'k-prop' ).text('loading');
-			this.$timeline.addClass( 'k-timeline' ).text('loading');
+			this.$prop.addClass( 'v-prop' ).text('loading');
+			this.$timeline.addClass( 'v-timeline' ).text('loading');
 			
 			// Add in default metadata: 
 			this.cuePoints.load(function( status ){
@@ -66,7 +66,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		displayPropEdit: function(){
 			var _this = this;
-			// check if we have a KS ( required for edit and display ) 
+			// check if we have a VS ( required for edit and display ) 
 			// check if we have an active cuePoint
 			if( this.activeCuePoint){
 				this.showEditCuePoint(); 
@@ -86,7 +86,7 @@ kWidget.addReadyCallback( function( playerId ){
 				this.getEditCuePoint( this.activeCuePoint ),
 				$('<a>').addClass( "btn" ).text( "Update" ).click( function(){
 					// Trigger cuePoint time update: 
-					_this.$prop.find( '.k-currentTime' ).trigger('change');
+					_this.$prop.find( '.v-currentTime' ).trigger('change');
 					var _saveButton = this;
 					$( this ).addClass( "disabled" ).text( 'saving ...' ).siblings('.btn').addClass( "disabled" );
 					_this.cuePoints.update( _this.activeCuePoint.get(), function( data ){
@@ -120,7 +120,7 @@ kWidget.addReadyCallback( function( playerId ){
 				var _addButton = this;
 				$( this ).addClass( "disabled" ).text( 'adding ...' );
 				// Trigger cuePoint time update: 
-				_this.$prop.find( '.k-currentTime' ).trigger('change');
+				_this.$prop.find( '.v-currentTime' ).trigger('change');
 				// insert the current cuePoint
 				_this.cuePoints.add({
 					'entryId': _this.getAttr( 'mediaProxy.entry.id' ),
@@ -178,12 +178,12 @@ kWidget.addReadyCallback( function( playerId ){
 					var win = ( self == top ) ? window : top;
 					if( win.location.hash.indexOf( 'uiconf_id') !== -1 ){
 						error.title = "URL includes uiconf_id #config";
-						error.msg = " Kaltura Secret can not be used with uiConf URL based config." +
+						error.msg = " Vidiun Secret can not be used with uiConf URL based config." +
 								"Please save settings, and remove url based config"
 						break;
 					}
-					error.title = "Missing Kaltura Secret";
-					error.msg = "The chapters editor appears to be missing a valid kaltura secret." +
+					error.title = "Missing Vidiun Secret";
+					error.msg = "The chapters editor appears to be missing a valid vidiun secret." +
 							" Please login."
 					break;
 				default:
@@ -203,7 +203,7 @@ kWidget.addReadyCallback( function( playerId ){
 			// get the edit table for the cuePoint
 			$editTable = curCuePoint.getEditTable();
 			// add special binding for time update: 
-			$editTable.find( '.k-currentTime' )
+			$editTable.find( '.v-currentTime' )
 			.off('blur')
 			.on('blur', function(){
 				// check if "editing a cue point" 
@@ -211,7 +211,7 @@ kWidget.addReadyCallback( function( playerId ){
 					_this.refreshTimeline();
 				}
 				_this.updatePlayhead( 
-					kWidget.npt2seconds( $( this ).val() )
+					vWidget.npt2seconds( $( this ).val() )
 				);
 			})
 			return $editTable;
@@ -236,7 +236,7 @@ kWidget.addReadyCallback( function( playerId ){
 				_this.updatePlayhead( clickTime );
 			});
 			// add playhead tracker
-			kdp.kBind('playerUpdatePlayhead', function( ct ){
+			vdp.vBind('playerUpdatePlayhead', function( ct ){
 				_this.updatePlayheadUi( ct );
 			} )
 		},
@@ -244,7 +244,7 @@ kWidget.addReadyCallback( function( playerId ){
 			// update the current time: 
 			this.currentTime = time;
 			// seek to that time
-			kdp.sendNotification( 'doSeek', time );
+			vdp.sendNotification( 'doSeek', time );
 			// do the ui update
 			this.updatePlayheadUi( time );
 		},
@@ -252,12 +252,12 @@ kWidget.addReadyCallback( function( playerId ){
 			// time target:
 			var timeTarget = (  time /  this.getAttr('mediaProxy.entry.duration') ) * this.getTimelineWidth();
 			// update playhead on timeline:
-			this.$timeline.find( '.k-playhead' ).css({
+			this.$timeline.find( '.v-playhead' ).css({
 				'left': (  this.leftOffset + timeTarget)  + 'px'
 			});
 			// Check if we can update current time: ( don't update if a chapter is selected )
-			this.$prop.find( '.k-currentTime' ).val(
-				kWidget.seconds2npt( time, true  )
+			this.$prop.find( '.v-currentTime' ).val(
+				vWidget.seconds2npt( time, true  )
 			)
 		},
 		getTimelineWidth: function(){
@@ -277,9 +277,9 @@ kWidget.addReadyCallback( function( playerId ){
 			
 			// draw main top level timeline
 			this.$timeline.append(
-				$('<div>').addClass( 'k-timeline-background' ),
-				$('<div>').addClass( 'k-baseline'),
-				$('<span>').addClass('k-timeline-docs').text(docstext)
+				$('<div>').addClass( 'v-timeline-background' ),
+				$('<div>').addClass( 'v-baseline'),
+				$('<span>').addClass('v-timeline-docs').text(docstext)
 			).css({
 				'position': 'relative',
 				'height': '100px'
@@ -288,7 +288,7 @@ kWidget.addReadyCallback( function( playerId ){
 			// draw the playhead marker 
 			this.$timeline.append( 
 				$('<div>')
-				.addClass('k-playhead')
+				.addClass('v-playhead')
 				.css({
 					'position': 'absolute',
 					'top': '25px',
@@ -323,7 +323,7 @@ kWidget.addReadyCallback( function( playerId ){
 							'width' : '70px',
 							'height': '14px',
 						}).text(
-							kWidget.seconds2npt( markerTime )
+							vWidget.seconds2npt( markerTime )
 						)
 					);
 				} else {
@@ -348,7 +348,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		deselectCuePoint: function(){
 			// make sure no other cuePoint is active: 
-			this.$timeline.find( '.k-cuepoint').removeClass('active');
+			this.$timeline.find( '.v-cuepoint').removeClass('active');
 			this.displayPropEdit();
 			this.activeCuePoint = null;
 		},
@@ -358,7 +358,7 @@ kWidget.addReadyCallback( function( playerId ){
 			_this.deselectCuePoint();
 			// activate the current :
 			_this.activeCuePoint = cuePoint;
-			$( '#k-cuepoint-' + cuePoint.get('id') ).addClass( 'active' );
+			$( '#v-cuepoint-' + cuePoint.get('id') ).addClass( 'active' );
 			// update the cue point editor: 
 			_this.displayPropEdit();
 			// select the current cueTime 
@@ -370,13 +370,13 @@ kWidget.addReadyCallback( function( playerId ){
 		drawCuePoints: function(){
 			var _this = this;
 			// remove all old cue points
-			_this.$timeline.find( '.k-cuepoint').remove();
+			_this.$timeline.find( '.v-cuepoint').remove();
 			$.each( this.cuePoints.get(), function( inx, curCuePoint){
 				var cueTime = curCuePoint.get( 'startTime' ) / 1000;
 				var timeTarget = (  cueTime /  _this.getAttr('mediaProxy.entry.duration') ) * _this.getTimelineWidth();
 				var $cuePoint = $('<div>')
-					.addClass( 'k-cuepoint' )
-					.attr( 'id', 'k-cuepoint-' + curCuePoint.get('id') )
+					.addClass( 'v-cuepoint' )
+					.attr( 'id', 'v-cuepoint-' + curCuePoint.get('id') )
 					.css({
 						'left': (  _this.leftOffset + timeTarget)  + 'px'
 					})
@@ -396,7 +396,7 @@ kWidget.addReadyCallback( function( playerId ){
 			});
 		},
 		normalizeAttrValue: function( attrValue ){
-			// normalize flash kdp string values
+			// normalize flash vdp string values
 			switch( attrValue ){
 				case "null":
 					return null;
@@ -412,7 +412,7 @@ kWidget.addReadyCallback( function( playerId ){
 		},
 		getAttr: function( attr ){
 			return this.normalizeAttrValue(
-				this.kdp.evaluate( '{' + attr + '}' )
+				this.vdp.evaluate( '{' + attr + '}' )
 			);
 		},
 		getConfig : function( attr ){
@@ -420,7 +420,7 @@ kWidget.addReadyCallback( function( playerId ){
 				return this.configOverride[ attr ];
 			}
 			return this.normalizeAttrValue(
-				this.kdp.evaluate('{chaptersEdit.' + attr + '}' )
+				this.vdp.evaluate('{chaptersEdit.' + attr + '}' )
 			);
 		}
 	}
@@ -431,12 +431,12 @@ kWidget.addReadyCallback( function( playerId ){
 	window['chaptersEditMediaReady'] = function(){
 		// make sure we have jQuery
 		if( !window.jQuery ){
-			kWidget.appendScriptUrl( '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js', function(){
-				new chaptersEdit(kdp) 
+			vWidget.appendScriptUrl( '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js', function(){
+				new chaptersEdit(vdp) 
 			});
 			return ;
 		}
-		new chaptersEdit(kdp);
+		new chaptersEdit(vdp);
 	};
-	kdp.addJsListener( "mediaReady", "chaptersEditMediaReady" );
+	vdp.addJsListener( "mediaReady", "chaptersEditMediaReady" );
 });

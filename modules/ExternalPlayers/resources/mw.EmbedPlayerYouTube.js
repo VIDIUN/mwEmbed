@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  * See http://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript for formating conventions
  */
 ( function( mw, $ ){ "use strict";
@@ -130,7 +130,7 @@
 			}
 			window['onError'] = function( event ){
 				mw.log("Error! YouTubePlayer" ,2);
-				//$('#loadingSpinner_kaltura_player').append('<br/>Error!');
+				//$('#loadingSpinner_vidiun_player').append('<br/>Error!');
 				var errorMessage;
 				if (event.data)
 					event = event.data;
@@ -147,12 +147,12 @@
 						errorMessage = "The owner of the requested video does not allow it to be played in embedded players";
 						break;
 				}
-				//$('#loadingSpinner_kaltura_player').append('<br/>'+errorMessage);
+				//$('#loadingSpinner_vidiun_player').append('<br/>'+errorMessage);
 				$(".playerPoster").hide();
-				//$(".loadingSpinner_kaltura_player").hide();
+				//$(".loadingSpinner_vidiun_player").hide();
 				if( !window['iframePlayer'] )
 					$('.mwEmbedPlayer').append('<br/><br/>'+errorMessage);
-				$("#loadingSpinner_kaltura_player").hide();
+				$("#loadingSpinner_vidiun_player").hide();
 				mw.log(errorMessage ,2);
 			};
 			//YOUTUBE IFRAME PLAYER READY (Not the Iframe - the player itself)

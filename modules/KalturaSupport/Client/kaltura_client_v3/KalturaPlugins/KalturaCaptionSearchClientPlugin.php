@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,25 +28,25 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCaptionClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunCaptionClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetItem extends KalturaObjectBase
+class VidiunCaptionAssetItem extends VidiunObjectBase
 {
 	/**
 	 * The Caption Asset object
 	 * 	 
 	 *
-	 * @var KalturaCaptionAsset
+	 * @var VidiunCaptionAsset
 	 */
 	public $asset;
 
@@ -54,7 +54,7 @@ class KalturaCaptionAssetItem extends KalturaObjectBase
 	 * The entry object
 	 * 	 
 	 *
-	 * @var KalturaBaseEntry
+	 * @var VidiunBaseEntry
 	 */
 	public $entry;
 
@@ -83,15 +83,15 @@ class KalturaCaptionAssetItem extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetItemListResponse extends KalturaObjectBase
+class VidiunCaptionAssetItemListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCaptionAssetItem
+	 * @var array of VidiunCaptionAssetItem
 	 * @readonly
 	 */
 	public $objects;
@@ -108,10 +108,10 @@ class KalturaCaptionAssetItemListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetItemFilter extends KalturaCaptionAssetFilter
+class VidiunCaptionAssetItemFilter extends VidiunCaptionAssetFilter
 {
 	/**
 	 * 
@@ -158,7 +158,7 @@ class KalturaCaptionAssetItemFilter extends KalturaCaptionAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaLanguage
+	 * @var VidiunLanguage
 	 */
 	public $languageEqual = null;
 
@@ -216,12 +216,12 @@ class KalturaCaptionAssetItemFilter extends KalturaCaptionAssetFilter
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionAssetItemService extends KalturaServiceBase
+class VidiunCaptionAssetItemService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -229,82 +229,82 @@ class KalturaCaptionAssetItemService extends KalturaServiceBase
 	/**
 	 * Search caption asset items by filter, pager and free text
 	 * 
-	 * @param KalturaBaseEntryFilter $entryFilter 
-	 * @param KalturaCaptionAssetItemFilter $captionAssetItemFilter 
-	 * @param KalturaFilterPager $captionAssetItemPager 
-	 * @return KalturaCaptionAssetItemListResponse
+	 * @param VidiunBaseEntryFilter $entryFilter 
+	 * @param VidiunCaptionAssetItemFilter $captionAssetItemFilter 
+	 * @param VidiunFilterPager $captionAssetItemPager 
+	 * @return VidiunCaptionAssetItemListResponse
 	 */
-	function search(KalturaBaseEntryFilter $entryFilter = null, KalturaCaptionAssetItemFilter $captionAssetItemFilter = null, KalturaFilterPager $captionAssetItemPager = null)
+	function search(VidiunBaseEntryFilter $entryFilter = null, VidiunCaptionAssetItemFilter $captionAssetItemFilter = null, VidiunFilterPager $captionAssetItemPager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($entryFilter !== null)
-			$this->client->addParam($kparams, "entryFilter", $entryFilter->toParams());
+			$this->client->addParam($vparams, "entryFilter", $entryFilter->toParams());
 		if ($captionAssetItemFilter !== null)
-			$this->client->addParam($kparams, "captionAssetItemFilter", $captionAssetItemFilter->toParams());
+			$this->client->addParam($vparams, "captionAssetItemFilter", $captionAssetItemFilter->toParams());
 		if ($captionAssetItemPager !== null)
-			$this->client->addParam($kparams, "captionAssetItemPager", $captionAssetItemPager->toParams());
-		$this->client->queueServiceActionCall("captionsearch_captionassetitem", "search", $kparams);
+			$this->client->addParam($vparams, "captionAssetItemPager", $captionAssetItemPager->toParams());
+		$this->client->queueServiceActionCall("captionsearch_captionassetitem", "search", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCaptionAssetItemListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunCaptionAssetItemListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * Search caption asset items by filter, pager and free text
 	 * 
-	 * @param KalturaBaseEntryFilter $entryFilter 
-	 * @param KalturaCaptionAssetItemFilter $captionAssetItemFilter 
-	 * @param KalturaFilterPager $captionAssetItemPager 
-	 * @return KalturaBaseEntryListResponse
+	 * @param VidiunBaseEntryFilter $entryFilter 
+	 * @param VidiunCaptionAssetItemFilter $captionAssetItemFilter 
+	 * @param VidiunFilterPager $captionAssetItemPager 
+	 * @return VidiunBaseEntryListResponse
 	 */
-	function searchEntries(KalturaBaseEntryFilter $entryFilter = null, KalturaCaptionAssetItemFilter $captionAssetItemFilter = null, KalturaFilterPager $captionAssetItemPager = null)
+	function searchEntries(VidiunBaseEntryFilter $entryFilter = null, VidiunCaptionAssetItemFilter $captionAssetItemFilter = null, VidiunFilterPager $captionAssetItemPager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($entryFilter !== null)
-			$this->client->addParam($kparams, "entryFilter", $entryFilter->toParams());
+			$this->client->addParam($vparams, "entryFilter", $entryFilter->toParams());
 		if ($captionAssetItemFilter !== null)
-			$this->client->addParam($kparams, "captionAssetItemFilter", $captionAssetItemFilter->toParams());
+			$this->client->addParam($vparams, "captionAssetItemFilter", $captionAssetItemFilter->toParams());
 		if ($captionAssetItemPager !== null)
-			$this->client->addParam($kparams, "captionAssetItemPager", $captionAssetItemPager->toParams());
-		$this->client->queueServiceActionCall("captionsearch_captionassetitem", "searchEntries", $kparams);
+			$this->client->addParam($vparams, "captionAssetItemPager", $captionAssetItemPager->toParams());
+		$this->client->queueServiceActionCall("captionsearch_captionassetitem", "searchEntries", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaBaseEntryListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunBaseEntryListResponse");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptionSearchClientPlugin extends KalturaClientPlugin
+class VidiunCaptionSearchClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaCaptionAssetItemService
+	 * @var VidiunCaptionAssetItemService
 	 */
 	public $captionAssetItem = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->captionAssetItem = new KalturaCaptionAssetItemService($client);
+		$this->captionAssetItem = new VidiunCaptionAssetItemService($client);
 	}
 
 	/**
-	 * @return KalturaCaptionSearchClientPlugin
+	 * @return VidiunCaptionSearchClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaCaptionSearchClientPlugin($client);
+		return new VidiunCaptionSearchClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

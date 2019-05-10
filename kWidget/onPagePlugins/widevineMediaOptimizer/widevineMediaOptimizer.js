@@ -1,33 +1,33 @@
 var WidevinePlugin;
-var widevineKdp;
-kWidget.addReadyCallback( function( playerId ){
-	widevineKdp = document.getElementById( playerId );
-	var playerType = widevineKdp.nodeName.toLowerCase();
-	//if the player is KDP
+var widevineVdp;
+vWidget.addReadyCallback( function( playerId ){
+	widevineVdp = document.getElementById( playerId );
+	var playerType = widevineVdp.nodeName.toLowerCase();
+	//if the player is VDP
 	if ( playerType == "object") {
-	    widevineKdp.kBind("entryReady", function () {
+	    widevineVdp.vBind("entryReady", function () {
 	       widevine.init();
 	    });
 	} else {
-		//if Kplayer is available - tell it to load widevine swf plugin
-		if ( kWidget.supportsFlash() ) {
-			widevineKdp.setKDPAttribute('kdpVars.widevine', 'plugin', 'true');
-			widevineKdp.setKDPAttribute('kdpVars.widevine', 'loadingPolicy', 'preInitialize');
-			widevineKdp.setKDPAttribute('kdpVars.widevine', 'asyncInit', 'true');
+		//if Vplayer is available - tell it to load widevine swf plugin
+		if ( vWidget.supportsFlash() ) {
+			widevineVdp.setVDPAttribute('vdpVars.widevine', 'plugin', 'true');
+			widevineVdp.setVDPAttribute('vdpVars.widevine', 'loadingPolicy', 'preInitialize');
+			widevineVdp.setVDPAttribute('vdpVars.widevine', 'asyncInit', 'true');
 			
-			widevineKdp.kBind( 'entryReady', function () {
+			widevineVdp.vBind( 'entryReady', function () {
 				if ( widevine.isWvFlavors() ) {
-					widevineKdp.setKDPAttribute('kdpVars.widevine', 'isWv', 'true');
+					widevineVdp.setVDPAttribute('vdpVars.widevine', 'isWv', 'true');
 				}
 		       	widevine.init();
 		    });
 		}
 		else {
 			//hide default "no source found" alert
-		     widevineKdp.setKDPAttribute(null, 'disableAlerts', true);
+		     widevineVdp.setVDPAttribute(null, 'disableAlerts', true);
 		     
-		     widevineKdp.kBind("playerReady", function () {
-			    var flavors = widevineKdp.evaluate("{mediaProxy.kalturaMediaFlavorArray}");
+		     widevineVdp.vBind("playerReady", function () {
+			    var flavors = widevineVdp.evaluate("{mediaProxy.vidiunMediaFlavorArray}");
 			    //if we received flavors we can play them. continue.
 			    if (flavors && flavors.length)
 				    return;
@@ -35,22 +35,22 @@ kWidget.addReadyCallback( function( playerId ){
 			    //if mobile device
 			    var msg = null;
 			    var title = null;
-			    if (kWidget.isMobileDevice()) {
-					 msg = widevineKdp.evaluate("{widevine.useSupportedDeviceMsg}") || "This video requires Adobe Flash Player, which is not supported by your device. You can watch it on devices that support Flash." ;
-					 title = widevineKdp.evaluate("{widevine.useSupportedDeviceTitle}") || "Notification";
+			    if (vWidget.isMobileDevice()) {
+					 msg = widevineVdp.evaluate("{widevine.useSupportedDeviceMsg}") || "This video requires Adobe Flash Player, which is not supported by your device. You can watch it on devices that support Flash." ;
+					 title = widevineVdp.evaluate("{widevine.useSupportedDeviceTitle}") || "Notification";
 			    } else {
 				 	//flash is not installed - prompt to install flash
 					if (navigator.mimeTypes ["application/x-shockwave-flash"] == undefined) {
-					     msg = widevineKdp.evaluate("{widevine.intallFlashMsg}") || "This video requires Adobe Flash Player, which is currently not available on your browser. Please <a href='http://www.adobe.com/support/flashplayer/downloads.html' target='_blank'> install Adobe Flash Player </a> to view this video.";
-					     title = widevineKdp.evaluate("{widevine.installFlashTitle}") || "Notification";
-					} else { //else prompt to use kdp
-					     msg = widevineKdp.evaluate("{widevine.useKdpMsg}") || "This video requires Adobe Flash enabled player.";
-					     title = widevineKdp.evaluate("{widevine.useKdpTitle}") || "Notification";
+					     msg = widevineVdp.evaluate("{widevine.intallFlashMsg}") || "This video requires Adobe Flash Player, which is currently not available on your browser. Please <a href='http://www.adobe.com/support/flashplayer/downloads.html' target='_blank'> install Adobe Flash Player </a> to view this video.";
+					     title = widevineVdp.evaluate("{widevine.installFlashTitle}") || "Notification";
+					} else { //else prompt to use vdp
+					     msg = widevineVdp.evaluate("{widevine.useVdpMsg}") || "This video requires Adobe Flash enabled player.";
+					     title = widevineVdp.evaluate("{widevine.useVdpTitle}") || "Notification";
 					}
 			    }
 			    if (msg && title) {
-			    	widevineKdp.sendNotification( "alert", {keepOverlay:true, message: msg , title: title} );
-			    	widevineKdp.sendNotification("enableGui", {guiEnabled: false});
+			    	widevineVdp.sendNotification( "alert", {keepOverlay:true, message: msg , title: title} );
+			    	widevineVdp.sendNotification("enableGui", {guiEnabled: false});
 			    }
 		    });  
 		}
@@ -72,7 +72,7 @@ var widevine = function() {
 
 	var signon_url = "https://staging.shibboleth.tv/widevine/cypherpc/cgi-bin/SignOn.cgi";
 	var log_url = "https://staging.shibboleth.tv/widevine/cypherpc/cgi-bin/LogEncEvent.cgi";
-	var emm_url="http://www.kaltura.com/api_v3/index.php?service=widevine_widevinedrm&action=getLicense";
+	var emm_url="http://www.vidiun.com/api_v3/index.php?service=widevine_widevinedrm&action=getLicense";
 	var widevineSrcPath = {
 	    mac:'WidevineMediaOptimizer.dmg',
 	    ie:'WidevineMediaOptimizerIE.exe',
@@ -81,7 +81,7 @@ var widevine = function() {
 	};
 	// Set the portal
 
-	var portal = "kaltura";
+	var portal = "vidiun";
 
 	function doDetect( type, value  ) {
 		return eval( 'navigator.' + type + '.toLowerCase().indexOf("' + value + '") != -1' );
@@ -295,7 +295,7 @@ var widevine = function() {
         }
         if (platform)
         {
-             return kWidget.getPath() + 'kWidget/onPagePlugins/widevineMediaOptimizer/resources/' + widevineSrcPath[platform];
+             return vWidget.getPath() + 'vWidget/onPagePlugins/widevineMediaOptimizer/resources/' + widevineSrcPath[platform];
         }
         return null;
     }
@@ -308,18 +308,18 @@ var widevine = function() {
 		if ( ! widevine.isWvFlavors() )
 			return;
 
-		widevineKdp.sendNotification("noWidevineBrowserPlugin");
+		widevineVdp.sendNotification("noWidevineBrowserPlugin");
 		
 		if (window.wvPromptDiv)
 			return window.wvPromptDiv;
 			
 		//get texts and style from the player, if they were set
-		var wvPromptStyle = widevineKdp.evaluate("{widevine.promptStyle}");
-		var wvPromptText = widevineKdp.evaluate("{widevine.promptText}");
-		var wvPromptLinkText = widevineKdp.evaluate("{widevine.promptLinkText}");
-        var wvPromptInfoText = widevineKdp.evaluate("{widevine.promptInfoText}");
-        var wvPromptInfoLink = widevineKdp.evaluate("{widevine.promptInfoLink}");
-        var wvPromptRestartChromeAfterInstall =widevineKdp.evaluate("{widevine.PromptRestartChromeAfterInstall}") ||
+		var wvPromptStyle = widevineVdp.evaluate("{widevine.promptStyle}");
+		var wvPromptText = widevineVdp.evaluate("{widevine.promptText}");
+		var wvPromptLinkText = widevineVdp.evaluate("{widevine.promptLinkText}");
+        var wvPromptInfoText = widevineVdp.evaluate("{widevine.promptInfoText}");
+        var wvPromptInfoLink = widevineVdp.evaluate("{widevine.promptInfoLink}");
+        var wvPromptRestartChromeAfterInstall =widevineVdp.evaluate("{widevine.PromptRestartChromeAfterInstall}") ||
             "Download of the plugin installer will start immediately. Note that you must restart your Chrome browser after running the installer";
 		
 		//workaround to overlap chrome's onpage plugins
@@ -387,10 +387,10 @@ var widevine = function() {
 		}
 	},
 	isWvFlavors: function() {
-		var entryFlavors = widevineKdp.evaluate("{mediaProxy.kalturaMediaFlavorArray}");
+		var entryFlavors = widevineVdp.evaluate("{mediaProxy.vidiunMediaFlavorArray}");
 		//either all flavors are encrypted or all are not. If the flavor is not widevine don't show wv prompt.
 		if (entryFlavors && entryFlavors.length){
-			if (entryFlavors[0].objectType == "KalturaWidevineFlavorAsset" || entryFlavors[0]["data-flavorid"] == "wvm" )
+			if (entryFlavors[0].objectType == "VidiunWidevineFlavorAsset" || entryFlavors[0]["data-flavorid"] == "wvm" )
 			return true;
 		}
 		return false;

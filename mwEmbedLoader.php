@@ -1,7 +1,7 @@
 <?php
 // Include configuration
 require_once( realpath( dirname( __FILE__ ) ) . '/includes/DefaultSettings.php' );
-require_once( realpath( dirname( __FILE__ ) ) . '/modules/KalturaSupport/KalturaCommon.php' );
+require_once( realpath( dirname( __FILE__ ) ) . '/modules/VidiunSupport/VidiunCommon.php' );
 
 // only include the iframe if we need to: 
 // Include MwEmbedWebStartSetup.php for all of mediawiki support
@@ -9,12 +9,12 @@ if( isset( $_GET['autoembed'] ) ){
 	$externalPlayersPath =  realpath( dirname( __FILE__ ) ) . '/modules/ExternalPlayers/ExternalPlayers.json';
 	$plugins = json_decode( file_get_contents($externalPlayersPath ), TRUE );
 	require ( dirname( __FILE__ ) . '/includes/MwEmbedWebStartSetup.php' );
-	require_once( realpath( dirname( __FILE__ ) ) . '/modules/KalturaSupport/kalturaIframeClass.php' );
+	require_once( realpath( dirname( __FILE__ ) ) . '/modules/VidiunSupport/vidiunIframeClass.php' );
 }
 
 // Check for custom resource ps config file:
-if( isset( $wgKalturaPSHtml5SettingsPath ) && is_file( $wgKalturaPSHtml5SettingsPath ) ){
-	require_once( $wgKalturaPSHtml5SettingsPath );
+if( isset( $wgVidiunPSHtml5SettingsPath ) && is_file( $wgVidiunPSHtml5SettingsPath ) ){
+	require_once( $wgVidiunPSHtml5SettingsPath );
 }
 
 $mwEmbedLoader = new mwEmbedLoader();
@@ -33,16 +33,16 @@ class mwEmbedLoader {
 	
 	
 	var $loaderFileList = array(
-		// Get main kWidget resource:
-		'kWidget/kWidget.js', 
+		// Get main vWidget resource:
+		'vWidget/vWidget.js', 
 		// Include json2 for old browsers that don't have JSON.stringify
 		'resources/json/json2.js', 
 		// By default include deprecated globals ( will be deprecated in 1.8 )
-		'kWidget/kWidget.deprecatedGlobals.js', 
+		'vWidget/vWidget.deprecatedGlobals.js', 
 		// Get resource ( domReady.js )
-		'kWidget/kWidget.domReady.js', 
+		'vWidget/vWidget.domReady.js', 
 		// Get resource (  mwEmbedLoader.js )
-		'kWidget/mwEmbedLoader.js', 
+		'vWidget/mwEmbedLoader.js', 
 		// Include checkUserAgentPlayer code
 		'kWidget/kWidget.checkUserAgentPlayerRules.js',
 		// Get kWidget utilities:
@@ -113,7 +113,7 @@ class mwEmbedLoader {
 	private function getAutoEmbedCode(){
 		$o='';
 		
-		// Get the kWidget call ( pass along iframe payload path )
+		// Get the vWidget call ( pass along iframe payload path )
 		// Check required params: 
 		$wid = $this->request()->get('wid');
 		if( !$wid ){
@@ -140,18 +140,18 @@ class mwEmbedLoader {
 		$height = ( $this->request()->get('height') )? htmlspecialchars( $this->request()->get('height') ): 330;
 
 		// Get the iframe payload
-		$kIframe = new kalturaIframeClass();
+		$vIframe = new vidiunIframeClass();
 
-		$this->iframeHeaders = $kIframe->getHeaders();
+		$this->iframeHeaders = $vIframe->getHeaders();
 		
-		// get the kIframe 
+		// get the vIframe 
 		$json = array(
-			'content' => $kIframe->getIFramePageOutput()
+			'content' => $vIframe->getIFramePageOutput()
 		);
-		$o.="kWidget.iframeAutoEmbedCache[ '{$playerId}' ] = " . json_encode( $json ) . ";\n";
+		$o.="vWidget.iframeAutoEmbedCache[ '{$playerId}' ] = " . json_encode( $json ) . ";\n";
 		
 		$o.="if(!document.getElementById('{$playerId}')) { document.write( '<div id=\"{$playerId}\" style=\"width:{$width}px;height:{$height}px\"></div>' ); } \n";
-		$o.="kWidget.embed( '{$playerId}', { \n" .
+		$o.="vWidget.embed( '{$playerId}', { \n" .
 			"\t'wid': '{$wid}', \n" .
 			"\t'uiconf_id' : '{$uiconf_id}'";
 		// conditionally add in the entry id: ( no entry id in playlists )
@@ -199,8 +199,8 @@ class mwEmbedLoader {
 			$o.= $this->getMinPerUiConfJS();
 		}
 		
-		// After we load everything ( issue the kWidget.Setup call as the last line in the loader )
-		$o.="\nkWidget.setup();\n";
+		// After we load everything ( issue the vWidget.Setup call as the last line in the loader )
+		$o.="\nvWidget.setup();\n";
 		
 		return $o;
 	}
@@ -259,7 +259,7 @@ class mwEmbedLoader {
 			)
 		){
 			// directly issue the UiConfJs callback
-			return 'kWidget.inLoaderUiConfJsCallback();';
+			return 'vWidget.inLoaderUiConfJsCallback();';
 		}
 		// load the onPage js services
 		$mweUiConfJs = new mweApiUiConfJs();
@@ -269,11 +269,11 @@ class mwEmbedLoader {
 		$o.= $mweUiConfJs->getUserAgentPlayerRules();
 		
 		// support including special player rewrite flags if set in uiConf:
-		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.LeadWithHTML5' ) === true
+		if( $this->getUiConfObject()->getPlayerConfig( null, 'Vidiun.LeadWithHTML5' ) === true
 			||
-			$this->getUiConfObject()->getPlayerConfig( null, 'KalturaSupport.LeadWithHTML5' ) === true
+			$this->getUiConfObject()->getPlayerConfig( null, 'VidiunSupport.LeadWithHTML5' ) === true
 		){
-			$o.="\n"."kWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
+			$o.="\n"."vWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
 		
 		}
 		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.ForceFlashOnIE10' ) === true ){
@@ -285,7 +285,7 @@ class mwEmbedLoader {
 		}
 
 		if( $this->getUiConfObject()->isJson() ) {
-			$o.="\n"."kWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
+			$o.="\n"."vWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
 		}
 		
 		// If we have entry data
@@ -307,12 +307,12 @@ class mwEmbedLoader {
 		
 		// Only include on page plugins if not in iframe Server
 		if( !isset( $_REQUEST['iframeServer'] ) ){
-			$o.= $mweUiConfJs->getPluginPageJs( 'kWidget.inLoaderUiConfJsCallback' );
+			$o.= $mweUiConfJs->getPluginPageJs( 'vWidget.inLoaderUiConfJsCallback' );
 		} else{
-			$o.='kWidget.inLoaderUiConfJsCallback();';
+			$o.='vWidget.inLoaderUiConfJsCallback();';
 		}
 		// set the flag so that we don't have to request the services.php
-		$o.= "\n" . 'kWidget.uiConfScriptLoadList[\'' . 
+		$o.= "\n" . 'vWidget.uiConfScriptLoadList[\'' . 
 			$this->request()->get('uiconf_id') .
 			'\'] = 1; ';
 		return $o;
@@ -421,8 +421,8 @@ class mwEmbedLoader {
 			'Kaltura.AllowedPluginVars' => $wgAllowedPluginVars,
 			'Kaltura.AllowedPluginVarsValPartials' => $wgAllowedPluginVarsValPartials
 		);
-		if( isset( $_GET['pskwidgetpath'] ) ){
-			$exportedJsConfig[ 'Kaltura.KWidgetPsPath' ] = htmlspecialchars( $_GET['pskwidgetpath'] );
+		if( isset( $_GET['psvwidgetpath'] ) ){
+			$exportedJsConfig[ 'Vidiun.VWidgetPsPath' ] = htmlspecialchars( $_GET['psvwidgetpath'] );
 		}
 		//For embed services pass "AllowIframeRemoteService" to client so it will be able to pass back the alternative service URL
 		if ($this->request()->isEmbedServicesEnabled()){
@@ -439,21 +439,21 @@ class mwEmbedLoader {
 		}
 		// Add user language
 		$language = json_encode($this->utility()->getUserLanguage());
-		$exportedJS .= "mw.setConfig('Kaltura.UserLanguage', $language );\n";
+		$exportedJS .= "mw.setConfig('Vidiun.UserLanguage', $language );\n";
 
 		return $exportedJS;
 	}
-	// Kaltura Comment
+	// Vidiun Comment
 	private function getLoaderHeader(){
 		global $wgMwEmbedVersion, $wgResourceLoaderUrl, $wgMwEmbedVersion;
 		$o = "/**
-* Kaltura HTML5 Library v$wgMwEmbedVersion  
-* http://html5video.org/kaltura-player/docs/
+* Vidiun HTML5 Library v$wgMwEmbedVersion  
+* http://html5video.org/vidiun-player/docs/
 * 
 * This is free software released under the GPL2 see README more info 
-* http://html5video.org/kaltura-player/docs/readme
+* http://html5video.org/vidiun-player/docs/readme
 * 
-* Copyright " . date("Y") . " Kaltura Inc.
+* Copyright " . date("Y") . " Vidiun Inc.
 */\n";
 		// Add the library version:
 		$o .= "window['MWEMBED_VERSION'] = '$wgMwEmbedVersion';\n";

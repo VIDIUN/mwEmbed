@@ -1,30 +1,30 @@
 /**
- * Based on the 'kdp3 javascript api'
- * Add full Kaltura mapping support to html5 based players
- * http://www.kaltura.org/demos/kdp3/docs.html#jsapi
+ * Based on the 'vdp3 javascript api'
+ * Add full Vidiun mapping support to html5 based players
+ * http://www.vidiun.org/demos/vdp3/docs.html#jsapi
  *
  * Compatibility is tracked here:
- * http://html5video.org/wiki/Kaltura_KDP_API_Compatibility
+ * http://html5video.org/wiki/Vidiun_VDP_API_Compatibility
  *
  */
 ( function( mw, $ ) { "use strict";
-	mw.KDPMapping = function( embedPlayer ) {
+	mw.VDPMapping = function( embedPlayer ) {
 		return this.init( embedPlayer );
 	};
-	mw.KDPMapping.prototype = {
+	mw.VDPMapping.prototype = {
 
 		// global list of kdp listening callbacks
 		listenerList: {},
 		/**
-		* Add Player hooks for supporting Kaltura api stuff
+		* Add Player hooks for supporting Vidiun api stuff
 		*/
 		init: function( embedPlayer ){
 			var _this = this;
 			this.registerDefaultFormaters();
 
 			// player api:
-			var kdpApiMethods = [ 'addJsListener', 'removeJsListener', 'sendNotification',
-								  'setKDPAttribute', 'evaluate' ];
+			var vdpApiMethods = [ 'addJsListener', 'removeJsListener', 'sendNotification',
+								  'setVDPAttribute', 'evaluate' ];
 
 			var parentProxyDiv = null;
 			if(  mw.getConfig('EmbedPlayer.IsFriendlyIframe') ){
@@ -35,8 +35,8 @@
 					// Do nothing
 				}
 			}
-			// Add kdp api methods to local embed object as well as parent iframe
-			$.each( kdpApiMethods, function( inx, methodName) {
+			// Add vdp api methods to local embed object as well as parent iframe
+			$.each( vdpApiMethods, function( inx, methodName) {
 				// Add to local embed object:
 				embedPlayer[ methodName ] = function(){
 					var args = $.makeArray( arguments ) ;
@@ -67,9 +67,9 @@
 			var runCallbackOnParent = false;
 			if(  mw.getConfig('EmbedPlayer.IsFriendlyIframe') ){
 				try {
-					if( window['parent'] && window['parent']['kWidget'] && parentProxyDiv ){
+					if( window['parent'] && window['parent']['vWidget'] && parentProxyDiv ){
 						runCallbackOnParent = true;
-						window['parent']['kWidget'].jsCallbackReady( embedPlayer.id );
+						window['parent']['vWidget'].jsCallbackReady( embedPlayer.id );
 					}
 				} catch( e ) {
 					runCallbackOnParent = false;
@@ -77,7 +77,7 @@
 			}
 			// Run jsCallbackReady inside the iframe ( support for onPage Iframe plugins )
 			if( !runCallbackOnParent ) {
-				window.kWidget.jsCallbackReady( embedPlayer.id );
+				window.vWidget.jsCallbackReady( embedPlayer.id );
 			}
 		},
 
@@ -97,13 +97,13 @@
 		},
 
 		/**
-		 * Emulates Kaltura setAttribute function
+		 * Emulates Vidiun setAttribute function
 		 * @param {Object} embedPlayer Base embedPlayer to be affected
 		 * @param {String} componentName Name of component to be updated
 		 * @param {String} property The value to give the named attribute
 		 */
-		setKDPAttribute: function( embedPlayer, componentName, property, value ) {
-			mw.log("KDPMapping::setKDPAttribute " + componentName + " p:" + property + " v:" + value  + ' for: ' + embedPlayer.id );
+		setVDPAttribute: function( embedPlayer, componentName, property, value ) {
+			mw.log("VDPMapping::setVDPAttribute " + componentName + " p:" + property + " v:" + value  + ' for: ' + embedPlayer.id );
 
 			var pluginNameToSet = componentName;
 			var propertyNameToSet = property;
@@ -126,18 +126,18 @@
 						valueToSet[ property ] = value;
 					}
 					// Save configuration
-					embedPlayer.setKalturaConfig( pluginNameToSet, propertyNameToSet, valueToSet );
+					embedPlayer.setVidiunConfig( pluginNameToSet, propertyNameToSet, valueToSet );
 				break;
 			}
 			// TODO move to a "ServicesProxy" plugin
 			if( pluginNameToSet == 'servicesProxy'
-				&& propertyNameToSet && propertyNameToSet == 'kalturaClient'
-				&& property == 'ks'
+				&& propertyNameToSet && propertyNameToSet == 'vidiunClient'
+				&& property == 'vs'
 			){
-				this.updateKS( embedPlayer, value );
+				this.updateVS( embedPlayer, value );
 			}
-			// Give kdp plugins a chance to take attribute actions
-			$( embedPlayer ).trigger( 'Kaltura_SetKDPAttribute', [ componentName, property, value ] );
+			// Give vdp plugins a chance to take attribute actions
+			$( embedPlayer ).trigger( 'Vidiun_SetVDPAttribute', [ componentName, property, value ] );
 		},
 		updateKS: function ( embedPlayer, ks){
 			var client = mw.kApiGetPartnerClient( embedPlayer.kwidgetid );
@@ -151,13 +151,13 @@
 			// add a loading spinner:
 			//embedPlayer.addPlayerSpinner();
 			// reload the player:
-			//kWidgetSupport.loadAndUpdatePlayerData( embedPlayer, function(){
-				// ks should now be updated
+			//vWidgetSupport.loadAndUpdatePlayerData( embedPlayer, function(){
+				// vs should now be updated
 			//	embedPlayer.hideSpinner();
 			//});
 		},
 		/**
-		 * Emulates kaltura evaluate function
+		 * Emulates vidiun evaluate function
 		 *
 		 * @@TODO move this into a separate uiConfValue parser script,
 		 * I predict ( unfortunately ) it will expand a lot.
@@ -176,7 +176,7 @@
 			// Limit recursive calls to 5
 			limit = limit || 0;
 			if( limit > 4 ) {
-				mw.log('KDPMapping::evaluate: recursive calls are limited to 5');
+				mw.log('VDPMapping::evaluate: recursive calls are limited to 5');
 				return objectString;
 			}
 
@@ -237,23 +237,23 @@
 
 			// Split the uiConf expression into parts separated by '.'
 			var objectPath = expression.split('.');
-			// Check the exported kaltura object ( for manual overrides of any mapping )
+			// Check the exported vidiun object ( for manual overrides of any mapping )
 			if( embedPlayer.playerConfig
 					&&
 				embedPlayer.playerConfig.plugins
 					&&
 				embedPlayer.playerConfig.plugins[ objectPath[0] ]
 			){
-				var kObj = embedPlayer.playerConfig.plugins[ objectPath[0] ] ;
+				var vObj = embedPlayer.playerConfig.plugins[ objectPath[0] ] ;
 				// TODO SHOULD USE A FUNCTION map
 				if( !objectPath[1] ){
-					return kObj;
+					return vObj;
 				}
-				if( !objectPath[2] && (objectPath[1] in kObj) ){
-					return kObj[ objectPath[1] ];
+				if( !objectPath[2] && (objectPath[1] in vObj) ){
+					return vObj[ objectPath[1] ];
 				}
-				if( objectPath[2] && kObj[ objectPath[1] ] && typeof kObj[ objectPath[1] ][ objectPath[2] ] != 'undefined' ){
-					return kObj[ objectPath[1] ][ objectPath[2] ];
+				if( objectPath[2] && vObj[ objectPath[1] ] && typeof vObj[ objectPath[1] ][ objectPath[2] ] != 'undefined' ){
+					return vObj[ objectPath[1] ][ objectPath[2] ];
 				}
 
 			}
@@ -332,9 +332,9 @@
 						case 'player':
 							switch( objectPath[2] ){
 								case 'currentTime':
-									// check for kPreSeekTime ( kaltura seek delay update property )
-									if( embedPlayer.seeking && embedPlayer.kPreSeekTime !== null ){
-										return embedPlayer.kPreSeekTime;
+									// check for vPreSeekTime ( vidiun seek delay update property )
+									if( embedPlayer.seeking && embedPlayer.vPreSeekTime !== null ){
+										return embedPlayer.vPreSeekTime;
 									}
 									/*var ct = embedPlayer.currentTime - embedPlayer.startOffset;
 									if( ct < 0 )
@@ -370,35 +370,35 @@
 							if( ! embedPlayer.rawCuePoints ){
 								return null;
 							}
-							var kdpCuePointFormat = {};
+							var vdpCuePointFormat = {};
 							$.each( embedPlayer.rawCuePoints, function(inx, cuePoint ){
 								var startTime = parseInt( cuePoint.startTime );
-								if( kdpCuePointFormat[ startTime ] ){
-									kdpCuePointFormat[ startTime ].push( cuePoint )
+								if( vdpCuePointFormat[ startTime ] ){
+									vdpCuePointFormat[ startTime ].push( cuePoint )
 								} else {
-									kdpCuePointFormat[ startTime ] = [ cuePoint ];
+									vdpCuePointFormat[ startTime ] = [ cuePoint ];
 								}
 							});
-							return kdpCuePointFormat;
+							return vdpCuePointFormat;
 						break;
 						case 'entryMetadata':
-							if( ! embedPlayer.kalturaEntryMetaData ){
+							if( ! embedPlayer.vidiunEntryMetaData ){
 								return null;
 							}
 							if( objectPath[2] ) {
-								return embedPlayer.kalturaEntryMetaData[ objectPath[2] ];
+								return embedPlayer.vidiunEntryMetaData[ objectPath[2] ];
 							} else {
-								return embedPlayer.kalturaEntryMetaData;
+								return embedPlayer.vidiunEntryMetaData;
 							}
 						break;
 						case 'entry':
-							if( ! embedPlayer.kalturaPlayerMetaData ){
+							if( ! embedPlayer.vidiunPlayerMetaData ){
 								return null;
 							}
 							if( objectPath[2] ) {
-								return embedPlayer.kalturaPlayerMetaData[ objectPath[2] ];
+								return embedPlayer.vidiunPlayerMetaData[ objectPath[2] ];
 							} else {
-								return embedPlayer.kalturaPlayerMetaData;
+								return embedPlayer.vidiunPlayerMetaData;
 							}
 						break;
 						case 'sources': 
@@ -425,7 +425,7 @@
 							if( ! embedPlayer.kalturaFlavors ){
 								return null;
 							}
-							return embedPlayer.kalturaFlavors;
+							return embedPlayer.vidiunFlavors;
 						break;
 					}
 				break;
@@ -456,40 +456,40 @@
 								return fv;
 							}
 						break;
-						// kaltura widget mapping: 
-						case 'kw': 
-							var kw = {
-								'objectType': "KalturaWidget",
-								'id' : embedPlayer.kwidgetid,
-								'partnerId': embedPlayer.kpartnerid,
-								'uiConfId' : embedPlayer.kuiconfid
+						// vidiun widget mapping: 
+						case 'vw': 
+							var vw = {
+								'objectType': "VidiunWidget",
+								'id' : embedPlayer.vwidgetid,
+								'partnerId': embedPlayer.vpartnerid,
+								'uiConfId' : embedPlayer.vuiconfid
 							}
 							if( objectPath[2] ){
-								if( typeof kw[ objectPath[2] ] != 'undefined' ){
-									return kw[ objectPath[2] ]
+								if( typeof vw[ objectPath[2] ] != 'undefined' ){
+									return vw[ objectPath[2] ]
 								}
 								return null;
 							}
-							return kw;
+							return vw;
 						break;
 						case 'targetId':
 							return embedPlayer.id;
 						break;
 						case 'sessionId':
-							return window.kWidgetSupport.getGUID();
+							return window.vWidgetSupport.getGUID();
 						break;
 					}
 					// No objectPath[1] match return the full configProx object:
-					// TODO I don't think this is supported in KDP ( we might want to return null instead )
+					// TODO I don't think this is supported in VDP ( we might want to return null instead )
 					return {
 							'flashvars' : fv,
-							'sessionId' : window.kWidgetSupport.getGUID()
+							'sessionId' : window.vWidgetSupport.getGUID()
 						};
 				break;
 				case 'playerStatusProxy':
 					switch( objectPath[1] ){
-						case 'kdpStatus':
-							if( embedPlayer.kdpEmptyFlag ){
+						case 'vdpStatus':
+							if( embedPlayer.vdpEmptyFlag ){
 								return "empty";
 							}
 							if( embedPlayer.playerReadyFlag ){
@@ -499,16 +499,16 @@
 						break;
 					}
 				break;
-				// TODO We should move playlistAPI into the Kaltura playlist handler code
+				// TODO We should move playlistAPI into the Vidiun playlist handler code
 				// ( but tricky to do because of cross iframe communication issue )
 				case 'playlistAPI':
 					switch( objectPath[1] ) {
 						case 'dataProvider':
 							// Get the current data provider:
-							if( !embedPlayer.kalturaPlaylistData ){
+							if( !embedPlayer.vidiunPlaylistData ){
 								return null;
 							}
-							var plData = embedPlayer.kalturaPlaylistData;
+							var plData = embedPlayer.vidiunPlaylistData;
 							var plId =null;
 							if( plData['currentPlaylistId'] ){
 								plId = plData['currentPlaylistId'];
@@ -583,11 +583,11 @@
 			// Look for a plugin based config: typeof
 			var pluginConfigValue = null;
 			// See if we are looking for a top level property
-			if( !objectPath[1] && $.isEmptyObject( embedPlayer.getKalturaConfig( objectPath[0] ) ) ){
+			if( !objectPath[1] && $.isEmptyObject( embedPlayer.getVidiunConfig( objectPath[0] ) ) ){
 				// Return the top level property directly ( {loop} {autoPlay} etc. )
-				pluginConfigValue = embedPlayer.getKalturaConfig( '', objectPath[0] );
+				pluginConfigValue = embedPlayer.getVidiunConfig( '', objectPath[0] );
 			} else {
-				pluginConfigValue = embedPlayer.getKalturaConfig( objectPath[0], objectPath[1]);
+				pluginConfigValue = embedPlayer.getVidiunConfig( objectPath[0], objectPath[1]);
 				if( $.isEmptyObject( pluginConfigValue ) ){
 					return ;
 				}
@@ -595,7 +595,7 @@
 			return pluginConfigValue;
 		},
 		/**
-		 * Maps a kdp expression to embedPlayer property.
+		 * Maps a vdp expression to embedPlayer property.
 		 *
 		 * NOTE: embedPlayer can be a playerProxy when on the other side of the iframe
 		 * so anything not exported over the iframe will not be available
@@ -651,10 +651,10 @@
 			return property;
 		},
 		/**
-		 * Emulates Kaltura removeJsListener function
+		 * Emulates Vidiun removeJsListener function
 		 */
 		removeJsListener: function( embedPlayer, eventName, callbackName ){
-			mw.log( "KDPMapping:: removeJsListener:: " + eventName );
+			mw.log( "VDPMapping:: removeJsListener:: " + eventName );
 			if( typeof eventName == 'string' ) {
 				var eventData = eventName.split('.', 2);
 				var eventNamespace = eventData[1];
@@ -663,7 +663,7 @@
 					$( embedPlayer ).unbind('.' + eventNamespace);
 				}
 				else if ( !eventNamespace ) {
-					eventNamespace = 'kdpMapping';
+					eventNamespace = 'vdpMapping';
 				}
 				eventName = eventData[0];
 				if ( !callbackName ) {
@@ -697,19 +697,19 @@
 		},
 
 		/**
-		 * Emulates Kalatura addJsListener function
+		 * Emulates Vidiun addJsListener function
 		 * @param {Object} EmbedPlayer the player to bind against
 		 * @param {String} eventName the name of the event.
 		 * @param {Mixed} String of callback name, or function ref
 		 */
 		addJsListener: function( embedPlayer, eventName, callbackName ){
 			var _this = this;
-			// mw.log("KDPMapping::addJsListener: " + eventName + ' cb:' + callbackName );
+			// mw.log("VDPMapping::addJsListener: " + eventName + ' cb:' + callbackName );
 
 			// We can pass [eventName.namespace] as event name, we need it in order to remove listeners with their namespace
 			if( typeof eventName == 'string' ) {
 				var eventData = eventName.split('.', 2);
-				var eventNamespace = ( eventData[1] ) ? eventData[1] : 'kdpMapping';
+				var eventNamespace = ( eventData[1] ) ? eventData[1] : 'vdpMapping';
 				eventName = eventData[0];
 			}
 
@@ -719,10 +719,10 @@
 				var callback = function(){
 					var callbackName = _this.listenerList[ listenerId ];
 					// Check for valid local listeners:
-					var callbackToRun = kWidgetSupport.getFunctionByName( callbackName, window );
+					var callbackToRun = vWidgetSupport.getFunctionByName( callbackName, window );
 					if( ! $.isFunction( callbackToRun ) ){
 						// Check for valid parent page listeners:
-						callbackToRun = kWidgetSupport.getFunctionByName( callbackName, window['parent'] );
+						callbackToRun = vWidgetSupport.getFunctionByName( callbackName, window['parent'] );
 					}
 
 					if( $.isFunction( callbackToRun ) ) {
@@ -732,7 +732,7 @@
 							mw.log("Error when trying to run callbackToRun (probably JavaScript error in callbackToRun code)")
 						};
 					} else {
-						mw.log('kdpMapping::addJsListener: callback name: ' + callbackName + ' not found');
+						mw.log('vdpMapping::addJsListener: callback name: ' + callbackName + ' not found');
 					}
 					
 				};
@@ -747,7 +747,7 @@
 					}
 				}
 			} else {
-				mw.log( "Error: KDPMapping : bad callback type: " + callbackName );
+				mw.log( "Error: VDPMapping : bad callback type: " + callbackName );
 				return ;
 			}
 
@@ -760,14 +760,14 @@
 				}
 				// Add a postfix string
 				bindName += '.' + eventNamespace;
-				// bind with .kdpMapping postfix::
+				// bind with .vdpMapping postfix::
 				embedPlayer.bindHelper( bindName, function(){
 					bindCallback.apply( embedPlayer, $.makeArray( arguments ) );
 				});
 			};
 			switch( eventName ){
 				case 'layoutReady':
-					b( 'KalturaSupport_DoneWithUiConf' );
+					b( 'VidiunSupport_DoneWithUiConf' );
 				break;
 				case 'mediaLoadError':
 					b( 'mediaLoadError' );
@@ -775,7 +775,7 @@
 				case 'mediaError':
 					b( 'mediaError' );
 					break;
-				case 'kdpEmpty':
+				case 'vdpEmpty':
 				case 'readyToLoad':
 					if( embedPlayer.playerReadyFlag ){
 						// player is already ready when listener is added
@@ -786,7 +786,7 @@
 					} else {
 						// TODO: When we have video tag without an entry
 						b( 'playerReady', function(){
-							// only trigger kdpEmpty when the player is empty
+							// only trigger vdpEmpty when the player is empty
 							// TODO support 'real' player empty state, ie not via "error handler"
 							if( ! embedPlayer.kalturaPlayerMetaData ){
 								embedPlayer.kdpEmptyFlag = true;
@@ -798,12 +798,12 @@
 						});
 					}
 					break;
-				case 'kdpReady':
+				case 'vdpReady':
 					// TODO: When player is ready with entry, only happens once
 					// why not use widgetLoaded event ? 
 					b( 'playerReady', function() {
 						if( !embedPlayer.getError() ){
-							embedPlayer.kdpEmptyFlag = false;
+							embedPlayer.vdpEmptyFlag = false;
 						}
 						callback( embedPlayer.id );
 					});
@@ -857,14 +857,14 @@
 				case 'doSeek':
 				case 'doIntelligentSeek':
 					b( "seeking", function(){
-						var seekTime = ( embedPlayer.kPreSeekTime !== null ) ? embedPlayer.kPreSeekTime : embedPlayer.currentTime;
+						var seekTime = ( embedPlayer.vPreSeekTime !== null ) ? embedPlayer.vPreSeekTime : embedPlayer.currentTime;
 						callback( seekTime, embedPlayer.id );
 					});
 					break;
 				case 'playerSeekEnd':
 					b( "seeked", function(){
 						// null out the pre seek time:
-						embedPlayer.kPreSeekTime = null
+						embedPlayer.vPreSeekTime = null
 						callback( embedPlayer.id );
 					} );
 					break;
@@ -910,22 +910,22 @@
 					break;
 				case 'changeMedia':
 					b( 'playerReady', function( event ){
-						callback({'entryId' : embedPlayer.kentryid }, embedPlayer.id );
+						callback({'entryId' : embedPlayer.ventryid }, embedPlayer.id );
 					});
 					break;
 				case 'entryReady':
-					b( 'KalturaSupport_EntryDataReady', function( event, entryData ){
+					b( 'VidiunSupport_EntryDataReady', function( event, entryData ){
 						callback( entryData, embedPlayer.id );
 					});
 					break;
 				case 'entryFailed':
-					b( 'KalturaSupport_EntryFailed' );
+					b( 'VidiunSupport_EntryFailed' );
 					break;
 				case 'mediaReady':
-					// Check for "media ready" ( namespace to kdpMapping )
+					// Check for "media ready" ( namespace to vdpMapping )
 					b( 'playerReady',function( event ){
 						// Only issue the media ready callback if entry is actually ready.
-						if( embedPlayer.kentryid ){
+						if( embedPlayer.ventryid ){
 							// run after all other playerReady events
 							setTimeout(function(){
 								callback( embedPlayer.id )
@@ -934,7 +934,7 @@
 					});
 					break;
 				case 'metadataReceived':
-					b('KalturaSupport_MetadataReceived');
+					b('VidiunSupport_MetadataReceived');
 					break;
 
 				/**
@@ -1060,26 +1060,26 @@
 					b( 'AdSupport_PostSequence');
 					break;
 				/**
-				 * Cue point listeners TODO ( move to mw.kCuepoints.js )
+				 * Cue point listeners TODO ( move to mw.vCuepoints.js )
 				 */
 				case 'cuePointsReceived':
-					b( 'KalturaSupport_CuePointsReady', function( event, cuePoints ) {
+					b( 'VidiunSupport_CuePointsReady', function( event, cuePoints ) {
 						callback( embedPlayer.rawCuePoints, embedPlayer.id );
 					});
 					break;
 				case 'cuePointReached':
-					b( 'KalturaSupport_CuePointReached', function( event, cuePointWrapper ) {
+					b( 'VidiunSupport_CuePointReached', function( event, cuePointWrapper ) {
 						callback( cuePointWrapper, embedPlayer.id );
 					});
 					break;
 				case 'adOpportunity':
-					b( 'KalturaSupport_AdOpportunity', function( event, cuePointWrapper ) {
+					b( 'VidiunSupport_AdOpportunity', function( event, cuePointWrapper ) {
 						callback( cuePointWrapper, embedPlayer.id );
 					});
 					break;
 
 				/**
-				 * Mostly for analytics ( rather than strict kdp compatibility )
+				 * Mostly for analytics ( rather than strict vdp compatibility )
 				 */
 				case 'videoView':
 					b('firstPlay' );
@@ -1100,11 +1100,11 @@
 				case 'save':
 				case 'gotoContributorWindow':
 				case 'gotoEditorWindow':
-					mw.log( "Warning: kdp event: " + eventName + " does not have an html5 mapping" );
+					mw.log( "Warning: vdp event: " + eventName + " does not have an html5 mapping" );
 					break;
 
 				case 'freePreviewEnd':
-					b('KalturaSupport_FreePreviewEnd');
+					b('VidiunSupport_FreePreviewEnd');
 					break;
 				case 'switchingChangeStarted':
 					b( 'sourceSwitchingStarted', function( event, data ) {
@@ -1136,7 +1136,7 @@
 		 * Master send action list:
 		 */
 		sendNotification: function( embedPlayer, notificationName, notificationData ){
-			mw.log('KDPMapping:: sendNotification > '+ notificationName,  notificationData );
+			mw.log('VDPMapping:: sendNotification > '+ notificationName,  notificationData );
 			switch( notificationName ){
 				case 'showSpinner': 
 					embedPlayer.addPlayerSpinner();
@@ -1154,7 +1154,7 @@
 						break;
 					}
 					if( embedPlayer.playerReadyFlag == false ){
-						mw.log('Warning:: KDPMapping, Calling doPlay before player ready');
+						mw.log('Warning:: VDPMapping, Calling doPlay before player ready');
 						$( embedPlayer ).bind( 'playerReady.sendNotificationDoPlay', function(){
 							$( embedPlayer ).unbind( '.sendNotificationDoPlay' );
 							embedPlayer.play();
@@ -1245,15 +1245,15 @@
 							embedPlayer.referenceId = notificationData.referenceId;
 						}
 						// Clear player & entry meta
-						embedPlayer.kalturaPlayerMetaData = null;
-						embedPlayer.kalturaEntryMetaData = null;
+						embedPlayer.vidiunPlayerMetaData = null;
+						embedPlayer.vidiunEntryMetaData = null;
 
 						// clear cuepoint data:
 						embedPlayer.rawCuePoints = null;
-						embedPlayer.kCuePoints = null;
+						embedPlayer.vCuePoints = null;
 
 						// clear ad data ..
-						embedPlayer.kAds = null;
+						embedPlayer.vAds = null;
 
 						// Temporary update the thumbnail to black pixel. the real poster comes from entry metadata
 						embedPlayer.updatePoster();
@@ -1288,8 +1288,8 @@
 					$( embedPlayer ).trigger( notificationName, [notificationData] );
 					break;
 			}
-			// Give kdp plugins a chance to take attribute actions
-			$( embedPlayer ).trigger( 'Kaltura_SendNotification', [ notificationName, notificationData ] );
+			// Give vdp plugins a chance to take attribute actions
+			$( embedPlayer ).trigger( 'Vidiun_SendNotification', [ notificationName, notificationData ] );
 		}
 	};
 

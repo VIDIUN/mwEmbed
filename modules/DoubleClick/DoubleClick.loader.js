@@ -3,7 +3,7 @@
  */
 ( function( mw ) { "use strict";
 
-	mw.addKalturaConfCheck( function(embedPlayer, callback ){
+	mw.addVidiunConfCheck( function(embedPlayer, callback ){
 		// Disable doubleClick for isOS < 5 ( breaks content playback )
 		if( mw.isIOS4() || mw.isIOS3() ){
 			callback();

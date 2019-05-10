@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaEventNotificationClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunEventNotificationClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationAuthenticationMethod
+class VidiunHttpNotificationAuthenticationMethod
 {
 	const ANYSAFE = -18;
 	const ANY = -17;
@@ -51,10 +51,10 @@ class KalturaHttpNotificationAuthenticationMethod
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationMethod
+class VidiunHttpNotificationMethod
 {
 	const GET = 1;
 	const POST = 2;
@@ -63,20 +63,20 @@ class KalturaHttpNotificationMethod
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationSslVersion
+class VidiunHttpNotificationSslVersion
 {
 	const V2 = 2;
 	const V3 = 3;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationCertificateType
+class VidiunHttpNotificationCertificateType
 {
 	const DER = "DER";
 	const ENG = "ENG";
@@ -84,10 +84,10 @@ class KalturaHttpNotificationCertificateType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationSslKeyType
+class VidiunHttpNotificationSslKeyType
 {
 	const DER = "DER";
 	const ENG = "ENG";
@@ -95,10 +95,10 @@ class KalturaHttpNotificationSslKeyType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationTemplateOrderBy
+class VidiunHttpNotificationTemplateOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -109,16 +109,16 @@ class KalturaHttpNotificationTemplateOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotification extends KalturaObjectBase
+class VidiunHttpNotification extends VidiunObjectBase
 {
 	/**
 	 * Object that triggered the notification
 	 * 	 
 	 *
-	 * @var KalturaObjectBase
+	 * @var VidiunObjectBase
 	 */
 	public $object;
 
@@ -126,7 +126,7 @@ class KalturaHttpNotification extends KalturaObjectBase
 	 * Object type that triggered the notification
 	 * 	 
 	 *
-	 * @var KalturaEventNotificationEventObjectType
+	 * @var VidiunEventNotificationEventObjectType
 	 */
 	public $eventObjectType = null;
 
@@ -166,7 +166,7 @@ class KalturaHttpNotification extends KalturaObjectBase
 	 * Ecent type that triggered the notification
 	 * 	 
 	 *
-	 * @var KalturaEventNotificationEventType
+	 * @var VidiunEventNotificationEventType
 	 */
 	public $eventType = null;
 
@@ -174,33 +174,33 @@ class KalturaHttpNotification extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaHttpNotificationData extends KalturaObjectBase
+abstract class VidiunHttpNotificationData extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationDataFields extends KalturaHttpNotificationData
+class VidiunHttpNotificationDataFields extends VidiunHttpNotificationData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationDataText extends KalturaHttpNotificationData
+class VidiunHttpNotificationDataText extends VidiunHttpNotificationData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaStringValue
+	 * @var VidiunStringValue
 	 */
 	public $content;
 
@@ -208,13 +208,13 @@ class KalturaHttpNotificationDataText extends KalturaHttpNotificationData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationObjectData extends KalturaHttpNotificationData
+class VidiunHttpNotificationObjectData extends VidiunHttpNotificationData
 {
 	/**
-	 * Kaltura API object type
+	 * Vidiun API object type
 	 * 	 
 	 *
 	 * @var string
@@ -225,7 +225,7 @@ class KalturaHttpNotificationObjectData extends KalturaHttpNotificationData
 	 * Data format
 	 * 	 
 	 *
-	 * @var KalturaResponseType
+	 * @var VidiunResponseType
 	 */
 	public $format = null;
 
@@ -249,10 +249,10 @@ class KalturaHttpNotificationObjectData extends KalturaHttpNotificationData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
+class VidiunHttpNotificationTemplate extends VidiunEventNotificationTemplate
 {
 	/**
 	 * Remote server URL
@@ -266,7 +266,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Request method.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationMethod
+	 * @var VidiunHttpNotificationMethod
 	 */
 	public $method = null;
 
@@ -274,7 +274,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Data to send.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationData
+	 * @var VidiunHttpNotificationData
 	 */
 	public $data;
 
@@ -315,7 +315,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * The HTTP authentication method to use.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationAuthenticationMethod
+	 * @var VidiunHttpNotificationAuthenticationMethod
 	 */
 	public $authenticationMethod = null;
 
@@ -324,7 +324,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * 	 By default PHP will try to determine this itself, although in some cases this must be set manually.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationSslVersion
+	 * @var VidiunHttpNotificationSslVersion
 	 */
 	public $sslVersion = null;
 
@@ -340,7 +340,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * The format of the certificate.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationCertificateType
+	 * @var VidiunHttpNotificationCertificateType
 	 */
 	public $sslCertificateType = null;
 
@@ -372,7 +372,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * The key type of the private SSL key specified in ssl key - PEM / DER / ENG.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationSslKeyType
+	 * @var VidiunHttpNotificationSslKeyType
 	 */
 	public $sslKeyType = null;
 
@@ -396,7 +396,7 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 	 * Adds a e-mail custom header
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $customHeaders;
 
@@ -404,10 +404,10 @@ class KalturaHttpNotificationTemplate extends KalturaEventNotificationTemplate
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDispatchJobData
+class VidiunHttpNotificationDispatchJobData extends VidiunEventNotificationDispatchJobData
 {
 	/**
 	 * Remote server URL
@@ -421,7 +421,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * Request method.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationMethod
+	 * @var VidiunHttpNotificationMethod
 	 */
 	public $method = null;
 
@@ -470,7 +470,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * The HTTP authentication method to use.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationAuthenticationMethod
+	 * @var VidiunHttpNotificationAuthenticationMethod
 	 */
 	public $authenticationMethod = null;
 
@@ -479,7 +479,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * 	 By default PHP will try to determine this itself, although in some cases this must be set manually.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationSslVersion
+	 * @var VidiunHttpNotificationSslVersion
 	 */
 	public $sslVersion = null;
 
@@ -495,7 +495,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * The format of the certificate.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationCertificateType
+	 * @var VidiunHttpNotificationCertificateType
 	 */
 	public $sslCertificateType = null;
 
@@ -527,7 +527,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * The key type of the private SSL key specified in ssl key - PEM / DER / ENG.
 	 * 	 
 	 *
-	 * @var KalturaHttpNotificationSslKeyType
+	 * @var VidiunHttpNotificationSslKeyType
 	 */
 	public $sslKeyType = null;
 
@@ -551,7 +551,7 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 	 * Adds a e-mail custom header
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $customHeaders;
 
@@ -567,44 +567,44 @@ class KalturaHttpNotificationDispatchJobData extends KalturaEventNotificationDis
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaHttpNotificationTemplateBaseFilter extends KalturaEventNotificationTemplateFilter
+abstract class VidiunHttpNotificationTemplateBaseFilter extends VidiunEventNotificationTemplateFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationTemplateFilter extends KalturaHttpNotificationTemplateBaseFilter
+class VidiunHttpNotificationTemplateFilter extends VidiunHttpNotificationTemplateBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaHttpNotificationClientPlugin extends KalturaClientPlugin
+class VidiunHttpNotificationClientPlugin extends VidiunClientPlugin
 {
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * @return KalturaHttpNotificationClientPlugin
+	 * @return VidiunHttpNotificationClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaHttpNotificationClientPlugin($client);
+		return new VidiunHttpNotificationClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

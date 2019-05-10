@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'airPlay', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'airPlay', mw.VBaseComponent.extend({
 		defaultConfig: {
 			"parent": "controlsContainer",
 			"order": 200,

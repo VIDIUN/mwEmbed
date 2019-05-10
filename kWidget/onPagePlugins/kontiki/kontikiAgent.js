@@ -1,21 +1,21 @@
 ( function( ) { "use strict";
 	
-	var kdp;
+	var vdp;
 	var entryReady = false;
 
-	kWidget.addReadyCallback( function ( playerId ) {
-		kdp = document.getElementById ( playerId );
+	vWidget.addReadyCallback( function ( playerId ) {
+		vdp = document.getElementById ( playerId );
 		setKontikiFlavorTags();
 
-		kdp.kBind( "entryReady", function() {
+		vdp.vBind( "entryReady", function() {
 			entryReady = true;
 		});
 
 	});
 
 	function setKontikiFlavorTags () {
-		if ( kdp !== undefined && gKontikiAgentData !== undefined ) {
-			kdp.setKDPAttribute( "configProxy.flashvars", "flavorTags", "kontiki, mbr, web" );
+		if ( vdp !== undefined && gKontikiAgentData !== undefined ) {
+			vdp.setVDPAttribute( "configProxy.flashvars", "flavorTags", "kontiki, mbr, web" );
 		}
 	}
 
@@ -32,7 +32,7 @@
 	if(!kontiki.kui) kontiki.kui = {};
 
 	//URLs to the various assets we'll need.	
-	var AGENT_FLASH_LOADER_URL = kWidget.getPath() +'kWidget/onPagePlugins/kontiki/kontikiagentflashloader.swf';
+	var AGENT_FLASH_LOADER_URL = vWidget.getPath() +'vWidget/onPagePlugins/kontiki/kontikiagentflashloader.swf';
 
 	// global callback and agent reference needed for flash loader
 	var gKontikiCallback;
@@ -124,7 +124,7 @@
 			    if( document.body ){  
 			      	document.body.appendChild( flashDiv );
 					var flashvars = { url: clientUrl };
-					kWidget.outputFlashObject( "kontikiAgent", { src: AGENT_FLASH_LOADER_URL, flashvars: flashvars });
+					vWidget.outputFlashObject( "kontikiAgent", { src: AGENT_FLASH_LOADER_URL, flashvars: flashvars });
 			    } 
 			    //wait until body is loaded  
 			    else{  
@@ -369,11 +369,11 @@
 	// end of kontiki code
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	function onKaReady() {	
+	function onVidReady() {	
 		setKontikiFlavorTags();
 		//if entryReady was already sent flavorTags won't affect.
 		if ( entryReady ) {
-			kWidget.log( "kontikiAgent :: KontikiAgent responded after entryReady, kontiki flavorTags weren't set" );
+			vWidget.log( "kontikiAgent :: KontikiAgent responded after entryReady, kontiki flavorTags weren't set" );
 		}
 	}
 	var loadFlash = false;
@@ -381,6 +381,6 @@
 	if ( location.protocol === "https:" ) {
 		loadFlash = true;
 	}
-	var params = { callback: onKaReady, flash_loader: loadFlash };
+	var params = { callback: onVidReady, flash_loader: loadFlash };
 	window.kontikiAgent = new KontikiAgent( params );
 })();
