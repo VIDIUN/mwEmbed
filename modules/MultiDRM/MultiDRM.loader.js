@@ -85,8 +85,8 @@
 
 	function loadDashCencHandler(embedPlayer){
 		var deferred = $.Deferred();
-		var clDashPlayerUrl = embedPlayer.getKalturaConfig("multiDrm", "clDashPlayerUrl") || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
-		var dashJsUrl = embedPlayer.getKalturaConfig("multiDrm", "dashJsUrl") || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
+		var clDashPlayerUrl = embedPlayer.getVidiunConfig("multiDrm", "clDashPlayerUrl") || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/video.js";
+		var dashJsUrl = embedPlayer.getVidiunConfig("multiDrm", "dashJsUrl") || mw.getMwEmbedPath() + "node_modules/mwEmbed-Dash-Everywhere/cldasheverywhere.min.js";
 		if (clDashPlayerUrl && dashJsUrl) {
 			$.ajax({
 					url: clDashPlayerUrl,
@@ -126,8 +126,8 @@
 
 	function getFpsCertificate(embedPlayer){
 		var cert = null;
-		if (window.kWidgetSupport){
-			cert = window.kWidgetSupport.getFairplayCert({contextData: embedPlayer.kalturaContextData});
+		if (window.vWidgetSupport){
+			cert = window.vWidgetSupport.getFairplayCert({contextData: embedPlayer.vidiunContextData});
 		}
 		return cert;
 	}
@@ -194,7 +194,7 @@
     }
 
 	function setDrmSources(drmSources, embedPlayer){
-		embedPlayer.kalturaFlavors = drmSources;
+		embedPlayer.vidiunFlavors = drmSources;
 		embedPlayer.replaceSources(drmSources);
 	}
 

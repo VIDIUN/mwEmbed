@@ -1,5 +1,5 @@
 @startuml
-title Kaltura Chromecast Sender-Receiver Events and Messages Flow
+title Vidiun Chromecast Sender-Receiver Events and Messages Flow
 Sender -> Receiver: new chrome.cast.SessionRequest (applicationID)
 Receiver --> Sender: onRequestSessionSuccess (session)
 |||
@@ -7,9 +7,9 @@ Sender -> Receiver: sendMessage({'type': 'setLogo', 'logo': this.getConfig("logo
 Sender -> Receiver: sendMessage({'type': 'show', 'target': 'logo'})
 Sender -> Receiver: sendMessage({'type': 'live', 'value': true})
 Sender -> Receiver: sendMessage({'type': 'license', 'value': this.drmConfig.contextData.widevineLicenseServerURL})
-Sender -> Receiver: sendMessage({'type': 'embed', 'lib': kWidget.getPath(), 'publisherID': this.embedPlayer.kwidgetid.substr(1), \n'uiconfID': this.embedPlayer.kuiconfid, 'entryID': this.embedPlayer.kentryid, \n'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars})
+Sender -> Receiver: sendMessage({'type': 'embed', 'lib': vWidget.getPath(), 'publisherID': this.embedPlayer.vwidgetid.substr(1), \n'uiconfID': this.embedPlayer.vuiconfid, 'entryID': this.embedPlayer.ventryid, \n'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars})
 Sender -> Receiver: sendMessage({'type': 'live', 'value': true})
-Sender --> Sender: this.session.addMessageListener('urn:x-cast:com.kaltura.cast.player', \nfunction(namespace, message) {...}
+Sender --> Sender: this.session.addMessageListener('urn:x-cast:com.vidiun.cast.player', \nfunction(namespace, message) {...}
 Receiver -[#0000FF]-> Sender: readyForMedia|{url}|{mimeType}
 Sender -> Receiver: session.loadMedia(new chrome.cast.media.LoadRequest( mediaInfo ),successFunc,errFunc)
 Receiver --> Sender: successFunc (mediaSession)
