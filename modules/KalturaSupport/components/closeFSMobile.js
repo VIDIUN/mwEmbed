@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'closeFSMobile', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'closeFSMobile', mw.VBaseComponent.extend({
 		defaultConfig: {
 			"parent": "topBarContainer",
 			"order": 1,

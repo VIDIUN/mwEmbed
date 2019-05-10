@@ -3,10 +3,10 @@
 */
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'restrictUserAgent', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'restrictUserAgent', mw.VBasePlugin.extend({
 		setup: function(){
 			var _this = this;
-			this.bind('KalturaSupport_EntryDataReady', function(){
+			this.bind('VidiunSupport_EntryDataReady', function(){
 				if( _this.isRestricted() ) {
 					_this.getPlayer().setError( _this.getMsgObject() );
 				}
@@ -36,7 +36,7 @@
 					'title': this.getConfig( 'restrictedUserAgentTitle' )
 				}
 			} else {
-				return this.embedPlayer.getKalturaMsgObject( 'USER_AGENT_RESTRICTED' );
+				return this.embedPlayer.getVidiunMsgObject( 'USER_AGENT_RESTRICTED' );
 			}
 		}
 	}));

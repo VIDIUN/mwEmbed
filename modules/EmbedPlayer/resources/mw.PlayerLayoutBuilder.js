@@ -447,7 +447,7 @@ mw.PlayerLayoutBuilder.prototype = {
 	},
 	setupTooltip: function(elm, arrowDirection){
 		// exit if not enabled
-		if( !this.embedPlayer.enableTooltips || kWidget.isIE8() ) {
+		if( !this.embedPlayer.enableTooltips || vWidget.isIE8() ) {
 			return;
 		}
 		var	tooltips = elm ? elm : this.getInterface();

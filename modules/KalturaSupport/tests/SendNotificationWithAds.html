@@ -19,7 +19,7 @@ This demonstrates the VAST 3.0 support for sequential ads as defined in the VAST
 <br>
 See the <a href="http://www.iab.net/media/file/VASTv3.0.pdf">Vast 3.0 spec</a> for more details.
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '13306622',
@@ -30,14 +30,14 @@ See the <a href="http://www.iab.net/media/file/VASTv3.0.pdf">Vast 3.0 spec</a> f
 				'numPreroll':"1", 
 				'prerollInterval':"1",
 				'prerollStartWith':"1",
-				'prerollUrl':"http://projects.kaltura.com/MichalR/vast3_demo.xml", 
+				'prerollUrl':"http://projects.vidiun.com/MichalR/vast3_demo.xml", 
 				'overlayStartAt':"20",
 				'overlayInterval':"300",
-				'overlayUrl':"http://projects.kaltura.com/MichalR/vast_overlay.xml",
+				'overlayUrl':"http://projects.vidiun.com/MichalR/vast_overlay.xml",
 				'numPostroll':"1",
 			//	'postrollInterval':"1",
 			//	'postrollStartWith':"1",
-			//	'postrollUrl':"http://projects.kaltura.com/mdale/hotelVastAd.xml",
+			//	'postrollUrl':"http://projects.vidiun.com/mdale/hotelVastAd.xml",
 				'preSequence':"1",
 				'postSequence':"1",
 				'timeout':"4"
@@ -46,18 +46,18 @@ See the <a href="http://www.iab.net/media/file/VASTv3.0.pdf">Vast 3.0 spec</a> f
 		}
 	})
 
-	var kdp = document.getElementById("myVideoTarget");
+	var vdp = document.getElementById("myVideoTarget");
 
 	function pause(){
-		kdp.sendNotification( 'doPause' ) // pause the ad
+		vdp.sendNotification( 'doPause' ) // pause the ad
 	}
 
 	function play(){
-		kdp.sendNotification( 'doPlay' ) // resume playback
+		vdp.sendNotification( 'doPlay' ) // resume playback
 	}
 
 	function volume(){
-		kdp.sendNotification( 'changeVolume',0.5 ) // set volume to 50%
+		vdp.sendNotification( 'changeVolume',0.5 ) // set volume to 50%
 	}
 
 </script>

@@ -9,45 +9,45 @@
 window.inlineReadyCallbackCalled = false;
 
 window['allreadyRan'] = false;
-function jsKalturaPlayerTest( videoId ){
-	// global jsCallbacks will be re-issued we are testing against inline kWiget calls
+function jsVidiunPlayerTest( videoId ){
+	// global jsCallbacks will be re-issued we are testing against inline vWiget calls
 	if( window['allreadyRan'] ){
 		return ;
 	}
 	window['allreadyRan'] = true;
 	
 	// Name this module 
-	module( "kWidget Player" );
+	module( "vWidget Player" );
 	asyncTest("Inline readyCallback fired", function(){
 		
 		window['testAutoPlay'] = function(){
-			var kdp = $( '#myVideoTarget' ).get( 0 );
+			var vdp = $( '#myVideoTarget' ).get( 0 );
 			test("AutoPlay flashvar passing", function(){
-				ok( kdp.evaluate('{configProxy.flashvars.autoPlay}') , 'AutoPlay flashvar set');
+				ok( vdp.evaluate('{configProxy.flashvars.autoPlay}') , 'AutoPlay flashvar set');
 			});
 			test( "Aribrary flashvar string passing", function(){
-				equal( kdp.evaluate('{configProxy.flashvars.fooBar}'), 'cats', "Passed foobar property" );
+				equal( vdp.evaluate('{configProxy.flashvars.fooBar}'), 'cats', "Passed foobar property" );
 			})
 		}
-		kalturaQunitWaitForPlayer( function(){
-			var kdp = $( '#' + videoId )[ 0 ];
+		vidiunQunitWaitForPlayer( function(){
+			var vdp = $( '#' + videoId )[ 0 ];
 			window['testAutoPlay'] = function(){
-				ok( kdp.evaluate('{configProxy.flashvars.autoPlay}') , 'AutoPlay flashvar set');
+				ok( vdp.evaluate('{configProxy.flashvars.autoPlay}') , 'AutoPlay flashvar set');
 				// Done with async 
-				testKWidgetDestroy();
+				testVWidgetDestroy();
 				start();
 			}
 			equal( window.inlineReadyCallbackCalled, videoId, "ReadyCallback fired with id:" + videoId );
-			equal( kdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
-				"KDP evaluate valid entry id" );
+			equal( vdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
+				"VDP evaluate valid entry id" );
 			testAutoPlay();
 		});
 	});
-	window['testKWidgetDestroy'] = function(){
-		asyncTest("Test kWidget.destroy", function(){
-			var kdp = $( '#' + videoId )[ 0 ];
-			kWidget.destroy( kdp.id );
-			equal( isInDOMTree( kdp ), false, "Removed KDP from Dom" );
+	window['testVWidgetDestroy'] = function(){
+		asyncTest("Test vWidget.destroy", function(){
+			var vdp = $( '#' + videoId )[ 0 ];
+			vWidget.destroy( vdp.id );
+			equal( isInDOMTree( vdp ), false, "Removed VDP from Dom" );
 			
 			// re add a video target with the same name
 			$('#myVideoContainer').append( 
@@ -61,7 +61,7 @@ function jsKalturaPlayerTest( videoId ){
 			);
 			window.inlineReadyCallbackCalled = false;
 			var callOnce = false;
-			kWidget.embed({
+			vWidget.embed({
 				'targetId': 'myVideoTarget',
 				'wid': '_243342',
 				'uiconf_id' : '12905712',
@@ -70,25 +70,25 @@ function jsKalturaPlayerTest( videoId ){
 					if( callOnce ){
 						ok( false, "Error called ready callback twice")	;
 					}
-					var kdp = $('#' + playerId )[0];
+					var vdp = $('#' + playerId )[0];
 					equal( window.inlineReadyCallbackCalled, false, 
-							"No inline callback from first kWidget.embed" );
+							"No inline callback from first vWidget.embed" );
 					equal( playerId, 'myVideoTarget',
 							"Ready callback for re-embed is valid" );
 					
-					equal( kdp.evaluate("{video.player.currentTime}") , '0', 
-					"KDP current Time is zero" );
+					equal( vdp.evaluate("{video.player.currentTime}") , '0', 
+					"VDP current Time is zero" );
 					
 					window['onMediaReady'] = function(){
-						kdp.removeJsListener('onMediaReady', 'onMediaReady');
-						equal( kdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
-						"KDP evaluate valid entry id" );
+						vdp.removeJsListener('onMediaReady', 'onMediaReady');
+						equal( vdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
+						"VDP evaluate valid entry id" );
 						
-						testKWidgetOverrideWithoutDestroy();
+						testVWidgetOverrideWithoutDestroy();
 						start();
 					}
 					
-					kdp.addJsListener( "mediaReady", 'onMediaReady' );
+					vdp.addJsListener( "mediaReady", 'onMediaReady' );
 					
 					callOnce = true;
 				}
@@ -96,10 +96,10 @@ function jsKalturaPlayerTest( videoId ){
 		});
 	}
 	
-	window['testKWidgetOverrideWithoutDestroy'] = function(){
-		asyncTest( "Test KWidget Override Without Destroy", function(){
+	window['testVWidgetOverrideWithoutDestroy'] = function(){
+		asyncTest( "Test VWidget Override Without Destroy", function(){
 			var callOnce = false;
-			kWidget.embed({
+			vWidget.embed({
 				'targetId': 'myVideoTarget',
 				'wid': '_243342',
 				'uiconf_id' : '12905712',
@@ -110,18 +110,18 @@ function jsKalturaPlayerTest( videoId ){
 					}
 					equal( playerId, 'myVideoTarget', "Ready callback Override re-embed is valid" );
 
-					var kdp = $('#' + playerId )[0];
+					var vdp = $('#' + playerId )[0];
 					
-					equal( kdp.evaluate("{video.player.currentTime}") , '0', 
-						"KDP current Time is zero" );
+					equal( vdp.evaluate("{video.player.currentTime}") , '0', 
+						"VDP current Time is zero" );
 					
 					window['onMediaReady'] = function(){
-						kdp.removeJsListener('onMediaReady', 'onMediaReady');
-						equal( kdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
-						"KDP evaluate valid entry id" );
+						vdp.removeJsListener('onMediaReady', 'onMediaReady');
+						equal( vdp.evaluate('{mediaProxy.entry.id}') , '0_uka1msg4', 
+						"VDP evaluate valid entry id" );
 						start();
 					}
-					kdp.addJsListener( "mediaReady", 'onMediaReady' );
+					vdp.addJsListener( "mediaReady", 'onMediaReady' );
 					
 					callOnce = true;
 					start();
@@ -148,8 +148,8 @@ function findUltimateAncestor(node) {
 	return ancestor;
 }
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Dynamic embed</h2>
@@ -169,13 +169,13 @@ function findUltimateAncestor(node) {
 		<span itemprop="height" content="300"></span>
 	</div>
 </div>
-<a name="kWidget.embed"></a><i>Basic usage</i> of kWidget embed looks like this: 
+<a name="vWidget.embed"></a><i>Basic usage</i> of vWidget embed looks like this: 
 <pre class="prettyprint linenums">
 &lt;div id=&quot;myEmbedTarget&quot; style=&quot;width:400px;height:330px;&quot;&gt;&lt;/div&gt;
-&lt!-- Substitute {partnerId} for your Kaltura partner id, {uiConfId} for an actual player id, also known as the uiconf id and {entryId} for an actual entry id. --&gt;
-&lt;script src=&quot;http://cdnapi.kaltura.com/p/{partnerId}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiConfId}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
+&lt!-- Substitute {partnerId} for your Vidiun partner id, {uiConfId} for an actual player id, also known as the uiconf id and {entryId} for an actual entry id. --&gt;
+&lt;script src=&quot;http://cdnapi.vidiun.com/p/{partnerId}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiConfId}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-	kWidget.embed({
+	vWidget.embed({
 		'targetId': 'myEmbedTarget',
 		'wid': '_{partnerId}',
 		'uiconf_id' : '{uiConfId}',
@@ -189,12 +189,12 @@ function findUltimateAncestor(node) {
 	});
 &lt;/script&gt;
 </pre>
-<a name="kWidget.destroy"></a><i>kWidget.destroy</i> enables you to cleanly remove a kWidget.embed: 
+<a name="vWidget.destroy"></a><i>vWidget.destroy</i> enables you to cleanly remove a vWidget.embed: 
 <pre class="prettyprint linenums">
 &lt;div id=&quot;myEmbedTarget&quot; style=&quot;width:400px;height:330px;&quot;&gt;&lt;/div&gt;
-&lt;script src=&quot;http://cdnapi.kaltura.com/p/{partnerId}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiConfId}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://cdnapi.vidiun.com/p/{partnerId}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiConfId}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-	kWidget.destroy( 'myEmbedTarget' );
+	vWidget.destroy( 'myEmbedTarget' );
 &lt;/script&gt;
 </pre>
 An integrated example which includes SEO and <a title="video metadata" href="http://www.schema.org/VideoObject">video metadata</a>, plugin configuration flashvars and an inline ready callback 
@@ -210,7 +210,7 @@ An integrated example which includes SEO and <a title="video metadata" href="htt
 	&lt;/div&gt;
 &lt;/div&gt;
 &lt;script&gt;
-	kWidget.embed({
+	vWidget.embed({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
@@ -227,9 +227,9 @@ An integrated example which includes SEO and <a title="video metadata" href="htt
 		
 		// Ready callback is issued for this player:
 		'readyCallback': function( playerId ){
-			console.log( &quot;kWidget player ready: &quot; + playerId );
-			var kdp = $( '#' + playerId ).get(0);
-			kdp.kBind( 'doPlay', function(){
+			console.log( &quot;vWidget player ready: &quot; + playerId );
+			var vdp = $( '#' + playerId ).get(0);
+			vdp.vBind( 'doPlay', function(){
 				console.log(  &quot;doPlay called on  &quot; + playerId );
 			});
 		}
@@ -238,11 +238,11 @@ An integrated example which includes SEO and <a title="video metadata" href="htt
 </pre>
 <script>
 	window['doPlayCallback'] = function( playerId ){
-		console.log( 'kWidget doPlay callback ' + playerId );
+		console.log( 'vWidget doPlay callback ' + playerId );
 	};
 	// only set autoplay if running a test:
 	var autoPlay = ( window.QUnit )? true: false;
-	kWidget.embed({
+	vWidget.embed({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
@@ -251,9 +251,9 @@ An integrated example which includes SEO and <a title="video metadata" href="htt
 			'autoPlay': autoPlay
 		},
 		'readyCallback': function( playerId ){
-			console.log( "kWidget player ready: " + playerId );
-			var kdp = $( '#' + playerId ).get(0);
-			kdp.addJsListener( 'doPlay', 'doPlayCallback');
+			console.log( "vWidget player ready: " + playerId );
+			var vdp = $( '#' + playerId ).get(0);
+			vdp.addJsListener( 'doPlay', 'doPlayCallback');
 			window.inlineReadyCallbackCalled = playerId;
 		}
 	});

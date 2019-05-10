@@ -4,7 +4,7 @@
 
 // The version of this script
 var logIfInIframe = ( typeof preMwEmbedConfig != 'undefined' && preMwEmbedConfig['EmbedPlayer.IsIframeServer'] ) ? ' ( iframe ) ': '';
-kWidget.log( 'Kaltura HTML5 Version: ' + MWEMBED_VERSION  + logIfInIframe );
+vWidget.log( 'Vidiun HTML5 Version: ' + MWEMBED_VERSION  + logIfInIframe );
 
 // Define mw ( if not already set )
 if( !window['mw'] ) {
@@ -91,10 +91,10 @@ if( !mw.ready ){
 }
 
 /**
- *  getKalturaThumbUrl is now supported via kWidget.getKalturaThumbUrl
+ *  getVidiunThumbUrl is now supported via vWidget.getVidiunThumbUrl
  */
-mw.getKalturaThumbUrl = function( entry ){
-	kWidget.log( 'mw.getKalturaThumbUrl is deprecated. Please use kWidget.getKalturaThumbUrl' );
-	return kWidget.getKalturaThumbUrl( entry );
+mw.getVidiunThumbUrl = function( entry ){
+	vWidget.log( 'mw.getVidiunThumbUrl is deprecated. Please use vWidget.getVidiunThumbUrl' );
+	return vWidget.getVidiunThumbUrl( entry );
 };
 

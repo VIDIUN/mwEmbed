@@ -13,21 +13,21 @@
 </div>
 <script>
 // qunit: 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Watermark present test" );
 
 	var $iframe = $( '#' + videoId + '_ifp' ).contents();
 	
 	asyncTest("Watermark in DOM", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			ok( $iframe.find('.watermark').length, "watermark class found" );
 			equal( $iframe.find('.watermark a').attr('href'), 
-					"http://www.kaltura.com/", 
+					"http://www.vidiun.com/", 
 					"watermark link found" 
 				);
 			equal( $iframe.find('.watermark img').attr('src'), 
-					"http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png", 
+					"http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png", 
 					"watermark img found" 
 				);
 			start();
@@ -35,9 +35,9 @@ function jsKalturaPlayerTest( videoId ){
 	});
 }
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',

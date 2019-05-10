@@ -38,7 +38,7 @@
 						if ( _this.isHttps() ) {
 							jsSrc = _this.defaultJSHTTPS;
 						}
-						kWidget.appendScriptUrl( jsSrc, function() {
+						vWidget.appendScriptUrl( jsSrc, function() {
 							_this.setData( embedPlayer );
 						}, window.document );
 					}
@@ -54,14 +54,14 @@
 				}
 			}
 
-			//in case kplayer will be loaded, it will use the flash akamaiMediaAnalytics plugin
-			//it is safe to always add these vars, only kplayer reads them
+			//in case vplayer will be loaded, it will use the flash akamaiMediaAnalytics plugin
+			//it is safe to always add these vars, only vplayer reads them
 			var swfPath = _this.getConfig( 'swfPath' ) || _this.defaultSWF;
 			var securedSwfPath = _this.getConfig( 'securedSwfPath' ) || _this.defaultSWFHTTPS;
 			var configPath = _this.getConfig( 'configPath' ) || _this.defaultConfigPath;
 			var securedConfigPath = _this.getConfig( 'securedConfigPath' ) || _this.defaultConfigPathHTTPS;
-			var kdpVars = embedPlayer.getKalturaConfig( 'kdpVars', null ) || {};
-				kdpVars.akamaiMediaAnalytics =  {
+			var vdpVars = embedPlayer.getVidiunConfig( 'vdpVars', null ) || {};
+				vdpVars.akamaiMediaAnalytics =  {
 				plugin: 'true',
 				asyncInit: 'true',
 				secured: _this.isHttps(),
@@ -70,7 +70,7 @@
 				swfPath: swfPath,
 				securedSwfPath: securedSwfPath
 			}
-			embedPlayer.setKalturaConfig( 'kdpVars', kdpVars );
+			embedPlayer.setVidiunConfig( 'vdpVars', vdpVars );
 			callback();
 		},
 
@@ -88,9 +88,9 @@
 			var startIndex = flavorURL.indexOf( '/flavorId/' ) + 10;
 			var flavorId = flavorURL.substr( startIndex, flavorURL.indexOf( '/format/' ) - startIndex );
 			var dataObject = {
-				'publisherId': embedPlayer.kpartnerid,
-				'title': this.getConfig( 'title' ) || embedPlayer.kentryid ,
-				'playerId': this.getConfig( 'playerId' ) || embedPlayer.kuiconfid ,
+				'publisherId': embedPlayer.vpartnerid,
+				'title': this.getConfig( 'title' ) || embedPlayer.ventryid ,
+				'playerId': this.getConfig( 'playerId' ) || embedPlayer.vuiconfid ,
 				'flavorId': flavorId ,
 				'playerVersion': MWEMBED_VERSION ,
 				'category': this.getConfig( 'category' ) || this.getMediaTypeName() ,
@@ -201,7 +201,7 @@
 				// If configuration path is not overriden or overriden with insecure URL, use default secure location
 				return this.defaultConfigPathHTTPS;
 			}
-			// The default config path for kaltura akami account
+			// The default config path for vidiun akami account
 			if ( configPath ){
 				return configPath;
 			}
@@ -210,7 +210,7 @@
 		},
 
 		getConfig: function( attr )  {
-			return this.embedPlayer.getKalturaConfig( 'akamaiMediaAnalytics', attr );
+			return this.embedPlayer.getVidiunConfig( 'akamaiMediaAnalytics', attr );
 		},
 		/**
 		* Set akamai custom data, if the given attribute value was set

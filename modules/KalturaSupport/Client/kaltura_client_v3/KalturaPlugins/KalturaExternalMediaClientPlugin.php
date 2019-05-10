@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaEntryOrderBy
+class VidiunExternalMediaEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -76,26 +76,26 @@ class KalturaExternalMediaEntryOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaSourceType
+class VidiunExternalMediaSourceType
 {
 	const INTERCALL = "InterCall";
 	const YOUTUBE = "YouTube";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaEntry extends KalturaMediaEntry
+class VidiunExternalMediaEntry extends VidiunMediaEntry
 {
 	/**
 	 * The source type of the external media
 	 * 	 
 	 *
-	 * @var KalturaExternalMediaSourceType
+	 * @var VidiunExternalMediaSourceType
 	 * @insertonly
 	 */
 	public $externalSourceType = null;
@@ -113,15 +113,15 @@ class KalturaExternalMediaEntry extends KalturaMediaEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaEntryListResponse extends KalturaObjectBase
+class VidiunExternalMediaEntryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaExternalMediaEntry
+	 * @var array of VidiunExternalMediaEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -138,15 +138,15 @@ class KalturaExternalMediaEntryListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaExternalMediaEntryBaseFilter extends KalturaMediaEntryFilter
+abstract class VidiunExternalMediaEntryBaseFilter extends VidiunMediaEntryFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaExternalMediaSourceType
+	 * @var VidiunExternalMediaSourceType
 	 */
 	public $externalSourceTypeEqual = null;
 
@@ -175,22 +175,22 @@ abstract class KalturaExternalMediaEntryBaseFilter extends KalturaMediaEntryFilt
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaEntryFilter extends KalturaExternalMediaEntryBaseFilter
+class VidiunExternalMediaEntryFilter extends VidiunExternalMediaEntryBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaService extends KalturaServiceBase
+class VidiunExternalMediaService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -198,19 +198,19 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	/**
 	 * Add external media entry
 	 * 
-	 * @param KalturaExternalMediaEntry $entry 
-	 * @return KalturaExternalMediaEntry
+	 * @param VidiunExternalMediaEntry $entry 
+	 * @return VidiunExternalMediaEntry
 	 */
-	function add(KalturaExternalMediaEntry $entry)
+	function add(VidiunExternalMediaEntry $entry)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "entry", $entry->toParams());
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "entry", $entry->toParams());
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaExternalMediaEntry");
+		$this->client->validateObjectType($resultObject, "VidiunExternalMediaEntry");
 		return $resultObject;
 	}
 
@@ -218,18 +218,18 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	 * Get external media entry by ID.
 	 * 
 	 * @param string $id External media entry id
-	 * @return KalturaExternalMediaEntry
+	 * @return VidiunExternalMediaEntry
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaExternalMediaEntry");
+		$this->client->validateObjectType($resultObject, "VidiunExternalMediaEntry");
 		return $resultObject;
 	}
 
@@ -237,20 +237,20 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	 * Update external media entry. Only the properties that were set will be updated.
 	 * 
 	 * @param string $id External media entry id to update
-	 * @param KalturaExternalMediaEntry $entry External media entry object to update
-	 * @return KalturaExternalMediaEntry
+	 * @param VidiunExternalMediaEntry $entry External media entry object to update
+	 * @return VidiunExternalMediaEntry
 	 */
-	function update($id, KalturaExternalMediaEntry $entry)
+	function update($id, VidiunExternalMediaEntry $entry)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "entry", $entry->toParams());
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "entry", $entry->toParams());
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaExternalMediaEntry");
+		$this->client->validateObjectType($resultObject, "VidiunExternalMediaEntry");
 		return $resultObject;
 	}
 
@@ -262,9 +262,9 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -276,38 +276,38 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	/**
 	 * List media entries by filter with paging support.
 	 * 
-	 * @param KalturaExternalMediaEntryFilter $filter External media entry filter
-	 * @param KalturaFilterPager $pager Pager
-	 * @return KalturaExternalMediaEntryListResponse
+	 * @param VidiunExternalMediaEntryFilter $filter External media entry filter
+	 * @param VidiunFilterPager $pager Pager
+	 * @return VidiunExternalMediaEntryListResponse
 	 */
-	function listAction(KalturaExternalMediaEntryFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunExternalMediaEntryFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaExternalMediaEntryListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunExternalMediaEntryListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * Count media entries by filter.
 	 * 
-	 * @param KalturaExternalMediaEntryFilter $filter External media entry filter
+	 * @param VidiunExternalMediaEntryFilter $filter External media entry filter
 	 * @return int
 	 */
-	function count(KalturaExternalMediaEntryFilter $filter = null)
+	function count(VidiunExternalMediaEntryFilter $filter = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("externalmedia_externalmedia", "count", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("externalmedia_externalmedia", "count", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -317,32 +317,32 @@ class KalturaExternalMediaService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExternalMediaClientPlugin extends KalturaClientPlugin
+class VidiunExternalMediaClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaExternalMediaService
+	 * @var VidiunExternalMediaService
 	 */
 	public $externalMedia = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->externalMedia = new KalturaExternalMediaService($client);
+		$this->externalMedia = new VidiunExternalMediaService($client);
 	}
 
 	/**
-	 * @return KalturaExternalMediaClientPlugin
+	 * @return VidiunExternalMediaClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaExternalMediaClientPlugin($client);
+		return new VidiunExternalMediaClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

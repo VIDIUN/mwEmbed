@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'fullScreenBtn', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'fullScreenBtn', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"align": "right",

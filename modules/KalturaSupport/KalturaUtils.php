@@ -1,6 +1,6 @@
 <?php 
 
-class KalturaUtils {
+class VidiunUtils {
 
 	public function formatString( $str ) {
 		// decode the value: 
@@ -42,8 +42,8 @@ class KalturaUtils {
 		if( strpos( $url, '{onPagePluginPath}' ) === 0 ){
 			$url = str_replace( '{onPagePluginPath}', '', $url);
 			// Check that the file exists: 
-			if( is_file( $wgBaseMwEmbedPath . '/kWidget/onPagePlugins' . $url ) ){
-				$url = str_replace('load.php', 'kWidget/onPagePlugins', $wgResourceLoaderUrl) . $url;
+			if( is_file( $wgBaseMwEmbedPath . '/vWidget/onPagePlugins' . $url ) ){
+				$url = str_replace('load.php', 'vWidget/onPagePlugins', $wgResourceLoaderUrl) . $url;
 			}
 		}
 		// check for {html5ps} local path flag:

@@ -10,15 +10,15 @@ window['disablePlaybackModeSelector'] = true;
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 //Enable uiconf js which includes player rules
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	
 	// Name this module
 	module( "User Agent" );
 
 	var $iframe = $('#' + videoId + '_ifp').contents();
-	var iframeContext = window.frames[ 'kaltura_player_ifp' ];
+	var iframeContext = window.frames[ 'vidiun_player_ifp' ];
 	
 	test( "Iframe in DOM", function() {
 		ok( $('#' + videoId + '_ifp').length , 'iframe found' );
@@ -26,14 +26,14 @@ function jsKalturaPlayerTest( videoId ){
 	});
 
 	asyncTest("Iframe layout elements", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			ok( $iframe.find('.largePlayBtn').length, ".largePlayBtn found" );
 			start();
 		});
 	});
 	
 	asyncTest("Iframe config", function(){
-		equal( iframeContext.mw.getConfig('Kaltura.IframeRewrite' ), false, "Kaltura.IframeRewrite" ); 
+		equal( iframeContext.mw.getConfig('Vidiun.IframeRewrite' ), false, "Vidiun.IframeRewrite" ); 
 		equal( iframeContext.mw.getConfig('Mw.LogPrepend'), 'iframe:', "Mw.LogPrepend ");
 		// Test page context config: 
 		equal( iframeContext.mw.getConfig('EmbedPlayer.EnableIpadHTMLControls'), true, 'EmbedPlayer.EnableIpadHTMLControls' );
@@ -41,12 +41,12 @@ function jsKalturaPlayerTest( videoId ){
 	});
 }
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> User Agent Player Rules </h2>
-<div id="kdoc-more-desc">
+<div id="vdoc-more-desc">
 <br>
 The player has the following rules: </br>
 0) Disable the forceMobileHTML5 url flag </br> 
@@ -59,10 +59,10 @@ If no rule is matched, standard lead with flash rules apply<br><br>
 <a href="?forceMobileHTML5"> Force Mobile HTML5</a> Notice that this url param has no effect since user agent rule <i>"disableForceMobileHTML5"</i> takes precedence.  
 <br />
 </div>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
-	kWidget.featureConfig( {
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig( {
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '5940092',
 		'entry_id': '0_uka1msg4',

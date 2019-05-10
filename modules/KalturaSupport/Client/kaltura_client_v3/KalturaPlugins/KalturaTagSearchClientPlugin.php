@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTag extends KalturaObjectBase
+class VidiunTag extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -60,7 +60,7 @@ class KalturaTag extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaTaggedObjectType
+	 * @var VidiunTaggedObjectType
 	 * @readonly
 	 */
 	public $taggedObjectType = null;
@@ -101,15 +101,15 @@ class KalturaTag extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTagListResponse extends KalturaObjectBase
+class VidiunTagListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaTag
+	 * @var array of VidiunTag
 	 * @readonly
 	 */
 	public $objects;
@@ -126,10 +126,10 @@ class KalturaTagListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIndexTagsByPrivacyContextJobData extends KalturaJobData
+class VidiunIndexTagsByPrivacyContextJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -156,15 +156,15 @@ class KalturaIndexTagsByPrivacyContextJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTagFilter extends KalturaFilter
+class VidiunTagFilter extends VidiunFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaTaggedObjectType
+	 * @var VidiunTaggedObjectType
 	 */
 	public $objectTypeEqual = null;
 
@@ -201,12 +201,12 @@ class KalturaTagFilter extends KalturaFilter
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTagService extends KalturaServiceBase
+class VidiunTagService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -214,22 +214,22 @@ class KalturaTagService extends KalturaServiceBase
 	/**
 	 * 
 	 * 
-	 * @param KalturaTagFilter $tagFilter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaTagListResponse
+	 * @param VidiunTagFilter $tagFilter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunTagListResponse
 	 */
-	function search(KalturaTagFilter $tagFilter, KalturaFilterPager $pager = null)
+	function search(VidiunTagFilter $tagFilter, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "tagFilter", $tagFilter->toParams());
+		$vparams = array();
+		$this->client->addParam($vparams, "tagFilter", $tagFilter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("tagsearch_tag", "search", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("tagsearch_tag", "search", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaTagListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunTagListResponse");
 		return $resultObject;
 	}
 
@@ -240,8 +240,8 @@ class KalturaTagService extends KalturaServiceBase
 	 */
 	function deletePending()
 	{
-		$kparams = array();
-		$this->client->queueServiceActionCall("tagsearch_tag", "deletePending", $kparams);
+		$vparams = array();
+		$this->client->queueServiceActionCall("tagsearch_tag", "deletePending", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -260,11 +260,11 @@ class KalturaTagService extends KalturaServiceBase
 	 */
 	function indexCategoryEntryTags($categoryId, $pcToDecrement, $pcToIncrement)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "categoryId", $categoryId);
-		$this->client->addParam($kparams, "pcToDecrement", $pcToDecrement);
-		$this->client->addParam($kparams, "pcToIncrement", $pcToIncrement);
-		$this->client->queueServiceActionCall("tagsearch_tag", "indexCategoryEntryTags", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "categoryId", $categoryId);
+		$this->client->addParam($vparams, "pcToDecrement", $pcToDecrement);
+		$this->client->addParam($vparams, "pcToIncrement", $pcToIncrement);
+		$this->client->queueServiceActionCall("tagsearch_tag", "indexCategoryEntryTags", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -274,32 +274,32 @@ class KalturaTagService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTagSearchClientPlugin extends KalturaClientPlugin
+class VidiunTagSearchClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaTagService
+	 * @var VidiunTagService
 	 */
 	public $tag = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->tag = new KalturaTagService($client);
+		$this->tag = new VidiunTagService($client);
 	}
 
 	/**
-	 * @return KalturaTagSearchClientPlugin
+	 * @return VidiunTagSearchClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaTagSearchClientPlugin($client);
+		return new VidiunTagSearchClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

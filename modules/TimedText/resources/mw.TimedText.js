@@ -589,7 +589,7 @@
 					return false;
 				}
 			});
-			// If no default caption is set, start with captions turned off (Same as KDP)
+			// If no default caption is set, start with captions turned off (Same as VDP)
 			if ( setDefault ) {
 				this.setLayoutMode( this.defaultDisplayMode );
 				return true;

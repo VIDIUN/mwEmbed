@@ -1,6 +1,6 @@
 <?php
 /*
- * Description of KalturaPlaylistResult
+ * Description of VidiunPlaylistResult
  * Holds playlist request methods
  * @author ran, michael dale
  */
@@ -135,17 +135,17 @@ class PlaylistResult {
 		// Build the entry set array:		
 		$entrySet = array();
 		foreach ($xml->channel->item as $item) {
-			$kaltuarNS = $item->children('http://kaltura.com/playlist/1.0'); 
-			if( isset( $kaltuarNS->entryId ) ){
-				$entrySet[] = $kaltuarNS->entryId;
+			$vidiunNS = $item->children('http://vidiun.com/playlist/1.0'); 
+			if( isset( $vidiunNS->entryId ) ){
+				$entrySet[] = $vidiunNS->entryId;
 			}
 		}
 		
 		$client = $this->client->getClient();
 		try {
-			$kparams = array();
-			$client->addParam( $kparams, "entryIds", implode(',', $entrySet ) );
-			$client->queueServiceActionCall( "baseEntry", "getByIds", $kparams );
+			$vparams = array();
+			$client->addParam( $vparams, "entryIds", implode(',', $entrySet ) );
+			$client->queueServiceActionCall( "baseEntry", "getByIds", $vparams );
 			$playlistResult = $client->doQueue();
 			$this->responseHeaders = $client->getResponseHeaders();
 			$playlistSortedResult = $this->getSortedPlaylistResult($entrySet, $playlistResult);
@@ -159,7 +159,7 @@ class PlaylistResult {
 			);
 		} catch( Exception $e ){
 			// Throw an Exception and pass it upward
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 			return array();
 		}
 		return $this->playlistObject;
@@ -237,7 +237,7 @@ class PlaylistResult {
 		// build multi-request: 
 		$client = $this->client->getClient();
 		$client->startMultiRequest();
-		$namedMultiRequest = new KalturaNamedMultiRequest( $client );
+		$namedMultiRequest = new VidiunNamedMultiRequest( $client );
 		// get AC filter from entry class:
 		$filter = $this->entry->getACFilter();
 		$aPerPlaylist = array();
@@ -304,12 +304,12 @@ class PlaylistResult {
 	 */
 	function getPlaylistId( $index = 0 ){
 		
-		$playlistId = $this->uiconf->getPlayerConfig('playlistAPI', 'kpl' . $index . 'Id');
+		$playlistId = $this->uiconf->getPlayerConfig('playlistAPI', 'vpl' . $index . 'Id');
 		if( $playlistId ) {
 			return $playlistId;
 		}
 
-		$playlistId = $this->uiconf->getPlayerConfig('playlistAPI', 'kpl' . $index . 'Url');
+		$playlistId = $this->uiconf->getPlayerConfig('playlistAPI', 'vpl' . $index . 'Url');
 		if( $playlistId ) {
 			$playlistId = trim( $playlistId );
 			$playlistId = rawurldecode( $playlistId );
@@ -339,7 +339,7 @@ class PlaylistResult {
 	}
 
 	function getPlaylistName( $index = 0 ) {
-		$name = $this->uiconf->getPlayerConfig('playlistAPI', 'kpl' . $index . 'Name');
+		$name = $this->uiconf->getPlayerConfig('playlistAPI', 'vpl' . $index . 'Name');
 		return ($name) ? $name : '';
 	}
 	

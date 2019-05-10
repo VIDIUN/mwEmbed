@@ -1,13 +1,13 @@
 /**
- * Simple kaltura javascript api
+ * Simple vidiun javascript api
  *
- * uses configuration Kaltura.ServiceUrl and Kaltura.ServiceBase for api entry point
+ * uses configuration Vidiun.ServiceUrl and Vidiun.ServiceBase for api entry point
  * 
- * Should extend new kWidget.api() api.request() base
+ * Should extend new vWidget.api() api.request() base
  */
 
 /**
- * kApi takes supports a few mixed argument types
+ * vApi takes supports a few mixed argument types
  *
  * @param {String}
  *		widgetId used to establish a request key for the given session
@@ -18,11 +18,11 @@
  */
 ( function( mw, $ ) { "use strict";
 
-mw.KApi = function( widgetId ){
+mw.VApi = function( widgetId ){
 	return this.init( widgetId );
 };
 
-mw.KApi.prototype = {
+mw.VApi.prototype = {
 	baseParam: {
 		'apiVersion' : '3.1',
 		'clientTag' : 'html5:v' + window[ 'MWEMBED_VERSION' ],
@@ -31,17 +31,17 @@ mw.KApi.prototype = {
 		'ignoreNull' : 1
 	},
 	playerLoaderCache: [],
-	// The local kaltura session key ( so it does not have to be re-grabbed with every request
-	ks : null,
+	// The local vidiun session key ( so it does not have to be re-grabbed with every request
+	vs : null,
 	init: function( widgetId ){
 		this.widgetId = widgetId;
 	},
 	/**
-	 * Clears the local cache for the ks and player data:
+	 * Clears the local cache for the vs and player data:
 	 */
 	clearCache:function(){
 		this.playerLoaderCache = [];
-		this.ks = null;
+		this.vs = null;
 	},
 	// Stores a callback index for duplicate api requests
 	callbackIndex:0,
@@ -52,13 +52,13 @@ mw.KApi.prototype = {
 	doRequest : function( requestObject, callback ,skipKS, errorCallback ){
 		var _this = this;
 		var param = {};
-		// Convert into a multi-request if no session is set ( ks will be added below )
-		if( !requestObject.length && !this.ks ){
+		// Convert into a multi-request if no session is set ( vs will be added below )
+		if( !requestObject.length && !this.vs ){
 			requestObject = [ requestObject ];
 		}
 
-		// If we have Kaltura.NoApiCache flag, pass 'nocache' param to the client
-		if( mw.getConfig('Kaltura.NoApiCache') === true ) {
+		// If we have Vidiun.NoApiCache flag, pass 'nocache' param to the client
+		if( mw.getConfig('Vidiun.NoApiCache') === true ) {
 			param['nocache'] = 'true';
 		}
 
@@ -67,7 +67,7 @@ mw.KApi.prototype = {
 			param['service'] = 'multirequest';
 			param['action'] = 'null';
 
-			// Kaltura api starts with index 1 for some strange reason.
+			// Vidiun api starts with index 1 for some strange reason.
 			var mulitRequestIndex = 1;
 
 			for( var i = 0 ; i < requestObject.length; i++ ){
@@ -75,7 +75,7 @@ mw.KApi.prototype = {
 				// MultiRequest pre-process each param with inx:param
 				for( var paramKey in requestObject[i] ){
 					// support multi dimension array request:
-					// NOTE kaltura api only has sub arrays ( would be more feature complete to
+					// NOTE vidiun api only has sub arrays ( would be more feature complete to
 					// recursively define key appends )
 					if( typeof requestObject[i][paramKey] == 'object' ){
 						for( var subParamKey in requestObject[i][paramKey] ){
@@ -98,39 +98,39 @@ mw.KApi.prototype = {
 			}
 		};
 
-		// Make sure we have the kaltura session
+		// Make sure we have the vidiun session
 		// ideally this could be part of the multi-request but could not get it to work
 		// see commented out code above.
         if (skipKS) {
             _this.doApiRequest( param, callback, errorCallback);
         }else {
-            this.getKS( function( ks ){
-                param['ks'] = ks;
+            this.getVS( function( vs ){
+                param['vs'] = vs;
                 // Do the getJSON jQuery call with special callback=? parameter:
                 _this.doApiRequest( param, callback, errorCallback);
             });
         }
 
 	},
-	setKS: function( ks ){
-		this.ks = ks;
+	setVS: function( vs ){
+		this.vs = vs;
 	},
-	getKS: function( callback ){
-		if( this.ks ){
-			callback( this.ks );
+	getVS: function( callback ){
+		if( this.vs ){
+			callback( this.vs );
 			return true;
 		}
 		var _this = this;
-		// Add the Kaltura session ( if not already set )
-		var ksParam = {
+		// Add the Vidiun session ( if not already set )
+		var vsParam = {
 				'action' : 'startwidgetsession',
 				'widgetId': this.widgetId
 		};
 		// add in the base parameters:
-		var param = $.extend( { 'service' : 'session' }, this.baseParam, ksParam );
+		var param = $.extend( { 'service' : 'session' }, this.baseParam, vsParam );
 		this.doApiRequest( param, function( data ){
-			_this.ks = data.ks;
-			callback( _this.ks );
+			_this.vs = data.vs;
+			callback( _this.vs );
 		});
 	},
 	doApiRequest: function( param, callback, errorCallback ){
@@ -142,7 +142,7 @@ mw.KApi.prototype = {
 
 		// Add the signature ( if not a session init )
 		if( serviceType != 'session' ){
-			param['kalsig'] = _this.getSignature( param );
+			param['vidsig'] = _this.getSignature( param );
 		}
 
 		// Build the request url with sorted params:
@@ -183,9 +183,9 @@ mw.KApi.prototype = {
 		});
 	},
 	getApiUrl : function( serviceType ){
-		var serviceUrl = mw.getConfig( 'Kaltura.ServiceUrl' );
-		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Kaltura.StatsServiceUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.StatsServiceUrl' );
+		var serviceUrl = mw.getConfig( 'Vidiun.ServiceUrl' );
+		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Vidiun.StatsServiceUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.StatsServiceUrl' );
 		}
 		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Kaltura.LiveStatsServiceUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Kaltura.LiveStatsServiceUrl' );
@@ -193,7 +193,7 @@ mw.KApi.prototype = {
 		return serviceUrl + mw.getConfig( 'Kaltura.ServiceBase' ) + serviceType;
 	},
 	getSignature: function( params ){
-		params = this.ksort(params);
+		params = this.vsort(params);
 		var str = "";
 		for(var v in params) {
 			var k = params[v];
@@ -206,7 +206,7 @@ mw.KApi.prototype = {
 	 * @param arr	The array to sort.
 	 * @return		The sorted array.
 	 */
-	ksort: function ( arr ) {
+	vsort: function ( arr ) {
 		var sArr = [];
 		var tArr = [];
 		var n = 0, i, x;
@@ -228,34 +228,34 @@ mw.KApi.prototype = {
 	 * c) Get flavorasset
 	 * b) Get baseEntry
 	 */
-	playerLoader: function( kProperties, callback ){
+	playerLoader: function( vProperties, callback ){
 		var _this = this,
 			requestObject = [];
 
 		// Normelize flashVars
-		kProperties.flashvars = kProperties.flashvars || {};
+		vProperties.flashvars = vProperties.flashvars || {};
 
-		if( this.getCacheKey( kProperties ) && this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ){
-			mw.log( "KApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] ) );
-			callback( this.playerLoaderCache[ this.getCacheKey( kProperties ) ] );
+		if( this.getCacheKey( vProperties ) && this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ){
+			mw.log( "VApi:: playerLoader load from cache: " + !!( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] ) );
+			callback( this.playerLoaderCache[ this.getCacheKey( vProperties ) ] );
 			return ;
 		}
 		// Local method to fill the cache key and run the assoicated callback
 		var fillCacheAndRunCallback = function( namedData ){
-			_this.playerLoaderCache[ _this.getCacheKey( kProperties ) ] = namedData;
+			_this.playerLoaderCache[ _this.getCacheKey( vProperties ) ] = namedData;
 			callback( namedData );
 		}
 
 		// If we don't have entryId and referenceId return an error
-		if( !kProperties.flashvars.referenceId && !kProperties.entry_id ) {
-			mw.log( "KApi:: entryId and referenceId not found, exit.");
+		if( !vProperties.flashvars.referenceId && !vProperties.entry_id ) {
+			mw.log( "VApi:: entryId and referenceId not found, exit.");
 			callback( { error: "Empty player" } );
 			return ;
 		}
 
-		// Check if we have ks flashvar and use it for our request
-		if( kProperties.flashvars && kProperties.flashvars.ks ) {
-			this.setKS( kProperties.flashvars.ks );
+		// Check if we have vs flashvar and use it for our request
+		if( vProperties.flashvars && vProperties.flashvars.vs ) {
+			this.setVS( vProperties.flashvars.vs );
 		}
 
 		// Always get the entry id from the first request result
@@ -264,29 +264,29 @@ mw.KApi.prototype = {
 		var baseEntryRequestObj = {
 			'service' : 'baseentry',
 			'action' : 'list',
-			'filter:objectType' : 'KalturaBaseEntryFilter'
+			'filter:objectType' : 'VidiunBaseEntryFilter'
 		};
 		// Filter by reference Id
-		if( !kProperties.entry_id && kProperties.flashvars.referenceId ){
-			baseEntryRequestObj['filter:referenceIdEqual'] = kProperties.flashvars.referenceId;
-		} else if ( kProperties.entry_id ){
-			if( kProperties.features['entryRedirect'] && kProperties.flashvars.disableEntryRedirect !== true ) {
+		if( !vProperties.entry_id && vProperties.flashvars.referenceId ){
+			baseEntryRequestObj['filter:referenceIdEqual'] = vProperties.flashvars.referenceId;
+		} else if ( vProperties.entry_id ){
+			if( vProperties.features['entryRedirect'] && vProperties.flashvars.disableEntryRedirect !== true ) {
 				// Filter by redirectEntryId
-				baseEntryRequestObj['filter:redirectFromEntryId'] = kProperties.entry_id;				
+				baseEntryRequestObj['filter:redirectFromEntryId'] = vProperties.entry_id;				
 			} else {
 				// Filter by entryId
-				baseEntryRequestObj['filter:idEqual'] = kProperties.entry_id;
+				baseEntryRequestObj['filter:idEqual'] = vProperties.entry_id;
 			}
 		}
 		requestObject.push(baseEntryRequestObj);
-		var streamerType = kProperties.flashvars.streamerType || 'http';
-		var flavorTags = kProperties.flashvars.flavorTags || 'all';
+		var streamerType = vProperties.flashvars.streamerType || 'http';
+		var flavorTags = vProperties.flashvars.flavorTags || 'all';
 
 		// Add Context Data request
 		requestObject.push({
 			'contextDataParams' : {
-				'referrer' : window.kWidgetSupport.getHostPageUrl(),
-				'objectType' : 'KalturaEntryContextDataParams',
+				'referrer' : window.vWidgetSupport.getHostPageUrl(),
+				'objectType' : 'VidiunEntryContextDataParams',
 				'flavorTags': flavorTags,
 				'streamerType': streamerType
 			},
@@ -301,17 +301,17 @@ mw.KApi.prototype = {
 			'action' : 'list',
 			'version' : '-1',
 			// metaDataFilter
-			'filter:metadataObjectTypeEqual' :1, /* KalturaMetadataObjectType::ENTRY */
+			'filter:metadataObjectTypeEqual' :1, /* VidiunMetadataObjectType::ENTRY */
 			'filter:orderBy' : '+createdAt',
 			'filter:objectIdEqual' : entryIdValue,
 			'pager:pageSize' : 1
 		});
 
-		if( kProperties.flashvars.getCuePointsData !== false ){
+		if( vProperties.flashvars.getCuePointsData !== false ){
 			requestObject.push({
 				'service' : 'cuepoint_cuepoint',
 				'action' : 'list',
-				'filter:objectType' : 'KalturaCuePointFilter',
+				'filter:objectType' : 'VidiunCuePointFilter',
 				'filter:orderBy' : '+startTime',
 				'filter:statusEqual' : 1,
 				'filter:entryIdEqual' : entryIdValue
@@ -334,7 +334,7 @@ mw.KApi.prototype = {
 
 			// Check if we have an error
 			if( data[0].code ) {
-				mw.log('Error in kaltura api response: ' + data[0].message);
+				mw.log('Error in vidiun api response: ' + data[0].message);
 				callback( { 'error' :  data[0].message } );
 				return ;
 			}
@@ -374,18 +374,18 @@ mw.KApi.prototype = {
 	},
 	/**
 	 * Get a string representation of the query string
-	 * @param kProperties
+	 * @param vProperties
 	 * @return
 	 */
-	getCacheKey: function( kProperties ){
+	getCacheKey: function( vProperties ){
 		var rKey = '';
-		if( kProperties ){
-			$.each(kProperties, function( inx, value ){
+		if( vProperties ){
+			$.each(vProperties, function( inx, value ){
 				if( inx == 'flashvars' ){
 					// add in the flashvars that can vary the api response
-					if( typeof kProperties.flashvars == 'object'){
-						rKey += kProperties.flashvars.getCuePointsData;
-						rKey += kProperties.flashvars.ks
+					if( typeof vProperties.flashvars == 'object'){
+						rKey += vProperties.flashvars.getCuePointsData;
+						rKey += vProperties.flashvars.vs
 					}
 				} else {
 					rKey+=inx + '_' + value;
@@ -397,42 +397,42 @@ mw.KApi.prototype = {
 };
 
 /**
- * KApi public entry points:
+ * VApi public entry points:
  *
- * TODO maybe move these over to "static" members of the kApi object ( ie not part of the .prototype methods )
+ * TODO maybe move these over to "static" members of the vApi object ( ie not part of the .prototype methods )
  */
 // Cache api object per partner
 // ( so that multiple partner types don't conflict if used on a single page )
-mw.KApiPartnerCache = [];
+mw.VApiPartnerCache = [];
 
-mw.kApiGetPartnerClient = function( widgetId ){
-	if( !mw.KApiPartnerCache[ widgetId ] ){
-		mw.KApiPartnerCache[ widgetId ] = new mw.KApi( widgetId );
+mw.vApiGetPartnerClient = function( widgetId ){
+	if( !mw.VApiPartnerCache[ widgetId ] ){
+		mw.VApiPartnerCache[ widgetId ] = new mw.VApi( widgetId );
 	}
-	return mw.KApiPartnerCache[ widgetId ];
+	return mw.VApiPartnerCache[ widgetId ];
 };
-mw.KApiPlayerLoader = function( kProperties, callback ){
-	if( !kProperties.widget_id ) {
-		mw.log( "Error:: mw.KApiPlayerLoader:: cant run player loader with widget_id "  + kProperties.widget_id );
+mw.VApiPlayerLoader = function( vProperties, callback ){
+	if( !vProperties.widget_id ) {
+		mw.log( "Error:: mw.VApiPlayerLoader:: cant run player loader with widget_id "  + vProperties.widget_id );
 	}
 	// Make sure we have features
-	if( !kProperties.features ) {
-		kProperties.features = {};
+	if( !vProperties.features ) {
+		vProperties.features = {};
 	}
 	// Convert widget_id to partner id
-	var kClient = mw.kApiGetPartnerClient( kProperties.widget_id );
-	kClient.playerLoader( kProperties, function( data ){
-		// Add a timeout so that we are sure to return kClient before issuing the callback
+	var vClient = mw.vApiGetPartnerClient( vProperties.widget_id );
+	vClient.playerLoader( vProperties, function( data ){
+		// Add a timeout so that we are sure to return vClient before issuing the callback
 		setTimeout(function(){
 			callback( data );
 		},0);
 	});
-	// Return the kClient api object for future requests
-	return kClient;
+	// Return the vClient api object for future requests
+	return vClient;
 };
-mw.KApiRequest = function( widgetId, requestObject, callback ){
-	var kClient = mw.kApiGetPartnerClient( widgetId );
-	kClient.doRequest( requestObject, callback );
+mw.VApiRequest = function( widgetId, requestObject, callback ){
+	var vClient = mw.vApiGetPartnerClient( widgetId );
+	vClient.doRequest( requestObject, callback );
 };
 
 })( window.mw, jQuery );

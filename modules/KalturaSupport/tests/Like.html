@@ -6,14 +6,14 @@
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">
-		function jsKalturaPlayerTest( videoId ) {
+		function jsVidiunPlayerTest( videoId ) {
 			// Name this module
 			module( "Like Plugin" );
-			var kdp = $( '#' + videoId ).get( 0 );
-			var $iframe = $( kdp ).find( 'iframe' ).contents();
+			var vdp = $( '#' + videoId ).get( 0 );
+			var $iframe = $( vdp ).find( 'iframe' ).contents();
 			
 			asyncTest( "Like plugin is loaded", function() {
-				kalturaQunitWaitForPlayer( function() {
+				vidiunQunitWaitForPlayer( function() {
 					equal( $iframe.find( '.like-btn' ).length, 1, "Like plugin is loaded and button is present" );
 					start();
 				} );
@@ -33,13 +33,13 @@
 			} );
 			
 			// add listeners for checking like status and changing it
-			kdp.addJsListener( 'onCheckLike', 'checkLikeCallback' );
-			kdp.addJsListener( 'likeSubmitted', 'likeSubmittedCallback' );
+			vdp.addJsListener( 'onCheckLike', 'checkLikeCallback' );
+			vdp.addJsListener( 'likeSubmitted', 'likeSubmittedCallback' );
 		}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 	<h2>Like Plugin Test</h2>
@@ -55,14 +55,14 @@
 			xmlns:dc="http://purl.org/dc/terms/"
 			xmlns:media="http://search.yahoo.com/searchmonkey/media/"
 			rel="media:video"
-			resource="http://hudsontest4.kaltura.dev/index.php/kwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1"
-			data="http://hudsontest4.kaltura.dev/index.php/kwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1">
+			resource="http://hudsontest4.vidiun.dev/index.php/vwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1"
+			data="http://hudsontest4.vidiun.dev/index.php/vwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1">
 		<param name="allowFullScreen" value="true" />
 		<param name="allowNetworking" value="all" />
 		<param name="allowScriptAccess" value="always" />
 		<param name="bgcolor" value="#000000" />
-		<param name="flashVars" value="&ks=OWI5NDIyNWJhNzcwNzk1NjdhZjgwNTUwOGYxZDRmMTgxNmNlZGEwNXwxMTQ7MTE0OzEzNDIxMDAxNTQ7MjsxMzQyMDEzNzU0LjIwNTthdmkudmFpc2VuYmVyZ2VyQGthbHR1cmEuY29tO2Rpc2FibGVlbnRpdGxlbWVudDs7" />
-		<param name="movie" value="http://hudsontest4.kaltura.dev/index.php/kwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1" />
+		<param name="flashVars" value="&vs=OWI5NDIyNWJhNzcwNzk1NjdhZjgwNTUwOGYxZDRmMTgxNmNlZGEwNXwxMTQ7MTE0OzEzNDIxMDAxNTQ7MjsxMzQyMDEzNzU0LjIwNTthdmkudmFpc2VuYmVyZ2VyQGthbHR1cmEuY29tO2Rpc2FibGVlbnRpdGxlbWVudDs7" />
+		<param name="movie" value="http://hudsontest4.vidiun.dev/index.php/vwidget/cache_st/1337264409/wid/_114/uiconf_id/4422393/entry_id/0_rqjo52j1" />
 	</object>
 
 </body>

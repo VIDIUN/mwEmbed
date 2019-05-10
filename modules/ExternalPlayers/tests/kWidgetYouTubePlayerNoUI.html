@@ -1,39 +1,39 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>KDP youtube flash player</title>
+<title>VDP youtube flash player</title>
 <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 <!-- <script type="text/javascript" src="../../../mwEmbedLoader.php/wid/_27017/uiconf_id/11426482/entry_id/1_5vwcdzlv"></script> -->
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<!-- <script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script> -->
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<!-- <script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script> -->
 
 
 <script type="text/javascript">
 function onPlayed(){
 	clearInterval(samplePlayerInterval);
 	samplePlayerInterval = setInterval(samplePage , 500);
-	$('#kaltura_player_ifp').contents().find('.time-disp').show();
+	$('#vidiun_player_ifp').contents().find('.time-disp').show();
 }
 function onPlay(){
-	window.kalturaPlayer.sendNotification('doPlay');
+	window.vidiunPlayer.sendNotification('doPlay');
 }
 function onPause(){
-	window.kalturaPlayer.sendNotification('doPause');
+	window.vidiunPlayer.sendNotification('doPause');
 	hideBigPlayButton();
 }
 function samplePage(){
-	var currentTime = Math.floor(window.kalturaPlayer.evaluate('{video.player.currentTime}'));
+	var currentTime = Math.floor(window.vidiunPlayer.evaluate('{video.player.currentTime}'));
 	$("#currentPosition")[0].value = currentTime;
-	if(window.kalturaPlayer &&  currentTime>=5 ){
-			window.kalturaPlayer.sendNotification('doPause');
+	if(window.vidiunPlayer &&  currentTime>=5 ){
+			window.vidiunPlayer.sendNotification('doPause');
 			clearInterval(samplePlayerInterval);
 			hideTimers();
-			window.kalturaPlayer.sendNotification('doSeek' , 0);
+			window.vidiunPlayer.sendNotification('doSeek' , 0);
 		}
 		  
 }
@@ -42,35 +42,35 @@ var samplePlayerInterval;
 function jsCallbackReady(objectId) {
 	hideBigPlayButton();
 	//set the player object
-	window.kalturaPlayer = document.getElementById(objectId);
-	window.kalturaPlayer.addJsListener("playerPlayed" , 'onPlayed')
+	window.vidiunPlayer = document.getElementById(objectId);
+	window.vidiunPlayer.addJsListener("playerPlayed" , 'onPlayed')
 	samplePlayerInterval = setInterval(samplePage , 500);
 }
 function hideTimers(){
-	$('#kaltura_player_ifp').contents().find('.time-disp').hide();
+	$('#vidiun_player_ifp').contents().find('.time-disp').hide();
 }
 function hideBigPlayButton(){
-	$('#kaltura_player_ifp').contents().find('.play-btn-large').hide();
+	$('#vidiun_player_ifp').contents().find('.play-btn-large').hide();
 }
 function hidePlayButton(){
-	$('#kaltura_player_ifp').contents().find('.play-btn').hide();
+	$('#vidiun_player_ifp').contents().find('.play-btn').hide();
 }
 
 function onVolume(){
-	window.kalturaPlayer.sendNotification('changeVolume',$("#volumeF")[0].value);
+	window.vidiunPlayer.sendNotification('changeVolume',$("#volumeF")[0].value);
 }
 
 </script>
 
 </head>
 <body>
-<h2>KDP YouTube wrapper - 10 seconds preview</h2>
+<h2>VDP YouTube wrapper - 10 seconds preview</h2>
 <p style="width:500px">This page shows the youtube wrapper with no UI. once the player loads it autoplays and shows the first 5 seconds and then pause</p>
-<div id="kaltura_player" style="width:400px;height:330px"></div>
+<div id="vidiun_player" style="width:400px;height:330px"></div>
 <br />
 <script>
-	kWidget.embed({
-		'targetId': "kaltura_player",
+	vWidget.embed({
+		'targetId': "vidiun_player",
 		'wid': '_585531',
 		'uiconf_id': '11426482',
 		'entry_id': '0_xdx96y70',

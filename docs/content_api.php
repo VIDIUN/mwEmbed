@@ -155,7 +155,7 @@ require_once( realpath( dirname( __FILE__ ) ) . '/api_evaluates.php' );
 
 	function getTableContent($headers, $param){
 		$paramArrayObject = new ArrayObject($param);
-		$paramArrayObject->ksort();
+		$paramArrayObject->vsort();
 		$o = "<table>";
 		$o.= "<tr>";
 		foreach( $headers as $header ){
@@ -168,7 +168,7 @@ require_once( realpath( dirname( __FILE__ ) ) . '/api_evaluates.php' );
 				$o.= '<tr class="linkable" id="'. $key .'">';
 				$o.= "<td>".$key;
 				foreach( $value as $val => $value1){
-					if ($val == 'availability' && $value1 == 'kdp'){
+					if ($val == 'availability' && $value1 == 'vdp'){
 						$o.= '<br><span class="label label-warning">Legacy Only</span>';
 						$restrictedAvailability = true;
 					}
@@ -256,7 +256,7 @@ $(function(){
 	});
 });</script>
 <div id="hps-resources"></div>
-<h2>Kaltura Player API</h2>
+<h2>Vidiun Player API</h2>
 <p>This documentation covers version <strong><i><?php global $wgMwEmbedVersion; echo $wgMwEmbedVersion ?></i></strong> of the html5 library. </p>
 <p>
 <a href="#kWidget" class="btn btn btn-info">kWidget API &raquo;</a>
@@ -272,8 +272,8 @@ The Kaltura player library can be embeded into both <a href="http://knowledge.ka
  and <a href="http://knowledge.kaltura.com/kaltura-player-sdk-ios">Native iOS</a>.
 <br><br>Sample JavaScript Kaltura player library include :
 <pre class="prettyprint linenums">
-&lt!-- Substitute {partner_id} for your Kaltura partner id, {uiconf_id} for uiconf player id --&gt;
-&lt;script src=&quot;http://cdnapi.kaltura.com/p/{partner_id}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiconf_id}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
+&lt!-- Substitute {partner_id} for your Vidiun partner id, {uiconf_id} for uiconf player id --&gt;
+&lt;script src=&quot;http://cdnapi.vidiun.com/p/{partner_id}/sp/{partnerId}00/embedIframeJs/uiconf_id/{uiconf_id}/partner_id/{partnerId}&quot;&gt;&lt;/script&gt;
 </pre>
 After you include the Kaltura player library, the following kWidget API is available:
 <div class="docblock">
@@ -283,10 +283,10 @@ After you include the Kaltura player library, the following kWidget API is avail
 	<h3 class="linkable" id="kwidget-settingsObject"> Settings Embed Object:</h2>
 	<?php echo getObjectDocs( array( 'kWidget.settingsObject' ) ) ?>
 </div><br><br>
-<a name="kWidgetApi"></a>
-<h3>Server API requests ( kWidget.api )</h3>
-kWidget Server API enables direct <a href="http://www.kaltura.com/api_v3/testmeDoc/index.php">Kaltura Server API</a> calls from JavaScript. 
-This should not be confused with the <a href="http://www.kaltura.com/api_v3/testme/client-libs.php">JavaScript client library</a>, 
+<a name="vWidgetApi"></a>
+<h3>Server API requests ( vWidget.api )</h3>
+vWidget Server API enables direct <a href="http://www.vidiun.com/api_v3/testmeDoc/index.php">Vidiun Server API</a> calls from JavaScript. 
+This should not be confused with the <a href="http://www.vidiun.com/api_v3/testme/client-libs.php">JavaScript client library</a>, 
 which offers object mappings and works with the code generated in the 
 <a href="http://www.kaltura.com/api_v3/testme/index.php">test me console</a>. <br>
 The Kaltura Server API offers minimal object validation, in exchange for being much smaller, and included with every kaltura player library include.<br><br>
@@ -301,8 +301,8 @@ new kWidget.api( { 'wid' : '_243342', })
 </pre> 
 For more examples see the <a href="../kWidget/tests/kWidget.api.html">kWidget.api test page.</a>
 <div class="docblock">
-	<?php echo getDocs('kWidget.api' ) ?>
-	<?php echo getObjectDocs( array( 'kWidget.apiOptions' ) ) ?>
+	<?php echo getDocs('vWidget.api' ) ?>
+	<?php echo getObjectDocs( array( 'vWidget.apiOptions' ) ) ?>
 </div>
 
 <a name="uiVars"></a>
@@ -381,8 +381,8 @@ Finally many properties can be upated at runtime using <a href="#setKDPAttribute
 
 Code sample:<br>
 <pre class="prettyprint linenums">
-kWidget.embed({
-  "targetId": "kaltura_player_1402219661",
+vWidget.embed({
+  "targetId": "vidiun_player_1402219661",
   "wid": "_1645161",
   "uiconf_id": 24231962,
   "flashvars": {
@@ -410,11 +410,11 @@ kWidget.embed({
 </pre>
 
 <br><br>
-<a name="kdpAPI"></a>
+<a name="vdpAPI"></a>
 
  <h2>Player API</h2>
 <p>The JavaScript API is a two-way communication channel that lets the player communicate what it is doing and lets you instruct the player to perform operations.
-<br>For more information: <a href="http://knowledge.kaltura.com/javascript-api-kaltura-media-players#UnderstandingtheJavaScriptAPIWorkflow" target="_blank">JavaScript API for Kaltura Media Players</a></p>
+<br>For more information: <a href="http://knowledge.vidiun.com/javascript-api-vidiun-media-players#UnderstandingtheJavaScriptAPIWorkflow" target="_blank">JavaScript API for Vidiun Media Players</a></p>
 <p>Available JavaScript API:</p>
 <a class="btn btn btn-info" href="#kWidget.addReadyCallback-desc">Ready Notifications</a>
 <a class="btn btn btn-info" href="#sendNotification-desc">sendNotification</a>
@@ -514,13 +514,13 @@ kWidget.addReadyCallback(function( playerId ){
 <p>Use the <b>setKDPAttribute</b> method to change a player attribute by setting its value.</p>
 <br>Code sample:<br>
 <pre class="prettyprint linenums">
-kdp.setKDPAttribute("configProxy.flashvars","autoPlay","true")
+vdp.setVDPAttribute("configProxy.flashvars","autoPlay","true")
 </pre>
-<br><p>Some plugins support runtime updates using <b>setKDPAttribute</b>.
+<br><p>Some plugins support runtime updates using <b>setVDPAttribute</b>.
 <br>For example, the "theme" plugin supports such updates:</p>
 <pre class="prettyprint linenums">
-var kdp = document.getElementById('kVideoTarget');
-kdp.setKDPAttribute("theme", "buttonsSize", "14");
+var vdp = document.getElementById('vVideoTarget');
+vdp.setVDPAttribute("theme", "buttonsSize", "14");
 </pre>
 <?php echo getDocs( array( 'setKDPAttribute' ) ) ?>
 

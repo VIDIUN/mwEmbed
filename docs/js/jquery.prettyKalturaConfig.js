@@ -1138,7 +1138,7 @@
 							$(input).kPagedTableInput({
 								'apiService': 'uiConf',
 								'partnerId': userObject.partnerId,
-								'ks': userObject.ks,
+								'vs': userObject.vs,
 								'fieldMap': {
 									'id': 'UI Conf ID',
 									'name': 'UI Conf Name',
@@ -1180,7 +1180,7 @@
 							$(input).kPagedTableInput({
 								'apiService': 'baseEntry',
 								'partnerId': userObject.partnerId,
-								'ks': userObject.ks,
+								'vs': userObject.vs,
 								'fieldMap': {
 									'thumbnailUrl': "Thumbnail",
 									'id': "Entry Id",
@@ -1262,7 +1262,7 @@
 			})
 			// get the attributes from the manifest for this plugin: 
 			// testing files always ../../ from test
-			var request = window.kDocPath + 'configManifest.php?';
+			var request = window.vDocPath + 'configManifest.php?';
 			// check for ps folder travarsal 
 			if (mw && mw.getConfig('Kaltura.KWidgetPsPath')) {
 				request += 'pskwidgetpath=' + mw.getConfig('Kaltura.KWidgetPsPath');
@@ -1389,7 +1389,7 @@
 						$('<div>').attr("id", "hostedAuthWidget"),
 						$('<br>'), $('<br>')
 					)
-					// Supports edit ks ( most important ) 
+					// Supports edit vs ( most important ) 
 					var $tbody = $('<tbody />');
 
 					function getInput(key) {

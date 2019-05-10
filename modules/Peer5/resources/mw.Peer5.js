@@ -19,7 +19,7 @@
 			this.peer5_type = this.getConfig('type');
 			this.peer5_overlayUI = this.getConfig('overlayUI');
 			this.peer5_proxy = this.getConfig('proxy');
-			kWidget.appendScriptUrl(_this.getConfig('peer5libUrl'), function () {
+			vWidget.appendScriptUrl(_this.getConfig('peer5libUrl'), function () {
 				// bind player
 				_this.bindPlayer();
 				// continue player build out:
@@ -96,7 +96,7 @@
 		},
 		getConfig:function (propId) {
 			// return the attribute value
-			return this.embedPlayer.getKalturaConfig('peer5', propId);
+			return this.embedPlayer.getVidiunConfig('peer5', propId);
 		}
 	}
 

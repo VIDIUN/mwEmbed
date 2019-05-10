@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>KDP3 | Kaltura Dynamic Player version 3 JavaScript Playground</title>
+		<title>VDP3 | Vidiun Dynamic Player version 3 JavaScript Playground</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 		<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
@@ -12,7 +12,7 @@
 			#container { width:800px; margin:10px auto; overflow:hidden; }
 			.demo { height:200px; width:790px; margin:0; border:1px solid gray; font-family:Verdana; font-size:10px; background:white; overflow:auto; }
 			.describe { height:200px; width:790px; margin:0; border:1px solid gray; font-family:Verdana; font-size:10px; background:white; overflow:auto; border-top:none; }
-			#kdp3 { margin-top:10px; }
+			#vdp3 { margin-top:10px; }
 			div.code { }
 			pre { display:block; }
 			.syntaxhighlighter { margin:0 0 0 0 !important; padding:0 !important; }
@@ -65,8 +65,8 @@
 				'doSeek',
 				'doIntelligentSeek',
 				'doSwitch',
-				'kdpReady',
-				'kdpEmpty',
+				'vdpReady',
+				'vdpEmpty',
 				'layoutReady',
 				'playerStateChange',
 				'playerReady',
@@ -199,7 +199,7 @@
 	</head>
 	<body>
 		<div id="controls_menu" class="sideBox content">
-			<strong><a href="docs.html">[Go to KDP3 Docs]</a></strong>
+			<strong><a href="docs.html">[Go to VDP3 Docs]</a></strong>
 			<h2>Player Control</h2>
 			<dfn title="Click the play, pause or stop buttons to control the player playback. Set a time in seconds to the seek field and click the 'seek to' button to jump to that seconds in the playing media">Playback control:</dfn>
 			<div class="controls">
@@ -222,7 +222,7 @@
 				Set volume: <input type="text" size="2" id="vol" value="1" /><span class="c1">(0-1)</span><button onclick="player.sendNotification('changeVolume', parseFloat($('#vol').val()));return false;">Change</button>
 			</div><br />
 			<dfn title=
-				 "Common statistics that are available, these are basically listeners to events and evaluation of KDP objects">
+				 "Common statistics that are available, these are basically listeners to events and evaluation of VDP objects">
 				Player statistics</dfn><a href="docs.html#addlistener">[docs]</a>
 			<div class="controls">
 				Duration: <span id="videoduration">0</span><br />
@@ -233,7 +233,7 @@
 			</div><br />
 			<div>
 				<dfn title=
-					 "The box below lists all the events that are handled by KDP, for readability, we do not list the playerUpdatePlayhead notification by default, since it is being called too often, tick the playerUpdatePlayhead checkbox below to list this notification as well">
+					 "The box below lists all the events that are handled by VDP, for readability, we do not list the playerUpdatePlayhead notification by default, since it is being called too often, tick the playerUpdatePlayhead checkbox below to list this notification as well">
 					Notifications:</dfn><a href="docs.html#addlistener">[docs]</a><input type="checkbox" id="autoscroll" checked="checked" /><label for="autoscroll">AutoScroll?</label> 
 				<textarea id="notifications" class="c2"></textarea><br />
 				<input type="checkbox" id="listenToUpdate" /><label for="listenToUpdate">Listen to
@@ -244,22 +244,22 @@
 		</div>
 		<div id="container">
 			<h1 class="title">
-				Kaltura Dynamic Player version 3 JavaScript Playground
+				Vidiun Dynamic Player version 3 JavaScript Playground
 			</h1>
 			<p>
 				<a href="?forceMobileHTML5">Force HTML5 Player</a>
 			</p>
-			<object id="kdp3" name="kdp3" type="application/x-shockwave-flash" allowFullScreen="true" 
+			<object id="vdp3" name="vdp3" type="application/x-shockwave-flash" allowFullScreen="true" 
 				allowNetworking="all" allowScriptAccess="always" height="333" width="400" xmlns:dc="http://purl.org/dc/terms/" 
 				xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" 
-				resource="http://www.kaltura.com/index.php/kwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4" 
-				data="http://www.kaltura.com/index.php/kwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4">
+				resource="http://www.vidiun.com/index.php/vwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4" 
+				data="http://www.vidiun.com/index.php/vwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4">
 					<param name="allowFullScreen" value="true" />
 					<param name="allowNetworking" value="all" />
 					<param name="allowScriptAccess" value="always" />
 					<param name="bgcolor" value="#000000" />
 					<param name="flashVars" value="&externalInterfaceDisabled=false" />
-					<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4" />
+					<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1292436446/wid/_243342/uiconf_id/12905712/entry_id/0_uka1msg4" />
 			</object>
 		</div>
 		<div id="cleardiv" class="c3"></div>

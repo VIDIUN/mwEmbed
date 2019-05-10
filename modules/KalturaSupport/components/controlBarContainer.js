@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'controlBarContainer', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'controlBarContainer', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			'hover': false
