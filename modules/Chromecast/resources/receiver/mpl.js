@@ -23,7 +23,7 @@ var playerInitialized = false;
 var isInSequence = false;
 
 onload = function () {
-	var kdp;
+	var vdp;
 	cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
 	cast.player.api.setLoggerLevel(cast.player.api.LoggerLevel.DEBUG);
 
@@ -110,7 +110,7 @@ onload = function () {
 		} else if (payload['type'] === 'load') {
 			setMediaManagerEvents();
 		} else if (payload['type'] === 'notification') {
-			kdp.sendNotification(payload['event']); // pass notification event to the player
+			vdp.sendNotification(payload['event']); // pass notification event to the player
 		} else if (payload['type'] === 'setLogo') {
 			document.getElementById('logo').style.backgroundImage = "url(" + payload['logo'] + ")";
 		} else if (payload['type'] === 'embed' && !playerInitialized) {
@@ -130,13 +130,13 @@ onload = function () {
 					mw.setConfig("EmbedPlayer.HidePosterOnStart", true);
 					if (payload['debugKalturaPlayer'] == true){
 						mw.setConfig("debug", true);
-						mw.setConfig("debugTarget", "kdebug");
+						mw.setConfig("debugTarget", "vdebug");
 						//mw.setConfig("debugFilter", "---");
 						mw.setConfig("autoScrollDebugTarget", true);
-						document.getElementById('kdebug').style.display = 'block';
+						document.getElementById('vdebug').style.display = 'block';
 					}
 					mw.setConfig("chromecastReceiver", true);
-					mw.setConfig("Kaltura.ExcludedModules", "chromecast");
+					mw.setConfig("Vidiun.ExcludedModules", "chromecast");
 					var fv = {
 						"multiDrm": {
 							'plugin': false
@@ -153,19 +153,19 @@ onload = function () {
 					var mimeType = null;
 					var src = null;
 
-					kWidget.embed({
-						"targetId": "kaltura_player",
+					vWidget.embed({
+						"targetId": "vidiun_player",
 						"wid": "_" + publisherID,
 						"uiconf_id": uiconfID,
 						"readyCallback": function (playerId) {
 							if (!playerInitialized){
 								playerInitialized = true;
-								kdp = document.getElementById(playerId);
-								kdp.kBind("broadcastToSender", function(msg){
+								vdp = document.getElementById(playerId);
+								vdp.vBind("broadcastToSender", function(msg){
 									messageBus.broadcast(msg);
 									isInSequence = ( msg == "chromecastReceiverAdOpen" );
 								});
-								kdp.kBind("chromecastReceiverLoaded", function(){
+								vdp.vBind("chromecastReceiverLoaded", function(){
 									setMediaManagerEvents();
 									var msg = "readyForMedia";
 									if (mimeType && src){
@@ -173,7 +173,7 @@ onload = function () {
 									}
 									messageBus.broadcast(msg);
 								});
-								kdp.kBind("waterMarkLoaded", function(waterMarkElement){
+								vdp.vBind("waterMarkLoaded", function(waterMarkElement){
 									var css = getCss(waterMarkElement);
 									document.getElementById("videoHolder").appendChild(waterMarkElement);
 									for (var property in css) {
@@ -182,7 +182,7 @@ onload = function () {
 										}
 									}
 								});
-								kdp.kBind("SourceSelected", function(source){
+								vdp.vBind("SourceSelected", function(source){
 									mimeType = source.mimeType;
 									src = source.src;
 								});

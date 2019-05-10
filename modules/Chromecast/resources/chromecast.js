@@ -21,7 +21,7 @@
 			'debugReceiver': false,
 			'receiverLogo': true,
 			'logoUrl': null,
-			'useKalturaPlayer': true,
+			'useVidiunPlayer': true,
 			'useReceiverSource': true,
 			'debugKalturaPlayer': false
 		},
@@ -55,7 +55,7 @@
 		inSequence: false,
 		adDuration: null,
 		sendPlayerReady: false, // after changing media we need to send the playerReady event to the chromecast receiver as it doesn't reload the player there
-		supportedPlugins: ['doubleClick', 'youbora', 'kAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat', 'proxyData'],
+		supportedPlugins: ['doubleClick', 'youbora', 'vAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat', 'proxyData'],
 
 		setup: function( embedPlayer ) {
 			var _this = this;
@@ -276,7 +276,7 @@
 			}
 			if (this.getConfig("useVidiunPlayer") === true){
 				var flashVars = this.getFlashVars();
-				this.sendMessage({'type': 'embed', 'lib': kWidget.getPath(), 'publisherID': this.embedPlayer.kwidgetid.substr(1), 'uiconfID': this.embedPlayer.kuiconfid, 'entryID': this.embedPlayer.kentryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars});
+				this.sendMessage({'type': 'embed', 'lib': vWidget.getPath(), 'publisherID': this.embedPlayer.vwidgetid.substr(1), 'uiconfID': this.embedPlayer.vuiconfid, 'entryID': this.embedPlayer.ventryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars});
 				this.displayMessage(gM('mwe-chromecast-loading'));
 			} else {
 				this.sendMessage({'type': 'load'});
@@ -328,8 +328,8 @@
 
 			var fv = {};
 			this.supportedPlugins.forEach(function(plugin){
-				if (!$.isEmptyObject(_this.embedPlayer.getKalturaConfig(plugin))){
-					fv[plugin] = _this.embedPlayer.getKalturaConfig(plugin);
+				if (!$.isEmptyObject(_this.embedPlayer.getVidiunConfig(plugin))){
+					fv[plugin] = _this.embedPlayer.getVidiunConfig(plugin);
 				}
 			});
 			// add support for custom proxyData for OTT app developers

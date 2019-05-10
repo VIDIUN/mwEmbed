@@ -3,7 +3,7 @@
         "scripts": "resources/mw.Peer5.js",
         "vidiunPluginName": "peer5",
         "dependencies": [
-            "mw.KBasePlugin",
+            "mw.VBasePlugin",
             "Hlsjs"
         ]
     }
