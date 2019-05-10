@@ -29,14 +29,14 @@
 	
 	
 	
-	kWidget.embed({
+	vWidget.embed({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
 		'readyCallback': function( playerId ){
-			console.log( "kWidget player ready: " + playerId );
-			var kdp = $('#' + playerId ).get(0);
+			console.log( "vWidget player ready: " + playerId );
+			var vdp = $('#' + playerId ).get(0);
 			var $iframe = $( '#' + playerId + '_ifp' ).contents();
 			var vid = $iframe.find('video').get(0);
 			
@@ -47,13 +47,13 @@
 				if( navigator.userAgent.match(/iPad/i) ){
 					$('#loading').show();
 					window['onContentStartedDownloading'] = function(){
-						kdp.removeJsListener( 'bytesTotalChange', 'onContentStartedDownloading' );
-						kdp.sendNotification( 'doPause' );
+						vdp.removeJsListener( 'bytesTotalChange', 'onContentStartedDownloading' );
+						vdp.sendNotification( 'doPause' );
 						$('#loading').hide();
 						$('#playlinks').show();
 					};
-					kdp.addJsListener( 'bytesTotalChange', 'onContentStartedDownloading');
-					kdp.sendNotification('doPlay');
+					vdp.addJsListener( 'bytesTotalChange', 'onContentStartedDownloading');
+					vdp.sendNotification('doPlay');
 				} else {
 					$('#playlinks').show();
 				}
@@ -87,19 +87,19 @@
 						hasEnteredFullscreen = true;
 						
 						// Check if we need to change media: 
-						if( kdp.evaluate('{mediaProxy.entry.id}') != _thisEntryId ){
+						if( vdp.evaluate('{mediaProxy.entry.id}') != _thisEntryId ){
 							isSwitchingStreams = true;
 							// change media to given entry ( and play) if iOS delay since fullscreen and play conflict 
-							kdp.sendNotification('changeMedia', { 'entryId' : _thisEntryId } );
+							vdp.sendNotification('changeMedia', { 'entryId' : _thisEntryId } );
 						} else{
 							// do the playback in a timeout ( iPad issues )
 							if( mw.isIpad() ){
 								setTimeout(function(){
-									kdp.sendNotification('doPlay');
+									vdp.sendNotification('doPlay');
 								},1000);
 							} else{
 								<!-- you may want to display a loading screen here --> 
-								kdp.sendNotification('doPlay');
+								vdp.sendNotification('doPlay');
 							}
 						}
 					})
@@ -112,7 +112,7 @@
 					// Check if we have entered fullscreen but the player 
 					// has exited fullscreen with native controls click
 					if( hasEnteredFullscreen && !currentFS ){
-						kdp.sendNotification('doStop');
+						vdp.sendNotification('doStop');
 						hasEnteredFullscreen = false;
 					}
 				}, 250 );
@@ -122,10 +122,10 @@
 			window['onChangeMedia'] = function(){
 				if( firstRunChangeMediaDone ){
 					// play on change media done
-					kdp.sendNotification('doPlay');
+					vdp.sendNotification('doPlay');
 					// iPad when buffering does not "play", 2 seconds seems to work
 					setTimeout(function(){
-						kdp.sendNotification('doPlay');
+						vdp.sendNotification('doPlay');
 					}, 2000);
 					// change media done no longer switching streams: 
 					isSwitchingStreams = false;
@@ -143,12 +143,12 @@
 				}
 			}
 			window['onCloseFullScreen'] = function(){
-				kdp.sendNotification('doStop');
+				vdp.sendNotification('doStop');
 			};
 			// Listen to change media event: 
-			kdp.addJsListener( 'changeMedia', 'onChangeMedia');
-			kdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd');
-			kdp.addJsListener( 'closeFullScreen', 'onCloseFullScreen'); 
+			vdp.addJsListener( 'changeMedia', 'onChangeMedia');
+			vdp.addJsListener( 'playerPlayEnd', 'onPlayerPlayEnd');
+			vdp.addJsListener( 'closeFullScreen', 'onCloseFullScreen'); 
 			
 		}
 	});

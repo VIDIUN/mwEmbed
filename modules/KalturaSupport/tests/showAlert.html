@@ -14,8 +14,8 @@
 			alert( buttonLabel + " button was pressed" );
 		}
 		window[ 'jsCallbackReady' ] = function( videoId ) {
-			// add a local ref to the kdp: 
-			var kdp = $( '#' + videoId ).get( 0 );
+			// add a local ref to the vdp: 
+			var vdp = $( '#' + videoId ).get( 0 );
 			$( '#displayAlert' ).removeClass( 'disabled' );
 			$( '#displayAlert' ).show();
 			$( '#displayAlert_b' ).removeClass( 'disabled' );
@@ -23,13 +23,13 @@
 			$( '#closeAlert' ).removeClass( 'disabled' );
 			$( '#closeAlert' ).show();
 			$( '#displayAlert' ).click(function(){
-				kdp.sendNotification( "alert", {
+				vdp.sendNotification( "alert", {
 					'title': 'This is a title',
 					'message': 'This is an HTML message',
 					'buttons': [ 'First', 'Second', 'Third'],
 					'callbackFunction': 'testFunc',
 					'iconClass': 'testClass',
-					'isExternal': true, // KDP defaults to false
+					'isExternal': true, // VDP defaults to false
 					'isModal': true,
 					'props': {
 						'titleTextColor': '0xFF0000',
@@ -41,19 +41,19 @@
 				});
 			});
 			$( '#displayAlert_b' ).click(function(){
-				kdp.sendNotification( "alert", {
+				vdp.sendNotification( "alert", {
 					'title': 'This is a different title',
 					'message': 'This is a different HTML message',
 					'buttons': [],
 					'callbackFunction': 'testFunc',
 					'iconClass': 'testClass',
-					'isExternal': true, // KDP defaults to false
+					'isExternal': true, // VDP defaults to false
 					'isModal': true,
 					'props': {'titleTextColor': '0xFF00FF','textColor': '0xFFFF00'}
 				});
 			});
 			$( '#closeAlert' ).click(function() {
-				kdp.sendNotification( "removealert" );
+				vdp.sendNotification( "removealert" );
 			})
 		}
 	</script>
@@ -63,13 +63,13 @@
 	Sample code to append an alert: 
 	<pre class="prettyprint linenums">
 $( '#displayAlert_b' ).click(function(){
-	kdp.sendNotification( "alert", {
+	vdp.sendNotification( "alert", {
 		'title': 'This is a different title',
 		'message': 'This is a different HTML message',
 		'buttons': [],
 		'callbackFunction': 'testFunc',
 		'iconClass': 'testClass',
-		'isExternal': true, // KDP defaults to false
+		'isExternal': true, // VDP defaults to false
 		'isModal': true,
 		'props': {'titleTextColor': '0xFF00FF','textColor': '0xFFFF00'}
 	});
@@ -77,10 +77,10 @@ $( '#displayAlert_b' ).click(function(){
 	</pre>
 	<br />
 	
-	<div id="kaltura_player" style="width:400px;height:330px;"></div>
+	<div id="vidiun_player" style="width:400px;height:330px;"></div>
 	<script>
-	kWidget.embed({
-			'targetId': 'kaltura_player',
+	vWidget.embed({
+			'targetId': 'vidiun_player',
 			'wid': '_243342',
 			'uiconf_id' : '12905712',
 			'entry_id' : '0_uka1msg4'

@@ -95,7 +95,7 @@ mw.EmbedTypes = {
 	},
 	addFlashPlayer: function(){
 		if( !mw.getConfig( 'EmbedPlayer.DisableHTML5FlashFallback' ) ){
-			this.mediaPlayers.addPlayer( kplayer );
+			this.mediaPlayers.addPlayer( vplayer );
 		}
 	},
 	addSilverlightPlayer:function(){
@@ -128,7 +128,7 @@ mw.EmbedTypes = {
 		}
 
 		// Use core mw.supportsFlash check:
-		// Safari has cross domain issue - Flash external interface doesn't work, so we disable kplayer
+		// Safari has cross domain issue - Flash external interface doesn't work, so we disable vplayer
 		if( mw.supportsFlash() ){
 			this.addFlashPlayer();
 		}
@@ -262,8 +262,8 @@ mw.EmbedTypes = {
 		return hasObj;
 	},
 
-	getKplayer : function () {
-		return kplayer;
+	getVplayer : function () {
+		return vplayer;
 	},
 	getSilverlightPlayer :function(){
 		return splayer;

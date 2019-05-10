@@ -1,6 +1,6 @@
 <?php
 
-class KalturaCache {
+class VidiunCache {
 
 	var $adapter = null;
 	var $defaultExpiry = null;

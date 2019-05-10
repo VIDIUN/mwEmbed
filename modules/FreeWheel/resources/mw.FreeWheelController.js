@@ -3,7 +3,7 @@
 // Set the FreeWheel config:
 mw.setDefaultConfig({
 	// The url for the ad Manager
-	// for debugging we use the following AdManager url: 'http://localhost/html5.kaltura/mwEmbed/modules/FreeWheel/AdManager.js'
+	// for debugging we use the following AdManager url: 'http://localhost/html5.vidiun/mwEmbed/modules/FreeWheel/AdManager.js'
 	'FreeWheel.AdManagerUrl': 'http://adm.fwmrm.net/p/release/latest-JS/adm/prd/AdManager.js'
 });
 
@@ -116,7 +116,7 @@ mw.FreeWheelController.prototype = {
 		var _this = this;
 		// Add support for getting videoAssetId from a notification:
 
-		_this.embedPlayer.bindHelper( 'Kaltura_SendNotification' + _this.bindPostfix, function( event, notificationName, notificationData ){
+		_this.embedPlayer.bindHelper( 'Vidiun_SendNotification' + _this.bindPostfix, function( event, notificationName, notificationData ){
 			if( notificationName == 'updateVideoAssetId' && notificationData['videoAssetId'] ){
 				_this.videoAssetIdOverride = notificationData['videoAssetId'];
 			}
@@ -133,7 +133,7 @@ mw.FreeWheelController.prototype = {
 			_this.setContextTimeout();
 
 			// Add the temporal slots for this "player"
-			if( _this.getConfig( 'useKalturaTemporalSlots') === true ){
+			if( _this.getConfig( 'useVidiunTemporalSlots') === true ){
 				_this.addTemporalSlots();
 			}
 
@@ -236,8 +236,8 @@ mw.FreeWheelController.prototype = {
 		$.each(_this.slots, function( slotType, slotSet){
 			if( slotType == 'midroll' || slotType == 'overlay' ){
 				// Add cue point binding:
-				_this.embedPlayer.bindHelper( 'KalturaSupport_AdOpportunity' + _this.bindPostfix, function( event, kalturaCuePoint ){
-					_this.playAdCuePoint( slotSet, kalturaCuePoint.cuePoint );
+				_this.embedPlayer.bindHelper( 'VidiunSupport_AdOpportunity' + _this.bindPostfix, function( event, vidiunCuePoint ){
+					_this.playAdCuePoint( slotSet, vidiunCuePoint.cuePoint );
 				});
 				return true;
 			}
@@ -540,7 +540,7 @@ mw.FreeWheelController.prototype = {
 			return this.embedPlayer.evaluate('{mediaProxy.entry.duration}');
 		}
 		// return the live attribute value
-		return this.embedPlayer.getKalturaConfig( 'freeWheel', propId );
+		return this.embedPlayer.getVidiunConfig( 'freeWheel', propId );
 	},
 	getAdManager: function(){
 		if( !this.adManager ){
@@ -683,7 +683,7 @@ mw.FreeWheelController.prototype = {
 					continue;
 				}
 
-				var adType = embedPlayer.kCuePoints.getRawAdSlotType( cuePoint );
+				var adType = embedPlayer.vCuePoints.getRawAdSlotType( cuePoint );
 				mw.log("FreeWheel:: context.addCuePointSlots: " + adType );
 				switch( adType ){
 					case 'preroll':

@@ -1,4 +1,4 @@
-.k-player-kaltura_player_4 .k-title-container {
+.v-player-vidiun_player_4 .v-title-container {
 	font-size: 21px;
 	line-height:25px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -11,30 +11,30 @@
 	padding-left: 3px;
 }
 
-.k-player-kaltura_player_4 .chapterNumber {
+.v-player-vidiun_player_4 .chapterNumber {
 	color: #166599;
 }
 
-.k-player-kaltura_player_4 .k-title {
+.v-player-vidiun_player_4 .v-title {
 	color: #ECF4FA;
 }
 
-.k-player-kaltura_player_4.k-chapters-container.k-horizontal .chapterBox{
+.v-player-vidiun_player_4.v-chapters-container.v-horizontal .chapterBox{
 	height: 65px !important;
 	background-color: #85C6F1;
 	padding-left: 0px;
 	border-bottom: 1px solid #659ACA;
 }
 
-.k-player-kaltura_player_4.k-chapters-container .k-description {
+.v-player-vidiun_player_4.v-chapters-container .v-description {
 	display:none;
 }
 
-.k-player-kaltura_player_4.k-chapters-container .k-duration {
+.v-player-vidiun_player_4.v-chapters-container .v-duration {
 	right: 12px;
 	bottom: 21px;
 }
 
-.k-player-kaltura_player_4.k-chapters-container .k-duration span {
+.v-player-vidiun_player_4.v-chapters-container .v-duration span {
 	font-size: 20px;
 }

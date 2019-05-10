@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'sourceSelector', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'sourceSelector', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",
@@ -39,7 +39,7 @@
 				var selectedId = selectedSrc.getAssetId();
 
 				//if selected source is not part of the menu, show the source before it as the selected one
-				//workaround when auto switch with kplayer occurred and the selected source is not part of the menu data provider
+				//workaround when auto switch with vplayer occurred and the selected source is not part of the menu data provider
 				if ( selectedSrc.skip ) {
 					var sources = _this.getSources();
 					for ( var i = 0; i< sources.length; i++ ) {
@@ -403,7 +403,7 @@
 		},
 		getMenu: function(){
 			if( !this.menu ) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex')
 				});
 			}

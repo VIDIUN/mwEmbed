@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,19 +28,19 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunCuePointClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotationOrderBy
+class VidiunAnnotationOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const DURATION_ASC = "+duration";
@@ -57,10 +57,10 @@ class KalturaAnnotationOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotation extends KalturaCuePoint
+class VidiunAnnotation extends VidiunCuePoint
 {
 	/**
 	 * 
@@ -125,15 +125,15 @@ class KalturaAnnotation extends KalturaCuePoint
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotationListResponse extends KalturaObjectBase
+class VidiunAnnotationListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAnnotation
+	 * @var array of VidiunAnnotation
 	 * @readonly
 	 */
 	public $objects;
@@ -150,10 +150,10 @@ class KalturaAnnotationListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAnnotationBaseFilter extends KalturaCuePointFilter
+abstract class VidiunAnnotationBaseFilter extends VidiunCuePointFilter
 {
 	/**
 	 * 
@@ -222,22 +222,22 @@ abstract class KalturaAnnotationBaseFilter extends KalturaCuePointFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotationFilter extends KalturaAnnotationBaseFilter
+class VidiunAnnotationFilter extends VidiunAnnotationBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotationService extends KalturaServiceBase
+class VidiunAnnotationService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -245,19 +245,19 @@ class KalturaAnnotationService extends KalturaServiceBase
 	/**
 	 * Allows you to add an annotation object associated with an entry
 	 * 
-	 * @param KalturaCuePoint $annotation 
-	 * @return KalturaAnnotation
+	 * @param VidiunCuePoint $annotation 
+	 * @return VidiunAnnotation
 	 */
-	function add(KalturaCuePoint $annotation)
+	function add(VidiunCuePoint $annotation)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "annotation", $annotation->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "annotation", $annotation->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotation");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotation");
 		return $resultObject;
 	}
 
@@ -265,43 +265,43 @@ class KalturaAnnotationService extends KalturaServiceBase
 	 * Update annotation by id
 	 * 
 	 * @param string $id 
-	 * @param KalturaCuePoint $annotation 
-	 * @return KalturaAnnotation
+	 * @param VidiunCuePoint $annotation 
+	 * @return VidiunAnnotation
 	 */
-	function update($id, KalturaCuePoint $annotation)
+	function update($id, VidiunCuePoint $annotation)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->addParam($kparams, "annotation", $annotation->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->addParam($vparams, "annotation", $annotation->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotation");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotation");
 		return $resultObject;
 	}
 
 	/**
 	 * List annotation objects by filter and pager
 	 * 
-	 * @param KalturaCuePointFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaAnnotationListResponse
+	 * @param VidiunCuePointFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunAnnotationListResponse
 	 */
-	function listAction(KalturaCuePointFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunCuePointFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAnnotationListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunAnnotationListResponse");
 		return $resultObject;
 	}
 
@@ -309,37 +309,37 @@ class KalturaAnnotationService extends KalturaServiceBase
 	 * Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 	 * 
 	 * @param file $fileData 
-	 * @return KalturaCuePointListResponse
+	 * @return VidiunCuePointListResponse
 	 */
 	function addFromBulk($fileData)
 	{
-		$kparams = array();
-		$kfiles = array();
-		$this->client->addParam($kfiles, "fileData", $fileData);
-		$this->client->queueServiceActionCall("annotation_annotation", "addFromBulk", $kparams, $kfiles);
+		$vparams = array();
+		$vfiles = array();
+		$this->client->addParam($vfiles, "fileData", $fileData);
+		$this->client->queueServiceActionCall("annotation_annotation", "addFromBulk", $vparams, $vfiles);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCuePointListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunCuePointListResponse");
 		return $resultObject;
 	}
 
 	/**
 	 * Download multiple cue points objects as XML definitions
 	 * 
-	 * @param KalturaCuePointFilter $filter 
-	 * @param KalturaFilterPager $pager 
+	 * @param VidiunCuePointFilter $filter 
+	 * @param VidiunFilterPager $pager 
 	 * @return file
 	 */
-	function serveBulk(KalturaCuePointFilter $filter = null, KalturaFilterPager $pager = null)
+	function serveBulk(VidiunCuePointFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "serveBulk", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "serveBulk", $vparams);
 		if(!$this->client->getDestinationPath() && !$this->client->getReturnServedResult())
 			return $this->client->getServeUrl();
 		return $this->client->doQueue();
@@ -349,33 +349,33 @@ class KalturaAnnotationService extends KalturaServiceBase
 	 * Retrieve an CuePoint object by id
 	 * 
 	 * @param string $id 
-	 * @return KalturaCuePoint
+	 * @return VidiunCuePoint
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("annotation_annotation", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("annotation_annotation", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaCuePoint");
+		$this->client->validateObjectType($resultObject, "VidiunCuePoint");
 		return $resultObject;
 	}
 
 	/**
 	 * Count cue point objects by filter
 	 * 
-	 * @param KalturaCuePointFilter $filter 
+	 * @param VidiunCuePointFilter $filter 
 	 * @return int
 	 */
-	function count(KalturaCuePointFilter $filter = null)
+	function count(VidiunCuePointFilter $filter = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
-		$this->client->queueServiceActionCall("annotation_annotation", "count", $kparams);
+			$this->client->addParam($vparams, "filter", $filter->toParams());
+		$this->client->queueServiceActionCall("annotation_annotation", "count", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -392,9 +392,9 @@ class KalturaAnnotationService extends KalturaServiceBase
 	 */
 	function delete($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("annotation_annotation", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("annotation_annotation", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -404,32 +404,32 @@ class KalturaAnnotationService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAnnotationClientPlugin extends KalturaClientPlugin
+class VidiunAnnotationClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaAnnotationService
+	 * @var VidiunAnnotationService
 	 */
 	public $annotation = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->annotation = new KalturaAnnotationService($client);
+		$this->annotation = new VidiunAnnotationService($client);
 	}
 
 	/**
-	 * @return KalturaAnnotationClientPlugin
+	 * @return VidiunAnnotationClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaAnnotationClientPlugin($client);
+		return new VidiunAnnotationClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -49,11 +49,11 @@ $( document ).ready(function(){
 	var hidden = false;
 	$("#testHide").click( function(){
 		if( !hidden){
-			$('#kaltura_player').get(0).sendNotification( 'doPause' );
+			$('#vidiun_player').get(0).sendNotification( 'doPause' );
 			$('#playerHolder').css('left', '-2048px' );
 			hidden = true;
 		} else {
-			$('#kaltura_player').get(0).sendNotification( 'doPlay' );
+			$('#vidiun_player').get(0).sendNotification( 'doPlay' );
 			$('#playerHolder').css('left', '20%' );
 			hidden = false;
 		}
@@ -68,7 +68,7 @@ $( document ).ready(function(){
 <br />
 <br />
 <div id="playerHolder" style="position:absolute;background-color:#fff;width:450px;height:370px;left:20%;">
-<object id="kaltura_player" name="kaltura_player" 
+<object id="vidiun_player" name="vidiun_player" 
 	type="application/x-shockwave-flash" 
 	allowFullScreen="true" 
 	allowNetworking="all"
@@ -77,14 +77,14 @@ $( document ).ready(function(){
 	xmlns:dc="http://purl.org/dc/terms/" 
 	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
 	rel="media:video" 
-	resource="http://www.kaltura.com/index.php/kwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4"
-	data="http://www.kaltura.com/index.php/kwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4">
+	resource="http://www.vidiun.com/index.php/vwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4"
+	data="http://www.vidiun.com/index.php/vwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4">
 	<param name="allowFullScreen" value="true" />
 	<param name="allowNetworking" value="all" />
 	<param name="allowScriptAccess" value="always" />
 	<param name="bgcolor" value="#000000" />
 	<param name="flashVars" value="&" />
-	<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4" />
+	<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1291647430/wid/_243342/uiconf_id/2890431/entry_id/0_uka1msg4" />
 </object>
 </div>
 <br /><br />

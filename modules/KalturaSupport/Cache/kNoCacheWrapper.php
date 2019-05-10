@@ -1,6 +1,6 @@
 <?php
 
-class kNoCacheWrapper {
+class vNoCacheWrapper {
 
 	public function get($key) {
 		return false;

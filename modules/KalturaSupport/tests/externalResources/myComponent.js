@@ -1,14 +1,14 @@
-mw.kalturaPluginWrapper(function(){
+mw.vidiunPluginWrapper(function(){
  
-    mw.PluginManager.add( 'myComponent', mw.KBaseComponent.extend({
+    mw.PluginManager.add( 'myComponent', mw.VBaseComponent.extend({
  
         defaultConfig: {
             parent: "controlsContainer",    // the container for the button 
             order: 41,                      // the display order ( based on layout )
             displayImportance: 'low',       // the display importance, determines when the item is removed from DOM
             align: "right",                 // the alignment of the button
-            href: 'http://www.kaltura.com', // the link for the logo
-            title: 'Kaltura',               // title
+            href: 'http://www.vidiun.com', // the link for the logo
+            title: 'Vidiun',               // title
             img: null                       // image
         },
         getComponent: function() {

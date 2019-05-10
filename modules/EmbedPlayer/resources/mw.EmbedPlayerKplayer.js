@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  */
 (function (mw, $) {
 	"use strict";

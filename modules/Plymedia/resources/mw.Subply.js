@@ -5,7 +5,7 @@
 */
 mw.Subply = {
 	bindPlayer: function( embedPlayer ){
-	var intializeRestUrl = "http://services.plymedia.com/jsinitialize?platform=kaltura&video=http://www.kaltura.com/extservices/plymedia?movie=entry_";
+	var intializeRestUrl = "http://services.plymedia.com/jsinitialize?platform=vidiun&video=http://www.vidiun.com/extservices/plymedia?movie=entry_";
 	var entryId	= "";
 	var currentVideoUrl = "";
 	var defaultlang =  "eng";
@@ -436,7 +436,7 @@ mw.Subply = {
 		$j( embedPlayer ).bind( 'playerReady', function(){
 
 			currentVideoUrl = embedPlayer.getSrc();
-			entryId = embedPlayer.kentryid;
+			entryId = embedPlayer.ventryid;
 
 			initializeByEntryId(entryId);
 		});

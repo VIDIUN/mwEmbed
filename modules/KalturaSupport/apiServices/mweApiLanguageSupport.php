@@ -19,7 +19,7 @@ class mweLanguageSupport {
 		$kMessages = $messages;
 
 		// sort language keys A-Z: 
-		ksort( $coreLanguageNames );
+		vsort( $coreLanguageNames );
 		$messageSupport = array();
 		// build support list array: 
 		foreach( $coreLanguageNames as $key => $name){
@@ -27,7 +27,7 @@ class mweLanguageSupport {
 			if( isset( $embedPlayerMessages[$key]) ){
 				$support = 'partial';
 			} 
-			if( isset( $kMessages[ $key ] ) ){
+			if( isset( $vMessages[ $key ] ) ){
 				$support = 'full';
 			}
 			$messageSupport[$key] = array( 

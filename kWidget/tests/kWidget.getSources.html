@@ -4,18 +4,18 @@
 	<script type="text/javascript" src="../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../docs/js/doc-bootstrap.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="../kWidget.getSources.js"></script>
+	<script src="../vWidget.getSources.js"></script>
 	<script>
 	// don't show qunit test links
-	window.isKalturaDocsIframe = true;
+	window.isVidiunDocsIframe = true;
 	</script>
 </head>
 <body>
-	<h3>Sample kWidget.getSources</h3>
-	This script enables you to generate stand alone video tags using kaltura entries. <br>
-	<i>Basic usage</i> of kWidget.getSources looks like this: 
+	<h3>Sample vWidget.getSources</h3>
+	This script enables you to generate stand alone video tags using vidiun entries. <br>
+	<i>Basic usage</i> of vWidget.getSources looks like this: 
 <pre class="prettyprint linenums">
-kWidget.getSources({<br/>		'partnerId': {partnerId},<br/>		'entryId': {entryId},<br/>		'callback': function( data ){<br/>			// data includes an array of sources that can easily be put into a video tag: <br/>			$vid = $('&lt;video /&gt;').attr({<br/>				'title' : data.name,<br/>				'poster' : data.poster + '/width/640',<br/>			})<br/>			for( var i=0; i &lt; data.sources.length; i++ ){<br/>				$vid.append(<br/>					$('&lt;source /&gt;').attr( data.sources[i] )<br/>				)<br/>			}<br/>			$('body').append( $vid )<br/>		})
+vWidget.getSources({<br/>		'partnerId': {partnerId},<br/>		'entryId': {entryId},<br/>		'callback': function( data ){<br/>			// data includes an array of sources that can easily be put into a video tag: <br/>			$vid = $('&lt;video /&gt;').attr({<br/>				'title' : data.name,<br/>				'poster' : data.poster + '/width/640',<br/>			})<br/>			for( var i=0; i &lt; data.sources.length; i++ ){<br/>				$vid.append(<br/>					$('&lt;source /&gt;').attr( data.sources[i] )<br/>				)<br/>			}<br/>			$('body').append( $vid )<br/>		})
 </pre>
 	partnerId : <input id="partnerId" type="text" value="243342"  style="width:100px;height:25px;">
 	 entryId: <input id="entryId" type="text" value="0_c0r624gh" style="width:100px;height:25px;"><br/>
@@ -49,7 +49,7 @@ kWidget.getSources({<br/>		'partnerId': {partnerId},<br/>		'entryId': {entryId},
 			if( parent && parent.sycnIframeContentHeight ){
 				parent.sycnIframeContentHeight();
 			}
-			kWidget.getSources({
+			vWidget.getSources({
 				'partnerId': $('#partnerId').val(),
 				'entryId': $('#entryId').val(),
 				'callback': function( data ){
