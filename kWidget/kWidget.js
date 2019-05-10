@@ -177,21 +177,21 @@
 			}
 
 			//Show non-production error by default, and allow overriding via flashvar
-			if (!mw.getConfig( "Kaltura.SupressNonProductionUrlsWarning", false )) {
+			if (!mw.getConfig( "Vidiun.SupressNonProductionUrlsWarning", false )) {
 				// Check if using staging server on non-staging site:
 				if (
-					// make sure this is Kaltura SaaS we are checking:
-					mw.getConfig("Kaltura.ServiceUrl").indexOf('kaltura.com') != -1
+					// make sure this is Vidiun SaaS we are checking:
+					mw.getConfig("Vidiun.ServiceUrl").indexOf('vidiun.com') != -1
 					&&
 						// check that the library is not on production
-					this.getPath().indexOf('i.kaltura.com') == -1
+					this.getPath().indexOf('i.vidiun.com') == -1
 					&&
-					this.getPath().indexOf('isec.kaltura.com') == -1
+					this.getPath().indexOf('isec.vidiun.com') == -1
 					&&
 						// check that we player is not on a staging site:
 					window.location.host != 'kgit.html5video.org'
 					&&
-					window.location.host != 'player.kaltura.com'
+					window.location.host != 'player.vidiun.com'
 					&&
 					window.location.host != 'localhost'
 				) {
@@ -294,20 +294,20 @@
 			if( this.widgetOriginalSettings[widgetId] ){
 				// TODO these settings may be a bit late for plugins config ( should be set earlier in build out )
 				// for now just null out settings and changeMedia:
-				player.kBind( 'kdpEmpty', function(){
+				player.vBind( 'vdpEmpty', function(){
 					player.sendNotification('changeMedia', {'entryId': _this.widgetOriginalSettings[widgetId].entry_id} );
 				} );
 				//player.sendNotification('changeMedia', {'entryId': this.widgetOriginalSettings[widgetId].entry_id} );
 			}
 
-			var kdpVersion = player.evaluate('{playerStatusProxy.kdpVersion}');
-			//set the load time attribute supported in version kdp 3.7.x
-			if (mw.versionIsAtLeast('v3.7.0', kdpVersion)) {
-				_this.log("Error: Unsuported KDP version");
+			var vdpVersion = player.evaluate('{playerStatusProxy.vdpVersion}');
+			//set the load time attribute supported in version vdp 3.7.x
+			if (mw.versionIsAtLeast('v3.7.0', vdpVersion)) {
+				_this.log("Error: Unsuported VDP version");
 			} else{
 				player.vBind('mediaReady', function () {
 					// Set the load time against startTime for the current playerId:
-					player.setKDPAttribute("playerStatusProxy", "loadTime",
+					player.setVDPAttribute("playerStatusProxy", "loadTime",
 							( (new Date().getTime() - _this.startTime[ widgetId ] ) / 1000.0 ).toFixed(2) );
 				});
 			}
@@ -435,7 +435,7 @@
 				// IE8 can't handle innerHTML on "read only" targets .
 			}
 
-			// Check for size override in kWidget embed call
+			// Check for size override in vWidget embed call
 			function checkSizeOverride(dim) {
 				if (settings[ dim ]) {
 					// check for non px value:
@@ -1035,9 +1035,9 @@
 				}
 				newDoc.close();
 
-				if(  _this.isInlineScriptRequest(settings) && kWidget.storage.isSupported()){
+				if(  _this.isInlineScriptRequest(settings) && vWidget.storage.isSupported()){
 					// if empty populate for the first time:
-					var iframeStoredData = kWidget.storage.getWithTTL( iframeRequest );
+					var iframeStoredData = vWidget.storage.getWithTTL( iframeRequest );
 					if (iframeStoredData == null) {
 						_this.cachePlayer(iframeRequest, iframeData.content, ttlUnixVal);
 					}
@@ -1051,7 +1051,7 @@
 			var _this = this;
 			window[cbName] = function (iframeData) {
 				// only populate the cache if request was an inlines scripts request.
-				if (_this.isInlineScriptRequest(settings) && kWidget.storage.isSupported()) {
+				if (_this.isInlineScriptRequest(settings) && vWidget.storage.isSupported()) {
 					_this.cachePlayer(iframeRequest, iframeData.content, ttlUnixVal);
 				}
 				// Clear out this global function
@@ -1117,12 +1117,12 @@
 
 		isStorageMaxLimitExceeded: function(settings){
 			//Get max cache entries form user settings or use default
-			var maxCacheEntries = settings.flashvars["Kaltura.MaxCacheEntries"]|| mw.getConfig("Kaltura.MaxCacheEntries");
-			var cacheEntriesCount = kWidget.storage.getEntriesCount();
+			var maxCacheEntries = settings.flashvars["Vidiun.MaxCacheEntries"]|| mw.getConfig("Vidiun.MaxCacheEntries");
+			var cacheEntriesCount = vWidget.storage.getEntriesCount();
 			return (cacheEntriesCount >= maxCacheEntries);
 		},
 		cachePlayer: function(key, value, ttl){
-			var success = kWidget.storage.setWithTTL(key, value, ttl);
+			var success = vWidget.storage.setWithTTL(key, value, ttl);
 			if (success) {
 				this.log("Player data stored in cache!");
 			} else {
@@ -1169,7 +1169,7 @@
 				var iframeRequest = this.getIframeRequest(widgetElm, requestSettings);
 
 				//Get TTL for cache entries form user settings or use default
-				var ttlUnixVal = settings.flashvars["Kaltura.CacheTTL"] || mw.getConfig("Kaltura.CacheTTL");
+				var ttlUnixVal = settings.flashvars["Vidiun.CacheTTL"] || mw.getConfig("Vidiun.CacheTTL");
 
 				//Prepare an iframe content injection hook
 				this.createContentInjectCallback(cbName, iframe, iframeRequest, requestSettings, ttlUnixVal);
@@ -1180,8 +1180,8 @@
 				} else {
 					// try to get payload from localStorage cache
 					var iframeData = null;
-					if (kWidget.storage.isSupported()) {
-						iframeData = kWidget.storage.getWithTTL(iframeRequest);
+					if (vWidget.storage.isSupported()) {
+						iframeData = vWidget.storage.getWithTTL(iframeRequest);
 					}
 					//If iframe content is in cache then load it immediately and update from server for next time
 					if (!mw.getConfig('debug') && iframeData && iframeData != "null") {
@@ -1195,8 +1195,8 @@
 						this.createContentUpdateCallback(cbName, iframeRequest, requestSettings, ttlUnixVal);
 					}
 					//Enforce the max storage entries setting to avoid over populating the localStorage
-					if (kWidget.storage.isSupported() && this.isStorageMaxLimitExceeded(settings)) {
-						kWidget.storage.clearNS();
+					if (vWidget.storage.isSupported() && this.isStorageMaxLimitExceeded(settings)) {
+						vWidget.storage.clearNS();
 					}
 					// Do a normal async content inject/update request:
 					this.requestPlayer(iframeRequest, widgetElm, targetId, cbName, requestSettings);
@@ -1218,7 +1218,7 @@
 			}
 			return cbName;
 		},
-		// TODO does this need to be part of the kWidget library?
+		// TODO does this need to be part of the vWidget library?
 		resizeOvelayByHolderSize: function (overlaySize, parentSize, ratio) {
 			var overlayRatio = overlaySize.width / overlaySize.height;
 
@@ -1374,16 +1374,16 @@
 		// retruns only the runtime config
 		getRuntimeSettings: function( settings ){
 			var runtimeSettings = {};
-			var allowedVars = mw.getConfig('Kaltura.AllowedVars');
+			var allowedVars = mw.getConfig('Vidiun.AllowedVars');
 			allowedVars = allowedVars.split(",");
 
-			var allowedVarsKeyPartials = mw.getConfig('Kaltura.AllowedVarsKeyPartials');
+			var allowedVarsKeyPartials = mw.getConfig('Vidiun.AllowedVarsKeyPartials');
 			allowedVarsKeyPartials = allowedVarsKeyPartials.split(",");
 
-			var allowedPluginVars = mw.getConfig('Kaltura.AllowedPluginVars');
+			var allowedPluginVars = mw.getConfig('Vidiun.AllowedPluginVars');
 			allowedPluginVars = allowedPluginVars.split(",");
 
-			var allowedPluginVarsValPartials = mw.getConfig('Kaltura.AllowedPluginVarsValPartials');
+			var allowedPluginVarsValPartials = mw.getConfig('Vidiun.AllowedPluginVarsValPartials');
 			allowedPluginVarsValPartials = allowedPluginVarsValPartials.split(",");
 
 			for( var settingsKey in settings ){
@@ -1448,7 +1448,7 @@
 		 * Build the iframe request from supplied settings:
 		 */
 		getIframeRequest: function (elm, settings) {
-			// Get the base set of kaltura params ( entry_id, uiconf_id etc )
+			// Get the base set of vidiun params ( entry_id, uiconf_id etc )
 			var iframeRequest = this.embedSettingsToUrl( settings );
 
 			// Add the player id:

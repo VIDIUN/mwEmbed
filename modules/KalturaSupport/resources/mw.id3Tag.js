@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'id3Tag', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'id3Tag', mw.VBasePlugin.extend({
 
         defaultConfig: {
             updateTimeIntervalSec: 1 // 1 second interval for update live time between id3 tags events (as for now we get id3 tag each 8 seconds)

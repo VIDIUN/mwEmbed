@@ -7,9 +7,9 @@
         $(".videoHolder").attr("aria-live", "polite");
         return this.init(embedPlayer);
     };
-    if (!(mw.KIVQScreenTemplate.prototype = {
+    if (!(mw.VIVQScreenTemplate.prototype = {
 
-            bindPostfix: '.KIVQScreenTemplate',
+            bindPostfix: '.VIVQScreenTemplate',
             init: function (embedPlayer) {
                 var _this = this;
                 this.destroy();

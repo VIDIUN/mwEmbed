@@ -200,7 +200,7 @@
             embedPlayer.bindHelper('onCloseFullScreen'+_this.KIVQModule.bindPostfix, function() {
                 _this.inFullScreen = false;
                 if (!_this.isScreenVisible()) {
-                    _this.KIVQModule.showQuizOnScrubber();
+                    _this.VIVQModule.showQuizOnScrubber();
                 }
             });
             embedPlayer.bindHelper( 'preShowScreen'+_this.KIVQModule.bindPostfix, function( event, screenName ){
@@ -383,7 +383,7 @@
             }
             $("<div>"+ gM('mwe-quiz-hint') +"</div>").prependTo(".header-container").addClass(className)
                 .on('click', function () {
-                    _this.KIVQScreenTemplate.tmplHint();
+                    _this.VIVQScreenTemplate.tmplHint();
                     $(".header-container").addClass('close-button')
                         .on('click', function () {
                             _this.ssSetCurrentQuestion(questionNr);
@@ -407,10 +407,10 @@
             var _this = this;
             $("<div>"+ gM('mwe-quiz-why') +"</div>").prependTo(".header-container").addClass('hint-why-box')
                 .on('click', function () {
-                    _this.KIVQScreenTemplate.tmplWhy();
+                    _this.VIVQScreenTemplate.tmplWhy();
                     $(".header-container").addClass('close-button')
                         .on('click', function () {
-                            _this.KIVQScreenTemplate.tmplReviewAnswer();
+                            _this.VIVQScreenTemplate.tmplReviewAnswer();
                             _this.ssReviewAnswer(questionNr);
                         });
                     $(".hint-container").append($.cpObject.cpArray[questionNr].explanation);
@@ -433,7 +433,7 @@
         ssSetCurrentQuestion: function (questionNr) {
             var _this = this,cPo = $.cpObject.cpArray[questionNr];
             _this.ivqShowScreen();
-            _this.KIVQScreenTemplate.tmplQuestion();
+            _this.VIVQScreenTemplate.tmplQuestion();
 
             if ($.cpObject.cpArray[questionNr].hintText){
                 _this.ssDisplayHint(questionNr)
@@ -599,7 +599,7 @@
             var _this = this;
             _this.KIVQModule.reviewMode = true;
             _this.ivqShowScreen();
-            _this.KIVQScreenTemplate.tmplAllCompleted();
+            _this.VIVQScreenTemplate.tmplAllCompleted();
 
             $(".title-text").html(gM('mwe-quiz-completed'));
             $(".sub-text").html(gM('mwe-quiz-sub-text'));
@@ -629,7 +629,7 @@
             var _this = this,cpArray = $.cpObject.cpArray;
             // TODO - pass this to IVQ module 
             _this.ivqShowScreen();
-            _this.KIVQScreenTemplate.tmplSubmitted();
+            _this.VIVQScreenTemplate.tmplSubmitted();
 
             $(".title-text").html(gM('mwe-quiz-Submitted'));
 
@@ -1001,7 +1001,7 @@
             }
             if (_this.KIVQModule.reviewMode) {
                 $(".ftr-left").append ($('<span>   ' +  gM('mwe-quiz-review').toUpperCase()
-                + ' ' + gM('mwe-quiz-question') + ' ' + this.KIVQModule.i2q(questionNr)
+                + ' ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
                 + '/' + $.cpObject.cpArray.length + '</span>'));
 
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
@@ -1111,7 +1111,7 @@
 
             $(document).off( 'click', '.quizDone-cont' )
                 .on('click', '.quizDone-cont', function () {
-                    _this.KIVQModule.quizEndScenario();
+                    _this.VIVQModule.quizEndScenario();
                 });
             $('.quizDone-cont').attr({
                 'tabindex': 20,
