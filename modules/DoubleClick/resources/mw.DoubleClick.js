@@ -164,7 +164,7 @@
 				this.handleCuePoints();
 			}
 			if (( mw.isIE8() || mw.isIE9() || mw.isEdge() || _this.leadWithFlash ) && (mw.supportsFlash())) {
-				mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
+				mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
 				_this.isChromeless = true;
 				_this.prevSlotType = 'none';
 				_this.embedPlayer.bindHelper('playerReady' + _this.bindPostfix, function() {
@@ -550,7 +550,7 @@
 
 			// due to IMA removal of custom playback on Android devices, we must get a user gesture for each new entry in order to show prerolls. Preventing auto play after change media in such cases.
 			if ( !_this.isNativeSDK && _this.embedPlayer.playlist && mw.isMobileDevice() && mw.isAndroid() ){
-				_this.embedPlayer.setKalturaConfig( 'playlistAPI', 'autoPlay',false );
+				_this.embedPlayer.setVidiunConfig( 'playlistAPI', 'autoPlay',false );
 				_this.embedPlayer.autoplay = false;
 
 				_this.embedPlayer.bindHelper('prePlayAction', function (event, prePlay) {
@@ -822,7 +822,7 @@
 			adTagUrl = _this.addAdRequestParams( adTagUrl );
 
 			// Update the local lastRequestedAdTagUrl for debug and audits
-			this.embedPlayer.setKDPAttribute( this.pluginName, 'requestedAdTagUrl', adTagUrl );
+			this.embedPlayer.setVDPAttribute( this.pluginName, 'requestedAdTagUrl', adTagUrl );
 
 			// Create ad request object.
 			var adsRequest = {};

@@ -1,6 +1,6 @@
 @startuml
 
-(*) --> wait for 'KalturaSupport_CuePointsReady' event
+(*) --> wait for 'VidiunSupport_CuePointsReady' event
 note left: (function 'init')
 --> "add cue points from 'embedPlayer.rawCuePoints'\nto 'midCuePointsArray'"
 note left
@@ -28,7 +28,7 @@ note left: function 'updateCuePoints'
 --> merge into 'cuePoints' and 'midCuePointsArray' arrays
 note left: function 'updateCuePoints'
 
---> raise 'KalturaSupport_CuePointsUpdated' event with total of updates
+--> raise 'VidiunSupport_CuePointsUpdated' event with total of updates
 }
 --> (*)
 else

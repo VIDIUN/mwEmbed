@@ -108,12 +108,12 @@
             });
         } else {
             drmSources = sources.filter(function (source) {
-                var nativeSdkDRMTypes = window.kNativeSdk && window.kNativeSdk.drmFormats;
+                var nativeSdkDRMTypes = window.vNativeSdk && window.vNativeSdk.drmFormats;
                 return $.inArray(source.mimeType, nativeSdkDRMTypes) >= 0;
             });
             
             // Additional check for iOS, to select FairPlay or WidevineClassic.
-            if (kWidget.isIOS()) {
+            if (vWidget.isIOS()) {
                 var fpsIndex = drmSources.findIndex(function(src) {return src.mimeType === "application/vnd.apple.mpegurl"});
                 var wvmIndex = drmSources.findIndex(function(src) {return src.mimeType === "video/wvm"});
                 if (fpsIndex >= 0) {

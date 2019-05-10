@@ -4,7 +4,7 @@
 ( function( mw, $ ) {
 	"use strict";
 
-	mw.PluginManager.add( 'kAnalony' , mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'vAnalony' , mw.VBasePlugin.extend( {
 		PlayerEvent:{
 			"IMPRESSION": 1,
 			"PLAY_REQUEST": 2,
@@ -100,8 +100,8 @@
 			var playerEvent = this.PlayerEvent;
 			this.embedPlayer.bindHelper( 'playerReady' , function () {
 				_this.resetPlayerflags();
-		        if ( _this.kalturaContextData && _this.kalturaContextData.flavorAssets && _this.kalturaContextData.flavorAssets.length === 1 ){
-			        _this.currentBitRate = _this.kalturaContextData.flavorAssets[0].bitrate;
+		        if ( _this.vidiunContextData && _this.vidiunContextData.flavorAssets && _this.vidiunContextData.flavorAssets.length === 1 ){
+			        _this.currentBitRate = _this.vidiunContextData.flavorAssets[0].bitrate;
 		        }
 				_this.sendAnalytics(playerEvent.IMPRESSION);
 			});
@@ -326,7 +326,7 @@
 			var _this = this;
 			var playerEvent = this.PlayerEvent;
 			_this.startTime = null;
-			_this.kClient = mw.kApiGetPartnerClient( _this.embedPlayer.kwidgetid );
+			_this.vClient = mw.vApiGetPartnerClient( _this.embedPlayer.vwidgetid );
 			_this.monitorIntervalObj.cancel = false;
 			if ( _this.firstPlay ){
 				_this.sendAnalytics(playerEvent.VIEW);
@@ -343,7 +343,7 @@
 		sendAnalytics : function(eventType, additionalData){
 			var _this = this;
 			this.calculateBuffer(true);
-			this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+			this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 			if ( this.embedPlayer.isMulticast && $.isFunction( this.embedPlayer.getMulticastBitrate ) ) {
 				this.currentBitRate = this.embedPlayer.getMulticastBitrate();
 			}
@@ -360,8 +360,8 @@
 			}
 
 			var statsEvent = {
-				'entryId'           : this.embedPlayer.kentryid,
-				'partnerId'         : this.embedPlayer.kpartnerid,
+				'entryId'           : this.embedPlayer.ventryid,
+				'partnerId'         : this.embedPlayer.vpartnerid,
 				'eventType'         : eventType,
 				'sessionId'         : this.embedPlayer.evaluate('{configProxy.sessionId}'),
 				'eventIndex'        : this.eventIndex,
@@ -371,21 +371,21 @@
 				'referrer'          : encodeURIComponent( mw.getConfig('EmbedPlayer.IframeParentUrl') ),
 				'deliveryType'      : this.embedPlayer.streamerType,
 				'sessionStartTime'  : this.startTime,
-				'uiConfId'          : this.embedPlayer.kuiconfid,
+				'uiConfId'          : this.embedPlayer.vuiconfid,
 				'clientVer'         : mw.getConfig("version"),
 				'position'          : position,
 				'playbackType'      : playbackType
 			};
 
-			// add ks if available
-			var ks = this.kClient.getKs();
-			if (ks){
-				statsEvent["ks"] = ks;
+			// add vs if available
+			var vs = this.vClient.getVs();
+			if (vs){
+				statsEvent["vs"] = vs;
 			}
 
 			// add preferred bitrate if defined by the user
-			if ( this.embedPlayer.getRawKalturaConfig('mediaProxy') && this.embedPlayer.getRawKalturaConfig('mediaProxy').preferedFlavorBR ){
-				statsEvent["expectedQuality"] = this.embedPlayer.getRawKalturaConfig('mediaProxy').preferedFlavorBR;
+			if ( this.embedPlayer.getRawVidiunConfig('mediaProxy') && this.embedPlayer.getRawVidiunConfig('mediaProxy').preferedFlavorBR ){
+				statsEvent["expectedQuality"] = this.embedPlayer.getRawVidiunConfig('mediaProxy').preferedFlavorBR;
 			}
 
 			// add specific events data
@@ -414,7 +414,7 @@
 			});
 			this.eventIndex += 1;
 			this.embedPlayer.triggerHelper( 'analyticsEvent' , statsEvent);
-			this.kClient.doRequest( eventRequest, function(data){
+			this.vClient.doRequest( eventRequest, function(data){
 				try {
 					if (!_this.startTime ) {
 						_this.startTime = data;

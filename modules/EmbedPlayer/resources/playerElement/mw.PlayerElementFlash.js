@@ -141,7 +141,7 @@
             if( this.detectFlashIntervalLoops === 0 ){
                 if ( !this.flashDetected ) {
                     mw.log("PlayerElementFlash::detectFlash::failed to detecting Flash Player");
-                    failCallback(); //trigger fail callback -> goes to the EmbeadPlayerKplayer in order to displayAlert with ks-FLASH-BLOCKED message
+                    failCallback(); //trigger fail callback -> goes to the EmbeadPlayerVplayer in order to displayAlert with vs-FLASH-BLOCKED message
                 }
                 this.cleanInterval(this.detectFlashInterval); //stop trying to detect Flash
             }

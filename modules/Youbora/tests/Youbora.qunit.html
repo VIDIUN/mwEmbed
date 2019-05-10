@@ -20,7 +20,7 @@
 
 	<body>
 		<h2> Youbora Media Analytics </h2>
-		<div id="kaltura_player" style="width:470px;height:300px"></div>
+		<div id="vidiun_player" style="width:470px;height:300px"></div>
         <br/><button id="changeMedia">Change Media</button><br/><br/>
 
 		<script>
@@ -39,7 +39,7 @@
 				'readyCallback': function(){
 					$('#changeMedia').click(function(){
                         $('#analyticsLog').text('');
-						$('#kaltura_player')[0].sendNotification( 'changeMedia', { 'entryId':'0_swup5zao' } );
+						$('#vidiun_player')[0].sendNotification( 'changeMedia', { 'entryId':'0_swup5zao' } );
 					});
 				}
 			});
