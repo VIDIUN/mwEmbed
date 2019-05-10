@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Access Control Preview embed level vs</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+function jsVidiunPlayerTest( videoId ){
+	module( "Access Control Preview, embed level vs" );
+	
+	var vdp = $('#' + videoId)[0];
+	
+	asyncTest("Playback full content", 1, function(){
+		window['onDoSeek'] = function(){
+			vdp.sendNotification( 'doPlay' );
+
+			testDone = false;
+			window.checkTestDone = function(){
+				if( vdp.evaluate('{video.player.currentTime}') > 11 ){
+					testDone = true;
+					vdp.removeJsListener('playerUpdatePlayhead', 'checkTestDone' );
+					ok( vdp.evaluate('{video.player.currentTime}') > 11, 'Playing content past 11 seconds');
+					vdp.sendNotification('doPause');
+					// done will all tests
+					start();
+				}
+			};
+			vdp.addJsListener('playerUpdatePlayhead', 'checkTestDone' );
+			setTimeout( function(){
+				if( !testDone ){
+					// test seek timed out:
+					ok( false, "Could not seek and play past 11" );
+				}
+			}, 9000);
+			
+		};
+		
+		window['onFreePreviewEnd'] = function(){
+			ok( false, "Recived free preview end event on vs content");
+		}
+		vdp.addJsListener( 'freePreviewEnd', 'onFreePreviewEnd' );
+		vdp.addJsListener('doSeek', 'onDoSeek' );
+		
+	});
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> Access Control Preview embed level vs </h2>
+View source code of sample <a href="https://github.com/vidiun/mwEmbed/blob/master/modules/VidiunSupport/apiServices/mweApiVSTest.php">VS service</a><br>
+<br />
+<div id="playerTarget" style="width:400px;height:330px;"> loading ... </div>
+<script>
+	$.getJSON( '../../../services.php?service=VSTest&entry_id=0_mjbelixh&wid=_243342', function( vsJSON ){
+		if( ! vsJSON || ! vsJSON.vs ){
+			$('#playerTarget').text( 'error getting vs');
+			return ;
+		}
+		vWidget.embed( 'playerTarget', {
+			'wid' : '_243342',
+			'uiconf_id' : '8145862',
+			'entry_id' : '0_mjbelixh',
+			'flashvars':{
+				'vs' : vsJSON.vs,
+				'disableAlerts': true,
+				'loadThumbnailWithVs': true
+			},
+			'readyCallback': function( playerId ){
+				var vdp = $('#' + playerId )[0];
+				// if testing start playback:
+				if( window.QUnit ){
+					vdp.vBind('mediaReady', function(){
+						vdp.sendNotification( 'doSeek', 9 );
+					})
+				}
+			}
+		});
+	});
+</script>
+<h3>Example getting VS via service and used in embed code:</h3>
+<pre class="prettyprint linenums">
+// for example vs service API call see: 
+// https://github.com/vidiun/mwEmbed/blob/master/modules/VidiunSupport/apiServices/mweApiVSTest.php
+$.getJSON( 'YOUR_ENTITLEMENT_CHECK_SERVICE__&entry_id=1_20x0ca3l&wid=_243342', function( vsJSON ){
+	if( ! vsJSON || ! vsJSON.vs ){
+		$('#playerTarget').text( 'You may not have permission to view this content');
+		return ;
+	}
+	vWidget.embed( 'playerTarget', {
+		'wid' : '_243342',
+		'uiconf_id' : '8145862',
+		'entry_id' : '0_mjbelixh',
+		'flashvars':{
+			'vs' : vsJSON.vs
+		}
+	});
+});
+</pre>
+<h3> Example of same player without VS provided</h3>
+<div id="playerTargetNoVs" style="width:400px;height:330px;"> loading ... </div>
+<script>
+	$.getJSON( '../../../services.php?service=VSTest&entry_id=1_20x0ca3l&wid=_243342', function( vsJSON ){
+		if( ! vsJSON || ! vsJSON.vs ){
+			$('#playerTarget').text( 'error getting vs');
+			return ;
+		}
+		vWidget.embed( 'playerTargetNoVs', {
+			'wid' : '_243342',
+			'uiconf_id' : '8145862',
+			'entry_id' : '0_mjbelixh'
+		});
+	});
+</script>
+
+</body>
+</html>
