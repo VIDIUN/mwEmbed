@@ -49,7 +49,7 @@
 	if(!kontiki.kui) kontiki.kui = {};
 
 	//URLs to the various assets we'll need.	
-	var AGENT_FLASH_LOADER_URL = kWidget.getPath() +'kWidget/onPagePlugins/kontiki/kontikiagentflashloader.swf';
+	var AGENT_FLASH_LOADER_URL = vWidget.getPath() +'vWidget/onPagePlugins/kontiki/kontikiagentflashloader.swf';
 
 	// global callback and agent reference needed for flash loader
 	var gKontikiCallback;
@@ -396,8 +396,8 @@
 	}
 
 	function setKontikiFlavorTags() {
-		if ( kplayer && gKontikiAgentData !== undefined ) {
-			var sources = kplayer.getSourcesByTags ( 'kontiki' );
+		if ( vplayer && gKontikiAgentData !== undefined ) {
+			var sources = vplayer.getSourcesByTags ( 'kontiki' );
 			//if kontiki flavors are available, select them
 			if ( sources && sources.length ) {
 				mw.log('Kontiki source was found, setting flavorTags to "kontiki"');

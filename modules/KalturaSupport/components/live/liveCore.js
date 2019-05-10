@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'liveCore', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'liveCore', mw.VBasePlugin.extend({
 
 		firstPlay : false,
 		/**
@@ -50,7 +50,7 @@
 			this.extendApi();
 		},
 		/**
-		 * Extend JS API to match the KDP
+		 * Extend JS API to match the VDP
 		 */
 		extendApi: function() {
 			var _this = this;
@@ -405,7 +405,7 @@
 
 			var service = 'liveStream';
 			//type liveChannel
-			if ( embedPlayer.kalturaPlayerMetaData && embedPlayer.kalturaPlayerMetaData.type == 8 ) {
+			if ( embedPlayer.vidiunPlayerMetaData && embedPlayer.vidiunPlayerMetaData.type == 8 ) {
 				service = 'liveChannel';
 			}
 			var protocol = 'hls';
@@ -438,11 +438,11 @@
 			} );
 		},
 
-		getKalturaClient: function() {
-			if( ! this.kClient ) {
-				this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+		getVidiunClient: function() {
+			if( ! this.vClient ) {
+				this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 			}
-			return this.kClient;
+			return this.vClient;
 		},
 
 		log: function( msg ) {

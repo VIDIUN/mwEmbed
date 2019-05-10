@@ -1064,7 +1064,7 @@ class ResourceLoader {
 		$query += $extraQuery;
 
 		// Make queries uniform in order
-		ksort( $query );
+		vsort( $query );
 		return $query;
 	}
 }

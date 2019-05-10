@@ -1,22 +1,22 @@
 /*********************************************
-* A minimal wrapper for kaltura server api
+* A minimal wrapper for vidiun server api
 * 
 * Supports static requests,
-* Auto includes kWidget for userKS queries ( where admin ks is not provided )
+* Auto includes vWidget for userVS queries ( where admin vs is not provided )
 * Makes use of defined: 
-* 	'Kaltura.ServiceUrl', 'http://cdnapi.kaltura.com' );
+* 	'Vidiun.ServiceUrl', 'http://cdnapi.vidiun.com' );
 * 		&&
-*	'Kaltura.ServiceBase'
+*	'Vidiun.ServiceBase'
 **********************************************/
-(function( kWidget ){ "use strict"
-if( !kWidget ){
-	kWidget = window.kWidget = {};
+(function( vWidget ){ "use strict"
+if( !vWidget ){
+	vWidget = window.vWidget = {};
 }
-kWidget.api = function( options ){
+vWidget.api = function( options ){
 	return this.init( options );
 };
-kWidget.api.prototype = {
-	ks: null,
+vWidget.api.prototype = {
+	vs: null,
 	// the default api request method
 	// will dictate if the CDN can cache on a per url basis
 	type: 'auto',
@@ -25,7 +25,7 @@ kWidget.api.prototype = {
 	baseParam: {
 		'apiVersion' : '3.1',
 		'expiry' : '86400',
-		'clientTag': 'kwidget:v' + window[ 'MWEMBED_VERSION' ],
+		'clientTag': 'vwidget:v' + window[ 'MWEMBED_VERSION' ],
 		'format' : 9, // 9 = JSONP format
 		'ignoreNull' : 1
 	},
@@ -39,23 +39,23 @@ kWidget.api.prototype = {
 		}
 		// check for globals if not set, use mw.getConfig
 		if( ! this.serviceUrl ){
-			this.serviceUrl = mw.getConfig( 'Kaltura.ServiceUrl' );
+			this.serviceUrl = mw.getConfig( 'Vidiun.ServiceUrl' );
 		}
 		if( ! this.serviceBase ){
-			this.serviceBase = mw.getConfig( 'Kaltura.ServiceBase' ); 
+			this.serviceBase = mw.getConfig( 'Vidiun.ServiceBase' ); 
 		}
 		if( ! this.statsServiceUrl ){
-			this.statsServiceUrl = mw.getConfig( 'Kaltura.StatsServiceUrl' );
+			this.statsServiceUrl = mw.getConfig( 'Vidiun.StatsServiceUrl' );
 		}
 		if( typeof this.disableCache == 'undefined' ){
-			this.disableCache = mw.getConfig('Kaltura.NoApiCache');
+			this.disableCache = mw.getConfig('Vidiun.NoApiCache');
 		}
 	},
-	setKs: function( ks ){
-		this.ks = ks;
+	setVs: function( vs ){
+		this.vs = vs;
 	},
-	getKs: function(){
-		return this.ks;
+	getVs: function(){
+		return this.vs;
 	},
 	forceKs:function(wid,callback,errorCallback){
 		if( this.getKs() ){
@@ -98,7 +98,7 @@ kWidget.api.prototype = {
 		if( requestObject['service'] != 'user' && !skipKS ){
 			kWidget.extend( param, this.handleKsServiceRequest( requestObject ) );
 		} else {
-			kWidget.extend( param, requestObject );
+			vWidget.extend( param, requestObject );
 		}
 
 		// set format to JSON ( Access-Control-Allow-Origin:* )
@@ -145,7 +145,7 @@ kWidget.api.prototype = {
 		};
 
 		// Run the request
-		// NOTE kaltura api server should return: 
+		// NOTE vidiun api server should return: 
 		// Access-Control-Allow-Origin:* most browsers support this. 
 		// ( old browsers with large api payloads are not supported )
 		var userAgent = navigator.userAgent.toLowerCase();
@@ -166,7 +166,7 @@ kWidget.api.prototype = {
 			// Add kalsig to query:
 			param[ 'kalsig' ] = kalSig;
 			// build the request url: 
-			var requestURL = _this.getApiUrl( serviceType ) + '&' + kWidget.param( param );
+			var requestURL = _this.getApiUrl( serviceType ) + '&' + vWidget.param( param );
 			// try with callback:
 			globalCBName = 'kapi_' + kalSig;
 			if( window[ globalCBName ] ){
@@ -183,13 +183,13 @@ kWidget.api.prototype = {
 				}catch( e ){}
 			}
 			requestURL+= '&callback=' + globalCBName;
-			kWidget.appendScriptUrl( requestURL );
+			vWidget.appendScriptUrl( requestURL );
 		}
 	},
 	xhrRequest: function( url, param, callback ){
 		// get the request method:
 		var requestMethod = this.type == "auto" ? 
-				( ( kWidget.param( param ).length > 2000 ) ? 'xhrPost' : 'xhrGet' ) :
+				( ( vWidget.param( param ).length > 2000 ) ? 'xhrPost' : 'xhrGet' ) :
 				( (  this.type == "GET" )? 'xhrGet': 'xhrPost' );
 		// do the respective request
 		this[ requestMethod ](  url, param, callback );
@@ -209,7 +209,7 @@ kWidget.api.prototype = {
 				callback( _this.parseResponse( xmlhttp.responseText ) );
 			}
 		}
-		xmlhttp.open("GET", url + '&' + kWidget.param( param ), true);
+		xmlhttp.open("GET", url + '&' + vWidget.param( param ), true);
 		xmlhttp.send();
 	},
 	/**
@@ -225,16 +225,16 @@ kWidget.api.prototype = {
 		}
 		xmlhttp.open("POST", url, true);
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xmlhttp.send( kWidget.param( param ) );
+		xmlhttp.send( vWidget.param( param ) );
 	},
-	handleKsServiceRequest: function( requestObject ){
+	handleVsServiceRequest: function( requestObject ){
 		var param = {};
-		// put the ks into the params request if set
-		if( requestObject[ 'ks' ] ){
-			this.ks = requestObject['ks'];
+		// put the vs into the params request if set
+		if( requestObject[ 'vs' ] ){
+			this.vs = requestObject['vs'];
 		}
-		// Convert into a multi-request if no session is set ( ks will be added below )
-		if( !requestObject.length && !this.getKs() ){
+		// Convert into a multi-request if no session is set ( vs will be added below )
+		if( !requestObject.length && !this.getVs() ){
 			requestObject = [ requestObject ];
 		}
 		// Check that we have a session established if not make it part of our multi-part request
@@ -242,10 +242,10 @@ kWidget.api.prototype = {
 			param['service'] = 'multirequest';
 			param['action'] = 'null';
 
-			// Kaltura api starts with index 1 for some strange reason.
+			// Vidiun api starts with index 1 for some strange reason.
 			var mulitRequestIndex = 1;
-			// check if we should add a user ks
-			if( !this.getKs() ){
+			// check if we should add a user vs
+			if( !this.getVs() ){
 				param[ mulitRequestIndex + ':service' ] = 'session';
 				param[ mulitRequestIndex + ':action' ] = 'startWidgetSession';
 				param[ mulitRequestIndex + ':widgetId'] = this.wid;
@@ -255,8 +255,8 @@ kWidget.api.prototype = {
 
 			for( var i = 0 ; i < requestObject.length; i++ ){
 				var requestInx = mulitRequestIndex + i;
-				// If ks was null always add back ref to ks:
-				param[ requestInx + ':ks'] = ( this.getKs() ) ? this.getKs() : '{1:result:ks}';
+				// If vs was null always add back ref to vs:
+				param[ requestInx + ':vs'] = ( this.getVs() ) ? this.getVs() : '{1:result:vs}';
 				
 				// MultiRequest pre-process each param with inx:param
 				for( var paramKey in requestObject[i] ){
@@ -273,7 +273,7 @@ kWidget.api.prototype = {
 			}
 		} else {
 			param = requestObject;
-			param['ks'] = this.getKs();
+			param['vs'] = this.getVs();
 		}
 		return param;
 	},
@@ -313,4 +313,4 @@ kWidget.api.prototype = {
 	}
 }
 
-})( window.kWidget );
+})( window.vWidget );

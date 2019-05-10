@@ -3,7 +3,7 @@
  */
 ( function( mw ) { "use strict";
 
-mw.addKalturaPlugin( ["mw.Comscore"], 'comscore', function( embedPlayer, callback ){
+mw.addVidiunPlugin( ["mw.Comscore"], 'comscore', function( embedPlayer, callback ){
 	new mw.Comscore( embedPlayer, callback );
 });
 

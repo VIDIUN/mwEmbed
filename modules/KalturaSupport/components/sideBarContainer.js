@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'sideBarContainer', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'sideBarContainer', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			'hover': true,

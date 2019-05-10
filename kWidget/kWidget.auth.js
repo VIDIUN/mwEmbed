@@ -1,14 +1,14 @@
 /**
-* A simple authentication api for consuming KS from kaltura authenticated api provider
+* A simple authentication api for consuming VS from vidiun authenticated api provider
 */
-(function(kWidget){ "use strict"
-	if( !kWidget ){
+(function(vWidget){ "use strict"
+	if( !vWidget ){
 		return ;
 	}
-	var kAuthentication = function(){
+	var vAuthentication = function(){
 		this.init();
 	}
-	kAuthentication.prototype = {
+	vAuthentication.prototype = {
 		// callbacks to auth object events go here: 
 		authCallbackList : [],
 		
@@ -18,16 +18,16 @@
 		init: function(){
 			var _this = this;
 			// setup vars:
-			this.authPageUrl = kWidget.getPath() + 'auth/authPage.php';
-			this.authOrgin = kWidget.getPath().split('/').slice(0,3).join('/');
+			this.authPageUrl = vWidget.getPath() + 'auth/authPage.php';
+			this.authOrgin = vWidget.getPath().split('/').slice(0,3).join('/');
 			
 			// Await postMessage response:
 			if( !window.addEventListener ){
-				kWidget.log( "kWidget.auth, requires postMessage browser support" );
+				vWidget.log( "vWidget.auth, requires postMessage browser support" );
 				return ;
 			}
 			window.addEventListener( "message", function( event ){
-				//console.log( "kWidget.auth: message: ", event.data );
+				//console.log( "vWidget.auth: message: ", event.data );
 				// check for correct event origin:
 				if( event.origin != _this.authOrgin ){
 					// error origin mismatch 
@@ -50,14 +50,14 @@
 			// added once document is ready ( all auth checks are async )
 			$(document).ready(function(){
 				$('body').append(
-					$( '<iframe style="width:0px;height:0px;border:none;overflow:hidden;" id="kwidget_auth_iframe">' )
+					$( '<iframe style="width:0px;height:0px;border:none;overflow:hidden;" id="vwidget_auth_iframe">' )
 					.attr('src', _this.authPageUrl )
 					.load( function(){
 						var _this = this;
 						// issue postMessage after .25 second to give a chance for the page to be ready.
 						setTimeout(function(){
 							//console.log( 'auth check: ' + $( _this )[0].contentWindow );
-							$( _this )[0].contentWindow.postMessage( 'kaltura-auth-check',  '*');
+							$( _this )[0].contentWindow.postMessage( 'vidiun-auth-check',  '*');
 						}, 250);
 					})
 				)
@@ -73,17 +73,17 @@
 		},
 		getWidget: function( targetId, callback ){
 			var _this = this;
-			var loginText = "Login to Kaltura";
+			var loginText = "Login to Vidiun";
 			var denyDomainText = "Please re-login";
 			var $userIcon = $('<div>')
-			.addClass( 'kaltura-user-icon' )
+			.addClass( 'vidiun-user-icon' )
 			.css({
 				'display': 'inline',
 				'float': 'left',
 				'margin-right': 5,
 				'width': 33,
 				'height': 24,
-				'background-image': 'url(\'' + kWidget.getPath() + 'auth/kaltura-user-icon-gray.png\')',
+				'background-image': 'url(\'' + vWidget.getPath() + 'auth/vidiun-user-icon-gray.png\')',
 				'background-repeat':'no-repeat',
 				'background-position':'bottom left'
 			});
@@ -97,7 +97,7 @@
 					.text( loginText )
 				).click( function(){
 					var authPage = (window.open( _this.authPageUrl +'?ui=1' , 
-						'kalturaauth',
+						'vidiunauth',
 						 "menubar=no,location=yes,resizable=no,scrollbars=no,status=no" +
 						 "left=50,top=100,width=400,height=250" 
 					));
@@ -106,7 +106,7 @@
 			this.addAuthCallback( function( userData ){
 				if( userData.code ){
 					var $icon =$('#' + targetId ).find('a div');
-					var grayIconUrl = 'url(\'' + kWidget.getPath() + 'auth/kaltura-user-icon-gray.png\')';
+					var grayIconUrl = 'url(\'' + vWidget.getPath() + 'auth/vidiun-user-icon-gray.png\')';
 					if( grayIconUrl != $icon.css('background-image') ){
 						$icon.css({
 							'background-image': grayIconUrl
@@ -126,11 +126,11 @@
 					return ;
 				}
 				// check for data:
-				// update the icon to "kaltura light" 
+				// update the icon to "vidiun light" 
 				$('#' + targetId ).find('a').empty()
 				.append(
 					$userIcon.css({
-						'background-image': 'url(\'' + kWidget.getPath() + 'auth/kaltura-user-icon.png\')'
+						'background-image': 'url(\'' + vWidget.getPath() + 'auth/vidiun-user-icon.png\')'
 					}),
 					$('<span>').text( userData.fullName )
 				);
@@ -139,7 +139,7 @@
 		}
 	}
 	
-	// export the auth object into kWidget.auth:
-	kWidget.auth = new kAuthentication();
+	// export the auth object into vWidget.auth:
+	vWidget.auth = new vAuthentication();
 
-})( window.kWidget );
+})( window.vWidget );

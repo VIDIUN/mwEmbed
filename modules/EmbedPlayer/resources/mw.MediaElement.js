@@ -277,7 +277,7 @@ mw.MediaElement.prototype = {
 			// Check for device flags:
 			var desktopVdn, mobileVdn;
 			$.each( vndSources, function( inx, source) {
-				// Kaltura tags vdn sources with iphonenew
+				// Vidiun tags vdn sources with iphonenew
 				if( source.getFlavorId() && source.getFlavorId().toLowerCase() == 'iphonenew' ){
 					mobileVdn = source;
 				} else {
@@ -426,7 +426,7 @@ mw.MediaElement.prototype = {
 				&& (
 					player.library == 'Native'
 					||
-					player.library == 'Kplayer'
+					player.library == 'Vplayer'
 				)
 			) {
 				if( source ){

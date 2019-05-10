@@ -1,8 +1,8 @@
-function kGoogleAnalytics ( options ){
+function vGoogleAnalytics ( options ){
 	this.init( options );
 	return this;
 };
-kGoogleAnalytics.prototype = {
+vGoogleAnalytics.prototype = {
 	// List of events to be tracked
 	eventTrackList: [],
 
@@ -13,7 +13,7 @@ kGoogleAnalytics.prototype = {
 	playerElement: null,
 
 	// The category for all the tracking events.
-	trackingCategory: 'KalturaVideo',
+	trackingCategory: 'VidiunVideo',
 
 	// pageTracker object ( if set to null async tracking is used via _gaq.push calls )
 	googlePageTracker : null,
@@ -37,7 +37,7 @@ kGoogleAnalytics.prototype = {
 			// special case meta events:
 			'quartiles' // quartiles an event for every 1/4 the of the video played
 	],
-	// The full set of notifications for kdp3 ( validates event names )
+	// The full set of notifications for vdp3 ( validates event names )
 	validEventList :[
 			'quartiles',
 			'startUp',
@@ -67,8 +67,8 @@ kGoogleAnalytics.prototype = {
 			'doSeek',
 			'doIntelligentSeek',
 			'doSwitch',
-			'kdpReady',
-			'kdpEmpty',
+			'vdpReady',
+			'vdpEmpty',
 			'layoutReady',
 			'playerStateChange',
 			'playerReady',
@@ -175,7 +175,7 @@ kGoogleAnalytics.prototype = {
 	},
 	/**
 	 * Handles the mapping for special case eventNames that
-	 * do n't match their corresponding kaltura listener binding name
+	 * do n't match their corresponding vidiun listener binding name
 	 */
 	getEventNameBinding: function( eventName ){
 		switch( eventName ){

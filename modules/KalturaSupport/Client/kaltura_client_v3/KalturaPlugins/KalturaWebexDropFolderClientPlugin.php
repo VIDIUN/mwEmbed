@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,20 +28,20 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaDropFolderClientPlugin.php");
-require_once(dirname(__FILE__) . "/KalturaMetadataClientPlugin.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
+require_once(dirname(__FILE__) . "/VidiunDropFolderClientPlugin.php");
+require_once(dirname(__FILE__) . "/VidiunMetadataClientPlugin.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderFileOrderBy
+class VidiunWebexDropFolderFileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const FILE_NAME_ASC = "+fileName";
@@ -62,10 +62,10 @@ class KalturaWebexDropFolderFileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderOrderBy
+class VidiunWebexDropFolderOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const ID_ASC = "+id";
@@ -78,10 +78,10 @@ class KalturaWebexDropFolderOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolder extends KalturaDropFolder
+class VidiunWebexDropFolder extends VidiunDropFolder
 {
 	/**
 	 * 
@@ -143,10 +143,10 @@ class KalturaWebexDropFolder extends KalturaDropFolder
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderFile extends KalturaDropFolderFile
+class VidiunWebexDropFolderFile extends VidiunDropFolderFile
 {
 	/**
 	 * 
@@ -187,10 +187,10 @@ class KalturaWebexDropFolderFile extends KalturaDropFolderFile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderContentProcessorJobData extends KalturaDropFolderContentProcessorJobData
+class VidiunWebexDropFolderContentProcessorJobData extends VidiunDropFolderContentProcessorJobData
 {
 	/**
 	 * 
@@ -217,62 +217,62 @@ class KalturaWebexDropFolderContentProcessorJobData extends KalturaDropFolderCon
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWebexDropFolderBaseFilter extends KalturaDropFolderFilter
+abstract class VidiunWebexDropFolderBaseFilter extends VidiunDropFolderFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWebexDropFolderFileBaseFilter extends KalturaDropFolderFileFilter
+abstract class VidiunWebexDropFolderFileBaseFilter extends VidiunDropFolderFileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderFileFilter extends KalturaWebexDropFolderFileBaseFilter
+class VidiunWebexDropFolderFileFilter extends VidiunWebexDropFolderFileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderFilter extends KalturaWebexDropFolderBaseFilter
+class VidiunWebexDropFolderFilter extends VidiunWebexDropFolderBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebexDropFolderClientPlugin extends KalturaClientPlugin
+class VidiunWebexDropFolderClientPlugin extends VidiunClientPlugin
 {
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * @return KalturaWebexDropFolderClientPlugin
+	 * @return VidiunWebexDropFolderClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaWebexDropFolderClientPlugin($client);
+		return new VidiunWebexDropFolderClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

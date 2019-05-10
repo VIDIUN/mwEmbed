@@ -1,6 +1,6 @@
 ( function( mw, $ ) { "use strict";
 
-	mw.addKalturaPlugin( ['mw.AttracTV'], 'AttracTV', function( embedPlayer, callback){
+	mw.addVidiunPlugin( ['mw.AttracTV'], 'AttracTV', function( embedPlayer, callback){
 		// do user agent checks {
 		if( true ){
 			embedPlayer.AttracTV = new mw.AttracTV( embedPlayer, callback );

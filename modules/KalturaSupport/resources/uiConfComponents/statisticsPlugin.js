@@ -2,11 +2,11 @@
  * <Plugin id="statistics" width="0%" height="0%" includeInLayout="false"/>
  *
  *	@dependencies
- *		mw.KAnalytics
+ *		mw.VAnalytics
  */
 ( function( mw, $ ) { "use strict";
-	mw.addKalturaPlugin(  "statistics", function( embedPlayer, callback){
-		mw.addKAnalytics( embedPlayer );
+	mw.addVidiunPlugin(  "statistics", function( embedPlayer, callback){
+		mw.addVAnalytics( embedPlayer );
 		callback();
 	});
 

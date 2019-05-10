@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  */
 (function (mw, $) {
 	"use strict";
@@ -618,7 +618,7 @@
 		} ,
 
 		/**
-		 * on Pause callback from the kaltura flash player calls parent_pause to
+		 * on Pause callback from the vidiun flash player calls parent_pause to
 		 * update the interface
 		 */
 		onPause: function () {
@@ -626,7 +626,7 @@
 		} ,
 
 		/**
-		 * onPlay function callback from the kaltura flash player directly call the
+		 * onPlay function callback from the vidiun flash player directly call the
 		 * parent_play
 		 */
 		onPlay: function () {

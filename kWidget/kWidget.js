@@ -1,5 +1,5 @@
 /**
- * KWidget library provided embed layer services to html5 and flash players, as well as client side abstraction for some kaltura services.
+ * VWidget library provided embed layer services to html5 and flash players, as well as client side abstraction for some vidiun services.
  */
 (function ($) {
 // Use strict ECMAScript 5

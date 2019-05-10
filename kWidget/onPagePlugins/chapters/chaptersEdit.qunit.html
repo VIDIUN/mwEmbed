@@ -8,16 +8,16 @@
 <script type="text/javascript">	
 
 //Enable uiconf js which includes external resources ( not needed if resources are defined in uiConf )
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Chapters edit test" );
-	var kdp = $('#' + videoId )[0];
+	var vdp = $('#' + videoId )[0];
 	var $iframe = $('#' + videoId + '_ifp').contents();
 	
 	asyncTest( "Check for chapters container", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			// look for description box id: 
 			//ok( $( '#descriptionBox_' + videoId ).length, "Found descriptionBox div" );
 			start();
@@ -27,20 +27,20 @@ function jsKalturaPlayerTest( videoId ){
 }
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Chapters Edit </h2>
 <div>
-	<div id="kaltura_player" style="width:400px;height:330px;float:left"></div>
-	<div id="k-chapterProp" style="float:left;width:370px"></div>
+	<div id="vidiun_player" style="width:400px;height:330px;float:left"></div>
+	<div id="v-chapterProp" style="float:left;width:370px"></div>
 	<div style="clear:both"></div>
-	<div id="k-chapterTimeline" style="width:765px"></div>
+	<div id="v-chapterTimeline" style="width:765px"></div>
 </div>
 <script>
-kWidget.featureConfig({
-	'targetId' : 'kaltura_player',
+vWidget.featureConfig({
+	'targetId' : 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '12905712',
 	'entry_id' : '1_w4fqa380',
@@ -50,15 +50,15 @@ kWidget.featureConfig({
 			'ks' : null, // should be set via settings
 			
 			'customDataFields': 'desc,thumbUrl',
-			'editPropId': 'k-chapterProp',
-			'editTimelineId': 'k-chapterTimeline',
+			'editPropId': 'v-chapterProp',
+			'editTimelineId': 'v-chapterTimeline',
 			'tags' : 'chaptering',
 
 			'requiresJQuery' : true,
 			'onPageJs1': "{onPagePluginPath}/chapters/chaptersEdit.js",
 			'onPageCss1': "{onPagePluginPath}/chapters/chaptersEdit.css",
 			// get the shared cuepoint data controller: 
-			'onPageJs2': "{onPagePluginPath}/chapters/kWidget.cuePointsDataController.js"
+			'onPageJs2': "{onPagePluginPath}/chapters/vWidget.cuePointsDataController.js"
 		}
 	}
 });

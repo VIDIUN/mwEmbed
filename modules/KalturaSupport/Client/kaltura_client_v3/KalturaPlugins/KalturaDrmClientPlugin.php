@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,28 +28,28 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfileStatus
+class VidiunDrmProfileStatus
 {
 	const ACTIVE = 1;
 	const DELETED = 2;
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfileOrderBy
+class VidiunDrmProfileOrderBy
 {
 	const ID_ASC = "+id";
 	const NAME_ASC = "+name";
@@ -58,19 +58,19 @@ class KalturaDrmProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProviderType
+class VidiunDrmProviderType
 {
 	const WIDEVINE = "widevine.WIDEVINE";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfile extends KalturaObjectBase
+class VidiunDrmProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -105,14 +105,14 @@ class KalturaDrmProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaDrmProviderType
+	 * @var VidiunDrmProviderType
 	 */
 	public $provider = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaDrmProfileStatus
+	 * @var VidiunDrmProfileStatus
 	 */
 	public $status = null;
 
@@ -150,15 +150,15 @@ class KalturaDrmProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfileListResponse extends KalturaObjectBase
+class VidiunDrmProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDrmProfile
+	 * @var array of VidiunDrmProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -175,10 +175,10 @@ class KalturaDrmProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDrmProfileBaseFilter extends KalturaFilter
+abstract class VidiunDrmProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -218,7 +218,7 @@ abstract class KalturaDrmProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDrmProviderType
+	 * @var VidiunDrmProviderType
 	 */
 	public $providerEqual = null;
 
@@ -232,7 +232,7 @@ abstract class KalturaDrmProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaDrmProfileStatus
+	 * @var VidiunDrmProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -247,22 +247,22 @@ abstract class KalturaDrmProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfileFilter extends KalturaDrmProfileBaseFilter
+class VidiunDrmProfileFilter extends VidiunDrmProfileBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmProfileService extends KalturaServiceBase
+class VidiunDrmProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -270,150 +270,150 @@ class KalturaDrmProfileService extends KalturaServiceBase
 	/**
 	 * Allows you to add a new DrmProfile object
 	 * 
-	 * @param KalturaDrmProfile $drmProfile 
-	 * @return KalturaDrmProfile
+	 * @param VidiunDrmProfile $drmProfile 
+	 * @return VidiunDrmProfile
 	 */
-	function add(KalturaDrmProfile $drmProfile)
+	function add(VidiunDrmProfile $drmProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "drmProfile", $drmProfile->toParams());
-		$this->client->queueServiceActionCall("drm_drmprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "drmProfile", $drmProfile->toParams());
+		$this->client->queueServiceActionCall("drm_drmprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfile");
 		return $resultObject;
 	}
 
 	/**
-	 * Retrieve a KalturaDrmProfile object by ID
+	 * Retrieve a VidiunDrmProfile object by ID
 	 * 
 	 * @param int $drmProfileId 
-	 * @return KalturaDrmProfile
+	 * @return VidiunDrmProfile
 	 */
 	function get($drmProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "drmProfileId", $drmProfileId);
-		$this->client->queueServiceActionCall("drm_drmprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "drmProfileId", $drmProfileId);
+		$this->client->queueServiceActionCall("drm_drmprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfile");
 		return $resultObject;
 	}
 
 	/**
-	 * Update an existing KalturaDrmProfile object
+	 * Update an existing VidiunDrmProfile object
 	 * 
 	 * @param int $drmProfileId 
-	 * @param KalturaDrmProfile $drmProfile Id
-	 * @return KalturaDrmProfile
+	 * @param VidiunDrmProfile $drmProfile Id
+	 * @return VidiunDrmProfile
 	 */
-	function update($drmProfileId, KalturaDrmProfile $drmProfile)
+	function update($drmProfileId, VidiunDrmProfile $drmProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "drmProfileId", $drmProfileId);
-		$this->client->addParam($kparams, "drmProfile", $drmProfile->toParams());
-		$this->client->queueServiceActionCall("drm_drmprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "drmProfileId", $drmProfileId);
+		$this->client->addParam($vparams, "drmProfile", $drmProfile->toParams());
+		$this->client->queueServiceActionCall("drm_drmprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfile");
 		return $resultObject;
 	}
 
 	/**
-	 * Mark the KalturaDrmProfile object as deleted
+	 * Mark the VidiunDrmProfile object as deleted
 	 * 
 	 * @param int $drmProfileId 
-	 * @return KalturaDrmProfile
+	 * @return VidiunDrmProfile
 	 */
 	function delete($drmProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "drmProfileId", $drmProfileId);
-		$this->client->queueServiceActionCall("drm_drmprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "drmProfileId", $drmProfileId);
+		$this->client->queueServiceActionCall("drm_drmprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfile");
 		return $resultObject;
 	}
 
 	/**
-	 * List KalturaDrmProfile objects
+	 * List VidiunDrmProfile objects
 	 * 
-	 * @param KalturaDrmProfileFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaDrmProfileListResponse
+	 * @param VidiunDrmProfileFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunDrmProfileListResponse
 	 */
-	function listAction(KalturaDrmProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunDrmProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("drm_drmprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("drm_drmprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfileListResponse");
 		return $resultObject;
 	}
 
 	/**
-	 * Retrieve a KalturaDrmProfile object by provider, if no specific profile defined return default profile
+	 * Retrieve a VidiunDrmProfile object by provider, if no specific profile defined return default profile
 	 * 
 	 * @param string $provider 
-	 * @return KalturaDrmProfile
+	 * @return VidiunDrmProfile
 	 */
 	function getByProvider($provider)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "provider", $provider);
-		$this->client->queueServiceActionCall("drm_drmprofile", "getByProvider", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "provider", $provider);
+		$this->client->queueServiceActionCall("drm_drmprofile", "getByProvider", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaDrmProfile");
+		$this->client->validateObjectType($resultObject, "VidiunDrmProfile");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDrmClientPlugin extends KalturaClientPlugin
+class VidiunDrmClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaDrmProfileService
+	 * @var VidiunDrmProfileService
 	 */
 	public $drmProfile = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->drmProfile = new KalturaDrmProfileService($client);
+		$this->drmProfile = new VidiunDrmProfileService($client);
 	}
 
 	/**
-	 * @return KalturaDrmClientPlugin
+	 * @return VidiunDrmClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaDrmClientPlugin($client);
+		return new VidiunDrmClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

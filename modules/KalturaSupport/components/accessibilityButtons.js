@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'accessibilityButtons', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'accessibilityButtons', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',

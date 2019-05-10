@@ -2,18 +2,18 @@
  * Stand alone source grabber.
  */
 
-if( ! window.kWidget ){
-	window.kWidget = {};
+if( ! window.vWidget ){
+	window.vWidget = {};
 }
-( function( kWidget ) {
+( function( vWidget ) {
 	// Add master exported function:
-	kWidget.getSources = function( settings ){
-		var sourceApi = new kWidget.api( { 'wid' : '_' + settings.partnerId } );
+	vWidget.getSources = function( settings ){
+		var sourceApi = new vWidget.api( { 'wid' : '_' + settings.partnerId } );
 		sourceApi.doRequest([
 		{
 			'contextDataParams' : {
 				'referrer' : document.URL,
-				'objectType' : 'KalturaEntryContextDataParams',
+				'objectType' : 'VidiunEntryContextDataParams',
 				'flavorTags': 'all'
 			},
 			'service' : 'baseentry',
@@ -26,7 +26,7 @@ if( ! window.kWidget ){
 			'version' : '-1',
 			'entryId' : settings.entryId
 		}], function( result ){ // API result
-			var ks = sourceApi.ks; 
+			var vs = sourceApi.vs; 
 			var ipadAdaptiveFlavors = [];
 			var iphoneAdaptiveFlavors = [];
 			var deviceSources = [];
@@ -34,9 +34,9 @@ if( ! window.kWidget ){
 			// Set the service url based on protocol type
 			var serviceUrl;
 			if( protocol == 'https' ){
-				serviceUrl = 'https://www.kaltura.com';
+				serviceUrl = 'https://www.vidiun.com';
 			} else {
-				serviceUrl = 'http://cdnbakmi.kaltura.com';
+				serviceUrl = 'http://cdnbakmi.vidiun.com';
 			}
 			var baseUrl = serviceUrl + '/p/' + settings.partnerId +
 					'/sp/' + settings.partnerId + '00/playManifest';
@@ -109,7 +109,7 @@ if( ! window.kWidget ){
 				if( asset.fileExt == 'webm'
 					||
 					asset.tags.indexOf('webm') != -1
-					|| // Kaltura transcodes give: 'matroska'
+					|| // Vidiun transcodes give: 'matroska'
 					( asset.containerFormat && asset.containerFormat.toLowerCase() == 'matroska' )
 					|| // some ingestion systems give "webm"
 					( asset.containerFormat && asset.containerFormat.toLowerCase() == 'webm' )
@@ -171,4 +171,4 @@ if( ! window.kWidget ){
 			}
 		});
 	};
-} )( window.kWidget );
+} )( window.vWidget );

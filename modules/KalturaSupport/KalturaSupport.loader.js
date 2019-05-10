@@ -1,7 +1,7 @@
 /**
- * kSupport module
+ * vSupport module
  *
- * Add support for kaltura api calls
+ * Add support for vidiun api calls
  *
  * TODO this loader is a little too large portions should be refactored into separate files
  *  this refactor can happen post rl_17 resource loader support
@@ -9,7 +9,7 @@
 // Scope everything in "mw" ( keeps the global namespace clean )
 ( function( mw, $ ) { "use strict";
 
-	// Add Kaltura specific attributes to the embedPlayer
+	// Add Vidiun specific attributes to the embedPlayer
 	$( mw ).bind( 'MwEmbedSupportReady', function(){
 		mw.mergeConfig( 'EmbedPlayer.Attributes', {
 			'kentryid' : null, // mediaProxy.entry.id
@@ -31,29 +31,29 @@
 		]);
 	});
 	
-	mw.kalturaPluginWrapper = function( callback ){
+	mw.vidiunPluginWrapper = function( callback ){
 		$(mw).bind('ProcessEmbedPlayers', callback );
 	};
 	
 	/**
 	 * Base utility functions
 	 */
-	mw.addKalturaConfCheck = function( callback ){
+	mw.addVidiunConfCheck = function( callback ){
 		$( mw ).bind( 'EmbedPlayerNewPlayer', function(event, embedPlayer){
-			$( embedPlayer ).bind( 'Kaltura_CheckConfig', function( event, embedPlayer, checkUiCallback ){
+			$( embedPlayer ).bind( 'Vidiun_CheckConfig', function( event, embedPlayer, checkUiCallback ){
 				callback( embedPlayer, checkUiCallback );
 			})
 		} );
 	};
 
 	/**
-	 * Abstracts the base kaltura plugin initialization
+	 * Abstracts the base vidiun plugin initialization
 	 *
 	 * @param depencies {Array} optional set of dependencies ( can also be set via php )
 	 * @param pluginName {String} the unique plugin name per the uiConf / uiVars
 	 * @param enabledCallback {function} the function called for a initialized plugin
 	 */
-	mw.addKalturaPlugin = function( dependencies, pluginName, initCallback ){
+	mw.addVidiunPlugin = function( dependencies, pluginName, initCallback ){
 		// Handle optional dependencies
 		if( ! $.isArray( dependencies ) ){
 			initCallback = pluginName;
@@ -61,7 +61,7 @@
 			dependencies = null;
 		}
 
-		mw.addKalturaConfCheck( function( embedPlayer, callback ){
+		mw.addVidiunConfCheck( function( embedPlayer, callback ){
 			if( embedPlayer.isPluginEnabled( pluginName ) ){
 				if( $.isArray( dependencies ) ){
 					mw.load(dependencies, function(){
@@ -76,29 +76,29 @@
 		});
 	}
 
-	// Make sure kWidget is part of EmbedPlayer dependencies if we have a uiConf id
+	// Make sure vWidget is part of EmbedPlayer dependencies if we have a uiConf id
 	$( mw ).bind( 'EmbedPlayerUpdateDependencies', function( event, playerElement, dependencySet ){
-		if( mw.getConfig( 'KalturaSupport.DepModuleList') ){
-			$.merge( dependencySet,  mw.getConfig( 'KalturaSupport.DepModuleList') );
+		if( mw.getConfig( 'VidiunSupport.DepModuleList') ){
+			$.merge( dependencySet,  mw.getConfig( 'VidiunSupport.DepModuleList') );
 		}
-		if( $( playerElement ).attr( 'kwidgetid' ) && $( playerElement ).attr( 'kuiconfid' ) ){
-			dependencySet.push( 'mw.KWidgetSupport' );
+		if( $( playerElement ).attr( 'vwidgetid' ) && $( playerElement ).attr( 'vuiconfid' ) ){
+			dependencySet.push( 'mw.VWidgetSupport' );
 		}
 	});
 
 	// Make sure flashvars and player config are ready as soon as we create a new player
 	$( mw ).bind( 'EmbedPlayerNewPlayer', function(event, embedPlayer){
-		if( mw.getConfig( 'KalturaSupport.PlayerConfig' ) ){
-			embedPlayer.playerConfig =  mw.getConfig( 'KalturaSupport.PlayerConfig' );
-			mw.setConfig('KalturaSupport.PlayerConfig', null );
+		if( mw.getConfig( 'VidiunSupport.PlayerConfig' ) ){
+			embedPlayer.playerConfig =  mw.getConfig( 'VidiunSupport.PlayerConfig' );
+			mw.setConfig('VidiunSupport.PlayerConfig', null );
 		}
-		// player config should be set before calling KalturaSupportNewPlayer
-		$( mw ).trigger( 'KalturaSupportNewPlayer',  [ embedPlayer ] );
+		// player config should be set before calling VidiunSupportNewPlayer
+		$( mw ).trigger( 'VidiunSupportNewPlayer',  [ embedPlayer ] );
 	});
 
-	// Set binding to disable "waitForMeta" for kaltura items ( We get size and length from api)
+	// Set binding to disable "waitForMeta" for vidiun items ( We get size and length from api)
 	$( mw ).bind( 'EmbedPlayerWaitForMetaCheck', function(even, playerElement ){
-		if( $( playerElement ).attr( 'kuiconfid') || $( playerElement ).attr( 'kentryid') ){
+		if( $( playerElement ).attr( 'vuiconfid') || $( playerElement ).attr( 'ventryid') ){
 			playerElement.waitForMeta = false;
 		}
 	});

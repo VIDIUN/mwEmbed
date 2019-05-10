@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailChangeXmlNodeType
+class VidiunAuditTrailChangeXmlNodeType
 {
 	const CHANGED = 1;
 	const ADDED = 2;
@@ -47,10 +47,10 @@ class KalturaAuditTrailChangeXmlNodeType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailContext
+class VidiunAuditTrailContext
 {
 	const CLIENT = -1;
 	const SCRIPT = 0;
@@ -59,10 +59,10 @@ class KalturaAuditTrailContext
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailFileSyncType
+class VidiunAuditTrailFileSyncType
 {
 	const FILE = 1;
 	const LINK = 2;
@@ -70,10 +70,10 @@ class KalturaAuditTrailFileSyncType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailStatus
+class VidiunAuditTrailStatus
 {
 	const PENDING = 1;
 	const READY = 2;
@@ -81,10 +81,10 @@ class KalturaAuditTrailStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailAction
+class VidiunAuditTrailAction
 {
 	const CHANGED = "CHANGED";
 	const CONTENT_VIEWED = "CONTENT_VIEWED";
@@ -98,15 +98,15 @@ class KalturaAuditTrailAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailObjectType
+class VidiunAuditTrailObjectType
 {
 	const BATCH_JOB = "BatchJob";
 	const EMAIL_INGESTION_PROFILE = "EmailIngestionProfile";
 	const FILE_SYNC = "FileSync";
-	const KSHOW_KUSER = "KshowKuser";
+	const VSHOW_VUSER = "VshowVuser";
 	const METADATA = "Metadata";
 	const METADATA_PROFILE = "MetadataProfile";
 	const PARTNER = "Partner";
@@ -122,8 +122,8 @@ class KalturaAuditTrailObjectType
 	const FLAVOR_PARAMS = "flavorParams";
 	const FLAVOR_PARAMS_CONVERSION_PROFILE = "flavorParamsConversionProfile";
 	const FLAVOR_PARAMS_OUTPUT = "flavorParamsOutput";
-	const KSHOW = "kshow";
-	const KUSER = "kuser";
+	const VSHOW = "vshow";
+	const VUSER = "vuser";
 	const MEDIA_INFO = "mediaInfo";
 	const MODERATION = "moderation";
 	const ROUGHCUT = "roughcutEntry";
@@ -136,10 +136,10 @@ class KalturaAuditTrailObjectType
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailOrderBy
+class VidiunAuditTrailOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const PARSED_AT_ASC = "+parsedAt";
@@ -148,19 +148,19 @@ class KalturaAuditTrailOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAuditTrailInfo extends KalturaObjectBase
+abstract class VidiunAuditTrailInfo extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrail extends KalturaObjectBase
+class VidiunAuditTrail extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -190,7 +190,7 @@ class KalturaAuditTrail extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailStatus
+	 * @var VidiunAuditTrailStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -198,7 +198,7 @@ class KalturaAuditTrail extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailObjectType
+	 * @var VidiunAuditTrailObjectType
 	 */
 	public $auditObjectType = null;
 
@@ -219,7 +219,7 @@ class KalturaAuditTrail extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailObjectType
+	 * @var VidiunAuditTrailObjectType
 	 */
 	public $relatedObjectType = null;
 
@@ -264,14 +264,14 @@ class KalturaAuditTrail extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailAction
+	 * @var VidiunAuditTrailAction
 	 */
 	public $action = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailInfo
+	 * @var VidiunAuditTrailInfo
 	 */
 	public $data;
 
@@ -281,12 +281,12 @@ class KalturaAuditTrail extends KalturaObjectBase
 	 * @var string
 	 * @readonly
 	 */
-	public $ks = null;
+	public $vs = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailContext
+	 * @var VidiunAuditTrailContext
 	 * @readonly
 	 */
 	public $context = null;
@@ -350,10 +350,10 @@ class KalturaAuditTrail extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailChangeItem extends KalturaObjectBase
+class VidiunAuditTrailChangeItem extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -380,15 +380,15 @@ class KalturaAuditTrailChangeItem extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailListResponse extends KalturaObjectBase
+class VidiunAuditTrailListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAuditTrail
+	 * @var array of VidiunAuditTrail
 	 * @readonly
 	 */
 	public $objects;
@@ -405,10 +405,10 @@ class KalturaAuditTrailListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
+abstract class VidiunAuditTrailBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -448,7 +448,7 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailStatus
+	 * @var VidiunAuditTrailStatus
 	 */
 	public $statusEqual = null;
 
@@ -462,7 +462,7 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailObjectType
+	 * @var VidiunAuditTrailObjectType
 	 */
 	public $auditObjectTypeEqual = null;
 
@@ -504,7 +504,7 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailObjectType
+	 * @var VidiunAuditTrailObjectType
 	 */
 	public $relatedObjectTypeEqual = null;
 
@@ -588,7 +588,7 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailAction
+	 * @var VidiunAuditTrailAction
 	 */
 	public $actionEqual = null;
 
@@ -604,12 +604,12 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 	 *
 	 * @var string
 	 */
-	public $ksEqual = null;
+	public $vsEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailContext
+	 * @var VidiunAuditTrailContext
 	 */
 	public $contextEqual = null;
 
@@ -673,15 +673,15 @@ abstract class KalturaAuditTrailBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailChangeInfo extends KalturaAuditTrailInfo
+class VidiunAuditTrailChangeInfo extends VidiunAuditTrailInfo
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAuditTrailChangeItem
+	 * @var array of VidiunAuditTrailChangeItem
 	 */
 	public $changedItems;
 
@@ -689,15 +689,15 @@ class KalturaAuditTrailChangeInfo extends KalturaAuditTrailInfo
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailChangeXmlNode extends KalturaAuditTrailChangeItem
+class VidiunAuditTrailChangeXmlNode extends VidiunAuditTrailChangeItem
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailChangeXmlNodeType
+	 * @var VidiunAuditTrailChangeXmlNodeType
 	 */
 	public $type = null;
 
@@ -705,10 +705,10 @@ class KalturaAuditTrailChangeXmlNode extends KalturaAuditTrailChangeItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailFileSyncCreateInfo extends KalturaAuditTrailInfo
+class VidiunAuditTrailFileSyncCreateInfo extends VidiunAuditTrailInfo
 {
 	/**
 	 * 
@@ -741,7 +741,7 @@ class KalturaAuditTrailFileSyncCreateInfo extends KalturaAuditTrailInfo
 	/**
 	 * 
 	 *
-	 * @var KalturaAuditTrailFileSyncType
+	 * @var VidiunAuditTrailFileSyncType
 	 */
 	public $fileType = null;
 
@@ -749,10 +749,10 @@ class KalturaAuditTrailFileSyncCreateInfo extends KalturaAuditTrailInfo
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailTextInfo extends KalturaAuditTrailInfo
+class VidiunAuditTrailTextInfo extends VidiunAuditTrailInfo
 {
 	/**
 	 * 
@@ -765,42 +765,42 @@ class KalturaAuditTrailTextInfo extends KalturaAuditTrailInfo
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailFilter extends KalturaAuditTrailBaseFilter
+class VidiunAuditTrailFilter extends VidiunAuditTrailBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditTrailService extends KalturaServiceBase
+class VidiunAuditTrailService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
 	/**
-	 * Allows you to add an audit trail object and audit trail content associated with Kaltura object
+	 * Allows you to add an audit trail object and audit trail content associated with Vidiun object
 	 * 
-	 * @param KalturaAuditTrail $auditTrail 
-	 * @return KalturaAuditTrail
+	 * @param VidiunAuditTrail $auditTrail 
+	 * @return VidiunAuditTrail
 	 */
-	function add(KalturaAuditTrail $auditTrail)
+	function add(VidiunAuditTrail $auditTrail)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "auditTrail", $auditTrail->toParams());
-		$this->client->queueServiceActionCall("audit_audittrail", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "auditTrail", $auditTrail->toParams());
+		$this->client->queueServiceActionCall("audit_audittrail", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAuditTrail");
+		$this->client->validateObjectType($resultObject, "VidiunAuditTrail");
 		return $resultObject;
 	}
 
@@ -808,71 +808,71 @@ class KalturaAuditTrailService extends KalturaServiceBase
 	 * Retrieve an audit trail object by id
 	 * 
 	 * @param int $id 
-	 * @return KalturaAuditTrail
+	 * @return VidiunAuditTrail
 	 */
 	function get($id)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "id", $id);
-		$this->client->queueServiceActionCall("audit_audittrail", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "id", $id);
+		$this->client->queueServiceActionCall("audit_audittrail", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAuditTrail");
+		$this->client->validateObjectType($resultObject, "VidiunAuditTrail");
 		return $resultObject;
 	}
 
 	/**
 	 * List audit trail objects by filter and pager
 	 * 
-	 * @param KalturaAuditTrailFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaAuditTrailListResponse
+	 * @param VidiunAuditTrailFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunAuditTrailListResponse
 	 */
-	function listAction(KalturaAuditTrailFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunAuditTrailFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("audit_audittrail", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("audit_audittrail", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaAuditTrailListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunAuditTrailListResponse");
 		return $resultObject;
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuditClientPlugin extends KalturaClientPlugin
+class VidiunAuditClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaAuditTrailService
+	 * @var VidiunAuditTrailService
 	 */
 	public $auditTrail = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->auditTrail = new KalturaAuditTrailService($client);
+		$this->auditTrail = new VidiunAuditTrailService($client);
 	}
 
 	/**
-	 * @return KalturaAuditClientPlugin
+	 * @return VidiunAuditClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaAuditClientPlugin($client);
+		return new VidiunAuditClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

@@ -33,13 +33,13 @@
 <body>
 	
 	<div id="container" class="cf">
-		back to <a href="http://player.kaltura.com/">player.kaltura.com</a>
+		back to <a href="http://player.vidiun.com/">player.vidiun.com</a>
 		<article>
 			<header>
 				<h2>
 					<img src="resources/rwd/images/example/header-logo.png" alt="Front" id="header-logo">
 				</h2> 
-				<h1>Responsive Web Design <span> with the Kaltura player</span></h1>
+				<h1>Responsive Web Design <span> with the Vidiun player</span></h1>
 			</header>
 			
 			<div id="main" role="main" class="cf">
@@ -60,15 +60,15 @@
 			<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 			<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 			<script>
-				mw.setConfig("KalturaSupport.LeadWithHTML5", true);
-				kWidget.embed({
+				mw.setConfig("VidiunSupport.LeadWithHTML5", true);
+				vWidget.embed({
 					'targetId': 'myVideoTarget',
 					'wid': '_243342',
 					'uiconf_id' : '12905712',
 					'entry_id' : '0_uka1msg4',
 					'readyCallback': function( playerId ){
 						if( console ) {
-							console.log( "kWidget player ready: " + playerId );
+							console.log( "vWidget player ready: " + playerId );
 						}
 					}
 				});

@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'download', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'download', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			align: "right",

@@ -7,20 +7,20 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 // Enable uiconf js which includes external resources 
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( playerId ){
+function jsVidiunPlayerTest( playerId ){
 	// Name this module
 	var myPluginName = "Video Details Block";
 	module(myPluginName);
-	var kdp = $('#' + playerId )[0];
+	var vdp = $('#' + playerId )[0];
 	
 	asyncTest( "Check for: "+myPluginName, function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			ok( $('#videoDetailsBlock-' + playerId).length, "Found the plugin's div!");
-			equal(kdp.evaluate('{mediaProxy.entry.name}'), $('#videoDetailsBlock-' + playerId + ' h1').text(), 'Entry name test passed');
-			equal(kdp.evaluate('{mediaProxy.entry.description}'), $('#videoDetailsBlock-' + playerId + ' p').text(), 'Entry description test passed');
-			var vidTags = kdp.evaluate('{mediaProxy.entry.tags}');
+			equal(vdp.evaluate('{mediaProxy.entry.name}'), $('#videoDetailsBlock-' + playerId + ' h1').text(), 'Entry name test passed');
+			equal(vdp.evaluate('{mediaProxy.entry.description}'), $('#videoDetailsBlock-' + playerId + ' p').text(), 'Entry description test passed');
+			var vidTags = vdp.evaluate('{mediaProxy.entry.tags}');
 			var tagsArr = vidTags ? vidTags.split(",") : [];
 			equal(tagsArr.length, $('#videoDetailsBlock-' + playerId + ' ul li').length, '# of rendered tags test passed');
 			start();
@@ -30,16 +30,16 @@ function jsKalturaPlayerTest( playerId ){
 }
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>VideoDetailsBlock Plugin Test</h2>
-<div id="kaltura_player" style="width:330px;height:216px;"></div>
+<div id="vidiun_player" style="width:330px;height:216px;"></div>
 <script>
-kWidget.featureConfig({
+vWidget.featureConfig({
 	'cache_st': 23,
-	'targetId' : 'kaltura_player',
+	'targetId' : 'vidiun_player',
 	'wid' : '_811441',
 	'uiconf_id' : 11824841,
 	'entry_id' : '1_3fxkoyn2',
@@ -54,7 +54,7 @@ kWidget.featureConfig({
 				//'targetDiv':'detailsBlockTarget', //detailsBlock will be loaded relative to the player, if this value is set, the block will be loaded in a div with that id
 				'showTransition':true,
 				'showTransitionDuration':600,
-				'path':"/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf", //this is for flash support
+				'path':"/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf", //this is for flash support
 				'relativeTo':'video', //this is for flash support
 				'position': 'before', //this is for flash support
 	 			'includeInLayout': false //this is for flash support

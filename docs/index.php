@@ -8,8 +8,8 @@
   <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Kaltura Player � Fastest, Most Flexible Online Video Player Toolkit, view feature test files that highlight kaltura player toolkit features.">
-	<meta name="author" content="kaltura">
+	<meta name="description" content="Vidiun Player � Fastest, Most Flexible Online Video Player Toolkit, view feature test files that highlight vidiun player toolkit features.">
+	<meta name="author" content="vidiun">
 
 	<?php if( $wgKalturaGoogleAnalyticsUA ){ ?>
 		<script type="text/javascript">
@@ -48,9 +48,9 @@
 	
 	<script>
 	// Output the exported configuration:
-	mw.setConfig( 'KalutraDocUseRewriteUrls', <?php echo $wgUseRewriteUrls ? 'true' : 'false' ?> );
-	// A configuration var for autodetecting kaltura docs context in child frames. 
-	mw.setConfig( "KalutraDocContext", true );
+	mw.setConfig( 'VidiunDocUseRewriteUrls', <?php echo $wgUseRewriteUrls ? 'true' : 'false' ?> );
+	// A configuration var for autodetecting vidiun docs context in child frames. 
+	mw.setConfig( "VidiunDocContext", true );
 	</script>
 	
 	
@@ -66,10 +66,10 @@
 	<script src="<?php echo $pathPrefix; ?>jquery/jquery.ba-hashchange.js"></script>
 	<script src="<?php echo $pathPrefix; ?>pagedown/showdown.js"></script>
 	
-	<title>Kaltura Player - Fast, Flexible, Video Player Toolkit - <?php echo $kdocPageTitle; ?></title>
+	<title>Vidiun Player - Fast, Flexible, Video Player Toolkit - <?php echo $vdocPageTitle; ?></title>
   </head>
 
-  <body class="kdoc">
+  <body class="vdoc">
 	<?php 
 		if( isset( $wgAdditionalDocsScriptInclude ) ){ 
 			echo $wgAdditionalDocsScriptInclude; 
@@ -78,7 +78,7 @@
 	<script> 
 	// make sure the body is at least as tall as the window:
 	$('body').css('min-height', $(window).height() - parseInt( $('body').css('padding-bottom') ) + 150 );
-	function kDocGetBasePath(){
+	function vDocGetBasePath(){
 		// if we are an index.php url return empty base path:
 		if( document.URL.indexOf('index.php') !== -1 ){
 			return '';
@@ -94,9 +94,9 @@
 	}
 	</script>
 	<?php include 'header.php' ?>
-	<div id="page-bg-gradient" class="page-bg-gradient <?php echo $kdocPageType ?>">
+	<div id="page-bg-gradient" class="page-bg-gradient <?php echo $vdocPageType ?>">
 		<?php 
-		if( $kdocPageType == 'featurepage' && $path != 'readme' 
+		if( $vdocPageType == 'featurepage' && $path != 'readme' 
 			&& isset( $featureList[ $pathParts[0] ] )
 			&& isset( $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ] )
 			&& isset( $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ]['testfiles'][ $pathParts[2] ] )
@@ -109,11 +109,11 @@
 		?>
 	</div>
 	<div class="container-fluid content-body">
-	  <div class="row-fluid kdoc-content <?php echo $kdocPageType ?>">
-	  	<div id="kdoc-navbarcontainer" class="span3">
+	  <div class="row-fluid vdoc-content <?php echo $vdocPageType ?>">
+	  	<div id="vdoc-navbarcontainer" class="span3">
 			<?php include "navbar.php"; ?>
 			<script>
-			$('#kdoc-navbar li').on( 'click', function(){
+			$('#vdoc-navbar li').on( 'click', function(){
 				var $curli = $( this );
 				// if a top level colapse others
 				if( $curli.hasClass('nav-category') ){
@@ -202,11 +202,11 @@
 					$('.nav-collapse .features' ).addClass('active');
 				}
 				
-				var $selected = $('#kdoc-navbarcontainer').find( "a[href='index.php?path=" + pathName + "']" );
+				var $selected = $('#vdoc-navbarcontainer').find( "a[href='index.php?path=" + pathName + "']" );
 				// update title: 
 				$( '#page-bg-gradient' ).empty();
 				
-				$('title').text( 'Kaltura Player - ' + pathName );
+				$('title').text( 'Vidiun Player - ' + pathName );
 				
 				if( pathName != 'main' && $selected.length ){
 					$( '#page-bg-gradient' ).append(
@@ -214,13 +214,13 @@
 							$('<span>').text(
 								$selected.parents('.nav-category').find('.link-category').text()
 							),
-							$('<i>').addClass('kdoc-blue-arrow'),
+							$('<i>').addClass('vdoc-blue-arrow'),
 							$selected.parent().parent().prev().text(),
-							$('<i>').addClass('kdoc-white-arrow')
+							$('<i>').addClass('vdoc-white-arrow')
 						)
 					)
 					// update the page title: 
-					$('title').text( 'Kaltura Player - ' + $selected.text() );
+					$('title').text( 'Vidiun Player - ' + $selected.text() );
 				}
 				// unset all active siblings of nav-category
 				$selected.parents('.nav-category').siblings().removeClass('active').find('.active').removeClass('active');
@@ -244,10 +244,10 @@
 				
 				// Check if we need to update contnet ( check page for history push state key );
 				if( document.getElementById( 'hps-' + pathName ) ){
-					if( console ) console.log( "KalturaDoc:: " + pathName + " already present " ) ;
+					if( console ) console.log( "VidiunDoc:: " + pathName + " already present " ) ;
 					return true;
 				}
-				var basePath = kDocGetBasePath();
+				var basePath = vDocGetBasePath();
 				var pageClassType = 'contentpage';
 				// Check for main menu hash changes: 
 				var setContent = function( content ){
@@ -337,7 +337,7 @@
 				if( !href ){
 					return ;
 				}
-				if( mw.getConfig( 'KalutraDocUseRewriteUrls' ) ){ 
+				if( mw.getConfig( 'VidiunDocUseRewriteUrls' ) ){ 
 					href = href.replace('index.php?path=', '' );
 				}
 				var title = $(this).attr( "title" );
@@ -349,8 +349,8 @@
 				} else {
 					if( history &&  history.pushState ){
 						var stateData = { 'key':  href };
-						history.pushState( stateData , 'Kaltura player docs -- ' + href, kDocGetBasePath() + href );
-						<?php if( $wgKalturaGoogleAnalyticsUA ){
+						history.pushState( stateData , 'Vidiun player docs -- ' + href, vDocGetBasePath() + href );
+						<?php if( $wgVidiunGoogleAnalyticsUA ){
 							?>
 						// include google log for pushState views:
 						_gaq.push(['_trackPageview', '/docs/' + href ]);
@@ -361,7 +361,7 @@
 						// return false;
 					}
 					// No history push state just go to the url: 
-					if( mw.getConfig('KalutraDocUseRewriteUrls') ){
+					if( mw.getConfig('VidiunDocUseRewriteUrls') ){
 						window.location.href = href;
 						return false;
 					}
@@ -381,20 +381,20 @@
 			<div class="social-links">
 				<h2>Stay in Touch</h2>
 				<ul>
-				<li><a class="twitter" title="twitter" href="https://twitter.com/@kaltura" target="_blank">Kaltura on Twitter</a></li>
-				<li><a class="chat" title="blog" href="http://blog.kaltura.org/" target="_blank">Kaltura Blog</a></li>
-				<li><a class="linkedin" title="linkedin" href="http://www.linkedin.com/groups/Open-Video-Kaltura-2179100" target="_blank">Kaltura on Linkedin</a></li>
-				<li><a class="facebook" title="facebook" href="http://www.facebook.com/pages/Kaltura/6839024691" target="_blank">Kaltura on Facebook</a></li>
+				<li><a class="twitter" title="twitter" href="https://twitter.com/@vidiun" target="_blank">Vidiun on Twitter</a></li>
+				<li><a class="chat" title="blog" href="http://blog.vidiun.org/" target="_blank">Vidiun Blog</a></li>
+				<li><a class="linkedin" title="linkedin" href="http://www.linkedin.com/groups/Open-Video-Vidiun-2179100" target="_blank">Vidiun on Linkedin</a></li>
+				<li><a class="facebook" title="facebook" href="http://www.facebook.com/pages/Vidiun/6839024691" target="_blank">Vidiun on Facebook</a></li>
 				</ul>
 			</div>
-			<p class="footer-top">Kaltura is the world's first Open Source Online Video Platform, providing both enterprise level commercial
-			software and services, fully supported and maintained by Kaltura, as well as free open-source community 
+			<p class="footer-top">Vidiun is the world's first Open Source Online Video Platform, providing both enterprise level commercial
+			software and services, fully supported and maintained by Vidiun, as well as free open-source community 
 			supported solutions, for video publishing, management, syndication and monetization.
 			</p>
 			<div class="divider"></div>
 			<div class="footer-bottom">
 				<img src="images/logo-footer.png">
-				This page reflects <a target="_new" href="http://html5video.org/wiki/Kaltura_HTML5_Release_Notes">Kaltura HTML5 v<?php 
+				This page reflects <a target="_new" href="http://html5video.org/wiki/Vidiun_HTML5_Release_Notes">Vidiun HTML5 v<?php 
 				 $_pos = strpos( $wgMwEmbedVersion, '__' );
 				 $prettyVersion = $wgMwEmbedVersion;
 				 if( $_pos !== false ){
@@ -402,10 +402,10 @@
 				 }
 				 echo $prettyVersion;
 				 ?></a>
-				Copyright © 2012 Kaltura Inc. All Rights Reserved. Designated trademarks and brands 
+				Copyright © 2012 Vidiun Inc. All Rights Reserved. Designated trademarks and brands 
 				are the property of their respective owners, Use of this web site constitutes acceptance 
-				of the <a href="http://corp.kaltura.com/terms-of-use">Terms of Use</a> and 
-				<a href="http://corp.kaltura.com/privacy-policy">Privacy Policy</a>, 
+				of the <a href="http://corp.vidiun.com/terms-of-use">Terms of Use</a> and 
+				<a href="http://corp.vidiun.com/privacy-policy">Privacy Policy</a>, 
 				User submitted media on this site is licensed under: <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">
 					Creative Commons Attribution-Share Alike 3.0 Unported License</a>.
 			</div>
