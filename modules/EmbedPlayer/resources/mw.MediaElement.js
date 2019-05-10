@@ -50,7 +50,7 @@ mw.MediaElement.prototype = {
 			var src = $( videoElement ).attr( "src" );
 			var found = false;
 			if (src){
-				$.each( mw.getConfig( 'Kaltura.BlackVideoSources' ), function(inx, sourceAttr ) {
+				$.each( mw.getConfig( 'Vidiun.BlackVideoSources' ), function(inx, sourceAttr ) {
 					if (src.indexOf(sourceAttr.src) !== -1){
 						found = true;
 						return false;

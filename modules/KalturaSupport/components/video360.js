@@ -1,7 +1,7 @@
 (function (mw, $, THREE) {
 	"use strict";
 
-	mw.PluginManager.add('video360', mw.KBasePlugin.extend({
+	mw.PluginManager.add('video360', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			manualControl:false,

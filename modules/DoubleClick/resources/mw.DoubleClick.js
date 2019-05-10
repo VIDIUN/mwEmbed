@@ -216,7 +216,7 @@
 			this.loadIma( function(){
 				_this.imaLoaded = true;
 				_this.embedPlayer.unbindHelper('prePlayAction' + _this.bindPostfix);
-				// Determine if we are in managed or kaltura point based mode.
+				// Determine if we are in managed or vidiun point based mode.
 				if ( _this.localizationCode ){
 					google.ima.settings.setLocale(_this.localizationCode);
 				}

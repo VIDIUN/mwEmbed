@@ -20,7 +20,7 @@ To set it up:
         <li>Accordingly, call the player <b>openFullScreen</b> or <b>closeFullScreen</b> notification in order to update its UI.</li>
     </ol>
 </p>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
     var isFullScreen = false;
 
@@ -56,24 +56,24 @@ To set it up:
 
     mw.setConfig('EmbedPlayer.ExternalFullScreenControl', true);
 
-    kWidget.embed({
-        'targetId': 'kaltura_player',
+    vWidget.embed({
+        'targetId': 'vidiun_player',
         'wid': '_243342',
         'uiconf_id' : '12905712',
         'entry_id' : '0_uka1msg4',
         'readyCallback': function(id){
-            var kdp = document.getElementById(id);
+            var vdp = document.getElementById(id);
 
-            kdp.kBind("onToggleFullscreen", function(){
+            vdp.vBind("onToggleFullscreen", function(){
 
                 if (!isFullScreen){
-                    enterFullscreen(kdp);
+                    enterFullscreen(vdp);
                 }else{
                     exitFullscreen();
                 }
 
                 var notification = isFullScreen ? "closeFullScreen" : "openFullScreen";
-                kdp.sendNotification(notification);
+                vdp.sendNotification(notification);
 
                 isFullScreen = !isFullScreen;
             });
@@ -117,24 +117,24 @@ Sample embed code:
 
     mw.setConfig('EmbedPlayer.ExternalFullScreenControl', true);
 
-    kWidget.embed({
-        'targetId': 'kaltura_player',
+    vWidget.embed({
+        'targetId': 'vidiun_player',
         'wid': '_243342',
         'uiconf_id' : '12905712',
         'entry_id' : '0_uka1msg4',
         'readyCallback': function(id){
-            var kdp = document.getElementById(id);
+            var vdp = document.getElementById(id);
 
-            kdp.kBind("onToggleFullscreen", function(){
+            vdp.vBind("onToggleFullscreen", function(){
 
                 if (!isFullScreen){
-                    enterFullscreen(kdp);
+                    enterFullscreen(vdp);
                 }else{
                     exitFullscreen();
                 }
 
                 var notification = isFullScreen ? "closeFullScreen" : "openFullScreen";
-                kdp.sendNotification(notification);
+                vdp.sendNotification(notification);
 
                 isFullScreen = !isFullScreen;
             });

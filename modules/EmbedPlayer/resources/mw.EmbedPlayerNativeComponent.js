@@ -161,7 +161,7 @@
 		},
 
         buildUdrmLicenseUri: function(mimeType) {
-            var licenseServer = mw.getConfig('Kaltura.UdrmServerURL');
+            var licenseServer = mw.getConfig('Vidiun.UdrmServerURL');
 			var licenseParams = this.mediaElement.getLicenseUriComponent();
             var licenseUri = null;
 
@@ -197,7 +197,7 @@
             
             var mimeType = selectedSource.mimeType;
 
-            var overrideDrmServerURL = mw.getConfig('Kaltura.overrideDrmServerURL');
+            var overrideDrmServerURL = mw.getConfig('Vidiun.overrideDrmServerURL');
             var licenseUri = overrideDrmServerURL ? overrideDrmServerURL : this.buildUdrmLicenseUri(mimeType);
             
             if (licenseUri) {
@@ -524,7 +524,7 @@
 				flavorsList.push(flavor);
 			});
 			setTimeout(function(){
-				_this.setKDPAttribute('sourceSelector', 'visible', true);
+				_this.setVDPAttribute('sourceSelector', 'visible', true);
 			},100);
 			this.onFlavorsListChanged(flavorsList);
 		},

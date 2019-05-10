@@ -21,7 +21,7 @@
 
                 var _this = this;
 
-                if ((_this.getPlayer().isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || _this.getPlayer().kCuePoints) {
+                if ((_this.getPlayer().isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || _this.getPlayer().vCuePoints) {
                     mw.log("dualScreen.externalControlManager.start(): creating cue point manager to monitor media cue points");
 
                     // handle cue points only if either live or we have cue points loaded from the server
