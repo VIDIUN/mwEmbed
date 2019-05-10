@@ -168,7 +168,7 @@ $.widget( "ui.slider", $.ui.mouse, {
 		}
 
 		var outerWidth = this.element.outerWidth();
-			//IE11 iframe fullscreen fix (KMS-4606)
+			//IE11 iframe fullscreen fix (VMS-4606)
 		if( !mw.getConfig('EmbedPlayer.IsFriendlyIframe') && window["resizeScrubberIE11"] === true ){
 			outerWidth =  $(window).width();
 		}

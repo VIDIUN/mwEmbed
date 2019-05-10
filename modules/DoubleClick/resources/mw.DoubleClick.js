@@ -178,7 +178,7 @@
 					mw.log("DoubleClick::chromeless volumeChanged: " + percent );
 					_this.embedPlayer.setPlayerElementVolume( percent );
 				});
-				_this.embedPlayer.bindHelper( 'Kaltura_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
+				_this.embedPlayer.bindHelper( 'Vidiun_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
 					if (notificationName === "doPause"){
 						_this.embedPlayer.getPlayerElement().pause();
 					}

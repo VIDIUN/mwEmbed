@@ -152,10 +152,10 @@
 						var cssLink = this.getConfig('cssFileName');
 						if (cssLink) {
 							//Scroller CSS
-							kWidget.appendCssUrl( kWidget.getPath() + this.getConfig("scrollerCssPath"), window.parent.document );
+							vWidget.appendCssUrl( vWidget.getPath() + this.getConfig("scrollerCssPath"), window.parent.document );
 							//Plugin CSS
-							cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : kWidget.getPath() + cssLink; // support external CSS links
-							kWidget.appendCssUrl( cssLink, window.parent.document );
+							cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : vWidget.getPath() + cssLink; // support external CSS links
+							vWidget.appendCssUrl( cssLink, window.parent.document );
 						} else {
 							mw.log( "Error: "+ this.pluginName +" could not find CSS link" );
 						}
