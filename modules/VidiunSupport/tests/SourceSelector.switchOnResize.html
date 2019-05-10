@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Source Selection Switch On Resize</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2>Source Selection Switch On Resize</h2>
+Demonstrate switching sources as player changes sizes. 
+<br />
+<div id="vidiun_player" style="width:400px;height:240px;"></div>
+<div id="sizes">Change player size: </div>
+
+<script>
+	var sizes = [ 240, 360, 480, 640, 720, 1080 ];
+	// clear the companions 
+	$.each( sizes, function(inx, size){
+		$('#sizes').append(
+			$('<a href="#">').append(
+				size
+			).click(function(){
+				$('#vidiun_player').css({
+					'height': size + 'px',
+					'width': size * 1.7 + 'px'
+				});
+			}),
+			$('<span>').text(' ')
+		)
+	})
+	// embed the player: 
+	vWidget.featureConfig( {
+		'targetId': 'vidiun_player',
+		'wid': '_243342',
+		'uiconf_id' : '12905712',
+		'entry_id' : '0_l1v5vzh3',
+		'flashvars': {
+			'sourceSelector': {
+				'switchOnResize': true
+			},
+			"confFilePath": "{libPath}/modules/VidiunSupport/tests/confFiles/jsonConfig.json",
+			"controlBarContainer": {
+				"hover": false
+			}
+		}
+	})
+</script>
+
+</body>
+</html>
