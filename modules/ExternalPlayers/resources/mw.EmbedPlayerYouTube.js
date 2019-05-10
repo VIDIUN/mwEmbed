@@ -433,11 +433,11 @@
 		canAutoPlay: function(){
 			return !mw.isMobileDevice() || (mw.isMobileDevice() && this.ytMobilePlayed);
 		},
-		getKClient: function () {
-			if (!this.kClient) {
-				this.kClient = mw.kApiGetPartnerClient(this.kwidgetid);
+		getVClient: function () {
+			if (!this.vClient) {
+				this.vClient = mw.vApiGetPartnerClient(this.vwidgetid);
 			}
-			return this.kClient;
+			return this.vClient;
 		},
 		supportsVolumeControl: function(){
 			// if ipad no.

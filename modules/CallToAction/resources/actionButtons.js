@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'actionButtons', mw.KBaseScreen.extend({
+mw.PluginManager.add( 'actionButtons', mw.VBaseScreen.extend({
 
 	defaultConfig: {
 		displayOn: "end", // Can be either "end" or "related"
@@ -45,9 +45,9 @@ mw.PluginManager.add( 'actionButtons', mw.KBaseScreen.extend({
 	handleCustomConfig: function() {
 		// Check if the entry has custom configuration
 		var customConfig = {};
-		if( this.getPlayer().kalturaEntryMetaData[ this.getConfig('customDataKey') ] ) {
+		if( this.getPlayer().vidiunEntryMetaData[ this.getConfig('customDataKey') ] ) {
 			try {
-				customConfig = JSON.parse( this.getPlayer().kalturaEntryMetaData[ this.getConfig('customDataKey') ] );
+				customConfig = JSON.parse( this.getPlayer().vidiunEntryMetaData[ this.getConfig('customDataKey') ] );
 			} catch (e) {}
 		}
 

@@ -12,8 +12,8 @@
 		//default playback start time to wait before falling back to unicast in millisecods
 		defaultMulticastStartTimeout: 10000 ,
 		defaultMulticastKeepAliveInterval: 10000 ,
-		defaultMulticastKESKtimeout: 10000 ,
-		defaultMulticastKESStartInterval: 2000 ,
+		defaultMulticastVESVtimeout: 10000 ,
+		defaultMulticastVESStartInterval: 2000 ,
 		defaultMaxAllowedMulticastBitrate: 90000 ,
 		multicastAddress: null ,
 		defaultDisableMulticastFallback: false ,
@@ -91,12 +91,12 @@
 
 			return diagObj;
 		} ,
-		connectToKES: function ( resolvedSrc ) {
-			mw.log( 'connectToKES ' + resolvedSrc );
+		connectToVES: function ( resolvedSrc ) {
+			mw.log( 'connectToVES ' + resolvedSrc );
 			var deferred = $.Deferred();
 			$.ajax( {
 				url: resolvedSrc ,
-				timeout: this.getKalturaConfig( null , 'multicastKESKtimeout' ) || this.defaultMulticastKESKtimeout ,
+				timeout: this.getVidiunConfig( null , 'multicastVESVtimeout' ) || this.defaultMulticastVESVtimeout ,
 				dataType: 'jsonp' ,
 				success: function ( response ) {
 					return deferred.resolve( response );
@@ -116,36 +116,36 @@
 
 		processMulticastMultiFlavorsStream: function(flavors) {
 
-			var KESMapping={};
+			var VESMapping={};
 
 			flavors.forEach(function(flavor) {
 				var uri = new mw.Uri(flavor.url);
-				var lastIndex=flavor.url.lastIndexOf("/kLive");
+				var lastIndex=flavor.url.lastIndexOf("/vLive");
 				var key=flavor.url.substring(0,lastIndex);
 
-				var index = flavor.url.indexOf("kMulticast/") + 11;
+				var index = flavor.url.indexOf("vMulticast/") + 11;
 				//var hls = flavor.url.substring(index);
-				if (!KESMapping.hasOwnProperty(key)) {
-					KESMapping[key] = {"flavors": [], "baseUrl": flavor.url.substring(0, index)};
+				if (!VESMapping.hasOwnProperty(key)) {
+					VESMapping[key] = {"flavors": [], "baseUrl": flavor.url.substring(0, index)};
 				}
-				var obj = KESMapping[key];
+				var obj = VESMapping[key];
 
 				obj.flavors.push({uri: uri, bitrate: flavor.bitrate});
 			});
 
-			var maxAllowedMulticastBitrate= this.getKalturaConfig( null , 'maxAllowedMulticastBitrate' ) || this.defaultMaxAllowedMulticastBitrate;
+			var maxAllowedMulticastBitrate= this.getVidiunConfig( null , 'maxAllowedMulticastBitrate' ) || this.defaultMaxAllowedMulticastBitrate;
 
 			this._availableMulticastManifests=[];
-			for(var key in KESMapping) {
+			for(var key in VESMapping) {
 
-				var KESFlavors=KESMapping[key].flavors;
+				var VESFlavors=VESMapping[key].flavors;
 
 				//sort by  bitrate  (descending)
-				KESFlavors.sort(function(a, b) {
+				VESFlavors.sort(function(a, b) {
 					return b.bitrate - a.bitrate;
 				});
 				//filter out all bitrates bigger than maximum allowed
-				var filtered=KESFlavors.filter(function(flavor) {
+				var filtered=VESFlavors.filter(function(flavor) {
 					return flavor.bitrate<maxAllowedMulticastBitrate;
 				});
 				if (filtered.length>0) {
@@ -161,26 +161,26 @@
 			}
 
 		} ,
-		selectNextKES: function(removeCurrent) {
+		selectNextVES: function(removeCurrent) {
 
 			var index=this._availableMulticastManifests.indexOf(this.multiastServerUrl);
 
 			if (this._availableMulticastManifests.length==0) {
 				this.multiastServerUrl=null;
-				mw.log('selectNextKES no available multicast manifests ');
+				mw.log('selectNextVES no available multicast manifests ');
 				this.isError = true;
-				var errorObj = {message: gM('ks-LIVE-STREAM-NOT-AVAILABLE'), title: gM('ks-ERROR')};
+				var errorObj = {message: gM('vs-LIVE-STREAM-NOT-AVAILABLE'), title: gM('vs-ERROR')};
 				this.showErrorMsg(errorObj);
 			} else {
 				index = (index + 1) % this._availableMulticastManifests.length;
 				this.multiastServerUrl = this._availableMulticastManifests[index];
 
-				//connect KES with https instead of http when page is https
+				//connect VES with https instead of http when page is https
 				if (window.location.protocol === "https:" &&
 					this.multiastServerUrl.indexOf("http://")===0) {
 					this.multiastServerUrl=this.multiastServerUrl.replace("http://","https://");
 				}
-				mw.log('selectNextKES selected ' + this.multiastServerUrl);
+				mw.log('selectNextVES selected ' + this.multiastServerUrl);
 			}
 
 		} ,
@@ -260,14 +260,14 @@
 				}
 			};
 
-			var startConnectToKESTimer = function () {
+			var startConnectToVESTimer = function () {
 
 				//in case of fallback to unicast we don't want to restart by accident
 				if (!_this.isMulticast || !_this.multiastServerUrl) {
 					return;
 				}
 
-				var retryTime= _this.getKalturaConfig( null , 'multicastKESStartInterval' ) || _this.defaultMulticastKESStartInterval;
+				var retryTime= _this.getVidiunConfig( null , 'multicastVESStartInterval' ) || _this.defaultMulticastVESStartInterval;
 
 				if (_this.isOnline && _this.multicastSessionId)
 					retryTime=_this.getKalturaConfig( null , 'multicastKeepAliveInterval' ) || _this.defaultMulticastKeepAliveInterval;
@@ -291,8 +291,8 @@
 			};
 
 
-			_this.selectNextKES();
-			startConnectToKESTimer();
+			_this.selectNextVES();
+			startConnectToVESTimer();
 		} ,
 		fallbackToUnicast: function () {
 			var _this = this;
@@ -304,7 +304,7 @@
 			}
 			this.stopped = true;
 
-			var disableMulticastFallback = _this.getKalturaConfig( null , 'disableMulticastFallback' ) || _this.defaultDisableMulticastFallback;
+			var disableMulticastFallback = _this.getVidiunConfig( null , 'disableMulticastFallback' ) || _this.defaultDisableMulticastFallback;
 			if ( !disableMulticastFallback ) {
 				mw.log( 'fallbackToUnicast: try unicast' );
 				//remove current source to fallback to unicast if multicast failed
@@ -320,7 +320,7 @@
 				_this.setupSourcePlayer(); //switch player
 			} else {
 				mw.log( "fallbackToUnicast: stop here since we don't allow multicast failver" );
-				var errorObj = {message: gM( 'ks-LIVE-STREAM-NOT-SUPPORTED' ) , title: gM( 'ks-ERROR' )};
+				var errorObj = {message: gM( 'vs-LIVE-STREAM-NOT-SUPPORTED' ) , title: gM( 'vs-ERROR' )};
 				_this.showErrorMsg( errorObj );
 			}
 			_this.readyCallbackFunc = undefined;
@@ -401,12 +401,12 @@
 					if ( isMimeType( "video/playreadySmooth" ) ) {
 						flashvars.preload = "none";
 						//Check for user defined DRM server else use uDRM
-						var overrideDrmServerURL = mw.getConfig('Kaltura.overrideDrmServerURL');
+						var overrideDrmServerURL = mw.getConfig('Vidiun.overrideDrmServerURL');
 						var licenseUrl;
 						if (overrideDrmServerURL) {
 							licenseUrl = overrideDrmServerURL;
 						} else {
-							var licenseBaseUrl = mw.getConfig('Kaltura.UdrmServerURL');
+							var licenseBaseUrl = mw.getConfig('Vidiun.UdrmServerURL');
 							if (!licenseBaseUrl) {
 								_this.log('Error:: failed to retrieve playready UDRM license URL ');
 							}
@@ -427,9 +427,9 @@
 						}
 
 						var customData = {
-							partnerId: _this.kpartnerid ,
-							ks: _this.getFlashvars( 'ks' ) ,
-							entryId: _this.kentryid
+							partnerId: _this.vpartnerid ,
+							vs: _this.getFlashvars( 'vs' ) ,
+							entryId: _this.ventryid
 						};
 						if ( _this.b64Referrer ) {
 							flashvars.referrer = _this.b64Referrer;
@@ -473,7 +473,7 @@
 					//flashvars.debug = true;
 
 					//check if multicast not available
-					var timeout = _this.getKalturaConfig( null , 'multicastStartTimeout' ) || _this.defaultMulticastStartTimeout;
+					var timeout = _this.getVidiunConfig( null , 'multicastStartTimeout' ) || _this.defaultMulticastStartTimeout;
 					_this.isError = false;
 					setTimeout( function () {
 						if ( !_this.gotFirstMulticastFrame ) {
@@ -696,7 +696,7 @@
 		},
 
 		handlePlayerError: function ( data ) {
-			var messageText = this.getKalturaMsg( 'ks-CLIP_NOT_FOUND' );
+			var messageText = this.getVidiunMsg( 'vs-CLIP_NOT_FOUND' );
 			if ( data && data.errorMessage ) {
 				messageText = data.errorMessage;
 				var dataParams = messageText.split( " " );
@@ -704,12 +704,12 @@
 					var errorCode = dataParams[0];
 					//DRM license related error has 6XXX error code
 					if ( errorCode.length == 4 && errorCode.indexOf( "6" ) == 0 ) {
-						messageText = gM( 'ks-NO-DRM-LICENSE' );
+						messageText = gM( 'vs-NO-DRM-LICENSE' );
 					}
 				}
 			}
 
-			var errorObj = {message: messageText , title: gM( 'ks-ERROR' )};
+			var errorObj = {message: messageText , title: gM( 'vs-ERROR' )};
 			if ( this.readyCallbackFunc ) {
 				this.setError( errorObj );
 				this.callReadyFunc();
@@ -794,7 +794,7 @@
 		 */
 		doSeek: function ( seekTime ) {
 			var _this = this;
-			// Include a fallback seek timer: in case the kdp does not fire 'playerSeekEnd'
+			// Include a fallback seek timer: in case the vdp does not fire 'playerSeekEnd'
 			var orgTime = this.slCurrentTime;
 			this.seekInterval = setInterval( function () {
 				if ( (_this.slCurrentTime != orgTime) && _this.seeking ) {//TODO - check seeking also
@@ -908,7 +908,7 @@
 			if ( this.requestedSrcIndex !== null && value.newIndex !== this.requestedSrcIndex ) {
 				return;
 			}
-			mw.log( 'EmbedPlayerKalturaSplayer: switchingChangeComplete: new index: ' + value.newIndex );
+			mw.log( 'EmbedPlayerVidiunSplayer: switchingChangeComplete: new index: ' + value.newIndex );
 			this.mediaElement.setSourceByIndex( value.newIndex );
 			$( this ).trigger( 'sourceSwitchingEnd' , [data] );
 		} ,

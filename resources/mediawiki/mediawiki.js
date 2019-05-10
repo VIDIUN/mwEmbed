@@ -954,8 +954,8 @@ var mw = ( function ( $, undefined ) {
 				 * Requests dependencies from server, loading and executing when things when ready.
 				 */
 				work: function () {
-					if ( mw.getConfig("Kaltura.ExcludedModules") ){
-						var excludedModules = mw.getConfig("Kaltura.ExcludedModules").split(",");
+					if ( mw.getConfig("Vidiun.ExcludedModules") ){
+						var excludedModules = mw.getConfig("Vidiun.ExcludedModules").split(",");
 						$.each(excludedModules, function( index, value ) {
 							if (registry[value]){
 								delete registry[value];
@@ -972,7 +972,7 @@ var mw = ( function ( $, undefined ) {
 						skin: mw.config.get( 'skin' ),
 						lang: mw.config.get( 'wgUserLanguage' ),
 						debug: mw.config.get( 'debug' ),
-						pskwidgetpath: mw.config.get( 'pskwidgetpath' )
+						psvwidgetpath: mw.config.get( 'psvwidgetpath' )
 					};
 					// Split module batch by source and by group.
 					splits = {};
@@ -1232,8 +1232,8 @@ var mw = ( function ( $, undefined ) {
 				 * @param error {Function} callback to execute when if dependencies have a errors (optional)
 				 */
 				using: function ( dependencies, ready, error ) {
-					if ( mw.getConfig("Kaltura.ExcludedModules") ){
-						var excludedModules = mw.getConfig("Kaltura.ExcludedModules").split(",");
+					if ( mw.getConfig("Vidiun.ExcludedModules") ){
+						var excludedModules = mw.getConfig("Vidiun.ExcludedModules").split(",");
 						$.each(excludedModules, function( index, value ) {
 							var pos = dependencies.indexOf(value);
 							if (pos !== -1){

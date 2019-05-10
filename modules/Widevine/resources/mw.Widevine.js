@@ -16,20 +16,20 @@
 			'promptTitle' : 'Notification',
 			'signon_url': 'https://staging.shibboleth.tv/widevine/cypherpc/cgi-bin/SignOn.cgi',
 			'log_url': 'https://staging.shibboleth.tv/widevine/cypherpc/cgi-bin/LogEncEvent.cgi',
-			'emm_url': 'http://www.kaltura.com/api_v3/index.php?service=widevine_widevinedrm&action=getLicense'
+			'emm_url': 'http://www.vidiun.com/api_v3/index.php?service=widevine_widevinedrm&action=getLicense'
 		},
-		kClient: null,
+		vClient: null,
 		setup: function(){
 			var _this = this;
 
-			this.kClient = mw.kApiGetPartnerClient( this.getPlayer().kwidgetid );
-			//generate KS if missing
-			if( !this.kClient.getKs() ){
-				this.kClient.doRequest( { 'service' : 'session', 'action' : 'startWidgetSession', 'widgetId': this.getPlayer().kwidgetid }, function( data ) {
+			this.vClient = mw.vApiGetPartnerClient( this.getPlayer().vwidgetid );
+			//generate VS if missing
+			if( !this.vClient.getVs() ){
+				this.vClient.doRequest( { 'service' : 'session', 'action' : 'startWidgetSession', 'widgetId': this.getPlayer().vwidgetid }, function( data ) {
 					if ( data.code ) {
 						mw.log("Widevine:: Error:: startWidgetSession failed");
-					} else if ( data.ks ) {
-						_this.kClient.setKs( data.ks );
+					} else if ( data.vs ) {
+						_this.vClient.setVs( data.vs );
 					}
 				}, true );
 			}
@@ -45,10 +45,10 @@
 				var allFlavors = _this.getPlayer().mediaElement.getPlayableSources();
 				if (allFlavors && allFlavors.length) {
 					//if we received wv flavors we can play them. so set native component WV server
-					if ( wvmFlavors && wvmFlavors.length && wvmFlavors[0].objectType == "KalturaWidevineFlavorAsset" || wvmFlavors[0].getFlavorId() == "wvm" ) {
+					if ( wvmFlavors && wvmFlavors.length && wvmFlavors[0].objectType == "VidiunWidevineFlavorAsset" || wvmFlavors[0].getFlavorId() == "wvm" ) {
 						if ( _this.getPlayer().selectedPlayer.library == "NativeComponent" ) {
 							_this.getPlayer().getPlayerElement().attr( 'wvServerKey', _this.widevineObj().getEmmUrl()
-								+ "&format=widevine&flavorAssetId=" + wvmFlavors[0].getAssetId() + "&ks=" + _this.kClient.getKs() );
+								+ "&format=widevine&flavorAssetId=" + wvmFlavors[0].getAssetId() + "&vs=" + _this.vClient.getVs() );
 						}
 					}
 					// If we don't have widevine flavors, but other flavors then let player handle them
@@ -57,7 +57,7 @@
 					_this.getPlayer().setVidiunConfig(null, 'disableAlerts', true);
 
 					//if mobile device
-					if (kWidget.isMobileDevice()) {
+					if (vWidget.isMobileDevice()) {
 						msg = _this.getConfig('useSupportedDeviceMsg');
 						title = _this.getConfig('useSupportedDeviceTitle');
 					} else if (mw.isDesktopSafari()) {
@@ -68,9 +68,9 @@
 						if (navigator.mimeTypes ['application/x-shockwave-flash'] == undefined) {
 							msg = _this.getConfig('intallFlashMsg');
 							title = _this.getConfig('installFlashTitle');
-						} else { //else prompt to use kdp
-							msg = _this.getConfig('useKdpMsg');
-							title = _this.getConfig('useKdpTitle');
+						} else { //else prompt to use vdp
+							msg = _this.getConfig('useVdpMsg');
+							title = _this.getConfig('useVdpTitle');
 						}
 					}
 

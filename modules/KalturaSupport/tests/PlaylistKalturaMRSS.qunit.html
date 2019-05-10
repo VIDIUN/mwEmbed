@@ -1,25 +1,25 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Playlist with Kaltura MRSS XML</title>
+    <title>Playlist with Vidiun MRSS XML</title>
       <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
       <script src="../../../mwEmbedLoader.php" type="text/javascript"></script>
       <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 
 	  <script type="text/javascript">
 		  // Enable uiconf js which includes external resources
-		  mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		  mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-		  function jsKalturaPlayerTest( videoId ){
+		  function jsVidiunPlayerTest( videoId ){
 			  // Name this module
 			  module( "playlist" );
-			  var kdp = $('#' + videoId )[0];
+			  var vdp = $('#' + videoId )[0];
 			  var $iframe = $('#' + videoId + '_ifp').contents();
 
 			  asyncTest( "Check for playlist MRSS feed", function(){
-				  kalturaQunitWaitForPlayer(function(){
+				  vidiunQunitWaitForPlayer(function(){
 					  // look for the playlist:
-					  ok( $( $iframe).find( '.medialistContainer.k-vertical' ).length > 0 , "Found vertical playlist" );
+					  ok( $( $iframe).find( '.medialistContainer.v-vertical' ).length > 0 , "Found vertical playlist" );
 					  equal ( $( $iframe).find('.chapterBox').length, 3, "Number of clips is 3");
 					  start();
 				  });
@@ -27,19 +27,19 @@
 		  }
 
 	  </script>
-	  <!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	  <script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	  <!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	  <script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
     </head>
    <body>
-   	<h3>Playlist with Kaltura MRSS</h3>
+   	<h3>Playlist with Vidiun MRSS</h3>
     
    	<br> <br>
-    <div id="kaltura_player_1367999865" style="width: 680px; height: 333px;"></div>
+    <div id="vidiun_player_1367999865" style="width: 680px; height: 333px;"></div>
     <script>
-    var playlistURL = kWidget.getPath() + 'modules/KalturaSupport/tests/resources/rss.xml';
-    kWidget.embed({
-      "targetId": "kaltura_player_1367999865",
+    var playlistURL = vWidget.getPath() + 'modules/VidiunSupport/tests/resources/rss.xml';
+    vWidget.embed({
+      "targetId": "vidiun_player_1367999865",
       "wid": "_243342",
       "uiconf_id": 25975211,
       "flashvars": {
@@ -52,8 +52,8 @@
 		      'autoInsert':true,
 		      'layout': 'vertical',
 		      'containerPosition': 'left',
-		      'kpl0Name': "test 4 item playlist",
-		      'kpl0Id': playlistURL
+		      'vpl0Name': "test 4 item playlist",
+		      'vpl0Id': playlistURL
 	      }
       },
       "cache_st": 1367999865

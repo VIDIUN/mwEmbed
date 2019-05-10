@@ -3,15 +3,15 @@
  */
 (function(mw, $) {
     'use strict';
-    $.extend(KalturaAdobeAnalyticsPluginDelegate.prototype, ADB.va.plugins.aa.AdobeAnalyticsPluginDelegate.prototype);
+    $.extend(VidiunAdobeAnalyticsPluginDelegate.prototype, ADB.va.plugins.aa.AdobeAnalyticsPluginDelegate.prototype);
 
-    function KalturaAdobeAnalyticsPluginDelegate() {
+    function VidiunAdobeAnalyticsPluginDelegate() {
     }
 
-    KalturaAdobeAnalyticsPluginDelegate.prototype.onError = function(errorInfo) {
+    VidiunAdobeAnalyticsPluginDelegate.prototype.onError = function(errorInfo) {
         mw.log("HeartBeat plugin :: AdobeAnalyticsPlugin error: " + errorInfo.getMessage() + " | " + errorInfo.getDetails());
     };
 
     // Export symbols.
-    window.KalturaAdobeAnalyticsPluginDelegate = KalturaAdobeAnalyticsPluginDelegate;
+    window.VidiunAdobeAnalyticsPluginDelegate = VidiunAdobeAnalyticsPluginDelegate;
 })(window.mw, window.jQuery);

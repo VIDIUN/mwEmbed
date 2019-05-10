@@ -7,20 +7,20 @@
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script type="text/javascript">	
 	//Enable uiconf js which includes external resources ( not needed if resources are defined in uiConf )
-	mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+	mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 	
-	function jsKalturaPlayerTest( videoId ){
+	function jsVidiunPlayerTest( videoId ){
 		// Name this module
 		module( "Omniture page test" );
 	}
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Omniture sCode Config, SiteCatalyst 15 + DoubleClick Ads</h2>
-<div id="kaltura_player" style="width:500px;height:310px;"></div>
-<div id="kdoc-more-desc">
+<div id="vidiun_player" style="width:500px;height:310px;"></div>
+<div id="vdoc-more-desc">
 <p>This test page highlights DoubleClick ad tracking as well. For each ad the following events are tracked:</p>
 <ul>
 	<li><b>s.Media.openAd</b>: When the ad loads</li>
@@ -32,8 +32,8 @@
 
 
 <script>
-kWidget.featureConfig({
-	'targetId' : 'kaltura_player',
+vWidget.featureConfig({
+	'targetId' : 'vidiun_player',
 	'wid': '_243342',
 	'uiconf_id' : '13306622',
 	'entry_id' : '0_uka1msg4',
@@ -41,7 +41,7 @@ kWidget.featureConfig({
 		'streamerType': 'hdnetwork',
 		'omnitureOnPage' :{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			'relativeTo': 'video',
 			'position': 'before',
 			'includeInLayout':false,
@@ -78,7 +78,7 @@ kWidget.featureConfig({
 		'doubleClick':{
 		 'plugin':true,
 		 //'ForceFlash': true,
-		 'path' : 'http://cdnbakmi.kaltura.com/content/uiconf/ps/veria/kdp3.9.1/plugins/doubleclickPlugin.swf',
+		 'path' : 'http://cdnbakmi.vidiun.com/content/uiconf/ps/veria/vdp3.9.1/plugins/doubleclickPlugin.swf',
 		 //'adTagUrl': 'http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear',
 		 'adTagUrl': 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F3510761%2FadRulesSampleTags&ciu_szs=160x600%2C300x250%2C728x90&cust_params=adrule%3Dpremidpostpodandbumpers&impl=s&gdfp_req=1&env=vp&ad_rule=1&vid=47570401&cmsid=481&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]',
 		 'trackCuePoints': false,

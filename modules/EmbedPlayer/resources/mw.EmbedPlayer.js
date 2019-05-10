@@ -141,7 +141,7 @@
 		// Live stream only - not playing live edge, user paused or seeked to play DVR content
 		"liveOffSynch": false,
 
-		// Is Audio Player (defined in kWidgetSupport)
+		// Is Audio Player (defined in vWidgetSupport)
 		"isAudioPlayer": false,
 
 		// Should tooltips be enabled by default?
@@ -741,8 +741,8 @@
 				&& !this.isImageSource()   //not an image entry
 				&& this.streamerType != 'http'
 				&& source.mimeType !== "video/youtube"
-				&& mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('kplayer')) {
-				targetPlayer = mw.EmbedTypes.getKplayer();
+				&& mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('vplayer')) {
+				targetPlayer = mw.EmbedTypes.getVplayer();
 			} else {
 				targetPlayer= mw.EmbedTypes.getMediaPlayers().getDefaultPlayer( source.mimeType );
 			}
@@ -836,7 +836,7 @@
 			// Auto select player based on default order
 			if (this.mediaElement.selectedSource) {
 
-				// Loading kaltura native cordova component only when it's media type
+				// Loading vidiun native cordova component only when it's media type
 				if (this.isImageSource()) {
 					mw.setConfig('EmbedPlayer.ForceNativeComponent', false);
 				}
@@ -1108,7 +1108,7 @@
 			mw.log('EmbedPlayer:: seek: to:' + seekTime + " sec, stopAfterSeek=" + this.stopAfterSeek);
 
 			// Save currentTime
-			this.kPreSeekTime = this.currentTime;
+			this.vPreSeekTime = this.currentTime;
 
 			// Trigger preSeek event for plugins that want to store pre seek conditions.
 			var stopSeek = {value: false};
@@ -1158,7 +1158,7 @@
 			this.previousTime = this.currentTime = this.getPlayerElementTime();
 
 			// Clear the PreSeek time
-			this.kPreSeekTime = null;
+			this.vPreSeekTime = null;
 
 			this.removePoster();
 			this.startMonitor();
@@ -1183,7 +1183,7 @@
 		},
 		/**
 		 * canSeek function ( should be implemented by embedPlayer interface
-		 * playerNative, playerKplayer etc. )
+		 * playerNative, playerVplayer etc. )
 		 */
 		canSeek: function(){
 			return $.Deferred().resolve();
@@ -1276,7 +1276,7 @@
 				}
 				// A secondary end event for playlist and clip sequence endings
 				if (this.onDoneInterfaceFlag) {
-					// We trigger two end events to match KDP and ensure playbackComplete always comes before  playerPlayEnd
+					// We trigger two end events to match VDP and ensure playbackComplete always comes before  playerPlayEnd
 					// in content ends.
 					mw.log("EmbedPlayer:: trigger: playbackComplete");
 					$(this).trigger('playbackComplete');
@@ -1472,7 +1472,7 @@
 			var _this = this;
 			if (typeof errorObj == 'string') {
 				this.playerError = {
-					'title': _this.getKalturaMsg('ks-GENERIC_ERROR_TITLE'),
+					'title': _this.getVidiunMsg('vs-GENERIC_ERROR_TITLE'),
 					'message': errorObj
 				}
 				return;
@@ -1577,7 +1577,7 @@
 			if (this.mediaElement.sources.length == 0
 				|| !mw.getConfig('EmbedPlayer.NotPlayableDownloadLink')) {
 				// Show missing sources error if we have entry id
-				if (this.kentryid) {
+				if (this.ventryid) {
 					this.showNoPlayableSources();
 				} else if (this.getFlashvars().referenceId) {
 					this.showWrongReferenceIdMessege();
@@ -1608,7 +1608,7 @@
 		 */
 		showNoPlayableSources: function () {
 			var $this = $(this);
-			var errorObj = this.getKalturaMsgObject('mwe-embedplayer-missing-source');
+			var errorObj = this.getVidiunMsgObject('mwe-embedplayer-missing-source');
 
 			// Support no sources custom error msg:
 			$this.trigger('NoSourcesCustomError', function (customErrorMsg) {
@@ -1625,7 +1625,7 @@
 
 		showWrongReferenceIdMessege: function () {
 			var $this = $(this);
-			var errorObj = this.getKalturaMsgObject('mwe-embedplayer-wrong-reference-id');
+			var errorObj = this.getVidiunMsgObject('mwe-embedplayer-wrong-reference-id');
 
 			// Support wrong reference id custom error msg:
 			$this.trigger('WrongReferenceIdCustomError', function (customErrorMsg) {
@@ -3025,8 +3025,8 @@
 				mw.log("EmbedPlayer::getCompatibleSource: add " + source.src + ' of type:' + source.type);
 			});
 			var myMediaElement = new mw.MediaElement($media[0]);
-			if ( this.getRawKalturaConfig('mediaProxy') && this.getRawKalturaConfig('mediaProxy').preferedFlavorBR ){
-				myMediaElement.preferedFlavorBR = this.getRawKalturaConfig('mediaProxy').preferedFlavorBR * 1000;
+			if ( this.getRawVidiunConfig('mediaProxy') && this.getRawVidiunConfig('mediaProxy').preferedFlavorBR ){
+				myMediaElement.preferedFlavorBR = this.getRawVidiunConfig('mediaProxy').preferedFlavorBR * 1000;
 			}
 			var baseTimeOptions =  {
 				'supportsURLTimeEncoding': this.supportsURLTimeEncoding(),
@@ -3106,8 +3106,8 @@
 		},
 
 		isDVR: function () {
-			if (this.kalturaPlayerMetaData && this.kalturaPlayerMetaData[ 'dvrStatus' ]) {
-				return this.kalturaPlayerMetaData[ 'dvrStatus' ];
+			if (this.vidiunPlayerMetaData && this.vidiunPlayerMetaData[ 'dvrStatus' ]) {
+				return this.vidiunPlayerMetaData[ 'dvrStatus' ];
 			}
 
 			return false;
@@ -3294,8 +3294,8 @@
 			}
 		},
 
-		getKalturaAttributeConfig: function (attr) {
-			return this.getKalturaConfig(null, attr);
+		getVidiunAttributeConfig: function (attr) {
+			return this.getVidiunConfig(null, attr);
 		},
 
 		isVideoSiblingEnabled: function () {
@@ -3309,17 +3309,17 @@
 		handlePlayerError: function (data, shouldHandlePlayerError) {
 			if (this.shouldHandlePlayerError || shouldHandlePlayerError) {
 				var message = this.getErrorMessage(data);
-				this.showErrorMsg({ title: this.getKalturaMsg('ks-GENERIC_ERROR_TITLE'), message: message });
+				this.showErrorMsg({ title: this.getVidiunMsg('vs-GENERIC_ERROR_TITLE'), message: message });
 
 			}
 		},
 
 		getErrorMessage: function(data){
-			var message = data ? data : this.getKalturaMsg('ks-CLIP_NOT_FOUND');
+			var message = data ? data : this.getVidiunMsg('vs-CLIP_NOT_FOUND');
 			/* there are two formats used to represent error messages*/
 			message = message.errorMessage !== undefined ? message.errorMessage : message;
 			if (!message || message == undefined){
-				message = this.getKalturaMsg('ks-CLIP_NOT_FOUND');
+				message = this.getVidiunMsg('vs-CLIP_NOT_FOUND');
 			}
 			return message;
 		},
@@ -3332,7 +3332,7 @@
 		onFlavorsListChanged: function (newFlavors) {
 			//we can't use simpleFormat with flavors that came from playmanifest otherwise sourceSelector list won't match
 			// to what is actually being played
-			this.setKDPAttribute('sourceSelector', 'simpleFormat', false);
+			this.setVDPAttribute('sourceSelector', 'simpleFormat', false);
 			// update the manifest defined flavor set:
 			this.manifestAdaptiveFlavors = [];
 			var _this = this;

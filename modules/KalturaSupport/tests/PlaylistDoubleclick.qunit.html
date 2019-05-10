@@ -8,16 +8,16 @@
 
 	<script type="text/javascript">
 		// Enable uiconf js which includes external resources
-		mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "playlist" );
-			var kdp = $('#' + videoId )[0];
+			var vdp = $('#' + videoId )[0];
 			var $iframe = $('#' + videoId + '_ifp').contents();
 
 			asyncTest( "Check Doubleclick ad playing in playlist entry", function(){
-				kalturaQunitWaitForPlayer(function(){
+				vidiunQunitWaitForPlayer(function(){
 					stop();
 				});
 			});
@@ -29,18 +29,18 @@
 		}
 
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 </head>
 <body>
 <h2>Playlist with DoubleClick ads</h2>
 <p>This page demonstrates a playlist with a DoubleClick preroll played before each clip.<br>
 The playlist is disabled during the ad playback.</p>
-<div id='kaltura_player' style="height:365px;width:650px"></div>
+<div id='vidiun_player' style="height:365px;width:650px"></div>
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '25975211',
 		'flashvars': {
@@ -52,8 +52,8 @@ The playlist is disabled during the ad playback.</p>
 				'onPage': false,
 				'layout': 'vertical',
 				'containerPosition': 'left',
-				'kpl0Name': "test 4 item playlist",
-				'kpl0Id': '0_q79jh71b'
+				'vpl0Name': "test 4 item playlist",
+				'vpl0Id': '0_q79jh71b'
 			},
 			'doubleClick':{
 				'plugin':true,

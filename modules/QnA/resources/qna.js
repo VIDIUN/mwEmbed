@@ -3,7 +3,7 @@
 (function (mw, $, ko) {
 	"use strict";
 
-	mw.PluginManager.add('qna', mw.KBasePlugin.extend({
+	mw.PluginManager.add('qna', mw.VBasePlugin.extend({
 
 		defaultConfig: {
 			templatePath: '../QnA/resources/qna.tmpl.html',
@@ -18,14 +18,14 @@
 		moduleStatus: ko.observable(undefined),
 		announcementOnlyStatus: ko.observable(false),
 
-		// get an hash code from a ks
-		getKSHash: function(ks) {
+		// get an hash code from a vs
+		getVSHash: function(vs) {
 			var hash = 0, i, chr, len;
-			if (ks.length === 0){
+			if (vs.length === 0){
 				return hash;
 			}
-			for (i = 0, len = ks.length; i < len; i++) {
-				chr   = ks.charCodeAt(i);
+			for (i = 0, len = vs.length; i < len; i++) {
+				chr   = vs.charCodeAt(i);
 				hash  = ((hash << 5) - hash) + chr;
 				hash |= 0; // Convert to 32bit integer
 			}
@@ -43,7 +43,7 @@
 
 			return	"##" +
 					_this.getConfig("userId") + "HashSeparator" +
-					_this.getKSHash(_this.getPlayer().getFlashvars().ks) +
+					_this.getVSHash(_this.getPlayer().getFlashvars().vs) +
 					_this.getRandomInt(10000,99999999).toString() +
 					"##";
 		},
@@ -56,10 +56,10 @@
 
 				//if localStorage is available, get & store the user id from it;
 				if(window.localStorage) {
-					if (!localStorage.kAnonymousUserId) {
-						localStorage.kAnonymousUserId = _this.generateUserId();
+					if (!localStorage.vAnonymousUserId) {
+						localStorage.vAnonymousUserId = _this.generateUserId();
 					}
-					return localStorage.kAnonymousUserId;
+					return localStorage.vAnonymousUserId;
 				}else{
 					// localStorage is not available. Just generate a user id
 					return _this.generateUserId();
@@ -81,13 +81,13 @@
 
         destroy: function(){
             var _this = this;
-            if (_this.KQnaModule) {
-                _this.KQnaModule.destroy();
-                _this.KQnaModule=null;
+            if (_this.VQnaModule) {
+                _this.VQnaModule.destroy();
+                _this.VQnaModule=null;
             }
-            if (_this.KQnaService) {
-                _this.KQnaService.destroy();
-                _this.KQnaService=null;
+            if (_this.VQnaService) {
+                _this.VQnaService.destroy();
+                _this.VQnaService=null;
             }
         },
 
@@ -175,7 +175,7 @@
 		updateUnreadBadge: function(){
 			var _this = this;
 			// if its a number and is greater then 0 - show & update the badge
-			var num = _this.KQnaModule.getUnreadCount();
+			var num = _this.VQnaModule.getUnreadCount();
 			if (isNaN(num) || num <=0 ){
 				$('.qna-badge').hide();
 			}
@@ -188,7 +188,7 @@
 		injectCssToPage: function(cssLink){
 			if (cssLink) {
 				try{
-					cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : kWidget.getPath() + cssLink; // support external CSS links
+					cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : vWidget.getPath() + cssLink; // support external CSS links
 					$('head', window.parent.document).append('<link type="text/css" rel="stylesheet" href="' + cssLink + '"/>');
 				}catch(e){
 					mw.log("failed to inject css " + cssLink + " to page. Exception: " + e);
@@ -282,19 +282,19 @@
 				this.positionQAButtonOnVideoContainer();
 				this.updateQnaListHolderSize();
 
-				// Create the KQnaService and KQnaModule after css were loaded
+				// Create the VQnaService and VQnaModule after css were loaded
 				if ( this.getConfig( 'onPage' ) ) {
 					this.verifyCssLoaded(_this.$qnaListContainer).then(function(){
-						_this.KQnaService = new mw.KQnaService(embedPlayer, _this);
-						_this.KQnaModule = new mw.KQnaModule(embedPlayer, _this, _this.KQnaService);
-						ko.applyBindings(_this.KQnaModule, _this.$qnaListContainer[0]);
-						_this.KQnaModule.applyLayout();
+						_this.VQnaService = new mw.VQnaService(embedPlayer, _this);
+						_this.VQnaModule = new mw.VQnaModule(embedPlayer, _this, _this.VQnaService);
+						ko.applyBindings(_this.VQnaModule, _this.$qnaListContainer[0]);
+						_this.VQnaModule.applyLayout();
 					});
 				}else{ // for in player plugin don't wait for css to load
-					_this.KQnaService = new mw.KQnaService(embedPlayer, _this);
-					_this.KQnaModule = new mw.KQnaModule(embedPlayer, _this, _this.KQnaService);
-					ko.applyBindings(_this.KQnaModule, _this.$qnaListContainer[0]);
-					_this.KQnaModule.applyLayout();
+					_this.VQnaService = new mw.VQnaService(embedPlayer, _this);
+					_this.VQnaModule = new mw.VQnaModule(embedPlayer, _this, _this.VQnaService);
+					ko.applyBindings(_this.VQnaModule, _this.$qnaListContainer[0]);
+					_this.VQnaModule.applyLayout();
 				}
 
 			}
@@ -348,7 +348,7 @@
 				alert(gM('qna-cant-ask-while-not-live'));
 			} else {
 				if (question !== gM('qna-default-question-box-text')) {
-					_this.KQnaService.submitQuestion(question);
+					_this.VQnaService.submitQuestion(question);
 					_this.resetTextArea(textArea);
 					return true;
 				}
@@ -425,7 +425,7 @@
 
 		getHTML : function(){
 			var templatePath = this.getConfig( 'templatePath' );
-			var rawHTML = window.kalturaIframePackageData.templates[ templatePath ];
+			var rawHTML = window.vidiunIframePackageData.templates[ templatePath ];
 
 			return rawHTML;
 		},
@@ -468,7 +468,7 @@
 			}
 			_this.updateQnaListHolderSize();
 			_this.changeVideoToggleIcon();
-			_this.KQnaModule.applyLayout();
+			_this.VQnaModule.applyLayout();
 		}
 	}));
 
