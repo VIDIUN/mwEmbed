@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'download', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'download', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			align: "right",
@@ -21,14 +21,14 @@
 			});
 		},
 		downloadMedia: function() {
-			var downloadUrl = mw.getMwEmbedPath() + '/modules/KalturaSupport/download.php/wid/';
-				downloadUrl += this.getPlayer().kwidgetid + '/uiconf_id/' + this.getPlayer().kuiconfid;
-				downloadUrl += '/entry_id/' + this.getPlayer().kentryid + '?forceDownload=true';
+			var downloadUrl = mw.getMwEmbedPath() + '/modules/VidiunSupport/download.php/wid/';
+				downloadUrl += this.getPlayer().vwidgetid + '/uiconf_id/' + this.getPlayer().vuiconfid;
+				downloadUrl += '/entry_id/' + this.getPlayer().ventryid + '?forceDownload=true';
 				downloadUrl += '&downloadName=' + encodeURIComponent(this.getConfig('downloadName'));
 				if ( this.getConfig( 'preferredBitrate' ) != '' && this.getConfig( 'preferredBitrate' ) != null ){
 					downloadUrl += '&preferredBitrate=' + encodeURIComponent( this.getConfig( 'preferredBitrate' ));
 				}
-				downloadUrl += '&ks=' + this.getPlayer().getFlashvars('ks');
+				downloadUrl += '&vs=' + this.getPlayer().getFlashvars('vs');
 				
 			window.open( downloadUrl );
 		},

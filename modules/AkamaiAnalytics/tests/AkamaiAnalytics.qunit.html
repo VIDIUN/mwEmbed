@@ -8,18 +8,18 @@
 		<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 		<script type="text/javascript" src="../../../resources/jquery/jquery.cookie.js"></script>
 		
-		<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-		<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+		<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+		<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 		
 		<script type="text/javascript">
-			function jsKalturaPlayerTest( videoId ) {
+			function jsVidiunPlayerTest( videoId ) {
 				module( "Akamai Media Analytics Plugin Test" );
-				var kdp = $( '#kaltura_player' )[ 0 ];
+				var vdp = $( '#vidiun_player' )[ 0 ];
 
 				test( "Akamai Configuration Path And Cookies Are Set", function() {
 					ok( window.AKAMAI_MEDIA_ANALYTICS_CONFIG_FILE_PATH, "Configuration File Path Is Set" );
-					kdp.addJsListener( 'doPlay.playingCountTest', 'playCountCallback' );
-					kdp.sendNotification( 'doPlay' );
+					vdp.addJsListener( 'doPlay.playingCountTest', 'playCountCallback' );
+					vdp.sendNotification( 'doPlay' );
 				} );
 
 				window[ 'playCountCallback' ] = function() {
@@ -27,8 +27,8 @@
 						stop();
 						setTimeout( function() {
 							ok( $.cookie( 'AkamaiAnalytics_BrowserSessionId' ).length, "AkamaiAnalytics_BrowserSessionId Cookie Is Set" );
-							kdp.sendNotification( 'doPause' );
-							kdp.removeJsListener( 'doPlay.playingCountTest', 'playCountCallback' );
+							vdp.sendNotification( 'doPause' );
+							vdp.removeJsListener( 'doPlay.playingCountTest', 'playCountCallback' );
 							start();
 						}, 2000 );
 					} );
@@ -46,11 +46,11 @@
 	<body>
 		<h2> Akamai Media Analytics </h2>
 		<div id="player_container" style="float:left;" >
-		<div id="kaltura_player" style="width:400px;height:330px"></div>
+		<div id="vidiun_player" style="width:400px;height:330px"></div>
 		<script>
-		//	mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
-			kWidget.featureConfig({
-				'targetId' : 'kaltura_player',
+		//	mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
+			vWidget.featureConfig({
+				'targetId' : 'vidiun_player',
 				'wid': '_243342',
 				'uiconf_id' : '12905712',
 				'entry_id' : '0_uka1msg4',
@@ -62,7 +62,7 @@
 					}
 				},
 				'readyCallback': function(){
-					$('#kaltura_player').css('float', 'left').after('<div id="analyticsContainer" style="float:left;padding-left:20px;" >'+
+					$('#vidiun_player').css('float', 'left').after('<div id="analyticsContainer" style="float:left;padding-left:20px;" >'+
 						'<i>Analytics events:</i> ( only html5 )<br />' +
 							'<textarea id="analyticsLog" style="width:300px;height:280px;" ></textarea>' +
 						'</div>'

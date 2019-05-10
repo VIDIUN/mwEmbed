@@ -137,7 +137,7 @@
 		// Live stream player?
 		"live": false,
 
-		// Is Audio Player (defined in kWidgetSupport)
+		// Is Audio Player (defined in vWidgetSupport)
 		"isAudioPlayer": false,
 
 		// Should tooltips be enabled by default?
@@ -683,12 +683,12 @@
 
 		getPlayerByStreamerType: function(source){
 			var targetPlayer;
-			//currently only kplayer can handle other streamerTypes
+			//currently only vplayer can handle other streamerTypes
 			if ( !mw.getConfig( 'EmbedPlayer.IgnoreStreamerType')
 				&& !this.isImageSource()   //not an image entry
 				&& this.streamerType != 'http'
-				&& mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'kplayer' ) ) {
-				targetPlayer =  mw.EmbedTypes.getKplayer();
+				&& mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'vplayer' ) ) {
+				targetPlayer =  mw.EmbedTypes.getVplayer();
 			} else {
 				targetPlayer= mw.EmbedTypes.getMediaPlayers().defaultPlayer( source.mimeType );
 			}
@@ -769,7 +769,7 @@
 			// Auto select player based on default order
 			if( this.mediaElement.selectedSource ){
 
-				// Loading kaltura native cordova component only when it's media type
+				// Loading vidiun native cordova component only when it's media type
 				if( this.isImageSource() ) {
 					mw.setConfig('EmbedPlayer.ForceNativeComponent', false);
 				}
@@ -801,7 +801,7 @@
 				if ( !mw.isMobileDevice() && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'splayer' ) ) {
 					$.each( this.mediaElement.sources, function( currentIndex, currentSource ) {
 						if( currentSource.getFlavorId() == "ism" ){
-							errorObj = _this.getKalturaMsgObject( 'mwe-embedplayer-install-silverlight' );
+							errorObj = _this.getVidiunMsgObject( 'mwe-embedplayer-install-silverlight' );
 							return;
 						}
 					});
@@ -977,7 +977,7 @@
 
 		/**
 		 * Seek function ( should be implemented by embedPlayer interface
-		 * playerNative, playerKplayer etc. ) embedPlayer seek only handles URL
+		 * playerNative, playerVplayer etc. ) embedPlayer seek only handles URL
 		 * time seeks
 		 * @param {Float}
 		 * 			percent of the video total length to seek to
@@ -1074,7 +1074,7 @@
 
 				// A secondary end event for playlist and clip sequence endings
 				if( this.onDoneInterfaceFlag ){
-					// We trigger two end events to match KDP and ensure playbackComplete always comes before  playerPlayEnd
+					// We trigger two end events to match VDP and ensure playbackComplete always comes before  playerPlayEnd
 					// in content ends.
 					mw.log("EmbedPlayer:: trigger: playbackComplete");
 					$( this ).trigger( 'playbackComplete' );
@@ -1310,7 +1310,7 @@
 			var _this = this;
 			if ( typeof errorObj == 'string' ) {
 				this.playerError = {
-					'title' : _this.getKalturaMsg( 'ks-GENERIC_ERROR_TITLE' ),
+					'title' : _this.getVidiunMsg( 'vs-GENERIC_ERROR_TITLE' ),
 					'message' : errorObj
 				}
 				return ;
@@ -1416,7 +1416,7 @@
 				!mw.getConfig('EmbedPlayer.NotPlayableDownloadLink') )
 			{
 				// Show missing sources error if we have entry id
-				if( this.kentryid ) {
+				if( this.ventryid ) {
 					this.showNoPlayableSources();
 				} else if( this.getFlashvars().referenceId ) {
 					this.showWrongReferenceIdMessege();
@@ -1448,7 +1448,7 @@
 		 */
 		showNoPlayableSources: function(){
 			var $this = $( this );
-			var errorObj = this.getKalturaMsgObject( 'mwe-embedplayer-missing-source' );
+			var errorObj = this.getVidiunMsgObject( 'mwe-embedplayer-missing-source' );
 
 			// Support no sources custom error msg:
 			$this.trigger( 'NoSourcesCustomError', function( customErrorMsg ){
@@ -1465,7 +1465,7 @@
 
 		showWrongReferenceIdMessege: function(){
 			var $this = $( this );
-			var errorObj = this.getKalturaMsgObject( 'mwe-embedplayer-wrong-reference-id' );
+			var errorObj = this.getVidiunMsgObject( 'mwe-embedplayer-wrong-reference-id' );
 
 			// Support wrong reference id custom error msg:
 			$this.trigger( 'WrongReferenceIdCustomError', function( customErrorMsg ){
@@ -2724,7 +2724,7 @@
 			} else if( timeUrls == 'flash' ){
 				if( this.mediaElement.selectedSource && this.mediaElement.selectedSource.URLTimeEncoding){
 					// see if the current selected player is flash:
-					return ( this.instanceOf == 'Kplayer' );
+					return ( this.instanceOf == 'Vplayer' );
 				}
 			} else {
 				mw.log("Error:: invalid config value for EmbedPlayer.EnableURLTimeEncoding:: " + mw.getConfig('EmbedPlayer.EnableURLTimeEncoding') );
@@ -2779,7 +2779,7 @@
 		},
 
 		isDVR: function() {
-			return this.kalturaPlayerMetaData[ 'dvrStatus' ];
+			return this.vidiunPlayerMetaData[ 'dvrStatus' ];
 		},
 
 		disableComponentsHover: function(){

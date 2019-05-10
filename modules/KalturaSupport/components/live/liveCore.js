@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'liveCore', mw.KBasePlugin.extend({
+	mw.PluginManager.add( 'liveCore', mw.VBasePlugin.extend({
 
 		firstPlay : false,
 		/**
@@ -42,7 +42,7 @@
 			this.extendApi();
 		},
 		/**
-		 * Extend JS API to match the KDP
+		 * Extend JS API to match the VDP
 		 */
 		extendApi: function() {
 			var _this = this;
@@ -91,7 +91,7 @@
 						if ( !_this.dvrWindow ) {
 							_this.dvrWindow = this.defaultDVRWindow;
 						}
-						if ( kWidget.isIOS() ) {
+						if ( vWidget.isIOS() ) {
 							embedPlayer.setDuration( _this.dvrWindow );
 						}
 						showComponentsArr.push( 'scrubber', 'durationLabel', 'currentTimeLabel' );
@@ -140,7 +140,7 @@
 						if ( !_this.onAirStatus ) {
 							//remember last state
 							_this.playWhenOnline = embedPlayer.isPlaying();
-							embedPlayer.layoutBuilder.displayAlert( { title: embedPlayer.getKalturaMsg( 'ks-LIVE-STREAM-OFFLINE-TITLE' ), message: embedPlayer.getKalturaMsg( 'ks-LIVE-STREAM-OFFLINE' ), keepOverlay: true } );
+							embedPlayer.layoutBuilder.displayAlert( { title: embedPlayer.getVidiunMsg( 'vs-LIVE-STREAM-OFFLINE-TITLE' ), message: embedPlayer.getVidiunMsg( 'vs-LIVE-STREAM-OFFLINE' ), keepOverlay: true } );
 							_this.getPlayer().disablePlayControls();
 						}
 					}, _this.getConfig( 'offlineAlertOffest' ) );
@@ -182,7 +182,7 @@
 				}
 			});
 
-			if ( kWidget.isIOS() ) {
+			if ( vWidget.isIOS() ) {
 				this.bind( 'timeupdate' , function() {
 					var curTime = embedPlayer.getPlayerElementTime();
 
@@ -285,7 +285,7 @@
 		 * relevant only on iOS and if updateIOSPauseTime flag is true
 		 */
 		shouldHandlePausedMonitor: function() {
-			if ( kWidget.isIOS() && this.getConfig('updateIOSPauseTime') ) {
+			if ( vWidget.isIOS() && this.getConfig('updateIOSPauseTime') ) {
 				return true;
 			}
 			return false;
@@ -345,19 +345,19 @@
 
 			var service = 'liveStream';
 			//type liveChannel
-			if ( embedPlayer.kalturaPlayerMetaData && embedPlayer.kalturaPlayerMetaData.type == 8 ) {
+			if ( embedPlayer.vidiunPlayerMetaData && embedPlayer.vidiunPlayerMetaData.type == 8 ) {
 				service = 'liveChannel';
 			}
 			var protocol = 'hls';
 			if ( embedPlayer.streamerType != 'http' ) {
 				protocol = embedPlayer.streamerType;
 			}
-			_this.getKalturaClient().doRequest( {
+			_this.getVidiunClient().doRequest( {
 				'service' : service,
 				'action' : 'islive',
-				'id' : embedPlayer.kentryid,
+				'id' : embedPlayer.ventryid,
 				'protocol' : protocol,
-				'partnerId': embedPlayer.kpartnerid,
+				'partnerId': embedPlayer.vpartnerid,
 				'timestamp' : Date.now()
 			}, function( data ) {
 				var onAirStatus = false;
@@ -368,14 +368,14 @@
 					callback( onAirStatus );
 				}
 				embedPlayer.triggerHelper( 'liveStreamStatusUpdate', { 'onAirStatus' : onAirStatus } );
-			},mw.getConfig("SkipKSOnIsLiveRequest") );
+			},mw.getConfig("SkipVSOnIsLiveRequest") );
 		},
 
-		getKalturaClient: function() {
-			if( ! this.kClient ) {
-				this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+		getVidiunClient: function() {
+			if( ! this.vClient ) {
+				this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 			}
-			return this.kClient;
+			return this.vClient;
 		},
 
 		log: function( msg ) {

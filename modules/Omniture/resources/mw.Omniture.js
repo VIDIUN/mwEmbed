@@ -44,7 +44,7 @@ mw.Omniture.prototype = {
  	},
  	getConfig: function( key ){
  		// Make sure all the config takes flash override values or what's in the uiconf
- 		return this.embedPlayer.getKalturaConfig( this.pluginName, key );
+ 		return this.embedPlayer.getVidiunConfig( this.pluginName, key );
  	},
  	loadSCode: function( callback ){
  		var sCodePath = this.getConfig ( 'sCodePath' ) || mw.getConfig('Omniture.ScodePath');
@@ -142,7 +142,7 @@ mw.Omniture.prototype = {
 
  	},
  	getUiConfName: function(){
- 		// NOTE: the KDP version access cp.vo.kuiConf.name ... We don't have that in html5.
+ 		// NOTE: the VDP version access cp.vo.vuiConf.name ... We don't have that in html5.
  		return 'localPlayer'
  	},
  	getMediaMapping: function(){
@@ -202,7 +202,7 @@ mw.Omniture.prototype = {
  				case 'doluk':
  					var refId = _this.embedPlayer.evaluate( '{mediaProxy.entry.referenceId}' )
  					if( !refId ) 
- 						refId = _this.embedPlayer.kentryid;
+ 						refId = _this.embedPlayer.ventryid;
  					return [g('SiteSection'), g('PropertyCode'), 
  						g('ContentType'),  g('ShortTitle').substr(0,30), 
  						parseInt( _this.embedPlayer.getDuration() ), 
@@ -238,7 +238,7 @@ mw.Omniture.prototype = {
  			);
  		});
  		embedPlayer.addJsListener( 'playerSeekEnd', function(){
- 			// kdp includes a "media.play" call on seek end.
+ 			// vdp includes a "media.play" call on seek end.
  			_this.runMediaCommand( 'play',
  				_this.getMediaName(),
 				_this.getCurrentTime()
@@ -394,9 +394,9 @@ mw.Omniture.prototype = {
 			}
 			var propsAndEvars = _this.getPropsAndEvars( eventName );
 			// Add the binding:
-			var kEventName = eventName.replace( 'Event', '');
-			embedPlayer.addJsListener( kEventName, function(){
-				_this.sendNotification( eventId, kEventName );
+			var vEventName = eventName.replace( 'Event', '');
+			embedPlayer.addJsListener( vEventName, function(){
+				_this.sendNotification( eventId, vEventName );
 			});
 		});
  	},

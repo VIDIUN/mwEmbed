@@ -1,12 +1,12 @@
 <?php
 
-require_once(dirname(__FILE__) . '/kBaseCacheWrapper.php');
+require_once(dirname(__FILE__) . '/vBaseCacheWrapper.php');
 
 /**
  * @package infra
  * @subpackage cache
  */
-class kApcCacheWrapper extends kBaseCacheWrapper
+class vApcCacheWrapper extends vBaseCacheWrapper
 {
 	/**
 	 * @return bool false on error
@@ -19,7 +19,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 	}
 
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::get()
+	 * @see vBaseCacheWrapper::get()
 	 */
 	public function get($key)
 	{
@@ -27,7 +27,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 	}
 		
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::set()
+	 * @see vBaseCacheWrapper::set()
 	 */
 	public function set($key, $var, $expiry = 0)
 	{
@@ -35,7 +35,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::multiGet()
+	 * @see vBaseCacheWrapper::multiGet()
 	 */
 	public function multiGet($keys)
 	{
@@ -44,7 +44,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 
 
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::delete()
+	 * @see vBaseCacheWrapper::delete()
 	 */
 	public function delete($key)
 	{
@@ -52,7 +52,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::increment()
+	 * @see vBaseCacheWrapper::increment()
 	 */
 	public function increment($key, $delta = 1)
 	{
@@ -60,7 +60,7 @@ class kApcCacheWrapper extends kBaseCacheWrapper
 	}
 	
 	/* (non-PHPdoc)
-	 * @see kBaseCacheWrapper::decrement()
+	 * @see vBaseCacheWrapper::decrement()
 	 */
 	public function decrement($key, $delta = 1)
 	{

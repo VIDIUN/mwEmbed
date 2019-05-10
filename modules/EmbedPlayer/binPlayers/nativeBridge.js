@@ -39,7 +39,7 @@ NativeBridge.videoPlayer = NativeBridge.videoPlayer  || {
 	isJsCallbackReady: false,
 	bindPostfix: ".nativeBridge",
 
-	playerMethods: [ 'stop', 'play', 'pause', 'setPlayerSource', 'bindPlayerEvents', 'showNativePlayer', 'hideNativePlayer', 'toggleFullscreen', 'notifyKPlayerEvent', 'notifyKPlayerEvaluated', 'notifyJsReady',
+	playerMethods: [ 'stop', 'play', 'pause', 'setPlayerSource', 'bindPlayerEvents', 'showNativePlayer', 'hideNativePlayer', 'toggleFullscreen', 'notifyVPlayerEvent', 'notifyVPlayerEvaluated', 'notifyJsReady',
 		'doneFSBtnPressed', 'addNativeAirPlayButton', 'showNativeAirPlayButton', 'hideNativeAirPlayButton'],
 
 	registePlayer: function (proxyElement) {
@@ -92,14 +92,14 @@ NativeBridge.videoPlayer = NativeBridge.videoPlayer  || {
 	addJsListener: function( eventName ){
 		var _this = this;
 		this.embedPlayer.addJsListener( eventName + this.bindPostfix, function( val ) {
-			_this.embedPlayer.getPlayerElement().notifyKPlayerEvent( [ eventName, _this.getObjectString( val ) ] );
+			_this.embedPlayer.getPlayerElement().notifyVPlayerEvent( [ eventName, _this.getObjectString( val ) ] );
 		});
 	},
 	removeJsListener: function( eventName ) {
 		this.embedPlayer.removeJsListener( eventName + this.bindPostfix );
 	},
-	setKDPAttribute: function( host, prop, value ) {
-		this.embedPlayer.setKDPAttribute( host, prop, value );
+	setVDPAttribute: function( host, prop, value ) {
+		this.embedPlayer.setVDPAttribute( host, prop, value );
 	},
 	/**
 	 * will evaluate given expression and send the resulted value back to native code with the given callbackName
@@ -108,7 +108,7 @@ NativeBridge.videoPlayer = NativeBridge.videoPlayer  || {
 	 */
 	asyncEvaluate: function( expression, callbackName ) {
 		var result = this.embedPlayer.evaluate( expression );
-		this.embedPlayer.getPlayerElement().notifyKPlayerEvaluated( [ callbackName, this.getObjectString( result ) ]);
+		this.embedPlayer.getPlayerElement().notifyVPlayerEvaluated( [ callbackName, this.getObjectString( result ) ]);
 	},
 	//this function should be called from IOS/Andorid
 	trigger: function (eventName, eventValue) {
@@ -169,7 +169,7 @@ NativeBridge.videoPlayer = NativeBridge.videoPlayer  || {
 
 if ( mw.getConfig('EmbedPlayer.ForceNativeComponent') === true ) {
 	window["NativeBridge"] = NativeBridge;
-	kWidget.addReadyCallback(  function() {
+	vWidget.addReadyCallback(  function() {
 		NativeBridge.videoPlayer.isJsCallbackReady = true;
 		NativeBridge.videoPlayer.notifyJsReadyFunc();
 	} );

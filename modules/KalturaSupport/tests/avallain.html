@@ -2,22 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	  <title>Kaltura</title>
+	  <title>Vidiun</title>
 	  <script type="text/javascript" src="http://solisoft.net/avallain/lib/third-party/jquery-1.7.1.min.js"></script>
-	  <script type="text/javascript" src="http://www.kaltura.com/p/1017902/sp/1126929100/embedIframeJs/uiconf_id/11098452/partner_id/1269291"></script>
+	  <script type="text/javascript" src="http://www.vidiun.com/p/1017902/sp/1126929100/embedIframeJs/uiconf_id/11098452/partner_id/1269291"></script>
     
   </head>
   <body>
     <script>
       
-      var kdp;
+      var vdp;
       var seekandplay = false;
       
       window["playerSeekEnd"] = function(val) {
         $("#logs").prepend("<div>Seek END: "+val+"</div>");
         if(seekandplay) {
           setTimeout(function() {
-            kdp.sendNotification("doPlay");
+            vdp.sendNotification("doPlay");
           }, 500);
         }
         seekandplay = false;
@@ -31,14 +31,14 @@
       window["playerUpdatePlayhead"] = function(val) {
         $("#logs").prepend("<div>playerUpdatePlayhead: "+val+"</div>");
       }
-      window["kdpReady"] = function(val) {
-        $("#logs").prepend("<div>kdpReady: "+val+"</div>");
+      window["vdpReady"] = function(val) {
+        $("#logs").prepend("<div>vdpReady: "+val+"</div>");
       }
       
       
       $(function() {
-        mw.setConfig("KalturaSupport.LeadWithHTML5", true);
-        kWidget.embed({
+        mw.setConfig("VidiunSupport.LeadWithHTML5", true);
+        vWidget.embed({
         	'targetId': "testaudio",
         	'partnerId': '1269291',
         	'wid': '_1269291',
@@ -53,38 +53,38 @@
         		'EmbedPlayer.OverlayControls': false
           },
           readyCallback: function( pID ){
-    	      kdp = document.getElementById(pID);
-    	      kdp.addJsListener("playerSeekEnd", "playerSeekEnd");
-    	      kdp.addJsListener("playerSeekStart", "playerSeekStart");
-    	      kdp.addJsListener("playerStateChange", "playerStateChange");    	   
-            kdp.addJsListener("playerUpdatePlayhead", "playerUpdatePlayhead");    	   
-            kdp.addJsListener("kdpReady", "kdpReady");    	   
+    	      vdp = document.getElementById(pID);
+    	      vdp.addJsListener("playerSeekEnd", "playerSeekEnd");
+    	      vdp.addJsListener("playerSeekStart", "playerSeekStart");
+    	      vdp.addJsListener("playerStateChange", "playerStateChange");    	   
+            vdp.addJsListener("playerUpdatePlayhead", "playerUpdatePlayhead");    	   
+            vdp.addJsListener("vdpReady", "vdpReady");    	   
                
 	        }
         });	
         $("#play").on("click", function() {
-          kdp.sendNotification("doPlay");          
+          vdp.sendNotification("doPlay");          
         });
         $("#pause").on("click", function() {
-          kdp.sendNotification("doPause");          
+          vdp.sendNotification("doPause");          
         });
         $("#seek").on("click", function() {
           seekandplay = true;
-          kdp.sendNotification("doSeek", 7);         
+          vdp.sendNotification("doSeek", 7);         
        
         });
         $("#seek2").on("click", function() {
-          kdp.sendNotification("doStop"); 
+          vdp.sendNotification("doStop"); 
           setTimeout(function() {
             seekandplay = true;
-            kdp.sendNotification("doSeek", 17);         
+            vdp.sendNotification("doSeek", 17);         
           }, 500);        
           
          
         });
         
         $("#stop").on("click", function() {
-          kdp.sendNotification("doStop");
+          vdp.sendNotification("doStop");
         });
         
       });

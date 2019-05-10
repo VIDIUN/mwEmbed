@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'largePlayBtn', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'largePlayBtn', mw.VBaseComponent.extend({
 		//indicates we were explicitly asked to show the button (will be used when re-enabling the button)
 		shouldShow : false,
 		isDisabled: false,

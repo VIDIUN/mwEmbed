@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of KalturaResultEntry
+ * Description of VidiunResultEntry
  *
  * @author ran
  */
@@ -65,10 +65,10 @@ class EntryResult {
 	}
 	
 	function getEntryResultFromApi(){
-		global $wgKalturaApiFeatures;
+		global $wgVidiunApiFeatures;
 
 		// Check if the API supports entryRedirect feature
-		$supportsEntryRedirect = isset($wgKalturaApiFeatures['entryRedirect']) ? $wgKalturaApiFeatures['entryRedirect'] : false;
+		$supportsEntryRedirect = isset($wgVidiunApiFeatures['entryRedirect']) ? $wgVidiunApiFeatures['entryRedirect'] : false;
 
 		$client = $this->client->getClient();
 		// define resultObject prior to try catch call
@@ -80,9 +80,9 @@ class EntryResult {
 			if( $this->request->noCache ) {
 				$client->addParam( $params, "nocache",  true );
 			}
-			$namedMultiRequest = new KalturaNamedMultiRequest( $client, $params );
+			$namedMultiRequest = new VidiunNamedMultiRequest( $client, $params );
 
-			$filter = new KalturaBaseEntryFilter();
+			$filter = new VidiunBaseEntryFilter();
 			if( ! $this->request->getEntryId() && $this->request->getReferenceId() ) {
 				$filter->referenceIdEqual = $this->request->getReferenceId();
 			} else if( $supportsEntryRedirect && $this->request->getFlashVars('disableEntryRedirect') !== true ){
@@ -94,7 +94,7 @@ class EntryResult {
 			// Get entryId from the baseEntry request response
 			$entryId = '{' . $baseEntryIdx . ':result:objects:0:id}';
 
-			// Access control NOTE: kaltura does not use http header spelling of Referer instead kaltura uses: "referrer"
+			// Access control NOTE: vidiun does not use http header spelling of Referer instead vidiun uses: "referrer"
 			$filter = $this->getACFilter();
 			$params = array( 
 				"contextDataParams" => $filter,
@@ -105,17 +105,17 @@ class EntryResult {
 			// Entry Custom Metadata
 			// Always get custom metadata for now 
 			//if( $this->uiconf->getPlayerConfig(false, 'requiredMetadataFields') ) {
-				$filter = new KalturaMetadataFilter();
-				$filter->orderBy = KalturaMetadataOrderBy::CREATED_AT_ASC;
+				$filter = new VidiunMetadataFilter();
+				$filter->orderBy = VidiunMetadataOrderBy::CREATED_AT_ASC;
 				$filter->objectIdEqual = $entryId;
-				$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::ENTRY;
+				$filter->metadataObjectTypeEqual = VidiunMetadataObjectType::ENTRY;
 				// Check if metadataProfileId is defined
 				$metadataProfileId = $this->uiconf->getPlayerConfig( false, 'metadataProfileId' );
 				if( $metadataProfileId ){
 					$filter->metadataProfileIdEqual = $metadataProfileId;
 				}
 				
-				$metadataPager =  new KalturaFilterPager();
+				$metadataPager =  new VidiunFilterPager();
 				$metadataPager->pageSize = 1;
 				$params = array( 'filter' => $filter, 'metadataPager', $metadataPager );
 				$namedMultiRequest->addNamedRequest( 'entryMeta', 'metadata_metadata', 'list', $params );
@@ -124,8 +124,8 @@ class EntryResult {
 			// Entry Cue Points
 			// Always get Cue Points for now
 			//if( $this->uiconf->getPlayerConfig(false, 'getCuePointsData') !== false ) {
-				$filter = new KalturaCuePointFilter();
-				$filter->orderBy = KalturaAdCuePointOrderBy::START_TIME_ASC;
+				$filter = new VidiunCuePointFilter();
+				$filter->orderBy = VidiunAdCuePointOrderBy::START_TIME_ASC;
 				$filter->entryIdEqual = $entryId;
 
 				$params = array( 'filter' => $filter );
@@ -138,7 +138,7 @@ class EntryResult {
 			
 		} catch( Exception $e ){
 			// Update the Exception and pass it upward
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 			return array();
 		}
 
@@ -151,9 +151,9 @@ class EntryResult {
 			$resultObject['meta'] = array();
 		}
 
-		// Check that the ks was valid on the first response ( flavors ) 
-		if( is_array( $resultObject['meta'] ) && isset( $resultObject['meta']['code'] ) && $resultObject['meta']['code'] == 'INVALID_KS' ){
-			$this->error = 'Error invalid KS';
+		// Check that the vs was valid on the first response ( flavors ) 
+		if( is_array( $resultObject['meta'] ) && isset( $resultObject['meta']['code'] ) && $resultObject['meta']['code'] == 'INVALID_VS' ){
+			$this->error = 'Error invalid VS';
 			return array();
 		}
 		
@@ -186,7 +186,7 @@ class EntryResult {
 		return $resultObject;
 	}
 	public function getACFilter(){
-		$filter = new KalturaEntryContextDataParams();
+		$filter = new VidiunEntryContextDataParams();
 		$filter->referrer = $this->request->getReferer();
 		$filter->userAgent = $this->request->getUserAgent();
 		$filter->flavorTags = 'all';
@@ -203,7 +203,7 @@ class EntryResult {
 	*/
 	public function isAccessControlAllowed( $resultObject = null ) {
 			
-		// Kaltura only has entry level access control not playlist level access control atm: 
+		// Vidiun only has entry level access control not playlist level access control atm: 
 		// don't check anything without an entry_id
 		/*if( !$this->request->getEntryId() ){
 			return true;
@@ -256,7 +256,7 @@ class EntryResult {
 		if( $accessControl->isSessionRestricted && 
 				( $accessControl->previewLength == -1 || $accessControl->previewLength == null ) )
 		{
-			return "No KS where KS is required\nWe're sorry, access to this content is restricted.";
+			return "No VS where VS is required\nWe're sorry, access to this content is restricted.";
 		}
 
 		if( $accessControl->isScheduledNow === 0 || $accessControl->isScheduledNow === false ) {

@@ -4,7 +4,7 @@
 *
 * it requires a partner_id and a uiconf_id 
 */
-require_once( dirname( __FILE__ ) . '/../KalturaCommon.php' );
+require_once( dirname( __FILE__ ) . '/../VidiunCommon.php' );
 
 $wgMwEmbedApiServices['uiconfJs'] = 'mweApiUiConfJs';
 
@@ -24,7 +24,7 @@ class mweApiUiConfJs {
 	
 	function run(){
 		global $wgEnableScriptDebug;
-		$o = "/* kaltura uiConfJS loader */\n";
+		$o = "/* vidiun uiConfJS loader */\n";
 		// get the checkUserAgentPlayerRules call if present in plugins
 		$o.= $this->getUserAgentPlayerRules();
 		// Get on page javascript: 
@@ -73,11 +73,11 @@ class mweApiUiConfJs {
 		$key = $this->request->getWidgetId() . '-' . $this->request->getUiConfId();
 		$flashVars = $this->request->getFlashVars();
 		unset($flashVars['swid']);
-		ksort($flashVars);
+		vsort($flashVars);
 		return $key . '-' . md5(http_build_query($flashVars));
 	}
 	function resolvePath( $path ){
-		global $wgKalturaPSHtml5SettingsPath, $wgBaseMwEmbedPath;
+		global $wgVidiunPSHtml5SettingsPath, $wgBaseMwEmbedPath;
 		if( strpos( $path, '{onPagePluginPath}' ) !== 0 
 			&&
 			strpos( $path, '{html5ps}' ) !== 0 
@@ -86,11 +86,11 @@ class mweApiUiConfJs {
 		}
 		if( strpos( $path, '{onPagePluginPath}' )  === 0 ){
 			$path = str_replace( '{onPagePluginPath}', '', $path);
-			$fullPath = $wgBaseMwEmbedPath . '/kWidget/onPagePlugins' . $path;
+			$fullPath = $wgBaseMwEmbedPath . '/vWidget/onPagePlugins' . $path;
 			return $fullPath;	
 		}
 		if( strpos( $path, '{html5ps}' ) === 0 ){
-			$basePsPath =  realpath( dirname( $wgKalturaPSHtml5SettingsPath ) . '/../ps/' );
+			$basePsPath =  realpath( dirname( $wgVidiunPSHtml5SettingsPath ) . '/../ps/' );
 			return realpath( str_replace('{html5ps}', $basePsPath, $path) );
 		}
 		return $path; 
@@ -140,7 +140,7 @@ class mweApiUiConfJs {
 		// css does not need any special handling either way: 
 		// TODO package in css resources
 		foreach( $cssSet as $cssFile ){
-			$o.='kWidget.appendCssUrl(\'' . $this->utility->getExternalResourceUrl( $cssFile ) . "');\n";
+			$o.='vWidget.appendCssUrl(\'' . $this->utility->getExternalResourceUrl( $cssFile ) . "');\n";
 		}
 		
 		// Always Output the mwEmbedLoader javascript inline ( if possible ) to be minified and gziped above )
@@ -151,7 +151,7 @@ class mweApiUiConfJs {
 				// Should be a file inside the mwEmbed repo:
 				strpos( realpath( $fullPath ), realpath( $wgBaseMwEmbedPath ) ) !== 0 
 				&&
-				// Or should be a file in the kwidget-ps repo:
+				// Or should be a file in the vwidget-ps repo:
 				strpos( $filePath, '{html5ps}' ) !== 0
 			){
 				// error attempted directory traversal:
@@ -171,7 +171,7 @@ class mweApiUiConfJs {
 			}
 		}
 		// output the remaining assets via appendScriptUrls
-		$o.= "\n" . 'kWidget.appendScriptUrls( [';
+		$o.= "\n" . 'vWidget.appendScriptUrls( [';
 		$coma = '';
 		foreach( $scriptSet as $script ){
 			$o.= $coma . '"' . $this->utility->getExternalResourceUrl( $script ) . "\"\n";
@@ -187,7 +187,7 @@ class mweApiUiConfJs {
 		
 		// check if we need jQuery wrap all the output in a conditional include ( if its not already on the page ) 
 		if( $requiresJQuery ){
-			$o = "kWidget.jQueryLoadCheck( function( $, jQuery ){ \n" . $o . "\n});";
+			$o = "vWidget.jQueryLoadCheck( function( $, jQuery ){ \n" . $o . "\n});";
 		}
 		return $o;
 	}
@@ -234,7 +234,7 @@ class mweApiUiConfJs {
 					}
 				}
 			}
-			$o.= 'kWidget.userAgentPlayerRules[\'' . $this->getResultObject()->request->getUiConfId() . '\'] = ' . json_encode( $rulesObject );
+			$o.= 'vWidget.userAgentPlayerRules[\'' . $this->getResultObject()->request->getUiConfId() . '\'] = ' . json_encode( $rulesObject );
 		}
 		return $o;
 	}
@@ -272,14 +272,14 @@ class mweApiUiConfJs {
 		die( '/* Error: ' . $error . ' */' );
 	}
 	function sendHeaders(){
-		global $wgKalturaUiConfCacheTime, $wgEnableScriptDebug, $wgKalturaForceResultCache;
+		global $wgVidiunUiConfCacheTime, $wgEnableScriptDebug, $wgVidiunForceResultCache;
 
 		// Set content type to javascript:
 		header("Content-type: text/javascript");
 		
 		// UiConf js should always send expire headers:
 		$useCacheHeaders = !$wgEnableScriptDebug;
-		if( $wgKalturaForceResultCache === true){
+		if( $wgVidiunForceResultCache === true){
 			$useCacheHeaders = true;
 		}
 		
@@ -287,10 +287,10 @@ class mweApiUiConfJs {
 		if( $useCacheHeaders ){
 			$time = time();
 			header( 'Pragma: public' );
-			// Cache for $wgKalturaUiConfCacheTime
-			header( "Cache-Control: public, max-age=$wgKalturaUiConfCacheTime, max-stale=0");
+			// Cache for $wgVidiunUiConfCacheTime
+			header( "Cache-Control: public, max-age=$wgVidiunUiConfCacheTime, max-stale=0");
 			header( "Last-Modified: " . gmdate( "D, d M Y H:i:s", $time) . "GMT");
-			header( "Expires: " . gmdate( "D, d M Y H:i:s", $time + $wgKalturaUiConfCacheTime ) . " GM" );
+			header( "Expires: " . gmdate( "D, d M Y H:i:s", $time + $wgVidiunUiConfCacheTime ) . " GM" );
 		} else {
 			header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 			header("Pragma: no-cache");

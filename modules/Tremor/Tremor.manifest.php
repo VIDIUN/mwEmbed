@@ -11,7 +11,7 @@ return array (
 		100% brand-safe environments. The Acudeo income engine provides publishers easy access to multiple sources 
 		of revenue and the ability to manage and monetize every video impression. <a target="_new" href="http://tremorvideo.com/">More about Tremor</a>
 		<br> 
-		Kaltura supports a full Acudeo ad module integration for both HTML5 and Flash',
+		Vidiun supports a full Acudeo ad module integration for both HTML5 and Flash',
 		'attributes' => array(
 			'displayAdCountdown' => array(
 				'doc' => "If the ad countdown should be displayed.",

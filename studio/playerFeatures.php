@@ -98,7 +98,7 @@ $basePluginConfig = array(
 );
 
 $configRegister = array();
-global $wgMwEmbedEnabledModules, $wgKalturaPSHtml5SettingsPath, $wgBaseMwEmbedPath;
+global $wgMwEmbedEnabledModules, $wgVidiunPSHtml5SettingsPath, $wgBaseMwEmbedPath;
 foreach ($wgMwEmbedEnabledModules as $moduleName) {
     $manifestPath = $wgBaseMwEmbedPath . "/modules/$moduleName/{$moduleName}.manifest.php";
     if (is_file($manifestPath)) {
@@ -110,10 +110,10 @@ foreach ($wgMwEmbedEnabledModules as $moduleName) {
 }
 # Register all the onPage scripts:
 $configRegister = array_merge($configRegister,
-    include(realpath(dirname(__FILE__)) . '/../kWidget/onPagePlugins/onPagePlugins.manifest.php')
+    include(realpath(dirname(__FILE__)) . '/../vWidget/onPagePlugins/onPagePlugins.manifest.php')
 );
-# Register all kwidget-ps based scripts: ( if setup )
-$html5ManifestFile = realpath(dirname($wgKalturaPSHtml5SettingsPath) . '/ps/kwidget-ps.manifest.json');
+# Register all vwidget-ps based scripts: ( if setup )
+$html5ManifestFile = realpath(dirname($wgVidiunPSHtml5SettingsPath) . '/ps/vwidget-ps.manifest.json');
 if (is_file($html5ManifestFile)) {
     $json = json_decode(file_get_contents($html5ManifestFile), true);
     if ($json == null) {

@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'share', mw.KBaseScreen.extend({
+mw.PluginManager.add( 'share', mw.VBaseScreen.extend({
 
 	defaultConfig: {
 		parent: "topBarContainer",
@@ -48,14 +48,14 @@ mw.PluginManager.add( 'share', mw.KBaseScreen.extend({
 		return ( mw.getConfig( 'EmbedPlayer.IframeParentUrl') ) ?
 				mw.getConfig( 'EmbedPlayer.IframeParentUrl') : document.URL;
 	},
-	getKalturaShareURL: function(){
-		return mw.getConfig('Kaltura.ServiceUrl') + '/index.php/extwidget/preview' +
-				'/partner_id/' + this.getPlayer().kpartnerid +
-				'/uiconf_id/' + this.getPlayer().kuiconfid +
-				'/entry_id/' + this.getPlayer().kentryid + '/embed/dynamic';
+	getVidiunShareURL: function(){
+		return mw.getConfig('Vidiun.ServiceUrl') + '/index.php/extwidget/preview' +
+				'/partner_id/' + this.getPlayer().vpartnerid +
+				'/uiconf_id/' + this.getPlayer().vuiconfid +
+				'/entry_id/' + this.getPlayer().ventryid + '/embed/dynamic';
 	},
 	getSmartURL: function(){
-		var shareURL = this.getKalturaShareURL();
+		var shareURL = this.getVidiunShareURL();
 		if(  mw.getConfig('EmbedPlayer.IsFriendlyIframe') ){
 			try {
 				var $parentDoc = $( window['parent'].document );

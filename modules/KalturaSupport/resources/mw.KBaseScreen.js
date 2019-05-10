@@ -4,13 +4,13 @@
  * Base screen component that allow to show overlay on top of the player 
 **/
 
-mw.KBaseScreen = mw.KBaseComponent.extend({
+mw.VBaseScreen = mw.VBaseComponent.extend({
 
 	$screen: null,
 	templateData: null,
 	iconBtnClass: '',
 
-	// Returns KBaseComponent config with screen config
+	// Returns VBaseComponent config with screen config
 	getBaseConfig: function(){
 		var parentConfig = this._super();
 		return $.extend({}, parentConfig, {
@@ -21,7 +21,7 @@ mw.KBaseScreen = mw.KBaseComponent.extend({
 
 	_addBindings: function(){
 		var _this = this;
-		// Make sure we will call _addBindings on KBaseComponent
+		// Make sure we will call _addBindings on VBaseComponent
 		this._super();
 
 		this.bind('playerReady', $.proxy(function(){
@@ -165,7 +165,7 @@ mw.KBaseScreen = mw.KBaseComponent.extend({
 		}
 		return this.$screen;
 	},
-	// Override this method in plugins that extend KBaseScreen to attach DOM events to template
+	// Override this method in plugins that extend VBaseScreen to attach DOM events to template
 	addScreenBindings: function(){},
 	getComponent: function(){
 		if( !this.$el ) {

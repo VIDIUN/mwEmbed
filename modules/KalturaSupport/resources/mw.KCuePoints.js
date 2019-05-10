@@ -3,13 +3,13 @@
 */
 ( function( mw, $ ) { "use strict";
 
-mw.KCuePoints = function( embedPlayer ){
+mw.VCuePoints = function( embedPlayer ){
 	return this.init( embedPlayer );
 };
-mw.KCuePoints.prototype = {
+mw.VCuePoints.prototype = {
 
 	// The bind postfix:
-	bindPostfix: '.kCuePoints',
+	bindPostfix: '.vCuePoints',
 	midCuePointsArray: [],
 
 	init: function( embedPlayer ){
@@ -20,7 +20,7 @@ mw.KCuePoints.prototype = {
 		this.embedPlayer = embedPlayer;
 
 		// Process cue points
-		embedPlayer.bindHelper('KalturaSupport_CuePointsReady' + this.bindPostfix, function() {
+		embedPlayer.bindHelper('VidiunSupport_CuePointsReady' + this.bindPostfix, function() {
 			_this.processCuePoints();
 			// Add player bindings:
 			_this.addPlayerBindings();
@@ -70,7 +70,7 @@ mw.KCuePoints.prototype = {
 
 		if (requestArray.length){
 			// do the api request
-			this.getKalturaClient().doRequest( requestArray, function ( data ) {
+			this.getVidiunClient().doRequest( requestArray, function ( data ) {
 				// Validate result
 				$.each(data, function(index, res) {
 					if ( !_this.isValidResult( res ) ) {
@@ -80,17 +80,17 @@ mw.KCuePoints.prototype = {
 				$.each(thumbCuePoint, function(index, item){
 					item.thumbnailUrl = data[index];
 				});
-				_this.embedPlayer.triggerHelper( 'KalturaSupport_ThumbCuePointsReady' );
+				_this.embedPlayer.triggerHelper( 'VidiunSupport_ThumbCuePointsReady' );
 			} );
 		} else {
-			_this.embedPlayer.triggerHelper( 'KalturaSupport_ThumbCuePointsReady' );
+			_this.embedPlayer.triggerHelper( 'VidiunSupport_ThumbCuePointsReady' );
 		}
 	},
-	getKalturaClient: function() {
-		if( ! this.kClient ) {
-			this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+	getVidiunClient: function() {
+		if( ! this.vClient ) {
+			this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 		}
-		return this.kClient;
+		return this.vClient;
 	},
 	isValidResult: function( data ){
 		// Check if we got error
@@ -190,23 +190,23 @@ mw.KCuePoints.prototype = {
 		 * We used that property so that the different plugins will know the context of the ad
 		 * In case the cue point is not a adOpportunity their will be no context
 		 *
-		 * This matches the KDP implementation
+		 * This matches the VDP implementation
 		 * */
 		var cuePointWrapper = {
 			'cuePoint' : rawCuePoint
 		};
 		if( rawCuePoint.cuePointType == 'codeCuePoint.Code' || rawCuePoint.cuePointType == 'thumbCuePoint.Thumb' ) {
 			// Code type cue point ( make it easier for people grepping the code base for an event )
-			eventName = 'KalturaSupport_CuePointReached';
+			eventName = 'VidiunSupport_CuePointReached';
 		} else if( rawCuePoint.cuePointType == 'adCuePoint.Ad' ) {
 			// Ad type cue point
-			eventName = 'KalturaSupport_AdOpportunity';
+			eventName = 'VidiunSupport_AdOpportunity';
 			cuePointWrapper.context = this.getVideoAdType( rawCuePoint );
 		} else {
 			// Ignore all others cue points types
 			return ;
 		}
-		mw.log('mw.KCuePoints :: Trigger event: ' + eventName + ' - ' + rawCuePoint.cuePointType + ' at: ' + rawCuePoint.startTime );
+		mw.log('mw.VCuePoints :: Trigger event: ' + eventName + ' - ' + rawCuePoint.cuePointType + ' at: ' + rawCuePoint.startTime );
 		$( this.embedPlayer ).trigger(  eventName, cuePointWrapper );
 		// TOOD "midSequenceComplete"
 	},
@@ -220,7 +220,7 @@ mw.KCuePoints.prototype = {
 		} else {
 			return 'mid';
 		}
-		mw.log("Error:: KCuePoints could not determine adType");
+		mw.log("Error:: VCuePoints could not determine adType");
 	},
 	/**
 	 * Accept a cuePoint wrapper

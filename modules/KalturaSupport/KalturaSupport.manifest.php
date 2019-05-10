@@ -1,9 +1,9 @@
 <?php
 /**
- * The kaltura plugin manifest
+ * The vidiun plugin manifest
  */
 
-$kgDefaultComponentAttr = array(
+$vgDefaultComponentAttr = array(
 	'parent' => array(
 		'doc' => 'Parent container for component. Components include default placement, leave as null if unsure.',
 		'type' => 'enum',
@@ -48,7 +48,7 @@ $kgDefaultComponentAttr = array(
 );
 
 // list any duplicate attribute sets here:
-$kgDefaultCaptionAttr = array(
+$vgDefaultCaptionAttr = array(
 	'layout' => array(
 		'doc' => 'Layout mode for caption, on top of the video or below the video.',
 		'type' => 'enum',
@@ -120,8 +120,8 @@ $kgDefaultCaptionAttr = array(
 return array(
 	/*Captions */
 	'closedCaptions' => array(
-		'description' => 'Reach multi-lingual audience and comply with FCC regulations with Kaltura multi-lingual closed captions support.',
-		'attributes' => $kgDefaultCaptionAttr
+		'description' => 'Reach multi-lingual audience and comply with FCC regulations with Vidiun multi-lingual closed captions support.',
+		'attributes' => $vgDefaultCaptionAttr
 	),
 	'custom1BtnControllerScreen' => array(
 		'description' => 'Custom on screen button.',
@@ -249,7 +249,7 @@ return array(
 		)
 	),
 	'playlistAPI' => array(
-		'description' => 'The Kaltura playlist plugin, supports associating multiple clips in sequence.',
+		'description' => 'The Vidiun playlist plugin, supports associating multiple clips in sequence.',
 		'attributes' => array(
 			'autoContinue' => array(
 				'doc' => "If the playlist should autocontinue.",
@@ -262,22 +262,22 @@ return array(
 			'initItemEntryId' => array(
 				'doc' => "The entryId that should be played first."
 			),
-			'kpl0Url' => array(
-				'doc' => 'The playlist URL. (can be a Kaltura playlist service or MRSS)',
+			'vpl0Url' => array(
+				'doc' => 'The playlist URL. (can be a Vidiun playlist service or MRSS)',
 				'type' => 'url'
 			),
-			'kpl0Id' => array(
-				'doc' => "The kaltura playlist Id",
+			'vpl0Id' => array(
+				'doc' => "The vidiun playlist Id",
 				'type' => 'string'
 			),
-			'kpl0Name' => array(
+			'vpl0Name' => array(
 				'doc' => "The name of the playlist.",
 			),
-			'kpl1Url' => array(
+			'vpl1Url' => array(
 				'doc' => 'The N playlist URL.',
 				'type' => 'url'
 			),
-			'kpl1Name' => array(
+			'vpl1Name' => array(
 				'doc' => "The name of the indexed playlist.",
 			)
 		)
@@ -293,7 +293,7 @@ return array(
 	),
 
 	'localizationCode' => array(
-			'description'=> "Set the language of the Kaltura player user interface. Supports language code or <b>auto</b> to take the browser
+			'description'=> "Set the language of the Vidiun player user interface. Supports language code or <b>auto</b> to take the browser
 		requested language from JavaScript vars.",
 			'doc' => 'language code, or "auto" for browser content language preference',
 			'type' => 'string',
@@ -335,7 +335,7 @@ return array(
 	),
 	/* flavor selector */
 	'flavorComboControllerScreen' => array(
-		'description' => "The Kaltura flavor selector plugin.",
+		'description' => "The Vidiun flavor selector plugin.",
 	),
 	'sourceSelector' => array(
 		'description' => "Enables users to select the video quality.",
@@ -376,7 +376,7 @@ return array(
 	'download' => array(
 		'description' => "Enables users to add a download button to the player controls.
 			The download button will enable users to download the media to a local file.",
-		'attributes' => array_merge($kgDefaultComponentAttr,
+		'attributes' => array_merge($vgDefaultComponentAttr,
 			array(
 				'preferredBitrate' => array(
 					'doc' => "Preferred bitrate for the downloaded movie source. Keep empty for the highest bitrate",
@@ -471,7 +471,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 		)
 	),
 	'logo' => array(
-		'description' => "The Kaltura custom logo plugin.",
+		'description' => "The Vidiun custom logo plugin.",
 		'featureCheckbox' => true,
 		'attributes' => array(
 			'img'=> array(
@@ -496,7 +496,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 	),
 	/** legay support */
 	'mylogo' => array(
-		'description' => "The Kaltura custom logo plugin.",
+		'description' => "The Vidiun custom logo plugin.",
 		'attributes' => array(
 			'watermarkPath' => array(
 				'doc' => "URL path to plugin image.",
@@ -593,13 +593,13 @@ The playhead reflects segment time as if it was the natural stream length.",
 		'type' => 'featuremenu',
 		'label' => 'Share',
 		'model' => 'config.plugins.share',
-		'attributes' => array_merge($kgDefaultComponentAttr,
+		'attributes' => array_merge($vgDefaultComponentAttr,
 			array(
 				'socialShareURL' => array(
 					'doc' => "<p style='text-align: left'>Allows you to define the URL shared for this player:</p>
 						<ul style='text-align: left'>
 							<li><b>smart</b> will maximize inline social sharing playback, by using the
-								page URL or Kaltura URL, and depend on whether opengraph tags are present on the page</li>
+								page URL or Vidiun URL, and depend on whether opengraph tags are present on the page</li>
 							<li><b>parent</b> will share the parent page URL.</li>
 							<li><b>http://my-custom-domain.com/?v={mediaProxy.entry.id}</b> a custom URL with magic substitution can also be used.</li>
 						</ul>",
@@ -616,7 +616,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 	),
 	'watermark' => array(
 		'featureCheckbox' => true, // *NEW* - actually enabled even if undefined but can be disabled via this property
-		'description' => "The kaltura watermark plugin", // used for tooltip
+		'description' => "The vidiun watermark plugin", // used for tooltip
 		'type' => 'featuremenu', // *NEW* = renders as featuremenu also if undefined, but can be turned into submenu via this
 		'label' => 'Watermark', // *NEW*
 		'model' => 'config.plugins.watermark', //*NEW*
@@ -649,14 +649,14 @@ The playhead reflects segment time as if it was the natural stream length.",
 				'label' => 'Image URL', // *NEW*
 				'model' => 'config.plugins.watermark.img',
 				'doc' => "The URL path to the watermark image.",
-				'initvalue' => 'http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png',
+				'initvalue' => 'http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png',
 				'type' => 'url' //URL input validation still not implemented but very easy in anuglar - renders as text.
 			),
 			'watermarkClickPath' => array(
 				'label' => 'Click URL', // *NEW*
 				'model' => 'config.plugins.watermark.href',
 				'doc' => "The URL for the watermark click.",
-				'initvalue' => 'http://www.kaltura.com/',
+				'initvalue' => 'http://www.vidiun.com/',
 				'type' => 'url'
 			),
 			'padding' => array(
@@ -673,28 +673,28 @@ The playhead reflects segment time as if it was the natural stream length.",
 	),
 	/** statistics has global flashvar based configuration:  **/
 	'statistics' => array(
-		'description' => 'Use Kaltura statistics to
-		<a target="_new" href="http://knowledge.kaltura.com/creating-and-tracking-analytics-kmc-0">track analytics for the Kaltura player.</a>
+		'description' => 'Use Vidiun statistics to
+		<a target="_new" href="http://knowledge.vidiun.com/creating-and-tracking-analytics-vmc-0">track analytics for the Vidiun player.</a>
 		Statistics are enabled by default.',
 		'attributes' => array(
 			'trackEventMonitor' => array(
-				'doc' => "Use to audit Kaltura events with a named callback function.",
+				'doc' => "Use to audit Vidiun events with a named callback function.",
 				'type' => 'string'
 			)
 		)
 	),
 	// top level properties:
 	'playbackContext' => array(
-		'doc' => "The playback context sent to Kaltura analytics."
+		'doc' => "The playback context sent to Vidiun analytics."
 	),
 	'originFeature' => array(
-		'doc' => "The featureType var sent to Kaltura analytics."
+		'doc' => "The featureType var sent to Vidiun analytics."
 	),
 	'applicationName' => array(
-		'doc' => "For registering the application with Kaltura analytics.",
+		'doc' => "For registering the application with Vidiun analytics.",
 	),
 	'userId' => array(
-		'doc' => "For associating a userId with Kaltura analytics."
+		'doc' => "For associating a userId with Vidiun analytics."
 	),
 
 	/* external resources example plugin stub */
@@ -702,19 +702,19 @@ The playhead reflects segment time as if it was the natural stream length.",
 		'description' => "The external resources attributes can be applied to a custom plugin by any name. All number keys can be incremneted to load more resources. i.e onPageJs1 onPageJs2 onPageJs3 etc.",
 		"attributes" => array(
 			'onPageJs1' => array(
-				'doc' => "An onPage javascript file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Kaltura_OnPage_Plugins\">onPage plugins</a>",
+				'doc' => "An onPage javascript file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Vidiun_OnPage_Plugins\">onPage plugins</a>",
 				'type' => 'url',
 			),
 			'onPageCss1' => array(
-				'doc' => "An onPage CSS file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Kaltura_OnPage_Plugins\">onPage plugins</a>",
+				'doc' => "An onPage CSS file is loaded on the client page. More about <a href=\"http://html5video.org/wiki/Vidiun_OnPage_Plugins\">onPage plugins</a>",
 				'type' => 'url'
 			),
 			'iframeHTML5Js1' => array(
-				'doc' => "Javascript to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Kaltura_HTML5_Plugins\">html5 iframe plugins</a>",
+				'doc' => "Javascript to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Vidiun_HTML5_Plugins\">html5 iframe plugins</a>",
 				'type' => 'url'
 			),
 			'iframeHTML5Css' => array(
-				'doc' => "CSS to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Kaltura_HTML5_Plugins\">html5 iframe plugins</a>",
+				'doc' => "CSS to be loaded inside the iframe. More about <a href=\"http://html5video.org/wiki/Developing_Vidiun_HTML5_Plugins\">html5 iframe plugins</a>",
 				'type' => 'url'
 			)
 		)
@@ -783,7 +783,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 		'type' => 'boolean'
 	),
 	'bumper' => array(
-		'description' => "Bumpers, enables a Kaltura entry to be displayed before or after the content.",
+		'description' => "Bumpers, enables a Vidiun entry to be displayed before or after the content.",
 		"attributes" => array(
 			'bumperEntryID' => array(
 				'doc' => 'The entry id of the bumper to be played',
@@ -826,7 +826,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 				array('label' => 'Comp.', 'key' => 'comp', 'children' => array())),
 			'title' => 'Configuration'
 		),
-		'description' => "Kaltura player features robust VAST support for prerolls, midrolls, overlays, companions and postrolls",
+		'description' => "Vidiun player features robust VAST support for prerolls, midrolls, overlays, companions and postrolls",
 		"attributes" => array(
 			'prerollUrl' => array(
 				'doc' => "The VAST ad tag XML URL.",
@@ -1172,7 +1172,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 	),
 	'infoScreen' => array(
 		'description' => 'Add Information screen about the video.',
-		'attributes' => array_merge($kgDefaultComponentAttr,
+		'attributes' => array_merge($vgDefaultComponentAttr,
 			array(
 				'template' => array(
 					'doc' => 'HTML Template for the info screen.',
@@ -1216,7 +1216,7 @@ The playhead reflects segment time as if it was the natural stream length.",
 	),
 	'related' => array(
 		'description' => 'Add the Related Videos screen at the end of the video to attract users to watch additional videos.',
-		'attributes' => array_merge($kgDefaultComponentAttr,
+		'attributes' => array_merge($vgDefaultComponentAttr,
 			array(
 				'playlistId' => array(
 					'doc' => 'Playlist Id that will be used as the data source for related items.',

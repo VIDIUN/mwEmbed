@@ -405,7 +405,7 @@ mw.PlayerLayoutBuilder.prototype = {
 
 	initToolTips: function(){
 		// exit if not enabled
-		if( !this.embedPlayer.enableTooltips || kWidget.isIE8() ) {
+		if( !this.embedPlayer.enableTooltips || vWidget.isIE8() ) {
 			return;
 		}
 		var _this = this;
@@ -557,7 +557,7 @@ mw.PlayerLayoutBuilder.prototype = {
 		});
 
 		// IE8 does not trigger click events on Flash objects
-		if( (embedPlayer.adSiblingFlashPlayer || embedPlayer.instanceOf == 'Kplayer') && 
+		if( (embedPlayer.adSiblingFlashPlayer || embedPlayer.instanceOf == 'Vplayer') && 
 			(mw.isIE8() || mw.isIE9()) ){
 			embedPlayer.getVideoHolder().bind('mouseup', function(){
 				$( embedPlayer ).trigger('click');

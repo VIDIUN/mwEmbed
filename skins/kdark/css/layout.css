@@ -933,7 +933,7 @@ box-shadow:  0px 1px 0px rgba(0, 0, 0, 0.3);
     border: 0px;
 }
 
-.kaltura-logo {
+.vidiun-logo {
 	display: inline-block;
 	height: 100%;
 	margin: 0;
@@ -943,7 +943,7 @@ box-shadow:  0px 1px 0px rgba(0, 0, 0, 0.3);
 	border: 0;
 	background-position: 12px 6px;
 	background-repeat: no-repeat;
-	background-image: url(../images/kalturaLogo.png);
+	background-image: url(../images/vidiunLogo.png);
 }
 .playPauseBtn {
 	width: 3.3em;

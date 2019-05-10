@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'liveBackBtn', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'liveBackBtn', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',

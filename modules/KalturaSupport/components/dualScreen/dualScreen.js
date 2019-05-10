@@ -1,7 +1,7 @@
 (function ( mw, $ ) {
 	"use strict";
 
-	mw.PluginManager.add( 'dualScreen', mw.KBaseComponent.extend( {
+	mw.PluginManager.add( 'dualScreen', mw.VBaseComponent.extend( {
 
 			defaultConfig: {
 				'parent': 'videoHolder',
@@ -354,8 +354,8 @@
 					_this.sync( cuePoint);
 				} )
 
-				this.bind( 'KalturaSupport_ThumbCuePointsReady', function ( ) {
-					var cuePoints = _this.getPlayer().kCuePoints.getCuePoints();
+				this.bind( 'VidiunSupport_ThumbCuePointsReady', function ( ) {
+					var cuePoints = _this.getPlayer().vCuePoints.getCuePoints();
 					$.each( cuePoints, function ( index, cuePoint ) {
 						if ( $.inArray( _this.getConfig( 'cuePointType' ), cuePoint.cuePointType ) ) {
 							_this.cuePoints.push( cuePoint );
@@ -367,7 +367,7 @@
 					} );
 					_this.loadNext( _this.cuePoints[0] );
 				});
-				this.bind( 'KalturaSupport_CuePointReached', function ( e, cuePointObj ) {
+				this.bind( 'VidiunSupport_CuePointReached', function ( e, cuePointObj ) {
 					_this.sync( cuePointObj.cuePoint );
 				} );
 
@@ -706,7 +706,7 @@
 
 					var _this = this;
 					// do the api request
-					this.getKalturaClient().doRequest( {
+					this.getVidiunClient().doRequest( {
 						'service': 'thumbAsset',
 						'action': 'getUrl',
 						'id': assetId

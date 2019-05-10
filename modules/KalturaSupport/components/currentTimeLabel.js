@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'currentTimeLabel', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'currentTimeLabel', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",

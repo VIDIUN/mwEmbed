@@ -13,12 +13,12 @@ class mweLanguageSupport {
 		include( dirname( __FILE__ ) . '/../../EmbedPlayer/EmbedPlayer.i18n.php' );
 		$embedPlayerMessages = $messages;
 		
-		// get all the messages supported in KalturaSupport:
-		include( dirname( __FILE__ ) . '/../KalturaSupport.i18n.php' );
-		$kMessages = $messages;
+		// get all the messages supported in VidiunSupport:
+		include( dirname( __FILE__ ) . '/../VidiunSupport.i18n.php' );
+		$vMessages = $messages;
 
 		// sort language keys A-Z: 
-		ksort( $coreLanguageNames );
+		vsort( $coreLanguageNames );
 		$messageSupport = array();
 		// build support list array: 
 		foreach( $coreLanguageNames as $key => $name){
@@ -26,7 +26,7 @@ class mweLanguageSupport {
 			if( isset( $embedPlayerMessages[$key]) ){
 				$support = 'partial';
 			} 
-			if( isset( $kMessages[ $key ] ) ){
+			if( isset( $vMessages[ $key ] ) ){
 				$support = 'full';
 			}
 			$messageSupport[$key] = array( 

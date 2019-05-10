@@ -1,6 +1,6 @@
 /* Carousel Plugin
 <Plugin id="playlistAPI" width="0%" height="0%" includeInLayout="false"/>
-<Plugin id="related" path="http://projects.kaltura.com/nu/wwwCoBSchool/plugins/relatedPlugin.swf"
+<Plugin id="related" path="http://projects.vidiun.com/nu/wwwCoBSchool/plugins/relatedPlugin.swf"
 	width="100%" height="100" hoverItemName="" styleName="List_background_default" columnWidth="100"
 	rowHeight="100" columnCount="4" direction="horizontal" dataProvider="{playlistAPI.dataProvider}" itemRenderer="playlistItemRenderer" />
 */
@@ -75,8 +75,8 @@ embedPlayer.bindHelper( 'onpause' + _this.bindPostFix, function() {
 		addTitle: function() {
 			var embedPlayer = this.embedPlayer;
 			var videoName = '';
-			if ( embedPlayer.kalturaPlayerMetaData ) {
-				videoName = embedPlayer.kalturaPlayerMetaData.name;
+			if ( embedPlayer.vidiunPlayerMetaData ) {
+				videoName = embedPlayer.vidiunPlayerMetaData.name;
 			}
 			if ( !this.isCarouselDrawn ) {
 				var $titleContainer = $( '<div />' )
@@ -102,7 +102,7 @@ embedPlayer.bindHelper( 'onpause' + _this.bindPostFix, function() {
 buildCarousel: function() {
 			var _this = this;
 			var embedPlayer = this.embedPlayer;
-			if ( !embedPlayer.kalturaPlaylistData ) {
+			if ( !embedPlayer.vidiunPlaylistData ) {
 				return false;
 			}
 			$('#playlistContainer').hide();
@@ -112,8 +112,8 @@ buildCarousel: function() {
 			// Get all entries in the playlist
 			var entriesArray = [];
 
-			for ( var playlist_id in embedPlayer.kalturaPlaylistData ) {
-				entriesArray = $.merge( entriesArray, embedPlayer.kalturaPlaylistData[ playlist_id ].items );
+			for ( var playlist_id in embedPlayer.vidiunPlaylistData ) {
+				entriesArray = $.merge( entriesArray, embedPlayer.vidiunPlaylistData[ playlist_id ].items );
 			}
 
 			_this.numOfEntries = entriesArray.length;
@@ -353,7 +353,7 @@ buildCarousel: function() {
 };
 
 	// Bind to new player event
-   mw.addKalturaConfCheck( function( embedPlayer, callback){
+   mw.addVidiunConfCheck( function( embedPlayer, callback){
 		// Check if plugin exists
 		if( 
 			( 

@@ -21,8 +21,8 @@ authPage.prototype = {
 	
 	init: function(){
 		var _this = this;
-		// always reset validKsFlag on init: 
-		this.setValidKsFlag( "reset" );
+		// always reset validVsFlag on init: 
+		this.setValidVsFlag( "reset" );
 		// Receive messages: 
 		window.addEventListener("message", function( event){
 			_this.receiveMessage( event )
@@ -40,9 +40,9 @@ authPage.prototype = {
 			this.showLoginForm();
 			return ;
 		}
-		// if authenticated, validate the ks: 
-		this.validateKs( function( isValidKs ){
-			if( !isValidKs ){
+		// if authenticated, validate the vs: 
+		this.validateVs( function( isValidVs ){
+			if( !isValidVs ){
 				_this.showLoginForm(
 					"Your session has expired, please login"
 				);
@@ -58,7 +58,7 @@ authPage.prototype = {
 		var _this = this;
 		// check if the user has access to multiple accounts: 
 		this.api.doRequest( {
-			'ks': this.getAuthData( 'ks' ),
+			'vs': this.getAuthData( 'vs' ),
 			'service': 'partner',
 			'action' : 'listpartnersforuser'
 		}, function( result ){
@@ -121,7 +121,7 @@ authPage.prototype = {
 			$('<div>')
 			.addClass('login-header')
 			.append(
-				$("<img>").attr('src','kaltura-user-icon.png'),
+				$("<img>").attr('src','vidiun-user-icon.png'),
 				$('<span>').text( 'Hello, ' + this.getAuthData( 'fullName' ) )
 			),
 			$('<div>')
@@ -183,7 +183,7 @@ authPage.prototype = {
 			$('<div>')
 			.addClass('login-header')
 			.append(
-				$("<img>").attr('src','kaltura-user-icon.png'),
+				$("<img>").attr('src','vidiun-user-icon.png'),
 				$('<span>').text( 'Login to ' + document.domain )
 			),
 			$('<div>')
@@ -225,7 +225,7 @@ authPage.prototype = {
 				$('<a>')
 				.attr({
 					'target' : "_new",
-					'href': 'http://corp.kaltura.com/free-trial'
+					'href': 'http://corp.vidiun.com/free-trial'
 				})
 				.text( "Sign up"),
 				
@@ -251,21 +251,21 @@ authPage.prototype = {
 			_this.addFormError( data.message  );
 			return ;
 		}
-		var ks = data;
-		// success set the ks
-		_this.api.setKs( ks );
+		var vs = data;
+		// success set the vs
+		_this.api.setVs( vs );
 		// now get all the user data:
 		_this.loadUserData( 
 			_this.sessionLoginId,
-			ks,
+			vs,
 			function( data ){
 				if( data.code ){
 					_this.addFormError( data.message );
 					return ;
 				};
 				_this.setAuthData( data );
-				// set to valid KS since its "fresh user data"
-				_this.setValidKsFlag( true );
+				// set to valid VS since its "fresh user data"
+				_this.setValidVsFlag( true );
 				_this.showPartnerAndDomainUi();
 			}
 		)
@@ -324,35 +324,35 @@ authPage.prototype = {
 		})
 	},
 	/**
-	 * Validates the stored ks against the api, by re-loading ( private ) user data.
+	 * Validates the stored vs against the api, by re-loading ( private ) user data.
 	 */
-	requestingKS: false,
-	validateKs: function( callback ){
+	requestingVS: false,
+	validateVs: function( callback ){
 		var _this = this;
-		// check if we already have a valid KS:
-		if( _this.getAuthData('validKsFlag') !== "reset" ){
-			callback( _this.getAuthData('validKsFlag') );
+		// check if we already have a valid VS:
+		if( _this.getAuthData('validVsFlag') !== "reset" ){
+			callback( _this.getAuthData('validVsFlag') );
 			return ;
 		}
-		if( this.requestingKS ){
-			// ks is not yet valid, ( try again later ) 
+		if( this.requestingVS ){
+			// vs is not yet valid, ( try again later ) 
 			callback( false );
 			return 
 		}
 		// check if we have params to validate against: 
-		if( !this.getAuthData( 'email' ) && !this.getAuthData( 'ks' ) ){
+		if( !this.getAuthData( 'email' ) && !this.getAuthData( 'vs' ) ){
 			callback( false );
 			return;
 		}
-		this.requestingKS = true;
+		this.requestingVS = true;
 		this.loadUserData(
 			this.getAuthData( 'email' ),
-			this.getAuthData( 'ks' ),
+			this.getAuthData( 'vs' ),
 			function( data ){
-				// update ks flag state:
-				_this.setValidKsFlag( !data.code );
-				// done requesting KS ( but won't be checked because we set validKsFlag anyway )
-				_this.requestingKS = false;
+				// update vs flag state:
+				_this.setValidVsFlag( !data.code );
+				// done requesting VS ( but won't be checked because we set validVsFlag anyway )
+				_this.requestingVS = false;
 				// covert code defined into boolean and issue callback 
 				callback( !data.code  );
 			}
@@ -360,10 +360,10 @@ authPage.prototype = {
 	},
 	getApi: function( callback ){
 		var _this = this;
-		if( ! window['kWidget'] || !kWidget.api || !this.api ){
-			// load kWidget.api: 
+		if( ! window['vWidget'] || !vWidget.api || !this.api ){
+			// load vWidget.api: 
 			$.getScript( "../mwEmbedLoader.php", function(){
-				_this.api = new kWidget.api();
+				_this.api = new vWidget.api();
 				callback();
 			});
 		} else {
@@ -373,7 +373,7 @@ authPage.prototype = {
 	/**
 	 * Once we have logged in, load user data about current user
 	 */
-	loadUserData: function ( userId, ks, callback ){
+	loadUserData: function ( userId, vs, callback ){
 		var _this = this;
 		// get an api object 
 		this.getApi( function(){
@@ -381,28 +381,28 @@ authPage.prototype = {
 				'service': 'user',
 				'action': 'getbyloginid',
 				'loginId': userId,
-				'ks': ks
+				'vs': vs
 			}, function( data ){
 				 if( !data.code ){
-					// if data is valid ( add ks )
-					data['ks'] = ks;
+					// if data is valid ( add vs )
+					data['vs'] = vs;
 				}
 				callback( data );
 			});
 		});
 	},
-	// reset the "validKsFlag"
-	setValidKsFlag: function( value ){
+	// reset the "validVsFlag"
+	setValidVsFlag: function( value ){
 		var authData = this.getAuthData();
 		if( !authData ){
 			authData = {};
 		}
-		authData['validKsFlag'] = value;
+		authData['validVsFlag'] = value;
 		this.setAuthData( authData );
 	},
 	logout: function(){
 		// clear the local storage:
-		delete( localStorage['kaltura-auth-object'] );
+		delete( localStorage['vidiun-auth-object'] );
 		// show the login form:
 		this.showLoginForm();
 	},
@@ -414,7 +414,7 @@ authPage.prototype = {
 		return ( $.inArray( this.authRequestOrigin, domainList) !== -1 ) ? 'ALLOW': 'DENY';
 	},
 	getDomainList: function(){
-		var domainList = localStorage['kaltura-auth-domainList'];
+		var domainList = localStorage['vidiun-auth-domainList'];
 		if( domainList ){
 			domainList = JSON.parse( domainList );
 		} else {
@@ -429,7 +429,7 @@ authPage.prototype = {
 			domainList.splice( inx, 1 );
 		}
 		// update the local storage domain list: 
-		localStorage['kaltura-auth-domainList'] = JSON.stringify( domainList );
+		localStorage['vidiun-auth-domainList'] = JSON.stringify( domainList );
 	},
 	addApprovedDomain: function( domain ){
 		var domainList = this.getDomainList();
@@ -438,7 +438,7 @@ authPage.prototype = {
 			domainList.push( domain );
 		}
 		// update the local storage:
-		localStorage['kaltura-auth-domainList'] = JSON.stringify( domainList );
+		localStorage['vidiun-auth-domainList'] = JSON.stringify( domainList );
 		// send the updated data to client: 
 		this.setAuthData();
 	},
@@ -447,13 +447,13 @@ authPage.prototype = {
 			var userData = this.getAuthData();
 		}
 		//console.log( 'setAuthData::' + JSON.stringify( userData ) );
-		localStorage['kaltura-auth-object'] = JSON.stringify( userData );
+		localStorage['vidiun-auth-object'] = JSON.stringify( userData );
 	},
 	getAuthData: function( attr ){
 		var authObject = null;
-		if( localStorage && localStorage['kaltura-auth-object'] ){
+		if( localStorage && localStorage['vidiun-auth-object'] ){
 			try{
-				var authObject = JSON.parse( localStorage['kaltura-auth-object'] );
+				var authObject = JSON.parse( localStorage['vidiun-auth-object'] );
 			} catch ( e ){
 				// could not parse ( probably undeinfed )
 			}
@@ -467,19 +467,19 @@ authPage.prototype = {
 		return authObject;
 	},
 	/**
-	 * Checks if we are authenticated and have a valid ks. 
+	 * Checks if we are authenticated and have a valid vs. 
 	 */
 	isAuthenticated: function(){
 		// boolean of get user data:
 		return !! this.getAuthData();
 	},
 	/**
-	* Receive messages marked kaltura-auth-handshake and establish origin
+	* Receive messages marked vidiun-auth-handshake and establish origin
 	* */
 	receiveMessage: function( event ){
 		var _this = this;
-		// check for the only message we receive: "kaltura-auth-check"
-		if( event.data != 'kaltura-auth-check' ){
+		// check for the only message we receive: "vidiun-auth-check"
+		if( event.data != 'vidiun-auth-check' ){
 			return ;
 		}
 		//console.log("AuthPage:: ReceiveMessage: ", event);
@@ -506,15 +506,15 @@ authPage.prototype = {
 				})
 				return ;
 			}
-			// Check that KS has been validated: 
-			if( _this.getAuthData( 'validKsFlag' ) === true ){
+			// Check that VS has been validated: 
+			if( _this.getAuthData( 'validVsFlag' ) === true ){
 				clearInterval( userAuthPoll );
 				_this.sendUserObject();
 				return; 
 			}
-			// Else Validate KS:
-			_this.validateKs( function( isKsValid ){
-				if( isKsValid ){
+			// Else Validate VS:
+			_this.validateVs( function( isVsValid ){
+				if( isVsValid ){
 					clearInterval( userAuthPoll );
 					// success send user object:
 					_this.sendUserObject();
@@ -528,7 +528,7 @@ authPage.prototype = {
 	 */
 	sendUserObject: function(){
 		this.sendMessage( {
-			'ks' : this.getAuthData( 'ks' ),
+			'vs' : this.getAuthData( 'vs' ),
 			'partnerId':  this.getAuthData( 'partnerId' ),
 			'email': this.getAuthData( 'email' ),
 			'firstName': this.getAuthData( 'firstName' ),

@@ -6,7 +6,7 @@
 	var bumperPlugin = function( embedPlayer, callback ){
 		var bumpPostfix = '.Bumper';
 		// <plugin id="bumper" bumperentryid="1_187nvs4c" clickurl="http://www.nokia.com" playonce="false" presequence="1" width="100%" height="100%"></plugin>
-		var bumperConfig = embedPlayer.getKalturaConfig('bumper');
+		var bumperConfig = embedPlayer.getVidiunConfig('bumper');
 
 		// Convert the pre and post to ints:
 		bumperConfig.preSequence = parseInt( bumperConfig.preSequence );
@@ -30,7 +30,7 @@
 			embedPlayer.unbindHelper( bumpPostfix );
 
 			// Add the ad player:
-			var adPlayer = new mw.KAdPlayer( embedPlayer );
+			var adPlayer = new mw.VAdPlayer( embedPlayer );
 
 			// Get the bumper entryid
 			mw.log( "BumperPlugin::checkUiConf: get sources for " + bumperConfig.bumperEntryID);
@@ -38,10 +38,10 @@
 				'width': embedPlayer.getWidth(),
 				'height': embedPlayer.getHeight()
 			}
-			mw.getEntryIdSourcesFromApi( embedPlayer.kwidgetid, embedPlayer.kpartnerid, bumperConfig.bumperEntryID, size, function( sources ){
+			mw.getEntryIdSourcesFromApi( embedPlayer.vwidgetid, embedPlayer.vpartnerid, bumperConfig.bumperEntryID, size, function( sources ){
 				if( ! sources ){
 					// no sources error:
-					mw.log("Error: bumperPlugin: No sources for: " + embedPlayer.kwidgetid + ' entry: ' +  bumperConfig.bumperEntryID );
+					mw.log("Error: bumperPlugin: No sources for: " + embedPlayer.vwidgetid + ' entry: ' +  bumperConfig.bumperEntryID );
 					callback();
 					return ;
 				}
@@ -60,7 +60,7 @@
 				};
 
 				// Check for skip button
-				var skipBtn = embedPlayer.getRawKalturaConfig('skipBtn');
+				var skipBtn = embedPlayer.getRawVidiunConfig('skipBtn');
 				if( ! $.isEmptyObject( skipBtn ) ){
 					adConf.skipBtn = {
 						'text' : ( skipBtn['label'] )? skipBtn['label']: 'skip ad', // TODO i8ln
@@ -102,7 +102,7 @@
 		}
 	};
 
-	mw.addKalturaPlugin( 'bumper', function(embedPlayer, callback){
+	mw.addVidiunPlugin( 'bumper', function(embedPlayer, callback){
 		bumperPlugin( embedPlayer, callback );
 	});
 

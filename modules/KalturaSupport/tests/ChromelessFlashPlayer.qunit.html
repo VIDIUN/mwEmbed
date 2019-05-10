@@ -10,7 +10,7 @@
 <h2> Force Chromeless Flash player </h2>
 For testing the chromeless flash player across protocols you can force the chromless flash player interface with:
 <pre class="prettyprint linenums">
-	mw.setConfig( 'EmbedPlayer.ForceKPlayer', true );
+	mw.setConfig( 'EmbedPlayer.ForceVPlayer', true );
 </pre>
 <br />
 <div id="myVideoTarget" style="width:400px;height:300px;float:left">
@@ -18,18 +18,18 @@ For testing the chromeless flash player across protocols you can force the chrom
 <br>
 <script>
     // qunit:
-    function jsKalturaPlayerTest( videoId ){
+    function jsVidiunPlayerTest( videoId ){
         // Name this module
         module( "Chromless Flash player playback test" );
 
        //TODO add test
     }
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script>
-	mw.setConfig('Kaltura.LeadWithHTML5', true);
-    mw.setConfig( 'EmbedPlayer.ForceKPlayer', true );
-    kWidget.embed({
+	mw.setConfig('Vidiun.LeadWithHTML5', true);
+    mw.setConfig( 'EmbedPlayer.ForceVPlayer', true );
+    vWidget.embed({
         'targetId': 'myVideoTarget',
         'wid': '_243342',
         'uiconf_id' : '2890431',

@@ -51,9 +51,9 @@
         if( mw.getConfig('loadingSpinner') ) {
             options = mw.getConfig('loadingSpinner');
         }else{
-            // fix for IE where the config is not loaded yet - try to get the config from the kalturaIframePackageData
-            if (kalturaIframePackageData && kalturaIframePackageData.playerConfig && kalturaIframePackageData.playerConfig.plugins && kalturaIframePackageData.playerConfig.plugins.loadingSpinner){
-                options = kalturaIframePackageData.playerConfig.plugins.loadingSpinner;
+            // fix for IE where the config is not loaded yet - try to get the config from the vidiunIframePackageData
+            if (vidiunIframePackageData && vidiunIframePackageData.playerConfig && vidiunIframePackageData.playerConfig.plugins && vidiunIframePackageData.playerConfig.plugins.loadingSpinner){
+                options = vidiunIframePackageData.playerConfig.plugins.loadingSpinner;
             }
         }
 		if( options ) {

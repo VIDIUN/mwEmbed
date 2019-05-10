@@ -1,18 +1,18 @@
 /**
- * KWidget library provided embed layer services to html5 and flash players, as well as client side abstraction for some kaltura services.
+ * VWidget library provided embed layer services to html5 and flash players, as well as client side abstraction for some vidiun services.
  */
 (function(){
 // Use strict ECMAScript 5
 "use strict";
 
-// Don't re-initialize kWidget
-if( window.kWidget ){
+// Don't re-initialize vWidget
+if( window.vWidget ){
 	return ;
 }
 
-var kWidget = {
+var vWidget = {
 
-	//store the start time of the kwidget init
+	//store the start time of the vwidget init
 	startTime:{},
 
 	//store the load time of the player
@@ -45,7 +45,7 @@ var kWidget = {
 	// stored per player id
 	iframeAutoEmbedCache:{}, 
 	/**
-	 * The master kWidget setup function setups up bindings for rewrites and
+	 * The master vWidget setup function setups up bindings for rewrites and
 	 * proxy of jsCallbackReady
 	 *
 	 * MUST BE CALLED AFTER all of the mwEmbedLoader.php includes.
@@ -58,7 +58,7 @@ var kWidget = {
 		 */
 		mw.setConfig('version', MWEMBED_VERSION );
 		/**
-		 *  Check the kWidget for environment settings and set appropriate flags
+		 *  Check the vWidget for environment settings and set appropriate flags
 		 */
 		this.checkEnvironment();
 		
@@ -99,20 +99,20 @@ var kWidget = {
 		){
 			mw.setConfig( 'forceMobileHTML5', true );
 		}
-		// Check for debugKalturaPlayer in url and set debug mode to true
-		if( document.URL.indexOf('debugKalturaPlayer') !== -1 ){
+		// Check for debugVidiunPlayer in url and set debug mode to true
+		if( document.URL.indexOf('debugVidiunPlayer') !== -1 ){
 			mw.setConfig( 'debug', true );
 		}
-		// Check for forceKPlayer in the URL
-		if( document.URL.indexOf('forceKPlayer') !== -1 ){
-			mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
+		// Check for forceVPlayer in the URL
+		if( document.URL.indexOf('forceVPlayer') !== -1 ){
+			mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
 		}
 
 		var ua = navigator.userAgent;
 		// Check if browser should use flash ( IE < 9 )
 		var ieMatch = ua.match( /MSIE\s([0-9]+)/ );
 		if ( (ieMatch && parseInt( ieMatch[1] ) < 9) || document.URL.indexOf('forceFlash') !== -1 ) {
-			mw.setConfig('Kaltura.ForceFlashOnDesktop', true );
+			mw.setConfig('Vidiun.ForceFlashOnDesktop', true );
 		}
 
 		// Blackberry does not really support html5
@@ -121,20 +121,20 @@ var kWidget = {
 			mw.setConfig( 'EmbedPlayer.NotPlayableDownloadLink', true );
 		}
 
-		if( ua.indexOf( 'kalturaNativeCordovaPlayer' ) != -1 ){
+		if( ua.indexOf( 'vidiunNativeCordovaPlayer' ) != -1 ){
 			mw.setConfig('EmbedPlayer.ForceNativeComponent', true);
 
 			if(! mw.getConfig('EmbedPlayer.IsIframeServer')){
 				var cordovaPath;
-				var cordovaKWidgetPath;
+				var cordovaVWidgetPath;
 				if ( this.isAndroid() ) {
 					cordovaPath = "/modules/EmbedPlayer/binPlayers/cordova/android/cordova.js";
 				} else {
 					cordovaPath = "/modules/EmbedPlayer/binPlayers/cordova/ios/cordova.js";
 				}
-				cordovaKWidgetPath = "/kWidget/cordova.kWidget.js";
+				cordovaVWidgetPath = "/vWidget/cordova.vWidget.js";
 				document.write('<script src="' + this.getPath() + cordovaPath + '"></scr' + 'ipt>' );
-				document.write('<script src="' + this.getPath() + cordovaKWidgetPath + '"></scr' + 'ipt>' );
+				document.write('<script src="' + this.getPath() + cordovaVWidgetPath + '"></scr' + 'ipt>' );
 			}
 		}
 
@@ -144,7 +144,7 @@ var kWidget = {
 					||
 			(/CPU like Mac OS X/i.test( ua ) )
 			){
-				mw.setConfig('Kaltura.UseAppleAdaptive', false);
+				mw.setConfig('Vidiun.UseAppleAdaptive', false);
 			}
 		}
 
@@ -172,7 +172,7 @@ var kWidget = {
 
 	/**
 	 * Checks for the existence of jsReadyCallback and stores it locally.
-	 * all ready calls then are wrapped by the kWidget jsCallBackready function.
+	 * all ready calls then are wrapped by the vWidget jsCallBackready function.
 	 */
 	proxiedJsCallback: null,
 	waitForLibraryChecks: true,
@@ -206,7 +206,7 @@ var kWidget = {
 	},
 
 	/**
-	 * The kWidget proxied jsCallbackReady
+	 * The vWidget proxied jsCallbackReady
 	 * @param {string} widgetId The id of the widget that is ready
 	 */
 	jsCallbackReady: function( widgetId ){
@@ -225,15 +225,15 @@ var kWidget = {
 			this.log("Error:: jsCallbackReady called on invalid player Id:" + widgetId );
 			return ;
 		}
-		// extend the element with kBind kUnbind:
+		// extend the element with vBind vUnbind:
 		this.extendJsListener( player );
 
-		var kdpVersion = player.evaluate('{playerStatusProxy.kdpVersion}');
-		//set the load time attribute supported in version kdp 3.7.x
-		if( mw.versionIsAtLeast('v3.7.0', kdpVersion) ) {
-			player.kBind( "kdpReady" , function() {
+		var vdpVersion = player.evaluate('{playerStatusProxy.vdpVersion}');
+		//set the load time attribute supported in version vdp 3.7.x
+		if( mw.versionIsAtLeast('v3.7.0', vdpVersion) ) {
+			player.vBind( "vdpReady" , function() {
 				_this.loadTime[ widgetId ] = ((new Date().getTime() - _this.startTime[ widgetId ] )  / 1000.0).toFixed(2);
-				player.setKDPAttribute("playerStatusProxy","loadTime", _this.loadTime[ widgetId ] );
+				player.setVDPAttribute("playerStatusProxy","loadTime", _this.loadTime[ widgetId ] );
 				_this.log( "Player (" + widgetId + "):" + _this.loadTime[ widgetId ] );
 			});
 		}
@@ -306,23 +306,23 @@ var kWidget = {
 		 * Embed settings checks
 		 */
 		if( !settings.wid ){
-			this.log("Error: kWidget.embed missing wid");
+			this.log("Error: vWidget.embed missing wid");
 			return ;
 		}
 		var uiconf_id = settings.uiconf_id;
 		var confFile = settings.flashvars.confFilePath;
 		if( !uiconf_id && !confFile ){
-			this.log("Error: kWidget.embed missing uiconf_id or confFile");
+			this.log("Error: vWidget.embed missing uiconf_id or confFile");
 			return ;
 		}
 		// Make sure the replace target exists:
 		var elm = document.getElementById( targetId );
 		if( ! elm ){
-			this.log("Error: kWidget.embed could not find target: " + targetId );
+			this.log("Error: vWidget.embed could not find target: " + targetId );
 			return false; // No target found ( probably already done )
 		}
-		// Don't rewrite special key kaltura_player_iframe_no_rewrite
-		if( elm.getAttribute('name') == 'kaltura_player_iframe_no_rewrite' ){
+		// Don't rewrite special key vidiun_player_iframe_no_rewrite
+		if( elm.getAttribute('name') == 'vidiun_player_iframe_no_rewrite' ){
 			return ;
 		}
 		// Check for "auto" localization and inject browser language. 
@@ -341,7 +341,7 @@ var kWidget = {
 			// IE8 can't handle innerHTML on "read only" targets .
 		}
 		
-		// Check for size override in kWidget embed call
+		// Check for size override in vWidget embed call
 		function checkSizeOveride( dim ){
 			if( settings[ dim ] ){
 				// check for non px value:
@@ -360,7 +360,7 @@ var kWidget = {
 		}
 
 		// Check for ForceIframeEmbed flag
-		if( mw.getConfig('Kaltura.ForceIframeEmbed') === true ) {
+		if( mw.getConfig('Vidiun.ForceIframeEmbed') === true ) {
 			this.outputIframeWithoutApi( targetId, settings );
 			return;
 		}
@@ -429,7 +429,7 @@ var kWidget = {
 
 		// load any onPage scripts if needed:
 		// create a player list for missing uiconf check:
-		var playerList =  [ {'kEmbedSettings' : settings }];
+		var playerList =  [ {'vEmbedSettings' : settings }];
 		// Load uiConfJS then call embed action
 		this.loadUiConfJs( playerList, function(){
 			// check that the proxy of js callback ready is up-to-date
@@ -440,8 +440,8 @@ var kWidget = {
 	},
 	outputCordovaPlayer: function( targetId, settings ){
 		var _this = this;
-		if ( cordova && cordova.kWidget ){
-			cordova.kWidget.embed( targetId, settings );
+		if ( cordova && cordova.vWidget ){
+			cordova.vWidget.embed( targetId, settings );
 		}else{//if cordova is not loaded run this function again after 500 ms
 			setTimeout(function(){
 				_this.outputCordovaPlayer(targetId,settings);
@@ -457,13 +457,13 @@ var kWidget = {
 		style.type = 'text/css';
 		var imagePath = this.getPath() + '/modules/MwEmbedSupport/skins/common/images/';
 		
-		var cssText = '.kWidgetCentered {max-height: 100%; ' +
+		var cssText = '.vWidgetCentered {max-height: 100%; ' +
 			'max-width: 100%; ' +
 			'position: absolute; ' +
 			'top: 0; left: 0; right: 0; bottom: 0; ' +
 			'margin: auto; ' +
 			'} ' + "\n" +
-			'.kWidgetPlayBtn { ' +
+			'.vWidgetPlayBtn { ' +
 				'cursor:pointer;' +
 				'height: 53px !important;;' +
 				'width: 70px !important;' +
@@ -471,7 +471,7 @@ var kWidget = {
 				'background: url(\'' + imagePath + 'player_big_play_button.png\') !important;;' +
 				'z-index: 1;' +
 			'} ' + "\n" +
-			'.kWidgetPlayBtn:hover{ ' +
+			'.vWidgetPlayBtn:hover{ ' +
 				'background: url(\'' + imagePath + 'player_big_play_button_hover.png\');"' +
 			'} ';
 			if (this.isIE())
@@ -500,7 +500,7 @@ var kWidget = {
 	 * the widget loaded anlytics event is triggered,
 	 * and a thumbReady callback is called
 	 *
-	 * All the other kWidget settings are invoked during playback.
+	 * All the other vWidget settings are invoked during playback.
 	 */
 	thumbEmbed: function( targetId, settings ){
 		var _this = this;
@@ -530,8 +530,8 @@ var kWidget = {
 		}
 		elm.innerHTML = '' +
 			'<div style="position: relative; width: 100%; height: 100%;">' +
-			'<img class="kWidgetCentered" src="' + this.getKalturaThumbUrl( settings ) + '" >' +
-			'<div class="kWidgetCentered kWidgetPlayBtn" ' +
+			'<img class="vWidgetCentered" src="' + this.getVidiunThumbUrl( settings ) + '" >' +
+			'<div class="vWidgetCentered vWidgetPlayBtn" ' +
 				'id="' + targetId + '_playBtn"' +
 			'></div></div>';
 		// Add a click binding to do the really embed:
@@ -543,9 +543,9 @@ var kWidget = {
 			}
 			settings.readyCallback = function( playerId ){
 				// issue a play ( since we already clicked the play button )
-				var kdp = document.getElementById( playerId );
-				kdp.kBind('mediaReady', function(){
-					kdp.sendNotification( 'doPlay' );
+				var vdp = document.getElementById( playerId );
+				vdp.vBind('mediaReady', function(){
+					vdp.sendNotification( 'doPlay' );
 				});
 				if( typeof orgEmbedCallback == 'function' ){
 					orgEmbedCallback( playerId );
@@ -554,7 +554,7 @@ var kWidget = {
 			// Set a flag to capture the click event
 			settings.captureClickEventForiOS = true;
 			// update the settings object
-			kWidget.embed( settings );
+			vWidget.embed( settings );
 		});
 		// TOOD maybe a basic basic api ( doPlay support ? )
 
@@ -564,7 +564,7 @@ var kWidget = {
 		}
 	},
 	/**
-	 * Destroy a kWidget embed instance
+	 * Destroy a vWidget embed instance
 	 * * removes the target from the dom
 	 * * removes any associated
 	 * @param {Element|String} The target element or string to destroy
@@ -596,26 +596,26 @@ var kWidget = {
 	},
 
 	/**
-	 * Embeds the player from a set of on page objects with kEmbedSettings properties
+	 * Embeds the player from a set of on page objects with vEmbedSettings properties
 	 * @param {object} rewriteObjects set of in page object tags to be rewritten
 	 */
 	embedFromObjects: function( rewriteObjects ){
 		for( var i=0; i < rewriteObjects.length; i++ ){
-			var settings = rewriteObjects[i].kEmbedSettings;
+			var settings = rewriteObjects[i].vEmbedSettings;
 			settings.width = rewriteObjects[i].width;
 			settings.height = rewriteObjects[i].height;
 
-			this.embed( rewriteObjects[i].id, rewriteObjects[i].kEmbedSettings );
+			this.embed( rewriteObjects[i].id, rewriteObjects[i].vEmbedSettings );
 		}
 	},
 
 	/**
-	 * Extends the kWidget objects with (un)binding mechanism - kBind / kUnbind
+	 * Extends the vWidget objects with (un)binding mechanism - vBind / vUnbind
 	 */
 	extendJsListener: function( player ) {
 		var _this = this;
 
-		player.kBind = function( eventName, callback ) {
+		player.vBind = function( eventName, callback ) {
 			// Stores the index of anonymous callbacks for generating global functions
 			var callbackIndex = 0;
 			var globalCBName = '';
@@ -623,7 +623,7 @@ var kWidget = {
 			// We can pass [eventName.namespace] as event name, we need it in order to remove listeners with their namespace
 			if( typeof eventName == 'string' ) {
 				var eventData = eventName.split('.', 2);
-				var eventNamespace = ( eventData[1] ) ? eventData[1] : 'kWidget';
+				var eventNamespace = ( eventData[1] ) ? eventData[1] : 'vWidget';
 				eventName = eventData[0];
 			}
 			if( typeof callback == 'string' ){
@@ -632,7 +632,7 @@ var kWidget = {
 				// Make life easier for internal usage of the listener mapping by supporting
 				// passing a callback by function ref
 				var generateGlobalCBName = function(){
-					globalCBName = 'kWidget_' + eventName + '_cb' + callbackIndex;
+					globalCBName = 'vWidget_' + eventName + '_cb' + callbackIndex;
 					if( window[ globalCBName ] ){
 						callbackIndex++;
 						generateGlobalCBName();
@@ -641,7 +641,7 @@ var kWidget = {
 				generateGlobalCBName();
 				window[ globalCBName ] = function(){
 					var args = Array.prototype.slice.call(arguments, 0);
-					// move kbind into a timeout to restore javascript backtrace for errors,
+					// move vbind into a timeout to restore javascript backtrace for errors,
 					// instead of having flash directly call the callback breaking backtrace
 					if( mw.getConfig( 'debug') ){
 						setTimeout(function(){
@@ -654,7 +654,7 @@ var kWidget = {
 					}
 				};
 			} else {
-				kWidget.log( "Error: kWidget : bad callback type: " + callback );
+				vWidget.log( "Error: vWidget : bad callback type: " + callback );
 				return ;
 			}
 			// Storing a list of namespaces. Each namespace contains a list of eventnames and respective callbacks
@@ -664,13 +664,13 @@ var kWidget = {
 			if ( !_this.listenerList[ eventNamespace ][ eventName ] ) {
 				_this.listenerList[ eventNamespace ][ eventName ] = globalCBName;
 			}
-			//kWidget.log( "kWidget :: kBind :: ( " + eventName + ", " + globalCBName + " )" );
+			//vWidget.log( "vWidget :: vBind :: ( " + eventName + ", " + globalCBName + " )" );
 			player.addJsListener( eventName, globalCBName );
 			return player;
 		}
 
-		player.kUnbind = function( eventName, callbackName ) {
-			//kWidget.log( "kWidget :: kUnbind :: ( " + eventName + ", " + callbackName + " )" );
+		player.vUnbind = function( eventName, callbackName ) {
+			//vWidget.log( "vWidget :: vUnbind :: ( " + eventName + ", " + callbackName + " )" );
 			if( typeof eventName == 'string' ) {
 				var eventData = eventName.split('.', 2);
 				var eventNamespace = eventData[1];
@@ -726,13 +726,13 @@ var kWidget = {
 		context = context || document;
 		var elm = context.getElementById( targetId );
 		if( !elm && !elm.parentNode ){
-			kWidget.log( "Error embed target missing" );
+			vWidget.log( "Error embed target missing" );
 			return ;
 		}
 
 		// Only generate a swf source if not defined.
 		if( !settings.src ){
-			var swfUrl = mw.getConfig( 'Kaltura.ServiceUrl' ) + '/index.php/kwidget'+
+			var swfUrl = mw.getConfig( 'Vidiun.ServiceUrl' ) + '/index.php/vwidget'+
 				'/wid/' + settings.wid +
 				'/uiconf_id/' + settings.uiconf_id;
 
@@ -757,7 +757,7 @@ var kWidget = {
 		}
 		// Set our special callback flashvar:
 		if( settings.flashvars['jsCallbackReadyFunc'] ){
-			kWidget.log("Error: Setting jsCallbackReadyFunc is not compatible with kWidget embed");
+			vWidget.log("Error: Setting jsCallbackReadyFunc is not compatible with vWidget embed");
 		}
 		// Check if in debug mode: 
 		if( mw.getConfig( 'debug', true ) ){
@@ -817,7 +817,7 @@ var kWidget = {
 		// XXX firefox with firebug enabled locks up the browser
 		// detect firebug:
 		if ( window.console && ( window.console.firebug || window.console.exception ) ) {
-			console.log( 'Warning firebug + firefox and dynamic flash kdp embed causes lockups in firefox' +
+			console.log( 'Warning firebug + firefox and dynamic flash vdp embed causes lockups in firefox' +
 					', ( delaying embed )');
 			this.domReady( function(){
 				setTimeout(function(){
@@ -853,9 +853,9 @@ var kWidget = {
 		iframe.id = iframeId;
 		iframe.scrolling = "no";
 		iframe.name = iframeId;
-		iframe.className = 'mwEmbedKalturaIframe';
+		iframe.className = 'mwEmbedVidiunIframe';
 		iframe.setAttribute('aria-labelledby', 'Player ' + targetId);
-		iframe.setAttribute('aria-describedby', 'The Kaltura Dynamic Video Player');
+		iframe.setAttribute('aria-describedby', 'The Vidiun Dynamic Video Player');
 
 		// Allow Fullscreen
 		iframe.setAttribute('allowfullscreen', true);
@@ -871,7 +871,7 @@ var kWidget = {
 		iframeProxy.id = widgetElm.id;
 		iframeProxy.name = widgetElm.name;
 		var moreClass = widgetElm.className ? ' ' +  widgetElm.className : '';
-		iframeProxy.className = 'kWidgetIframeContainer' + moreClass;
+		iframeProxy.className = 'vWidgetIframeContainer' + moreClass;
 		// Update the iframe proxy style per org embed widget:
 		iframeProxy.style.cssText =  widgetElm.style.cssText + ';overflow: hidden';
 		iframeProxy.appendChild( iframe );
@@ -954,7 +954,7 @@ var kWidget = {
 		var newDoc = iframeElm.contentDocument;
 		newDoc.open();
 		// grab a black source
-		var vidSrc = location.protocol + '//www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/http/a.mp4';
+		var vidSrc = location.protocol + '//www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/http/a.mp4';
 
 		// Add the iframe skeleton with video element to the iframe
 		newDoc.write( '<html>' +
@@ -964,10 +964,10 @@ var kWidget = {
 						'<div class="videoHolder">' +
 							'<video class="persistentNativePlayer" ' +
 								'id="' + targetId + '" ' +
-								'kwidgetid="' + settings.wid + '" '+
-								'kentryid="' + settings.entry_id + '" ' +
-								'kuiconfid="' + settings.uiconf_id + '" ' +
-								//'poster="' + _this.getKalturaThumbUrl( settings ) + '" ' +
+								'vwidgetid="' + settings.wid + '" '+
+								'ventryid="' + settings.entry_id + '" ' +
+								'vuiconfid="' + settings.uiconf_id + '" ' +
+								//'poster="' + _this.getVidiunThumbUrl( settings ) + '" ' +
 								// Only applies to iOS, and only to caputre the play event,
 								// so we only include a low bitrate mp4
 								'src="' + vidSrc + '" ' +
@@ -1036,7 +1036,7 @@ var kWidget = {
 	 * Build the iframe request from supplied settings:
 	 */
 	getIframeRequest: function( elm, settings ){
-		// Get the base set of kaltura params ( entry_id, uiconf_id etc )
+		// Get the base set of vidiun params ( entry_id, uiconf_id etc )
 		var iframeRequest = this.embedSettingsToUrl( settings );
 
 		// Add the player id:
@@ -1047,22 +1047,22 @@ var kWidget = {
 			iframeRequest+= '&debug=true';
 		}
 		// add ps if set: 
-		if( mw.getConfig( 'Kaltura.KWidgetPsPath') ){
-			iframeRequest+= '&pskwidgetpath=' + mw.getConfig( 'Kaltura.KWidgetPsPath');
+		if( mw.getConfig( 'Vidiun.VWidgetPsPath') ){
+			iframeRequest+= '&psvwidgetpath=' + mw.getConfig( 'Vidiun.VWidgetPsPath');
 		}
 
 		// If remote service is enabled pass along service arguments:
-		if( mw.getConfig( 'Kaltura.AllowIframeRemoteService' )  &&
+		if( mw.getConfig( 'Vidiun.AllowIframeRemoteService' )  &&
 			(
-				mw.getConfig("Kaltura.ServiceUrl").indexOf('kaltura.com') === -1 &&
-				mw.getConfig("Kaltura.ServiceUrl").indexOf('kaltura.org') === -1
+				mw.getConfig("Vidiun.ServiceUrl").indexOf('vidiun.com') === -1 &&
+				mw.getConfig("Vidiun.ServiceUrl").indexOf('vidiun.org') === -1
 			)
 		){
-			iframeRequest += kWidget.serviceConfigToUrl();
+			iframeRequest += vWidget.serviceConfigToUrl();
 		}
 
 		// Add no cache flag if set:
-		if( mw.getConfig('Kaltura.NoApiCache') ) {
+		if( mw.getConfig('Vidiun.NoApiCache') ) {
 			iframeRequest+= '&nocache=true';
 		}
 
@@ -1076,7 +1076,7 @@ var kWidget = {
 	},
 	getIframeUrl: function(){
 		var path = this.getPath();
-		if( mw.getConfig('Kaltura.ForceIframeEmbed') === true ) {
+		if( mw.getConfig('Vidiun.ForceIframeEmbed') === true ) {
 			// In order to simulate iframe embed we need to use different host
 			path = path.replace( 'localhost', '127.0.0.1' );
 		}
@@ -1090,7 +1090,7 @@ var kWidget = {
 	 * as well as native fullscreen on browsers that support it.
 	 *
 	 * @param {string} replaceTargetId target container for iframe
-	 * @param {object} kEmbedSettings object used to build iframe settings
+	 * @param {object} vEmbedSettings object used to build iframe settings
 	 */
 	outputIframeWithoutApi: function( targetId, settings ) {
 		var targetEl = document.getElementById(targetId);
@@ -1112,7 +1112,7 @@ var kWidget = {
 	},
 
 	/**
-	 * Adds a ready callback to be called once the kdp or html5 player is ready
+	 * Adds a ready callback to be called once the vdp or html5 player is ready
 	 * @param {function} readyCallback called once a player or widget is ready on the page
 	 */
 	addReadyCallback: function( readyCallback ){
@@ -1140,7 +1140,7 @@ var kWidget = {
 	 */
 	rewriteObjectTags: function() {
 		// get the list of object tags to be rewritten:
-		var playerList = this.getKalutaObjectList();
+		var playerList = this.getVidiunObjectList();
 		var _this = this;
 		
 		// don't bother with checks if no players exist: 
@@ -1159,21 +1159,21 @@ var kWidget = {
 		}
 
 		/**
-		 * If Kaltura.AllowIframeRemoteService is not enabled force in page rewrite:
+		 * If Vidiun.AllowIframeRemoteService is not enabled force in page rewrite:
 		 */
-		var serviceUrl = mw.getConfig('Kaltura.ServiceUrl');
-		if( ! mw.getConfig( 'Kaltura.AllowIframeRemoteService' ) ) {
-			if( ! serviceUrl || serviceUrl.indexOf( 'kaltura.com' ) === -1 ){
-				// if not hosted on kaltura for now we can't use the iframe to load the player
-				mw.setConfig( 'Kaltura.IframeRewrite', false );
-				mw.setConfig( 'Kaltura.UseManifestUrls', false);
+		var serviceUrl = mw.getConfig('Vidiun.ServiceUrl');
+		if( ! mw.getConfig( 'Vidiun.AllowIframeRemoteService' ) ) {
+			if( ! serviceUrl || serviceUrl.indexOf( 'vidiun.com' ) === -1 ){
+				// if not hosted on vidiun for now we can't use the iframe to load the player
+				mw.setConfig( 'Vidiun.IframeRewrite', false );
+				mw.setConfig( 'Vidiun.UseManifestUrls', false);
 			}
 		}
 		/*
 		 * TODO revisit support for video tag rewrites ( maybe redirect to iframe style embed )
-		if( ! mw.getConfig( 'Kaltura.ForceFlashOnDesktop' )
+		if( ! mw.getConfig( 'Vidiun.ForceFlashOnDesktop' )
 				&&
-			( mw.getConfig( 'Kaltura.LoadScriptForVideoTags' ) && this.pageHasAudioOrVideoTags()  )
+			( mw.getConfig( 'Vidiun.LoadScriptForVideoTags' ) && this.pageHasAudioOrVideoTags()  )
 		){
 			loadHTML5LibAndRewriteTags();
 			return ;
@@ -1188,13 +1188,13 @@ var kWidget = {
 		
 		// loop over the playerList check if given uiConf should be lead with html: 
 		for( var i=0; i < playerList.length; i++ ){
-			if( this.isUiConfIdHTML5( playerList[i].kEmbedSettings['uiconf_id'] ) ){
+			if( this.isUiConfIdHTML5( playerList[i].vEmbedSettings['uiconf_id'] ) ){
 				this.embedFromObjects( [ playerList[i] ] );
 			}
 		}
 		
 		// Check if no flash and no html5 and no forceFlash ( direct download link )
-		if( ! this.supportsFlash() && ! this.supportsHTML5() && ! mw.getConfig( 'Kaltura.ForceFlashOnDesktop' ) ){
+		if( ! this.supportsFlash() && ! this.supportsHTML5() && ! mw.getConfig( 'Vidiun.ForceFlashOnDesktop' ) ){
 			this.embedFromObjects( playerList );
 			return ;
 		}
@@ -1227,14 +1227,14 @@ var kWidget = {
 		}
 		// Check if we need to load uiConfJs ( for non-inLoaderUiConfJs )
 		if( playerList.length == 0 ||
-			! mw.getConfig( 'Kaltura.EnableEmbedUiConfJs' ) ||
+			! mw.getConfig( 'Vidiun.EnableEmbedUiConfJs' ) ||
 			mw.getConfig('EmbedPlayer.IsIframeServer') )
 		{
 			return false;
 		}
 
 		for( var i =0; i < playerList.length; i++ ){
-			var settings = playerList[i].kEmbedSettings;
+			var settings = playerList[i].vEmbedSettings;
 			if( ! this.uiConfScriptLoadList[ settings.uiconf_id  ] ){
 				return true;
 			}
@@ -1264,8 +1264,8 @@ var kWidget = {
 		// We have not yet loaded uiConfJS... load it for each ui_conf id
 		var baseUiConfJsUrl = this.getPath() + 'services.php?service=uiconfJs';
 		// add ps if set: 
-		if( mw.getConfig( 'Kaltura.KWidgetPsPath') ){
-			baseUiConfJsUrl+= '&pskwidgetpath=' + mw.getConfig( 'Kaltura.KWidgetPsPath');
+		if( mw.getConfig( 'Vidiun.VWidgetPsPath') ){
+			baseUiConfJsUrl+= '&psvwidgetpath=' + mw.getConfig( 'Vidiun.VWidgetPsPath');
 		}
 		if( !this.isMissingUiConfJs( playerList ) ){
 			// called with empty request set:
@@ -1282,7 +1282,7 @@ var kWidget = {
 				}
 				foundPlayerMissingUiConfJs = true;
 				// Setup uiConf callback so we don't risk out of order execution
-				var cbName = 'kUiConfJs_' + i + '_' + settings.uiconf_id;
+				var cbName = 'vUiConfJs_' + i + '_' + settings.uiconf_id;
 				if( ! _this.uiConfScriptLoadListCallbacks[ cbName ] ){
 					_this.uiConfScriptLoadListCallbacks[ cbName ] = [ callback ];
 					window[ cbName ] = function(){
@@ -1301,7 +1301,7 @@ var kWidget = {
 					_this.uiConfScriptLoadListCallbacks[ cbName ].push( callback );
 				}
 				
-			})( playerList[i].kEmbedSettings );
+			})( playerList[i].vEmbedSettings );
 		}
 		// check if we should wait for a player to load its uiConf:
 		if( !foundPlayerMissingUiConfJs ){
@@ -1312,7 +1312,7 @@ var kWidget = {
 
 	/**
 	 * Write log message to the console
-	 * TODO support log levels: https://github.com/kaltura/mwEmbed/issues/80
+	 * TODO support log levels: https://github.com/vidiun/mwEmbed/issues/80
 	 */
 	 log: function( msg ) {
 		// only log if debug is active:
@@ -1320,7 +1320,7 @@ var kWidget = {
 			return ;
 		}
 		if( typeof console != 'undefined' && console.log ) {
-			console.log( "kWidget: " + msg );
+			console.log( "vWidget: " + msg );
 		}
 	 },
 
@@ -1444,10 +1444,10 @@ var kWidget = {
 			 return true;
 		 }
 
-		 // Check for "Kaltura.LeadWithHTML5" attribute
+		 // Check for "Vidiun.LeadWithHTML5" attribute
 		 // Only return true if the browser actually supports html5
 		 if( 
-			( mw.getConfig( 'KalturaSupport.LeadWithHTML5' ) || mw.getConfig( 'Kaltura.LeadWithHTML5' ) )
+			( mw.getConfig( 'VidiunSupport.LeadWithHTML5' ) || mw.getConfig( 'Vidiun.LeadWithHTML5' ) )
 			&& 
 			this.supportsHTMLPlayerUI()
 		 ){
@@ -1458,7 +1458,7 @@ var kWidget = {
 		 if( this.isAndroid() ){
 			 if( mw.getConfig( 'EmbedPlayer.UseFlashOnAndroid' )
 					 &&
-				kWidget.supportsFlash()
+				vWidget.supportsFlash()
 			){
 				// Use flash on Android if available
 				return false;
@@ -1472,7 +1472,7 @@ var kWidget = {
 		 * If the browser supports flash ( don't use html5 )
 		 * On ModernUI IE10, Flash is integrated. However, our Flash detection on IE looks for ActiveX which is disabled, thus failing.
 		 */
-		if( kWidget.supportsFlash() ){
+		if( vWidget.supportsFlash() ){
 			return false;
 		}
 
@@ -1482,7 +1482,7 @@ var kWidget = {
 		 * Due to that, we fallback to HTML5 player on Modern UI IE10 by default
 		 * Using this flag this can be overriden.
 		 */
-		if( mw.getConfig( 'Kaltura.ForceFlashOnIE10' ) ) {
+		if( mw.getConfig( 'Vidiun.ForceFlashOnIE10' ) ) {
 			var ua = navigator.userAgent;
 			var ie10Match = ua.match( /MSIE\s10/ );
 			if ( ie10Match ) {
@@ -1491,17 +1491,17 @@ var kWidget = {
 		}
 
 		// Check if the UseFlashOnDesktop flag is set and ( don't check for html5 )
-		if( mw.getConfig( 'Kaltura.ForceFlashOnDesktop' ) ){
+		if( mw.getConfig( 'Vidiun.ForceFlashOnDesktop' ) ){
 			return false;
 		}
 
 		// No flash return true if the browser supports html5 video tag with basic support for canPlayType:
-		if( kWidget.supportsHTML5() ){
+		if( vWidget.supportsHTML5() ){
 			return true;
 		}
 		// if we have the iframe enabled return true ( since the iframe will output a fallback link
 		// even if the client does not support html5 or flash )
-		if( mw.getConfig( 'Kaltura.IframeRewrite' ) ){
+		if( mw.getConfig( 'Vidiun.IframeRewrite' ) ){
 			return true;
 		}
 
@@ -1510,13 +1510,13 @@ var kWidget = {
 	 },
 
 	 /**
-	  * Get Kaltura thumb url from entry object
+	  * Get Vidiun thumb url from entry object
 	  * TODO We need to grab thumbnail path from api (baseEntry->thumbnailUrl)
 	  *		or a specialized entry point for cases where we don't have the api is available
 	  *
 	  * @param {object} Entry settings used to generate the api url request
 	  */
-	 getKalturaThumbUrl: function ( settings ){
+	 getVidiunThumbUrl: function ( settings ){
 
 		var sizeParam = '';
 		if( settings.width != '100%' && settings.width ){
@@ -1540,12 +1540,12 @@ var kWidget = {
 
 		var flashVars = {};
 
-		// Add the ks if set ( flashvar overrides settings based ks )
-		if( settings.ks ) {
-			flashVars[ 'ks' ] = settings.ks;
+		// Add the vs if set ( flashvar overrides settings based vs )
+		if( settings.vs ) {
+			flashVars[ 'vs' ] = settings.vs;
 		}
-		if( settings.flashvars && settings.flashvars.ks ) {
-			flashVars[ 'ks' ] = settings.flashvars.ks;
+		if( settings.flashvars && settings.flashvars.vs ) {
+			flashVars[ 'vs' ] = settings.flashvars.vs;
 		}
 
 		// Add referenceId if set
@@ -1565,7 +1565,7 @@ var kWidget = {
 		var entryId = (settings.entry_id) ? '/entry_id/' + settings.entry_id : '';
 
 		// Return the thumbnail.php script which will redirect to the thumbnail location
-		return this.getPath() + 'modules/KalturaSupport/thumbnail.php' +
+		return this.getPath() + 'modules/VidiunSupport/thumbnail.php' +
 			'/p/' + settings.partner_id +
 			'/uiconf_id/' + settings.uiconf_id +
 			entryId +
@@ -1575,12 +1575,12 @@ var kWidget = {
 	 },
 
 	 /**
-	  * Get kaltura embed settings from a swf url and flashvars object
+	  * Get vidiun embed settings from a swf url and flashvars object
 	  *
 	  * @param {string} swfUrl
-	  *	url to kaltura platform hosted swf
+	  *	url to vidiun platform hosted swf
 	  * @param {object} flashvars
-	  *	object mapping kaltura variables, ( overrides url based variables )
+	  *	object mapping vidiun variables, ( overrides url based variables )
 	  */
 	 getEmbedSettings: function( swfUrl, flashvars ){
 		var embedSettings = {};
@@ -1730,27 +1730,27 @@ var kWidget = {
 		 return false;
 	},
 	/**
-	 * Get the list of embed objects on the page that are 'kaltura players'
+	 * Get the list of embed objects on the page that are 'vidiun players'
 	*/
-	getKalutaObjectList: function(){
+	getVidiunObjectList: function(){
 		var _this = this;
-		var kalturaPlayerList = [];
-		// Check all objects for kaltura compatible urls
+		var vidiunPlayerList = [];
+		// Check all objects for vidiun compatible urls
 		var objectList = document.getElementsByTagName('object');
-		if( !objectList.length && document.getElementById('kaltura_player') ){
-			objectList = [ document.getElementById('kaltura_player') ];
+		if( !objectList.length && document.getElementById('vidiun_player') ){
+			objectList = [ document.getElementById('vidiun_player') ];
 		}
-		// local function to attempt to add the kalturaEmbed
-		var tryAddKalturaEmbed = function( url , flashvars){
+		// local function to attempt to add the vidiunEmbed
+		var tryAddVidiunEmbed = function( url , flashvars){
 
-			//make sure we change only kdp objects
-			if ( !url.match( /(kwidget|kdp)/ig ) ) {
+			//make sure we change only vdp objects
+			if ( !url.match( /(vwidget|vdp)/ig ) ) {
 				return false;
 			}
 			var settings = _this.getEmbedSettings( url, flashvars );
 			if( settings && settings.uiconf_id && settings.wid ){
-				objectList[i].kEmbedSettings = settings;
-				kalturaPlayerList.push(  objectList[i] );
+				objectList[i].vEmbedSettings = settings;
+				vidiunPlayerList.push(  objectList[i] );
 				return true;
 			}
 			return false;
@@ -1773,18 +1773,18 @@ var kWidget = {
 				}
 			}
 
-			if( tryAddKalturaEmbed( swfUrl, flashvars) ){
+			if( tryAddVidiunEmbed( swfUrl, flashvars) ){
 				continue;
 			}
 
 			// Check for object data style url:
 			if( objectList[i].getAttribute('data') ){
-				if( tryAddKalturaEmbed( objectList[i].getAttribute('data'), flashvars ) ){
+				if( tryAddVidiunEmbed( objectList[i].getAttribute('data'), flashvars ) ){
 					continue;
 				}
 			}
 		}
-		return kalturaPlayerList;
+		return vidiunPlayerList;
 	 },
 	 /**
 	  * Checks if the current page has jQuery defined, else include it and issue callback
@@ -1799,19 +1799,19 @@ var kWidget = {
 			 }
 			 this.appendScriptUrl( this.getPath() + 'resources/jquery/jquery.min.js', function(){
 				 // remove jQuery from window scope if client has already included older jQuery
-				 window.kalturaJQuery = window.jQuery.noConflict(); 
+				 window.vidiunJQuery = window.jQuery.noConflict(); 
 				 // Restore client jquery to base target
 				 if( window.clientPagejQuery ){
 					 window.jQuery = window.$ = window.clientPagejQuery;
 				 }
 				 
-				 // Run all on-page code with kalturaJQuery scope 
+				 // Run all on-page code with vidiunJQuery scope 
 				 // ( pass twice to poupluate $, and jQuery )  
-				 callback( window.kalturaJQuery, window.kalturaJQuery );
+				 callback( window.vidiunJQuery, window.vidiunJQuery );
 			 });
 		 } else {
-			 // update window.kalturaJQuery reference:
-			 window.kalturaJQuery = window.jQuery;
+			 // update window.vidiunJQuery reference:
+			 window.vidiunJQuery = window.jQuery;
 			 callback( window.jQuery, window.jQuery);
 		 }
 	 },
@@ -1853,7 +1853,7 @@ var kWidget = {
 	  * @param {function} callback
 	  */
 	 appendScriptUrls: function( urls, callback ){
-		kWidget.log( "appendScriptUrls" );
+		vWidget.log( "appendScriptUrls" );
 		var _this = this;
 		var loadCount = 0;
 		if( urls.length == 0 ){
@@ -1944,8 +1944,8 @@ var kWidget = {
 		var serviceVars = ['ServiceUrl', 'CdnUrl', 'ServiceBase', 'UseManifestUrls'];
 		var urlParam = '';
 		for( var i=0; i < serviceVars.length; i++){
-			if( mw.getConfig('Kaltura.' + serviceVars[i] ) !== null ){
-				urlParam += '&' + serviceVars[i] + '=' + encodeURIComponent( mw.getConfig('Kaltura.' + serviceVars[i] ) );
+			if( mw.getConfig('Vidiun.' + serviceVars[i] ) !== null ){
+				urlParam += '&' + serviceVars[i] + '=' + encodeURIComponent( mw.getConfig('Vidiun.' + serviceVars[i] ) );
 			}
 		}
 		return urlParam;
@@ -1990,11 +1990,11 @@ var kWidget = {
 	 */
 	embedSettingsToUrl: function( settings ){
 		var url ='';
-		var kalturaAttributeList = ['uiconf_id', 'entry_id', 'wid', 'p', 'cache_st'];
+		var vidiunAttributeList = ['uiconf_id', 'entry_id', 'wid', 'p', 'cache_st'];
 		for(var attrKey in settings ){
-			// Check if the attrKey is in the kalturaAttributeList:
-			for( var i =0 ; i < kalturaAttributeList.length; i++){
-				if( kalturaAttributeList[i] == attrKey ){
+			// Check if the attrKey is in the vidiunAttributeList:
+			for( var i =0 ; i < vidiunAttributeList.length; i++){
+				if( vidiunAttributeList[i] == attrKey ){
 					url += '&' + attrKey + '=' + encodeURIComponent( settings[attrKey] );
 				}
 			}
@@ -2017,19 +2017,19 @@ var kWidget = {
 			if( heightStr ) {
 				settings.height = heightStr;
 			}
-			kWidget.embed( replaceTargetId, settings );
+			vWidget.embed( replaceTargetId, settings );
 		};
 		// flashobject
 		if( window['flashembed'] && !window['originalFlashembed'] ){
 			window['originalFlashembed'] = window['flashembed'];
 			window['flashembed'] = function( targetId, attributes, flashvars ){
-				// TODO test with kWidget.embed replacement.
+				// TODO test with vWidget.embed replacement.
 				_this.domReady(function(){
-					var kEmbedSettings = kWidget.getEmbedSettings( attributes.src, flashvars);
+					var vEmbedSettings = vWidget.getEmbedSettings( attributes.src, flashvars);
 
-					if( kEmbedSettings.uiconf_id && ( kWidget.isHTML5FallForward() || ! kWidget.supportsFlash() ) ){
+					if( vEmbedSettings.uiconf_id && ( vWidget.isHTML5FallForward() || ! vWidget.supportsFlash() ) ){
 						document.getElementById( targetId ).innerHTML = '<div style="width:100%;height:100%" id="' + attributes.id + '"></div>';
-						doEmbedSettingsWrite( kEmbedSettings, attributes.id, attributes.width, attributes.height);
+						doEmbedSettingsWrite( vEmbedSettings, attributes.id, attributes.width, attributes.height);
 					} else {
 						// Use the original flash player embed:
 						return originalFlashembed( targetId, attributes, flashvars );
@@ -2048,11 +2048,11 @@ var kWidget = {
 			window['SWFObject'].prototype['originalWrite'] = window['SWFObject'].prototype.write;
 			window['SWFObject'].prototype['write'] = function( targetId ){
 				var swfObj = this;
-				// TODO test with kWidget.embed replacement.
+				// TODO test with vWidget.embed replacement.
 				_this.domReady(function(){
-					var kEmbedSettings = kWidget.getEmbedSettings( swfObj.attributes.swf, swfObj.params.flashVars);
-					if( kEmbedSettings.uiconf_id && ( kWidget.isHTML5FallForward() || ! kWidget.supportsFlash() ) ){
-						doEmbedSettingsWrite( kEmbedSettings, targetId, swfObj.attributes.width, swfObj.attributes.height);
+					var vEmbedSettings = vWidget.getEmbedSettings( swfObj.attributes.swf, swfObj.params.flashVars);
+					if( vEmbedSettings.uiconf_id && ( vWidget.isHTML5FallForward() || ! vWidget.supportsFlash() ) ){
+						doEmbedSettingsWrite( vEmbedSettings, targetId, swfObj.attributes.width, swfObj.attributes.height);
 					} else {
 						// use the original flash player embed:
 						swfObj.originalWrite( targetId );
@@ -2067,12 +2067,12 @@ var kWidget = {
 			window['swfobject']['embedSWF'] = function( swfUrlStr, replaceElemIdStr, widthStr,
 					heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn)
 			{
-				// TODO test with kWidget.embed replacement.
+				// TODO test with vWidget.embed replacement.
 				_this.domReady(function(){
-					var kEmbedSettings = kWidget.getEmbedSettings( swfUrlStr, flashvarsObj );
+					var vEmbedSettings = vWidget.getEmbedSettings( swfUrlStr, flashvarsObj );
 					// Check if IsHTML5FallForward
-					if( kEmbedSettings.uiconf_id && ( kWidget.isHTML5FallForward() || ! kWidget.supportsFlash() ) ){
-						doEmbedSettingsWrite( kEmbedSettings, replaceElemIdStr, widthStr,  heightStr );
+					if( vEmbedSettings.uiconf_id && ( vWidget.isHTML5FallForward() || ! vWidget.supportsFlash() ) ){
+						doEmbedSettingsWrite( vEmbedSettings, replaceElemIdStr, widthStr,  heightStr );
 					} else {
 						// Else call the original EmbedSWF with all its arguments
 						window['swfobject']['originalEmbedSWF']( swfUrlStr, replaceElemIdStr, widthStr,
@@ -2084,8 +2084,8 @@ var kWidget = {
 	}
 };
 
-// Export to kWidget and KWidget ( official name is camel case kWidget )
-window.KWidget = kWidget;
-window.kWidget = kWidget;
+// Export to vWidget and VWidget ( official name is camel case vWidget )
+window.VWidget = vWidget;
+window.vWidget = vWidget;
 
 })();

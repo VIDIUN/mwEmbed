@@ -42,10 +42,10 @@ if( count( $pathParts ) == 1 && isset( $flatFeatureList[ $pathParts[0] ] ) ){
 	
 
 // normalize path from path key if present: 
-$kdocPageType = 'landing';
+$vdocPageType = 'landing';
 
 if( $path != 'main' ){
-	$kdocPageType = 'featurepage';
+	$vdocPageType = 'featurepage';
 }
 // check for content page types:
 if( $path == 'resources' 
@@ -53,16 +53,16 @@ if( $path == 'resources'
 	|| $path == 'templates'
 	|| $path == 'customersamples'
 ){
-	$kdocPageType = 'contentpage';
+	$vdocPageType = 'contentpage';
 }
 
 // Set page title if avaliable from path:
-$kdocPageTitle = $path;
+$vdocPageTitle = $path;
 if(		isset( $featureList[ $pathParts[0] ] )
 		&& isset( $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ] )
 		&& isset( $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ]['testfiles'][ $pathParts[2] ] )
 ){
-	$kdocPageTitle = $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ]['testfiles'][ $pathParts[2] ]['title'];
+	$vdocPageTitle = $featureList[ $pathParts[0] ]['featureSets'][ $pathParts[1] ]['testfiles'][ $pathParts[2] ]['title'];
 }
 
 ?>

@@ -7,56 +7,56 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 // Enable uiconf js which includes external resources 
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( playerId ){
+function jsVidiunPlayerTest( playerId ){
 	// Name this module
 	module( "limeSurvey Player Form Box test" );
 	
 	asyncTest("Seek Events", function(){
-		var kdp = document.getElementById( playerId );
+		var vdp = document.getElementById( playerId );
 		
 		// Add a binding for when seek is completed: 
-		kdp.kBind('playerSeekEnd', function(){
+		vdp.vBind('playerSeekEnd', function(){
 			setTimeout(function(){
-				ok( $('#k-form-container-' + playerId).length, "Found the plugin's div!");
+				ok( $('#v-form-container-' + playerId).length, "Found the plugin's div!");
 				start(); //Run the test
 			}, 2000)
 		});
 		
 		// Once playing issue seek
 		var seekDone = false;
-		kdp.kBind('playerUpdatePlayhead', function(){
+		vdp.vBind('playerUpdatePlayhead', function(){
 			if( ! seekDone ){
-				kdp.sendNotification('doSeek', 10 );
+				vdp.sendNotification('doSeek', 10 );
 			}
 			seekDone = true;
 		});
 		
-		kdp.sendNotification('doPlay');
+		vdp.sendNotification('doPlay');
 	});
 }
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>LimeSurvey CuePoint Forms on Player </h2>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
-<div id="kdoc-more-desc"><br>This demo, shows a survey at 6 seconds into the video. This is an example of custom integration, not an out of the box feature.  
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
+<div id="vdoc-more-desc"><br>This demo, shows a survey at 6 seconds into the video. This is an example of custom integration, not an out of the box feature.  
 Reports are aggregated into limeSurvay.  </div>
 <script>
-kWidget.featureConfig({
+vWidget.featureConfig({
 	'cache_st': 52345,
-	'targetId' : 'kaltura_player',
+	'targetId' : 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '12644921',
 	'entry_id' : '0_uka1msg4',
 	'flashvars': {
 		'limeSurveyCuePointForms':{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			'relativeTo': 'video',
 			'position': 'before',
 			

@@ -16,7 +16,7 @@ return array (
 			),
 
 			'url' => array(
-				'doc' => "The video URL to override the existing URL loaded from Kaltura.",
+				'doc' => "The video URL to override the existing URL loaded from Vidiun.",
    				'type' => 'string'
 			),
 

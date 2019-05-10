@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'infoScreen', mw.KBaseScreen.extend({
+mw.PluginManager.add( 'infoScreen', mw.VBaseScreen.extend({
 
 	defaultConfig: {
 		parent: "topBarContainer",

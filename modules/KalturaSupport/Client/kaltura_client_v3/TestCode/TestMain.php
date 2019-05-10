@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -26,10 +26,10 @@
 //
 // @ignore
 // ===================================================================================================
-require_once(dirname(__FILE__) . '/../KalturaClient.php');
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'KalturaTestConfiguration.php');
+require_once(dirname(__FILE__) . '/../VidiunClient.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'VidiunTestConfiguration.php');
 
-class TestMain implements IKalturaLogger
+class TestMain implements IVidiunLogger
 {
 	public function log($message)
 	{
@@ -45,23 +45,23 @@ class TestMain implements IKalturaLogger
 		echo "\nFinished running client library tests\n";
 	}
 	
-	private function getKalturaClient($partnerId, $adminSecret, $isAdmin)
+	private function getVidiunClient($partnerId, $adminSecret, $isAdmin)
 	{
-		$kConfig = new KalturaConfiguration($partnerId);
-		$kConfig->serviceUrl = KalturaTestConfiguration::SERVICE_URL;
-		$kConfig->setLogger($this);
-		$client = new KalturaClient($kConfig);
+		$vConfig = new VidiunConfiguration($partnerId);
+		$vConfig->serviceUrl = VidiunTestConfiguration::SERVICE_URL;
+		$vConfig->setLogger($this);
+		$client = new VidiunClient($vConfig);
 		
 		$userId = "SomeUser";
-		$sessionType = ($isAdmin)? KalturaSessionType::ADMIN : KalturaSessionType::USER; 
+		$sessionType = ($isAdmin)? VidiunSessionType::ADMIN : VidiunSessionType::USER; 
 		try
 		{
-			$ks = $client->generateSession($adminSecret, $userId, $sessionType, $partnerId);
-			$client->setKs($ks);
+			$vs = $client->generateSession($adminSecret, $userId, $sessionType, $partnerId);
+			$client->setVs($vs);
 		}
 		catch(Exception $ex)
 		{
-			die("could not start session - check configurations in KalturaTestConfiguration class");
+			die("could not start session - check configurations in VidiunTestConfiguration class");
 		}
 		
 		return $client;
@@ -71,7 +71,7 @@ class TestMain implements IKalturaLogger
 	{
 		try
 		{
-			$client = $this->getKalturaClient(KalturaTestConfiguration::PARTNER_ID, KalturaTestConfiguration::ADMIN_SECRET, true);
+			$client = $this->getVidiunClient(VidiunTestConfiguration::PARTNER_ID, VidiunTestConfiguration::ADMIN_SECRET, true);
 			$results = $client->media->listAction();
 			$entry = $results->objects[0];
 			echo "\nGot an entry: [{$entry->name}]";
@@ -86,14 +86,14 @@ class TestMain implements IKalturaLogger
 	{
 		try
 		{
-			$client = $this->getKalturaClient(KalturaTestConfiguration::PARTNER_ID, KalturaTestConfiguration::ADMIN_SECRET, true);
+			$client = $this->getVidiunClient(VidiunTestConfiguration::PARTNER_ID, VidiunTestConfiguration::ADMIN_SECRET, true);
 			$client->startMultiRequest();
 			$client->baseEntry->count();
 			$client->partner->getInfo();
 			$client->partner->getUsage(2011);
 			$multiRequest = $client->doMultiRequest();
 			$partner = $multiRequest[1];
-			if(!is_object($partner) || get_class($partner) != 'KalturaPartner')
+			if(!is_object($partner) || get_class($partner) != 'VidiunPartner')
 			{
 				throw new Exception("UNEXPECTED_RESULT");
 			}
@@ -110,25 +110,25 @@ class TestMain implements IKalturaLogger
 		try 
 		{
 			echo "\nUploading test video...";
-			$client = $this->getKalturaClient(KalturaTestConfiguration::PARTNER_ID, KalturaTestConfiguration::ADMIN_SECRET, false);
-			$filePath = KalturaTestConfiguration::UPLOAD_FILE;
+			$client = $this->getVidiunClient(VidiunTestConfiguration::PARTNER_ID, VidiunTestConfiguration::ADMIN_SECRET, false);
+			$filePath = VidiunTestConfiguration::UPLOAD_FILE;
 			
 			$token = $client->baseEntry->upload($filePath);
-			$entry = new KalturaMediaEntry();
+			$entry = new VidiunMediaEntry();
 			$entry->name = "my upload entry";
-			$entry->mediaType = KalturaMediaType::VIDEO;
+			$entry->mediaType = VidiunMediaType::VIDEO;
 			$newEntry = $client->media->addFromUploadedFile($entry, $token);
 			echo "\nUploaded a new Video entry " . $newEntry->id;
 			$client->media->delete($newEntry->id);
 			try {
 				$entry = null;
 				$entry = $client->media->get($newEntry->id);
-			} catch (KalturaException $exApi) {
+			} catch (VidiunException $exApi) {
 				if ($entry == null) {
 					echo "\nDeleted the entry (" . $newEntry->id .") successfully!";
 				}
 			}
-		} catch (KalturaException $ex) {
+		} catch (VidiunException $ex) {
 			die($ex->getMessage());
 		}	
 	}

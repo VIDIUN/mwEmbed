@@ -215,11 +215,11 @@ mw.AdTimeline.prototype = {
 						};
 						// Check if the src does not match original src if
 						// so switch back and restore original bindings
-						if ( embedPlayer.kAds 
+						if ( embedPlayer.vAds 
 								&&
-							embedPlayer.kAds.adPlayer
+							embedPlayer.vAds.adPlayer
 								&& 
-							!embedPlayer.kAds.adPlayer.isVideoSiblingEnabled() 
+							!embedPlayer.vAds.adPlayer.isVideoSiblingEnabled() 
 						){
 							// restore the original source:
 							embedPlayer.switchPlaySource( _this.originalSource, completeFunc);

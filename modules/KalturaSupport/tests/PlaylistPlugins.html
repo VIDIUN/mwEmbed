@@ -4,7 +4,7 @@
 <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
-	<script>mw.setConfig('Kaltura.NoApiCache', true);</script>
+	<script>mw.setConfig('Vidiun.NoApiCache', true);</script>
 	<title>
 	  Playlist Plugins
 	</title>
@@ -13,13 +13,13 @@
 	<h1>Playlist Plugins</h1>
 	<h3>VAST (Preroll), Bumper(Nokia Ad), Captions plugin, Cue Points</h3>
 	<br /><br />
-	<object id="kaltura_player_1316950678" name="kaltura_player_1316950678" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="330" width="740" bgcolor="#000000" xmlns:dc="http://purl.org/dc/terms/" xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" resource="http://www.kaltura.com/index.php/kwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781" data="http://www.kaltura.com/index.php/kwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781">
+	<object id="vidiun_player_1316950678" name="vidiun_player_1316950678" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="330" width="740" bgcolor="#000000" xmlns:dc="http://purl.org/dc/terms/" xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" resource="http://www.vidiun.com/index.php/vwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781" data="http://www.vidiun.com/index.php/vwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781">
 		<param name="allowFullScreen" value="true" />
 		<param name="allowNetworking" value="all" />
 		<param name="allowScriptAccess" value="always" />
 		<param name="bgcolor" value="#000000" />
-		<param name="flashVars" value="playlistAPI.autoInsert=true&playlistAPI.kpl0Name=Music Playlist&playlistAPI.kpl0Url=http%3A%2F%2Fwww.kaltura.com%2Findex.php%2Fpartnerservices2%2Fexecuteplaylist%3Fuid%3D%26partner_id%3D423851%26subp_id%3D42385100%26format%3D8%26ks%3D%7Bks%7D%26playlist_id%3D1_ca8ueg14&" />
-		<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781" />
+		<param name="flashVars" value="playlistAPI.autoInsert=true&playlistAPI.vpl0Name=Music Playlist&playlistAPI.vpl0Url=http%3A%2F%2Fwww.vidiun.com%2Findex.php%2Fpartnerservices2%2Fexecuteplaylist%3Fuid%3D%26partner_id%3D423851%26subp_id%3D42385100%26format%3D8%26vs%3D%7Bvs%7D%26playlist_id%3D1_ca8ueg14&" />
+		<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1316950678/wid/_423851/uiconf_id/5843781" />
 	</object>
 <div style="width:200px;right:300px;top:0px;position:absolute;"> Analytics events: </div>
 <textarea id="analyticsLog" name="analyticsLog" col="5" rows="10" style="width:500px; height:300px; position:absolute;top:20px;right:0px;" ></textarea>
@@ -28,10 +28,10 @@
  
  
 <script type="text/javascript">
-window['kalturaSendAnalyticEvent'] = function( analyticName, analyticValue){
+window['vidiunSendAnalyticEvent'] = function( analyticName, analyticValue){
 	$('#analyticsLog').append( analyticName + "\n");
-	if( window['sendKalturaSendAnalyticEvent'] ){
-		sendKalturaSendAnalyticEvent( analyticName, analyticValue );
+	if( window['sendVidiunSendAnalyticEvent'] ){
+		sendVidiunSendAnalyticEvent( analyticName, analyticValue );
 	}
 };
 
@@ -46,7 +46,7 @@ function logPlayerEvent( eventMsg ){
 
 var eventOnce = ['playerUpdatePlayhead' ];
 var eventAll = [
-				'kdpEmpty',
+				'vdpEmpty',
 				'changeMedia',
 				
 				'firstPlay', 
@@ -61,15 +61,15 @@ var eventAll = [
 
 function jsCallbackReady( videoId ){
 	logPlayerEvent( 'jsCallbackReady: ' + videoId );
-	var kdp = $('#' + videoId )[0];
+	var vdp = $('#' + videoId )[0];
 	for( var i in eventOnce ){
 		( function( eventName ){
 			window[ 'on_' + eventName ] = function(){
 				//remove listener: 
-				kdp.removeJsListener( eventName, 'on_' + eventName );
+				vdp.removeJsListener( eventName, 'on_' + eventName );
 				window.logPlayerEvent( eventName );
 			}
-			kdp.addJsListener( eventName , 'on_' + eventName );
+			vdp.addJsListener( eventName , 'on_' + eventName );
 		})(  eventOnce[i]);
 	}
 	for( var i in eventAll){
@@ -77,19 +77,19 @@ function jsCallbackReady( videoId ){
 			window[ 'onnb_' + eventName ] = function(){
 				window.logPlayerEvent( eventName );
 			}
-			kdp.addJsListener( eventName , 'onnb_' + eventName );
+			vdp.addJsListener( eventName , 'onnb_' + eventName );
 		})(  eventAll[i]);
 	}
 }
 </script>
 	<!-- 
-	<layout id="full" skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf" isPlaylist="true" name="Xtream Playlist">
+	<layout id="full" skinPath="/content/uiconf/vidiun/vmc/appstudio/vdp3/eagle/skin/v3.5.9/skin.swf" isPlaylist="true" name="Xtream Playlist">
   <HBox id="topLevel" width="100%" height="100%">
 	<VBox id="player" width="100%" height="100%" styleName="black">
 	  <Plugin id="playlistAPI" width="0%" height="0%" includeInLayout="false"/>
-	  <Plugin id="kalturaMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
+	  <Plugin id="vidiunMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
 	  <Plugin id="statistics" width="0%" height="0%" includeInLayout="false"/>
-	  <Plugin id="vast" numPreroll="1" prerollInterval="1" prerollStartWith="1" prerollUrl="http://kaldev.kaltura.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;source=&amp;format=vast&amp;charset=UTF_8&amp;nz=1&amp;zones=z1=24" preSequence="1" trackCuePoints="true" timeout="4"/>
+	  <Plugin id="vast" numPreroll="1" prerollInterval="1" prerollStartWith="1" prerollUrl="http://viddev.vidiun.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;source=&amp;format=vast&amp;charset=UTF_8&amp;nz=1&amp;zones=z1=24" preSequence="1" trackCuePoints="true" timeout="4"/>
 	  <Canvas height="100%" width="100%" id="PlayerHolder" styleName="black">
 		<Video id="video" width="100%" height="100%"/>
 		<Label id="noticeMessage" text="Video will start in {sequenceProxy.timeRemaining} seconds" height="18" width="100%" font="TimesNewRoman" styleName="movieName" dynamicColor="true" color1="14540253" visible="{sequenceProxy.isAdLoaded}" includeInLayout="{sequenceProxy.isAdLoaded}"/>
@@ -100,14 +100,14 @@ function jsCallbackReady( videoId ){
 		  <Spacer height="100%"/>
 		</VBox>
 		<Screens id="screensLayer" width="100%" height="100%" mouseOverTarget="{PlayerHolder}" styleName="clickThrough" startScreenId="startScreen" startScreenOverId="startScreen" pauseScreenOverId="pauseScreen" pauseScreenId="pauseScreen" playScreenOverId="playScreen" endScreenId="endScreen" endScreenOverId="endScreen"/>
-		<Watermark id="watermark" width="100%" height="100%" watermarkPath="http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png" watermarkClickPath="http://www.kaltura.com/" watermarkPosition="bottomLeft" padding="5"/>
+		<Watermark id="watermark" width="100%" height="100%" watermarkPath="http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png" watermarkClickPath="http://www.vidiun.com/" watermarkPosition="bottomLeft" padding="5"/>
 		<Plugin id="overlay" width="100%" height="100%" trackCuePoints="true"/>
 		<Plugin id="bumper" bumperEntryID="1_187nvs4c" clickurl="http://www.nokia.com" lockUI="true" playOnce="false" preSequence="2" width="100%" height="100%"/>
 		<VBox id="skipBtnHolder" width="100%" height="100%">
 		  <Spacer height="100%"/>
 		  <HBox width="100%" height="30">
 			<Spacer width="100%"/>
-			<Button id="skipBtn" visible="{sequenceProxy.isAdSkip}" includeInLayout="{sequenceProxy.isAdSkip}" type="labelButton" color1="14540253" color2="16777215" styleName="controllerScreen" height="30" width="20" allowDisable="false" label="skip ad >" kClick="sendNotification('sequenceSkipNext')"/>
+			<Button id="skipBtn" visible="{sequenceProxy.isAdSkip}" includeInLayout="{sequenceProxy.isAdSkip}" type="labelButton" color1="14540253" color2="16777215" styleName="controllerScreen" height="30" width="20" allowDisable="false" label="skip ad >" vClick="sendNotification('sequenceSkipNext')"/>
 		  </HBox>
 		</VBox>
 		<VBox id="generalPluginContainer" width="100%" height="100%">
@@ -118,10 +118,10 @@ function jsCallbackReady( videoId ){
 	  <Canvas id="controlsHolder" width="100%" height="30">
 		<HBox id="ControllerScreenHolder" width="100%" height="30" verticalAlign="middle" styleName="darkBg">
 		  <HBox id="ControllerScreen" width="100%" height="30" horizontalGap="9" paddingLeft="9" verticalAlign="middle" styleName="darkBg">
-			<Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="" upTooltip="Play" selectedTooltip="Pause" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+			<Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="" upTooltip="Play" selectedTooltip="Pause" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 			<Button id="liveToggleStatus" toggle="true" color1="0xFF0000" color2="0xFF0000" upIcon="onAirIcon" overIcon="onAirIcon" downIcon="onAirIcon" disabeledIcon="onAirIcon" selectedUpIcon="offlineIcon" selectedOverIcon="offlineIcon" selectedDownIcon="offlineIcon" selectedDisabledIcon="offlineIcon" isSelected="{mediaProxy.isOffline}" visible="{mediaProxy.isLive}" includeInLayout="{mediaProxy.isLive}" mouseEnable="false" useHandCursor=""/>
-			<Button id="previousBtnControllerScreen" kClick="sendNotification('playlistPlayPrevious')" height="22" focusRectPadding="0" buttonType="iconButton" styleName="controllerScreen" icon="PreviousIcon" tooltip="" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-			<Button id="nextBtnControllerScreen" kClick="sendNotification('playlistPlayNext')" focusRectPadding="0" height="22" buttonType="iconButton" icon="NextIcon" styleName="controllerScreen" tooltip="" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+			<Button id="previousBtnControllerScreen" vClick="sendNotification('playlistPlayPrevious')" height="22" focusRectPadding="0" buttonType="iconButton" styleName="controllerScreen" icon="PreviousIcon" tooltip="" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+			<Button id="nextBtnControllerScreen" vClick="sendNotification('playlistPlayNext')" focusRectPadding="0" height="22" buttonType="iconButton" icon="NextIcon" styleName="controllerScreen" tooltip="" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 			<VBox id="scrubberContainer" width="100%" height="30" verticalAlign="middle" verticalGap="-3" notVisible="{mediaProxy.isLive}">
 			  <Spacer height="10"/>
 			  <Scrubber id="scrubber" width="100%" height="10" styleName="" color1="14540253" color2="14540253"/>
@@ -132,11 +132,11 @@ function jsCallbackReady( videoId ){
 			  </HBox>
 			</VBox>
 			<VolumeBar id="volumeBar" styleName="volumeBtn" buttonWidth="20" width="20" height="20" buttonType="iconButton" tooltip="Change volume" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-			<ComboBox id="ccUnderComboBox" width="90" styleName="_kdp" selectedIndex="{closedCaptionsUnderPlayer.currentCCFileIndex}" kevent_change="sendNotification( 'closedCaptionsSelected' , ccUnderComboBox.selectedItem)" dataProvider="{closedCaptionsUnderPlayer.availableCCFilesLabels}" prompt="Captions" includeInLayout="{closedCaptionsUnderPlayer.availableCCFilesLabels.length}" visible="{closedCaptionsUnderPlayer.availableCCFilesLabels.length}" tooltip=""/>
-			<Button id="fullScreenBtnControllerScreen" command="fullScreen" buttonType="iconButton" height="22" styleName="controllerScreen" icon="openFullScreenIcon" selectedUpIcon="closeFullScreenIcon" selectedOverIcon="closeFullScreenIcon" selectedDownIcon="closeFullScreenIcon" selectedDisabledIcon="closeFullScreenIcon" focusRectPadding="0" allowDisable="false" tooltip="Toggle fullscreen" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+			<ComboBox id="ccUnderComboBox" width="90" styleName="_vdp" selectedIndex="{closedCaptionsUnderPlayer.currentCCFileIndex}" vevent_change="sendNotification( 'closedCaptionsSelected' , ccUnderComboBox.selectedItem)" dataProvider="{closedCaptionsUnderPlayer.availableCCFilesLabels}" prompt="Captions" includeInLayout="{closedCaptionsUnderPlayer.availableCCFilesLabels.length}" visible="{closedCaptionsUnderPlayer.availableCCFilesLabels.length}" tooltip=""/>
+			<Button id="fullScreenBtnControllerScreen" command="fullScreen" buttonType="iconButton" height="22" styleName="controllerScreen" icon="openFullScreenIcon" selectedUpIcon="closeFullScreenIcon" selectedOverIcon="closeFullScreenIcon" selectedDownIcon="closeFullScreenIcon" selectedDisabledIcon="closeFullScreenIcon" focusRectPadding="0" allowDisable="false" tooltip="Toggle fullscreen" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 		  </HBox>
 		  <Spacer width="13"/>
-		  <Button id="kalturaLogo" height="50" width="100" kClick="navigate('http://www.kaltura.com')" styleName="controllerScreen" icon="kalturaLogo"/>
+		  <Button id="vidiunLogo" height="50" width="100" vClick="navigate('http://www.vidiun.com')" styleName="controllerScreen" icon="vidiunLogo"/>
 		  <Spacer width="13"/>
 		</HBox>
 	  </Canvas>
@@ -158,7 +158,7 @@ function jsCallbackReady( videoId ){
 	  <VBox id="startContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<Spacer width="100%"/>
 		<Tile id="startTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-		  <Button id="onVideoPlayBtnStartScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" k_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+		  <Button id="onVideoPlayBtnStartScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" v_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 		</Tile>
 		<Spacer width="100%"/>
 	  </VBox>
@@ -167,7 +167,7 @@ function jsCallbackReady( videoId ){
 	  <VBox id="pauseContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<Spacer height="100%"/>
 		<Tile id="pauseTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-		  <Button id="onVideoPlayBtnPauseScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" k_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+		  <Button id="onVideoPlayBtnPauseScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" v_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 		</Tile>
 		<Spacer height="100%"/>
 	  </VBox>
@@ -183,7 +183,7 @@ function jsCallbackReady( videoId ){
 	  <VBox id="endContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
 		<Spacer height="100%"/>
 		<Tile id="endTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-		  <Button id="replayBtnEndScreen" kClick="sendNotification('doPlay')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="replay" styleName="onScreenBtn" upIcon="replayIcon" k_buttonType="buttonIconControllerArea" tooltip="replay" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+		  <Button id="replayBtnEndScreen" vClick="sendNotification('doPlay')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="replay" styleName="onScreenBtn" upIcon="replayIcon" v_buttonType="buttonIconControllerArea" tooltip="replay" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
 		</Tile>
 		<Spacer height="100%"/>
 	  </VBox>

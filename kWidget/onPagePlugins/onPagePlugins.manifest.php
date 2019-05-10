@@ -55,8 +55,8 @@ return array(
 				'type'=> 'string'
 			),
 			'customEvents' => array(
-				'doc' => "A comma separated list of Kaltura player events you want to track.",
-				'label' => 'Kaltura player events',
+				'doc' => "A comma separated list of Vidiun player events you want to track.",
+				'label' => 'Vidiun player events',
 				'type'=> 'string'
 			),
 			'additionalEvarsAndProps' => array(
@@ -65,9 +65,9 @@ return array(
 				'type' => 'string'
 			),
 			'additionalEvarsAndPropsValues' => array(
-				'doc' => "A comma separated list of Kaltura values, you want to pass along with every media event.
+				'doc' => "A comma separated list of Vidiun values, you want to pass along with every media event.
 				Values will correspond to the evars and props comma separated map defined in additionalEvarsAndProps.",
-				'label' => 'Kaltura values',
+				'label' => 'Vidiun values',
 				'type' => 'string'
 			)
 		)
@@ -164,8 +164,8 @@ return array(
 		must provide your credentials on the "integrate" tab and select an entry from your 
 		account to edits it\'s chapter cuePoints.',
 		'attributes' => array(
-			'ks' => array(
-				'doc' => "The authentication ks, required until we have iframe auth system in place",
+			'vs' => array(
+				'doc' => "The authentication vs, required until we have iframe auth system in place",
 				'type' => 'string',
 				'hideEdit' => true
 			),
@@ -199,7 +199,7 @@ return array(
 		)
 	),
 	'chaptersView' => array(
-	 	'description' => 'Display video chapter information. See <a target="_blank" href="http://player.kaltura.com/kWidget/onPagePlugins/chapters/ChapterSamples.html">chapter samples</a>, for highlighted sample chapter configuration',
+	 	'description' => 'Display video chapter information. See <a target="_blank" href="http://player.vidiun.com/vWidget/onPagePlugins/chapters/ChapterSamples.html">chapter samples</a>, for highlighted sample chapter configuration',
 		'attributes' => array(
 			'containerId' => array(
 				'doc'=> "Default: null, The chapter container id, will override some layout settings and allow you to place the chapters in a target div.",
@@ -300,7 +300,7 @@ return array(
 			),
 			'path' => array(
 				'doc' => "",
-				'initvalue' => '/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf',
+				'initvalue' => '/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf',
 				'type' => 'hidden'
 			),
 			'chapterRenderer' => array(

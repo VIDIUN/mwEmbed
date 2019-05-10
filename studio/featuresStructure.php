@@ -111,7 +111,7 @@ return array(
 	"analytics"=> array(
 		"label" => "Analytics",
 		"icon" => "TabAnalytics",
-		"description" => "Kaltura supports robust analytics via the Kaltura platform as well as via 3rd party analytics providers.",
+		"description" => "Vidiun supports robust analytics via the Vidiun platform as well as via 3rd party analytics providers.",
 		"type" => "menu",
 		"model" => "analytics",
 		"children"=> array(
@@ -126,7 +126,7 @@ return array(
 	"monetization"=> array(
 		"label" => "Monetization",
 		"icon" => "TabMonetization",
-		"description" => "The Kaltura platform supports VAST 3.0 as well as 3rd party ad plugins to facilitate content monetization.",
+		"description" => "The Vidiun platform supports VAST 3.0 as well as 3rd party ad plugins to facilitate content monetization.",
 		"type" => "menu",
 		"model" => "monitization",
 		"children"=> array(

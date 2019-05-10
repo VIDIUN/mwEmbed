@@ -7,7 +7,7 @@
 return array(
 	'nielsenCombined' => array(
 		'description' => "Supports sending player analytics events to Nielsen Combined.
-		Kaltura integration supports the full Combined beacon event flow.",
+		Vidiun integration supports the full Combined beacon event flow.",
 		'attributes'=> array(
 			'clientId' => array(
 				'doc' => "The client ID.",

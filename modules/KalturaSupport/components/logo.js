@@ -1,15 +1,15 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'logo', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'logo', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			parent: "controlsContainer",
 			order: 41,
 			displayImportance: 'low',
 			align: "right",
-			cssClass: "kaltura-logo",
-			href: 'http://www.kaltura.com',
-			title: 'Kaltura',
+			cssClass: "vidiun-logo",
+			href: 'http://www.vidiun.com',
+			title: 'Vidiun',
 			img: null
 		},
 		getComponent: function() {
@@ -35,9 +35,9 @@
 						}).append( $img )
 					);
 			}
-			// remove Kaltura logo image if we have a custom logo icon
+			// remove Vidiun logo image if we have a custom logo icon
 			if (this.getConfig('img') != null){
-				this.$el.removeClass('kaltura-logo');
+				this.$el.removeClass('vidiun-logo');
 			}
 			return this.$el;
 		}

@@ -85,7 +85,7 @@ mw.DoubleClick.prototype = {
 
 		// Load double click ima per doc:
 		this.loadIma( function(){
-			// Determine if we are in managed or kaltura point based mode.
+			// Determine if we are in managed or vidiun point based mode.
 			if( (_this.getConfig( "preSequence" ) || _this.getConfig( "postSequence" )) && _this.getConfig( "adTagUrl" ) ){
 				// Check for adPattern
 				if( _this.getConfig( 'adPattern' ) ){
@@ -102,7 +102,7 @@ mw.DoubleClick.prototype = {
 				}
 			} else {
 				// Add cuepoint bindings
-				_this.addKalturaCuePointBindings();
+				_this.addVidiunCuePointBindings();
 			}
 			// Issue the callback to continue player build out:
 			callback();
@@ -201,11 +201,11 @@ mw.DoubleClick.prototype = {
 			return this.embedPlayer.getPlayerElement();
 		}
 	},
-	addKalturaCuePointBindings: function(){
+	addVidiunCuePointBindings: function(){
 		var _this = this;
-		mw.log("DoubleClick::addKalturaCuePointBindings");
+		mw.log("DoubleClick::addVidiunCuePointBindings");
 		// Add a binding for cuepoints:
-		_this.embedPlayer.bindHelper( 'KalturaSupport_AdOpportunity' + _this.bindPostfix, function( event,  cuePointWrapper ){
+		_this.embedPlayer.bindHelper( 'VidiunSupport_AdOpportunity' + _this.bindPostfix, function( event,  cuePointWrapper ){
 			mw.log( "DoubleClick:: evaluate ad oppertunity");
 			var cuePoint = cuePointWrapper.cuePoint;
 			// Check if trackCuePoints has been disabled
@@ -229,7 +229,7 @@ mw.DoubleClick.prototype = {
 			}
 
 			// Get the ad type for each cuepoint
-			var adType = _this.embedPlayer.kCuePoints.getRawAdSlotType( cuePoint );
+			var adType = _this.embedPlayer.vCuePoints.getRawAdSlotType( cuePoint );
 			// Update the ad slot type:
 			_this.currentAdSlotType = adType;
 
@@ -254,7 +254,7 @@ mw.DoubleClick.prototype = {
 			// If cuepoint ad type is midroll request inline:
 			if( adType == 'midroll' ){
 				// All cuepoints act as "midrolls"
-				mw.log( "DoubleClick:: addKalturaCuePointBindings: midroll -> requestAds" );
+				mw.log( "DoubleClick:: addVidiunCuePointBindings: midroll -> requestAds" );
 				// pause the player while requesting adds
 				_this.embedPlayer.pauseLoading();
 				// request the ads:
@@ -365,7 +365,7 @@ mw.DoubleClick.prototype = {
 		mw.log( "DoubleClick::requestAds: url: " + adTagUrl );
 
 		// Update the local lastRequestedAdTagUrl for debug and audits
-		_this.embedPlayer.setKDPAttribute( this.pluginName, 'requestedAdTagUrl', adTagUrl );
+		_this.embedPlayer.setVDPAttribute( this.pluginName, 'requestedAdTagUrl', adTagUrl );
 
 		// Create ad request object.
 		var adsRequest = {};
@@ -700,7 +700,7 @@ mw.DoubleClick.prototype = {
 		/**
 		 * Handle any send notification events:
 		 */
-		embedPlayer.bindHelper( 'Kaltura_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
+		embedPlayer.bindHelper( 'Vidiun_SendNotification' + this.bindPostfix, function(event, notificationName, notificationData){
 			// Only take local api actions if in an Ad.
 			if( _this.adActive ){
 				mw.log("DoubleClick:: sendNotification: " + notificationName );
@@ -813,7 +813,7 @@ mw.DoubleClick.prototype = {
 	 */
 	getConfig: function( attrName ){
 		// always get the config from the embedPlayer so that is up-to-date
-		return this.embedPlayer.getKalturaConfig( this.pluginName, attrName );
+		return this.embedPlayer.getVidiunConfig( this.pluginName, attrName );
 	}
 };
 

@@ -2,15 +2,15 @@
 
 // go over the folder list 
 return array(
-	'kdark' => array(
+	'vdark' => array(
 		/** 
 		  * We need to have mw.EmbedPlayer dependency for our skin
 		  * So that the Core CSS will load before Skin CSS
 		 **/
 		'dependencies' => 'mw.EmbedPlayer',
 		'styles' => array(
-			'skins/kdark/css/layout.css',
-			'skins/kdark/css/icons.css',
+			'skins/vdark/css/layout.css',
+			'skins/vdark/css/icons.css',
 		)
 	)
 );

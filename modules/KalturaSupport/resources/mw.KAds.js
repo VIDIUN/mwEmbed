@@ -3,12 +3,12 @@
 */
 ( function( mw, $ ) { "use strict";
 
-mw.KAds = function( embedPlayer, callback) {
+mw.VAds = function( embedPlayer, callback) {
 	// Create a Player Manager
 	return this.init( embedPlayer, callback );
 };
 
-mw.KAds.prototype = {
+mw.VAds.prototype = {
 	// The ad types
 	namedAdTimelineTypes : [ 'preroll', 'postroll', 'midroll', 'overlay' ],
 	// Ad attribute map
@@ -18,7 +18,7 @@ mw.KAds.prototype = {
 	},
 	displayedCuePoints: [],
 
-	bindPostfix: '.KAds',
+	bindPostfix: '.VAds',
 	confPrefix: 'vast',
 	config:{},
 
@@ -30,7 +30,7 @@ mw.KAds.prototype = {
 		_this.embedPlayer = embedPlayer;
 			
 		// Setup the ad player:
-		_this.adPlayer = new mw.KAdPlayer( embedPlayer );
+		_this.adPlayer = new mw.VAdPlayer( embedPlayer );
 
 		// Clear any existing bindings:
 		_this.destroy();
@@ -48,8 +48,8 @@ mw.KAds.prototype = {
 
 		// We can add this binding here, because we will always have vast in the uiConf when having cue points
 		// Catch Ads from adOpportunity event
-		if( embedPlayer.getKalturaConfig('vast', 'trackCuePoints') === true ) {
-			$( embedPlayer ).bind('KalturaSupport_AdOpportunity' + _this.bindPostfix, function( event, cuePointWrapper ) {
+		if( embedPlayer.getVidiunConfig('vast', 'trackCuePoints') === true ) {
+			$( embedPlayer ).bind('VidiunSupport_AdOpportunity' + _this.bindPostfix, function( event, cuePointWrapper ) {
 				// Check for  protocolType == 1 ( type = vast )
 				if( cuePointWrapper.cuePoint.protocolType == 1 ){
 					_this.handleAdOpportunity( cuePointWrapper );
@@ -70,7 +70,7 @@ mw.KAds.prototype = {
 
 		// Load the Ads from uiConf
 		_this.loadAds( function(){
-			mw.log( "KAds::All ads have been loaded" );
+			mw.log( "VAds::All ads have been loaded" );
 			callback();
 		});
 	},
@@ -81,12 +81,12 @@ mw.KAds.prototype = {
 	 * @return
 	 */
 	getConfig: function( attr ){
-		return this.embedPlayer.getKalturaConfig( 'vast', attr );
+		return this.embedPlayer.getVidiunConfig( 'vast', attr );
 	},
 
 	handleAdOpportunity: function( cuePointWrapper ) {
 		var _this = this;
-		switch( _this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper ) ) {
+		switch( _this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper ) ) {
 			case 'preroll':
 			case 'postroll':
 				_this.loadAndAddToSequence( cuePointWrapper );
@@ -102,7 +102,7 @@ mw.KAds.prototype = {
 	loadAndAddToSequence: function( cuePointWrapper ) {
 		var _this = this;
 		var cuePoint = cuePointWrapper.cuePoint;
-		var adType = _this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper );
+		var adType = _this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper );
 
 		// Check for empty ad:
 		if( !cuePoint.sourceUrl || $.trim( cuePoint.sourceUrl ) === '' ) {
@@ -138,7 +138,7 @@ mw.KAds.prototype = {
 		var _this = this;
 		var embedPlayer = this.embedPlayer;
 		var cuePoint = cuePointWrapper.cuePoint;
-		var adType = this.embedPlayer.kCuePoints.getAdSlotType( cuePointWrapper );
+		var adType = this.embedPlayer.vCuePoints.getAdSlotType( cuePointWrapper );
 		var adDuration = Math.round( cuePoint.duration / 1000);
 
 		// Check if cue point already displayed
@@ -151,7 +151,7 @@ mw.KAds.prototype = {
 		// Trigger midSequenceStart event (TODO: should moved to AdTimeline)
 		$( embedPlayer ).trigger('midSequenceStart');
 
-		mw.log('kAds::loadAndDisplayAd:: load ' + adType + ', duration: ' + adDuration, cuePoint);
+		mw.log('vAds::loadAndDisplayAd:: load ' + adType + ', duration: ' + adDuration, cuePoint);
 
 		// Load adTimeline
 		if (!_this.embedPlayer.adTimeline) {
@@ -304,7 +304,7 @@ mw.KAds.prototype = {
 	 */
 	setPersistentConfig: function( key, value ) {
 		// check if we are storing ads session:
-		if( this.embedPlayer.getKalturaConfig( this.confPrefix, 'storeSession' ) ){
+		if( this.embedPlayer.getVidiunConfig( this.confPrefix, 'storeSession' ) ){
 			// no object usage for this
 			$.cookie( this.confPrefix + '_' + key, value );
 		}
@@ -320,7 +320,7 @@ mw.KAds.prototype = {
 	},
 	getPersistentConfig: function( attr ) {
 		// check if we are storing ads session 
-		if( this.embedPlayer.getKalturaConfig( this.confPrefix, 'storeSession' ) ){
+		if( this.embedPlayer.getVidiunConfig( this.confPrefix, 'storeSession' ) ){
 			return $.cookie( this.confPrefix + '_' + attr );
 		}
 		
@@ -414,7 +414,7 @@ mw.KAds.prototype = {
 			return this.getConfig( adKey );
 		}
 		// else get raw and evaluate manually: 
-		var rawAdUrl = this.embedPlayer.getRawKalturaConfig( 'vast', adKey );
+		var rawAdUrl = this.embedPlayer.getRawVidiunConfig( 'vast', adKey );
 		return this.embedPlayer.evaluate( rawAdUrl );
 	},
 	addOverlayBinding: function( overlayConfig ){
@@ -422,7 +422,7 @@ mw.KAds.prototype = {
 		var embedPlayer = this.embedPlayer;
 		var startOvelrayDisplayed = false;
 		var lastDisplay = 0;
-		var timeout = this.embedPlayer.getKalturaConfig( 'vast', 'timeout' );
+		var timeout = this.embedPlayer.getVidiunConfig( 'vast', 'timeout' );
 
 		// turn start time from string to number
 		timeout = parseInt( timeout );
@@ -439,7 +439,7 @@ mw.KAds.prototype = {
 				overlayConfig,
 				function(){
 					startOvelrayDisplayed = false;
-					mw.log("KAds::overlay done");
+					mw.log("VAds::overlay done");
 				},
 				timeout
 			)
@@ -449,12 +449,12 @@ mw.KAds.prototype = {
 			if( (embedPlayer.currentTime > overlayConfig.start) && (embedPlayer.currentTime < overlayConfig.end) && !startOvelrayDisplayed && !embedPlayer.evaluate('{sequenceProxy.isInSequence}') ){
 				lastDisplay = embedPlayer.currentTime;
 				startOvelrayDisplayed = true;
-				mw.log("KAds::displayOverlay::startOvelrayDisplayed " + startOvelrayDisplayed)
+				mw.log("VAds::displayOverlay::startOvelrayDisplayed " + startOvelrayDisplayed)
 				displayOverlay();
 			}
 			if( startOvelrayDisplayed && embedPlayer.currentTime > ( lastDisplay + parseInt( overlayConfig.frequency ) ) && !embedPlayer.evaluate('{sequenceProxy.isInSequence}') ){
 				// reset the lastDisplay time:
-				mw.log("KAds::displayOverlay::overlayConfig.frequency ct:" +embedPlayer.currentTime + ' > ' + ( lastDisplay + parseInt( overlayConfig.frequency) ) )
+				mw.log("VAds::displayOverlay::overlayConfig.frequency ct:" +embedPlayer.currentTime + ' > ' + ( lastDisplay + parseInt( overlayConfig.frequency) ) )
 				displayOverlay();
 				lastDisplay =  embedPlayer.currentTime;
 			}
@@ -470,9 +470,9 @@ mw.KAds.prototype = {
 		};
 
 		// Setup local pointer:
-		var notice = embedPlayer.getRawKalturaConfig('noticeMessage');
-		var skipBtn = embedPlayer.getRawKalturaConfig('skipBtn');
-		var skipNotice = embedPlayer.getRawKalturaConfig('skipNotice');
+		var notice = embedPlayer.getRawVidiunConfig('noticeMessage');
+		var skipBtn = embedPlayer.getRawVidiunConfig('skipBtn');
+		var skipNotice = embedPlayer.getRawVidiunConfig('skipNotice');
 		// Add notice if present		
 		if( notice && notice['plugin'] !== false){
 			config.notice = {
@@ -525,7 +525,7 @@ mw.KAds.prototype = {
 				loadQueueCount++;
 				// Load and parse the adXML into displayConf format
 				mw.AdLoader.load( _this.getAdUrl( adType ) , function( adDisplayConf ){
-					mw.log("KalturaAds loaded: " + adType );
+					mw.log("VidiunAds loaded: " + adType );
 					loadQueueCount--;
 					addAdCheckLoadDone( adType,  $.extend({}, _this.getBaseAdConf( adType ), adDisplayConf ) );
 				});

@@ -4,7 +4,7 @@
  * We should use this on both sides of the iframe
  * If it gets to large we will have to do some dep mapping 
 */
-(function(kWidget) {
+(function(vWidget) {
 	/**
 	 * Given a float number of seconds, returns npt format response. ( ignore
 	 * days for now )
@@ -15,13 +15,13 @@
 	 *			show_ms If milliseconds should be displayed.
 	 * @return {Float} String npt format
 	 */
-	kWidget.seconds2npt = function( sec, show_ms ) {
+	vWidget.seconds2npt = function( sec, show_ms ) {
 		if ( isNaN( sec ) ) {
-			kWidget.log("Warning: mediawiki.UtilitiesTime, trying to get npt time on NaN:" + sec);
+			vWidget.log("Warning: mediawiki.UtilitiesTime, trying to get npt time on NaN:" + sec);
 			return '0:00:00';
 		}
 
-		var tm = kWidget.seconds2Measurements( sec );
+		var tm = vWidget.seconds2Measurements( sec );
 
 		// Round the number of seconds to the required number of significant
 		// digits
@@ -52,7 +52,7 @@
 	 *			nptString NPT time string
 	 * @return {Float} Number of seconds
 	 */
-	kWidget.npt2seconds = function ( nptString ) {
+	vWidget.npt2seconds = function ( nptString ) {
 		if ( !nptString ) {
 			// mw.log('npt2seconds:not valid ntp:'+ntp);
 			return 0;
@@ -86,7 +86,7 @@
 	 * @param {float}
 	 *			sec Seconds to be converted into time measurements
 	 */
-	kWidget.seconds2Measurements = function ( sec ){
+	vWidget.seconds2Measurements = function ( sec ){
 		var tm = {};
 		tm.days = Math.floor( sec / ( 3600 * 24 ) );
 		tm.hours = Math.floor( Math.round( sec ) / 3600 );
@@ -95,7 +95,7 @@
 		return tm;
 	};
 
-    kWidget.getSliceCount =  function( duration ){
+    vWidget.getSliceCount =  function( duration ){
         if( duration < 60 ){
             return Math.round( duration ) +1; // every second
         }
@@ -110,11 +110,11 @@
         return 200;
     };
 
-    kWidget.getThumbSpriteOffset = function( thumbWidth, time , duration , forceSliceCount ){
-        var sliceIndex = kWidget.getSliceIndexForTime( time , duration, forceSliceCount );
+    vWidget.getThumbSpriteOffset = function( thumbWidth, time , duration , forceSliceCount ){
+        var sliceIndex = vWidget.getSliceIndexForTime( time , duration, forceSliceCount );
         return - ( sliceIndex * thumbWidth ) + 'px 0px';
     };
-    kWidget.getSliceIndexForTime =  function( time , duration ,forceSliceCount ){
+    vWidget.getSliceIndexForTime =  function( time , duration ,forceSliceCount ){
         var sliceCount = forceSliceCount || this.getSliceCount(duration);
         var perc = time / duration;
         var sliceIndex = Math.ceil( sliceCount * perc );
@@ -122,4 +122,4 @@
     };
 
 	
-})(window.kWidget);
+})(window.vWidget);

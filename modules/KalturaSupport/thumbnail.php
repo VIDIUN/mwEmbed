@@ -7,7 +7,7 @@
 // Include configuration: ( will include LocalSettings.php )
 chdir( dirname( __FILE__ ) . '/../../' );
 require_once( 'includes/DefaultSettings.php' );
-require_once( dirname( __FILE__ ) . '/KalturaCommon.php' );
+require_once( dirname( __FILE__ ) . '/VidiunCommon.php' );
 
 $thumbnail = new thumbnailEntry();
 $thumbnail->redirectThumbnail();
@@ -17,25 +17,25 @@ class thumbnailEntry {
 	
 	function redirectThumbnail(){
 		// We don't check access controls, this happens in the real player once embed
-		$kEntryObject = $this->getEntryObject();
+		$vEntryObject = $this->getEntryObject();
 		try {
-			$entryObject =  $kEntryObject->getResult();
+			$entryObject =  $vEntryObject->getResult();
 		} catch ( Exception $e ){
 				die( $e->getMessage() );
 		}
 
 		// Request params
-		$width = $kEntryObject->request->get('width');
-		$height = $kEntryObject->request->get('height');
-		$vid_slices = $kEntryObject->request->get('vid_slices');
-		$vid_sec = $kEntryObject->request->get('vid_sec');
+		$width = $vEntryObject->request->get('width');
+		$height = $vEntryObject->request->get('height');
+		$vid_slices = $vEntryObject->request->get('vid_slices');
+		$vid_sec = $vEntryObject->request->get('vid_sec');
 
 		// Send public cache header for 5 min
 		header("Cache-Control: public, max-age=300");
 		
 		if( isset (  $entryObject['meta']->thumbnailUrl ) ){
 			$thumbUrl =  $entryObject['meta']->thumbnailUrl;
-			// Only append width/height params if thumbnail from kaltura service ( could be external thumbnail )
+			// Only append width/height params if thumbnail from vidiun service ( could be external thumbnail )
 			if( strpos( $thumbUrl,  "thumbnail/entry_id" ) !== false ){
 				// Add with and height if available
 				$thumbUrl .= $width ? '/width/' . intval( $width ) : '';

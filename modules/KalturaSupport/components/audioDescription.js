@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'audioDescription', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'audioDescription', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',
@@ -19,9 +19,9 @@
 
 		setup: function() {
 			var _this = this;
-			if ( kWidget.supportsFlash() ) {
-				mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true ); //only kplayer supports audio description
-				this.getPlayer().setKalturaConfig('kdpVars', 'audioDescription',
+			if ( vWidget.supportsFlash() ) {
+				mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true ); //only vplayer supports audio description
+				this.getPlayer().setVidiunConfig('vdpVars', 'audioDescription',
 						{ plugin: 'true', volume: this.getConfig( 'volume' ) } );
 				
 				this.bind("playerReady", function(){

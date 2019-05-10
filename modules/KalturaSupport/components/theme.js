@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'theme', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'theme', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'buttonsSize': null,

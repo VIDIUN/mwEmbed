@@ -39,13 +39,13 @@
         'mediaProxy.isOffline' => array(
             'desc' => 'A flag specifying if the current live broadcast is offline',
         ),
-        'mediaProxy.kalturaMediaFlavorArray' => array(
+        'mediaProxy.vidiunMediaFlavorArray' => array(
             'desc' => 'An array holding all available flavours for the current media',
         ),
         'configProxy' => array(
             'desc' => 'The player configuration object. Allows access to all UI vars and plugin properties',
         ),
-        'playerStatusProxy.kdpStatus' => array(
+        'playerStatusProxy.vdpStatus' => array(
             'desc' => 'The player status. Can be "empty" or "ready"',
         ),
         'playerStatusProxy.loadTime' => array(

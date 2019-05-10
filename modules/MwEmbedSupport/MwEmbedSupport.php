@@ -34,7 +34,7 @@ return array(
 		'styles'=> array( 'skins/common/MwEmbedCommonStyle.css' ),
 		'skinStyles' => array(
 			/* shared jQuery ui skin styles */
-			'kaltura-dark' => 'skins/jquery.ui.themes/kaltura-dark/jquery-ui-1.7.2.css',
+			'vidiun-dark' => 'skins/jquery.ui.themes/vidiun-dark/jquery-ui-1.7.2.css',
 		),
 	),	
 	'mediawiki.UtilitiesTime' => array( 'scripts' => 'mediawiki/mediawiki.UtilitiesTime.js' ),

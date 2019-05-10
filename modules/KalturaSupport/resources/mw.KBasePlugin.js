@@ -1,7 +1,7 @@
 ( function( mw, $ ) {"use strict";
 
 // Class defined in resources/class/class.js
-mw.KBasePlugin = Class.extend({
+mw.VBasePlugin = Class.extend({
 	asyncInit: false,
 	init: function( embedPlayer, callback, pluginName ){
 
@@ -63,12 +63,12 @@ mw.KBasePlugin = Class.extend({
 	},
 	getConfig: function( attr, raw ) {
 		if( raw ){
-			return this.embedPlayer.getRawKalturaConfig( this.pluginName, attr );
+			return this.embedPlayer.getRawVidiunConfig( this.pluginName, attr );
 		}
-		return this.embedPlayer.getKalturaConfig( this.pluginName, attr );
+		return this.embedPlayer.getVidiunConfig( this.pluginName, attr );
 	},
 	setConfig: function( attr, value, quiet ) {
-		this.embedPlayer.setKalturaConfig( this.pluginName, attr, value, quiet );
+		this.embedPlayer.setVidiunConfig( this.pluginName, attr, value, quiet );
 	},
 	getTemplateHTML: function( data ){
 		var _this = this;
@@ -82,11 +82,11 @@ mw.KBasePlugin = Class.extend({
 		var rawHTML = this.getConfig( 'template', true );
 		if( !rawHTML ){
 			var templatePath = this.getConfig( 'templatePath' );
-			if( !templatePath || !window.kalturaIframePackageData.templates[ templatePath ]) {
+			if( !templatePath || !window.vidiunIframePackageData.templates[ templatePath ]) {
 				this.log('getTemplateHTML:: Template not found');
 				return '';
 			}
-			rawHTML = window.kalturaIframePackageData.templates[ templatePath ];
+			rawHTML = window.vidiunIframePackageData.templates[ templatePath ];
 		}
 		var transformedHTML = mw.util.tmpl( rawHTML, data );
 		var evaluatedHTML = $.trim( this.embedPlayer.evaluate( transformedHTML ) );
@@ -143,17 +143,17 @@ mw.KBasePlugin = Class.extend({
 		if( typeof this.onConfigChange !== 'function' ){
 			return ;
 		}
-		this.bind('Kaltura_ConfigChanged', function(event, pluginName, property, value){
+		this.bind('Vidiun_ConfigChanged', function(event, pluginName, property, value){
 			if( pluginName === _this.pluginName ){
 				_this.onConfigChange( property, value );
 			}
 		});
 	},
-	getKalturaClient: function() {
-		if( ! this.kClient ) {
-			this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+	getVidiunClient: function() {
+		if( ! this.vClient ) {
+			this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 		}
-		return this.kClient;
+		return this.vClient;
 	},
 	destroy: function(){
 		this.unbind();

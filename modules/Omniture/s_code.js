@@ -21,8 +21,8 @@ s.linkTrackEvents = "None"
 /* WARNING: Changing any of the below variables will cause drastic
 changes to how your visitor data is collected.  Changes should only be
 made when instructed to do so by your account manager.*/
-s.visitorNamespace = "partnerkaltura"
-s.trackingServer = "partnerkaltura.sbx1.2o7.net"
+s.visitorNamespace = "partnervidiun"
+s.trackingServer = "partnervidiun.sbx1.2o7.net"
 
 /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
 var s_code = '',

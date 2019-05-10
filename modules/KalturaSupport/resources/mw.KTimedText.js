@@ -3,18 +3,18 @@
 */
 ( function( mw, $ ) { "use strict";
 
-	mw.KTimedText = function( embedPlayer, captionPluginName, callback ) {
+	mw.VTimedText = function( embedPlayer, captionPluginName, callback ) {
 		return this.init( embedPlayer, captionPluginName, callback );
 	};
-	mw.KTimedText.prototype = {
-		bindPostFix : '.kTimedText',
+	mw.VTimedText.prototype = {
+		bindPostFix : '.vTimedText',
 		init: function( embedPlayer, captionPluginName, callback ) {
 			var _this = this;
 			
 			this.embedPlayer = embedPlayer;
 			// Set the caption plugin name so that we can get config from the correct location.
 			this.pluginName = captionPluginName;
-			// Check for kaltura plugin representation of offset:
+			// Check for vidiun plugin representation of offset:
 			if( _this.getConfig( 'timeOffset' ) ) {
 				_this.timeOffset = _this.getConfig( 'timeOffset' );
 			}
@@ -45,11 +45,11 @@
 			embedPlayer.timedText = baseTimedText;
 
 			// if using the customCaptionsButton existingLayout always starts as "off"
-			if ( _this.embedPlayer.getKalturaConfig( '', 'customCaptionsButton' ) ) {
+			if ( _this.embedPlayer.getVidiunConfig( '', 'customCaptionsButton' ) ) {
 				existingLayout =  'off';
 			}
 			// Set the default key:
-			var defaultLanguageKey =  _this.embedPlayer.getKalturaConfig( this.pluginName, 'defaultLanguageKey' );
+			var defaultLanguageKey =  _this.embedPlayer.getVidiunConfig( this.pluginName, 'defaultLanguageKey' );
 			if ( defaultLanguageKey && defaultLanguageKey != "None" ){
 				embedPlayer.timedText.setPersistentConfig( 'userLanguage', defaultLanguageKey );
 			} else if ( defaultLanguageKey == 'None' ) {
@@ -75,7 +75,7 @@
 		bindTextButton: function($textButton) {
 			var _this = this;
 			$textButton.unbind( 'click.textMenu' ).bind( 'click.textMenu', function() {
-				if ( _this.embedPlayer.getKalturaConfig( '', 'customCaptionsButton' ) ) {
+				if ( _this.embedPlayer.getVidiunConfig( '', 'customCaptionsButton' ) ) {
 					_this.toggleCaptions();
 				} else {
 					_this.showTextMenu();
@@ -86,7 +86,7 @@
 		/* Override buildMenu for allowing captions toggle */
 		buildMenu: function( autoShow ) {
 			var _this = this;
-			if ( _this.embedPlayer.getKalturaConfig( '', 'customCaptionsButton' ) ) {
+			if ( _this.embedPlayer.getVidiunConfig( '', 'customCaptionsButton' ) ) {
 				return;
 			} else {
 				this.parent_buildMenu( autoShow );
@@ -133,7 +133,7 @@
 			});
 
 			// Support hide show notifications:
-			$( embedPlayer ).bind( 'Kaltura_SendNotification'+ this.bindPostFix , function( event, notificationName, notificationData) {
+			$( embedPlayer ).bind( 'Vidiun_SendNotification'+ this.bindPostFix , function( event, notificationName, notificationData) {
 				switch( notificationName ) {
 					case 'showHideClosedCaptions':
 						embedPlayer.timedText.toggleCaptions();
@@ -151,8 +151,8 @@
 				}
 			});
 
-			// Support SetKDP attribute style caption updates
-			$( embedPlayer ).bind( 'Kaltura_SetKDPAttribute' + this.bindPostFix, function( event, componentName, property, value ) {
+			// Support SetVDP attribute style caption updates
+			$( embedPlayer ).bind( 'Vidiun_SetVDPAttribute' + this.bindPostFix, function( event, componentName, property, value ) {
 				if( componentName == _this.pluginName ) {
 					if( property == 'ccUrl' ) {
 						// empty the text sources:
@@ -171,16 +171,16 @@
 
 		  <hbox id="ccOverComboBoxWrapper" horizontalalign="right" width="100%" height="100%" paddingright="5" paddingtop="5">
 		  <plugin id="captionsOverFader" width="0%" height="0%" includeinlayout="false" target="{ccOverComboBoxWrapper}" hovertarget="{PlayerHolder}" duration="0.5" autohide="true" path="faderPlugin.swf"></plugin>
-		  <combobox id="ccOverComboBox" width="90" stylename="_kdp" selectedindex="{closedCaptionsOverPlayer.currentCCFileIndex}"
-			   kevent_change="sendNotification( 'closedCaptionsSelected' , ccOverComboBox.selectedItem)"
+		  <combobox id="ccOverComboBox" width="90" stylename="_vdp" selectedindex="{closedCaptionsOverPlayer.currentCCFileIndex}"
+			   vevent_change="sendNotification( 'closedCaptionsSelected' , ccOverComboBox.selectedItem)"
 			   dataprovider="{closedCaptionsOverPlayer.availableCCFilesLabels}" prompt="Captions" tooltip="">
 		  </combobox>
 
 		  <Button id="custom1BtnControllerScreen" height="22"
 		  focusRectPadding="0" buttonType="iconButton"
-		  kClick="jsCall( 'customFunc1', mediaProxy.entry.id )"
+		  vClick="jsCall( 'customFunc1', mediaProxy.entry.id )"
 		  styleName="controllerScreen" icon="generalIcon"
-		  k_buttonType="buttonIconControllerArea" tooltip="captions"
+		  v_buttonType="buttonIconControllerArea" tooltip="captions"
 		  color1="14540253" color2="16777215" color3="3355443"
 		  color4="10066329" color5="16777215" font="Arial"/>
 
@@ -192,24 +192,24 @@
 			return true;
 		},
 		getConfig: function( attrName ) {
-			return this.embedPlayer.getKalturaConfig( this.pluginName, attrName );
+			return this.embedPlayer.getVidiunConfig( this.pluginName, attrName );
 		},
-		getKalturaClient: function() {
-			if( ! this.kClient ) {
-				this.kClient = mw.kApiGetPartnerClient( this.embedPlayer.kwidgetid );
+		getVidiunClient: function() {
+			if( ! this.vClient ) {
+				this.vClient = mw.vApiGetPartnerClient( this.embedPlayer.vwidgetid );
 			}
-			return this.kClient;
+			return this.vClient;
 		},
 
 		/**
-		 * Load the list of captions sources from the kaltura api, or from plugin config
+		 * Load the list of captions sources from the vidiun api, or from plugin config
 		 */
 		loadTextSources: function( callback ) {
 			var _this = this;
-			mw.log("KTimedText::loadTextSources");
+			mw.log("VTimedText::loadTextSources");
 			// Check if text sources are already loaded ( not null )
 			if( this.textSources && this.textSources.length ) {
-				mw.log( 'KTimedText:: loadTextSources > already loaded' );
+				mw.log( 'VTimedText:: loadTextSources > already loaded' );
 				callback();
 				return ;
 			}
@@ -217,14 +217,14 @@
 			// Check that we have entry data before loading:
 			var entry = this.embedPlayer.evaluate('{mediaProxy.entry}');
 			if( !entry || !entry.id ){
-				mw.log("KTimedText::loadTextSources without entry data ( skip )");
+				mw.log("VTimedText::loadTextSources without entry data ( skip )");
 				callback();
 				return ;
 			}
 
-			// Check for Kaltura ccUrl style text tracks ( not eagle api )
+			// Check for Vidiun ccUrl style text tracks ( not eagle api )
 			if( this.getConfig( 'ccUrl' ) ) {
-				mw.log( 'KTimedText:: loadTextSources> add textSources from ccUrl:' + this.getConfig( 'ccUrl' ) );
+				mw.log( 'VTimedText:: loadTextSources> add textSources from ccUrl:' + this.getConfig( 'ccUrl' ) );
 				// Set up a single source from the custom vars:
 				var textSource = this.getTextSource( this.getConfig( 'ccUrl' ), this.getConfig( 'type' ) );
 				if( textSource ) {
@@ -235,9 +235,9 @@
 			}
 
 			// Api sources require that a api query
-			_this.getKalturaClient().getKS( function( ks ) {
-				mw.log( 'KTimedText:: loadTextSources> from api');
-				_this.ksCache = ks;
+			_this.getVidiunClient().getVS( function( vs ) {
+				mw.log( 'VTimedText:: loadTextSources> from api');
+				_this.vsCache = vs;
 				_this.getTextSourcesFromApi( function( dbTextSources ) {
 					var multiRequest = [];
 					var captionIds = [];
@@ -252,21 +252,21 @@
 						captionIds.push(dbTextSource.id);
 					});
 					if ( multiRequest.length ) {
-						_this.getKalturaClient().doRequest( multiRequest, function( results ) {
+						_this.getVidiunClient().doRequest( multiRequest, function( results ) {
 							var captionsURLs = {};
 							$.each( results, function( idx, url ) {
 								captionsURLs[ captionIds[idx] ] = url;
 							} );
 							$.each( dbTextSources, function( inx, dbTextSource ) {
 								dbTextSource.src = captionsURLs[ dbTextSource.id ];
-								mw.log( 'KTimedText:: loadTextSources> add textSources from db:' + inx );
+								mw.log( 'VTimedText:: loadTextSources> add textSources from db:' + inx );
 								_this.textSources.push(
 									_this.getTextSourceFromDB( dbTextSource )
 								);
 							});
-							$( _this.embedPlayer ).trigger( 'KalturaSupport_CCDataLoaded' );
+							$( _this.embedPlayer ).trigger( 'VidiunSupport_CCDataLoaded' );
 							// Done adding source issue callback
-							mw.log( 'KTimedText:: loadTextSources> total source count: ' + _this.textSources.length );
+							mw.log( 'VTimedText:: loadTextSources> total source count: ' + _this.textSources.length );
 							callback();
 						} );
 					}
@@ -278,15 +278,15 @@
 		 */
 		getTextSourcesFromApi: function( callback ) {
 			var _this = this;
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'caption_captionasset',
 				'action' : 'list',
-				'filter:objectType' : 'KalturaAssetFilter',
-				'filter:entryIdEqual' : _this.embedPlayer.kentryid,
+				'filter:objectType' : 'VidiunAssetFilter',
+				'filter:entryIdEqual' : _this.embedPlayer.ventryid,
 				'filter:statusEqual' : 2
 			}, function( data ) {
-				mw.log( "KTimedText:: getTextSourcesFromApi: " + data.totalCount, data.objects );
-				$( _this.embedPlayer ).trigger( 'KalturaSupport_NewClosedCaptionsData' );
+				mw.log( "VTimedText:: getTextSourcesFromApi: " + data.totalCount, data.objects );
+				$( _this.embedPlayer ).trigger( 'VidiunSupport_NewClosedCaptionsData' );
 				// TODO is this needed? Does the api not return an empty set?
 				if( data.totalCount > 0 ) {
 					callback( data.objects );
@@ -308,7 +308,7 @@
 		getTextSource: function( ccUrl, type ) {
 			var _this = this;
 			if( !ccUrl ) {
-				mw.log("Error: KTimedText error missing text source from custom vars");
+				mw.log("Error: VTimedText error missing text source from custom vars");
 				return null;
 			}
 			if( !type ) {
@@ -366,15 +366,15 @@
 		*/
 		getCaptionUrl: function( captionId, type ) {
 			// Sample Url for Caption serve
-			// http://www.kaltura.com/api_v3/index.php?service=caption_captionasset&action=serve&captionAssetId=@ID@&ks=@KS@
+			// http://www.vidiun.com/api_v3/index.php?service=caption_captionasset&action=serve&captionAssetId=@ID@&vs=@VS@
 			var params = {
 				'action': 'serve',
 				'captionAssetId': captionId,
-				'ks': this.ksCache
+				'vs': this.vsCache
 			};
-			var kalsig = this.getKalturaClient().getSignature( params );
-			var baseUrl = mw.getConfig( 'Kaltura.ServiceUrl' ) + mw.getConfig( 'Kaltura.ServiceBase' ).replace( 'index.php', '' );
-			return baseUrl + 'caption_captionasset&' + $.param( params ) + '&kalsig=' + kalsig + '&.' + type;
+			var vidsig = this.getVidiunClient().getSignature( params );
+			var baseUrl = mw.getConfig( 'Vidiun.ServiceUrl' ) + mw.getConfig( 'Vidiun.ServiceBase' ).replace( 'index.php', '' );
+			return baseUrl + 'caption_captionasset&' + $.param( params ) + '&vidsig=' + vidsig + '&.' + type;
 		}
 	};
 

@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'playPauseBtn', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'playPauseBtn', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',

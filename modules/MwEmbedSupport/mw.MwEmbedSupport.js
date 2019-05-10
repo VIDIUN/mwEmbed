@@ -13,10 +13,10 @@ Date.now = Date.now || function(){ return +new Date; };
  * mwEmbed
  * Dual licensed under the MIT or GPL Version 2 licenses.
  *
- * @copyright (C) 2010 Kaltura
- * @author Michael Dale ( michael.dale at kaltura.com )
+ * @copyright (C) 2010 Vidiun
+ * @author Michael Dale ( michael.dale at vidiun.com )
  *
- * @url http://www.kaltura.org/project/HTML5_Video_Media_JavaScript_Library
+ * @url http://www.vidiun.org/project/HTML5_Video_Media_JavaScript_Library
  *
  * Libraries used include code license in headers
  *

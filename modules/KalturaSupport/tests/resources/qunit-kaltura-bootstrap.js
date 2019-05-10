@@ -11,16 +11,16 @@ if( window.QUnit ){
 
 	window.QUnit.start();
 	jsCallbackCalledId = null;
-	asyncTest( "KalturaSupport::PlayerLoaded", function(){
+	asyncTest( "VidiunSupport::PlayerLoaded", function(){
 		// Player time out in 90 seconds:
 		setTimeout( function(){
 			ok( false, "Player timed out" );
 			start();
 		}, 90000 );
-		window['kalturaPlayerLoadedCallbackCalled'] = function( playerId ){
+		window['vidiunPlayerLoadedCallbackCalled'] = function( playerId ){
 			ok( true, "Player loaded: " + playerId );
-			if( typeof jsKalturaPlayerTest == 'function' ){
-				jsKalturaPlayerTest( playerId );
+			if( typeof jsVidiunPlayerTest == 'function' ){
+				jsVidiunPlayerTest( playerId );
 			}
 			// add timeout for async test to register
 			setTimeout( function(){
@@ -29,11 +29,11 @@ if( window.QUnit ){
 		}
 		// check if jscallback ready fired before async test:
 		if( jsCallbackCalledId != null ){
-			kalturaPlayerLoadedCallbackCalled( jsCallbackCalledId );
+			vidiunPlayerLoadedCallbackCalled( jsCallbackCalledId );
 		}
 	});
 
-	kWidget.addReadyCallback( function( videoId ){
+	vWidget.addReadyCallback( function( videoId ){
 		// check if the test can access the iframe
 		var domainRegEx = new RegExp(/^((http[s]?):\/)?\/?([^:\/\s]+)(:([^\/]*))?((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(\?([^#]*))?(#(.*))?$/);
 		var match = document.URL.match( domainRegEx );
@@ -46,18 +46,18 @@ if( window.QUnit ){
 			stop();
 		}
 		// Add entry ready listener
-		document.getElementById( videoId ).addJsListener("mediaReady", "kalturaQunitMediaReady");
+		document.getElementById( videoId ).addJsListener("mediaReady", "vidiunQunitMediaReady");
 
 		jsCallbackCalledId = videoId;
-		if( typeof kalturaPlayerLoadedCallbackCalled == 'function' ){
-			kalturaPlayerLoadedCallbackCalled( videoId );
+		if( typeof vidiunPlayerLoadedCallbackCalled == 'function' ){
+			vidiunPlayerLoadedCallbackCalled( videoId );
 		}
 	});
 
 	var mediaReadyCallbacks = [];
 	var mediaReadyAlreadyCalled = false;
 	// Utility function for entry ready testing handler
-	window['kalturaQunitMediaReady'] = function(){
+	window['vidiunQunitMediaReady'] = function(){
 		// Run in async call to ensure non-blocking build out is in dom
 		setTimeout(function(){
 			while( mediaReadyCallbacks.length ){
@@ -66,7 +66,7 @@ if( window.QUnit ){
 			mediaReadyAlreadyCalled = true;
 		}, 0 );
 	};
-	window['kalturaQunitWaitForPlayer'] = function( callback ){
+	window['vidiunQunitWaitForPlayer'] = function( callback ){
 		if( mediaReadyAlreadyCalled ){
 			callback();
 			return ;

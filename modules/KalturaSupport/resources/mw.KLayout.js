@@ -6,10 +6,10 @@
 */
 ( function( mw, $ ) { "use strict";
 
-mw.KLayout = function( options ){
+mw.VLayout = function( options ){
 	this.init( options );
 };
-mw.KLayout.prototype = {
+mw.VLayout.prototype = {
 
 	// Default length for titles
 	titleLength: 45,
@@ -80,7 +80,7 @@ mw.KLayout.prototype = {
 					return [];
 					break;
 			}
-			mw.log( "KLayout::getLayout > " + boxItem.nodeName.toLowerCase() );
+			mw.log( "VLayout::getLayout > " + boxItem.nodeName.toLowerCase() );
 			$node.addClass( boxItem.nodeName.toLowerCase() );
 			if( $node && $node.length ){
 				_this.applyUiConfAttributes( $node, boxItem);
@@ -166,7 +166,7 @@ mw.KLayout.prototype = {
 					break;
 			}
 		});
-		mw.log( "KLayout:: applyUiConfAttributes > style: " + styleName );
+		mw.log( "VLayout:: applyUiConfAttributes > style: " + styleName );
 		// Styles enforce some additional constraints
 		switch( styleName ){
 			case 'itemRendererLabel':

@@ -1,13 +1,13 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  */
 ( function( mw, $ ) { "use strict";
 
-mw.EmbedPlayerKplayer = {
+mw.EmbedPlayerVplayer = {
 	// Instance name:
-	instanceOf : 'Kplayer',
+	instanceOf : 'Vplayer',
 
-	bindPostfix: '.kPlayer',
+	bindPostfix: '.vPlayer',
 
 	//Flag indicating we should cancel autoPlay on live entry
 	// (we set it to true as a workaround to make the Flash start the live checks call)
@@ -27,7 +27,7 @@ mw.EmbedPlayerKplayer = {
 	// Stores the current time as set from flash player
 	flashCurrentTime : 0,
 	selectedFlavorIndex : 0,
-	b64Referrer: base64_encode( window.kWidgetSupport.getHostPageUrl() ),
+	b64Referrer: base64_encode( window.vWidgetSupport.getHostPageUrl() ),
 	playerObject: null,
 	//when playing live rtmp we increase the timeout until we display the "offline" alert, cuz player takes a while to identify "online" state
 	LIVE_OFFLINE_ALERT_TIMEOUT: 8000,
@@ -35,9 +35,9 @@ mw.EmbedPlayerKplayer = {
 
 	// Create our player element
 	setup: function( readyCallback ) {
-		mw.log('EmbedPlayerKplayer:: Setup');
+		mw.log('EmbedPlayerVplayer:: Setup');
 
-		// Check if we created the kPlayer container
+		// Check if we created the vPlayer container
 		var $container = this.getPlayerContainer();
 		// If container exists, show the player and exit
 		if( $container.length ){
@@ -53,7 +53,7 @@ mw.EmbedPlayerKplayer = {
 		// Create the container
 		this.getVideoDisplay().prepend(
 			$('<div />')
-				.attr('id', this.kPlayerContainerId)
+				.attr('id', this.vPlayerContainerId)
 				.addClass('maximize')
 		);
 
@@ -61,13 +61,13 @@ mw.EmbedPlayerKplayer = {
 		this.updateSources();
 
 		var flashvars = {};
-		flashvars.widgetId = "_" + this.kpartnerid;
-		flashvars.partnerId = this.kpartnerid;
+		flashvars.widgetId = "_" + this.vpartnerid;
+		flashvars.partnerId = this.vpartnerid;
         flashvars.autoMute = this.muted || mw.getConfig( 'autoMute' );
 		flashvars.streamerType = this.streamerType;
 		flashvars.entryUrl = encodeURIComponent(this.getEntryUrl());
-		flashvars.ks = this.getFlashvars( 'ks' );
-		flashvars.serviceUrl = mw.getConfig( 'Kaltura.ServiceUrl' );
+		flashvars.vs = this.getFlashvars( 'vs' );
+		flashvars.serviceUrl = mw.getConfig( 'Vidiun.ServiceUrl' );
 		flashvars.b64Referrer = this.b64Referrer;
 		flashvars.forceDynamicStream = this.getFlashvars( 'forceDynamicStream' );
 		flashvars.isLive = this.isLive();
@@ -88,13 +88,13 @@ mw.EmbedPlayerKplayer = {
 		if ( this.isHlsSource( this.mediaElement.selectedSource ) && mw.getConfig("LeadWithHLSOnFlash") ) {
 			flashvars.sourceType = 'url';
 			flashvars.ignoreStreamerTypeForSeek = true;
-			flashvars.KalturaHLS = { plugin: 'true', asyncInit: 'true', loadingPolicy: 'preInitialize' };
+			flashvars.VidiunHLS = { plugin: 'true', asyncInit: 'true', loadingPolicy: 'preInitialize' };
 		}
 
 		//will contain flash plugins we need to load
-		var kdpVars = this.getKalturaConfig( 'kdpVars', null );
-		$.extend ( flashvars, kdpVars );
-		var playerElementFlash = new mw.PlayerElementFlash( this.kPlayerContainerId, 'kplayer_' + this.pid, flashvars, this, function() {
+		var vdpVars = this.getVidiunConfig( 'vdpVars', null );
+		$.extend ( flashvars, vdpVars );
+		var playerElementFlash = new mw.PlayerElementFlash( this.vPlayerContainerId, 'vplayer_' + this.pid, flashvars, this, function() {
 			var bindEventMap = {
 				'playerPaused' : 'onPause',
 				'playerPlayed' : 'onPlay',
@@ -118,11 +118,11 @@ mw.EmbedPlayerKplayer = {
 				_this.playerObject.addJsListener(  bindName, localMethod );
 			});
 			if ( _this.startTime !== undefined && _this.startTime != 0 ) {
-				_this.playerObject.setKDPAttribute('mediaProxy', 'mediaPlayFrom', _this.startTime );
+				_this.playerObject.setVDPAttribute('mediaProxy', 'mediaPlayFrom', _this.startTime );
 			}
 			readyCallback();
 			if ( _this.live && _this.cancelLiveAutoPlay ){
-				_this.playerObject.setKDPAttribute( 'configProxy.flashvars', 'autoPlay', 'false');
+				_this.playerObject.setVDPAttribute( 'configProxy.flashvars', 'autoPlay', 'false');
 				_this.triggerHelper( 'liveStreamStatusUpdate', { 'onAirStatus': false } );
 			}
 			if (mw.getConfig( 'autoMute' )){
@@ -191,13 +191,13 @@ mw.EmbedPlayerKplayer = {
 	},
 
 	/**
-	* Get required sources for KDP. Either by flavorTags flashvar or tagged wtih 'web'/'mbr' by default
+	* Get required sources for VDP. Either by flavorTags flashvar or tagged wtih 'web'/'mbr' by default
 	 * or hls sources
 	**/
-	getSourcesForKDP: function() {
+	getSourcesForVDP: function() {
 		var _this = this;
 		var sourcesByTags = [];
-		var flavorTags = _this.getKalturaConfig( null, 'flavorTags' );
+		var flavorTags = _this.getVidiunConfig( null, 'flavorTags' );
 		//select default 'web' / 'mbr' flavors
 		if ( flavorTags === undefined ) {
 			var sources = _this.mediaElement.getPlayableSources();
@@ -216,7 +216,7 @@ mw.EmbedPlayerKplayer = {
 
 	updateSources: function(){
 		if ( ! ( this.live || this.sourcesReplaced ) ) {
-			var newSources = this.getSourcesForKDP();
+			var newSources = this.getSourcesForVDP();
 			this.replaceSources( newSources );
 			this.mediaElement.autoSelectSource();
 		}
@@ -230,7 +230,7 @@ mw.EmbedPlayerKplayer = {
 				this.cancelLiveAutoPlay = true;
 			}
 			//with rtmp the first seconds look offline, delay the "offline" message
-			this.setKDPAttribute('liveCore', 'offlineAlertOffest', this.LIVE_OFFLINE_ALERT_TIMEOUT);
+			this.setVDPAttribute('liveCore', 'offlineAlertOffest', this.LIVE_OFFLINE_ALERT_TIMEOUT);
 			$( this ).bind( 'layoutBuildDone', function() {
 				_this.disablePlayControls();
 			});
@@ -241,7 +241,7 @@ mw.EmbedPlayerKplayer = {
 	changeMediaCallback: function( callback ){
 		this.updateSources();
 		this.flashCurrentTime = 0;
-		this.playerObject.setKDPAttribute( 'mediaProxy', 'isLive', this.isLive() );
+		this.playerObject.setVDPAttribute( 'mediaProxy', 'isLive', this.isLive() );
 		this.playerObject.sendNotification( 'changeMedia', {
 			entryUrl: this.getEntryUrl()
 		});
@@ -254,7 +254,7 @@ mw.EmbedPlayerKplayer = {
 	embedPlayerHTML: function() {},
 
 	/**
-	 * on Pause callback from the kaltura flash player calls parent_pause to
+	 * on Pause callback from the vidiun flash player calls parent_pause to
 	 * update the interface
 	 */
 	onPause: function() {
@@ -262,7 +262,7 @@ mw.EmbedPlayerKplayer = {
 	},
 
 	/**
-	 * onPlay function callback from the kaltura flash player directly call the
+	 * onPlay function callback from the vidiun flash player directly call the
 	 * parent_play
 	 */
 	onPlay: function() {
@@ -300,7 +300,7 @@ mw.EmbedPlayerKplayer = {
 	 * play method calls parent_play to update the interface
 	 */
 	play: function() {
-		mw.log('EmbedPlayerKplayer::play')
+		mw.log('EmbedPlayerVplayer::play')
 		if ( this.parent_play() ) {
 			//live might take a while to start, meanwhile disable gui
 			if ( this.isLive() ) {
@@ -310,7 +310,7 @@ mw.EmbedPlayerKplayer = {
 			this.playerObject.play();
 			this.monitor();
 		} else {
-			mw.log( "EmbedPlayerKPlayer:: parent play returned false, don't issue play on kplayer element");
+			mw.log( "EmbedPlayerVPlayer:: parent play returned false, don't issue play on vplayer element");
 		}
 	},
 
@@ -321,7 +321,7 @@ mw.EmbedPlayerKplayer = {
 		try {
 			this.playerObject.pause();
 		} catch(e) {
-			mw.log( "EmbedPlayerKplayer:: doPause failed" );
+			mw.log( "EmbedPlayerVplayer:: doPause failed" );
 		}
 		this.parent_pause();
 	},
@@ -355,7 +355,7 @@ mw.EmbedPlayerKplayer = {
 	seek: function(percentage) {
 		var _this = this;
 		var seekTime = percentage * this.getDuration();
-		mw.log( 'EmbedPlayerKalturaKplayer:: seek: ' + percentage + ' time:' + seekTime );
+		mw.log( 'EmbedPlayerVidiunVplayer:: seek: ' + percentage + ' time:' + seekTime );
 		if (this.supportsURLTimeEncoding()) {
 
 			// Make sure we could not do a local seek instead:
@@ -375,7 +375,7 @@ mw.EmbedPlayerKplayer = {
 			// Issue the seek to the flash player:
 			this.playerObject.seek( seekTime );
 
-			// Include a fallback seek timer: in case the kdp does not fire 'playerSeekEnd'
+			// Include a fallback seek timer: in case the vdp does not fire 'playerSeekEnd'
 //			var orgTime = this.flashCurrentTime;
 //			 this.seekInterval = setInterval( function(){ debugger;
 //				if( _this.flashCurrentTime != orgTime ){
@@ -385,7 +385,7 @@ mw.EmbedPlayerKplayer = {
 //				}
 //			}, mw.getConfig( 'EmbedPlayer.MonitorRate' ) );
 		} else if ( percentage != 0 ) {
-			this.playerObject.setKDPAttribute('mediaProxy', 'mediaPlayFrom', seekTime);
+			this.playerObject.setVDPAttribute('mediaProxy', 'mediaPlayFrom', seekTime);
 			this.playerObject.play();
 		}
 
@@ -451,7 +451,7 @@ mw.EmbedPlayerKplayer = {
 	onFlavorsListChanged: function ( data, id ) {
 		var flavors = data.flavors;
 		if ( flavors && flavors.length > 1 ) {
-			this.setKDPAttribute( 'sourceSelector' , 'visible', true);
+			this.setVDPAttribute( 'sourceSelector' , 'visible', true);
 		}
 		this.replaceSources( flavors );
 
@@ -517,21 +517,21 @@ mw.EmbedPlayerKplayer = {
 	},
 
 	getPlayerContainer: function(){
-		if( !this.kPlayerContainerId ){
-			this.kPlayerContainerId = 'kplayer_' + this.id;
+		if( !this.vPlayerContainerId ){
+			this.vPlayerContainerId = 'vplayer_' + this.id;
 		}
-		return $( '#' +  this.kPlayerContainerId );
+		return $( '#' +  this.vPlayerContainerId );
 	},
 
 	/**
-	* Get the URL to pass to KDP according to the current streamerType
+	* Get the URL to pass to VDP according to the current streamerType
 	*/
 	getEntryUrl: function() {
 		if ( this.live || this.sourcesReplaced || this.isHlsSource( this.mediaElement.selectedSource )) {
 			return this.mediaElement.selectedSource.getSrc();
 		}
 		var flavorIdParam = '';
-		var mediaProtocol = this.getKalturaConfig( null, 'mediaProtocol' ) || "http";
+		var mediaProtocol = this.getVidiunConfig( null, 'mediaProtocol' ) || "http";
 		var format;
 		var fileExt = 'f4m';
 		if ( this.streamerType === 'hdnetwork' ) {
@@ -547,10 +547,10 @@ mw.EmbedPlayerKplayer = {
 		}
 
 		//build playmanifest URL
-		var srcUrl =  window.kWidgetSupport.getBaseFlavorUrl( this.kpartnerid ) + "/entryId/" + this.kentryid + flavorIdParam 
+		var srcUrl =  window.vWidgetSupport.getBaseFlavorUrl( this.vpartnerid ) + "/entryId/" + this.ventryid + flavorIdParam 
 				 + this.getPlaymanifestArg ( "deliveryCode", "deliveryCode" ) + "/format/" + format
 				 + "/protocol/" + mediaProtocol + this.getPlaymanifestArg( "cdnHost", "cdnHost" ) + this.getPlaymanifestArg( "storageId", "storageId" )
-				 +  "/ks/" + this.getFlashvars( 'ks' ) + "/uiConfId/" + this.kuiconfid  + this.getPlaymanifestArg ( "referrerSig", "referrerSig" )  
+				 +  "/vs/" + this.getFlashvars( 'vs' ) + "/uiConfId/" + this.vuiconfid  + this.getPlaymanifestArg ( "referrerSig", "referrerSig" )  
 				 + this.getPlaymanifestArg ( "tags", "flavorTags" ) + "/a/a." + fileExt + "?referrer=" + this.b64Referrer  ;
 		
 		return srcUrl;	
@@ -563,7 +563,7 @@ mw.EmbedPlayerKplayer = {
 	*/
 	getPlaymanifestArg: function ( argName, argKey ) {
 		var argString = "";
-		var argVal = this.getKalturaConfig( null, argKey );
+		var argVal = this.getVidiunConfig( null, argKey );
 		if ( argVal !== undefined ) {
 			argString = "/" + argName + "/" + argVal;
 		}
@@ -581,16 +581,16 @@ mw.EmbedPlayerKplayer = {
 			}
 		});
 		if( !sourceIndex ){
-			mw.log( "EmbedPlayerKplayer:: Error could not find source: " + source.getSrc() );
+			mw.log( "EmbedPlayerVplayer:: Error could not find source: " + source.getSrc() );
 		}
 		return sourceIndex;
 	},
 	switchSrc: function ( source ) {
-		//http requires source switching, all other switch will be handled by OSMF in KDP
+		//http requires source switching, all other switch will be handled by OSMF in VDP
 		if ( this.streamerType == 'http' && !this.getFlashvars( 'forceDynamicStream' ) ) {
 			//other streamerTypes will update the source upon "switchingChangeComplete"
 			this.mediaElement.setSource ( source );
-			this.playerObject.setKDPAttribute ('mediaProxy', 'entryUrl', this.getEntryUrl());
+			this.playerObject.setVDPAttribute ('mediaProxy', 'entryUrl', this.getEntryUrl());
 		}
 		this.playerObject.sendNotification('doSwitch', { flavorIndex: this.getSourceIndex( source ) });
 	},
@@ -601,8 +601,8 @@ mw.EmbedPlayerKplayer = {
 		this.triggerHelper( 'movingBackToLive' );
 		this.playerObject.sendNotification('goLive');
 	},
-	setKPlayerAttribute: function( host, prop, val ) {
-		this.playerObject.setKDPAttribute(host, prop, val);
+	setVPlayerAttribute: function( host, prop, val ) {
+		this.playerObject.setVDPAttribute(host, prop, val);
 	},
 	clean:function(){
 		$(this.getPlayerContainer()).remove();
@@ -611,7 +611,7 @@ mw.EmbedPlayerKplayer = {
 		this.parent_setStorageId( storageId );
 		//set url with new storageId
 		if ( this.playerObject ) {
-			this.playerObject.setKDPAttribute ( 'mediaProxy', 'entryUrl', this.getEntryUrl() );
+			this.playerObject.setVDPAttribute ( 'mediaProxy', 'entryUrl', this.getEntryUrl() );
 		}
 	}
 };

@@ -14,12 +14,12 @@
 <h2> HLSDynamicPlugin Test </h2>
 <div class="item">
 	<label>HLS url:</label>
-	<input type="text" id="url" value="http://cdnapi.kaltura.com/p/524241/sp/52424100/playManifest/entryId/0_8zzalxul/flavorIds/0_3ob6cr7c,0_tpmcai9x,0_kde7mda7/format/applehttp/protocol/http/a.m3u8"></input>
+	<input type="text" id="url" value="http://cdnapi.vidiun.com/p/524241/sp/52424100/playManifest/entryId/0_8zzalxul/flavorIds/0_3ob6cr7c,0_tpmcai9x,0_kde7mda7/format/applehttp/protocol/http/a.m3u8"></input>
 </div>
 
 <div><input type="button" id="generate" value="Generate" /></div>
 
-<div id="kaltura_player_1387835968" style="width: 400px; height: 333px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+<div id="vidiun_player_1387835968" style="width: 400px; height: 333px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
 	<span itemprop="name" content="Big Buck Bunny Trailer"></span>
 	<span itemprop="description" content=""></span>
 	<span itemprop="duration" content=""></span>
@@ -28,8 +28,8 @@
 	<span itemprop="height" content="333"></span>
 </div>
 <script>
-	mw.setConfig( 'Kaltura.LeadWithHTML5' , true );
-	mw.setConfig( 'EmbedPlayer.ForceKPlayer' , true );
+	mw.setConfig( 'Vidiun.LeadWithHTML5' , true );
+	mw.setConfig( 'EmbedPlayer.ForceVPlayer' , true );
 	$('#generate').click( function() {
 		mw.setConfig('EmbedPlayer.ReplaceSources', [
 			{
@@ -37,23 +37,23 @@
 				'src' : $('#url').val()
 			}
 		]);
-		kWidget.embed({
-			"targetId": "kaltura_player_1387835968",
+		vWidget.embed({
+			"targetId": "vidiun_player_1387835968",
 			"wid": "_524241",
 			"uiconf_id": 21648442,
 			"flashvars": {
-				"kdpVars": {
+				"vdpVars": {
 					"sourceType": "url",
 					"ignoreStreamerTypeForSeek": "true",
-					"KalturaHLS": {
+					"VidiunHLS": {
 						plugin: "true",
-						//pluginURL: '../../EmbedPlayer/binPlayers/kaltura-player/plugins/KalturaHLSPlugin.swf',
+						//pluginURL: '../../EmbedPlayer/binPlayers/vidiun-player/plugins/VidiunHLSPlugin.swf',
 						asyncInit: "true",
 						loadingPolicy: "preInitialize",
 						//waitForSecondLoad: "false"
 					}
 				},
-				"confFilePath": "{libPath}/modules/KalturaSupport/tests/confFiles/jsonConfig.json"
+				"confFilePath": "{libPath}/modules/VidiunSupport/tests/confFiles/jsonConfig.json"
 			},
 			"cache_st": 1387835968
 		});

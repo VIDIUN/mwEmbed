@@ -199,7 +199,7 @@ mw.VastAdParser = {
 			// Skip if no videoFile set:
 			if( currentAd.videoFiles.length == 0 && !currentAd.vpaid ){
 				mw.log( 'Error:; VastAdParser::MISSING videoFile no video url: ( skip ) ');
-				//currentAd.videoFiles = mw.getConfig( 'Kaltura.MissingFlavorSources');
+				//currentAd.videoFiles = mw.getConfig( 'Vidiun.MissingFlavorSources');
 			}
 			// Set the CompanionAds if present:
 			currentAd.companions = [];

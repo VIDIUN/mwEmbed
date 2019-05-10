@@ -1,11 +1,11 @@
 <?php 
 /**
- * The Kaltura plugin manifest
+ * The Vidiun plugin manifest
  */
 return array(
 	'googleAnalytics' => array(
 		'description' => "Supports sending player analytics events to Google.<br>
-		For full implementation guide see <a target=\"_new\" href=\"http://knowledge.kaltura.com/google-analytics-kaltura-player\">Google Analytics</a> 
+		For full implementation guide see <a target=\"_new\" href=\"http://knowledge.vidiun.com/google-analytics-vidiun-player\">Google Analytics</a> 
 		in the Knowledge Center",
 		'attributes'=> array(
 			'urchinCode' => array(

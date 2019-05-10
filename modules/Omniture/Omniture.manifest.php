@@ -1,10 +1,10 @@
 <?php 
 /**
- * The Kaltura plugin manifest
+ * The Vidiun plugin manifest
  */
 return array(
 	'siteCatalyst15' => array(
-		'description' => "SiteCatalyst15 Kaltura analytics implementation. SiteCatalyst15 supports a dynamic set of attributes based on events you want to track and data you want to associate with each event.",
+		'description' => "SiteCatalyst15 Vidiun analytics implementation. SiteCatalyst15 supports a dynamic set of attributes based on events you want to track and data you want to associate with each event.",
 		'attributes'=> array(
 			'sCodePath' => array(
 				'doc' => 'The URL to the Ominture generated sCode file. If null, a local copy of s_code.js is used. Must be set in uiConf not via flashvar.',

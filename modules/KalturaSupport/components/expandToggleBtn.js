@@ -4,7 +4,7 @@
 
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'expandToggleBtn', mw.KBaseButton.extend({
+	mw.PluginManager.add( 'expandToggleBtn', mw.VBaseButton.extend({
 
 	}));
 

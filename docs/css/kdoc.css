@@ -19,13 +19,13 @@
 	padding-left: 40px;
 	padding-right: 40px;
 }
-body.kdoc{
+body.vdoc{
 	position: relative;
 	padding-bottom: 200px;/* Height of the footer */
 	font-family:Arial,"Tahoma","Geneva",sans-serif;
 }
 /* Hide the render time on top level doc pages */
-.kdoc .kdocPlayerRenderTime{
+.vdoc .vdocPlayerRenderTime{
 	display:none;
 }
 h1, h2, h3{
@@ -208,7 +208,7 @@ footer .footer-content a{
 	background: linear-gradient(to bottom, #0095ae 0%,#009bb5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095ae', endColorstr='#009bb5',GradientType=0 ); /* IE6-9 */
 }
-.page-bg-gradient.kdoc-header{
+.page-bg-gradient.vdoc-header{
 	position:inline;
 	height:50px;
 	position:relative;
@@ -232,7 +232,7 @@ pre.prettyprint{
 	max-width:800px;
 }
 
-.kdoc-header h2{
+.vdoc-header h2{
 	padding-top:5px;
 	font-weight: 400;
 }
@@ -310,7 +310,7 @@ pre.prettyprint{
 .feature-list a:hover h2{
 	color:#000;
 }
-.kdoc-blue-arrow{
+.vdoc-blue-arrow{
 	width:11px;
 	height:15px;
 	display:inline-block;
@@ -319,7 +319,7 @@ pre.prettyprint{
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
-.kdoc-white-arrow{
+.vdoc-white-arrow{
 	width:11px;
 	height:15px;
 	display:inline-block;
@@ -338,7 +338,7 @@ pre.prettyprint{
 	*margin-right: .3em;
 	line-height: 17px;
 	vertical-align: text-top;
-	background-image: url("../images/kdoc-icons.png");
+	background-image: url("../images/vdoc-icons.png");
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
@@ -356,8 +356,8 @@ pre.prettyprint{
 	background-position: 0px -37px;
 }
 
-[class^="kpcicon-"],
-[class*=" kpcicon-"] {
+[class^="vpcicon-"],
+[class*=" vpcicon-"] {
 	margin-top: -3px;
 	display: inline-block;
 	width: 35px;
@@ -369,38 +369,38 @@ pre.prettyprint{
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 }
-.kpcicon-demo{
+.vpcicon-demo{
 	background-position: -35px 0px;
 }
-a:hover .kpcicon-demo, .active .kpcicon-demo{
+a:hover .vpcicon-demo, .active .vpcicon-demo{
 	background-position: 0px 0px;
 }
 
-.kpcicon-customize{
+.vpcicon-customize{
 	background-position: -35px -36px;
 }
-a:hover .kpcicon-customize, .active .kpcicon-customize{
+a:hover .vpcicon-customize, .active .vpcicon-customize{
 	background-position: 0px -36px;
 }
 
-.kpcicon-integrate{
+.vpcicon-integrate{
 	background-position: -35px -70px;
 }
-a:hover .kpcicon-integrate, .active .kpcicon-integrate{
+a:hover .vpcicon-integrate, .active .vpcicon-integrate{
 	background-position: 0px -70px;
 }
 
-.kpcicon-html5{
+.vpcicon-html5{
 	background-position: -35px -99px;
 }
-a:hover .kpcicon-html5, .active .kpcicon-html5{
+a:hover .vpcicon-html5, .active .vpcicon-html5{
 	background-position: 0px -99px;
 }
 
-.kpcicon-flash{
+.vpcicon-flash{
 	background-position: -35px -131px;
 }
-a:hover .kpcicon-flash, .active .kpcicon-flash{
+a:hover .vpcicon-flash, .active .vpcicon-flash{
 	background-position: 0px -131px;
 }
 .feature-config{
@@ -421,15 +421,15 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 .featurepage #contentHolder{
 	margin-left:220px;
 }
-.landing #kdoc-navbarcontainer, .contentpage #kdoc-navbarcontainer{
+.landing #vdoc-navbarcontainer, .contentpage #vdoc-navbarcontainer{
 	display:none;
 }
-#kdoc-navbarcontainer {
+#vdoc-navbarcontainer {
 	position:relative;
 	width: 200px;
 	top: 116px;
 }
-#kdoc-navbar {
+#vdoc-navbar {
 	margin-left: 0px;
 	background-color: #f5f5f5;
 	list-style-type: none;
@@ -437,24 +437,24 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 	border-radius: 5px;
 	color:#484848;
 }
-#kdoc-navbar li.nav-category:first-child{
+#vdoc-navbar li.nav-category:first-child{
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
-#kdoc-navbar li:last-child{
+#vdoc-navbar li:last-child{
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
-#kdoc-navbarcontainer .nav-header{
+#vdoc-navbarcontainer .nav-header{
 	text-transform: none;
 	font-size:14px;
 	font-weight:400;
 }
-#kdoc-navbarcontainer .nav-header a{
+#vdoc-navbarcontainer .nav-header a{
 	color:#484848;
 	text-decoration: none;
 }
-#kdoc-navbarcontainer .nav-header span{
+#vdoc-navbarcontainer .nav-header span{
 	padding:8px;
 	font-weight:700;
 }
@@ -501,33 +501,33 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 .nav-header.nav-category:hover .kicon-customization, .nav-header.nav-category.active .kicon-customization{
 	background-position: -20px -37px;
 }
-#kdoc-navbarcontainer  .featureset{
+#vdoc-navbarcontainer  .featureset{
 	padding-left:0px;
 	padding-right:0px;
 }
-#kdoc-navbarcontainer  .featureset ul{
+#vdoc-navbarcontainer  .featureset ul{
 	margin-left:0px;
 }
-#kdoc-navbarcontainer .featureset li:hover, 
-#kdoc-navbarcontainer .featureset li:hover a,
-#kdoc-navbarcontainer .featureset li.active, 
-#kdoc-navbarcontainer .featureset li.active a{
+#vdoc-navbarcontainer .featureset li:hover, 
+#vdoc-navbarcontainer .featureset li:hover a,
+#vdoc-navbarcontainer .featureset li.active, 
+#vdoc-navbarcontainer .featureset li.active a{
 	color:#fff;
 	background: #0096af;
 }
-#kdoc-navbarcontainer .featureset{
+#vdoc-navbarcontainer .featureset{
 	font-weight:400;
 	color:#c6f7ff;
 	text-shadow: none;
 }
-#kdoc-navbarcontainer .nav-featureset a{
+#vdoc-navbarcontainer .nav-featureset a{
 	color:#c6f7ff;
 }
-#kdoc-navbarcontainer .featureset li{
+#vdoc-navbarcontainer .featureset li{
 	padding-left:23px;
 	border-bottom: solid thin #0096af;
 }
-#kdoc-navbarcontainer .featureset a{
+#vdoc-navbarcontainer .featureset a{
 	color:#c6f7ff;
 }
 .row-fluid .span6{
@@ -554,7 +554,7 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 	.page-bg-gradient h2{
 		padding-left: 20px;
 	}
-	#kdoc-navbarcontainer {
+	#vdoc-navbarcontainer {
 		width:180px;
 	}
 	.featurepage #contentHolder{
@@ -623,7 +623,7 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 		width:98%;
 		padding:5px;
 	}
-	body.kdoc{
+	body.vdoc{
 		padding-bottom: 220px;/* Height of the footer */
 	}
 	footer{
@@ -642,7 +642,7 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 	.row-fluid .span6{
 		width:100%;
 	}
-	#kdoc-navbarcontainer {
+	#vdoc-navbarcontainer {
 		width:150px;
 	}
 	.featurepage #contentHolder{
@@ -714,7 +714,7 @@ a:hover .kpcicon-flash, .active .kpcicon-flash{
 	}
 }
 @media (max-width: 500px) {
-	#kdoc-navbarcontainer{
+	#vdoc-navbarcontainer{
 		width:100%;
 		position: relative;
 		top: 100px;

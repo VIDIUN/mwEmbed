@@ -1,6 +1,6 @@
-( function( mw, $, kWidget ) {"use strict";
+( function( mw, $, vWidget ) {"use strict";
 
-	mw.PluginManager.add( 'scrubber', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'scrubber', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlBarContainer',
@@ -148,7 +148,7 @@
 			this.getComponent().toggleClass('disabled');
 		},
 		getSliceCount: function( duration ) {
-			//return kWidget.getSliceCount(this.duration);
+			//return vWidget.getSliceCount(this.duration);
 			return this.getConfig("thumbSlices") || 100;
 		},
 		loadThumbnails : function(callback) {
@@ -156,13 +156,13 @@
 			if (!this.loadedThumb)  {
 				this.loadedThumb = true;
 				var baseThumbSettings = {
-					'partner_id': this.embedPlayer.kpartnerid,
-					'uiconf_id': this.embedPlayer.kuiconfid,
-					'entry_id': this.embedPlayer.kentryid,
+					'partner_id': this.embedPlayer.vpartnerid,
+					'uiconf_id': this.embedPlayer.vuiconfid,
+					'entry_id': this.embedPlayer.ventryid,
 					'width': this.getConfig("thumbWidth")
 				};
 
-				this.imageSlicesUrl = kWidget.getKalturaThumbUrl(
+				this.imageSlicesUrl = vWidget.getVidiunThumbUrl(
 					$.extend( {}, baseThumbSettings, {
 						'vid_slices': this.getSliceCount(this.duration)
 					})
@@ -215,15 +215,15 @@
 			var thumbWidth =  this.getConfig("thumbWidth");
 			$sliderPreview.css({top:top,left:sliderLeft });
 			$sliderPreview.css({'background-image': 'url(\'' + this.imageSlicesUrl + '\')',
-				'background-position': kWidget.getThumbSpriteOffset( thumbWidth, currentTime  , this.duration , this.getSliceCount( this.duration ) ),
+				'background-position': vWidget.getThumbSpriteOffset( thumbWidth, currentTime  , this.duration , this.getSliceCount( this.duration ) ),
 				'background-size': ( thumbWidth * this.getSliceCount( this.duration ) ) + 'px 100%'
 			});
 			$(".playHead .arrow").css("left",thumbWidth / 2 -  6);
-			$sliderPreviewTime.text(kWidget.seconds2npt( currentTime ));
+			$sliderPreviewTime.text(vWidget.seconds2npt( currentTime ));
 			$sliderPreviewTime.css({bottom:2,left:thumbWidth/2 - $sliderPreviewTime.width()/2});
 			$sliderPreview.css("width",thumbWidth);
 
-			if (kWidget.isIE8()) {
+			if (vWidget.isIE8()) {
 				$sliderPreview.css("height",43);
 			}
 			$sliderPreview.show();
@@ -318,4 +318,4 @@
 		}
 	}));
 
-} )( window.mw, window.jQuery, kWidget );
+} )( window.mw, window.jQuery, vWidget );

@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
+mw.PluginManager.add( 'related', mw.VBaseScreen.extend({
 
 	defaultConfig: {
 		parent: "topBarContainer",
@@ -138,7 +138,7 @@ mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
 			return this.getEntriesFromList( this.getConfig( 'entryList' ), callback );
 		}
 		// if no playlist is defined used the magic related video playlistd id: 
-		return this.getEntriesFromPlaylistId( '_KDP_CTXPL', callback);
+		return this.getEntriesFromPlaylistId( '_VDP_CTXPL', callback);
 	},
 	isValidResult: function( data ){
 		// Check if we got error
@@ -156,7 +156,7 @@ mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
 	},
 	getEntriesFromList: function( entryList, callback){
 		var _this =this;
-		this.getKalturaClient().doRequest( {
+		this.getVidiunClient().doRequest( {
 			'service': 'baseEntry',
 			'action': 'getbyids',
 			'entryIds': entryList
@@ -184,12 +184,12 @@ mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
 	},
 	getEntriesFromPlaylistId: function( playlistId, callback ){
 		var _this = this;
-		this.getKalturaClient().doRequest( {
+		this.getVidiunClient().doRequest( {
 			'service' : 'playlist',
 			'action' : 'execute',
 			'id' : playlistId,
-			'filter:objectType': 'KalturaMediaEntryFilterForPlaylist',
-			'filter:idNotIn': this.getPlayer().kentryid,
+			'filter:objectType': 'VidiunMediaEntryFilterForPlaylist',
+			'filter:idNotIn': this.getPlayer().ventryid,
 			'filter:limit': this.getConfig('itemsLimit')
 		}, function( data ){
 			// Validate result, don't issue callback if not valid.
@@ -231,7 +231,7 @@ mw.PluginManager.add( 'related', mw.KBaseScreen.extend({
 
 		if( property == 'timeRemaining' ){
 			if( this.getConfig('formatCountdown')){
-				var timeFormat = mw.KDPMapping.prototype.formatFunctions.timeFormat;
+				var timeFormat = mw.VDPMapping.prototype.formatFunctions.timeFormat;
 				this.getScreen().find('.remaining').html(timeFormat(value));
 			}else{
 				this.getScreen().find('.remaining').html(value);

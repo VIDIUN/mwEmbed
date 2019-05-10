@@ -13,13 +13,13 @@
 <br />
 
 
-<object id="kaltura_player_1320682985" name="kaltura_player_1320682985" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="400" width="400" bgcolor="#000000" data="http://www.kaltura.com/index.php/kwidget/cache_st/1320682985/wid/_2222/uiconf_id/6190012/a">
+<object id="vidiun_player_1320682985" name="vidiun_player_1320682985" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="400" width="400" bgcolor="#000000" data="http://www.vidiun.com/index.php/vwidget/cache_st/1320682985/wid/_2222/uiconf_id/6190012/a">
 	<param name="allowFullScreen" value="true" />
 	<param name="allowNetworking" value="all" />
 	<param name="allowScriptAccess" value="always" />
 	<param name="bgcolor" value="#000000" />
-	<param name="flashVars" value="playlistAPI.autoInsert=true&playlistAPI.kpl0Name=Audio playlist (manual)&playlistAPI.kpl0Url=http%3A%2F%2Fwww.kaltura.com%2Findex.php%2Fpartnerservices2%2Fexecuteplaylist%3Fuid%3D%26partner_id%3D2222%26subp_id%3D222200%26format%3D8%26ks%3D%7Bks%7D%26playlist_id%3D0_u7nb64lt&{FLAVOR}" />
-	<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1320682985/wid/_2222/uiconf_id/6190012/a" />
+	<param name="flashVars" value="playlistAPI.autoInsert=true&playlistAPI.vpl0Name=Audio playlist (manual)&playlistAPI.vpl0Url=http%3A%2F%2Fwww.vidiun.com%2Findex.php%2Fpartnerservices2%2Fexecuteplaylist%3Fuid%3D%26partner_id%3D2222%26subp_id%3D222200%26format%3D8%26vs%3D%7Bvs%7D%26playlist_id%3D0_u7nb64lt&{FLAVOR}" />
+	<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1320682985/wid/_2222/uiconf_id/6190012/a" />
 </object>
 
 <br />
@@ -29,11 +29,11 @@
 
 <!--
 
-<layout id="full" skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin_light.swf" isPlaylist="true" name="Example: Audio playlist">
+<layout id="full" skinPath="/content/uiconf/vidiun/vmc/appstudio/vdp3/eagle/skin/v3.5.9/skin_light.swf" isPlaylist="true" name="Example: Audio playlist">
   <VBox id="topLevel" width="100%" height="100%">
     <VBox id="player" width="100%" height="100%" styleName="black">
       <Plugin id="playlistAPI" width="0%" height="0%" includeInLayout="false"/>
-      <Plugin id="kalturaMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
+      <Plugin id="vidiunMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
       <Plugin id="statistics" width="0%" height="0%" includeInLayout="false"/>
       <Canvas height="100%" width="100%" id="PlayerHolder" styleName="black">
         <Video id="video" width="100%" height="100%"/>
@@ -57,10 +57,10 @@
       <Canvas id="controlsHolder" width="100%" height="30">
         <HBox id="ControllerScreenHolder" width="100%" height="30" verticalAlign="middle" styleName="darkBg">
           <HBox id="ControllerScreen" width="100%" height="30" horizontalGap="9" paddingLeft="9" verticalAlign="middle" styleName="darkBg">
-            <Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="Play" upTooltip="Play" selectedTooltip="Pause" k_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
+            <Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="Play" upTooltip="Play" selectedTooltip="Pause" v_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
             <Button id="liveToggleStatus" toggle="true" color1="0xFF0000" color2="0xFF0000" upIcon="onAirIcon" overIcon="onAirIcon" downIcon="onAirIcon" disabeledIcon="onAirIcon" selectedUpIcon="offlineIcon" selectedOverIcon="offlineIcon" selectedDownIcon="offlineIcon" selectedDisabledIcon="offlineIcon" isSelected="{mediaProxy.isOffline}" visible="{mediaProxy.isLive}" includeInLayout="{mediaProxy.isLive}" mouseEnable="false" useHandCursor=""/>
-            <Button id="previousBtnControllerScreen" kClick="sendNotification('playlistPlayPrevious')" height="22" focusRectPadding="0" buttonType="iconButton" styleName="controllerScreen" icon="PreviousIcon" tooltip="" k_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
-            <Button id="nextBtnControllerScreen" kClick="sendNotification('playlistPlayNext')" focusRectPadding="0" height="22" buttonType="iconButton" icon="NextIcon" styleName="controllerScreen" tooltip="" k_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
+            <Button id="previousBtnControllerScreen" vClick="sendNotification('playlistPlayPrevious')" height="22" focusRectPadding="0" buttonType="iconButton" styleName="controllerScreen" icon="PreviousIcon" tooltip="" v_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
+            <Button id="nextBtnControllerScreen" vClick="sendNotification('playlistPlayNext')" focusRectPadding="0" height="22" buttonType="iconButton" icon="NextIcon" styleName="controllerScreen" tooltip="" v_buttonType="buttonIconControllerArea" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
             <VBox id="scrubberContainer" width="100%" height="30" verticalAlign="middle" verticalGap="-3" notVisible="{mediaProxy.isLive}">
               <Spacer height="10"/>
               <Scrubber id="scrubber" width="100%" height="10" styleName="" color1="3381759" color2="3381759"/>
@@ -73,7 +73,7 @@
             <VolumeBar id="volumeBar" styleName="volumeBtn" buttonWidth="20" width="20" height="20" buttonType="iconButton" tooltip="Change volume" initialValue="1" forceInitialValue="false" color1="3381759" color2="26367" color3="3355443" color4="10066329" color5="6724095" font="Arial"/>
           </HBox>
           <Spacer width="13"/>
-          <Button id="kalturaLogo" height="50" width="100" kClick="navigate('http://www.kaltura.com')" styleName="controllerScreen" icon="kalturaLogo"/>
+          <Button id="vidiunLogo" height="50" width="100" vClick="navigate('http://www.vidiun.com')" styleName="controllerScreen" icon="vidiunLogo"/>
           <Spacer width="13"/>
         </HBox>
       </Canvas>
@@ -184,8 +184,8 @@
     <var key="search.relativeTo" value="playlist" overrideFlashvar="true"/>
     <var key="search.position" value="lastChild" overrideFlashvar="true"/>
     <var key="playlistAPI.searchDataProvider" value="{search.searchDataProvider}" overrideFlashvar="true"/>
-    <var key="playlistAPI.path" value="/content/uiconf/ps/ucb/kdp3.5.21/plugins/playlistAPIPlugin.swf" overrideFlashvar="true"/>
-    <var key="search.path" value="/content/uiconf/ps/ucb/kdp3.5.46/plugins/SearchPlugin.swf" overrideFlashvar="true"/>
+    <var key="playlistAPI.path" value="/content/uiconf/ps/ucb/vdp3.5.21/plugins/playlistAPIPlugin.swf" overrideFlashvar="true"/>
+    <var key="search.path" value="/content/uiconf/ps/ucb/vdp3.5.46/plugins/SearchPlugin.swf" overrideFlashvar="true"/>
     <var key="mylogo.plugin" value="true" overrideFlashvar="true"/>
     <var key="mylogo.className" value="Watermark" overrideFlashvar="true"/>
     <var key="mylogo.width" value="30" overrideFlashvar="true"/>
@@ -193,9 +193,9 @@
     <var key="mylogo.watermarkPath" value="http://dl.dropbox.com/u/7356868/examples/logo.png" overrideFlashvar="true"/>
     <var key="mylogo.watermarkClickPath" value="http://dl.dropbox.com/u/7356868/examples/examples.html" overrideFlashvar="true"/>
     <var key="mylogo.position" value="after" overrideFlashvar="true"/>
-    <var key="mylogo.relativeTo" value="kalturaLogo" overrideFlashvar="true"/>
-    <var key="kalturaLogo.visible" value="false" overrideFlashvar="true"/>
-    <var key="kalturaLogo.includeInLayout" value="false" overrideFlashvar="true"/>
+    <var key="mylogo.relativeTo" value="vidiunLogo" overrideFlashvar="true"/>
+    <var key="vidiunLogo.visible" value="false" overrideFlashvar="true"/>
+    <var key="vidiunLogo.includeInLayout" value="false" overrideFlashvar="true"/>
     <var key="playlistHolder.height" value="100%" overrideFlashvar="true"/>
     <var key="playlist.height" value="100%" overrideFlashvar="true"/>
     <var key="volumeBar.layoutMode" value="horizontal" overrideFlashvar="true"/>

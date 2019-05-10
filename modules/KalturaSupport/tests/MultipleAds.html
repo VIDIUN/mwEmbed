@@ -6,8 +6,8 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>Multiple VAST Ads test</h2>
@@ -23,7 +23,7 @@
 
 <div id="myVideoTarget" style="width:400px;height:330px;"></div>
 <script>
-kWidget.embed({
+vWidget.embed({
 	'targetId': 'myVideoTarget',
 	'wid': '_423851',
 	'uiconf_id' : '7769171',
@@ -37,21 +37,21 @@ kWidget.embed({
 	
  <!-- 
  <layout id="full" name="Multiple Ads Test"
-skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf">
+skinPath="/content/uiconf/vidiun/vmc/appstudio/vdp3/eagle/skin/v3.5.9/skin.swf">
 
   <HBox id="topLevel" width="100%" height="100%">
     <VBox id="player" width="100%" height="100%" styleName="black">
-      <Plugin id="kalturaMix" width="0%" height="0%"
+      <Plugin id="vidiunMix" width="0%" height="0%"
       includeInLayout="false" loadingPolicy="onDemand" />
       <Plugin id="statistics" width="0%" height="0%"
       includeInLayout="false" />
       <Plugin id="vast" numPreroll="1" prerollInterval="1"
       prerollStartWith="1"
-      prerollUrl="http://kaldev.kaltura.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=24"
+      prerollUrl="http://viddev.vidiun.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=24"
       overlayStartAt="20" overlayInterval="180"
-      overlayUrl="http://kaldev.kaltura.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=19"
+      overlayUrl="http://viddev.vidiun.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=19"
       numPostroll="1" postrollInterval="1" postrollStartWith="1"
-      postrollUrl="http://kaldev.kaltura.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=24"
+      postrollUrl="http://viddev.vidiun.com/myopenx/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;amp;source=&amp;amp;format=vast&amp;amp;charset=UTF_8&amp;amp;nz=1&amp;amp;zones=z1=24"
       preSequence="1" postSequence="1" trackCuePoints="true"
       timeout="4" />
       <Canvas id="PlayerHolder" height="100%" width="100%"
@@ -85,8 +85,8 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
         playScreenOverId="playScreen" endScreenId="endScreen"
         endScreenOverId="endScreen" />
         <Watermark id="watermark" width="100%" height="100%"
-        watermarkPath="http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png"
-        watermarkClickPath="http://www.kaltura.com/"
+        watermarkPath="http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png"
+        watermarkClickPath="http://www.vidiun.com/"
         watermarkPosition="bottomLeft" padding="5" />
         <Plugin id="overlay" swfUrls="{vast.overlays}"
         overlayStartAt="{vast.overlayStartAt}"
@@ -94,7 +94,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
         displayDuration="5" width="100%" height="100%"
         trackCuePoints="true" />
         <Plugin id="bumper" bumperEntryID="1_znvt6hgh"
-        clickurl="http://www.kaltura.com" lockUI="true"
+        clickurl="http://www.vidiun.com" lockUI="true"
         playOnce="false" preSequence="2" width="100%"
         height="100%" />
         <VBox id="skipBtnHolder" width="100%" height="100%">
@@ -106,7 +106,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
             type="labelButton" color1="14540253" color2="16777215"
             styleName="controllerScreen" height="30" width="20"
             allowDisable="false" label="skip ad &gt;"
-            kClick="sendNotification('sequenceSkipNext')" />
+            vClick="sendNotification('sequenceSkipNext')" />
           </HBox>
         </VBox>
       </Canvas>
@@ -124,7 +124,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
             selectedDownIcon="pauseIcon"
             selectedDisabledIcon="pauseIcon" tooltip="Play"
             upTooltip="Play" selectedTooltip="Pause"
-            k_buttonType="buttonIconControllerArea"
+            v_buttonType="buttonIconControllerArea"
             color1="14540253" color2="16777215" color3="3355443"
             color4="10066329" color5="16777215" font="Arial" />
             <Button id="liveToggleStatus" toggle="true"
@@ -172,16 +172,16 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
             selectedDisabledIcon="closeFullScreenIcon"
             focusRectPadding="0" allowDisable="false"
             tooltip="Toggle fullscreen"
-            k_buttonType="buttonIconControllerArea"
+            v_buttonType="buttonIconControllerArea"
             upTooltip="Open Full Screen"
             selectedTooltip="Close Full Screen" color1="14540253"
             color2="16777215" color3="3355443" color4="10066329"
             color5="16777215" font="Arial" />
           </HBox>
           <Spacer width="13" />
-          <Button id="kalturaLogo" height="50" width="100"
-          kClick="navigate('http://www.kaltura.com')"
-          styleName="controllerScreen" icon="kalturaLogo" />
+          <Button id="vidiunLogo" height="50" width="100"
+          vClick="navigate('http://www.vidiun.com')"
+          styleName="controllerScreen" icon="vidiunLogo" />
           <Spacer width="13" />
         </HBox>
       </Canvas>
@@ -201,7 +201,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
           disabeledIcon="playIcon" selectedUpIcon="playIcon"
           selectedOverIcon="playIcon" selectedDownIcon="playIcon"
           selectedDisabledIcon="playIcon"
-          k_buttonType="buttonIconControllerArea"
+          v_buttonType="buttonIconControllerArea"
           tooltip="Play video" color1="14540253" color2="16777215"
           color3="3355443" color4="10066329" color5="16777215"
           font="Arial" />
@@ -222,7 +222,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
           disabeledIcon="playIcon" selectedUpIcon="playIcon"
           selectedOverIcon="playIcon" selectedDownIcon="playIcon"
           selectedDisabledIcon="playIcon"
-          k_buttonType="buttonIconControllerArea"
+          v_buttonType="buttonIconControllerArea"
           tooltip="Play video" color1="14540253" color2="16777215"
           color3="3355443" color4="10066329" color5="16777215"
           font="Arial" />
@@ -246,11 +246,11 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
         <Tile id="endTile" width="100%" verticalGap="10"
         verticalAlign="middle" horizontalAlign="center">
           <Button id="replayBtnEndScreen"
-          kClick="sendNotification('doPlay')"
+          vClick="sendNotification('doPlay')"
           buttonType="onScreenButton" minWidth="60"
           labelPlacement="top" label="Replay"
           styleName="onScreenBtn" upIcon="replayIcon"
-          k_buttonType="buttonIconControllerArea" upTooltip="Play"
+          v_buttonType="buttonIconControllerArea" upTooltip="Play"
           selectedTooltip="Pause" tooltip="Replay"
           color1="14540253" color2="16777215" color3="3355443"
           color4="10066329" color5="16777215" font="Arial" />

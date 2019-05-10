@@ -5,7 +5,7 @@
 
 return array (
 	'widevine' => array(
-	 	'description' => 'The Widevine plugin provides a DRM solution for Kaltura content. Initially, the Kaltura player checks for the Widevine browser plugin and displays a message with a download link if this plugin is missing. <a href="http://www.widevine.com/wv_drm.html" target="_blank"> More info </a>',
+	 	'description' => 'The Widevine plugin provides a DRM solution for Vidiun content. Initially, the Vidiun player checks for the Widevine browser plugin and displays a message with a download link if this plugin is missing. <a href="http://www.widevine.com/wv_drm.html" target="_blank"> More info </a>',
 		'attributes' => array(
 			'useSupportedDeviceMsg' => array(
 				'label' => "Use supported device message",
@@ -30,15 +30,15 @@ return array (
 				'type' => 'string',
 				'initvalue' => "Notification"
 			),
-			'useKdpMsg' => array(
-				'label' => "Use KDP message",
-				'doc' => "Overrides the message that prompts the user to use KDP.",
+			'useVdpMsg' => array(
+				'label' => "Use VDP message",
+				'doc' => "Overrides the message that prompts the user to use VDP.",
 				'type' => 'hiddenValue',
 				'initvalue' => "This video requires Adobe Flash enabled player."
 			),
-			'useKdpTitle' => array(
-				'label' => "Use KDP title",
-				'doc' => "Overrides the title of the message that prompts the user to use KDP.",
+			'useVdpTitle' => array(
+				'label' => "Use VDP title",
+				'doc' => "Overrides the title of the message that prompts the user to use VDP.",
 				'type' => 'hiddenValue',
 				'initvalue' => "Notification"
 			),

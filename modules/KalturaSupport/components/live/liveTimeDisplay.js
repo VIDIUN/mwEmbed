@@ -1,5 +1,5 @@
 ( function( mw, $ ) {"use strict";
-	mw.PluginManager.add( 'liveTimeDisplay', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'liveTimeDisplay', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',

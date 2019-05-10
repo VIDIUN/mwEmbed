@@ -12,24 +12,24 @@
 	<h1>Loading Spinner</h1>
 	<a href="#" id="show">Show spinner</a> | <a href="#" id="hide">Hide Spinner</a>
 	<br />
-	<div id="kaltura_player" style="width: 585px; height: 330px;float: left;"></div>
+	<div id="vidiun_player" style="width: 585px; height: 330px;float: left;"></div>
 	<br style="clear: both;" /><br />
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'readyCallback': function(playerId){
-			var kdp = $('#' + playerId)[0];
+			var vdp = $('#' + playerId)[0];
 			$("#show").click(function(){
-				kdp.setKDPAttribute('largePlayBtn', 'visible', false);
-				kdp.sendNotification('showSpinner');
+				vdp.setVDPAttribute('largePlayBtn', 'visible', false);
+				vdp.sendNotification('showSpinner');
 				return false;
 			})
 			$("#hide").click(function(){
-				kdp.sendNotification('doPause');
-				kdp.sendNotification('hideSpinner');
-				kdp.setKDPAttribute('largePlayBtn', 'visible', true);
+				vdp.sendNotification('doPause');
+				vdp.sendNotification('hideSpinner');
+				vdp.setVDPAttribute('largePlayBtn', 'visible', true);
 				return false;
 			})
 		},

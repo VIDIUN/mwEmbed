@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-	mw.PluginManager.add( 'playbackRateSelector', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'playbackRateSelector', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			"parent": "controlsContainer",
@@ -170,7 +170,7 @@
 		},
 		getMenu: function(){
 			if( !this.menu ) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex')
 				});
 			}

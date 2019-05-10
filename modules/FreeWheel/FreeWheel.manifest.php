@@ -10,7 +10,7 @@ return array (
 		'description' => 'FreeWheel gives enterprise-level media companies the infrastructure they 
 		need to create scaled, profitable content businesses in the new media landscape. 
 		Learn more about <a href="http://www.freewheel.tv/" target="_blank">FreeWheel offerings</a>. <br>
-		Kaltura supports a full featured FreeWheel ad network integration for both HTML5 and flash players.',
+		Vidiun supports a full featured FreeWheel ad network integration for both HTML5 and flash players.',
 		'attributes' => array(
 			'adManagerUrl' =>array(
 				'doc' => "The FreeWheel ad manager SWF URL.",
@@ -45,9 +45,9 @@ return array (
 				'doc' => "The site section ID used to segment ad retrieval per site section.",
 				'type' => 'string'
 			), 
-			'useKalturaTemporalSlots' => array(
-				'doc' => "If Kaltura cuePoints should be used for ad opportunities.",
-				'label' => 'Use Kaltura cue points.',
+			'useVidiunTemporalSlots' => array(
+				'doc' => "If Vidiun cuePoints should be used for ad opportunities.",
+				'label' => 'Use Vidiun cue points.',
 				'type' => 'boolean'
 			),
 			'videoAssetId' => array(

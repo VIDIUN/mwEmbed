@@ -28,21 +28,21 @@ mw.MediaPlayers.prototype = {
 		this.loadPreferences();
 
 		// Set up default players order for each library type
-		this.defaultPlayers['video/wvm'] = ['Kplayer'];
-		this.defaultPlayers['video/live'] = ['Kplayer'];
-		this.defaultPlayers['video/kontiki'] = ['Kplayer'];
-		this.defaultPlayers['video/x-flv'] = ['Kplayer', 'Vlc'];
-		this.defaultPlayers['video/h264'] = ['NativeComponent', 'Native', 'Kplayer', 'Vlc'];
-		this.defaultPlayers['video/mp4'] = ['NativeComponent', 'Native', 'Kplayer', 'Vlc'];		
+		this.defaultPlayers['video/wvm'] = ['Vplayer'];
+		this.defaultPlayers['video/live'] = ['Vplayer'];
+		this.defaultPlayers['video/kontiki'] = ['Vplayer'];
+		this.defaultPlayers['video/x-flv'] = ['Vplayer', 'Vlc'];
+		this.defaultPlayers['video/h264'] = ['NativeComponent', 'Native', 'Vplayer', 'Vlc'];
+		this.defaultPlayers['video/mp4'] = ['NativeComponent', 'Native', 'Vplayer', 'Vlc'];		
 		this.defaultPlayers['application/vnd.apple.mpegurl'] = ['NativeComponent', 'Native'];
-		this.defaultPlayers['application/x-shockwave-flash'] = ['Kplayer'];
+		this.defaultPlayers['application/x-shockwave-flash'] = ['Vplayer'];
 
 		this.defaultPlayers['video/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['video/webm'] = ['Native', 'Vlc'];
 		this.defaultPlayers['application/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['audio/ogg'] = ['Native', 'Vlc', 'Java' ];
-		this.defaultPlayers['audio/mpeg']= ['Native', 'Kplayer'];
-		this.defaultPlayers['audio/mp3']= ['Native', 'Kplayer'];
+		this.defaultPlayers['audio/mpeg']= ['Native', 'Vplayer'];
+		this.defaultPlayers['audio/mp3']= ['Native', 'Vplayer'];
 		this.defaultPlayers['video/mpeg'] = ['Vlc'];
 		this.defaultPlayers['video/x-msvideo'] = ['Vlc'];
 		this.defaultPlayers['video/multicast'] = ['Silverlight'];
@@ -55,7 +55,7 @@ mw.MediaPlayers.prototype = {
 		this.defaultPlayers['image/png'] = ['ImageOverlay'];
 
 		if ( mw.getConfig("LeadWithHLSOnFlash") ) {
-			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Kplayer');
+			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Vplayer');
 		}
 
 	},
@@ -125,8 +125,8 @@ mw.MediaPlayers.prototype = {
 			return mw.EmbedTypes.getNativeComponentPlayerVideo();
 		}
 
-		if ( mw.getConfig( 'EmbedPlayer.ForceKPlayer' ) && this.isSupportedPlayer( 'kplayer' ) ) {
-			return mw.EmbedTypes.getKplayer();
+		if ( mw.getConfig( 'EmbedPlayer.ForceVPlayer' ) && this.isSupportedPlayer( 'vplayer' ) ) {
+			return mw.EmbedTypes.getVplayer();
 		}
 		if (mw.getConfig( 'EmbedPlayer.ForceSPlayer') && this.isSupportedPlayer('splayer')) {
 			return mw.EmbedTypes.getSilverlightPlayer();

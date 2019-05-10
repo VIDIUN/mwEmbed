@@ -212,7 +212,7 @@ mw.MediaElement.prototype = {
 			// Check for device flags:
 			var desktopVdn, mobileVdn;
 			$.each( vndSources, function( inx, source) {
-				// Kaltura tags vdn sources with iphonenew
+				// Vidiun tags vdn sources with iphonenew
 				if( source.getFlavorId() && source.getFlavorId().toLowerCase() == 'iphonenew' ){
 					mobileVdn = source;
 				} else {
@@ -220,7 +220,7 @@ mw.MediaElement.prototype = {
 				}
 			});
 			// NOTE: We really should not have two VDN sources the point of vdn is to be a set of adaptive streams.
-			// This work around is a result of Kaltura HLS stream tagging
+			// This work around is a result of Vidiun HLS stream tagging
 			if( ( mw.isIphone() || mw.isAndroid4andUp() ) && mobileVdn ){
 				_this.setSource( mobileVdn );
 			} else if( desktopVdn ){
@@ -372,7 +372,7 @@ mw.MediaElement.prototype = {
 				&& (
 					player.library == 'Native'
 					||
-					player.library == 'Kplayer'
+					player.library == 'Vplayer'
 				)
 			) {
 				if( source ){

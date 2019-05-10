@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of KalturaUiConfResult
+ * Description of VidiunUiConfResult
  *
  * @author ran
  */
@@ -80,7 +80,7 @@ class UiConfResult {
 		if( $this->uiConfFile === false ){
 			$this->uiConfFile = $this->loadUiConfFromApi();
 			if( $this->uiConfFile !== null ) {
-				$this->logger->log('KalturaUiConfResult::loadUiConf: [' . $this->request->getUiConfId() . '] Cache uiConf xml to: ' . $cacheKey);
+				$this->logger->log('VidiunUiConfResult::loadUiConf: [' . $this->request->getUiConfId() . '] Cache uiConf xml to: ' . $cacheKey);
 				$this->cache->set( $cacheKey, $this->uiConfFile );
 			} else {
 				if (isset($this->error)){
@@ -112,10 +112,10 @@ class UiConfResult {
 	}
 
 	function loadFromLocalFile( $filePath ) {
-		global $wgKalturaPSHtml5SettingsPath;
+		global $wgVidiunPSHtml5SettingsPath;
 
 		$libPath = realpath(dirname(__FILE__) . '/../../' ); 
-		$psPath   = dirname( $wgKalturaPSHtml5SettingsPath ) . "../../ps";
+		$psPath   = dirname( $wgVidiunPSHtml5SettingsPath ) . "../../ps";
 		$filePath = str_replace('{libPath}', $libPath, $filePath);
 		$filePath = str_replace('{html5ps}', $psPath, $filePath);
 
@@ -124,18 +124,18 @@ class UiConfResult {
 
 	function loadUiConfFromApi() {
 		$client = $this->client->getClient();
-		$kparams = array();
+		$vparams = array();
 		try {
 			if( $this->noCache ) {
-				$client->addParam( $kparams, "nocache",  true );
+				$client->addParam( $vparams, "nocache",  true );
 			}
-			$client->addParam( $kparams, "id",  $this->request->get('uiconf_id') );
-			$client->queueServiceActionCall( "uiconf", "get", $kparams );
+			$client->addParam( $vparams, "id",  $this->request->get('uiconf_id') );
+			$client->queueServiceActionCall( "uiconf", "get", $vparams );
 
 			$rawResultObject = $client->doQueue();
 		} catch( Exception $e ){
 			// Update the Exception and pass it upward
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 		}
 		
 		if( is_array( $rawResultObject ) && isset( $rawResultObject['code'] ) ) {
@@ -255,7 +255,7 @@ class UiConfResult {
 	 */
 	public function cleanUiConf( $uiConf ) {
 		// remove this hack as soon as possible
-		$uiConf = str_replace( '[kClick="', 'kClick="', $uiConf);
+		$uiConf = str_replace( '[vClick="', 'vClick="', $uiConf);
 		// remove this hack as soon as possible as well!
 		$brokenFlashVarXMl =  'autoPlay=false&screensLayer.startScreenOverId=startScreen&screensLayer.startScreenId=startScreen';
 		$uiConf = str_replace( $brokenFlashVarXMl, htmlentities( $brokenFlashVarXMl ), $uiConf );
@@ -308,10 +308,10 @@ class UiConfResult {
 			$pluginKeys = explode(".", $key);
 			$pluginId = $pluginKeys[0];
 			// Don't remove common configuration prefixes:
-			// http://html5video.org/wiki/Kaltura_HTML5_Configuration
-			if( $pluginId == 'Kaltura' || 
+			// http://html5video.org/wiki/Vidiun_HTML5_Configuration
+			if( $pluginId == 'Vidiun' || 
 				$pluginId == 'EmbedPlayer' || 
-				$pluginId == 'KalturaSupport' || 
+				$pluginId == 'VidiunSupport' || 
 				$pluginId == 'mediaProxy'
 			){
 				continue;
@@ -376,9 +376,9 @@ class UiConfResult {
 			$pluginKeys = explode(".", $key);
 			$pluginId = $pluginKeys[0];
 			$pluginAttribute = $pluginKeys[1];
-			 if( $pluginId == 'Kaltura' ||
+			 if( $pluginId == 'Vidiun' ||
 					$pluginId == 'EmbedPlayer' ||
-					$pluginId == 'KalturaSupport' ||
+					$pluginId == 'VidiunSupport' ||
 					$pluginId == 'mediaProxy'
 					){
 						continue;
@@ -503,7 +503,7 @@ class UiConfResult {
 
 		// Add default layout
 		$playerConfig['layout'] = array(
-			'skin' => 'kdark'
+			'skin' => 'vdark'
 		);
 
 		$this->playerConfig = $playerConfig;
@@ -518,7 +518,7 @@ class UiConfResult {
 
 		// Allow us to ignore old plugins
 		$ignorePlugins = array(
-			'kalturaMix', 'captionsOverFader', 'gigya'
+			'vidiunMix', 'captionsOverFader', 'gigya'
 		);
 
 		// Default set of plugins, always enabled
@@ -572,7 +572,7 @@ class UiConfResult {
 			'flavorComboControllerScreen' => array(
 				'pluginName' => 'sourceSelector'
 			),
-			'kalturaLogo' => array(
+			'vidiunLogo' => array(
 				'pluginName' => 'logo'
 			),
 			'mylogo' => array(
@@ -695,7 +695,7 @@ class UiConfResult {
 	 */
 	private function filterExternalResources( &$vars ){
 		global $wgResourceLoaderUrl, $wgMwEmbedEnabledModules;
-		$warningUrl = str_replace('load.php', 'kWidget/externalResourceWarning.js', $wgResourceLoaderUrl);
+		$warningUrl = str_replace('load.php', 'vWidget/externalResourceWarning.js', $wgResourceLoaderUrl);
 
 		# Register / load all the mwEmbed modules
 		$configRegister = array();
@@ -794,8 +794,8 @@ class UiConfResult {
 		if( $this->request->getEntryId() ) {
 			$addtionalData['entryId'] = $this->request->getEntryId();
 		}
-		// Add KS to uiVars
-		$this->playerConfig['vars']['ks'] = $this->client->getKS();
+		// Add VS to uiVars
+		$this->playerConfig['vars']['vs'] = $this->client->getVS();
 
 		return array_merge($addtionalData, $this->playerConfig);
 	}
@@ -806,8 +806,8 @@ class UiConfResult {
 			return $this->isPlaylist;
 		}
 		// Check for playlist based on playlistAPI plugin existence
-		$this->isPlaylist = ( !! $this->getPlayerConfig('playlistAPI', 'kpl0Url') 
-			|| !! $this->getPlayerConfig('playlistAPI', 'kpl0Id') ) ;
+		$this->isPlaylist = ( !! $this->getPlayerConfig('playlistAPI', 'vpl0Url') 
+			|| !! $this->getPlayerConfig('playlistAPI', 'vpl0Id') ) ;
 		return $this->isPlaylist;
 	}
 	public function getWidgetPlugins() {

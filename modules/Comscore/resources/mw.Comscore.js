@@ -57,7 +57,7 @@ mw.Comscore.prototype = {
 			attributes.push( 'c' + i + 'Value' );
 		}
 
-		this.config = this.embedPlayer.getKalturaConfig( 'comscore', attributes );
+		this.config = this.embedPlayer.getVidiunConfig( 'comscore', attributes );
 	},
 
 	loadXML: function( callback ) {
@@ -126,7 +126,7 @@ mw.Comscore.prototype = {
 		});
 
 		// Bind to entry ready
-		embedPlayer.bindHelper('KalturaSupport_EntryDataReady' + this.bindPostfix, function() {
+		embedPlayer.bindHelper('VidiunSupport_EntryDataReady' + this.bindPostfix, function() {
 			playerPlayedFired = false;
 			shouldSendBeacon = false;
 			sendOnSequnceEnd = false;
@@ -147,8 +147,8 @@ mw.Comscore.prototype = {
 		});
 
 		// Listen to Ad opportunities of midroll type and increase the current segment counter
-		embedPlayer.bindHelper('KalturaSupport_AdOpportunity' + this.bindPostfix, function( event, cuePoint ) {
-			if( embedPlayer.kCuePoints.getAdSlotType( cuePoint ) === 'midroll' ) {
+		embedPlayer.bindHelper('VidiunSupport_AdOpportunity' + this.bindPostfix, function( event, cuePoint ) {
+			if( embedPlayer.vCuePoints.getAdSlotType( cuePoint ) === 'midroll' ) {
 				_this.currentSegment++;
 				// Used setTimeout because it takes few ms to set propagateEvents to false
 				setTimeout( function() {
@@ -276,8 +276,8 @@ mw.Comscore.prototype = {
 			If there are no segments in the video, the tag should either be empty, or return 1-1
 	 */
 	getC10: function() {
-		if( ! this.embedPlayer.kCuePoints ) { return "1-1"; }
-		var adsCount = this.embedPlayer.kCuePoints.getCuePointsCount( 'midroll' );
+		if( ! this.embedPlayer.vCuePoints ) { return "1-1"; }
+		var adsCount = this.embedPlayer.vCuePoints.getCuePointsCount( 'midroll' );
 		if( adsCount == 0 ){
 			return "1-1";
 		} else {

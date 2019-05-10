@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  */
 ( function( mw, $ ) { "use strict";
 
@@ -124,7 +124,7 @@
 
 					if ( isMimeType( "video/playreadySmooth" ) )
 					{
-						var licenseUrl = _this.getKalturaConfig( null, 'playreadyLicenseUrl' ) || mw.getConfig( 'Kaltura.LicenseServerURL' );
+						var licenseUrl = _this.getVidiunConfig( null, 'playreadyLicenseUrl' ) || mw.getConfig( 'Vidiun.LicenseServerURL' );
 						if ( !licenseUrl ) {
 							mw.log('EmbedPlayerSPlayer::Error:: failed to retrieve playready license URL ' );
 						}  else {
@@ -132,9 +132,9 @@
 						}
 
 						var customData = {
-							partnerId: _this.kpartnerid,
-							ks: _this.getFlashvars( 'ks' ),
-							entryId: _this.kentryid
+							partnerId: _this.vpartnerid,
+							vs: _this.getFlashvars( 'vs' ),
+							entryId: _this.ventryid
 						}
 						if ( _this.b64Referrer ) {
 							flashvars.referrer = _this.b64Referrer;
@@ -159,12 +159,12 @@
 					//flashvars.debug = true;
 
 					//check if multicast not available
-					var timeout = _this.getKalturaConfig( null, 'multicastStartTimeout' ) || _this.defaultMulticastStartTimeout;
+					var timeout = _this.getVidiunConfig( null, 'multicastStartTimeout' ) || _this.defaultMulticastStartTimeout;
 					_this.isError = false;
 					setTimeout( function() {
 						if ( !_this.durationReceived ) {
 							_this.isError = true
-							if ( _this.getKalturaConfig( null, 'enableMulticastFallback' ) == true ) {
+							if ( _this.getVidiunConfig( null, 'enableMulticastFallback' ) == true ) {
 								//remove current source to fallback to unicast if multicast failed
 								for ( var i=0; i< _this.mediaElement.sources.length; i++ ) {
 									if ( _this.mediaElement.sources[i] == _this.mediaElement.selectedSource ) {
@@ -178,7 +178,7 @@
 									}
 								}
 							} else {
-								var errorObj = { message: gM( 'ks-LIVE-STREAM-NOT-AVAILABLE' ), title: gM( 'ks-ERROR' ) };
+								var errorObj = { message: gM( 'vs-LIVE-STREAM-NOT-AVAILABLE' ), title: gM( 'vs-ERROR' ) };
 								_this.showErrorMsg( errorObj );
 							}
 
@@ -273,7 +273,7 @@
 		},
 
 		/**
-		 * on Pause callback from the kaltura flash player calls parent_pause to
+		 * on Pause callback from the vidiun flash player calls parent_pause to
 		 * update the interface
 		 */
 		onPause: function() {
@@ -282,7 +282,7 @@
 		},
 
 		/**
-		 * onPlay function callback from the kaltura flash player directly call the
+		 * onPlay function callback from the vidiun flash player directly call the
 		 * parent_play
 		 */
 		onPlay: function() {
@@ -349,11 +349,11 @@
 				var errorCode = dataParams[0];
 				//DRM license related error has 6XXX error code
 				if ( errorCode.length == 4 && errorCode.indexOf("6")==0 )  {
-					messageText = gM( 'ks-NO-DRM-LICENSE' );
+					messageText = gM( 'vs-NO-DRM-LICENSE' );
 				}
 			}
 
-			var errorObj =  { message: messageText, title: gM( 'ks-ERROR' ) };
+			var errorObj =  { message: messageText, title: gM( 'vs-ERROR' ) };
 			if ( this.readyCallbackFunc ) {
 				this.setError( errorObj );
 				this.callReadyFunc();
@@ -432,7 +432,7 @@
 		seek: function(percentage) {
 			var _this = this;
 			var seekTime = percentage * this.getDuration();
-			mw.log( 'EmbedPlayerKalturaSplayer:: seek: ' + percentage + ' time:' + seekTime );
+			mw.log( 'EmbedPlayerVidiunSplayer:: seek: ' + percentage + ' time:' + seekTime );
 			if (this.supportsURLTimeEncoding()) {
 
 				// Make sure we could not do a local seek instead:
@@ -452,7 +452,7 @@
 				// Issue the seek to the flash player:
 				this.playerObject.seek( seekTime );
 
-				// Include a fallback seek timer: in case the kdp does not fire 'playerSeekEnd'
+				// Include a fallback seek timer: in case the vdp does not fire 'playerSeekEnd'
 				var orgTime = this.slCurrentTime;
 				this.seekInterval = setInterval( function(){
 					if( _this.slCurrentTime != orgTime ){
@@ -525,7 +525,7 @@
 			if ( this.requestedSrcIndex!== null && value.newIndex !== this.requestedSrcIndex ) {
 				return;
 			}
-			mw.log( 'EmbedPlayerKalturaSplayer: switchingChangeComplete: new index: ' +  value.newIndex);
+			mw.log( 'EmbedPlayerVidiunSplayer: switchingChangeComplete: new index: ' +  value.newIndex);
 			this.mediaElement.setSourceByIndex ( value.newIndex );
 		},
 

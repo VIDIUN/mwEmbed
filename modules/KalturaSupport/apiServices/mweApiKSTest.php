@@ -2,14 +2,14 @@
 /**
 * This file enables slow javascript response for testing blocking scripts relative to player embeds
 */
-$wgMwEmbedApiServices['KSTest'] = 'mweApiKSTest';
+$wgMwEmbedApiServices['VSTest'] = 'mweApiVSTest';
 
-// Include the kaltura client
-require_once( dirname( __FILE__ ) . '../../Client/KalturaClientHelper.php' );
+// Include the vidiun client
+require_once( dirname( __FILE__ ) . '../../Client/VidiunClientHelper.php' );
 
-class mweApiKSTest {
+class mweApiVSTest {
 	function run(){
-		global $wgKalturaAdminSecret;
+		global $wgVidiunAdminSecret;
 		// validate params ( hard coded to test a particular test file / account )
 		if( !isset( $_REQUEST['wid'] ) ||  $_REQUEST['wid'] != '_243342' ){
 			$this->outputError( 'bad widget param');
@@ -20,37 +20,37 @@ class mweApiKSTest {
 		}
 		$this->entryId = '1_20x0ca3l';
 		
-		// load library and get ks for given entry:
-		if( !isset( $wgKalturaAdminSecret ) || ( $wgKalturaAdminSecret == null ) ) {
-			$this->outputError( 'no admin ks configured');
+		// load library and get vs for given entry:
+		if( !isset( $wgVidiunAdminSecret ) || ( $wgVidiunAdminSecret == null ) ) {
+			$this->outputError( 'no admin vs configured');
 		}
 	
 		$client = $this->getClient();
-		$ks = $client->session->start ( $wgKalturaAdminSecret, 
+		$vs = $client->session->start ( $wgVidiunAdminSecret, 
 				$_SERVER['REMOTE_ADDR'], 
-				KalturaSessionType::ADMIN, 
+				VidiunSessionType::ADMIN, 
 				$this->partnerId, 
 				null, 
 				"sview:{$this->entryId}"
 			);
 		header( 'Content-type: text/javascript');
-		echo json_encode(array('ks' => $ks ) );
+		echo json_encode(array('vs' => $vs ) );
 	}
 	function getClient(){
-		$conf = new KalturaConfiguration( $this->partnerId );
+		$conf = new VidiunConfiguration( $this->partnerId );
 		$conf->serviceUrl = $this->getServiceConfig( 'ServiceUrl' );
 		$conf->serviceBase = $this->getServiceConfig( 'ServiceBase' );
-		return new KalturaClient( $conf );
+		return new VidiunClient( $conf );
 	}
 	function getServiceConfig( $name ){
 		switch( $name ){
 			case 'ServiceUrl' : 
-				global $wgKalturaServiceUrl;
-				return $wgKalturaServiceUrl;
+				global $wgVidiunServiceUrl;
+				return $wgVidiunServiceUrl;
 				break;
 			case 'ServiceBase':
-				global $wgKalturaServiceBase;
-				return $wgKalturaServiceBase;
+				global $wgVidiunServiceBase;
+				return $wgVidiunServiceBase;
 				break;
 		}
 	}

@@ -3,9 +3,9 @@
  *
  * @dependencies
  * 		"mw.EmbedPlayer", "mw.Playlist",
- * 		'mw.PlaylistHandlerKaltura',
-		'mw.PlaylistHandlerKalturaRss',
-		'mw.KLayout'
+ * 		'mw.PlaylistHandlerVidiun',
+		'mw.PlaylistHandlerVidiunRss',
+		'mw.VLayout'
  */
 ( function( mw, $ ) { "use strict";
 
@@ -13,59 +13,59 @@
 $( mw ).bind( "PlaylistGetSourceHandler", function( event, playlist ){
 	var $playlistTarget = $( '#' + playlist.id );
 	var embedPlayer = playlist.embedPlayer;
-	var kplUrl0, kpl0Id, playlistConfig;
+	var vplUrl0, vpl0Id, playlistConfig;
 
-	// Check if we are dealing with a kaltura player:
+	// Check if we are dealing with a vidiun player:
 	if( !embedPlayer  ){
 		mw.log("Error: playlist source handler without embedPlayer");
 	} else {
 		playlistConfig = {
-			'uiconf_id' : embedPlayer.kuiconfid,
-			'widget_id' : embedPlayer.kwidgetid
+			'uiconf_id' : embedPlayer.vuiconfid,
+			'widget_id' : embedPlayer.vwidgetid
 		};
-		kplUrl0 = embedPlayer.getKalturaConfig( 'playlistAPI', 'kpl0Url' );
-		if( kplUrl0 ) {
-			kplUrl0 = decodeURIComponent( kplUrl0 );
+		vplUrl0 = embedPlayer.getVidiunConfig( 'playlistAPI', 'vpl0Url' );
+		if( vplUrl0 ) {
+			vplUrl0 = decodeURIComponent( vplUrl0 );
 		}
 
-		kpl0Id = embedPlayer.getKalturaConfig( 'playlistAPI', 'kpl0Id' );
+		vpl0Id = embedPlayer.getVidiunConfig( 'playlistAPI', 'vpl0Id' );
 	}
-	// No kpl0Url, not a kaltura playlist
-	if( !kplUrl0 && !kpl0Id ){
+	// No vpl0Url, not a vidiun playlist
+	if( !vplUrl0 && !vpl0Id ){
 		return ;
 	}
 
-	// get first item key in kalturaPlaylistData
+	// get first item key in vidiunPlaylistData
 	var playlistId;
-	if( embedPlayer.kalturaPlaylistData ) {
-		for (playlistId in embedPlayer.kalturaPlaylistData) break;
+	if( embedPlayer.vidiunPlaylistData ) {
+		for (playlistId in embedPlayer.vidiunPlaylistData) break;
 	}
 
-	var plId = kpl0Id || new mw.Uri ( kplUrl0 ).query['playlist_id'];
-	// If the url has a partner_id and executeplaylist in its url assume its a "kaltura services playlist"
-	if( (embedPlayer.kalturaPlaylistData ) || 
-		plId || kplUrl0.indexOf('executeplaylist') != -1 ){
+	var plId = vpl0Id || new mw.Uri ( vplUrl0 ).query['playlist_id'];
+	// If the url has a partner_id and executeplaylist in its url assume its a "vidiun services playlist"
+	if( (embedPlayer.vidiunPlaylistData ) || 
+		plId || vplUrl0.indexOf('executeplaylist') != -1 ){
 		playlistConfig.playlist_id = plId;
-		playlist.sourceHandler = new mw.PlaylistHandlerKaltura( playlist, playlistConfig );
+		playlist.sourceHandler = new mw.PlaylistHandlerVidiun( playlist, playlistConfig );
 		return ;
 	}
 
 	mw.log("Error playlist source not found");
 });
 
-// Check for kaltura playlist:
-mw.addKalturaConfCheck(function( embedPlayer, callback ) {
+// Check for vidiun playlist:
+mw.addVidiunConfCheck(function( embedPlayer, callback ) {
 	// Special iframe playlist target:
 	var $playerInterface = embedPlayer.getInterface();
 	
 	// Check if playlist is enabled and that its not already built for this player:
 	if( embedPlayer.isPluginEnabled( 'playlistAPI' )
 			&&
-			// check for kpl0Url or kpl0Id, don't init empty playlist
+			// check for vpl0Url or vpl0Id, don't init empty playlist
 			(
-					embedPlayer.getKalturaConfig( 'playlistAPI', 'kpl0Url' )
+					embedPlayer.getVidiunConfig( 'playlistAPI', 'vpl0Url' )
 					||
-					embedPlayer.getKalturaConfig( 'playlistAPI', 'kpl0Id' )
+					embedPlayer.getVidiunConfig( 'playlistAPI', 'vpl0Id' )
 			)
 			&&
 		// check for activatedPlaylist

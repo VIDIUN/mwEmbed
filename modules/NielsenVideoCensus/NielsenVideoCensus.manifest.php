@@ -10,7 +10,7 @@ return array(
 		the size and demographic composition (age, gender, etc.) of audiences viewing video online, 
 		across the entire web and for specific sites. Learn more at
 		<a target=\"new\" href=\"http://www.nielsen.com/us/en/nielsen-solutions.html\">Nielsen.com</a>
-		The Kaltura Integration supports the Video Census beacon. <br>Note only one beacon is fired per
+		The Vidiun Integration supports the Video Census beacon. <br>Note only one beacon is fired per
 		content view. See NielsenCombined for Nielsen video event tracking support.",
 		'attributes'=> array(
 			'trackEventMonitor' => array(

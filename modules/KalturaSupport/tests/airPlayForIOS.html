@@ -8,15 +8,15 @@
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 	<script>mw.setConfig('forceMobileHTML5', true);</script>
 	<script type="text/javascript">	
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "airPlay Sample" );
 
-			var kdp = $( '#' + videoId ).get( 0 );
+			var vdp = $( '#' + videoId ).get( 0 );
 			
 			asyncTest( "airPlay plugin exists", function() {
-				kalturaQunitWaitForPlayer(function(){
-					equal( kdp.evaluate( '{airPlay.plugin}' ), true, "airPlay plugin exists");
+				vidiunQunitWaitForPlayer(function(){
+					equal( vdp.evaluate( '{airPlay.plugin}' ), true, "airPlay plugin exists");
 					testIfAirPlayButonExists();
 					start();
 				});
@@ -31,7 +31,7 @@
 					    iOS = true;
 					}
 
-					var playerElement = $("#kaltura_player iframe").get(0).contentWindow.document;
+					var playerElement = $("#vidiun_player iframe").get(0).contentWindow.document;
 
 					if (iOS) {
 						ok( ( playerElement.getElementsByClassName("airPlay")[0] ), "AirPlay Button Exists On iOS Device");
@@ -52,21 +52,21 @@
 		}
 	</script>
 
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 	<h1>Player Skin 2.0 + JSON Config + airPlay plugin</h1>
 	<br />
-	<div id="kaltura_player" style="width: 300px; height: 330px;"></div>
+	<div id="vidiun_player" style="width: 300px; height: 330px;"></div>
 	<br style="clear: both;" /><br />
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
 		'flashvars': {
-			"confFilePath": "{libPath}/modules/KalturaSupport/tests/confFiles/jsonConfig.json",
+			"confFilePath": "{libPath}/modules/VidiunSupport/tests/confFiles/jsonConfig.json",
 			"related.playlistId": "1_qui13sz2",
 			"airPlay":{
 				"plugin":true

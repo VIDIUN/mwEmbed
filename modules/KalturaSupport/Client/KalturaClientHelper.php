@@ -1,14 +1,14 @@
 <?php
 
-// Include the kaltura client
-require_once(  dirname( __FILE__ ) . '/kaltura_client_v3/KalturaClient.php' );
-// Include the kaltura named multi request helper class: 
-require_once(  dirname( __FILE__ ) . '/KalturaNamedMultiRequest.php');
+// Include the vidiun client
+require_once(  dirname( __FILE__ ) . '/vidiun_client_v3/VidiunClient.php' );
+// Include the vidiun named multi request helper class: 
+require_once(  dirname( __FILE__ ) . '/VidiunNamedMultiRequest.php');
 
-class KalturaClientHelper {
+class VidiunClientHelper {
 
 	private $options = array();
-	var $ks = null;
+	var $vs = null;
 	var $client = null;
 	
 	function __construct( $options ) {
@@ -26,7 +26,7 @@ class KalturaClientHelper {
 
 		// Check if client already exists
 		if( ! $this->client ) {
-			$conf = new KalturaConfiguration( null );
+			$conf = new VidiunConfiguration( null );
 
 			$conf->serviceUrl = $this->getOption('ServiceUrl');
 			$conf->serviceBase = $this->getOption( 'ServiceBase' );
@@ -44,41 +44,41 @@ class KalturaClientHelper {
 				$conf->setLogger( $this->getOption('Logger') );
 			}
 			
-			$this->client = new KalturaClient( $conf );
+			$this->client = new VidiunClient( $conf );
 
-			if( $this->getOption('KS') ) {
-				$this->setKS( $this->getOption('KS') );
+			if( $this->getOption('VS') ) {
+				$this->setVS( $this->getOption('VS') );
 			} else if( $this->getOption('WidgetId') ) {
-				$this->generateKS( $this->getOption('WidgetId') );
+				$this->generateVS( $this->getOption('WidgetId') );
 			}
 		}
 
 		return $this->client;		
 	}
 
-	public function generateKS( $widgetId ) {
+	public function generateVS( $widgetId ) {
 		try{
 			$session = $this->getClient()->session->startWidgetSession( $widgetId );
 			$this->partnerId = $session->partnerId;
 		} catch ( Exception $e ){
-			throw new Exception( KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
+			throw new Exception( VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage() );
 		}
-		// Save KS to the client
-		$this->setKS( $session->ks );
+		// Save VS to the client
+		$this->setVS( $session->vs );
 		return $session;
 	}
 
-	public function setKS( $ks = null ) {
-		if( $ks ) {
-			$this->ks = $ks;
-			$this->getClient()->setKS( $ks ) ;
+	public function setVS( $vs = null ) {
+		if( $vs ) {
+			$this->vs = $vs;
+			$this->getClient()->setVS( $vs ) ;
 		}
 	}
 
-	public function getKS() {
+	public function getVS() {
 		if( ! $this->client ) 
 			$this->getClient();
 		
-		return ($this->ks) ? $this->ks : null;
+		return ($this->vs) ? $this->vs : null;
 	}
 }

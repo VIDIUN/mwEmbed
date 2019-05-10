@@ -389,7 +389,7 @@ mw.EmbedPlayerNative = {
 		mw.log( 'EmbedPlayerNative::seek p: ' + percent + ' : ' + this.supportsURLTimeEncoding() + ' dur: ' + this.getDuration() + ' sts:' + this.seekTimeSec );
 
 		// Save currentTime 
-		this.kPreSeekTime = _this.currentTime;
+		this.vPreSeekTime = _this.currentTime;
 
 		// Trigger preSeek event for plugins that want to store pre seek conditions.
 		this.triggerHelper( 'preSeek', percent );
@@ -1012,7 +1012,7 @@ if( !( mw.isIphone() && mw.isIOS80() ) ) {
 
 		//workaround for the bug:
 		// HLS on native android initially starts with no video, only audio. We need to pause/play after movie starts.
-		// livestream is already handled in KWidgetSupprt
+		// livestream is already handled in VWidgetSupprt
 		if ( this.firstPlay && mw.isAndroid4andUp() && mw.getConfig( 'EmbedPlayer.twoPhaseManifestHlsAndroid' ) && this.mediaElement.selectedSource.getMIMEType() == 'application/vnd.apple.mpegurl' && !this.isLive()) {
 			this.getHlsUrl().then( function(){
 				var firstTimePostfix = ".firstTime";
@@ -1206,7 +1206,7 @@ if( !( mw.isIphone() && mw.isIOS80() ) ) {
 		this.previousTime = this.currentTime = this.playerElement.currentTime;
 
 		// Clear the PreSeek time
-		this.kPreSeekTime = null;
+		this.vPreSeekTime = null;
 		
 		// Trigger the html5 action on the parent
 		if( this.seeking ){

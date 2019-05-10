@@ -29,7 +29,7 @@
 		);
 	};
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script type="text/javascript">	
 var testEventObject = {};
 //we use this round about way of tracking events to show the events are being sent for google.
@@ -41,14 +41,14 @@ function trackEventForTests( qPoint ) {
 		$( testEventObject ).trigger( 'cueEvent', qPoint );
 	}
 }
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "CuePoints" );
 
-	var kdp = $( '#' + videoId )[0];
+	var vdp = $( '#' + videoId )[0];
 
 	asyncTest("start cue point", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			$( testEventObject ).bind('preCueEvent', function(event, qPoint){
 				var type = (qPoint.context) ? 'Ad' : 'Code';
 				equal( qPoint.cuePoint.title, "Preroll", "Preroll event sent" );
@@ -56,7 +56,7 @@ function jsKalturaPlayerTest( videoId ){
 				// continue testing
 				start();
 			});
-			kdp.sendNotification('doPlay');
+			vdp.sendNotification('doPlay');
 		});
 	});
 	asyncTest("CuePoint 1 at 3 seconds", function(){
@@ -64,7 +64,7 @@ function jsKalturaPlayerTest( videoId ){
 			equal( qPoint.cuePoint.description, "Code Cue Point", "Code Cue Point event text sent");
 			equal( qPoint.cuePoint.startTime, 3000, "Code Cue Point event sent" );
 			// Finish tests:
-			kdp.sendNotification('doPause');
+			vdp.sendNotification('doPause');
 			start();
 		});		
 	});
@@ -75,13 +75,13 @@ function jsKalturaPlayerTest( videoId ){
 <body>
 <h2> Cue Points Vast Ads </h2>
 This demo includes a cuePoint with a vast ad at 5 seconds. 
-Read more about <a href="http://knowledge.kaltura.com/faq/how-configure-mid-roll-ads">Kaltura Ad cuePoints</a> 
+Read more about <a href="http://knowledge.vidiun.com/faq/how-configure-mid-roll-ads">Vidiun Ad cuePoints</a> 
 <div id="playbackModeSelector" ></div>
 <br /><br />
-<div id="kaltura_player" style="width:400px;height:333px"></div>
+<div id="vidiun_player" style="width:400px;height:333px"></div>
 <script>
-	kWidget.embed({
-		'targetId': 'kaltura_player',
+	vWidget.embed({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '6470132',
 		'entry_id': '1_v1z55w0b'

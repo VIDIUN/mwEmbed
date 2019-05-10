@@ -5,6 +5,6 @@ return array(
 		'dependencies' => array(
 			'mw.AdTimeline'
 		),
-		'kalturaPluginName' => 'tremor'
+		'vidiunPluginName' => 'tremor'
 	)
 );

@@ -7,14 +7,14 @@
     <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
-	<script>mw.setConfig('Kaltura.NoApiCache', true);</script>
+	<script>mw.setConfig('Vidiun.NoApiCache', true);</script>
   </head>
   <body>
 	<h1>Comscore Plugin</h1>
 	<br>
 	<div>
 		<div id="comscoreSettings"></div>
-		<div id="kaltura_player" style="float:left;width:400px;height:330px"></div>
+		<div id="vidiun_player" style="float:left;width:400px;height:330px"></div>
 		<div style="float:left;padding-left:20px;">
 			<i>Analytics events:</i> ( only html5 )<br />
 			<textarea id="analyticsLog" rows='15' ></textarea>
@@ -57,8 +57,8 @@
 		</pre>
 	
 	<script>
-	kWidget.featureConfig({
-		'targetId' : 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId' : 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
@@ -69,7 +69,7 @@
 				'position': "before",
 				'relativeTo': "video",
 				'trackEventMonitor': 'trackEvent',
-				'cTagsMap':"http://projects.kaltura.com/ran/comscore/comscore.xml",
+				'cTagsMap':"http://projects.vidiun.com/ran/comscore/comscore.xml",
 				'c2':"3000032",
 				'c3':'myDefaultString',
 				'c3attributeKey':'name',
@@ -99,11 +99,11 @@
 <!--
 
 <layout id="full" name="Comscore plugin"
-skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf">
+skinPath="/content/uiconf/vidiun/vmc/appstudio/vdp3/eagle/skin/v3.5.9/skin.swf">
 
   <HBox id="topLevel" width="100%" height="100%">
     <VBox id="player" width="100%" height="100%" styleName="black">
-      <Plugin id="kalturaMix" width="0%" height="0%"
+      <Plugin id="vidiunMix" width="0%" height="0%"
       includeInLayout="false" loadingPolicy="onDemand" />
       <Plugin id="statistics" width="0%" height="0%"
       includeInLayout="false" />
@@ -114,7 +114,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
       height="0" 
       includeInLayout="false" 
       asyncInit="true"
-      cTagsMap="http://projects.kaltura.com/ran/comscore/comscore.xml"
+      cTagsMap="http://projects.vidiun.com/ran/comscore/comscore.xml"
       c2="3000032" 
       c3="myDefaultString" 
       c3attributeKey="name"
@@ -128,7 +128,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
       c5attributeValue="id"
       c5Value="{mediaProxy.entryMetadata.C5}"
       c6="{mediaProxy.entryMetadata.SeriesName}|{mediaProxy.entryMetadata.Season}{mediaProxy.entryMetadata.Episode}|{mediaProxy.entry.name}"
-      path="/content/uiconf/abc/kdp/v3.5.7.7/plugins/comscore_v1/comscorePlugin.swf"
+      path="/content/uiconf/abc/vdp/v3.5.7.7/plugins/comscore_v1/comscorePlugin.swf"
       />
 
 
@@ -155,8 +155,8 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
         playScreenOverId="playScreen" endScreenId="endScreen"
         endScreenOverId="endScreen" />
         <Watermark id="watermark" width="100%" height="100%"
-        watermarkPath="http://www.kaltura.com/content/uiconf/kaltura/kmc/appstudio/kdp3/exampleWatermark.png"
-        watermarkClickPath="http://www.kaltura.com/"
+        watermarkPath="http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png"
+        watermarkClickPath="http://www.vidiun.com/"
         watermarkPosition="bottomLeft" padding="5" />
         <VBox id="skipBtnHolder" width="100%" height="100%">
           <Spacer height="100%" />
@@ -183,7 +183,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
             selectedDownIcon="pauseIcon"
             selectedDisabledIcon="pauseIcon" tooltip=""
             upTooltip="Play" selectedTooltip="Pause"
-            k_buttonType="buttonIconControllerArea"
+            v_buttonType="buttonIconControllerArea"
             color1="14540253" color2="16777215" color3="3355443"
             color4="10066329" color5="16777215" font="Arial" />
             <Button id="liveToggleStatus" toggle="true"
@@ -230,14 +230,14 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
             selectedDisabledIcon="closeFullScreenIcon"
             focusRectPadding="0" allowDisable="false"
             tooltip="Toggle fullscreen"
-            k_buttonType="buttonIconControllerArea"
+            v_buttonType="buttonIconControllerArea"
             color1="14540253" color2="16777215" color3="3355443"
             color4="10066329" color5="16777215" font="Arial" />
           </HBox>
           <Spacer width="13" />
-          <Button id="kalturaLogo" height="50" width="100"
-          kClick="navigate('http://www.kaltura.com')"
-          styleName="controllerScreen" icon="kalturaLogo" />
+          <Button id="vidiunLogo" height="50" width="100"
+          vClick="navigate('http://www.vidiun.com')"
+          styleName="controllerScreen" icon="vidiunLogo" />
           <Spacer width="13" />
         </HBox>
       </Canvas>
@@ -257,7 +257,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
           disabeledIcon="playIcon" selectedUpIcon="playIcon"
           selectedOverIcon="playIcon" selectedDownIcon="playIcon"
           selectedDisabledIcon="playIcon"
-          k_buttonType="buttonIconControllerArea"
+          v_buttonType="buttonIconControllerArea"
           tooltip="Play video" color1="14540253" color2="16777215"
           color3="3355443" color4="10066329" color5="16777215"
           font="Arial" />
@@ -278,7 +278,7 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
           disabeledIcon="playIcon" selectedUpIcon="playIcon"
           selectedOverIcon="playIcon" selectedDownIcon="playIcon"
           selectedDisabledIcon="playIcon"
-          k_buttonType="buttonIconControllerArea"
+          v_buttonType="buttonIconControllerArea"
           tooltip="Play video" color1="14540253" color2="16777215"
           color3="3355443" color4="10066329" color5="16777215"
           font="Arial" />
@@ -302,11 +302,11 @@ skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/eagle/skin/v3.5.9/skin.swf"
         <Tile id="endTile" width="100%" verticalGap="10"
         verticalAlign="middle" horizontalAlign="center">
           <Button id="replayBtnEndScreen"
-          kClick="sendNotification('doPlay')"
+          vClick="sendNotification('doPlay')"
           buttonType="onScreenButton" minWidth="60"
           labelPlacement="top" label="Replay"
           styleName="onScreenBtn" upIcon="replayIcon"
-          k_buttonType="buttonIconControllerArea" tooltip="Replay"
+          v_buttonType="buttonIconControllerArea" tooltip="Replay"
           color1="14540253" color2="16777215" color3="3355443"
           color4="10066329" color5="16777215" font="Arial" />
         </Tile>

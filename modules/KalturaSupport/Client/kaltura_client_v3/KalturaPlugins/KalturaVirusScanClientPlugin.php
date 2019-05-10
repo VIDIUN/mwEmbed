@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,18 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
-require_once(dirname(__FILE__) . "/../KalturaEnums.php");
-require_once(dirname(__FILE__) . "/../KalturaTypes.php");
+require_once(dirname(__FILE__) . "/../VidiunClientBase.php");
+require_once(dirname(__FILE__) . "/../VidiunEnums.php");
+require_once(dirname(__FILE__) . "/../VidiunTypes.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusFoundAction
+class VidiunVirusFoundAction
 {
 	const NONE = 0;
 	const DELETE = 1;
@@ -48,10 +48,10 @@ class KalturaVirusFoundAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanJobResult
+class VidiunVirusScanJobResult
 {
 	const SCAN_ERROR = 1;
 	const FILE_IS_CLEAN = 2;
@@ -60,10 +60,10 @@ class KalturaVirusScanJobResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfileStatus
+class VidiunVirusScanProfileStatus
 {
 	const DISABLED = 1;
 	const ENABLED = 2;
@@ -71,19 +71,19 @@ class KalturaVirusScanProfileStatus
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanEngineType
+class VidiunVirusScanEngineType
 {
 	const CLAMAV_SCAN_ENGINE = "clamAVScanEngine.ClamAV";
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfileOrderBy
+class VidiunVirusScanProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
@@ -92,10 +92,10 @@ class KalturaVirusScanProfileOrderBy
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfile extends KalturaObjectBase
+class VidiunVirusScanProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -139,28 +139,28 @@ class KalturaVirusScanProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanProfileStatus
+	 * @var VidiunVirusScanProfileStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanEngineType
+	 * @var VidiunVirusScanEngineType
 	 */
 	public $engineType = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaBaseEntryFilter
+	 * @var VidiunBaseEntryFilter
 	 */
 	public $entryFilter;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusFoundAction
+	 * @var VidiunVirusFoundAction
 	 */
 	public $actionIfInfected = null;
 
@@ -168,15 +168,15 @@ class KalturaVirusScanProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfileListResponse extends KalturaObjectBase
+class VidiunVirusScanProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaVirusScanProfile
+	 * @var array of VidiunVirusScanProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -193,10 +193,10 @@ class KalturaVirusScanProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaParseCaptionAssetJobData extends KalturaJobData
+class VidiunParseCaptionAssetJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -209,10 +209,10 @@ class KalturaParseCaptionAssetJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanJobData extends KalturaJobData
+class VidiunVirusScanJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -231,14 +231,14 @@ class KalturaVirusScanJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanJobResult
+	 * @var VidiunVirusScanJobResult
 	 */
 	public $scanResult = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusFoundAction
+	 * @var VidiunVirusFoundAction
 	 */
 	public $virusFoundAction = null;
 
@@ -246,10 +246,10 @@ class KalturaVirusScanJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
+abstract class VidiunVirusScanProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -324,7 +324,7 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanProfileStatus
+	 * @var VidiunVirusScanProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -338,7 +338,7 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaVirusScanEngineType
+	 * @var VidiunVirusScanEngineType
 	 */
 	public $engineTypeEqual = null;
 
@@ -353,22 +353,22 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfileFilter extends KalturaVirusScanProfileBaseFilter
+class VidiunVirusScanProfileFilter extends VidiunVirusScanProfileBaseFilter
 {
 
 }
 
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanProfileService extends KalturaServiceBase
+class VidiunVirusScanProfileService extends VidiunServiceBase
 {
-	function __construct(KalturaClient $client = null)
+	function __construct(VidiunClient $client = null)
 	{
 		parent::__construct($client);
 	}
@@ -376,42 +376,42 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	/**
 	 * List virus scan profile objects by filter and pager
 	 * 
-	 * @param KalturaVirusScanProfileFilter $filter 
-	 * @param KalturaFilterPager $pager 
-	 * @return KalturaVirusScanProfileListResponse
+	 * @param VidiunVirusScanProfileFilter $filter 
+	 * @param VidiunFilterPager $pager 
+	 * @return VidiunVirusScanProfileListResponse
 	 */
-	function listAction(KalturaVirusScanProfileFilter $filter = null, KalturaFilterPager $pager = null)
+	function listAction(VidiunVirusScanProfileFilter $filter = null, VidiunFilterPager $pager = null)
 	{
-		$kparams = array();
+		$vparams = array();
 		if ($filter !== null)
-			$this->client->addParam($kparams, "filter", $filter->toParams());
+			$this->client->addParam($vparams, "filter", $filter->toParams());
 		if ($pager !== null)
-			$this->client->addParam($kparams, "pager", $pager->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "list", $kparams);
+			$this->client->addParam($vparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "list", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfileListResponse");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfileListResponse");
 		return $resultObject;
 	}
 
 	/**
-	 * Allows you to add an virus scan profile object and virus scan profile content associated with Kaltura object
+	 * Allows you to add an virus scan profile object and virus scan profile content associated with Vidiun object
 	 * 
-	 * @param KalturaVirusScanProfile $virusScanProfile 
-	 * @return KalturaVirusScanProfile
+	 * @param VidiunVirusScanProfile $virusScanProfile 
+	 * @return VidiunVirusScanProfile
 	 */
-	function add(KalturaVirusScanProfile $virusScanProfile)
+	function add(VidiunVirusScanProfile $virusScanProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfile", $virusScanProfile->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "add", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfile", $virusScanProfile->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "add", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
@@ -419,18 +419,18 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	 * Retrieve an virus scan profile object by id
 	 * 
 	 * @param int $virusScanProfileId 
-	 * @return KalturaVirusScanProfile
+	 * @return VidiunVirusScanProfile
 	 */
 	function get($virusScanProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "get", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "get", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
@@ -438,20 +438,20 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	 * Update exisitng virus scan profile, it is possible to update the virus scan profile id too
 	 * 
 	 * @param int $virusScanProfileId 
-	 * @param KalturaVirusScanProfile $virusScanProfile Id
-	 * @return KalturaVirusScanProfile
+	 * @param VidiunVirusScanProfile $virusScanProfile Id
+	 * @return VidiunVirusScanProfile
 	 */
-	function update($virusScanProfileId, KalturaVirusScanProfile $virusScanProfile)
+	function update($virusScanProfileId, VidiunVirusScanProfile $virusScanProfile)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->addParam($kparams, "virusScanProfile", $virusScanProfile->toParams());
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "update", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->addParam($vparams, "virusScanProfile", $virusScanProfile->toParams());
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "update", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
@@ -459,18 +459,18 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	 * Mark the virus scan profile as deleted
 	 * 
 	 * @param int $virusScanProfileId 
-	 * @return KalturaVirusScanProfile
+	 * @return VidiunVirusScanProfile
 	 */
 	function delete($virusScanProfileId)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "delete", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "delete", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
 		$this->client->throwExceptionIfError($resultObject);
-		$this->client->validateObjectType($resultObject, "KalturaVirusScanProfile");
+		$this->client->validateObjectType($resultObject, "VidiunVirusScanProfile");
 		return $resultObject;
 	}
 
@@ -483,10 +483,10 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	 */
 	function scan($flavorAssetId, $virusScanProfileId = null)
 	{
-		$kparams = array();
-		$this->client->addParam($kparams, "flavorAssetId", $flavorAssetId);
-		$this->client->addParam($kparams, "virusScanProfileId", $virusScanProfileId);
-		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "scan", $kparams);
+		$vparams = array();
+		$this->client->addParam($vparams, "flavorAssetId", $flavorAssetId);
+		$this->client->addParam($vparams, "virusScanProfileId", $virusScanProfileId);
+		$this->client->queueServiceActionCall("virusscan_virusscanprofile", "scan", $vparams);
 		if ($this->client->isMultiRequest())
 			return $this->client->getMultiRequestResult();
 		$resultObject = $this->client->doQueue();
@@ -496,32 +496,32 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 	}
 }
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaVirusScanClientPlugin extends KalturaClientPlugin
+class VidiunVirusScanClientPlugin extends VidiunClientPlugin
 {
 	/**
-	 * @var KalturaVirusScanProfileService
+	 * @var VidiunVirusScanProfileService
 	 */
 	public $virusScanProfile = null;
 
-	protected function __construct(KalturaClient $client)
+	protected function __construct(VidiunClient $client)
 	{
 		parent::__construct($client);
-		$this->virusScanProfile = new KalturaVirusScanProfileService($client);
+		$this->virusScanProfile = new VidiunVirusScanProfileService($client);
 	}
 
 	/**
-	 * @return KalturaVirusScanClientPlugin
+	 * @return VidiunVirusScanClientPlugin
 	 */
-	public static function get(KalturaClient $client)
+	public static function get(VidiunClient $client)
 	{
-		return new KalturaVirusScanClientPlugin($client);
+		return new VidiunVirusScanClientPlugin($client);
 	}
 
 	/**
-	 * @return array<KalturaServiceBase>
+	 * @return array<VidiunServiceBase>
 	 */
 	public function getServices()
 	{

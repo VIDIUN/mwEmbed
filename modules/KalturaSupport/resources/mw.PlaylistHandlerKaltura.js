@@ -1,12 +1,12 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PlaylistHandlerKaltura = function( playlist, options ){
+mw.PlaylistHandlerVidiun = function( playlist, options ){
 	return this.init( playlist, options );
 };
 // For players playlist that don't have layout information
-mw.setConfig('KalturaSupport.PlaylistDefaultItemRenderer', '<HBox id="irCont" height="100%" width="100%" x="10" y="10" verticalAlign="top" styleName="Button_upSkin_default"><Image id="irImageIrScreen" height="48" width="72" url="{this.thumbnailUrl}" source="{this.thumbnailUrl}"/><VBox height="100%" width="100%" id="labelsHolder" verticalGap="0"><HBox id="nameAndDuration" width="100%" height="18"><Label id="irLinkIrScreen" height="18" width="100%" text="{this.name}" styleName="itemRendererLabel" label="{this.name}" prefix="" font="Arial"/><Label id="irDurationIrScreen" height="18" width="70" text="{formatDate(this.duration, \'NN:SS\')}" styleName="itemRendererLabel" prefix="" font="Arial"/></HBox><Label id="irDescriptionIrScreen" width="240" height="18" text="{this.description}" styleName="itemRendererLabel" prefix="" font="Arial"/></VBox></HBox>');
+mw.setConfig('VidiunSupport.PlaylistDefaultItemRenderer', '<HBox id="irCont" height="100%" width="100%" x="10" y="10" verticalAlign="top" styleName="Button_upSkin_default"><Image id="irImageIrScreen" height="48" width="72" url="{this.thumbnailUrl}" source="{this.thumbnailUrl}"/><VBox height="100%" width="100%" id="labelsHolder" verticalGap="0"><HBox id="nameAndDuration" width="100%" height="18"><Label id="irLinkIrScreen" height="18" width="100%" text="{this.name}" styleName="itemRendererLabel" label="{this.name}" prefix="" font="Arial"/><Label id="irDurationIrScreen" height="18" width="70" text="{formatDate(this.duration, \'NN:SS\')}" styleName="itemRendererLabel" prefix="" font="Arial"/></HBox><Label id="irDescriptionIrScreen" width="240" height="18" text="{this.description}" styleName="itemRendererLabel" prefix="" font="Arial"/></VBox></HBox>');
 
-mw.PlaylistHandlerKaltura.prototype = {
+mw.PlaylistHandlerVidiun.prototype = {
 
 	clipList: null,
 	widget_id: null,
@@ -15,7 +15,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 
 	playlistSet : [],
 
-	titleHeight : 0, // Kaltura playlist include title via player ( not playlist )
+	titleHeight : 0, // Vidiun playlist include title via player ( not playlist )
 
 	// ui conf data
 	$uiConf : null,
@@ -24,7 +24,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 	// flag to store the current loading entry
 	loadingEntry: null,
 
-	bindPostFix: '.playlistHandlerKaltura',
+	bindPostFix: '.playlistHandlerVidiun',
 
 	// store any playlist loading errors:
 	errorMsg: null,
@@ -37,26 +37,26 @@ mw.PlaylistHandlerKaltura.prototype = {
 		}
 	},
 	getConfig: function( key ){
-		return this.playlist.embedPlayer.getKalturaConfig( 'playlistAPI', key );
+		return this.playlist.embedPlayer.getVidiunConfig( 'playlistAPI', key );
 	},
 	loadPlaylist: function ( callback ){
 		var _this = this;
 		var embedPlayer = this.playlist.embedPlayer;
 		var $uiConf = embedPlayer.$uiConf;
 
-		mw.log( "mw.PlaylistHandlerKaltura:: loadPlaylist > ");
+		mw.log( "mw.PlaylistHandlerVidiun:: loadPlaylist > ");
 
 		// check if we have playlist data
-		if( !embedPlayer.kalturaPlaylistData ) {
-			mw.log('Error: no playlists were found in embedPlayer.kalturaPlaylistData.');
+		if( !embedPlayer.vidiunPlaylistData ) {
+			mw.log('Error: no playlists were found in embedPlayer.vidiunPlaylistData.');
 			return false;
 		}
 
 		_this.playlistSet = [];
-		// Populate playlist set with kalturaPlaylistData
-		for (var playlistId in embedPlayer.kalturaPlaylistData ) {
-			if (embedPlayer.kalturaPlaylistData.hasOwnProperty(playlistId)) {
-			   _this.playlistSet.push( embedPlayer.kalturaPlaylistData[ playlistId ] );
+		// Populate playlist set with vidiunPlaylistData
+		for (var playlistId in embedPlayer.vidiunPlaylistData ) {
+			if (embedPlayer.vidiunPlaylistData.hasOwnProperty(playlistId)) {
+			   _this.playlistSet.push( embedPlayer.vidiunPlaylistData[ playlistId ] );
 			}
 		}
 		// Check if we have playlists
@@ -65,13 +65,13 @@ mw.PlaylistHandlerKaltura.prototype = {
 			return false;
 		}		
 
-		var plConf = _this.playlist.embedPlayer.getKalturaConfig(
+		var plConf = _this.playlist.embedPlayer.getVidiunConfig(
 				'playlist',
 				[ 'includeInLayout', 'width', 'height' ]
 		);
 		// Check for autoContinue
 		_this.autoContinue = _this.getConfig( 'autoContinue' );
-		mw.log("mw.PlaylistHandlerKaltura::loadPlaylist > autoContinue: " + _this.autoContinue );
+		mw.log("mw.PlaylistHandlerVidiun::loadPlaylist > autoContinue: " + _this.autoContinue );
 
 		// Set autoPlay
 		_this.autoPlay =_this.getConfig( 'autoPlay' );
@@ -96,7 +96,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 		_this.$playlistItemRenderer = $uiConf.find('#playlistItemRenderer');
 		if( _this.$playlistItemRenderer.children().length == 0  ){
 			// No layout info use default
-			var itemRenderer =  mw.getConfig('KalturaSupport.PlaylistDefaultItemRenderer');
+			var itemRenderer =  mw.getConfig('VidiunSupport.PlaylistDefaultItemRenderer');
 			if (mw.isIE8()){
 				// for IE8, add xml name spaces for custom HTML tags so jQuery can identify them
 				itemRenderer = itemRenderer.split("<HBox").join("<HBox xmlns='HBox'");
@@ -110,7 +110,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 			_this.autoContinue = true;
 		}
 
-		mw.log( "PlaylistHandlerKaltura:: got  " +  _this.playlistSet.length + ' playlists ' );
+		mw.log( "PlaylistHandlerVidiun:: got  " +  _this.playlistSet.length + ' playlists ' );
 		// Set the playlist to the first playlist
 		_this.setPlaylistIndex( 0 );
 
@@ -135,14 +135,14 @@ mw.PlaylistHandlerKaltura.prototype = {
 		var embedPlayer =  this.playlist.getEmbedPlayer();
 
 		// Get Width
-		var pWidth = embedPlayer.getKalturaConfig('playlistHolder', 'width');
+		var pWidth = embedPlayer.getVidiunConfig('playlistHolder', 'width');
 		if( ! pWidth ) {
-			pWidth = embedPlayer.getKalturaConfig('playlist', 'width');
+			pWidth = embedPlayer.getVidiunConfig('playlist', 'width');
 		}
 		// Get Height
-		var pHeight = embedPlayer.getKalturaConfig('playlistHolder', 'height');
+		var pHeight = embedPlayer.getVidiunConfig('playlistHolder', 'height');
 		if( ! pHeight ) {
-			pHeight = embedPlayer.getKalturaConfig('playlist', 'height');
+			pHeight = embedPlayer.getVidiunConfig('playlist', 'height');
 		}
 
 		// Add px if not percentage
@@ -163,13 +163,13 @@ mw.PlaylistHandlerKaltura.prototype = {
 		var embedPlayer =  this.playlist.getEmbedPlayer();
 
 		// Hide our player if not needed
-		var playerHolder = embedPlayer.getKalturaConfig('PlayerHolder', ["visible", "includeInLayout"]);
+		var playerHolder = embedPlayer.getVidiunConfig('PlayerHolder', ["visible", "includeInLayout"]);
 		if( ( playerHolder.visible === false  || playerHolder.includeInLayout === false ) && !embedPlayer.useNativePlayerControls() ) {
 			embedPlayer.displayPlayer = false;
 		}
 
 		var updateLayout = function() {
-			mw.log( "PlaylistHandlerKaltura:: updateLayout:" );
+			mw.log( "PlaylistHandlerVidiun:: updateLayout:" );
 			var playlistSize = _this.getPlaylistSize();
 			if( layout == 'vertical' ){
 				if( playlistSize.height == '100%' ) {
@@ -213,16 +213,16 @@ mw.PlaylistHandlerKaltura.prototype = {
 		this.playlist_id = this.playlistSet[ playlistIndex ].id;
 		var embedPlayer =  this.playlist.getEmbedPlayer();
 		// Update the player data ( if we can )
-		if( embedPlayer.kalturaPlaylistData ){
-			embedPlayer.kalturaPlaylistData.currentPlaylistId = this.playlist_id;
+		if( embedPlayer.vidiunPlaylistData ){
+			embedPlayer.vidiunPlaylistData.currentPlaylistId = this.playlist_id;
 		}
 	},
 	setClipIndex: function( clipIndex ){
 		var embedPlayer =  this.playlist.getEmbedPlayer();
 		// Update the player data ( if we can )
-		if( embedPlayer.kalturaPlaylistData ){
-			embedPlayer.kalturaPlaylistData.currentPlaylistId = this.playlist_id;
-			embedPlayer.setKalturaConfig( 'playlistAPI', 'dataProvider', {'selectedIndex' : clipIndex} );
+		if( embedPlayer.vidiunPlaylistData ){
+			embedPlayer.vidiunPlaylistData.currentPlaylistId = this.playlist_id;
+			embedPlayer.setVidiunConfig( 'playlistAPI', 'dataProvider', {'selectedIndex' : clipIndex} );
 		}
 	},
 	loadCurrentPlaylist: function( callback ){
@@ -230,11 +230,11 @@ mw.PlaylistHandlerKaltura.prototype = {
 	},
 	loadPlaylistById: function( playlist_id, loadedCallback ){
 		var _this = this;
-		mw.log("PlaylistHandlerKaltura::loadPlaylistById> " + playlist_id );
+		mw.log("PlaylistHandlerVidiun::loadPlaylistById> " + playlist_id );
 		var embedPlayer = this.playlist.embedPlayer;
 
-		if( ! embedPlayer.kalturaPlaylistData ) {
-			embedPlayer.kalturaPlaylistData = {};
+		if( ! embedPlayer.vidiunPlaylistData ) {
+			embedPlayer.vidiunPlaylistData = {};
 		}
 
 		// Local ready callback  to trigger playlistReady
@@ -255,11 +255,11 @@ mw.PlaylistHandlerKaltura.prototype = {
 		};
 
 		// Check for playlist cache
-		if( embedPlayer.kalturaPlaylistData[ playlist_id ] 
-			&& embedPlayer.kalturaPlaylistData[ playlist_id ].items
-			&& embedPlayer.kalturaPlaylistData[ playlist_id ].items.length ){
-			_this.clipList = embedPlayer.kalturaPlaylistData[ playlist_id ].items;
-			embedPlayer.setKalturaConfig( 'playlistAPI', 'dataProvider', {'content' : _this.clipList} );
+		if( embedPlayer.vidiunPlaylistData[ playlist_id ] 
+			&& embedPlayer.vidiunPlaylistData[ playlist_id ].items
+			&& embedPlayer.vidiunPlaylistData[ playlist_id ].items.length ){
+			_this.clipList = embedPlayer.vidiunPlaylistData[ playlist_id ].items;
+			embedPlayer.setVidiunConfig( 'playlistAPI', 'dataProvider', {'content' : _this.clipList} );
 			callback();
 			return ;
 		}
@@ -269,7 +269,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 			'action' : 'execute',
 			'id': playlist_id
 		};
-		this.getKClient().doRequest( playlistRequest, function( playlistDataResult ) {
+		this.getVClient().doRequest( playlistRequest, function( playlistDataResult ) {
 			// Empty the clip list
 			_this.clipList = [];
 			var playlistData;
@@ -279,29 +279,29 @@ mw.PlaylistHandlerKaltura.prototype = {
 			} else if( playlistDataResult[0] && playlistDataResult[0][0].id ){
 				playlistData = playlistDataResult[0];
 			} else {
-				mw.log("Error: kaltura playlist:" + playlist_id + " could not load:" + playlistDataResult.code);
+				mw.log("Error: vidiun playlist:" + playlist_id + " could not load:" + playlistDataResult.code);
 				_this.errorMsg = "Error loading playlist:" + playlistDataResult.code;
 				callback();
 				return ;
 			}
-			mw.log( 'PlaylistHandlerKaltura::Got playlist of length::' +   playlistData.length );
+			mw.log( 'PlaylistHandlerVidiun::Got playlist of length::' +   playlistData.length );
 			if( playlistData.length > mw.getConfig( "Playlist.MaxClips" ) ){
 				playlistData = playlistData.splice(0, mw.getConfig( "Playlist.MaxClips" ) );
 			}
 			// Add it to the cache:
-			embedPlayer.kalturaPlaylistData[ playlist_id ].items = playlistData;
-			embedPlayer.setKalturaConfig( 'playlistAPI', 'dataProvider', {'content' : playlistData} );
+			embedPlayer.vidiunPlaylistData[ playlist_id ].items = playlistData;
+			embedPlayer.setVidiunConfig( 'playlistAPI', 'dataProvider', {'content' : playlistData} );
 			// update the clipList:
 			_this.clipList = playlistData;
 			callback();
 		});
 	},
 
-	getKClient: function(){
-		if( !this.kClient ){
-			this.kClient = mw.kApiGetPartnerClient( this.widget_id );
+	getVClient: function(){
+		if( !this.vClient ){
+			this.vClient = mw.vApiGetPartnerClient( this.widget_id );
 		}
-		return this.kClient;
+		return this.vClient;
 	},
 
 	/**
@@ -321,7 +321,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 	playClip: function( embedPlayer, clipIndex, callback ){
 		var _this = this
 		if( !embedPlayer ){
-			mw.log("Error:: PlaylistHandlerKaltura:playClip > no embed player");
+			mw.log("Error:: PlaylistHandlerVidiun:playClip > no embed player");
 			if( $.isFunction( callback ) ){
 				callback();
 			}
@@ -337,9 +337,9 @@ mw.PlaylistHandlerKaltura.prototype = {
 		}
 
 		// Check if entry id already matches ( and is loaded )
-		if( embedPlayer.kentryid == this.getClip( clipIndex ).id ){
+		if( embedPlayer.ventryid == this.getClip( clipIndex ).id ){
 			if( this.loadingEntry ){
-				mw.log("Error: PlaylistHandlerKaltura is loading Entry, possible double playClip request");
+				mw.log("Error: PlaylistHandlerVidiun is loading Entry, possible double playClip request");
 			}else {
 				embedPlayer.play();
 			}
@@ -355,7 +355,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 		// Listen for change media done
 		var bindName = 'onChangeMediaDone' + this.bindPostFix;
 		$( embedPlayer).unbind( bindName ).bind( bindName, function(){
-			mw.log( 'mw.PlaylistHandlerKaltura:: onChangeMediaDone' );
+			mw.log( 'mw.PlaylistHandlerVidiun:: onChangeMediaDone' );
 			_this.loadingEntry = false;
 			// Sync player size
 			/*embedPlayer.bindHelper( 'loadeddata', function() {
@@ -368,7 +368,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 				callback();
 			}
 		});
-		mw.log("PlaylistHandlerKaltura::playClip::changeMedia entryId: " + this.getClip( clipIndex ).id);
+		mw.log("PlaylistHandlerVidiun::playClip::changeMedia entryId: " + this.getClip( clipIndex ).id);
 
 		// Make sure its in a playing state when change media is called if we are autoContinuing:
 		if( this.autoContinue && !embedPlayer.firstPlay ){
@@ -385,7 +385,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 	drawEmbedPlayer: function( clipIndex, callback ){
 		var _this = this;
 		var $target = _this.playlist.getVideoPlayerTarget();
-		mw.log( "PlaylistHandlerKaltura::drawEmbedPlayer:" + clipIndex );
+		mw.log( "PlaylistHandlerVidiun::drawEmbedPlayer:" + clipIndex );
 		// Get the embed
 		var embedPlayer = _this.playlist.getEmbedPlayer();
 		embedPlayer.doUpdateLayout();
@@ -403,22 +403,22 @@ mw.PlaylistHandlerKaltura.prototype = {
 		}
 
 		// Call changeMedia
-		if( embedPlayer.kentryid != this.getClip( clipIndex ).id ){
+		if( embedPlayer.ventryid != this.getClip( clipIndex ).id ){
 			embedPlayer.sendNotification( 'changeMedia', { entryId: this.getClip( clipIndex ).id} );
 		}
 
 	},
 	updatePlayerUi: function( clipIndex ){
-		// no updates need since kaltura player interface components are managed by the player
+		// no updates need since vidiun player interface components are managed by the player
 	},
 	addEmbedPlayerBindings: function( embedPlayer ){
 		var _this = this;
-		mw.log( 'PlaylistHandlerKaltura:: addEmbedPlayerBindings');
+		mw.log( 'PlaylistHandlerVidiun:: addEmbedPlayerBindings');
 		// remove any old bindings;
 		$( embedPlayer ).unbind( this.bindPostFix );
 		// add the binding:
-		$( embedPlayer ).bind( 'Kaltura_SetKDPAttribute' + this.bindPostFix, function( event, componentName, property, value ){
-			mw.log("PlaylistHandlerKaltura::Kaltura_SetKDPAttribute:" + property + ' value:' + value);
+		$( embedPlayer ).bind( 'Vidiun_SetVDPAttribute' + this.bindPostFix, function( event, componentName, property, value ){
+			mw.log("PlaylistHandlerVidiun::Vidiun_SetVDPAttribute:" + property + ' value:' + value);
 			switch( componentName ){
 				case "playlistAPI.dataProvider":
 					_this.doDataProviderAction( property, value );
@@ -429,11 +429,11 @@ mw.PlaylistHandlerKaltura.prototype = {
 			}
 		});
 
-		$( embedPlayer ).bind( 'Kaltura_SendNotification'+ this.bindPostFix , function( event, notificationName, notificationData){
+		$( embedPlayer ).bind( 'Vidiun_SendNotification'+ this.bindPostFix , function( event, notificationName, notificationData){
 			switch( notificationName ){
 				case 'playlistPlayNext':
 				case 'playlistPlayPrevious':
-					mw.log( "PlaylistHandlerKaltura:: trigger: " + notificationName );
+					mw.log( "PlaylistHandlerVidiun:: trigger: " + notificationName );
 					$( embedPlayer ).trigger( notificationName );
 					break;
 			}
@@ -463,7 +463,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 		if( !size ){
 			return clip.thumbnailUrl;
 		}
-		return kWidget.getKalturaThumbUrl({
+		return vWidget.getVidiunThumbUrl({
 			'width': size.width,
 			'height': size.height,
 			'entry_id' : clip.id,
@@ -493,7 +493,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 		// In case of image entry get the real duration
 		if( this.getClip( clipIndex).mediaType == 2 ) {
 			var embedPlayer = this.playlist.embedPlayer;
-			var imageDuration = embedPlayer.getKalturaConfig( '', 'imageDefaultDuration' ) ? embedPlayer.getKalturaConfig( '', 'imageDefaultDuration' ) : mw.getConfig( "EmbedPlayer.DefaultImageDuration" );
+			var imageDuration = embedPlayer.getVidiunConfig( '', 'imageDefaultDuration' ) ? embedPlayer.getVidiunConfig( '', 'imageDefaultDuration' ) : mw.getConfig( "EmbedPlayer.DefaultImageDuration" );
 			return parseFloat( imageDuration );
 		}
 		return this.getClip( clipIndex ).duration;
@@ -731,7 +731,7 @@ mw.PlaylistHandlerKaltura.prototype = {
 				if( this.getClip( clipIndex )[ objectPath[1] ] ){
 					return this.getClip( clipIndex )[ objectPath[1] ];
 				} else {
-					mw.log("Error: Kaltura Playlist Handler could not find property:" + objectPath[1] );
+					mw.log("Error: Vidiun Playlist Handler could not find property:" + objectPath[1] );
 				}
 
 			break;

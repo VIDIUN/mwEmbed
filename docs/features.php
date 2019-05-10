@@ -27,13 +27,13 @@ if( $featureCategoryKey && isset( $featureList[ $featureCategoryKey ] )
 				 	<!--  maintain 16/9 aspect ratio: -->
 				 	<div id="dummy" style="margin-top: 56.25%;"></div>
 				 	<div class="player-container-absolute">
-						<div id="kaltura_player" style="width:100%;height:100%"></div>
+						<div id="vidiun_player" style="width:100%;height:100%"></div>
 					</div>
 				</div>
 			</div>
 			<script>
-				kWidget.embed({
-					'targetId' : 'kaltura_player',
+				vWidget.embed({
+					'targetId' : 'vidiun_player',
 					'wid' : '_243342',
 					'uiconf_id' : '11930362',
 					'entry_id' : '1_zm1lgs13',
@@ -151,7 +151,7 @@ function outputFeatureIframe($featureFileKey, $testFile){
 		src="">
 	</iframe>
 	<script>
-		var testPath = kDocGetBasePath() + '../modules/<?php echo $testFile['path'] ?>';
+		var testPath = vDocGetBasePath() + '../modules/<?php echo $testFile['path'] ?>';
 		$('#<?php echo $iframeId ?>' ).attr('src', testPath);
 		$('#a_<?php echo $iframeId ?>').attr('href', testPath);
 	</script>

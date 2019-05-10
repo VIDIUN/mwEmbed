@@ -1,6 +1,6 @@
 <?php 
 /**
- * The Kaltura plugin manifest
+ * The Vidiun plugin manifest
  */
 return array(
 	'akamaiMediaAnalytics' => array(

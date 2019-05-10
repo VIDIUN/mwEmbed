@@ -5,11 +5,11 @@
 //                          | ' </ _` | |  _| || | '_/ _` |
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
-// This file is part of the Kaltura Collaborative Media Suite which allows users
+// This file is part of the Vidiun Collaborative Media Suite which allows users
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2011  Kaltura Inc.
+// Copyright (C) 2006-2011  Vidiun Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -28,25 +28,25 @@
 // ===================================================================================================
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-require_once(dirname(__FILE__) . "/KalturaClientBase.php");
+require_once(dirname(__FILE__) . "/VidiunClientBase.php");
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBaseRestriction extends KalturaObjectBase
+abstract class VidiunBaseRestriction extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControl extends KalturaObjectBase
+class VidiunAccessControl extends VidiunObjectBase
 {
 	/**
 	 * The id of the Access Control Profile
@@ -102,7 +102,7 @@ class KalturaAccessControl extends KalturaObjectBase
 	 * True if this Conversion Profile is the default
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefault = null;
 
@@ -110,12 +110,12 @@ class KalturaAccessControl extends KalturaObjectBase
 	 * Array of Access Control Restrictions
 	 * 	 
 	 *
-	 * @var array of KalturaBaseRestriction
+	 * @var array of VidiunBaseRestriction
 	 */
 	public $restrictions;
 
 	/**
-	 * Indicates that the access control profile is new and should be handled using KalturaAccessControlProfile object and accessControlProfile service
+	 * Indicates that the access control profile is new and should be handled using VidiunAccessControlProfile object and accessControlProfile service
 	 * 	 
 	 *
 	 * @var bool
@@ -127,16 +127,16 @@ class KalturaAccessControl extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContextTypeHolder extends KalturaObjectBase
+class VidiunContextTypeHolder extends VidiunObjectBase
 {
 	/**
 	 * The type of the condition context
 	 * 	 
 	 *
-	 * @var KalturaContextType
+	 * @var VidiunContextType
 	 */
 	public $type = null;
 
@@ -144,24 +144,24 @@ class KalturaContextTypeHolder extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlContextTypeHolder extends KalturaContextTypeHolder
+class VidiunAccessControlContextTypeHolder extends VidiunContextTypeHolder
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlListResponse extends KalturaObjectBase
+class VidiunAccessControlListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAccessControl
+	 * @var array of VidiunAccessControl
 	 * @readonly
 	 */
 	public $objects;
@@ -178,16 +178,16 @@ class KalturaAccessControlListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaRuleAction extends KalturaObjectBase
+abstract class VidiunRuleAction extends VidiunObjectBase
 {
 	/**
 	 * The type of the action
 	 * 	 
 	 *
-	 * @var KalturaRuleActionType
+	 * @var VidiunRuleActionType
 	 * @readonly
 	 */
 	public $type = null;
@@ -196,16 +196,16 @@ abstract class KalturaRuleAction extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCondition extends KalturaObjectBase
+abstract class VidiunCondition extends VidiunObjectBase
 {
 	/**
 	 * The type of the access control condition
 	 * 	 
 	 *
-	 * @var KalturaConditionType
+	 * @var VidiunConditionType
 	 * @readonly
 	 */
 	public $type = null;
@@ -228,10 +228,10 @@ abstract class KalturaCondition extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRule extends KalturaObjectBase
+class VidiunRule extends VidiunObjectBase
 {
 	/**
 	 * Message to be thrown to the player in case the rule is fulfilled
@@ -245,7 +245,7 @@ class KalturaRule extends KalturaObjectBase
 	 * Actions to be performed by the player in case the rule is fulfilled
 	 * 	 
 	 *
-	 * @var array of KalturaRuleAction
+	 * @var array of VidiunRuleAction
 	 */
 	public $actions;
 
@@ -253,7 +253,7 @@ class KalturaRule extends KalturaObjectBase
 	 * Conditions to validate the rule
 	 * 	 
 	 *
-	 * @var array of KalturaCondition
+	 * @var array of VidiunCondition
 	 */
 	public $conditions;
 
@@ -261,7 +261,7 @@ class KalturaRule extends KalturaObjectBase
 	 * Indicates what contexts should be tested by this rule 
 	 * 	 
 	 *
-	 * @var array of KalturaContextTypeHolder
+	 * @var array of VidiunContextTypeHolder
 	 */
 	public $contexts;
 
@@ -277,10 +277,10 @@ class KalturaRule extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlProfile extends KalturaObjectBase
+class VidiunAccessControlProfile extends VidiunObjectBase
 {
 	/**
 	 * The id of the Access Control Profile
@@ -345,7 +345,7 @@ class KalturaAccessControlProfile extends KalturaObjectBase
 	 * True if this access control profile is the partner default
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefault = null;
 
@@ -353,7 +353,7 @@ class KalturaAccessControlProfile extends KalturaObjectBase
 	 * Array of access control rules
 	 * 	 
 	 *
-	 * @var array of KalturaRule
+	 * @var array of VidiunRule
 	 */
 	public $rules;
 
@@ -361,15 +361,15 @@ class KalturaAccessControlProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlProfileListResponse extends KalturaObjectBase
+class VidiunAccessControlProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaAccessControlProfile
+	 * @var array of VidiunAccessControlProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -386,10 +386,10 @@ class KalturaAccessControlProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaKeyValue extends KalturaObjectBase
+class VidiunKeyValue extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -409,10 +409,10 @@ class KalturaKeyValue extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlScope extends KalturaObjectBase
+class VidiunAccessControlScope extends VidiunObjectBase
 {
 	/**
 	 * URL to be used to test domain conditions.
@@ -431,12 +431,12 @@ class KalturaAccessControlScope extends KalturaObjectBase
 	public $ip = null;
 
 	/**
-	 * Kaltura session to be used to test session and user conditions.
+	 * Vidiun session to be used to test session and user conditions.
 	 * 	 
 	 *
 	 * @var string
 	 */
-	public $ks = null;
+	public $vs = null;
 
 	/**
 	 * Browser or client application to be used to test agent conditions.
@@ -458,7 +458,7 @@ class KalturaAccessControlScope extends KalturaObjectBase
 	 * Indicates what contexts should be tested. No contexts means any context.
 	 * 	 
 	 *
-	 * @var array of KalturaAccessControlContextTypeHolder
+	 * @var array of VidiunAccessControlContextTypeHolder
 	 */
 	public $contexts;
 
@@ -466,7 +466,7 @@ class KalturaAccessControlScope extends KalturaObjectBase
 	 * Array of hashes to pass to the access control profile scope
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $hashes;
 
@@ -474,10 +474,10 @@ class KalturaAccessControlScope extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAsset extends KalturaObjectBase
+class VidiunAsset extends VidiunObjectBase
 {
 	/**
 	 * The ID of the Flavor Asset
@@ -601,10 +601,10 @@ class KalturaAsset extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaString extends KalturaObjectBase
+class VidiunString extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -617,10 +617,10 @@ class KalturaString extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParams extends KalturaObjectBase
+class VidiunAssetParams extends VidiunObjectBase
 {
 	/**
 	 * The id of the Flavor Params
@@ -676,7 +676,7 @@ class KalturaAssetParams extends KalturaObjectBase
 	 * True if those Flavor Params are part of system defaults
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 * @readonly
 	 */
 	public $isSystemDefault = null;
@@ -693,12 +693,12 @@ class KalturaAssetParams extends KalturaObjectBase
 	 * Array of partner permisison names that required for using this asset params
 	 * 	 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $requiredPermissions;
 
 	/**
-	 * Id of remote storage profile that used to get the source, zero indicates Kaltura data center
+	 * Id of remote storage profile that used to get the source, zero indicates Vidiun data center
 	 * 	 
 	 *
 	 * @var int
@@ -717,7 +717,7 @@ class KalturaAssetParams extends KalturaObjectBase
 	 * Media parser type to be used for post-conversion validation
 	 * 	 
 	 *
-	 * @var KalturaMediaParserType
+	 * @var VidiunMediaParserType
 	 */
 	public $mediaParserType = null;
 
@@ -733,34 +733,34 @@ class KalturaAssetParams extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaResource extends KalturaObjectBase
+abstract class VidiunResource extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaContentResource extends KalturaResource
+abstract class VidiunContentResource extends VidiunResource
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsResourceContainer extends KalturaResource
+class VidiunAssetParamsResourceContainer extends VidiunResource
 {
 	/**
 	 * The content resource to associate with asset params
 	 * 	 
 	 *
-	 * @var KalturaContentResource
+	 * @var VidiunContentResource
 	 */
 	public $resource;
 
@@ -776,19 +776,19 @@ class KalturaAssetParamsResourceContainer extends KalturaResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaOperationAttributes extends KalturaObjectBase
+abstract class VidiunOperationAttributes extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseEntry extends KalturaObjectBase
+class VidiunBaseEntry extends VidiunObjectBase
 {
 	/**
 	 * Auto generated 10 characters alphanumeric string
@@ -875,7 +875,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -884,7 +884,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	 * Entry moderation status
 	 * 	 
 	 *
-	 * @var KalturaEntryModerationStatus
+	 * @var VidiunEntryModerationStatus
 	 * @readonly
 	 */
 	public $moderationStatus = null;
@@ -902,7 +902,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	 * The type of the entry, this is auto filled by the derived entry object
 	 * 	 
 	 *
-	 * @var KalturaEntryType
+	 * @var VidiunEntryType
 	 */
 	public $type = null;
 
@@ -988,7 +988,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	 * License type used for this entry
 	 * 	 
 	 *
-	 * @var KalturaLicenseType
+	 * @var VidiunLicenseType
 	 */
 	public $licenseType = null;
 
@@ -1064,7 +1064,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	 * Status of the replacement readiness and approval
 	 * 	 
 	 *
-	 * @var KalturaEntryReplacementStatus
+	 * @var VidiunEntryReplacementStatus
 	 * @readonly
 	 */
 	public $replacementStatus = null;
@@ -1106,7 +1106,7 @@ class KalturaBaseEntry extends KalturaObjectBase
 	 * clipping, skipping and cropping attributes that used to create this entry  
 	 * 	 
 	 *
-	 * @var array of KalturaOperationAttributes
+	 * @var array of VidiunOperationAttributes
 	 */
 	public $operationAttributes;
 
@@ -1130,15 +1130,15 @@ class KalturaBaseEntry extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseEntryListResponse extends KalturaObjectBase
+class VidiunBaseEntryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaBaseEntry
+	 * @var array of VidiunBaseEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -1155,10 +1155,10 @@ class KalturaBaseEntryListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
+abstract class VidiunBaseSyndicationFeed extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -1205,7 +1205,7 @@ abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
 	 * feed status
 	 * 	 
 	 *
-	 * @var KalturaSyndicationFeedStatus
+	 * @var VidiunSyndicationFeedStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -1214,7 +1214,7 @@ abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
 	 * feed type
 	 * 	 
 	 *
-	 * @var KalturaSyndicationFeedType
+	 * @var VidiunSyndicationFeedType
 	 * @insertonly
 	 */
 	public $type = null;
@@ -1249,7 +1249,7 @@ abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
 	public $allowEmbed = null;
 
 	/**
-	 * Select a uiconf ID as player skin to include in the kwidget url
+	 * Select a uiconf ID as player skin to include in the vwidget url
 	 * 	 
 	 *
 	 * @var int
@@ -1294,7 +1294,7 @@ abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaSyndicationFeedEntriesOrderBy
+	 * @var VidiunSyndicationFeedEntriesOrderBy
 	 */
 	public $entriesOrderBy = null;
 
@@ -1327,15 +1327,15 @@ abstract class KalturaBaseSyndicationFeed extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseSyndicationFeedListResponse extends KalturaObjectBase
+class VidiunBaseSyndicationFeedListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaBaseSyndicationFeed
+	 * @var array of VidiunBaseSyndicationFeed
 	 * @readonly
 	 */
 	public $objects;
@@ -1352,10 +1352,10 @@ class KalturaBaseSyndicationFeedListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadPluginData extends KalturaObjectBase
+class VidiunBulkUploadPluginData extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -1375,10 +1375,10 @@ class KalturaBulkUploadPluginData extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResult extends KalturaObjectBase
+class VidiunBulkUploadResult extends VidiunObjectBase
 {
 	/**
 	 * The id of the result
@@ -1415,14 +1415,14 @@ class KalturaBulkUploadResult extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadResultStatus
+	 * @var VidiunBulkUploadResultStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadAction
+	 * @var VidiunBulkUploadAction
 	 */
 	public $action = null;
 
@@ -1443,7 +1443,7 @@ class KalturaBulkUploadResult extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadResultObjectType
+	 * @var VidiunBulkUploadResultObjectType
 	 */
 	public $bulkUploadResultObjectType = null;
 
@@ -1472,7 +1472,7 @@ class KalturaBulkUploadResult extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaBulkUploadPluginData
+	 * @var array of VidiunBulkUploadPluginData
 	 */
 	public $pluginsData;
 
@@ -1501,10 +1501,10 @@ class KalturaBulkUploadResult extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUpload extends KalturaObjectBase
+class VidiunBulkUpload extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -1544,7 +1544,7 @@ class KalturaBulkUpload extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobStatus
+	 * @var VidiunBatchJobStatus
 	 */
 	public $status = null;
 
@@ -1572,14 +1572,14 @@ class KalturaBulkUpload extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadType
+	 * @var VidiunBulkUploadType
 	 */
 	public $bulkUploadType = null;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaBulkUploadResult
+	 * @var array of VidiunBulkUploadResult
 	 */
 	public $results;
 
@@ -1593,7 +1593,7 @@ class KalturaBulkUpload extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobErrorTypes
+	 * @var VidiunBatchJobErrorTypes
 	 */
 	public $errorType = null;
 
@@ -1628,7 +1628,7 @@ class KalturaBulkUpload extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadObjectType
+	 * @var VidiunBulkUploadObjectType
 	 */
 	public $bulkUploadObjectType = null;
 
@@ -1636,15 +1636,15 @@ class KalturaBulkUpload extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadListResponse extends KalturaObjectBase
+class VidiunBulkUploadListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaBulkUpload
+	 * @var array of VidiunBulkUpload
 	 * @readonly
 	 */
 	public $objects;
@@ -1661,19 +1661,19 @@ class KalturaBulkUploadListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBulkUploadObjectData extends KalturaObjectBase
+abstract class VidiunBulkUploadObjectData extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCEError extends KalturaObjectBase
+class VidiunCEError extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -1750,10 +1750,10 @@ class KalturaCEError extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategory extends KalturaObjectBase
+class VidiunCategory extends VidiunObjectBase
 {
 	/**
 	 * The id of the Category
@@ -1861,7 +1861,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * If category will be returned for list action.
 	 * 	 
 	 *
-	 * @var KalturaAppearInListType
+	 * @var VidiunAppearInListType
 	 */
 	public $appearInList = null;
 
@@ -1869,7 +1869,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * defines the privacy of the entries that assigned to this category
 	 * 	 
 	 *
-	 * @var KalturaPrivacyType
+	 * @var VidiunPrivacyType
 	 */
 	public $privacy = null;
 
@@ -1877,7 +1877,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * If Category members are inherited from parent category or set manualy. 
 	 * 	 
 	 *
-	 * @var KalturaInheritanceType
+	 * @var VidiunInheritanceType
 	 */
 	public $inheritanceType = null;
 
@@ -1885,7 +1885,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * Who can ask to join this category
 	 * 	 
 	 *
-	 * @var KalturaUserJoinPolicyType
+	 * @var VidiunUserJoinPolicyType
 	 * @readonly
 	 */
 	public $userJoinPolicy = null;
@@ -1894,7 +1894,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * Default permissionLevel for new users
 	 * 	 
 	 *
-	 * @var KalturaCategoryUserPermissionLevel
+	 * @var VidiunCategoryUserPermissionLevel
 	 */
 	public $defaultPermissionLevel = null;
 
@@ -1927,7 +1927,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * who can assign entries to this category
 	 * 	 
 	 *
-	 * @var KalturaContributionPolicyType
+	 * @var VidiunContributionPolicyType
 	 */
 	public $contributionPolicy = null;
 
@@ -1970,7 +1970,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * Status
 	 * 	 
 	 *
-	 * @var KalturaCategoryStatus
+	 * @var VidiunCategoryStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -2004,7 +2004,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * Enable client side applications to define how to sort the category child categories 
 	 * 	 
 	 *
-	 * @var KalturaCategoryOrderBy
+	 * @var VidiunCategoryOrderBy
 	 */
 	public $defaultOrderBy = null;
 
@@ -2021,7 +2021,7 @@ class KalturaCategory extends KalturaObjectBase
 	 * Moderation to add entries to this category by users that are not of permission level Manager or Moderator.  
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $moderation = null;
 
@@ -2038,10 +2038,10 @@ class KalturaCategory extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntry extends KalturaObjectBase
+class VidiunCategoryEntry extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2080,7 +2080,7 @@ class KalturaCategoryEntry extends KalturaObjectBase
 	 * CategroyEntry status
 	 * 	 
 	 *
-	 * @var KalturaCategoryEntryStatus
+	 * @var VidiunCategoryEntryStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -2089,15 +2089,15 @@ class KalturaCategoryEntry extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryListResponse extends KalturaObjectBase
+class VidiunCategoryEntryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCategoryEntry
+	 * @var array of VidiunCategoryEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -2114,15 +2114,15 @@ class KalturaCategoryEntryListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryListResponse extends KalturaObjectBase
+class VidiunCategoryListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCategory
+	 * @var array of VidiunCategory
 	 * @readonly
 	 */
 	public $objects;
@@ -2139,10 +2139,10 @@ class KalturaCategoryListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUser extends KalturaObjectBase
+class VidiunCategoryUser extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2174,7 +2174,7 @@ class KalturaCategoryUser extends KalturaObjectBase
 	 * Permission level
 	 * 	 
 	 *
-	 * @var KalturaCategoryUserPermissionLevel
+	 * @var VidiunCategoryUserPermissionLevel
 	 */
 	public $permissionLevel = null;
 
@@ -2182,7 +2182,7 @@ class KalturaCategoryUser extends KalturaObjectBase
 	 * Status
 	 * 	 
 	 *
-	 * @var KalturaCategoryUserStatus
+	 * @var VidiunCategoryUserStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -2206,10 +2206,10 @@ class KalturaCategoryUser extends KalturaObjectBase
 	public $updatedAt = null;
 
 	/**
-	 * Update method can be either manual or automatic to distinguish between manual operations (for example in KMC) on automatic - using bulk upload 
+	 * Update method can be either manual or automatic to distinguish between manual operations (for example in VMC) on automatic - using bulk upload 
 	 * 	 
 	 *
-	 * @var KalturaUpdateMethodType
+	 * @var VidiunUpdateMethodType
 	 */
 	public $updateMethod = null;
 
@@ -2234,15 +2234,15 @@ class KalturaCategoryUser extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserListResponse extends KalturaObjectBase
+class VidiunCategoryUserListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaCategoryUser
+	 * @var array of VidiunCategoryUser
 	 * @readonly
 	 */
 	public $objects;
@@ -2259,10 +2259,10 @@ class KalturaCategoryUserListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaClientNotification extends KalturaObjectBase
+class VidiunClientNotification extends VidiunObjectBase
 {
 	/**
 	 * The URL where the notification should be sent to 
@@ -2284,25 +2284,25 @@ class KalturaClientNotification extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaContext extends KalturaObjectBase
+abstract class VidiunContext extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaContextDataResult extends KalturaObjectBase
+class VidiunContextDataResult extends VidiunObjectBase
 {
 	/**
 	 * Array of messages as received from the rules that invalidated
 	 * 	 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $messages;
 
@@ -2310,7 +2310,7 @@ class KalturaContextDataResult extends KalturaObjectBase
 	 * Array of actions as received from the rules that invalidated
 	 * 	 
 	 *
-	 * @var array of KalturaRuleAction
+	 * @var array of VidiunRuleAction
 	 */
 	public $actions;
 
@@ -2318,10 +2318,10 @@ class KalturaContextDataResult extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionAttribute extends KalturaObjectBase
+class VidiunConversionAttribute extends VidiunObjectBase
 {
 	/**
 	 * The id of the flavor params, set to null for source flavor
@@ -2351,10 +2351,10 @@ class KalturaConversionAttribute extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCropDimensions extends KalturaObjectBase
+class VidiunCropDimensions extends VidiunObjectBase
 {
 	/**
 	 * Crop left point
@@ -2392,10 +2392,10 @@ class KalturaCropDimensions extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfile extends KalturaObjectBase
+class VidiunConversionProfile extends VidiunObjectBase
 {
 	/**
 	 * The id of the Conversion Profile
@@ -2417,14 +2417,14 @@ class KalturaConversionProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaConversionProfileStatus
+	 * @var VidiunConversionProfileStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaConversionProfileType
+	 * @var VidiunConversionProfileType
 	 * @insertonly
 	 */
 	public $type = null;
@@ -2490,7 +2490,7 @@ class KalturaConversionProfile extends KalturaObjectBase
 	 * Indicates that this conversion profile is system default
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isDefault = null;
 
@@ -2507,7 +2507,7 @@ class KalturaConversionProfile extends KalturaObjectBase
 	 * Cropping dimensions
 	 * 	 
 	 *
-	 * @var KalturaCropDimensions
+	 * @var VidiunCropDimensions
 	 */
 	public $cropDimensions;
 
@@ -2547,7 +2547,7 @@ class KalturaConversionProfile extends KalturaObjectBase
 	 * Media parser type to be used for extract media
 	 * 	 
 	 *
-	 * @var KalturaMediaParserType
+	 * @var VidiunMediaParserType
 	 */
 	public $mediaParserType = null;
 
@@ -2555,10 +2555,10 @@ class KalturaConversionProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileAssetParams extends KalturaObjectBase
+class VidiunConversionProfileAssetParams extends VidiunObjectBase
 {
 	/**
 	 * The id of the conversion profile
@@ -2582,7 +2582,7 @@ class KalturaConversionProfileAssetParams extends KalturaObjectBase
 	 * The ingestion origin of the asset params
 	 * 	 
 	 *
-	 * @var KalturaFlavorReadyBehaviorType
+	 * @var VidiunFlavorReadyBehaviorType
 	 */
 	public $readyBehavior = null;
 
@@ -2590,7 +2590,7 @@ class KalturaConversionProfileAssetParams extends KalturaObjectBase
 	 * The ingestion origin of the asset params
 	 * 	 
 	 *
-	 * @var KalturaAssetParamsOrigin
+	 * @var VidiunAssetParamsOrigin
 	 */
 	public $origin = null;
 
@@ -2606,7 +2606,7 @@ class KalturaConversionProfileAssetParams extends KalturaObjectBase
 	 * Starts conversion even if the decision layer reduced the configuration to comply with the source
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $forceNoneComplied = null;
 
@@ -2614,7 +2614,7 @@ class KalturaConversionProfileAssetParams extends KalturaObjectBase
 	 * Specifies how to treat the flavor after conversion is finished
 	 * 	 
 	 *
-	 * @var KalturaAssetParamsDeletePolicy
+	 * @var VidiunAssetParamsDeletePolicy
 	 */
 	public $deletePolicy = null;
 
@@ -2622,15 +2622,15 @@ class KalturaConversionProfileAssetParams extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileAssetParamsListResponse extends KalturaObjectBase
+class VidiunConversionProfileAssetParamsListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaConversionProfileAssetParams
+	 * @var array of VidiunConversionProfileAssetParams
 	 * @readonly
 	 */
 	public $objects;
@@ -2647,15 +2647,15 @@ class KalturaConversionProfileAssetParamsListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileListResponse extends KalturaObjectBase
+class VidiunConversionProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaConversionProfile
+	 * @var array of VidiunConversionProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -2672,10 +2672,10 @@ class KalturaConversionProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvertCollectionFlavorData extends KalturaObjectBase
+class VidiunConvertCollectionFlavorData extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2730,10 +2730,10 @@ class KalturaConvertCollectionFlavorData extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDataEntry extends KalturaBaseEntry
+class VidiunDataEntry extends VidiunBaseEntry
 {
 	/**
 	 * The data of the entry
@@ -2756,15 +2756,15 @@ class KalturaDataEntry extends KalturaBaseEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDataListResponse extends KalturaObjectBase
+class VidiunDataListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDataEntry
+	 * @var array of VidiunDataEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -2781,10 +2781,10 @@ class KalturaDataListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileSyncDescriptor extends KalturaObjectBase
+class VidiunFileSyncDescriptor extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2812,19 +2812,19 @@ class KalturaFileSyncDescriptor extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDestFileSyncDescriptor extends KalturaFileSyncDescriptor
+class VidiunDestFileSyncDescriptor extends VidiunFileSyncDescriptor
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEmailIngestionProfile extends KalturaObjectBase
+class VidiunEmailIngestionProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2880,14 +2880,14 @@ class KalturaEmailIngestionProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryModerationStatus
+	 * @var VidiunEntryModerationStatus
 	 */
 	public $moderationStatus = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaEmailIngestionProfileStatus
+	 * @var VidiunEmailIngestionProfileStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -2946,10 +2946,10 @@ class KalturaEmailIngestionProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaValue extends KalturaObjectBase
+abstract class VidiunValue extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -2962,10 +2962,10 @@ abstract class KalturaValue extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStringValue extends KalturaValue
+class VidiunStringValue extends VidiunValue
 {
 	/**
 	 * 
@@ -2978,10 +2978,10 @@ class KalturaStringValue extends KalturaValue
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaObjectIdentifier extends KalturaObjectBase
+abstract class VidiunObjectIdentifier extends VidiunObjectBase
 {
 	/**
 	 * Comma separated string of enum values denoting which features of the item need to be included in the MRSS 
@@ -2995,10 +2995,10 @@ abstract class KalturaObjectIdentifier extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExtendingItemMrssParameter extends KalturaObjectBase
+class VidiunExtendingItemMrssParameter extends VidiunObjectBase
 {
 	/**
 	 * XPath for the extending item
@@ -3012,7 +3012,7 @@ class KalturaExtendingItemMrssParameter extends KalturaObjectBase
 	 * Object identifier
 	 * 	 
 	 *
-	 * @var KalturaObjectIdentifier
+	 * @var VidiunObjectIdentifier
 	 */
 	public $identifier;
 
@@ -3020,7 +3020,7 @@ class KalturaExtendingItemMrssParameter extends KalturaObjectBase
 	 * Mode of extension - append to MRSS or replace the xpath content.
 	 * 	 
 	 *
-	 * @var KalturaMrssExtensionMode
+	 * @var VidiunMrssExtensionMode
 	 */
 	public $extensionMode = null;
 
@@ -3028,10 +3028,10 @@ class KalturaExtendingItemMrssParameter extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlayableEntry extends KalturaBaseEntry
+class VidiunPlayableEntry extends VidiunBaseEntry
 {
 	/**
 	 * Number of plays
@@ -3099,7 +3099,7 @@ class KalturaPlayableEntry extends KalturaBaseEntry
 	 * The duration type (short for 0-4 mins, medium for 4-20 mins, long for 20+ mins)
 	 * 	 
 	 *
-	 * @var KalturaDurationType
+	 * @var VidiunDurationType
 	 * @readonly
 	 */
 	public $durationType = null;
@@ -3108,16 +3108,16 @@ class KalturaPlayableEntry extends KalturaBaseEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaEntry extends KalturaPlayableEntry
+class VidiunMediaEntry extends VidiunPlayableEntry
 {
 	/**
 	 * The media type of the entry
 	 * 	 
 	 *
-	 * @var KalturaMediaType
+	 * @var VidiunMediaType
 	 * @insertonly
 	 */
 	public $mediaType = null;
@@ -3135,7 +3135,7 @@ class KalturaMediaEntry extends KalturaPlayableEntry
 	 * The source type of the entry 
 	 * 	 
 	 *
-	 * @var KalturaSourceType
+	 * @var VidiunSourceType
 	 * @insertonly
 	 */
 	public $sourceType = null;
@@ -3144,7 +3144,7 @@ class KalturaMediaEntry extends KalturaPlayableEntry
 	 * The search provider type used to import this entry
 	 * 	 
 	 *
-	 * @var KalturaSearchProviderType
+	 * @var VidiunSearchProviderType
 	 * @insertonly
 	 */
 	public $searchProviderType = null;
@@ -3205,15 +3205,15 @@ class KalturaMediaEntry extends KalturaPlayableEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFeatureStatus extends KalturaObjectBase
+class VidiunFeatureStatus extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaFeatureStatusType
+	 * @var VidiunFeatureStatusType
 	 */
 	public $type = null;
 
@@ -3228,15 +3228,15 @@ class KalturaFeatureStatus extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFeatureStatusListResponse extends KalturaObjectBase
+class VidiunFeatureStatusListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFeatureStatus
+	 * @var array of VidiunFeatureStatus
 	 * @readonly
 	 */
 	public $objects;
@@ -3253,10 +3253,10 @@ class KalturaFeatureStatusListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAsset extends KalturaObjectBase
+class VidiunFileAsset extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -3277,7 +3277,7 @@ class KalturaFileAsset extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaFileAssetObjectType
+	 * @var VidiunFileAssetObjectType
 	 * @insertonly
 	 */
 	public $fileAssetObjectType = null;
@@ -3338,7 +3338,7 @@ class KalturaFileAsset extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaFileAssetStatus
+	 * @var VidiunFileAssetStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -3347,15 +3347,15 @@ class KalturaFileAsset extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileAssetListResponse extends KalturaObjectBase
+class VidiunFileAssetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFileAsset
+	 * @var array of VidiunFileAsset
 	 * @readonly
 	 */
 	public $objects;
@@ -3372,19 +3372,19 @@ class KalturaFileAssetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaSearchItem extends KalturaObjectBase
+abstract class VidiunSearchItem extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFilter extends KalturaObjectBase
+class VidiunFilter extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -3396,7 +3396,7 @@ class KalturaFilter extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaSearchItem
+	 * @var VidiunSearchItem
 	 */
 	public $advancedSearch;
 
@@ -3404,10 +3404,10 @@ class KalturaFilter extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFilterPager extends KalturaObjectBase
+class VidiunFilterPager extends VidiunObjectBase
 {
 	/**
 	 * The number of objects to retrieve. (Default is 30, maximum page size is 500).
@@ -3429,10 +3429,10 @@ class KalturaFilterPager extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAsset extends KalturaAsset
+class VidiunFlavorAsset extends VidiunAsset
 {
 	/**
 	 * The Flavor Params used to create this Flavor Asset
@@ -3489,7 +3489,7 @@ class KalturaFlavorAsset extends KalturaAsset
 	public $isOriginal = null;
 
 	/**
-	 * True if this Flavor Asset is playable in KDP
+	 * True if this Flavor Asset is playable in VDP
 	 * 	 
 	 *
 	 * @var bool
@@ -3519,7 +3519,7 @@ class KalturaFlavorAsset extends KalturaAsset
 	 * The status of the Flavor Asset
 	 * 	 
 	 *
-	 * @var KalturaFlavorAssetStatus
+	 * @var VidiunFlavorAssetStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -3528,15 +3528,15 @@ class KalturaFlavorAsset extends KalturaAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAssetListResponse extends KalturaObjectBase
+class VidiunFlavorAssetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFlavorAsset
+	 * @var array of VidiunFlavorAsset
 	 * @readonly
 	 */
 	public $objects;
@@ -3553,16 +3553,16 @@ class KalturaFlavorAssetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParams extends KalturaAssetParams
+class VidiunFlavorParams extends VidiunAssetParams
 {
 	/**
 	 * The video codec of the Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaVideoCodec
+	 * @var VidiunVideoCodec
 	 */
 	public $videoCodec = null;
 
@@ -3578,7 +3578,7 @@ class KalturaFlavorParams extends KalturaAssetParams
 	 * The audio codec of the Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaAudioCodec
+	 * @var VidiunAudioCodec
 	 */
 	public $audioCodec = null;
 
@@ -3693,7 +3693,7 @@ class KalturaFlavorParams extends KalturaAssetParams
 	 * The container format of the Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaContainerFormat
+	 * @var VidiunContainerFormat
 	 */
 	public $format = null;
 
@@ -3792,16 +3792,16 @@ class KalturaFlavorParams extends KalturaAssetParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAssetWithParams extends KalturaObjectBase
+class VidiunFlavorAssetWithParams extends VidiunObjectBase
 {
 	/**
 	 * The Flavor Asset (Can be null when there are params without asset)
 	 * 	 
 	 *
-	 * @var KalturaFlavorAsset
+	 * @var VidiunFlavorAsset
 	 */
 	public $flavorAsset;
 
@@ -3809,7 +3809,7 @@ class KalturaFlavorAssetWithParams extends KalturaObjectBase
 	 * The Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaFlavorParams
+	 * @var VidiunFlavorParams
 	 */
 	public $flavorParams;
 
@@ -3825,15 +3825,15 @@ class KalturaFlavorAssetWithParams extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsListResponse extends KalturaObjectBase
+class VidiunFlavorParamsListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFlavorParams
+	 * @var array of VidiunFlavorParams
 	 * @readonly
 	 */
 	public $objects;
@@ -3850,10 +3850,10 @@ class KalturaFlavorParamsListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsOutput extends KalturaFlavorParams
+class VidiunFlavorParamsOutput extends VidiunFlavorParams
 {
 	/**
 	 * 
@@ -3901,15 +3901,15 @@ class KalturaFlavorParamsOutput extends KalturaFlavorParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsOutputListResponse extends KalturaObjectBase
+class VidiunFlavorParamsOutputListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaFlavorParamsOutput
+	 * @var array of VidiunFlavorParamsOutput
 	 * @readonly
 	 */
 	public $objects;
@@ -3926,33 +3926,33 @@ class KalturaFlavorParamsOutputListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaObject extends KalturaObjectBase
+abstract class VidiunObject extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaJobData extends KalturaObjectBase
+class VidiunJobData extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamConfiguration extends KalturaObjectBase
+class VidiunLiveStreamConfiguration extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaPlaybackProtocol
+	 * @var VidiunPlaybackProtocol
 	 */
 	public $protocol = null;
 
@@ -3974,10 +3974,10 @@ class KalturaLiveStreamConfiguration extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveEntry extends KalturaMediaEntry
+abstract class VidiunLiveEntry extends VidiunMediaEntry
 {
 	/**
 	 * The message to be presented when the stream is offline
@@ -3991,7 +3991,7 @@ abstract class KalturaLiveEntry extends KalturaMediaEntry
 	 * Recording Status Enabled/Disabled
 	 * 	 
 	 *
-	 * @var KalturaRecordStatus
+	 * @var VidiunRecordStatus
 	 * @insertonly
 	 */
 	public $recordStatus = null;
@@ -4000,7 +4000,7 @@ abstract class KalturaLiveEntry extends KalturaMediaEntry
 	 * DVR Status Enabled/Disabled
 	 * 	 
 	 *
-	 * @var KalturaDVRStatus
+	 * @var VidiunDVRStatus
 	 * @insertonly
 	 */
 	public $dvrStatus = null;
@@ -4018,7 +4018,7 @@ abstract class KalturaLiveEntry extends KalturaMediaEntry
 	 * Array of key value protocol->live stream url objects
 	 * 	 
 	 *
-	 * @var array of KalturaLiveStreamConfiguration
+	 * @var array of VidiunLiveStreamConfiguration
 	 */
 	public $liveStreamConfigurations;
 
@@ -4034,7 +4034,7 @@ abstract class KalturaLiveEntry extends KalturaMediaEntry
 	 * Flag denoting whether entry should be published by the media server
 	 * 	 
 	 *
-	 * @var KalturaLivePublishStatus
+	 * @var VidiunLivePublishStatus
 	 */
 	public $pushPublishEnabled = null;
 
@@ -4042,10 +4042,10 @@ abstract class KalturaLiveEntry extends KalturaMediaEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannel extends KalturaLiveEntry
+class VidiunLiveChannel extends VidiunLiveEntry
 {
 	/**
 	 * Playlist id to be played
@@ -4059,7 +4059,7 @@ class KalturaLiveChannel extends KalturaLiveEntry
 	 * Indicates that the segments should be repeated for ever
 	 * 	 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $repeat = null;
 
@@ -4067,15 +4067,15 @@ class KalturaLiveChannel extends KalturaLiveEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelListResponse extends KalturaObjectBase
+class VidiunLiveChannelListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaLiveChannel
+	 * @var array of VidiunLiveChannel
 	 * @readonly
 	 */
 	public $objects;
@@ -4092,10 +4092,10 @@ class KalturaLiveChannelListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegment extends KalturaObjectBase
+class VidiunLiveChannelSegment extends VidiunObjectBase
 {
 	/**
 	 * Unique identifier
@@ -4160,14 +4160,14 @@ class KalturaLiveChannelSegment extends KalturaObjectBase
 	 * Segment could be associated with the main stream, as additional stream or as overlay
 	 * 	 
 	 *
-	 * @var KalturaLiveChannelSegmentType
+	 * @var VidiunLiveChannelSegmentType
 	 */
 	public $type = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaLiveChannelSegmentStatus
+	 * @var VidiunLiveChannelSegmentStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -4192,7 +4192,7 @@ class KalturaLiveChannelSegment extends KalturaObjectBase
 	 * Segment start time trigger type
 	 * 	 
 	 *
-	 * @var KalturaLiveChannelSegmentTriggerType
+	 * @var VidiunLiveChannelSegmentTriggerType
 	 */
 	public $triggerType = null;
 
@@ -4224,15 +4224,15 @@ class KalturaLiveChannelSegment extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentListResponse extends KalturaObjectBase
+class VidiunLiveChannelSegmentListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaLiveChannelSegment
+	 * @var array of VidiunLiveChannelSegment
 	 * @readonly
 	 */
 	public $objects;
@@ -4249,10 +4249,10 @@ class KalturaLiveChannelSegmentListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamBitrate extends KalturaObjectBase
+class VidiunLiveStreamBitrate extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -4286,10 +4286,10 @@ class KalturaLiveStreamBitrate extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamEntry extends KalturaLiveEntry
+class VidiunLiveStreamEntry extends VidiunLiveEntry
 {
 	/**
 	 * The stream id as provided by the provider
@@ -4313,7 +4313,7 @@ class KalturaLiveStreamEntry extends KalturaLiveEntry
 	 * Array of supported bitrates
 	 * 	 
 	 *
-	 * @var array of KalturaLiveStreamBitrate
+	 * @var array of VidiunLiveStreamBitrate
 	 */
 	public $bitrates;
 
@@ -4399,15 +4399,15 @@ class KalturaLiveStreamEntry extends KalturaLiveEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamListResponse extends KalturaObjectBase
+class VidiunLiveStreamListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaLiveStreamEntry
+	 * @var array of VidiunLiveStreamEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -4424,10 +4424,10 @@ class KalturaLiveStreamListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
+abstract class VidiunBaseEntryBaseFilter extends VidiunFilter
 {
 	/**
 	 * This filter should be in use for retrieving only a specific entry (identified by its entryId).
@@ -4485,7 +4485,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	public $nameEqual = null;
 
 	/**
-	 * This filter should be in use for retrieving only entries which were uploaded by/assigned to users of a specific Kaltura Partner (identified by Partner ID).
+	 * This filter should be in use for retrieving only entries which were uploaded by/assigned to users of a specific Vidiun Partner (identified by Partner ID).
 	 * 	 
 	 *
 	 * @var int
@@ -4493,7 +4493,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	public $partnerIdEqual = null;
 
 	/**
-	 * This filter should be in use for retrieving only entries within Kaltura network which were uploaded by/assigned to users of few Kaltura Partners  (string should include comma separated list of PartnerIDs)
+	 * This filter should be in use for retrieving only entries within Vidiun network which were uploaded by/assigned to users of few Vidiun Partners  (string should include comma separated list of PartnerIDs)
 	 * 	 
 	 *
 	 * @var string
@@ -4611,21 +4611,21 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $categoriesIdsEmpty = null;
 
 	/**
 	 * This filter should be in use for retrieving only entries, at a specific {
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 */
 	public $statusEqual = null;
 
 	/**
 	 * This filter should be in use for retrieving only entries, not at a specific {
 	 *
-	 * @var KalturaEntryStatus
+	 * @var VidiunEntryStatus
 	 */
 	public $statusNotEqual = null;
 
@@ -4646,14 +4646,14 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryModerationStatus
+	 * @var VidiunEntryModerationStatus
 	 */
 	public $moderationStatusEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryModerationStatus
+	 * @var VidiunEntryModerationStatus
 	 */
 	public $moderationStatusNotEqual = null;
 
@@ -4674,7 +4674,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryType
+	 * @var VidiunEntryType
 	 */
 	public $typeEqual = null;
 
@@ -4686,7 +4686,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	public $typeIn = null;
 
 	/**
-	 * This filter parameter should be in use for retrieving only entries which were created at Kaltura system after a specific time/date (standard timestamp format).
+	 * This filter parameter should be in use for retrieving only entries which were created at Vidiun system after a specific time/date (standard timestamp format).
 	 * 	 
 	 *
 	 * @var int
@@ -4694,7 +4694,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	public $createdAtGreaterThanOrEqual = null;
 
 	/**
-	 * This filter parameter should be in use for retrieving only entries which were created at Kaltura system before a specific time/date (standard timestamp format).
+	 * This filter parameter should be in use for retrieving only entries which were created at Vidiun system before a specific time/date (standard timestamp format).
 	 * 	 
 	 *
 	 * @var int
@@ -4867,7 +4867,7 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaEntryReplacementStatus
+	 * @var VidiunEntryReplacementStatus
 	 */
 	public $replacementStatusEqual = null;
 
@@ -4952,10 +4952,10 @@ abstract class KalturaBaseEntryBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseEntryFilter extends KalturaBaseEntryBaseFilter
+class VidiunBaseEntryFilter extends VidiunBaseEntryBaseFilter
 {
 	/**
 	 * 
@@ -4967,7 +4967,7 @@ class KalturaBaseEntryFilter extends KalturaBaseEntryBaseFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isRoot = null;
 
@@ -4998,10 +4998,10 @@ class KalturaBaseEntryFilter extends KalturaBaseEntryBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPlayableEntryBaseFilter extends KalturaBaseEntryFilter
+abstract class VidiunPlayableEntryBaseFilter extends VidiunBaseEntryFilter
 {
 	/**
 	 * 
@@ -5056,24 +5056,24 @@ abstract class KalturaPlayableEntryBaseFilter extends KalturaBaseEntryFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlayableEntryFilter extends KalturaPlayableEntryBaseFilter
+class VidiunPlayableEntryFilter extends VidiunPlayableEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMediaEntryBaseFilter extends KalturaPlayableEntryFilter
+abstract class VidiunMediaEntryBaseFilter extends VidiunPlayableEntryFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaMediaType
+	 * @var VidiunMediaType
 	 */
 	public $mediaTypeEqual = null;
 
@@ -5116,19 +5116,19 @@ abstract class KalturaMediaEntryBaseFilter extends KalturaPlayableEntryFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaEntryFilter extends KalturaMediaEntryBaseFilter
+class VidiunMediaEntryFilter extends VidiunMediaEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaEntryFilterForPlaylist extends KalturaMediaEntryFilter
+class VidiunMediaEntryFilterForPlaylist extends VidiunMediaEntryFilter
 {
 	/**
 	 * 
@@ -5141,10 +5141,10 @@ class KalturaMediaEntryFilterForPlaylist extends KalturaMediaEntryFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaInfo extends KalturaObjectBase
+class VidiunMediaInfo extends VidiunObjectBase
 {
 	/**
 	 * The id of the media info
@@ -5247,7 +5247,7 @@ class KalturaMediaInfo extends KalturaObjectBase
 	 * The video bit rate mode
 	 * 	 
 	 *
-	 * @var KalturaBitRateMode
+	 * @var VidiunBitRateMode
 	 */
 	public $videoBitRateMode = null;
 
@@ -5326,7 +5326,7 @@ class KalturaMediaInfo extends KalturaObjectBase
 	 * The audio bit rate mode
 	 * 	 
 	 *
-	 * @var KalturaBitRateMode
+	 * @var VidiunBitRateMode
 	 */
 	public $audioBitRateMode = null;
 
@@ -5395,15 +5395,15 @@ class KalturaMediaInfo extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaInfoListResponse extends KalturaObjectBase
+class VidiunMediaInfoListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMediaInfo
+	 * @var array of VidiunMediaInfo
 	 * @readonly
 	 */
 	public $objects;
@@ -5420,15 +5420,15 @@ class KalturaMediaInfoListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaListResponse extends KalturaObjectBase
+class VidiunMediaListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMediaEntry
+	 * @var array of VidiunMediaEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -5445,10 +5445,10 @@ class KalturaMediaListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaServer extends KalturaObjectBase
+class VidiunMediaServer extends VidiunObjectBase
 {
 	/**
 	 * Unique identifier
@@ -5499,19 +5499,19 @@ class KalturaMediaServer extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaServerStatus extends KalturaObjectBase
+class VidiunMediaServerStatus extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMixEntry extends KalturaPlayableEntry
+class VidiunMixEntry extends VidiunPlayableEntry
 {
 	/**
 	 * Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
@@ -5526,7 +5526,7 @@ class KalturaMixEntry extends KalturaPlayableEntry
 	 * The editor type used to edit the metadata
 	 * 	 
 	 *
-	 * @var KalturaEditorType
+	 * @var VidiunEditorType
 	 */
 	public $editorType = null;
 
@@ -5542,15 +5542,15 @@ class KalturaMixEntry extends KalturaPlayableEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMixListResponse extends KalturaObjectBase
+class VidiunMixListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMixEntry
+	 * @var array of VidiunMixEntry
 	 * @readonly
 	 */
 	public $objects;
@@ -5567,10 +5567,10 @@ class KalturaMixListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaModerationFlag extends KalturaObjectBase
+class VidiunModerationFlag extends VidiunObjectBase
 {
 	/**
 	 * Moderation flag id
@@ -5602,7 +5602,7 @@ class KalturaModerationFlag extends KalturaObjectBase
 	 * The type of the moderation flag (entry or user)
 	 * 	 
 	 *
-	 * @var KalturaModerationObjectType
+	 * @var VidiunModerationObjectType
 	 * @readonly
 	 */
 	public $moderationObjectType = null;
@@ -5627,7 +5627,7 @@ class KalturaModerationFlag extends KalturaObjectBase
 	 * The moderation flag status
 	 * 	 
 	 *
-	 * @var KalturaModerationFlagStatus
+	 * @var VidiunModerationFlagStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -5643,7 +5643,7 @@ class KalturaModerationFlag extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaModerationFlagType
+	 * @var VidiunModerationFlagType
 	 */
 	public $flagType = null;
 
@@ -5667,15 +5667,15 @@ class KalturaModerationFlag extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaModerationFlagListResponse extends KalturaObjectBase
+class VidiunModerationFlagListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaModerationFlag
+	 * @var array of VidiunModerationFlag
 	 * @readonly
 	 */
 	public $objects;
@@ -5692,10 +5692,10 @@ class KalturaModerationFlagListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlayerDeliveryType extends KalturaObjectBase
+class VidiunPlayerDeliveryType extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -5714,7 +5714,7 @@ class KalturaPlayerDeliveryType extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $flashvars;
 
@@ -5729,10 +5729,10 @@ class KalturaPlayerDeliveryType extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlayerEmbedCodeType extends KalturaObjectBase
+class VidiunPlayerEmbedCodeType extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -5766,10 +5766,10 @@ class KalturaPlayerEmbedCodeType extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartner extends KalturaObjectBase
+class VidiunPartner extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -5840,7 +5840,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaCommercialUseType
+	 * @var VidiunCommercialUseType
 	 */
 	public $commercialUse = null;
 
@@ -5868,7 +5868,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerType
+	 * @var VidiunPartnerType
 	 */
 	public $type = null;
 
@@ -5910,7 +5910,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerStatus
+	 * @var VidiunPartnerStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -6032,7 +6032,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 * @insertonly
 	 */
 	public $additionalParams;
@@ -6048,7 +6048,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerGroupType
+	 * @var VidiunPartnerGroupType
 	 * @readonly
 	 */
 	public $partnerGroupType = null;
@@ -6080,7 +6080,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPlayerDeliveryType
+	 * @var array of VidiunPlayerDeliveryType
 	 * @readonly
 	 */
 	public $deliveryTypes;
@@ -6088,7 +6088,7 @@ class KalturaPartner extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPlayerEmbedCodeType
+	 * @var array of VidiunPlayerEmbedCodeType
 	 * @readonly
 	 */
 	public $embedCodeTypes;
@@ -6161,15 +6161,15 @@ class KalturaPartner extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerListResponse extends KalturaObjectBase
+class VidiunPartnerListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPartner
+	 * @var array of VidiunPartner
 	 * @readonly
 	 */
 	public $objects;
@@ -6186,10 +6186,10 @@ class KalturaPartnerListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerStatistics extends KalturaObjectBase
+class VidiunPartnerStatistics extends VidiunObjectBase
 {
 	/**
 	 * Package total allowed bandwidth and storage
@@ -6249,10 +6249,10 @@ class KalturaPartnerStatistics extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerUsage extends KalturaObjectBase
+class VidiunPartnerUsage extends VidiunObjectBase
 {
 	/**
 	 * Partner total hosting in GB on the disk
@@ -6314,10 +6314,10 @@ class KalturaPartnerUsage extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermission extends KalturaObjectBase
+class VidiunPermission extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6330,7 +6330,7 @@ class KalturaPermission extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionType
+	 * @var VidiunPermissionType
 	 * @readonly
 	 */
 	public $type = null;
@@ -6359,7 +6359,7 @@ class KalturaPermission extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionStatus
+	 * @var VidiunPermissionStatus
 	 */
 	public $status = null;
 
@@ -6419,10 +6419,10 @@ class KalturaPermission extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPermissionItem extends KalturaObjectBase
+abstract class VidiunPermissionItem extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6435,7 +6435,7 @@ abstract class KalturaPermissionItem extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionItemType
+	 * @var VidiunPermissionItemType
 	 * @readonly
 	 */
 	public $type = null;
@@ -6475,15 +6475,15 @@ abstract class KalturaPermissionItem extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionItemListResponse extends KalturaObjectBase
+class VidiunPermissionItemListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPermissionItem
+	 * @var array of VidiunPermissionItem
 	 * @readonly
 	 */
 	public $objects;
@@ -6500,15 +6500,15 @@ class KalturaPermissionItemListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionListResponse extends KalturaObjectBase
+class VidiunPermissionListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPermission
+	 * @var array of VidiunPermission
 	 * @readonly
 	 */
 	public $objects;
@@ -6525,10 +6525,10 @@ class KalturaPermissionListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaylist extends KalturaBaseEntry
+class VidiunPlaylist extends VidiunBaseEntry
 {
 	/**
 	 * Content of the playlist - 
@@ -6544,7 +6544,7 @@ class KalturaPlaylist extends KalturaBaseEntry
 	/**
 	 * 
 	 *
-	 * @var array of KalturaMediaEntryFilterForPlaylist
+	 * @var array of VidiunMediaEntryFilterForPlaylist
 	 */
 	public $filters;
 
@@ -6560,7 +6560,7 @@ class KalturaPlaylist extends KalturaBaseEntry
 	 * Type of playlist
 	 * 	 
 	 *
-	 * @var KalturaPlaylistType
+	 * @var VidiunPlaylistType
 	 */
 	public $playlistType = null;
 
@@ -6604,15 +6604,15 @@ class KalturaPlaylist extends KalturaBaseEntry
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaylistListResponse extends KalturaObjectBase
+class VidiunPlaylistListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaPlaylist
+	 * @var array of VidiunPlaylist
 	 * @readonly
 	 */
 	public $objects;
@@ -6629,10 +6629,10 @@ class KalturaPlaylistListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemotePath extends KalturaObjectBase
+class VidiunRemotePath extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6654,15 +6654,15 @@ class KalturaRemotePath extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemotePathListResponse extends KalturaObjectBase
+class VidiunRemotePathListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaRemotePath
+	 * @var array of VidiunRemotePath
 	 * @readonly
 	 */
 	public $objects;
@@ -6679,10 +6679,10 @@ class KalturaRemotePathListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUrlResource extends KalturaContentResource
+class VidiunUrlResource extends VidiunContentResource
 {
 	/**
 	 * Remote URL, FTP, HTTP or HTTPS 
@@ -6704,10 +6704,10 @@ class KalturaUrlResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemoteStorageResource extends KalturaUrlResource
+class VidiunRemoteStorageResource extends VidiunUrlResource
 {
 	/**
 	 * ID of storage profile to be associated with the created file sync, used for file serving URL composing. 
@@ -6721,10 +6721,10 @@ class KalturaRemoteStorageResource extends KalturaUrlResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReport extends KalturaObjectBase
+class VidiunReport extends VidiunObjectBase
 {
 	/**
 	 * Report id
@@ -6797,10 +6797,10 @@ class KalturaReport extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportBaseTotal extends KalturaObjectBase
+class VidiunReportBaseTotal extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6820,10 +6820,10 @@ class KalturaReportBaseTotal extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportGraph extends KalturaObjectBase
+class VidiunReportGraph extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6843,10 +6843,10 @@ class KalturaReportGraph extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportInputBaseFilter extends KalturaObjectBase
+class VidiunReportInputBaseFilter extends VidiunObjectBase
 {
 	/**
 	 * Start date as Unix timestamp (In seconds)
@@ -6884,15 +6884,15 @@ class KalturaReportInputBaseFilter extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportListResponse extends KalturaObjectBase
+class VidiunReportListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaReport
+	 * @var array of VidiunReport
 	 * @readonly
 	 */
 	public $objects;
@@ -6909,10 +6909,10 @@ class KalturaReportListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportResponse extends KalturaObjectBase
+class VidiunReportResponse extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6924,7 +6924,7 @@ class KalturaReportResponse extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $results;
 
@@ -6932,10 +6932,10 @@ class KalturaReportResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportTable extends KalturaObjectBase
+class VidiunReportTable extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6965,10 +6965,10 @@ class KalturaReportTable extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportTotal extends KalturaObjectBase
+class VidiunReportTotal extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -6988,19 +6988,19 @@ class KalturaReportTotal extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaScope extends KalturaObjectBase
+class VidiunScope extends VidiunObjectBase
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearch extends KalturaObjectBase
+class VidiunSearch extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7012,14 +7012,14 @@ class KalturaSearch extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaSearchProviderType
+	 * @var VidiunSearchProviderType
 	 */
 	public $searchSource = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaMediaType
+	 * @var VidiunMediaType
 	 */
 	public $mediaType = null;
 
@@ -7044,10 +7044,10 @@ class KalturaSearch extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchAuthData extends KalturaObjectBase
+class VidiunSearchAuthData extends VidiunObjectBase
 {
 	/**
 	 * The authentication data that further should be used for search
@@ -7077,10 +7077,10 @@ class KalturaSearchAuthData extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchResult extends KalturaSearch
+class VidiunSearchResult extends VidiunSearch
 {
 	/**
 	 * 
@@ -7141,7 +7141,7 @@ class KalturaSearchResult extends KalturaSearch
 	/**
 	 * 
 	 *
-	 * @var KalturaLicenseType
+	 * @var VidiunLicenseType
 	 */
 	public $licenseType = null;
 
@@ -7163,15 +7163,15 @@ class KalturaSearchResult extends KalturaSearch
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchResultResponse extends KalturaObjectBase
+class VidiunSearchResultResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaSearchResult
+	 * @var array of VidiunSearchResult
 	 * @readonly
 	 */
 	public $objects;
@@ -7188,10 +7188,10 @@ class KalturaSearchResultResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSessionInfo extends KalturaObjectBase
+class VidiunSessionInfo extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7199,12 +7199,12 @@ class KalturaSessionInfo extends KalturaObjectBase
 	 * @var string
 	 * @readonly
 	 */
-	public $ks = null;
+	public $vs = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaSessionType
+	 * @var VidiunSessionType
 	 * @readonly
 	 */
 	public $sessionType = null;
@@ -7245,10 +7245,10 @@ class KalturaSessionInfo extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSourceFileSyncDescriptor extends KalturaFileSyncDescriptor
+class VidiunSourceFileSyncDescriptor extends VidiunFileSyncDescriptor
 {
 	/**
 	 * The translated path as used by the scheduler
@@ -7276,10 +7276,10 @@ class KalturaSourceFileSyncDescriptor extends KalturaFileSyncDescriptor
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStartWidgetSessionResponse extends KalturaObjectBase
+class VidiunStartWidgetSessionResponse extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7295,7 +7295,7 @@ class KalturaStartWidgetSessionResponse extends KalturaObjectBase
 	 * @var string
 	 * @readonly
 	 */
-	public $ks = null;
+	public $vs = null;
 
 	/**
 	 * 
@@ -7309,10 +7309,10 @@ class KalturaStartWidgetSessionResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStatsEvent extends KalturaObjectBase
+class VidiunStatsEvent extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7324,7 +7324,7 @@ class KalturaStatsEvent extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaStatsEventType
+	 * @var VidiunStatsEventType
 	 */
 	public $eventType = null;
 
@@ -7462,7 +7462,7 @@ class KalturaStatsEvent extends KalturaObjectBase
 	public $isFirstInSession = null;
 
 	/**
-	 * kaltura application name 
+	 * vidiun application name 
 	 * 	 
 	 *
 	 * @var string
@@ -7479,7 +7479,7 @@ class KalturaStatsEvent extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaStatsFeatureType
+	 * @var VidiunStatsFeatureType
 	 */
 	public $featureType = null;
 
@@ -7487,10 +7487,10 @@ class KalturaStatsEvent extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStatsKmcEvent extends KalturaObjectBase
+class VidiunStatsVmcEvent extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7504,14 +7504,14 @@ class KalturaStatsKmcEvent extends KalturaObjectBase
 	 *
 	 * @var string
 	 */
-	public $kmcEventActionPath = null;
+	public $vmcEventActionPath = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaStatsKmcEventType
+	 * @var VidiunStatsVmcEventType
 	 */
-	public $kmcEventType = null;
+	public $vmcEventType = null;
 
 	/**
 	 * the client's timestamp of this event
@@ -7578,10 +7578,10 @@ class KalturaStatsKmcEvent extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfile extends KalturaObjectBase
+class VidiunStorageProfile extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -7639,14 +7639,14 @@ class KalturaStorageProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileStatus
+	 * @var VidiunStorageProfileStatus
 	 */
 	public $status = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileProtocol
+	 * @var VidiunStorageProfileProtocol
 	 */
 	public $protocol = null;
 
@@ -7751,7 +7751,7 @@ class KalturaStorageProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $pathManagerParams;
 
@@ -7765,7 +7765,7 @@ class KalturaStorageProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $urlManagerParams;
 
@@ -7788,7 +7788,7 @@ class KalturaStorageProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileDeliveryStatus
+	 * @var VidiunStorageProfileDeliveryStatus
 	 */
 	public $deliveryStatus = null;
 
@@ -7802,7 +7802,7 @@ class KalturaStorageProfile extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileReadyBehavior
+	 * @var VidiunStorageProfileReadyBehavior
 	 */
 	public $readyBehavior = null;
 
@@ -7826,7 +7826,7 @@ class KalturaStorageProfile extends KalturaObjectBase
 	 * Holds storage profile export rules
 	 * 	 
 	 *
-	 * @var array of KalturaRule
+	 * @var array of VidiunRule
 	 */
 	public $rules;
 
@@ -7834,15 +7834,15 @@ class KalturaStorageProfile extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileListResponse extends KalturaObjectBase
+class VidiunStorageProfileListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaStorageProfile
+	 * @var array of VidiunStorageProfile
 	 * @readonly
 	 */
 	public $objects;
@@ -7859,10 +7859,10 @@ class KalturaStorageProfileListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyndicationFeedEntryCount extends KalturaObjectBase
+class VidiunSyndicationFeedEntryCount extends VidiunObjectBase
 {
 	/**
 	 * the total count of entries that should appear in the feed without flavor filtering
@@ -7892,10 +7892,10 @@ class KalturaSyndicationFeedEntryCount extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbAsset extends KalturaAsset
+class VidiunThumbAsset extends VidiunAsset
 {
 	/**
 	 * The Flavor Params used to create this Flavor Asset
@@ -7928,7 +7928,7 @@ class KalturaThumbAsset extends KalturaAsset
 	 * The status of the asset
 	 * 	 
 	 *
-	 * @var KalturaThumbAssetStatus
+	 * @var VidiunThumbAssetStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -7937,15 +7937,15 @@ class KalturaThumbAsset extends KalturaAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbAssetListResponse extends KalturaObjectBase
+class VidiunThumbAssetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaThumbAsset
+	 * @var array of VidiunThumbAsset
 	 * @readonly
 	 */
 	public $objects;
@@ -7962,15 +7962,15 @@ class KalturaThumbAssetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParams extends KalturaAssetParams
+class VidiunThumbParams extends VidiunAssetParams
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaThumbCropType
+	 * @var VidiunThumbCropType
 	 */
 	public $cropType = null;
 
@@ -8064,7 +8064,7 @@ class KalturaThumbParams extends KalturaAssetParams
 	 * The container format of the Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaContainerFormat
+	 * @var VidiunContainerFormat
 	 */
 	public $format = null;
 
@@ -8088,15 +8088,15 @@ class KalturaThumbParams extends KalturaAssetParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsListResponse extends KalturaObjectBase
+class VidiunThumbParamsListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaThumbParams
+	 * @var array of VidiunThumbParams
 	 * @readonly
 	 */
 	public $objects;
@@ -8113,10 +8113,10 @@ class KalturaThumbParamsListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsOutput extends KalturaThumbParams
+class VidiunThumbParamsOutput extends VidiunThumbParams
 {
 	/**
 	 * 
@@ -8157,15 +8157,15 @@ class KalturaThumbParamsOutput extends KalturaThumbParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsOutputListResponse extends KalturaObjectBase
+class VidiunThumbParamsOutputListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaThumbParamsOutput
+	 * @var array of VidiunThumbParamsOutput
 	 * @readonly
 	 */
 	public $objects;
@@ -8182,10 +8182,10 @@ class KalturaThumbParamsOutputListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbnailServeOptions extends KalturaObjectBase
+class VidiunThumbnailServeOptions extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8198,10 +8198,10 @@ class KalturaThumbnailServeOptions extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConf extends KalturaObjectBase
+class VidiunUiConf extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8237,7 +8237,7 @@ class KalturaUiConf extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaUiConfObjType
+	 * @var VidiunUiConfObjType
 	 */
 	public $objType = null;
 
@@ -8355,7 +8355,7 @@ class KalturaUiConf extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaUiConfCreationMode
+	 * @var VidiunUiConfCreationMode
 	 */
 	public $creationMode = null;
 
@@ -8386,15 +8386,15 @@ class KalturaUiConf extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfListResponse extends KalturaObjectBase
+class VidiunUiConfListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUiConf
+	 * @var array of VidiunUiConf
 	 * @readonly
 	 */
 	public $objects;
@@ -8411,16 +8411,16 @@ class KalturaUiConfListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfTypeInfo extends KalturaObjectBase
+class VidiunUiConfTypeInfo extends VidiunObjectBase
 {
 	/**
 	 * UiConf Type
 	 * 	 
 	 *
-	 * @var KalturaUiConfObjType
+	 * @var VidiunUiConfObjType
 	 */
 	public $type = null;
 
@@ -8428,7 +8428,7 @@ class KalturaUiConfTypeInfo extends KalturaObjectBase
 	 * Available versions
 	 *      
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $versions;
 
@@ -8452,10 +8452,10 @@ class KalturaUiConfTypeInfo extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadResponse extends KalturaObjectBase
+class VidiunUploadResponse extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8474,7 +8474,7 @@ class KalturaUploadResponse extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaUploadErrorCode
+	 * @var VidiunUploadErrorCode
 	 */
 	public $errorCode = null;
 
@@ -8489,10 +8489,10 @@ class KalturaUploadResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadToken extends KalturaObjectBase
+class VidiunUploadToken extends VidiunObjectBase
 {
 	/**
 	 * Upload token unique ID
@@ -8525,7 +8525,7 @@ class KalturaUploadToken extends KalturaObjectBase
 	 * Status of the upload token
 	 * 	 
 	 *
-	 * @var KalturaUploadTokenStatus
+	 * @var VidiunUploadTokenStatus
 	 * @readonly
 	 */
 	public $status = null;
@@ -8579,15 +8579,15 @@ class KalturaUploadToken extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadTokenListResponse extends KalturaObjectBase
+class VidiunUploadTokenListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUploadToken
+	 * @var array of VidiunUploadToken
 	 * @readonly
 	 */
 	public $objects;
@@ -8604,10 +8604,10 @@ class KalturaUploadTokenListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUser extends KalturaObjectBase
+class VidiunUser extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8712,14 +8712,14 @@ class KalturaUser extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaGender
+	 * @var VidiunGender
 	 */
 	public $gender = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaUserStatus
+	 * @var VidiunUserStatus
 	 */
 	public $status = null;
 
@@ -8803,7 +8803,7 @@ class KalturaUser extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaLanguageCode
+	 * @var VidiunLanguageCode
 	 */
 	public $language = null;
 
@@ -8880,15 +8880,15 @@ class KalturaUser extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserListResponse extends KalturaObjectBase
+class VidiunUserListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUser
+	 * @var array of VidiunUser
 	 * @readonly
 	 */
 	public $objects;
@@ -8905,10 +8905,10 @@ class KalturaUserListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserLoginData extends KalturaObjectBase
+class VidiunUserLoginData extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8928,15 +8928,15 @@ class KalturaUserLoginData extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserLoginDataListResponse extends KalturaObjectBase
+class VidiunUserLoginDataListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUserLoginData
+	 * @var array of VidiunUserLoginData
 	 * @readonly
 	 */
 	public $objects;
@@ -8953,10 +8953,10 @@ class KalturaUserLoginDataListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRole extends KalturaObjectBase
+class VidiunUserRole extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -8990,7 +8990,7 @@ class KalturaUserRole extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaUserRoleStatus
+	 * @var VidiunUserRoleStatus
 	 */
 	public $status = null;
 
@@ -9036,15 +9036,15 @@ class KalturaUserRole extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRoleListResponse extends KalturaObjectBase
+class VidiunUserRoleListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaUserRole
+	 * @var array of VidiunUserRole
 	 * @readonly
 	 */
 	public $objects;
@@ -9061,10 +9061,10 @@ class KalturaUserRoleListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidget extends KalturaObjectBase
+class VidiunWidget extends VidiunObjectBase
 {
 	/**
 	 * 
@@ -9114,7 +9114,7 @@ class KalturaWidget extends KalturaObjectBase
 	/**
 	 * 
 	 *
-	 * @var KalturaWidgetSecurityType
+	 * @var VidiunWidgetSecurityType
 	 */
 	public $securityType = null;
 
@@ -9185,15 +9185,15 @@ class KalturaWidget extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidgetListResponse extends KalturaObjectBase
+class VidiunWidgetListResponse extends VidiunObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaWidget
+	 * @var array of VidiunWidget
 	 * @readonly
 	 */
 	public $objects;
@@ -9210,10 +9210,10 @@ class KalturaWidgetListResponse extends KalturaObjectBase
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAccessControlBaseFilter extends KalturaFilter
+abstract class VidiunAccessControlBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -9261,19 +9261,19 @@ abstract class KalturaAccessControlBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlBlockAction extends KalturaRuleAction
+class VidiunAccessControlBlockAction extends VidiunRuleAction
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlLimitFlavorsAction extends KalturaRuleAction
+class VidiunAccessControlLimitFlavorsAction extends VidiunRuleAction
 {
 	/**
 	 * Comma separated list of flavor ids 
@@ -9294,10 +9294,10 @@ class KalturaAccessControlLimitFlavorsAction extends KalturaRuleAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlPreviewAction extends KalturaRuleAction
+class VidiunAccessControlPreviewAction extends VidiunRuleAction
 {
 	/**
 	 * 
@@ -9310,10 +9310,10 @@ class KalturaAccessControlPreviewAction extends KalturaRuleAction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAccessControlProfileBaseFilter extends KalturaFilter
+abstract class VidiunAccessControlProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -9375,24 +9375,24 @@ abstract class KalturaAccessControlProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdminUser extends KalturaUser
+class VidiunAdminUser extends VidiunUser
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAmazonS3StorageProfile extends KalturaStorageProfile
+class VidiunAmazonS3StorageProfile extends VidiunStorageProfile
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAmazonS3StorageProfileFilesPermissionLevel
+	 * @var VidiunAmazonS3StorageProfileFilesPermissionLevel
 	 */
 	public $filesPermissionInS3 = null;
 
@@ -9400,10 +9400,10 @@ class KalturaAmazonS3StorageProfile extends KalturaStorageProfile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiActionPermissionItem extends KalturaPermissionItem
+class VidiunApiActionPermissionItem extends VidiunPermissionItem
 {
 	/**
 	 * 
@@ -9423,10 +9423,10 @@ class KalturaApiActionPermissionItem extends KalturaPermissionItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItem extends KalturaPermissionItem
+class VidiunApiParameterPermissionItem extends VidiunPermissionItem
 {
 	/**
 	 * 
@@ -9445,7 +9445,7 @@ class KalturaApiParameterPermissionItem extends KalturaPermissionItem
 	/**
 	 * 
 	 *
-	 * @var KalturaApiParameterPermissionItemAction
+	 * @var VidiunApiParameterPermissionItemAction
 	 */
 	public $action = null;
 
@@ -9453,10 +9453,10 @@ class KalturaApiParameterPermissionItem extends KalturaPermissionItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAssetBaseFilter extends KalturaFilter
+abstract class VidiunAssetBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -9581,10 +9581,10 @@ abstract class KalturaAssetBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAssetParamsBaseFilter extends KalturaFilter
+abstract class VidiunAssetParamsBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -9603,7 +9603,7 @@ abstract class KalturaAssetParamsBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isSystemDefaultEqual = null;
 
@@ -9618,10 +9618,10 @@ abstract class KalturaAssetParamsBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsOutput extends KalturaAssetParams
+class VidiunAssetParamsOutput extends VidiunAssetParams
 {
 	/**
 	 * 
@@ -9662,7 +9662,7 @@ class KalturaAssetParamsOutput extends KalturaAssetParams
 	 * The container format of the Flavor Params
 	 * 	 
 	 *
-	 * @var KalturaContainerFormat
+	 * @var VidiunContainerFormat
 	 */
 	public $format = null;
 
@@ -9670,16 +9670,16 @@ class KalturaAssetParamsOutput extends KalturaAssetParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetPropertiesCompareCondition extends KalturaCondition
+class VidiunAssetPropertiesCompareCondition extends VidiunCondition
 {
 	/**
 	 * Array of key/value objects that holds the property and the value to find and compare on an asset object
 	 * 	 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $properties;
 
@@ -9687,16 +9687,16 @@ class KalturaAssetPropertiesCompareCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetsParamsResourceContainers extends KalturaResource
+class VidiunAssetsParamsResourceContainers extends VidiunResource
 {
 	/**
 	 * Array of resources associated with asset params ids
 	 * 	 
 	 *
-	 * @var array of KalturaAssetParamsResourceContainer
+	 * @var array of VidiunAssetParamsResourceContainer
 	 */
 	public $resources;
 
@@ -9704,16 +9704,16 @@ class KalturaAssetsParamsResourceContainers extends KalturaResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAuthenticatedCondition extends KalturaCondition
+class VidiunAuthenticatedCondition extends VidiunCondition
 {
 	/**
 	 * The privelege needed to remove the restriction
 	 * 	 
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of VidiunStringValue
 	 */
 	public $privileges;
 
@@ -9721,19 +9721,19 @@ class KalturaAuthenticatedCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBaseSyndicationFeedBaseFilter extends KalturaFilter
+abstract class VidiunBaseSyndicationFeedBaseFilter extends VidiunFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBatchJobBaseFilter extends KalturaFilter
+abstract class VidiunBatchJobBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -9836,7 +9836,7 @@ abstract class KalturaBatchJobBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobType
+	 * @var VidiunBatchJobType
 	 */
 	public $jobTypeEqual = null;
 
@@ -9878,7 +9878,7 @@ abstract class KalturaBatchJobBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobStatus
+	 * @var VidiunBatchJobStatus
 	 */
 	public $statusEqual = null;
 
@@ -9983,7 +9983,7 @@ abstract class KalturaBatchJobBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobErrorTypes
+	 * @var VidiunBatchJobErrorTypes
 	 */
 	public $errTypeEqual = null;
 
@@ -10054,10 +10054,10 @@ abstract class KalturaBatchJobBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBooleanValue extends KalturaValue
+class VidiunBooleanValue extends VidiunValue
 {
 	/**
 	 * 
@@ -10070,10 +10070,10 @@ class KalturaBooleanValue extends KalturaValue
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkDownloadJobData extends KalturaJobData
+class VidiunBulkDownloadJobData extends VidiunJobData
 {
 	/**
 	 * Comma separated list of entry ids
@@ -10103,10 +10103,10 @@ class KalturaBulkDownloadJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBulkUploadBaseFilter extends KalturaFilter
+abstract class VidiunBulkUploadBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -10139,14 +10139,14 @@ abstract class KalturaBulkUploadBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaBatchJobStatus
+	 * @var VidiunBatchJobStatus
 	 */
 	public $statusEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaBulkUploadObjectType
+	 * @var VidiunBulkUploadObjectType
 	 */
 	public $bulkUploadObjectTypeEqual = null;
 
@@ -10161,37 +10161,37 @@ abstract class KalturaBulkUploadBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCategoryData extends KalturaBulkUploadObjectData
+class VidiunBulkUploadCategoryData extends VidiunBulkUploadObjectData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCategoryEntryData extends KalturaBulkUploadObjectData
+class VidiunBulkUploadCategoryEntryData extends VidiunBulkUploadObjectData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadCategoryUserData extends KalturaBulkUploadObjectData
+class VidiunBulkUploadCategoryUserData extends VidiunBulkUploadObjectData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadEntryData extends KalturaBulkUploadObjectData
+class VidiunBulkUploadEntryData extends VidiunBulkUploadObjectData
 {
 	/**
 	 * Selected profile id for all bulk entries
@@ -10205,10 +10205,10 @@ class KalturaBulkUploadEntryData extends KalturaBulkUploadObjectData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadJobData extends KalturaJobData
+class VidiunBulkUploadJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -10285,7 +10285,7 @@ class KalturaBulkUploadJobData extends KalturaJobData
 	 * Type of object for bulk upload
 	 * 	 
 	 *
-	 * @var KalturaBulkUploadObjectType
+	 * @var VidiunBulkUploadObjectType
 	 * @readonly
 	 */
 	public $bulkUploadObjectType = null;
@@ -10302,7 +10302,7 @@ class KalturaBulkUploadJobData extends KalturaJobData
 	 * Data pertaining to the objects being uploaded
 	 * 	 
 	 *
-	 * @var KalturaBulkUploadObjectData
+	 * @var VidiunBulkUploadObjectData
 	 * @readonly
 	 */
 	public $objectData;
@@ -10311,7 +10311,7 @@ class KalturaBulkUploadJobData extends KalturaJobData
 	 * Type of bulk upload
 	 * 	 
 	 *
-	 * @var KalturaBulkUploadType
+	 * @var VidiunBulkUploadType
 	 * @readonly
 	 */
 	public $type = null;
@@ -10336,10 +10336,10 @@ class KalturaBulkUploadJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultCategory extends KalturaBulkUploadResult
+class VidiunBulkUploadResultCategory extends VidiunBulkUploadResult
 {
 	/**
 	 * 
@@ -10443,10 +10443,10 @@ class KalturaBulkUploadResultCategory extends KalturaBulkUploadResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultCategoryEntry extends KalturaBulkUploadResult
+class VidiunBulkUploadResultCategoryEntry extends VidiunBulkUploadResult
 {
 	/**
 	 * 
@@ -10466,10 +10466,10 @@ class KalturaBulkUploadResultCategoryEntry extends KalturaBulkUploadResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultCategoryUser extends KalturaBulkUploadResult
+class VidiunBulkUploadResultCategoryUser extends VidiunBulkUploadResult
 {
 	/**
 	 * 
@@ -10517,10 +10517,10 @@ class KalturaBulkUploadResultCategoryUser extends KalturaBulkUploadResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultEntry extends KalturaBulkUploadResult
+class VidiunBulkUploadResultEntry extends VidiunBulkUploadResult
 {
 	/**
 	 * 
@@ -10673,10 +10673,10 @@ class KalturaBulkUploadResultEntry extends KalturaBulkUploadResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadResultUser extends KalturaBulkUploadResult
+class VidiunBulkUploadResultUser extends VidiunBulkUploadResult
 {
 	/**
 	 * 
@@ -10773,19 +10773,19 @@ class KalturaBulkUploadResultUser extends KalturaBulkUploadResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadUserData extends KalturaBulkUploadObjectData
+class VidiunBulkUploadUserData extends VidiunBulkUploadObjectData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCaptureThumbJobData extends KalturaJobData
+class VidiunCaptureThumbJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -10833,7 +10833,7 @@ class KalturaCaptureThumbJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaAssetType
+	 * @var VidiunAssetType
 	 */
 	public $srcAssetType = null;
 
@@ -10848,10 +10848,10 @@ class KalturaCaptureThumbJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCategoryBaseFilter extends KalturaFilter
+abstract class VidiunCategoryBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -10982,14 +10982,14 @@ abstract class KalturaCategoryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaAppearInListType
+	 * @var VidiunAppearInListType
 	 */
 	public $appearInListEqual = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaPrivacyType
+	 * @var VidiunPrivacyType
 	 */
 	public $privacyEqual = null;
 
@@ -11003,7 +11003,7 @@ abstract class KalturaCategoryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaInheritanceType
+	 * @var VidiunInheritanceType
 	 */
 	public $inheritanceTypeEqual = null;
 
@@ -11024,14 +11024,14 @@ abstract class KalturaCategoryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $referenceIdEmpty = null;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaContributionPolicyType
+	 * @var VidiunContributionPolicyType
 	 */
 	public $contributionPolicyEqual = null;
 
@@ -11073,7 +11073,7 @@ abstract class KalturaCategoryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryStatus
+	 * @var VidiunCategoryStatus
 	 */
 	public $statusEqual = null;
 
@@ -11116,10 +11116,10 @@ abstract class KalturaCategoryBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryAdvancedFilter extends KalturaSearchItem
+class VidiunCategoryEntryAdvancedFilter extends VidiunSearchItem
 {
 	/**
 	 * 
@@ -11138,7 +11138,7 @@ class KalturaCategoryEntryAdvancedFilter extends KalturaSearchItem
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryEntryAdvancedOrderBy
+	 * @var VidiunCategoryEntryAdvancedOrderBy
 	 */
 	public $orderBy = null;
 
@@ -11153,10 +11153,10 @@ class KalturaCategoryEntryAdvancedFilter extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCategoryEntryBaseFilter extends KalturaFilter
+abstract class VidiunCategoryEntryBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -11210,7 +11210,7 @@ abstract class KalturaCategoryEntryBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryEntryStatus
+	 * @var VidiunCategoryEntryStatus
 	 */
 	public $statusEqual = null;
 
@@ -11225,16 +11225,16 @@ abstract class KalturaCategoryEntryBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryIdentifier extends KalturaObjectIdentifier
+class VidiunCategoryIdentifier extends VidiunObjectIdentifier
 {
 	/**
 	 * Identifier of the object
 	 * 	 
 	 *
-	 * @var KalturaCategoryIdentifierField
+	 * @var VidiunCategoryIdentifierField
 	 */
 	public $identifier = null;
 
@@ -11242,10 +11242,10 @@ class KalturaCategoryIdentifier extends KalturaObjectIdentifier
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserAdvancedFilter extends KalturaSearchItem
+class VidiunCategoryUserAdvancedFilter extends VidiunSearchItem
 {
 	/**
 	 * 
@@ -11279,10 +11279,10 @@ class KalturaCategoryUserAdvancedFilter extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCategoryUserBaseFilter extends KalturaFilter
+abstract class VidiunCategoryUserBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -11315,7 +11315,7 @@ abstract class KalturaCategoryUserBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryUserPermissionLevel
+	 * @var VidiunCategoryUserPermissionLevel
 	 */
 	public $permissionLevelEqual = null;
 
@@ -11329,7 +11329,7 @@ abstract class KalturaCategoryUserBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaCategoryUserStatus
+	 * @var VidiunCategoryUserStatus
 	 */
 	public $statusEqual = null;
 
@@ -11371,7 +11371,7 @@ abstract class KalturaCategoryUserBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUpdateMethodType
+	 * @var VidiunUpdateMethodType
 	 */
 	public $updateMethodEqual = null;
 
@@ -11421,10 +11421,10 @@ abstract class KalturaCategoryUserBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaClipAttributes extends KalturaOperationAttributes
+class VidiunClipAttributes extends VidiunOperationAttributes
 {
 	/**
 	 * Offset in milliseconds
@@ -11446,10 +11446,10 @@ class KalturaClipAttributes extends KalturaOperationAttributes
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIntegerValue extends KalturaValue
+class VidiunIntegerValue extends VidiunValue
 {
 	/**
 	 * 
@@ -11462,16 +11462,16 @@ class KalturaIntegerValue extends KalturaValue
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaCompareCondition extends KalturaCondition
+abstract class VidiunCompareCondition extends VidiunCondition
 {
 	/**
 	 * Value to evaluate against the field and operator
 	 * 	 
 	 *
-	 * @var KalturaIntegerValue
+	 * @var VidiunIntegerValue
 	 */
 	public $value;
 
@@ -11479,7 +11479,7 @@ abstract class KalturaCompareCondition extends KalturaCondition
 	 * Comparing operator
 	 * 	 
 	 *
-	 * @var KalturaSearchConditionComparison
+	 * @var VidiunSearchConditionComparison
 	 */
 	public $comparison = null;
 
@@ -11487,25 +11487,25 @@ abstract class KalturaCompareCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDataCenterContentResource extends KalturaContentResource
+abstract class VidiunDataCenterContentResource extends VidiunContentResource
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConcatAttributes extends KalturaOperationAttributes
+class VidiunConcatAttributes extends VidiunOperationAttributes
 {
 	/**
 	 * The resource to be concatenated
 	 * 	 
 	 *
-	 * @var KalturaDataCenterContentResource
+	 * @var VidiunDataCenterContentResource
 	 */
 	public $resource;
 
@@ -11513,16 +11513,16 @@ class KalturaConcatAttributes extends KalturaOperationAttributes
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConcatJobData extends KalturaJobData
+class VidiunConcatJobData extends VidiunJobData
 {
 	/**
 	 * Source files to be concatenated
 	 * 	 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $srcFiles;
 
@@ -11562,10 +11562,10 @@ class KalturaConcatJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaControlPanelCommandBaseFilter extends KalturaFilter
+abstract class VidiunControlPanelCommandBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -11605,7 +11605,7 @@ abstract class KalturaControlPanelCommandBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaControlPanelCommandType
+	 * @var VidiunControlPanelCommandType
 	 */
 	public $typeEqual = null;
 
@@ -11619,7 +11619,7 @@ abstract class KalturaControlPanelCommandBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaControlPanelCommandTargetType
+	 * @var VidiunControlPanelCommandTargetType
 	 */
 	public $targetTypeEqual = null;
 
@@ -11633,7 +11633,7 @@ abstract class KalturaControlPanelCommandBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaControlPanelCommandStatus
+	 * @var VidiunControlPanelCommandStatus
 	 */
 	public $statusEqual = null;
 
@@ -11648,10 +11648,10 @@ abstract class KalturaControlPanelCommandBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvartableJobData extends KalturaJobData
+class VidiunConvartableJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -11678,7 +11678,7 @@ class KalturaConvartableJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var array of KalturaSourceFileSyncDescriptor
+	 * @var array of VidiunSourceFileSyncDescriptor
 	 */
 	public $srcFileSyncs;
 
@@ -11699,7 +11699,7 @@ class KalturaConvartableJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaFlavorParamsOutput
+	 * @var VidiunFlavorParamsOutput
 	 */
 	public $flavorParamsOutput;
 
@@ -11727,7 +11727,7 @@ class KalturaConvartableJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var array of KalturaKeyValue
+	 * @var array of VidiunKeyValue
 	 */
 	public $pluginData;
 
@@ -11735,10 +11735,10 @@ class KalturaConvartableJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaConversionProfileAssetParamsBaseFilter extends KalturaFilter
+abstract class VidiunConversionProfileAssetParamsBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -11771,7 +11771,7 @@ abstract class KalturaConversionProfileAssetParamsBaseFilter extends KalturaFilt
 	/**
 	 * 
 	 *
-	 * @var KalturaFlavorReadyBehaviorType
+	 * @var VidiunFlavorReadyBehaviorType
 	 */
 	public $readyBehaviorEqual = null;
 
@@ -11785,7 +11785,7 @@ abstract class KalturaConversionProfileAssetParamsBaseFilter extends KalturaFilt
 	/**
 	 * 
 	 *
-	 * @var KalturaAssetParamsOrigin
+	 * @var VidiunAssetParamsOrigin
 	 */
 	public $originEqual = null;
 
@@ -11814,10 +11814,10 @@ abstract class KalturaConversionProfileAssetParamsBaseFilter extends KalturaFilt
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaConversionProfileBaseFilter extends KalturaFilter
+abstract class VidiunConversionProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -11836,7 +11836,7 @@ abstract class KalturaConversionProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaConversionProfileStatus
+	 * @var VidiunConversionProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -11850,7 +11850,7 @@ abstract class KalturaConversionProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaConversionProfileType
+	 * @var VidiunConversionProfileType
 	 */
 	public $typeEqual = null;
 
@@ -11914,10 +11914,10 @@ abstract class KalturaConversionProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvertLiveSegmentJobData extends KalturaJobData
+class VidiunConvertLiveSegmentJobData extends VidiunJobData
 {
 	/**
 	 * Live stream entry id
@@ -11931,7 +11931,7 @@ class KalturaConvertLiveSegmentJobData extends KalturaJobData
 	 * Primary or secondary media server
 	 * 	 
 	 *
-	 * @var KalturaMediaServerIndex
+	 * @var VidiunMediaServerIndex
 	 */
 	public $mediaServerIndex = null;
 
@@ -11971,10 +11971,10 @@ class KalturaConvertLiveSegmentJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvertProfileJobData extends KalturaJobData
+class VidiunConvertProfileJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -12003,10 +12003,10 @@ class KalturaConvertProfileJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCopyPartnerJobData extends KalturaJobData
+class VidiunCopyPartnerJobData extends VidiunJobData
 {
 	/**
 	 * Id of the partner to copy from
@@ -12028,16 +12028,16 @@ class KalturaCopyPartnerJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCountryRestriction extends KalturaBaseRestriction
+class VidiunCountryRestriction extends VidiunBaseRestriction
 {
 	/**
 	 * Country restriction type (Allow or deny)
 	 * 	 
 	 *
-	 * @var KalturaCountryRestrictionType
+	 * @var VidiunCountryRestrictionType
 	 */
 	public $countryRestrictionType = null;
 
@@ -12053,10 +12053,10 @@ class KalturaCountryRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDeleteFileJobData extends KalturaJobData
+class VidiunDeleteFileJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -12069,16 +12069,16 @@ class KalturaDeleteFileJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDeleteJobData extends KalturaJobData
+class VidiunDeleteJobData extends VidiunJobData
 {
 	/**
 	 * The filter should return the list of objects that need to be deleted.
 	 * 	 
 	 *
-	 * @var KalturaFilter
+	 * @var VidiunFilter
 	 */
 	public $filter;
 
@@ -12086,16 +12086,16 @@ class KalturaDeleteJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDirectoryRestriction extends KalturaBaseRestriction
+class VidiunDirectoryRestriction extends VidiunBaseRestriction
 {
 	/**
-	 * Kaltura directory restriction type
+	 * Vidiun directory restriction type
 	 * 	 
 	 *
-	 * @var KalturaDirectoryRestrictionType
+	 * @var VidiunDirectoryRestrictionType
 	 */
 	public $directoryRestrictionType = null;
 
@@ -12103,10 +12103,10 @@ class KalturaDirectoryRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryUserFilter extends KalturaCategoryUserBaseFilter
+class VidiunCategoryUserFilter extends VidiunCategoryUserBaseFilter
 {
 	/**
 	 * Return the list of categoryUser that are not inherited from parent category - only the direct categoryUsers.
@@ -12128,10 +12128,10 @@ class KalturaCategoryUserFilter extends KalturaCategoryUserBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUserBaseFilter extends KalturaFilter
+abstract class VidiunUserBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -12185,7 +12185,7 @@ abstract class KalturaUserBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUserStatus
+	 * @var VidiunUserStatus
 	 */
 	public $statusEqual = null;
 
@@ -12227,7 +12227,7 @@ abstract class KalturaUserBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isAdminEqual = null;
 
@@ -12235,10 +12235,10 @@ abstract class KalturaUserBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserFilter extends KalturaUserBaseFilter
+class VidiunUserFilter extends VidiunUserBaseFilter
 {
 	/**
 	 * 
@@ -12264,7 +12264,7 @@ class KalturaUserFilter extends KalturaUserBaseFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $loginEnabledEqual = null;
 
@@ -12316,10 +12316,10 @@ class KalturaUserFilter extends KalturaUserBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryContext extends KalturaContext
+class VidiunEntryContext extends VidiunContext
 {
 	/**
 	 * The entry ID in the context of which the playlist should be built
@@ -12333,7 +12333,7 @@ class KalturaEntryContext extends KalturaContext
 	 * Is this a redirected entry followup?
 	 *      
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $followEntryRedirect = null;
 
@@ -12341,10 +12341,10 @@ class KalturaEntryContext extends KalturaContext
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryContextDataParams extends KalturaAccessControlScope
+class VidiunEntryContextDataParams extends VidiunAccessControlScope
 {
 	/**
 	 * Id of the current flavor.
@@ -12382,10 +12382,10 @@ class KalturaEntryContextDataParams extends KalturaAccessControlScope
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryContextDataResult extends KalturaContextDataResult
+class VidiunEntryContextDataResult extends VidiunContextDataResult
 {
 	/**
 	 * 
@@ -12470,7 +12470,7 @@ class KalturaEntryContextDataResult extends KalturaContextDataResult
 	 * Array of messages as received from the access control rules that invalidated
 	 * 	 
 	 *
-	 * @var array of KalturaString
+	 * @var array of VidiunString
 	 */
 	public $accessControlMessages;
 
@@ -12478,7 +12478,7 @@ class KalturaEntryContextDataResult extends KalturaContextDataResult
 	 * Array of actions as received from the access control rules that invalidated
 	 * 	 
 	 *
-	 * @var array of KalturaRuleAction
+	 * @var array of VidiunRuleAction
 	 */
 	public $accessControlActions;
 
@@ -12486,7 +12486,7 @@ class KalturaEntryContextDataResult extends KalturaContextDataResult
 	 * Array of allowed flavor assets according to access control limitations and requested tags
 	 * 	 
 	 *
-	 * @var array of KalturaFlavorAsset
+	 * @var array of VidiunFlavorAsset
 	 */
 	public $flavorAssets;
 
@@ -12494,16 +12494,16 @@ class KalturaEntryContextDataResult extends KalturaContextDataResult
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryIdentifier extends KalturaObjectIdentifier
+class VidiunEntryIdentifier extends VidiunObjectIdentifier
 {
 	/**
 	 * Identifier of the object
 	 * 	 
 	 *
-	 * @var KalturaEntryIdentifierField
+	 * @var VidiunEntryIdentifierField
 	 */
 	public $identifier = null;
 
@@ -12511,28 +12511,28 @@ class KalturaEntryIdentifier extends KalturaObjectIdentifier
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaBooleanField extends KalturaBooleanValue
+abstract class VidiunBooleanField extends VidiunBooleanValue
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlattenJobData extends KalturaJobData
+class VidiunFlattenJobData extends VidiunJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericSyndicationFeed extends KalturaBaseSyndicationFeed
+class VidiunGenericSyndicationFeed extends VidiunBaseSyndicationFeed
 {
 	/**
 	 * feed description
@@ -12554,15 +12554,15 @@ class KalturaGenericSyndicationFeed extends KalturaBaseSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGoogleVideoSyndicationFeed extends KalturaBaseSyndicationFeed
+class VidiunGoogleVideoSyndicationFeed extends VidiunBaseSyndicationFeed
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaGoogleSyndicationFeedAdultValues
+	 * @var VidiunGoogleSyndicationFeedAdultValues
 	 */
 	public $adultContent = null;
 
@@ -12570,10 +12570,10 @@ class KalturaGoogleVideoSyndicationFeed extends KalturaBaseSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaITunesSyndicationFeed extends KalturaBaseSyndicationFeed
+class VidiunITunesSyndicationFeed extends VidiunBaseSyndicationFeed
 {
 	/**
 	 * feed description
@@ -12626,7 +12626,7 @@ class KalturaITunesSyndicationFeed extends KalturaBaseSyndicationFeed
 	/**
 	 * 
 	 *
-	 * @var KalturaITunesSyndicationFeedCategories
+	 * @var VidiunITunesSyndicationFeedCategories
 	 * @readonly
 	 */
 	public $category = null;
@@ -12634,7 +12634,7 @@ class KalturaITunesSyndicationFeed extends KalturaBaseSyndicationFeed
 	/**
 	 * 
 	 *
-	 * @var KalturaITunesSyndicationFeedAdultValues
+	 * @var VidiunITunesSyndicationFeedAdultValues
 	 */
 	public $adultContent = null;
 
@@ -12649,7 +12649,7 @@ class KalturaITunesSyndicationFeed extends KalturaBaseSyndicationFeed
 	 * true in case you want to enfore the palylist order on the 
 	 * 		 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $enforceOrder = null;
 
@@ -12657,10 +12657,10 @@ class KalturaITunesSyndicationFeed extends KalturaBaseSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaImportJobData extends KalturaJobData
+class VidiunImportJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -12694,10 +12694,10 @@ class KalturaImportJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIndexAdvancedFilter extends KalturaSearchItem
+class VidiunIndexAdvancedFilter extends VidiunSearchItem
 {
 	/**
 	 * 
@@ -12710,16 +12710,16 @@ class KalturaIndexAdvancedFilter extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIndexJobData extends KalturaJobData
+class VidiunIndexJobData extends VidiunJobData
 {
 	/**
 	 * The filter should return the list of objects that need to be reindexed.
 	 * 	 
 	 *
-	 * @var KalturaFilter
+	 * @var VidiunFilter
 	 */
 	public $filter;
 
@@ -12743,16 +12743,16 @@ class KalturaIndexJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIpAddressRestriction extends KalturaBaseRestriction
+class VidiunIpAddressRestriction extends VidiunBaseRestriction
 {
 	/**
 	 * Ip address restriction type (Allow or deny)
 	 * 	 
 	 *
-	 * @var KalturaIpAddressRestrictionType
+	 * @var VidiunIpAddressRestrictionType
 	 */
 	public $ipAddressRestrictionType = null;
 
@@ -12768,16 +12768,16 @@ class KalturaIpAddressRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLimitFlavorsRestriction extends KalturaBaseRestriction
+class VidiunLimitFlavorsRestriction extends VidiunBaseRestriction
 {
 	/**
 	 * Limit flavors restriction type (Allow or deny)
 	 * 	 
 	 *
-	 * @var KalturaLimitFlavorsRestrictionType
+	 * @var VidiunLimitFlavorsRestrictionType
 	 */
 	public $limitFlavorsRestrictionType = null;
 
@@ -12793,10 +12793,10 @@ class KalturaLimitFlavorsRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveChannelSegmentBaseFilter extends KalturaFilter
+abstract class VidiunLiveChannelSegmentBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -12829,7 +12829,7 @@ abstract class KalturaLiveChannelSegmentBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaLiveChannelSegmentStatus
+	 * @var VidiunLiveChannelSegmentStatus
 	 */
 	public $statusEqual = null;
 
@@ -12872,15 +12872,15 @@ abstract class KalturaLiveChannelSegmentBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMailJobData extends KalturaJobData
+class VidiunMailJobData extends VidiunJobData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaMailType
+	 * @var VidiunMailType
 	 */
 	public $mailType = null;
 
@@ -12894,7 +12894,7 @@ class KalturaMailJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaMailJobStatus
+	 * @var VidiunMailJobStatus
 	 */
 	public $status = null;
 
@@ -12913,7 +12913,7 @@ class KalturaMailJobData extends KalturaJobData
 	public $recipientEmail = null;
 
 	/**
-	 * kuserId  
+	 * vuserId  
 	 * 	 
 	 *
 	 * @var int
@@ -12958,7 +12958,7 @@ class KalturaMailJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaLanguageCode
+	 * @var VidiunLanguageCode
 	 */
 	public $language = null;
 
@@ -12994,15 +12994,15 @@ class KalturaMailJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMatchCondition extends KalturaCondition
+abstract class VidiunMatchCondition extends VidiunCondition
 {
 	/**
 	 * 
 	 *
-	 * @var array of KalturaStringValue
+	 * @var array of VidiunStringValue
 	 */
 	public $values;
 
@@ -13010,10 +13010,10 @@ abstract class KalturaMatchCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMediaInfoBaseFilter extends KalturaFilter
+abstract class VidiunMediaInfoBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13026,10 +13026,10 @@ abstract class KalturaMediaInfoBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMediaServerBaseFilter extends KalturaFilter
+abstract class VidiunMediaServerBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13063,10 +13063,10 @@ abstract class KalturaMediaServerBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMoveCategoryEntriesJobData extends KalturaJobData
+class VidiunMoveCategoryEntriesJobData extends VidiunJobData
 {
 	/**
 	 * Source category id
@@ -13139,10 +13139,10 @@ class KalturaMoveCategoryEntriesJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaNotificationJobData extends KalturaJobData
+class VidiunNotificationJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -13154,7 +13154,7 @@ class KalturaNotificationJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaNotificationType
+	 * @var VidiunNotificationType
 	 */
 	public $type = null;
 
@@ -13175,7 +13175,7 @@ class KalturaNotificationJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaNotificationStatus
+	 * @var VidiunNotificationStatus
 	 */
 	public $status = null;
 
@@ -13203,7 +13203,7 @@ class KalturaNotificationJobData extends KalturaJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaNotificationObjectType
+	 * @var VidiunNotificationObjectType
 	 */
 	public $objType = null;
 
@@ -13211,10 +13211,10 @@ class KalturaNotificationJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPartnerBaseFilter extends KalturaFilter
+abstract class VidiunPartnerBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13268,7 +13268,7 @@ abstract class KalturaPartnerBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerStatus
+	 * @var VidiunPartnerStatus
 	 */
 	public $statusEqual = null;
 
@@ -13303,7 +13303,7 @@ abstract class KalturaPartnerBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaPartnerGroupType
+	 * @var VidiunPartnerGroupType
 	 */
 	public $partnerGroupTypeEqual = null;
 
@@ -13318,10 +13318,10 @@ abstract class KalturaPartnerBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPermissionBaseFilter extends KalturaFilter
+abstract class VidiunPermissionBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13340,7 +13340,7 @@ abstract class KalturaPermissionBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionType
+	 * @var VidiunPermissionType
 	 */
 	public $typeEqual = null;
 
@@ -13382,7 +13382,7 @@ abstract class KalturaPermissionBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionStatus
+	 * @var VidiunPermissionStatus
 	 */
 	public $statusEqual = null;
 
@@ -13467,10 +13467,10 @@ abstract class KalturaPermissionBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPermissionItemBaseFilter extends KalturaFilter
+abstract class VidiunPermissionItemBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13489,7 +13489,7 @@ abstract class KalturaPermissionItemBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaPermissionItemType
+	 * @var VidiunPermissionItemType
 	 */
 	public $typeEqual = null;
 
@@ -13560,10 +13560,10 @@ abstract class KalturaPermissionItemBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaProvisionJobData extends KalturaJobData
+class VidiunProvisionJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -13660,10 +13660,10 @@ class KalturaProvisionJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaReportBaseFilter extends KalturaFilter
+abstract class VidiunReportBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13711,10 +13711,10 @@ abstract class KalturaReportBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportInputFilter extends KalturaReportInputBaseFilter
+class VidiunReportInputFilter extends VidiunReportInputBaseFilter
 {
 	/**
 	 * Search keywords to filter objects
@@ -13760,7 +13760,7 @@ class KalturaReportInputFilter extends KalturaReportInputBaseFilter
 	 * Aggregated results according to interval
 	 * 	 
 	 *
-	 * @var KalturaReportInterval
+	 * @var VidiunReportInterval
 	 */
 	public $interval = null;
 
@@ -13768,10 +13768,10 @@ class KalturaReportInputFilter extends KalturaReportInputBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchCondition extends KalturaSearchItem
+class VidiunSearchCondition extends VidiunSearchItem
 {
 	/**
 	 * 
@@ -13791,22 +13791,22 @@ class KalturaSearchCondition extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchOperator extends KalturaSearchItem
+class VidiunSearchOperator extends VidiunSearchItem
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaSearchOperatorType
+	 * @var VidiunSearchOperatorType
 	 */
 	public $type = null;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaSearchItem
+	 * @var array of VidiunSearchItem
 	 */
 	public $items;
 
@@ -13814,25 +13814,25 @@ class KalturaSearchOperator extends KalturaSearchItem
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSessionRestriction extends KalturaBaseRestriction
+class VidiunSessionRestriction extends VidiunBaseRestriction
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSiteRestriction extends KalturaBaseRestriction
+class VidiunSiteRestriction extends VidiunBaseRestriction
 {
 	/**
 	 * The site restriction type (allow or deny)
 	 * 	 
 	 *
-	 * @var KalturaSiteRestrictionType
+	 * @var VidiunSiteRestrictionType
 	 */
 	public $siteRestrictionType = null;
 
@@ -13848,19 +13848,19 @@ class KalturaSiteRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageAddAction extends KalturaRuleAction
+class VidiunStorageAddAction extends VidiunRuleAction
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageJobData extends KalturaJobData
+class VidiunStorageJobData extends VidiunJobData
 {
 	/**
 	 * 
@@ -13915,10 +13915,10 @@ class KalturaStorageJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaStorageProfileBaseFilter extends KalturaFilter
+abstract class VidiunStorageProfileBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -13993,7 +13993,7 @@ abstract class KalturaStorageProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileStatus
+	 * @var VidiunStorageProfileStatus
 	 */
 	public $statusEqual = null;
 
@@ -14007,7 +14007,7 @@ abstract class KalturaStorageProfileBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaStorageProfileProtocol
+	 * @var VidiunStorageProfileProtocol
 	 */
 	public $protocolEqual = null;
 
@@ -14022,10 +14022,10 @@ abstract class KalturaStorageProfileBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSyncCategoryPrivacyContextJobData extends KalturaJobData
+class VidiunSyncCategoryPrivacyContextJobData extends VidiunJobData
 {
 	/**
 	 * category id
@@ -14057,15 +14057,15 @@ class KalturaSyncCategoryPrivacyContextJobData extends KalturaJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTubeMogulSyndicationFeed extends KalturaBaseSyndicationFeed
+class VidiunTubeMogulSyndicationFeed extends VidiunBaseSyndicationFeed
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaTubeMogulSyndicationFeedCategories
+	 * @var VidiunTubeMogulSyndicationFeedCategories
 	 * @readonly
 	 */
 	public $category = null;
@@ -14074,10 +14074,10 @@ class KalturaTubeMogulSyndicationFeed extends KalturaBaseSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUiConfBaseFilter extends KalturaFilter
+abstract class VidiunUiConfBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -14117,7 +14117,7 @@ abstract class KalturaUiConfBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUiConfObjType
+	 * @var VidiunUiConfObjType
 	 */
 	public $objTypeEqual = null;
 
@@ -14173,7 +14173,7 @@ abstract class KalturaUiConfBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUiConfCreationMode
+	 * @var VidiunUiConfCreationMode
 	 */
 	public $creationModeEqual = null;
 
@@ -14223,10 +14223,10 @@ abstract class KalturaUiConfBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUploadTokenBaseFilter extends KalturaFilter
+abstract class VidiunUploadTokenBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -14252,7 +14252,7 @@ abstract class KalturaUploadTokenBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUploadTokenStatus
+	 * @var VidiunUploadTokenStatus
 	 */
 	public $statusEqual = null;
 
@@ -14281,16 +14281,16 @@ abstract class KalturaUploadTokenBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserAgentRestriction extends KalturaBaseRestriction
+class VidiunUserAgentRestriction extends VidiunBaseRestriction
 {
 	/**
 	 * User agent restriction type (Allow or deny)
 	 * 	 
 	 *
-	 * @var KalturaUserAgentRestrictionType
+	 * @var VidiunUserAgentRestrictionType
 	 */
 	public $userAgentRestrictionType = null;
 
@@ -14306,10 +14306,10 @@ class KalturaUserAgentRestriction extends KalturaBaseRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUserLoginDataBaseFilter extends KalturaFilter
+abstract class VidiunUserLoginDataBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -14322,10 +14322,10 @@ abstract class KalturaUserLoginDataBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaUserRoleBaseFilter extends KalturaFilter
+abstract class VidiunUserRoleBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -14379,7 +14379,7 @@ abstract class KalturaUserRoleBaseFilter extends KalturaFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaUserRoleStatus
+	 * @var VidiunUserRoleStatus
 	 */
 	public $statusEqual = null;
 
@@ -14450,10 +14450,10 @@ abstract class KalturaUserRoleBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRoleCondition extends KalturaCondition
+class VidiunUserRoleCondition extends VidiunCondition
 {
 	/**
 	 * Comma separated list of role ids
@@ -14467,10 +14467,10 @@ class KalturaUserRoleCondition extends KalturaCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaWidgetBaseFilter extends KalturaFilter
+abstract class VidiunWidgetBaseFilter extends VidiunFilter
 {
 	/**
 	 * 
@@ -14560,15 +14560,15 @@ abstract class KalturaWidgetBaseFilter extends KalturaFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaYahooSyndicationFeed extends KalturaBaseSyndicationFeed
+class VidiunYahooSyndicationFeed extends VidiunBaseSyndicationFeed
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaYahooSyndicationFeedCategories
+	 * @var VidiunYahooSyndicationFeedCategories
 	 * @readonly
 	 */
 	public $category = null;
@@ -14576,7 +14576,7 @@ class KalturaYahooSyndicationFeed extends KalturaBaseSyndicationFeed
 	/**
 	 * 
 	 *
-	 * @var KalturaYahooSyndicationFeedAdultValues
+	 * @var VidiunYahooSyndicationFeedAdultValues
 	 */
 	public $adultContent = null;
 
@@ -14600,28 +14600,28 @@ class KalturaYahooSyndicationFeed extends KalturaBaseSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlFilter extends KalturaAccessControlBaseFilter
+class VidiunAccessControlFilter extends VidiunAccessControlBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAccessControlProfileFilter extends KalturaAccessControlProfileBaseFilter
+class VidiunAccessControlProfileFilter extends VidiunAccessControlProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAkamaiProvisionJobData extends KalturaProvisionJobData
+class VidiunAkamaiProvisionJobData extends VidiunProvisionJobData
 {
 	/**
 	 * 
@@ -14669,10 +14669,10 @@ class KalturaAkamaiProvisionJobData extends KalturaProvisionJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAkamaiUniversalProvisionJobData extends KalturaProvisionJobData
+class VidiunAkamaiUniversalProvisionJobData extends VidiunProvisionJobData
 {
 	/**
 	 * 
@@ -14705,7 +14705,7 @@ class KalturaAkamaiUniversalProvisionJobData extends KalturaProvisionJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaDVRStatus
+	 * @var VidiunDVRStatus
 	 */
 	public $dvrEnabled = null;
 
@@ -14733,7 +14733,7 @@ class KalturaAkamaiUniversalProvisionJobData extends KalturaProvisionJobData
 	/**
 	 * 
 	 *
-	 * @var KalturaAkamaiUniversalStreamType
+	 * @var VidiunAkamaiUniversalStreamType
 	 */
 	public $streamType = null;
 
@@ -14748,28 +14748,28 @@ class KalturaAkamaiUniversalProvisionJobData extends KalturaProvisionJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetFilter extends KalturaAssetBaseFilter
+class VidiunAssetFilter extends VidiunAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetParamsFilter extends KalturaAssetParamsBaseFilter
+class VidiunAssetParamsFilter extends VidiunAssetParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAssetResource extends KalturaContentResource
+class VidiunAssetResource extends VidiunContentResource
 {
 	/**
 	 * ID of the source asset 
@@ -14783,46 +14783,46 @@ class KalturaAssetResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBaseSyndicationFeedFilter extends KalturaBaseSyndicationFeedBaseFilter
+class VidiunBaseSyndicationFeedFilter extends VidiunBaseSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobFilter extends KalturaBatchJobBaseFilter
+class VidiunBatchJobFilter extends VidiunBatchJobBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBulkUploadFilter extends KalturaBulkUploadBaseFilter
+class VidiunBulkUploadFilter extends VidiunBulkUploadBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryEntryFilter extends KalturaCategoryEntryBaseFilter
+class VidiunCategoryEntryFilter extends VidiunCategoryEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCategoryFilter extends KalturaCategoryBaseFilter
+class VidiunCategoryFilter extends VidiunCategoryBaseFilter
 {
 	/**
 	 * 
@@ -14885,40 +14885,40 @@ class KalturaCategoryFilter extends KalturaCategoryBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaControlPanelCommandFilter extends KalturaControlPanelCommandBaseFilter
+class VidiunControlPanelCommandFilter extends VidiunControlPanelCommandBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileFilter extends KalturaConversionProfileBaseFilter
+class VidiunConversionProfileFilter extends VidiunConversionProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConversionProfileAssetParamsFilter extends KalturaConversionProfileAssetParamsBaseFilter
+class VidiunConversionProfileAssetParamsFilter extends VidiunConversionProfileAssetParamsBaseFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaConversionProfileFilter
+	 * @var VidiunConversionProfileFilter
 	 */
 	public $conversionProfileIdFilter;
 
 	/**
 	 * 
 	 *
-	 * @var KalturaAssetParamsFilter
+	 * @var VidiunAssetParamsFilter
 	 */
 	public $assetParamsIdFilter;
 
@@ -14926,10 +14926,10 @@ class KalturaConversionProfileAssetParamsFilter extends KalturaConversionProfile
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvertCollectionJobData extends KalturaConvartableJobData
+class VidiunConvertCollectionJobData extends VidiunConvartableJobData
 {
 	/**
 	 * 
@@ -14976,7 +14976,7 @@ class KalturaConvertCollectionJobData extends KalturaConvartableJobData
 	/**
 	 * 
 	 *
-	 * @var array of KalturaConvertCollectionFlavorData
+	 * @var array of VidiunConvertCollectionFlavorData
 	 */
 	public $flavors;
 
@@ -14984,10 +14984,10 @@ class KalturaConvertCollectionJobData extends KalturaConvartableJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaConvertJobData extends KalturaConvartableJobData
+class VidiunConvertJobData extends VidiunConvartableJobData
 {
 	/**
 	 * 
@@ -15041,7 +15041,7 @@ class KalturaConvertJobData extends KalturaConvartableJobData
 	/**
 	 * 
 	 *
-	 * @var array of KalturaDestFileSyncDescriptor
+	 * @var array of VidiunDestFileSyncDescriptor
 	 */
 	public $extraDestFileSyncs;
 
@@ -15056,16 +15056,16 @@ class KalturaConvertJobData extends KalturaConvartableJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCountryCondition extends KalturaMatchCondition
+class VidiunCountryCondition extends VidiunMatchCondition
 {
 	/**
 	 * The ip geo coder engine to be used
 	 * 	 
 	 *
-	 * @var KalturaGeoCoderType
+	 * @var VidiunGeoCoderType
 	 */
 	public $geoCoderType = null;
 
@@ -15073,10 +15073,10 @@ class KalturaCountryCondition extends KalturaMatchCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEndUserReportInputFilter extends KalturaReportInputFilter
+class VidiunEndUserReportInputFilter extends VidiunReportInputFilter
 {
 	/**
 	 * 
@@ -15103,10 +15103,10 @@ class KalturaEndUserReportInputFilter extends KalturaReportInputFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEntryResource extends KalturaContentResource
+class VidiunEntryResource extends VidiunContentResource
 {
 	/**
 	 * ID of the source entry 
@@ -15128,10 +15128,10 @@ class KalturaEntryResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaExtractMediaJobData extends KalturaConvartableJobData
+class VidiunExtractMediaJobData extends VidiunConvartableJobData
 {
 	/**
 	 * 
@@ -15144,25 +15144,25 @@ class KalturaExtractMediaJobData extends KalturaConvartableJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaIntegerField extends KalturaIntegerValue
+abstract class VidiunIntegerField extends VidiunIntegerValue
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFieldCompareCondition extends KalturaCompareCondition
+class VidiunFieldCompareCondition extends VidiunCompareCondition
 {
 	/**
 	 * Field to evaluate
 	 * 	 
 	 *
-	 * @var KalturaIntegerField
+	 * @var VidiunIntegerField
 	 */
 	public $field;
 
@@ -15170,25 +15170,25 @@ class KalturaFieldCompareCondition extends KalturaCompareCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaStringField extends KalturaStringValue
+abstract class VidiunStringField extends VidiunStringValue
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFieldMatchCondition extends KalturaMatchCondition
+class VidiunFieldMatchCondition extends VidiunMatchCondition
 {
 	/**
 	 * Field to evaluate
 	 * 	 
 	 *
-	 * @var KalturaStringField
+	 * @var VidiunStringField
 	 */
 	public $field;
 
@@ -15196,10 +15196,10 @@ class KalturaFieldMatchCondition extends KalturaMatchCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFileSyncResource extends KalturaContentResource
+class VidiunFileSyncResource extends VidiunContentResource
 {
 	/**
 	 * The object type of the file sync object 
@@ -15237,10 +15237,10 @@ class KalturaFileSyncResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericXsltSyndicationFeed extends KalturaGenericSyndicationFeed
+class VidiunGenericXsltSyndicationFeed extends VidiunGenericSyndicationFeed
 {
 	/**
 	 * 
@@ -15252,7 +15252,7 @@ class KalturaGenericXsltSyndicationFeed extends KalturaGenericSyndicationFeed
 	/**
 	 * 
 	 *
-	 * @var array of KalturaExtendingItemMrssParameter
+	 * @var array of VidiunExtendingItemMrssParameter
 	 */
 	public $itemXpathsToExtend;
 
@@ -15260,19 +15260,19 @@ class KalturaGenericXsltSyndicationFeed extends KalturaGenericSyndicationFeed
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIpAddressCondition extends KalturaMatchCondition
+class VidiunIpAddressCondition extends VidiunMatchCondition
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveAsset extends KalturaFlavorAsset
+class VidiunLiveAsset extends VidiunFlavorAsset
 {
 	/**
 	 * 
@@ -15292,19 +15292,19 @@ class KalturaLiveAsset extends KalturaFlavorAsset
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelSegmentFilter extends KalturaLiveChannelSegmentBaseFilter
+class VidiunLiveChannelSegmentFilter extends VidiunLiveChannelSegmentBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveParams extends KalturaFlavorParams
+class VidiunLiveParams extends VidiunFlavorParams
 {
 	/**
 	 * Suffix to be added to the stream name after the entry id {entry_id}_{stream_suffix}, e.g. for entry id 0_kjdu5jr6 and suffix 1, the stream name will be 0_kjdu5jr6_1
@@ -15318,50 +15318,50 @@ class KalturaLiveParams extends KalturaFlavorParams
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParams extends KalturaFlavorParams
+class VidiunMediaFlavorParams extends VidiunFlavorParams
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaInfoFilter extends KalturaMediaInfoBaseFilter
+class VidiunMediaInfoFilter extends VidiunMediaInfoBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaServerFilter extends KalturaMediaServerBaseFilter
+class VidiunMediaServerFilter extends VidiunMediaServerBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaOperationResource extends KalturaContentResource
+class VidiunOperationResource extends VidiunContentResource
 {
 	/**
-	 * Only KalturaEntryResource and KalturaAssetResource are supported
+	 * Only VidiunEntryResource and VidiunAssetResource are supported
 	 * 	 
 	 *
-	 * @var KalturaContentResource
+	 * @var VidiunContentResource
 	 */
 	public $resource;
 
 	/**
 	 * 
 	 *
-	 * @var array of KalturaOperationAttributes
+	 * @var array of VidiunOperationAttributes
 	 */
 	public $operationAttributes;
 
@@ -15377,37 +15377,37 @@ class KalturaOperationResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPartnerFilter extends KalturaPartnerBaseFilter
+class VidiunPartnerFilter extends VidiunPartnerBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionFilter extends KalturaPermissionBaseFilter
+class VidiunPermissionFilter extends VidiunPermissionBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPermissionItemFilter extends KalturaPermissionItemBaseFilter
+class VidiunPermissionItemFilter extends VidiunPermissionItemBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPostConvertJobData extends KalturaConvartableJobData
+class VidiunPostConvertJobData extends VidiunConvartableJobData
 {
 	/**
 	 * 
@@ -15467,10 +15467,10 @@ class KalturaPostConvertJobData extends KalturaConvartableJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPreviewRestriction extends KalturaSessionRestriction
+class VidiunPreviewRestriction extends VidiunSessionRestriction
 {
 	/**
 	 * The preview restriction length 
@@ -15484,25 +15484,25 @@ class KalturaPreviewRestriction extends KalturaSessionRestriction
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaRegexCondition extends KalturaMatchCondition
+abstract class VidiunRegexCondition extends VidiunMatchCondition
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaRemoteStorageResources extends KalturaContentResource
+class VidiunRemoteStorageResources extends VidiunContentResource
 {
 	/**
 	 * Array of remote stoage resources 
 	 * 	 
 	 *
-	 * @var array of KalturaRemoteStorageResource
+	 * @var array of VidiunRemoteStorageResource
 	 */
 	public $resources;
 
@@ -15510,24 +15510,24 @@ class KalturaRemoteStorageResources extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaReportFilter extends KalturaReportBaseFilter
+class VidiunReportFilter extends VidiunReportBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSearchComparableCondition extends KalturaSearchCondition
+class VidiunSearchComparableCondition extends VidiunSearchCondition
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaSearchConditionComparison
+	 * @var VidiunSearchConditionComparison
 	 */
 	public $comparison = null;
 
@@ -15535,19 +15535,19 @@ class KalturaSearchComparableCondition extends KalturaSearchCondition
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSiteCondition extends KalturaMatchCondition
+class VidiunSiteCondition extends VidiunMatchCondition
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSshImportJobData extends KalturaImportJobData
+class VidiunSshImportJobData extends VidiunImportJobData
 {
 	/**
 	 * 
@@ -15574,19 +15574,19 @@ class KalturaSshImportJobData extends KalturaImportJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageDeleteJobData extends KalturaStorageJobData
+class VidiunStorageDeleteJobData extends VidiunStorageJobData
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageExportJobData extends KalturaStorageJobData
+class VidiunStorageExportJobData extends VidiunStorageJobData
 {
 	/**
 	 * 
@@ -15606,19 +15606,19 @@ class KalturaStorageExportJobData extends KalturaStorageJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStorageProfileFilter extends KalturaStorageProfileBaseFilter
+class VidiunStorageProfileFilter extends VidiunStorageProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaStringResource extends KalturaContentResource
+class VidiunStringResource extends VidiunContentResource
 {
 	/**
 	 * Textual content
@@ -15632,69 +15632,69 @@ class KalturaStringResource extends KalturaContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUiConfFilter extends KalturaUiConfBaseFilter
+class VidiunUiConfFilter extends VidiunUiConfBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadTokenFilter extends KalturaUploadTokenBaseFilter
+class VidiunUploadTokenFilter extends VidiunUploadTokenBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserLoginDataFilter extends KalturaUserLoginDataBaseFilter
+class VidiunUserLoginDataFilter extends VidiunUserLoginDataBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserRoleFilter extends KalturaUserRoleBaseFilter
+class VidiunUserRoleFilter extends VidiunUserRoleBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWidgetFilter extends KalturaWidgetBaseFilter
+class VidiunWidgetFilter extends VidiunWidgetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAdminUserBaseFilter extends KalturaUserFilter
+abstract class VidiunAdminUserBaseFilter extends VidiunUserFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAmazonS3StorageExportJobData extends KalturaStorageExportJobData
+class VidiunAmazonS3StorageExportJobData extends VidiunStorageExportJobData
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaAmazonS3StorageProfileFilesPermissionLevel
+	 * @var VidiunAmazonS3StorageProfileFilesPermissionLevel
 	 */
 	public $filesPermissionInS3 = null;
 
@@ -15702,37 +15702,37 @@ class KalturaAmazonS3StorageExportJobData extends KalturaStorageExportJobData
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaAmazonS3StorageProfileBaseFilter extends KalturaStorageProfileFilter
+abstract class VidiunAmazonS3StorageProfileBaseFilter extends VidiunStorageProfileFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaApiActionPermissionItemBaseFilter extends KalturaPermissionItemFilter
+abstract class VidiunApiActionPermissionItemBaseFilter extends VidiunPermissionItemFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaApiParameterPermissionItemBaseFilter extends KalturaPermissionItemFilter
+abstract class VidiunApiParameterPermissionItemBaseFilter extends VidiunPermissionItemFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaBatchJobFilterExt extends KalturaBatchJobFilter
+class VidiunBatchJobFilterExt extends VidiunBatchJobFilter
 {
 	/**
 	 * 
@@ -15745,16 +15745,16 @@ class KalturaBatchJobFilterExt extends KalturaBatchJobFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaCountryContextField extends KalturaStringField
+class VidiunCountryContextField extends VidiunStringField
 {
 	/**
 	 * The ip geo coder engine to be used
 	 * 	 
 	 *
-	 * @var KalturaGeoCoderType
+	 * @var VidiunGeoCoderType
 	 */
 	public $geoCoderType = null;
 
@@ -15762,36 +15762,19 @@ class KalturaCountryContextField extends KalturaStringField
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaDataEntryBaseFilter extends KalturaBaseEntryFilter
+abstract class VidiunDataEntryBaseFilter extends VidiunBaseEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaEvalBooleanField extends KalturaBooleanField
-{
-	/**
-	 * PHP code
-	 * 	 
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaEvalStringField extends KalturaStringField
+class VidiunEvalBooleanField extends VidiunBooleanField
 {
 	/**
 	 * PHP code
@@ -15805,10 +15788,27 @@ class KalturaEvalStringField extends KalturaStringField
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaFlavorAssetBaseFilter extends KalturaAssetFilter
+class VidiunEvalStringField extends VidiunStringField
+{
+	/**
+	 * PHP code
+	 * 	 
+	 *
+	 * @var string
+	 */
+	public $code = null;
+
+
+}
+
+/**
+ * @package Vidiun
+ * @subpackage Client
+ */
+abstract class VidiunFlavorAssetBaseFilter extends VidiunAssetFilter
 {
 	/**
 	 * 
@@ -15827,7 +15827,7 @@ abstract class KalturaFlavorAssetBaseFilter extends KalturaAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaFlavorAssetStatus
+	 * @var VidiunFlavorAssetStatus
 	 */
 	public $statusEqual = null;
 
@@ -15849,15 +15849,15 @@ abstract class KalturaFlavorAssetBaseFilter extends KalturaAssetFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaFlavorParamsBaseFilter extends KalturaAssetParamsFilter
+abstract class VidiunFlavorParamsBaseFilter extends VidiunAssetParamsFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaContainerFormat
+	 * @var VidiunContainerFormat
 	 */
 	public $formatEqual = null;
 
@@ -15865,73 +15865,73 @@ abstract class KalturaFlavorParamsBaseFilter extends KalturaAssetParamsFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGenericSyndicationFeedBaseFilter extends KalturaBaseSyndicationFeedFilter
+abstract class VidiunGenericSyndicationFeedBaseFilter extends VidiunBaseSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGoogleVideoSyndicationFeedBaseFilter extends KalturaBaseSyndicationFeedFilter
+abstract class VidiunGoogleVideoSyndicationFeedBaseFilter extends VidiunBaseSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaITunesSyndicationFeedBaseFilter extends KalturaBaseSyndicationFeedFilter
+abstract class VidiunITunesSyndicationFeedBaseFilter extends VidiunBaseSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaIpAddressContextField extends KalturaStringField
+class VidiunIpAddressContextField extends VidiunStringField
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParamsOutput extends KalturaFlavorParamsOutput
+class VidiunMediaFlavorParamsOutput extends VidiunFlavorParamsOutput
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaObjectIdField extends KalturaStringField
+class VidiunObjectIdField extends VidiunStringField
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaPlaylistBaseFilter extends KalturaBaseEntryFilter
+abstract class VidiunPlaylistBaseFilter extends VidiunBaseEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaServerFileResource extends KalturaDataCenterContentResource
+class VidiunServerFileResource extends VidiunDataCenterContentResource
 {
 	/**
 	 * Full path to the local file 
@@ -15945,10 +15945,10 @@ class KalturaServerFileResource extends KalturaDataCenterContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaSshUrlResource extends KalturaUrlResource
+class VidiunSshUrlResource extends VidiunUrlResource
 {
 	/**
 	 * SSH private key
@@ -15978,10 +15978,10 @@ class KalturaSshUrlResource extends KalturaUrlResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaThumbAssetBaseFilter extends KalturaAssetFilter
+abstract class VidiunThumbAssetBaseFilter extends VidiunAssetFilter
 {
 	/**
 	 * 
@@ -16000,7 +16000,7 @@ abstract class KalturaThumbAssetBaseFilter extends KalturaAssetFilter
 	/**
 	 * 
 	 *
-	 * @var KalturaThumbAssetStatus
+	 * @var VidiunThumbAssetStatus
 	 */
 	public $statusEqual = null;
 
@@ -16022,15 +16022,15 @@ abstract class KalturaThumbAssetBaseFilter extends KalturaAssetFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaThumbParamsBaseFilter extends KalturaAssetParamsFilter
+abstract class VidiunThumbParamsBaseFilter extends VidiunAssetParamsFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaContainerFormat
+	 * @var VidiunContainerFormat
 	 */
 	public $formatEqual = null;
 
@@ -16038,10 +16038,10 @@ abstract class KalturaThumbParamsBaseFilter extends KalturaAssetParamsFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTimeContextField extends KalturaIntegerField
+class VidiunTimeContextField extends VidiunIntegerField
 {
 	/**
 	 * Time offset in seconds since current time
@@ -16055,19 +16055,19 @@ class KalturaTimeContextField extends KalturaIntegerField
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaTubeMogulSyndicationFeedBaseFilter extends KalturaBaseSyndicationFeedFilter
+abstract class VidiunTubeMogulSyndicationFeedBaseFilter extends VidiunBaseSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUploadedFileTokenResource extends KalturaDataCenterContentResource
+class VidiunUploadedFileTokenResource extends VidiunDataCenterContentResource
 {
 	/**
 	 * Token that returned from upload.upload action or uploadToken.add action. 
@@ -16081,37 +16081,37 @@ class KalturaUploadedFileTokenResource extends KalturaDataCenterContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserAgentCondition extends KalturaRegexCondition
+class VidiunUserAgentCondition extends VidiunRegexCondition
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserAgentContextField extends KalturaStringField
+class VidiunUserAgentContextField extends VidiunStringField
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaUserEmailContextField extends KalturaStringField
+class VidiunUserEmailContextField extends VidiunStringField
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaWebcamTokenResource extends KalturaDataCenterContentResource
+class VidiunWebcamTokenResource extends VidiunDataCenterContentResource
 {
 	/**
 	 * Token that returned from media server such as FMS or red5.
@@ -16125,154 +16125,154 @@ class KalturaWebcamTokenResource extends KalturaDataCenterContentResource
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaYahooSyndicationFeedBaseFilter extends KalturaBaseSyndicationFeedFilter
+abstract class VidiunYahooSyndicationFeedBaseFilter extends VidiunBaseSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAdminUserFilter extends KalturaAdminUserBaseFilter
+class VidiunAdminUserFilter extends VidiunAdminUserBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaAmazonS3StorageProfileFilter extends KalturaAmazonS3StorageProfileBaseFilter
+class VidiunAmazonS3StorageProfileFilter extends VidiunAmazonS3StorageProfileBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiActionPermissionItemFilter extends KalturaApiActionPermissionItemBaseFilter
+class VidiunApiActionPermissionItemFilter extends VidiunApiActionPermissionItemBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaApiParameterPermissionItemFilter extends KalturaApiParameterPermissionItemBaseFilter
+class VidiunApiParameterPermissionItemFilter extends VidiunApiParameterPermissionItemBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaDataEntryFilter extends KalturaDataEntryBaseFilter
+class VidiunDataEntryFilter extends VidiunDataEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorAssetFilter extends KalturaFlavorAssetBaseFilter
+class VidiunFlavorAssetFilter extends VidiunFlavorAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsFilter extends KalturaFlavorParamsBaseFilter
+class VidiunFlavorParamsFilter extends VidiunFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericSyndicationFeedFilter extends KalturaGenericSyndicationFeedBaseFilter
+class VidiunGenericSyndicationFeedFilter extends VidiunGenericSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGoogleVideoSyndicationFeedFilter extends KalturaGoogleVideoSyndicationFeedBaseFilter
+class VidiunGoogleVideoSyndicationFeedFilter extends VidiunGoogleVideoSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaITunesSyndicationFeedFilter extends KalturaITunesSyndicationFeedBaseFilter
+class VidiunITunesSyndicationFeedFilter extends VidiunITunesSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaPlaylistFilter extends KalturaPlaylistBaseFilter
+class VidiunPlaylistFilter extends VidiunPlaylistBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbAssetFilter extends KalturaThumbAssetBaseFilter
+class VidiunThumbAssetFilter extends VidiunThumbAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsFilter extends KalturaThumbParamsBaseFilter
+class VidiunThumbParamsFilter extends VidiunThumbParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaTubeMogulSyndicationFeedFilter extends KalturaTubeMogulSyndicationFeedBaseFilter
+class VidiunTubeMogulSyndicationFeedFilter extends VidiunTubeMogulSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaYahooSyndicationFeedFilter extends KalturaYahooSyndicationFeedBaseFilter
+class VidiunYahooSyndicationFeedFilter extends VidiunYahooSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaFlavorParamsOutputBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunFlavorParamsOutputBaseFilter extends VidiunFlavorParamsFilter
 {
 	/**
 	 * 
@@ -16306,64 +16306,64 @@ abstract class KalturaFlavorParamsOutputBaseFilter extends KalturaFlavorParamsFi
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaGenericXsltSyndicationFeedBaseFilter extends KalturaGenericSyndicationFeedFilter
+abstract class VidiunGenericXsltSyndicationFeedBaseFilter extends VidiunGenericSyndicationFeedFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveAssetBaseFilter extends KalturaFlavorAssetFilter
+abstract class VidiunLiveAssetBaseFilter extends VidiunFlavorAssetFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunLiveParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamAdminEntry extends KalturaLiveStreamEntry
+class VidiunLiveStreamAdminEntry extends VidiunLiveStreamEntry
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMediaFlavorParamsBaseFilter extends KalturaFlavorParamsFilter
+abstract class VidiunMediaFlavorParamsBaseFilter extends VidiunFlavorParamsFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMixEntryBaseFilter extends KalturaPlayableEntryFilter
+abstract class VidiunMixEntryBaseFilter extends VidiunPlayableEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaThumbParamsOutputBaseFilter extends KalturaThumbParamsFilter
+abstract class VidiunThumbParamsOutputBaseFilter extends VidiunThumbParamsFilter
 {
 	/**
 	 * 
@@ -16397,96 +16397,96 @@ abstract class KalturaThumbParamsOutputBaseFilter extends KalturaThumbParamsFilt
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaFlavorParamsOutputFilter extends KalturaFlavorParamsOutputBaseFilter
+class VidiunFlavorParamsOutputFilter extends VidiunFlavorParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaGenericXsltSyndicationFeedFilter extends KalturaGenericXsltSyndicationFeedBaseFilter
+class VidiunGenericXsltSyndicationFeedFilter extends VidiunGenericXsltSyndicationFeedBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveAssetFilter extends KalturaLiveAssetBaseFilter
+class VidiunLiveAssetFilter extends VidiunLiveAssetBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveParamsFilter extends KalturaLiveParamsBaseFilter
+class VidiunLiveParamsFilter extends VidiunLiveParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParamsFilter extends KalturaMediaFlavorParamsBaseFilter
+class VidiunMediaFlavorParamsFilter extends VidiunMediaFlavorParamsBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMixEntryFilter extends KalturaMixEntryBaseFilter
+class VidiunMixEntryFilter extends VidiunMixEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaThumbParamsOutputFilter extends KalturaThumbParamsOutputBaseFilter
+class VidiunThumbParamsOutputFilter extends VidiunThumbParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveEntryBaseFilter extends KalturaMediaEntryFilter
+abstract class VidiunLiveEntryBaseFilter extends VidiunMediaEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaMediaFlavorParamsOutputBaseFilter extends KalturaFlavorParamsOutputFilter
+abstract class VidiunMediaFlavorParamsOutputBaseFilter extends VidiunFlavorParamsOutputFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveEntryFilter extends KalturaLiveEntryBaseFilter
+class VidiunLiveEntryFilter extends VidiunLiveEntryBaseFilter
 {
 	/**
 	 * 
 	 *
-	 * @var KalturaNullableBoolean
+	 * @var VidiunNullableBoolean
 	 */
 	public $isLive = null;
 
@@ -16494,64 +16494,64 @@ class KalturaLiveEntryFilter extends KalturaLiveEntryBaseFilter
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaMediaFlavorParamsOutputFilter extends KalturaMediaFlavorParamsOutputBaseFilter
+class VidiunMediaFlavorParamsOutputFilter extends VidiunMediaFlavorParamsOutputBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveChannelBaseFilter extends KalturaLiveEntryFilter
+abstract class VidiunLiveChannelBaseFilter extends VidiunLiveEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveStreamEntryBaseFilter extends KalturaLiveEntryFilter
+abstract class VidiunLiveStreamEntryBaseFilter extends VidiunLiveEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveChannelFilter extends KalturaLiveChannelBaseFilter
+class VidiunLiveChannelFilter extends VidiunLiveChannelBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamEntryFilter extends KalturaLiveStreamEntryBaseFilter
+class VidiunLiveStreamEntryFilter extends VidiunLiveStreamEntryBaseFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-abstract class KalturaLiveStreamAdminEntryBaseFilter extends KalturaLiveStreamEntryFilter
+abstract class VidiunLiveStreamAdminEntryBaseFilter extends VidiunLiveStreamEntryFilter
 {
 
 }
 
 /**
- * @package Kaltura
+ * @package Vidiun
  * @subpackage Client
  */
-class KalturaLiveStreamAdminEntryFilter extends KalturaLiveStreamAdminEntryBaseFilter
+class VidiunLiveStreamAdminEntryFilter extends VidiunLiveStreamAdminEntryBaseFilter
 {
 
 }

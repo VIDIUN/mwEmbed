@@ -17,22 +17,22 @@
 </div>
 <script>
 // qunit: 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "Chromless present test" );
 
 	var $iframe = $( '#' + videoId + '_ifp' ).contents();
 	asyncTest("Testing that control bar is not in DOM", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			equal( $iframe.find('.controlBarContainer').length, 0 ,"no control-bar found" );
 			start();
 		})
 	});
 }
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
@@ -43,9 +43,9 @@ function jsKalturaPlayerTest( videoId ){
 			'loadingSpinner.plugin': false
 		}, 
 		'readyCallback': function( playerId ){
-			var kdp = $('#' + playerId)[0];
+			var vdp = $('#' + playerId)[0];
 			$('#actions a').click( function(){
-				kdp.sendNotification( $(this).attr('data-action') );
+				vdp.sendNotification( $(this).attr('data-action') );
 			})
 		}
 	});

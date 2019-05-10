@@ -14,41 +14,41 @@
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">	
 // Enable uiconf js which includes external resources 
-mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "limeSurvey Player Form Box test" );
 }
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2>limeSurvey Cue Points Form Editor </h2>
 Note The chapters editor has been configured to edit limeSurvey entries. 
 Please provide the limeSurvey Form URL for the given "chapter" form cuePoint.
 <div>
-	<div id="kaltura_player" style="width:400px;height:330px;float:left"></div>
-	<div id="k-chapterProp" style="float:left;width:400px"></div>
+	<div id="vidiun_player" style="width:400px;height:330px;float:left"></div>
+	<div id="v-chapterProp" style="float:left;width:400px"></div>
 	<div style="clear:both"></div>
-	<div id="k-chapterTimeline" style="width:800px"></div>
+	<div id="v-chapterTimeline" style="width:800px"></div>
 </div>
 <script>
-kWidget.featureConfig({
+vWidget.featureConfig({
 	'cache_st': 23,
-	'targetId' : 'kaltura_player',
+	'targetId' : 'vidiun_player',
 	'wid' : '_243342',
 	'uiconf_id' : '12644921',
 	'entry_id' : '0_uka1msg4',
 	'flashvars': {
 		'chaptersEdit':{
 			'plugin': true,
-			'path' : "/content/uiconf/ps/kaltura/kdp/v3.6.9/plugins/facadePlugin.swf",
+			'path' : "/content/uiconf/ps/vidiun/vdp/v3.6.9/plugins/facadePlugin.swf",
 			'relativeTo': 'video',
 			'position': 'before',
-			'ks' : null, // should be set via settings
+			'vs' : null, // should be set via settings
 			
 			// Actual plugin config:
 			'cueTags': 'limeSurvey',
@@ -58,14 +58,14 @@ kWidget.featureConfig({
 			
 			'customDataFields': 'limeSurveyURL,fadeOutTimeMs',
 			'tags' : 'limeSurvey',
-			'editPropId': 'k-chapterProp',
-			'editTimelineId': 'k-chapterTimeline',
+			'editPropId': 'v-chapterProp',
+			'editTimelineId': 'v-chapterTimeline',
 
 			'requiresJQuery' : true,
 			'onPageJs1': "{onPagePluginPath}/chapters/chaptersEdit.js",
 			'onPageCss1': "{onPagePluginPath}/chapters/chaptersEdit.css",
 			// get the shared cuepoint data controller: 
-			'onPageJs2': "{onPagePluginPath}/chapters/kWidget.cuePointsDataController.js"
+			'onPageJs2': "{onPagePluginPath}/chapters/vWidget.cuePointsDataController.js"
 		}
 	}
 })

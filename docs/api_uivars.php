@@ -1,48 +1,42 @@
 <?php
 	$uiVars1 = array(
-        /*'Kaltura.ServiceUrl' => array(
+        /*'Vidiun.ServiceUrl' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.ServiceBase' => array(
+        'Vidiun.ServiceBase' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.StatsServiceUrl' => array(
+        'Vidiun.StatsServiceUrl' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.NoApiCache' => array(
+        'Vidiun.NoApiCache' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.ForceIframeEmbed' => array(
+        'Vidiun.ForceIframeEmbed' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.KWidgetPsPath' => array(
+        'Vidiun.VWidgetPsPath' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.AllowIframeRemoteService' => array(
-            'type' => 'String',
-            'desc' => '',
-            'default' => '',
-            'example' => ''
-        ),
-        '' => array(
+        'Vidiun.AllowIframeRemoteService' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
@@ -54,73 +48,79 @@
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.ForceFlashOnDesktop' => array(
+        '' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.EnableEmbedUiConfJs' => array(
+        'Vidiun.ForceFlashOnDesktop' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.ForceFlashOnIE10' => array(
+        'Vidiun.EnableEmbedUiConfJs' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.IframeRewrite' => array(
+        'Vidiun.ForceFlashOnIE10' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.LicenseServerURL' => array(
+        'Vidiun.IframeRewrite' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.BlackVideoSources' => array(
+        'Vidiun.LicenseServerURL' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.UseManifestUrls' => array(
+        'Vidiun.BlackVideoSources' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.CdnUrl' => array(
+        'Vidiun.UseManifestUrls' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.Protocol' => array(
+        'Vidiun.CdnUrl' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.UseAppleAdaptive' => array(
+        'Vidiun.Protocol' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.UseFlavorIdsUrls' => array(
+        'Vidiun.UseAppleAdaptive' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
             'example' => ''
         ),
-        'Kaltura.LeadHLSOnAndroid' => array(
+        'Vidiun.UseFlavorIdsUrls' => array(
+            'type' => 'String',
+            'desc' => '',
+            'default' => '',
+            'example' => ''
+        ),
+        'Vidiun.LeadHLSOnAndroid' => array(
             'type' => 'String',
             'desc' => '',
             'default' => '',
@@ -128,14 +128,14 @@
         ),*/
         'httpProtocol' => array(
             'type' => 'String',
-            'desc' => 'The HTTP protocol to load the KDP application from',
-            'default' => 'Trimmed protocol of the URL the KDP was loaded from',
-            'availability' => 'kdp',
+            'desc' => 'The HTTP protocol to load the VDP application from',
+            'default' => 'Trimmed protocol of the URL the VDP was loaded from',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'host' => array(
             'type' => 'String',
-            'desc' => 'The URL of the Kaltura server to work with',
+            'desc' => 'The URL of the Vidiun server to work with',
             'default' => '',
             'example' => ''
         ),
@@ -147,27 +147,27 @@
         ),
         'clientTag' => array(
             'type' => 'String',
-            'desc' => 'A custom text that is concatenated to KDP version. The tag is used by the Kaltura server widget caching mechanism and for tracking and analytics',
-            'default' => 'KDP:KDP_VERSION',
+            'desc' => 'A custom text that is concatenated to VDP version. The tag is used by the Vidiun server widget caching mechanism and for tracking and analytics',
+            'default' => 'VDP:VDP_VERSION',
             'example' => ''
         ),
         'srvUrl' => array(
             'type' => 'String',
-            'desc' => 'Reserved for future use, determine the API services part of the base Kaltura API calls',
+            'desc' => 'Reserved for future use, determine the API services part of the base Vidiun API calls',
             'default' => '',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'partnerId' => array(
             'type' => 'String',
-            'desc' => 'The id of the current Kaltura partner',
+            'desc' => 'The id of the current Vidiun partner',
             'default' => '',
             'example' => ''
         ),
-        'ks' => array(
+        'vs' => array(
             'type' => 'String',
-            'desc' => 'Kaltura Session',
-            'default' => 'By default, the KDP generates a KS by calling the widget.get API',
+            'desc' => 'Vidiun Session',
+            'default' => 'By default, the VDP generates a VS by calling the widget.get API',
             'example' => ''
         ),
         'referrer' => array(
@@ -180,7 +180,7 @@
             'type' => 'Boolean',
             'desc' => 'Flag indicating whether to take the referrer from the page (if true) or from the referrer Flashvar (if false)',
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'storageId' => array(
@@ -193,21 +193,21 @@
             'type' => 'Boolean',
             'desc' => "Flag indicating whether to print traces to a box in the page. Useful when there's no Flash debugger version",
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'centerPreloader' => array(
             'type' => 'Boolean',
             'desc' => 'Flag indicating whether to center the preloader SWF. Should be true in case the preloader registration point is not at its center.',
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'usePreloaderBufferAnimation' => array(
             'type' => 'Boolean',
-            'desc' => 'Flag indication whether we should use the preloader SWF animation as the buffering animation. if "false", buffering animation is taken from "kspin" class in KDP skin.',
+            'desc' => 'Flag indication whether we should use the preloader SWF animation as the buffering animation. if "false", buffering animation is taken from "vspin" class in VDP skin.',
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         )
     );
@@ -215,7 +215,7 @@
 	$uiVars2 = array(
         'entryId' => array(
             'type' => 'String',
-            'desc' => 'Valid Kaltura media entry id or a media URL (to use URL set sourceType=URL)',
+            'desc' => 'Valid Vidiun media entry id or a media URL (to use URL set sourceType=URL)',
             'default' => '',
             'example' => ''
         ),
@@ -227,7 +227,7 @@
         ),
         'sourceType' => array(
             'type' => 'String',
-            'desc' => 'The type of media source to load, either a URL or id of valid Kaltura media entry',
+            'desc' => 'The type of media source to load, either a URL or id of valid Vidiun media entry',
             'default' => 'entryId',
             'example' => ''
         ),
@@ -239,35 +239,35 @@
         ),
         'streamerUrl' => array(
             'type' => 'String',
-            'desc' => "A full RTMP URL to the streaming application that will be used as the streaming provider, e.g. 'rtmp://rtmpakmi.kaltura.com/ondemand' (Used by the FMSURL OSMF class)",
+            'desc' => "A full RTMP URL to the streaming application that will be used as the streaming provider, e.g. 'rtmp://rtmpakmi.vidiun.com/ondemand' (Used by the FMSURL OSMF class)",
             'default' => '',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'streamFormat' => array(
             'type' => 'String',
             'desc' => 'Defines the video type of the RTMP stream to be played. To play mp4 streams over RTMP, pass streamFormat=mp4',
             'default' => 'undefined',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'rtmpFlavors' => array(
             'type' => 'String',
             'desc' => 'Determine whether to use a multi-bitrate content flavors for dynamic streaming (set to 1)',
             'default' => 'undefined',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'useRtmptFallback' => array(
             'type' => 'Boolean',
-            'desc' => 'Flag indicating whether KDP should try to connect to rtmpt/rtmpte when mediaProtocol is rtmp/rtmpe.',
+            'desc' => 'Flag indicating whether VDP should try to connect to rtmpt/rtmpte when mediaProtocol is rtmp/rtmpe.',
             'default' => 'true',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'disableBitrateCookie' => array(
             'type' => 'Boolean',
-            'desc' => 'Flag indicating whether the KDP should take the bitrate from the Flash cookie',
+            'desc' => 'Flag indicating whether the VDP should take the bitrate from the Flash cookie',
             'default' => 'false',
             'example' => ''
         ),
@@ -285,7 +285,7 @@
         ),
         'metadataProfileId' => array(
             'type' => 'String',
-            'desc' => 'This Flashvar contains a specific custom metadata profile id to deliver. If it is not passed, the KDP delivers the latest custom metadata profile',
+            'desc' => 'This Flashvar contains a specific custom metadata profile id to deliver. If it is not passed, the VDP delivers the latest custom metadata profile',
             'default' => '',
             'example' => ''
         ),
@@ -295,17 +295,17 @@
             'default' => 'true',
             'example' => ''
         ),
-        'loadThumbnailWithKs' => array(
+        'loadThumbnailWithVs' => array(
             'type' => 'Boolean',
-            'desc' => 'Flag indicating whether the KDP should append the KS to the thumbnail request. Default value "false" to take advantage of caching.',
+            'desc' => 'Flag indicating whether the VDP should append the VS to the thumbnail request. Default value "false" to take advantage of caching.',
             'default' => 'false',
             'example' => ''
         ),
         'noThumbnail' => array(
             'type' => 'Boolean',
-            'desc' => 'Flag indicating whether the KDP should forgo loading the thumbnail',
+            'desc' => 'Flag indicating whether the VDP should forgo loading the thumbnail',
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         )
     );
@@ -313,35 +313,35 @@
 	$uiVars3 = array(
         'widgetId' => array(
             'type' => 'String',
-            'desc' => 'The widget id as provided by Preview & Embed in KMC (if unsure use _partnerId e.g. _309)',
+            'desc' => 'The widget id as provided by Preview & Embed in VMC (if unsure use _partnerId e.g. _309)',
             'default' => '',
             'example' => ''
         ),
         'uiConfId' => array(
             'type' => 'String',
-            'desc' => 'The player uiConf id as provided by KMC (or by calling uiConf.add api)',
+            'desc' => 'The player uiConf id as provided by VMC (or by calling uiConf.add api)',
             'default' => '',
             'example' => ''
         ),
-        'kml' => array(
+        'vml' => array(
             'type' => 'String',
-            'desc' => 'The source from which to load the KDP uiConf (KML=Kaltura Meta ui Language). If undefined, the kml will be loaded from the Kaltura server via uiConf.get api. Options are: local / inject',
+            'desc' => 'The source from which to load the VDP uiConf (VML=Vidiun Meta ui Language). If undefined, the vml will be loaded from the Vidiun server via uiConf.get api. Options are: local / inject',
             'default' => 'undefined',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
-        'kmlPath' => array(
+        'vmlPath' => array(
             'type' => 'String',
-            'desc' => 'An accessible path to valid kml file (use with kml=local)',
+            'desc' => 'An accessible path to valid vml file (use with vml=local)',
             'default' => 'config.xml',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'embeddedWidgetData' => array(
             'type' => 'String',
-            'desc' => "Valid uiConf XML result, that is used by the 'KDP wrapper'; A Flash application that wraps the KDP for caching purposes",
+            'desc' => "Valid uiConf XML result, that is used by the 'VDP wrapper'; A Flash application that wraps the VDP for caching purposes",
             'default' => 'null',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'disableAlerts' => array(
@@ -352,9 +352,9 @@
         ),
         'fileSystemMode' => array(
             'type' => 'Boolean',
-            'desc' => 'Use to load the uiConf XML and skin assets from predefined path when debugging or loading KDP from local file system',
+            'desc' => 'Use to load the uiConf XML and skin assets from predefined path when debugging or loading VDP from local file system',
             'default' => 'false',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'debugMode' => array(
@@ -365,11 +365,11 @@
         ),
         'disableOnScreenClick' => array(
             'type' => 'Boolean',
-            'desc' => 'This Flashvar configures whether the on-screen click in KDP pauses/resumes playback',
+            'desc' => 'This Flashvar configures whether the on-screen click in VDP pauses/resumes playback',
             'default' => 'false',
             'example' => ''
         ),
-        'KalturaSupport_ForceUserAgent' => array(
+        'VidiunSupport_ForceUserAgent' => array(
             'type' => 'String',
             'desc' => 'Enable forcing a specific user agent by setting the user agent string. Player rules are validated against this user agent string',
             'default' => '',
@@ -379,7 +379,7 @@
             'type' => 'Boolean',
             'desc' => 'Disables forced usage of the HTML5 player set by the forceMobileHTML5 Flash var',
             'default' => '',
-            'example' => '../modules/KalturaSupport/tests/UserAgentPlayerRules.html'
+            'example' => '../modules/VidiunSupport/tests/UserAgentPlayerRules.html'
         ),
         'forceMobileHTML5' => array(
             'type' => 'Boolean ',
@@ -391,7 +391,7 @@
             'type' => 'Boolean',
             'desc' => 'When set to true, pops a user confirmation alert when the player needs to save a cookie in the local machine',
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/AlertForCookies.qunit.html'
+            'example' => '../modules/VidiunSupport/tests/AlertForCookies.qunit.html'
         ),
         'relativeCortadoAppletPath' => array(
             'type' => 'String',
@@ -403,17 +403,17 @@
             'type' => 'Boolean',
             'desc' => 'Under iOS - if there are captions within the HLS stream, users should set disableTrackElement to true to prevent caption duplications',
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/ClosedCaptions.html'
+            'example' => '../modules/VidiunSupport/tests/ClosedCaptions.html'
         ),
-        'KalturaSupport.LeadWithHTML5' => array(
+        'VidiunSupport.LeadWithHTML5' => array(
             'type' => 'Boolean',
             'desc' => 'When set to true, first tries to load the HTML5 player and if loading fails, loads the Flash player',
             'default' => 'false',
             'example' => ''
         ),
-        'KalturaSupport.PlayerConfig' => array(
+        'VidiunSupport.PlayerConfig' => array(
             'type' => 'Object',
-            'desc' => 'The Kaltura player configuration object',
+            'desc' => 'The Vidiun player configuration object',
             'default' => '',
             'example' => ''
         )
@@ -424,7 +424,7 @@
             'type' => 'Boolean',
             'desc' => "Auto play single media (doesn't apply to playlists)",
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/AutoPlay.qunit.html'
+            'example' => '../modules/VidiunSupport/tests/AutoPlay.qunit.html'
         ),
         'autoRewind' => array(
             'type' => 'Boolean',
@@ -436,19 +436,19 @@
             'type' => 'Boolean',
             'desc' => 'Determine whether to start playback with volume muted (usually used by video ads or homepage auto play videos)',
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/PlaylistAutoMute.html'
+            'example' => '../modules/VidiunSupport/tests/PlaylistAutoMute.html'
         ),
         'loop' => array(
             'type' => 'Boolean',
             'desc' => 'Indicates whether the media should be played again after playback has completed',
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/Loop.qunit.html'
+            'example' => '../modules/VidiunSupport/tests/Loop.qunit.html'
         ),
         'stretchVideo' => array(
             'type' => 'Boolean',
             'desc' => 'When true, stretchs the video to fill its container even if video aspect ratio breaks',
             'default' => 'false',
-            'example' => '../modules/KalturaSupport/tests/Loop.qunit.html'
+            'example' => '../modules/VidiunSupport/tests/Loop.qunit.html'
         ),
         'adsOnReplay' => array(
             'type' => 'Boolean',
@@ -705,9 +705,9 @@
             'default' => 'true',
             'example' => ''
         ),
-        'EmbedPlayer.ForceKPlayer' => array(
+        'EmbedPlayer.ForceVPlayer' => array(
             'type' => 'Boolean',
-            'desc' => "Force loading the legacy KDP Flash video player.",
+            'desc' => "Force loading the legacy VDP Flash video player.",
             'default' => 'false',
             'example' => ''
         ),
@@ -746,9 +746,9 @@
 	$uiVars6 = array(
         'mediaProxy.selectedFlavorId' => array(
             'type' => 'String',
-            'desc' => 'The transcoding flavor currently playing. A valid id of a transcoding flavor associated with Kaltura entry currently being played',
+            'desc' => 'The transcoding flavor currently playing. A valid id of a transcoding flavor associated with Vidiun entry currently being played',
             'default' => '',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'mediaProxy.preferedFlavorBR' => array(
@@ -767,21 +767,21 @@
             'type' => 'Boolean',
             'desc' => 'This is used to turn an image to a timed image. It is useful in case of playlist where an image should only show for a specific time before the next item will show. If the image should show without time (static), set this to false',
             'default' => 'true in case of playlists, false in case of single image',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'mediaProxy.initialBufferTime' => array(
             'type' => 'Integer',
             'desc' => "Set the initial buffer time in dual buffering method. When a number of seconds indicated by this parameter will be buffered, the stream playback will start and the buffer size will increase to expandedBufferTime. Any positive number representing the number of seconds the buffer should hold before playback",
             'default' => '2',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'mediaProxy.expandedBufferTime' => array(
             'type' => 'Integer',
             'desc' => 'Set the desired buffer time in dual buffering method. After the stream buffer has accumulated the number of seconds indicated by initialBufferTime, the buffer size increases to the number of seconds indicated by this parameter to maximize the buffer download size during playback. Any positive number representing the desired seconds to buffer',
             'default' => '10',
-            'availability' => 'kdp',
+            'availability' => 'vdp',
             'example' => ''
         ),
         'mediaProxy.mediaPlayFrom' => array(

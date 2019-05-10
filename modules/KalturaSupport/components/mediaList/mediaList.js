@@ -1,7 +1,7 @@
 (function ( mw, $ ) {
 	"use strict";
 
-	mw.PluginManager.add( 'mediaList', mw.KBaseComponent.extend( {
+	mw.PluginManager.add( 'mediaList', mw.VBaseComponent.extend( {
 
 			defaultConfig: {
 				'parent': 'sideBarContainer',
@@ -31,9 +31,9 @@
 
 			setup: function ( embedPlayer ) {
 				this.baseThumbSettings = {
-					'partner_id': this.getPlayer().kpartnerid,
-					'uiconf_id': this.getPlayer().kuiconfid,
-					'entry_id': this.getPlayer().kentryid,
+					'partner_id': this.getPlayer().vpartnerid,
+					'uiconf_id': this.getPlayer().vuiconfid,
+					'entry_id': this.getPlayer().ventryid,
 					'width': this.getConfig( "thumbWidth" )
 				};
 				if (this.getConfig('containerPosition')){
@@ -44,10 +44,10 @@
 			addBindings: function () {
 				var _this = this;
 
-				this.bind( 'KalturaSupport_ThumbCuePointsReady', function () {
+				this.bind( 'VidiunSupport_ThumbCuePointsReady', function () {
 					_this.mediaList.meta = {};
 					//Init data provider
-					var cuePoints = _this.getPlayer().kCuePoints.getCuePoints();
+					var cuePoints = _this.getPlayer().vCuePoints.getCuePoints();
 					//Generate data transfer object
 					var filteredCuePoints = $.grep(cuePoints, function(cuePoint){
 						var found = false;
@@ -113,7 +113,7 @@
 			getComponent: function(){
 				if( ! this.$el ){
 					this.$el = $( '<div />' )
-						.addClass(this.pluginName + " k-chapters-container k-" + this.getLayout() /*+ this.getCssClass()*/);
+						.addClass(this.pluginName + " v-chapters-container v-" + this.getLayout() /*+ this.getCssClass()*/);
 						/*.append(
 							this.getTemplateHTML( {meta: this.getMetaData(), mediaList: this.getTemplateData()})
 					);*/
@@ -143,10 +143,10 @@
 				}
 			},
 			getListContainer: function(){
-				// remove any existing k-chapters-container for this player
-				$('.k-player-' + this.getPlayer().id + '.k-chapters-container').remove();
+				// remove any existing v-chapters-container for this player
+				$('.v-player-' + this.getPlayer().id + '.v-chapters-container').remove();
 				// Build new chapters container
-				var $chaptersContainer = this.$chaptersContainer = $('<div>').addClass( 'k-player-' + this.getPlayer().id + ' k-chapters-container');
+				var $chaptersContainer = this.$chaptersContainer = $('<div>').addClass( 'v-player-' + this.getPlayer().id + ' v-chapters-container');
 				// check for where it should be appended:
 				var targetRef = $('#'+this.getPlayer().id, parent.document.body );//$( this.getPlayer().getInterface() );
 				switch( this.getConfig('containerPosition') ){
@@ -224,7 +224,7 @@
 						height: this.getThumbHeight()
 					},
 					startTime: obj.startTime / 1000,
-					startTimeDisplay: this.formatTimeDisplayValue(kWidget.seconds2npt( obj.startTime / 1000 )),
+					startTimeDisplay: this.formatTimeDisplayValue(vWidget.seconds2npt( obj.startTime / 1000 )),
 					endTime: null,
 					durationDisplay: null,
 					chapterNumber: this.getItemNumber(index)
@@ -248,7 +248,7 @@
 				});
 
 				// do the api request
-				this.getKalturaClient().doRequest( requestArray, function ( data ) {
+				this.getVidiunClient().doRequest( requestArray, function ( data ) {
 					// Validate result
 					if ( !_this.isValidResult( data ) ) {
 						return;
@@ -269,7 +269,7 @@
 						item.endTime = _this.getPlayer().duration;
 					}
 
-					item.durationDisplay = kWidget.seconds2npt((item.endTime - item.startTime) );
+					item.durationDisplay = vWidget.seconds2npt((item.endTime - item.startTime) );
 				});
 			},
 			formatTimeDisplayValue: function(time){
@@ -298,7 +298,7 @@
 			},
 			getThumbUrl: function(item) {
 				var time = item.thumbOffset || item.startTime;
-				var thumbUrl = kWidget.getKalturaThumbUrl(
+				var thumbUrl = vWidget.getVidiunThumbUrl(
 					$.extend( {}, this.baseThumbSettings, {
 						'vid_sec': parseInt( time / 1000 )
 					} )
@@ -331,7 +331,7 @@
 			},
 			getThumRotatorUrl: function(){
 				var _this = this;
-				var imageSlicesUrl = kWidget.getKalturaThumbUrl(
+				var imageSlicesUrl = vWidget.getVidiunThumbUrl(
 					$.extend( {}, this.baseThumbSettings, {
 						'vid_slices': _this.getSliceCount()
 					})
@@ -380,7 +380,7 @@
 					});
 				if (this.getConfig('thumbnailRotator')) {
 					chapterBox
-						.off( 'mouseenter mouseleave', '.k-thumb' )
+						.off( 'mouseenter mouseleave', '.v-thumb' )
 						.on( {
 							mouseenter: function () {
 								var index = $( this ).data( 'chapterIndex' );
@@ -392,7 +392,7 @@
 									'height': item.thumbnail.height,
 									'background-image': 'url(\'' + item.thumbnail.rotatorUrl + '\')',
 									'background-position': _this.getThumbSpriteOffset( item.thumbnail.width, ( item.startTime ) ),
-									// fix aspect ratio on bad Kaltura API returns
+									// fix aspect ratio on bad Vidiun API returns
 									'background-size': ( item.thumbnail.width * _this.getSliceCount() ) + 'px 100%'
 								} );
 
@@ -427,7 +427,7 @@
 										'background-image': 'url(\'' + item.thumbnail.url + '\')'
 									} );
 							}
-						}, ".k-thumb" );
+						}, ".v-thumb" );
 				}
 
 			},
@@ -460,7 +460,7 @@
 					return $(a).data('index') > $(b).data('index') ? 1 : -1;
 				});*/
 				// start at clip zero ( should be default )
-				//$cc.find('.k-carousel')[0].jCarouselLiteGo( 0 );
+				//$cc.find('.v-carousel')[0].jCarouselLiteGo( 0 );
 			},
 			initScroll: function(){
 				var _this = this;
@@ -473,9 +473,9 @@
 				}
 
 				// Add scrolling carousel to clip list ( once dom sizes are up-to-date )
-				$cc.find('.k-carousel').jCarouselLite({
-					btnNext: /*'.k-player-' + this.getPlayer().id +*/' .k-next',
-					btnPrev: /*'.k-player-' + this.getPlayer().id +*/' .k-prev',
+				$cc.find('.v-carousel').jCarouselLite({
+					btnNext: /*'.v-player-' + this.getPlayer().id +*/' .v-next',
+					btnPrev: /*'.v-player-' + this.getPlayer().id +*/' .v-prev',
 					visible: chaptersVisible,
 					mouseWheel: true,
 					circular: false,
@@ -486,13 +486,13 @@
 
 				// make sure vertical height matches target:
 				if( this.getLayout() == 'vertical' ){
-					$cc.find('.k-carousel').css('height', $cc.height() )
+					$cc.find('.v-carousel').css('height', $cc.height() )
 				}
 
 				// give more height if needed
 				if( this.getLayout() == 'horizontal' ){
 					// fit to container:
-					$cc.find('.k-carousel').css('width', $cc.width() )
+					$cc.find('.v-carousel').css('width', $cc.width() )
 					// set width to horizontalChapterBoxWidth
 					$cc.find('.chapterBox').css( 'width', this.getChapterBoxWidth() );
 					//set to auto to discover height:
@@ -520,41 +520,41 @@
 
 				var $cc = this.getComponent();
 				$cc.find('ul').wrap(
-					$( '<div>' ).addClass('k-carousel')
+					$( '<div>' ).addClass('v-carousel')
 				);
 				// Add scroll buttons
-				$cc.find('.k-carousel').before(
+				$cc.find('.v-carousel').before(
 					$( '<a />' )
-						.addClass( "k-scroll k-prev" )
+						.addClass( "v-scroll v-prev" )
 				);
-				$cc.find('.k-carousel').after(
+				$cc.find('.v-carousel').after(
 					$( '<a />' )
-						.addClass( "k-scroll k-next" )
+						.addClass( "v-scroll v-next" )
 				);
 
 				// Add chapter hover to hide show play buttons:
-				var inKBtn = false;
+				var inVBtn = false;
 				var inContainer = false;
 				var checkHideBtn = function(){
 					setTimeout(function(){
-						if( !inKBtn && !inContainer ){
-							$cc.find('.k-prev,.k-next').animate({'opacity':0});
+						if( !inVBtn && !inContainer ){
+							$cc.find('.v-prev,.v-next').animate({'opacity':0});
 						}
 					},0)
 				}
 				var showBtn = function(){
-					$cc.find('.k-prev,.k-next').animate({'opacity':1});
+					$cc.find('.v-prev,.v-next').animate({'opacity':1});
 				}
-				// check for knext
-				$cc.find('.k-prev,.k-next')
+				// check for vnext
+				$cc.find('.v-prev,.v-next')
 					.hover(function(){
 						showBtn();
-						inKBtn = true;
+						inVBtn = true;
 					},function(){
-						inKBtn = false;
+						inVBtn = false;
 						checkHideBtn();
 					})
-				$cc.find('.k-carousel').hover( function(){
+				$cc.find('.v-carousel').hover( function(){
 					showBtn();
 					inContainer = true;
 				}, function(){
@@ -562,7 +562,7 @@
 					checkHideBtn();
 				})
 				// hide the arrows to start with ( with an animation so users know they are there )
-				$cc.find('.k-prev,.k-next').animate({'opacity':0});
+				$cc.find('.v-prev,.v-next').animate({'opacity':0});
 			},
 			calculateVisibleScrollItems: function(){
 				var $cc = this.getComponent();
@@ -578,7 +578,7 @@
 					// set container height if horizontal
 					$cc.css( 'height', largestBoxHeight );
 					// calculate number of visible chapters
-					chaptersVisible = Math.floor( $cc.find( '.k-carousel' ).width() / largestBoxWidth );
+					chaptersVisible = Math.floor( $cc.find( '.v-carousel' ).width() / largestBoxWidth );
 				} else {
 					// calculate number of visible for vertical chapters
 					chaptersVisible = Math.floor( $cc.height() / largestBoxHeight );
@@ -644,8 +644,8 @@
 						item.active = true;
 						var endTime = item.endTime;
 						var countDown =  Math.abs( time - endTime );
-						$activeChapter.find('.k-duration span').text(
-							kWidget.seconds2npt( countDown )
+						$activeChapter.find('.v-duration span').text(
+							vWidget.seconds2npt( countDown )
 						);
 					}
 				} else {
@@ -656,8 +656,8 @@
 						var endTime = item.endTime;
 						$activeChapter
 							.removeClass( 'active' )
-							.find( '.k-duration span' ).text(
-							kWidget.seconds2npt( endTime - startTime )
+							.find( '.v-duration span' ).text(
+							vWidget.seconds2npt( endTime - startTime )
 						)
 					}
 
@@ -670,7 +670,7 @@
 
 					if ( this.mediaList[ activeIndex ] ) {
 						this.getComponent().find( "li[data-chapter-index='" + activeIndex + "']" ).addClass( 'active' );
-						this.getComponent().find( '.k-carousel' )[0].jCarouselLiteGo( activeIndex );
+						this.getComponent().find( '.v-carousel' )[0].jCarouselLiteGo( activeIndex );
 					}
 				}
 			}

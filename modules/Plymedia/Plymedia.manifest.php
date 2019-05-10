@@ -3,7 +3,7 @@ return	array(
 	'plymedia' => array(
 		'description' => "PLYmedia captions provides on demand and realtime caption services. 
 			This player demonstrate plyMedia captions on top of video playback. 
-			Learn more about <a target=\"_new\" href=\"http://exchange.kaltura.com/content/plymedia\">adding PLYmedia services</a> to your account",
+			Learn more about <a target=\"_new\" href=\"http://exchange.vidiun.com/content/plymedia\">adding PLYmedia services</a> to your account",
 		'attributes'=> array(
 			// 
 			"subpos" => array(

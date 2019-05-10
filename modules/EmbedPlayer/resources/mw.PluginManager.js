@@ -37,7 +37,7 @@ mw.PluginManager = {
 			return;
 		}
 		var _this = this;
-		mw.addKalturaPlugin( pluginName, function( embedPlayer, callback ){
+		mw.addVidiunPlugin( pluginName, function( embedPlayer, callback ){
 			// Check if plugin initialise
 			if( embedPlayer.plugins[ pluginName ] ) {
 				//mw.log('PluginManager::init: Plugin "' + pluginName + '" already initialised.');

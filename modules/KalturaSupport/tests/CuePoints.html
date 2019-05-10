@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Cue Points example html5 / kdp</title>
+<title>Cue Points example html5 / vdp</title>
 <script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
@@ -28,7 +28,7 @@
 		);
 	};
 </script>
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 <script type="text/javascript">	
 var testEventObject = {};
 //we use this round about way of tracking events
@@ -40,14 +40,14 @@ function trackEventForTests( qPoint ) {
 		$( testEventObject ).trigger( 'cueEvent', qPoint );
 	}
 }
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 	// Name this module
 	module( "CuePoints" );
 
-	var kdp = $( '#' + videoId )[0];
+	var vdp = $( '#' + videoId )[0];
 	
 	asyncTest("start cue point", function(){
-		kalturaQunitWaitForPlayer(function(){
+		vidiunQunitWaitForPlayer(function(){
 			$( testEventObject ).bind('preCueEvent', function(event, qPoint){
 				var type = (qPoint.context) ? 'Ad' : 'Code';
 				equal( qPoint.cuePoint.title, "Preroll", "Preroll event sent" );
@@ -55,7 +55,7 @@ function jsKalturaPlayerTest( videoId ){
 				// continue testing
 				start();
 			});
-			kdp.sendNotification('doPlay');
+			vdp.sendNotification('doPlay');
 		});
 	});
 	asyncTest("CuePoint 1 at 5 seconds", function(){
@@ -63,7 +63,7 @@ function jsKalturaPlayerTest( videoId ){
 			equal( qPoint.cuePoint.description, "Code Cue Point", "Code Cue Point event text sent");
 			equal( qPoint.cuePoint.startTime, 3000, "Code Cue Point event sent" );
 			// Finish tests:
-			kdp.sendNotification('doPause');
+			vdp.sendNotification('doPause');
 			start();
 		});		
 	});
@@ -72,13 +72,13 @@ function jsKalturaPlayerTest( videoId ){
 </script>
 </head>
 <body>
-<h2> Cue Points for kdp flash player and html5 player </h2>
+<h2> Cue Points for vdp flash player and html5 player </h2>
 <h4> Preroll from uiConf, other ads from cue points</h4>
 <a href="?forceMobileHTML5"> Force Mobile Safari</a> for testing with desktop chrome and safari.
 <br /><br />
 
 <div style="float:left">
-<object id="kaltura_player" name="kaltura_player" 
+<object id="vidiun_player" name="vidiun_player" 
 	type="application/x-shockwave-flash" 
 	allowFullScreen="true" allowNetworking="all" 
 	allowScriptAccess="always" 
@@ -86,13 +86,13 @@ function jsKalturaPlayerTest( videoId ){
 	xmlns:dc="http://purl.org/dc/terms/" 
 	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
 	rel="media:video" 
-	resource="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" 
-	data="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy">
+	resource="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" 
+	data="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy">
 	<param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" />
 	<param name="allowScriptAccess" value="always" />
 	<param name="bgcolor" value="#000000" />
 	<param name="flashVars" value="&externalInterfaceDisabled=false&getCuePointsData=true" />
-	<param name="movie" value="http://www.kaltura.com/index.php/kwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" />
+	<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1310313522/wid/_423851/uiconf_id/5143401/entry_id/1_sqv8eppy" />
 </object>
 </div>
 <div style="float:left;padding-left:20px" >
@@ -106,10 +106,10 @@ function jsKalturaPlayerTest( videoId ){
 	</table>
 </div>
 <!-- 
-<layout id="full" name="Preroll only" skinPath="/content/uiconf/kaltura/kmc/appstudio/kdp3/dragonfly/skin/skin_3.5.5/skin.swf">
+<layout id="full" name="Preroll only" skinPath="/content/uiconf/vidiun/vmc/appstudio/vdp3/dragonfly/skin/skin_3.5.5/skin.swf">
   <HBox id="topLevel" width="100%" height="100%">
     <VBox id="player" width="100%" height="100%" styleName="black">
-      <Plugin id="kalturaMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
+      <Plugin id="vidiunMix" width="0%" height="0%" includeInLayout="false" loadingPolicy="onDemand"/>
       <Plugin id="statistics" width="0%" height="0%" includeInLayout="false"/>
       <Plugin id="vast" numPreroll="1" prerollInterval="1" prerollStartWith="1" prerollUrl="http://d1.openx.org/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&amp;source=&amp;format=vast&amp;charset=UTF_8&amp;nz=1&amp;zones=z1=182104" preSequence="1" timeout="4" trackCuePoints="true"/>
       <HBox id="TopTitleScreen" width="100%" height="30" styleName="darkBg">
@@ -130,7 +130,7 @@ function jsKalturaPlayerTest( videoId ){
           <Spacer height="100%"/>
           <HBox width="100%" height="30">
             <Spacer width="100%"/>
-            <Button id="skipBtn" visible="{sequenceProxy.isAdSkip}" includeInLayout="{sequenceProxy.isAdSkip}" type="labelButton" color1="14540253" color2="16777215" styleName="controllerScreen" height="30" width="20" allowDisable="false" label="skip ad >" kClick="sendNotification('sequenceSkipNext')"/>
+            <Button id="skipBtn" visible="{sequenceProxy.isAdSkip}" includeInLayout="{sequenceProxy.isAdSkip}" type="labelButton" color1="14540253" color2="16777215" styleName="controllerScreen" height="30" width="20" allowDisable="false" label="skip ad >" vClick="sendNotification('sequenceSkipNext')"/>
           </HBox>
         </VBox>
         <Plugin id="gigya" width="100%" height="100%" loadingPolicy="noWait" title="{mediaProxy.entry.name}" shareEmailBody="Hi,&lt;br>I watched this video and thought you'd enjoy it too. &lt;br>$URL$ to watch.&lt;br> $sender$" shareEmailSubject="Take a look at this video"/>
@@ -141,7 +141,7 @@ function jsKalturaPlayerTest( videoId ){
       <Canvas id="controlsHolder" width="100%" height="30">
         <HBox id="ControllerScreenHolder" width="100%" height="30" verticalAlign="middle" styleName="darkBg">
           <HBox id="ControllerScreen" width="100%" height="30" horizontalGap="9" paddingLeft="9" verticalAlign="middle" styleName="darkBg">
-            <Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="" upTooltip="Play" selectedTooltip="Pause" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+            <Button id="playBtnControllerScreen" command="play" buttonType="iconButton" focusRectPadding="0" icon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="pauseIcon" selectedOverIcon="pauseIcon" selectedDownIcon="pauseIcon" selectedDisabledIcon="pauseIcon" tooltip="" upTooltip="Play" selectedTooltip="Pause" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
             <Button id="liveToggleStatus" toggle="true" color1="0xFF0000" color2="0xFF0000" upIcon="onAirIcon" overIcon="onAirIcon" downIcon="onAirIcon" disabeledIcon="onAirIcon" selectedUpIcon="offlineIcon" selectedOverIcon="offlineIcon" selectedDownIcon="offlineIcon" selectedDisabledIcon="offlineIcon" isSelected="{mediaProxy.isOffline}" visible="{mediaProxy.isLive}" includeInLayout="{mediaProxy.isLive}" mouseEnable="false" useHandCursor=""/>
             <VBox id="scrubberContainer" width="100%" height="30" verticalAlign="middle" verticalGap="-3" notVisible="{mediaProxy.isLive}">
               <Spacer height="10"/>
@@ -153,11 +153,11 @@ function jsKalturaPlayerTest( videoId ){
               </HBox>
             </VBox>
             <VolumeBar id="volumeBar" styleName="volumeBtn" width="20" height="20" buttonType="iconButton" tooltip="Change volume" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-            <Button id="shareBtnControllerScreen" buttonType="iconButton" kClick="sendNotification('doGigya')" height="22" styleName="controllerScreen" focusRectPadding="0" icon="shareIcon" tooltip="share with friends" k_buttonType="buttonIconControllerArea" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-            <Button id="fullScreenBtnControllerScreen" command="fullScreen" buttonType="iconButton" height="22" styleName="controllerScreen" icon="openFullScreenIcon" selectedUpIcon="closeFullScreenIcong" selectedOverIcon="closeFullScreenIcon" selectedDownIcon="closeFullScreenIcon" selectedDisabledIcon="closeFullScreenIcon" focusRectPadding="0" allowDisable="false" tooltip="Toggle fullscreen" k_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+            <Button id="shareBtnControllerScreen" buttonType="iconButton" vClick="sendNotification('doGigya')" height="22" styleName="controllerScreen" focusRectPadding="0" icon="shareIcon" tooltip="share with friends" v_buttonType="buttonIconControllerArea" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+            <Button id="fullScreenBtnControllerScreen" command="fullScreen" buttonType="iconButton" height="22" styleName="controllerScreen" icon="openFullScreenIcon" selectedUpIcon="closeFullScreenIcong" selectedOverIcon="closeFullScreenIcon" selectedDownIcon="closeFullScreenIcon" selectedDisabledIcon="closeFullScreenIcon" focusRectPadding="0" allowDisable="false" tooltip="Toggle fullscreen" v_buttonType="buttonIconControllerArea" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
           </HBox>
           <Spacer width="13"/>
-          <Button id="kalturaLogo" height="50" width="100" kClick="navigate('http://www.kaltura.com')" styleName="controllerScreen" icon="kalturaLogo"/>
+          <Button id="vidiunLogo" height="50" width="100" vClick="navigate('http://www.vidiun.com')" styleName="controllerScreen" icon="vidiunLogo"/>
           <Spacer width="13"/>
         </HBox>
       </Canvas>
@@ -168,8 +168,8 @@ function jsKalturaPlayerTest( videoId ){
       <VBox id="startContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
         <Spacer width="100%"/>
         <Tile id="startTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-          <Button id="onVideoPlayBtnStartScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" k_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-          <Button id="shareBtnStartScreen" kClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" k_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="onVideoPlayBtnStartScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" v_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="shareBtnStartScreen" vClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" v_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
         </Tile>
         <Spacer width="100%"/>
       </VBox>
@@ -178,8 +178,8 @@ function jsKalturaPlayerTest( videoId ){
       <VBox id="pauseContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
         <Spacer height="100%"/>
         <Tile id="pauseTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-          <Button id="onVideoPlayBtnPauseScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" k_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-          <Button id="shareBtnPauseScreen" kClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" k_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="onVideoPlayBtnPauseScreen" command="play" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Play" styleName="onScreenBtn" upIcon="playIcon" overIcon="playIcon" downIcon="playIcon" disabeledIcon="playIcon" selectedUpIcon="playIcon" selectedOverIcon="playIcon" selectedDownIcon="playIcon" selectedDisabledIcon="playIcon" v_buttonType="buttonIconControllerArea" tooltip="Play video" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="shareBtnPauseScreen" vClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" v_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
         </Tile>
         <Spacer height="100%"/>
       </VBox>
@@ -188,7 +188,7 @@ function jsKalturaPlayerTest( videoId ){
       <VBox id="playContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
         <Spacer height="100%"/>
         <Tile id="playTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-          <Button id="shareBtnPlayScreen" kClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" k_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="shareBtnPlayScreen" vClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" v_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
         </Tile>
         <Spacer height="100%"/>
       </VBox>
@@ -197,8 +197,8 @@ function jsKalturaPlayerTest( videoId ){
       <VBox id="endContainer" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
         <Spacer height="100%"/>
         <Tile id="endTile" width="100%" verticalGap="10" verticalAlign="middle" horizontalAlign="center">
-          <Button id="replayBtnEndScreen" kClick="sendNotification('doPlay')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Replay" styleName="onScreenBtn" upIcon="replayIcon" k_buttonType="buttonIconControllerArea" tooltip="Replay" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
-          <Button id="shareBtnEndScreen" kClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" k_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="replayBtnEndScreen" vClick="sendNotification('doPlay')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Replay" styleName="onScreenBtn" upIcon="replayIcon" v_buttonType="buttonIconControllerArea" tooltip="Replay" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
+          <Button id="shareBtnEndScreen" vClick="sendNotification('doGigya')" buttonType="onScreenButton" minWidth="60" labelPlacement="top" label="Share" styleName="onScreenBtn" upIcon="shareIcon" v_buttonType="buttonIconControllerArea" tooltip="share with friends" uiconfId="" color1="14540253" color2="16777215" color3="3355443" color4="10066329" color5="16777215" font="Arial"/>
         </Tile>
         <Spacer height="100%"/>
       </VBox>

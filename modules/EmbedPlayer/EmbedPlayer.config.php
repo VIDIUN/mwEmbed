@@ -55,7 +55,7 @@
 			'EmbedPlayer.ForceLargeReplayButton' => false,
 	
 			// The attribution library page
-			'EmbedPlayer.LibraryPage' => 'http://www.kaltura.org/project/HTML5_Video_Media_JavaScript_Library',
+			'EmbedPlayer.LibraryPage' => 'http://www.vidiun.org/project/HTML5_Video_Media_JavaScript_Library',
 	
 			// What tags will be re-written to video player by default
 			// Set to empty string or null to avoid automatic video tag rewrites to embedPlayer
@@ -70,15 +70,15 @@
 			// Default time display size:
 			'EmbedPlayer.TimeDisplayWidth' => 75,
 	
-			// If the video player should attribute kaltura
-			"EmbedPlayer.KalturaAttribution" => true,
+			// If the video player should attribute vidiun
+			"EmbedPlayer.VidiunAttribution" => true,
 	
 			// The attribution button
 			'EmbedPlayer.AttributionButton' => array(
-				'title' => 'Kaltura html5 video library',
-			 	'href' => 'http://www.kaltura.com',
+				'title' => 'Vidiun html5 video library',
+			 	'href' => 'http://www.vidiun.com',
 				// Style icon to be applied
-				'class' => 'kaltura-icon',
+				'class' => 'vidiun-icon',
 				// Style to be applied to the outer attribution button container div
 				'style' => array(),
 				// An icon image url 16x16 image url or data url )

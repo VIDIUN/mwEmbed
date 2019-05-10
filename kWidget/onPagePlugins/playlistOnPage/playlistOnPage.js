@@ -1,7 +1,7 @@
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById(playerId);
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById(playerId);
 	var addOnce = false;
-	var genClipListId = 'k-clipList-' + playerId;
+	var genClipListId = 'v-clipList-' + playerId;
 	// remove any old genClipListId:
 	$('#' + genClipListId ).remove();
 
@@ -10,7 +10,7 @@ kWidget.addReadyCallback( function( playerId ){
 		if( $('#' + genClipListId ).length ){
 			return  $('#' + genClipListId );
 		}
-		var clipListId = kdp.evaluate('{playlistOnPage.clipListTargetId}' );
+		var clipListId = vdp.evaluate('{playlistOnPage.clipListTargetId}' );
 		if( clipListId == "null" ){
 			clipListId = null;
 		}
@@ -22,57 +22,57 @@ kWidget.addReadyCallback( function( playerId ){
 		return $('<div />').attr('id', genClipListId ).insertAfter(  $( '#' + playerId ) )
 	}
 	function activateEntry( activeEntryId ){
-		var $carousel = getClipListTarget().find( '.k-carousel' );
+		var $carousel = getClipListTarget().find( '.v-carousel' );
 		// highlight the active clip ( make sure only one clip is highlighted )
 		var $clipList = getClipListTarget().find( 'ul li' );
 		if( $clipList.length && activeEntryId ){
 			$clipList.each( function( inx, clipLi ){
-				// kdp moves entryId to .entryId in playlist data provider ( not a db mapping )
+				// vdp moves entryId to .entryId in playlist data provider ( not a db mapping )
 				var entryMeta =  $( clipLi ).data( 'entryMeta' );
 				var clipEntryId = entryMeta.entryId || entryMeta.id;
 				if( clipEntryId == activeEntryId ){
-					$( clipLi ).addClass( 'k-active' ).data( 'activeEntry', true );
+					$( clipLi ).addClass( 'v-active' ).data( 'activeEntry', true );
 
 					// scroll to the target entry ( if not already shown ):
 					if( inx == 0 || getClipListTarget().find('ul').width() > getClipListTarget().width() ){
 						$carousel[0].jCarouselLiteGo( inx );
 					}
 				} else {
-					$( clipLi ).removeClass( 'k-active' ).data('activeEntry', false)
+					$( clipLi ).removeClass( 'v-active' ).data('activeEntry', false)
 				}
 			});
 		}
 	}
-	kdp.kBind( "changeMedia.onPagePlaylist", function( clip ){
+	vdp.vBind( "changeMedia.onPagePlaylist", function( clip ){
 		activateEntry( clip.entryId );
 	});
 	
-	kdp.kBind( "mediaReady.onPagePlaylist", function(){
+	vdp.vBind( "mediaReady.onPagePlaylist", function(){
 		if( addOnce ){
 			return ;
 		}
-		var clipListId = kdp.evaluate('{playlistOnPage.clipListTargetId}' );
+		var clipListId = vdp.evaluate('{playlistOnPage.clipListTargetId}' );
 		if( clipListId == "null" ){
 			clipListId = null;
 		}
 		addOnce = true;
-		var playlistObject = kdp.evaluate("{playlistAPI.dataProvider}");
+		var playlistObject = vdp.evaluate("{playlistAPI.dataProvider}");
 		if( !playlistObject || !playlistObject.content ){
-			kWidget.log("Error:: playlistOnPage: no playlist object found");
+			vWidget.log("Error:: playlistOnPage: no playlist object found");
 			// no sense in building out playlist if it does not exist: 
 			return ;
 		}
 		// check for a target
 		$clipListTarget = getClipListTarget();
 		// Add a base style class:
-		$clipListTarget.addClass( 'kWidget-clip-list' );
+		$clipListTarget.addClass( 'vWidget-clip-list' );
 
 		// add layout mode:
-		var layoutMode = kdp.evaluate( '{playlistOnPage.layoutMode}' ) || 'horizontal';
-		$clipListTarget.addClass( 'k-' + layoutMode );
+		var layoutMode = vdp.evaluate( '{playlistOnPage.layoutMode}' ) || 'horizontal';
+		$clipListTarget.addClass( 'v-' + layoutMode );
 
 		// get the thumbWidth:
-		var thumbWidth =  kdp.evaluate('{playlistOnPage.thumbWidth}') || '110';
+		var thumbWidth =  vdp.evaluate('{playlistOnPage.thumbWidth}') || '110';
 		// standard 3x4 box ratio:
 		var thumbHeight = thumbWidth*.75;
 
@@ -87,12 +87,12 @@ kWidget.addReadyCallback( function( playerId ){
 			if( !clipListId ){
 				// if adding in after the player make sure the player is float left so
 				// the playlist shows up after:
-				$(kdp).css('float', 'left');
+				$(vdp).css('float', 'left');
 				$clipListTarget
 				.css( {
 					'float' : 'left',
-					'height' : $( kdp ).height() + 'px',
-					'width' : $( kdp ).width() + 'px'
+					'height' : $( vdp ).height() + 'px',
+					'width' : $( vdp ).width() + 'px'
 				});
 			}
 
@@ -106,7 +106,7 @@ kWidget.addReadyCallback( function( playerId ){
 			// Give it player width if dynamically added:
 			if( !clipListId ){
 				$clipListTarget.css({
-					'width' : $( kdp ).width() + 'px',
+					'width' : $( vdp ).width() + 'px',
 					'height' : thumbHeight
 				});
 			}
@@ -122,10 +122,10 @@ kWidget.addReadyCallback( function( playerId ){
 		})
 		.appendTo( $clipListTarget )
 		.wrap(
-			$( '<div />' ).addClass('k-carousel')
+			$( '<div />' ).addClass('v-carousel')
 		)
 		
-		//var cat = kdp.evaluate('{playlistOnPage.thumbWidth}');
+		//var cat = vdp.evaluate('{playlistOnPage.thumbWidth}');
 		// append all the clips
 		$.each( playlistObject.content, function( inx, clip ){
 			$clipsUl.append(
@@ -141,26 +141,26 @@ kWidget.addReadyCallback( function( playerId ){
 						'src' : clip.thumbnailUrl + '/width/' + thumbWidth
 					}),
 					$('<div />')
-					.addClass( 'k-clip-desc' )
+					.addClass( 'v-clip-desc' )
 					.append(
 						$('<h3 />')
-						.addClass( 'k-title' )
+						.addClass( 'v-title' )
 						.text( clip.name ),
 
 						$('<p />')
-						.addClass( 'k-description' )
+						.addClass( 'v-description' )
 						.text( ( clip.description == null ) ? '': clip.description )
 					)
 				)
 				.click(function(){
-					kdp.setKDPAttribute("playlistAPI.dataProvider", "selectedIndex", inx );
+					vdp.setVDPAttribute("playlistAPI.dataProvider", "selectedIndex", inx );
 				}).hover(function(){
-					$( this ).addClass( 'k-active' );
+					$( this ).addClass( 'v-active' );
 				},
 				function(){
 					// only remove if not the active entry:
 					if( !$( this ).data( 'activeEntry' ) ){
-						$( this ).removeClass( 'k-active' );
+						$( this ).removeClass( 'v-active' );
 					}
 				})
 			)
@@ -169,11 +169,11 @@ kWidget.addReadyCallback( function( playerId ){
 		// Add scroll buttons
 		$clipListTarget.prepend(
 			$( '<a />' )
-			.addClass( "k-scroll k-prev" )
+			.addClass( "v-scroll v-prev" )
 		)
 		$clipListTarget.append(
 			$( '<a />' )
-			.addClass( "k-scroll k-next" )
+			.addClass( "v-scroll v-next" )
 		)
 		// don't show more clips then we have available 
 		if( clipsVisible > playlistObject.content.length ){
@@ -181,17 +181,17 @@ kWidget.addReadyCallback( function( playerId ){
 		}
 		
 		// Add scrolling carousel to clip list ( once dom sizes are up-to-date )
-		$clipListTarget.find( '.k-carousel' ).jCarouselLite({
-			btnNext: ".k-next",
-			btnPrev: ".k-prev",
+		$clipListTarget.find( '.v-carousel' ).jCarouselLite({
+			btnNext: ".v-next",
+			btnPrev: ".v-prev",
 			visible: clipsVisible,
 			mouseWheel: true,
 			circular: false,
 			vertical: isVertical
 		});
-		// test if k-carousel is too large for scroll buttons:
-		if( !isVertical && $clipListTarget.find( '.k-carousel' ).width() > $clipListTarget.width() - 40 ){
-			$clipListTarget.find( '.k-carousel' ).css('width',
+		// test if v-carousel is too large for scroll buttons:
+		if( !isVertical && $clipListTarget.find( '.v-carousel' ).width() > $clipListTarget.width() - 40 ){
+			$clipListTarget.find( '.v-carousel' ).css('width',
 				$clipListTarget.width() - 40
 			)
 		}
@@ -202,6 +202,6 @@ kWidget.addReadyCallback( function( playerId ){
 		});
 
 		// activate entry:
-		activateEntry(  kdp.evaluate( '{mediaProxy.entry.id}' ) );
+		activateEntry(  vdp.evaluate( '{mediaProxy.entry.id}' ) );
 	});
 });

@@ -1,8 +1,8 @@
 (function(){
-	kWidget.addReadyCallback( function( playerId ){
-		var kdp = $('#' + playerId ).get(0);
-		kdp.kBind( 'mediaReady.limeSurveyCuePointForms', function() {
-			if( kdp.evaluate( '{limeSurveyCuePointForms.plugin}' ) ){
+	vWidget.addReadyCallback( function( playerId ){
+		var vdp = $('#' + playerId ).get(0);
+		vdp.vBind( 'mediaReady.limeSurveyCuePointForms', function() {
+			if( vdp.evaluate( '{limeSurveyCuePointForms.plugin}' ) ){
 				new limeSurveyCuePointForms( playerId );
 			}
 		});
@@ -22,8 +22,8 @@
 		init:function( player_id ){
 			var _this = this;
 			this.playerId = player_id;
-			this.kdp = $('#' + this.playerId ).get(0);
-			this.api = new kWidget.api( { 'wid' : this.getAttr( 'configProxy.kw.id' ) } );
+			this.vdp = $('#' + this.playerId ).get(0);
+			this.api = new vWidget.api( { 'wid' : this.getAttr( 'configProxy.vw.id' ) } );
 			this.loadCuePoints( function( cuePoints ){
 				_this.cuePoints = cuePoints;
 				_this.monitorForCuePoint();
@@ -31,7 +31,7 @@
 		},
 		monitorForCuePoint:function(){
 			var _this = this;
-			this.kdp.kBind('playerUpdatePlayhead', function( time ){
+			this.vdp.vBind('playerUpdatePlayhead', function( time ){
 				$.each( _this.cuePoints, function( inx, cuePoint){
 					if( time > ( cuePoint.startTime / 1000 ) 
 						&&	
@@ -44,16 +44,16 @@
 			});
 		},
 		getFormContainerId: function(){
-			return 'k-form-container-' + this.kdp.id;
+			return 'v-form-container-' + this.vdp.id;
 		},
 		activateFormForCuePoint: function( cuePoint ){
 			var _this = this;
 			// pause playback
-			this.kdp.sendNotification('doPause');
+			this.vdp.sendNotification('doPause');
 			this.currentFormData = JSON.parse( cuePoint.partnerData );
 			
 			// Add a form to the player:
-			var pos = $(this.kdp).position();
+			var pos = $(this.vdp).position();
 			
 			//Get background color values:
 			var bgalpha = this.getConfig('backgroundAlpha');
@@ -61,7 +61,7 @@
 				
 			// remove any old form:
 			$( '#' + this.getFormContainerId() ).remove();
-			$(this.kdp).after(
+			$(this.vdp).after(
 				$('<div>')
 				.attr('id', this.getFormContainerId() )
 				.css({
@@ -70,8 +70,8 @@
 					'position': 'absolute',
 					'top' : pos.top,
 					'left': pos.left,
-					'width': $(_this.kdp ).width(),
-					'height': $(_this.kdp).height() - 30 //TODO: change 30 to actual controlbar height using JS 
+					'width': $(_this.vdp ).width(),
+					'height': $(_this.vdp).height() - 30 //TODO: change 30 to actual controlbar height using JS 
 				}).append(
 					$('<iframe>')
 					.css({
@@ -92,7 +92,7 @@
 				if( messagePayload.status == 'ok' && messagePayload.playerId == _this.playerId){
 					setTimeout(function(){
 						$( '#' + _this.getFormContainerId() ).fadeOut('fast');
-						_this.kdp.sendNotification('doPlay');
+						_this.vdp.sendNotification('doPlay');
 					},  _this.currentFormData.fadeOutTimeMs);
 				}
 			}, false);
@@ -105,7 +105,7 @@
 					'service': 'cuepoint_cuepoint',
 					'action': 'list',
 					'filter:entryIdEqual': this.getAttr( 'mediaProxy.entry.id' ),
-					'filter:objectType':'KalturaCuePointFilter',
+					'filter:objectType':'VidiunCuePointFilter',
 					'filter:cuePointTypeEqual':	'annotation.Annotation',
 					'filter:tagsLike' : this.getConfig('tags') || 'limeSurvey'
 				},
@@ -122,7 +122,7 @@
 		//// Utility functions below
 		//// --------------------------------------------
 		
-		// normalize flash kdp string values
+		// normalize flash vdp string values
 		// makes flash and html5 return the same values for: null, true and false
 		normalizeAttrValue: function( attrValue ){
 			switch( attrValue ){
@@ -142,7 +142,7 @@
 		// wraps evaluate for easier access to player attributes 
 		getAttr: function( attr ) {
 			return this.normalizeAttrValue(
-				this.kdp.evaluate( '{' + attr + '}' )
+				this.vdp.evaluate( '{' + attr + '}' )
 			);
 		},
 		

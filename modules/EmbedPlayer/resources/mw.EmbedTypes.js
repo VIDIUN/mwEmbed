@@ -16,7 +16,7 @@
 var nativeComponentPlayerVideo = new mw.MediaPlayer( 'nativeComponentPlayer', ['video/h264', 'video/mp4', 'application/vnd.apple.mpegurl'], 'NativeComponent' );
 
 // Flash based players:
-var kplayer = new mw.MediaPlayer('kplayer', ['video/live', 'video/kontiki', 'video/wvm', 'video/x-flv', 'video/h264', 'video/mp4', 'audio/mpeg', 'application/x-shockwave-flash', 'application/vnd.apple.mpegurl'], 'Kplayer');
+var vplayer = new mw.MediaPlayer('vplayer', ['video/live', 'video/kontiki', 'video/wvm', 'video/x-flv', 'video/h264', 'video/mp4', 'audio/mpeg', 'application/x-shockwave-flash', 'application/vnd.apple.mpegurl'], 'Vplayer');
 // Silverlight
 var splayer = new mw.MediaPlayer('splayer', ['video/playreadySmooth', 'video/ism', 'video/multicast', 'video/h264', 'video/mp4'], 'Silverlight');
 
@@ -91,7 +91,7 @@ mw.EmbedTypes = {
 	},
 	addFlashPlayer: function(){
 		if( !mw.getConfig( 'EmbedPlayer.DisableHTML5FlashFallback' ) ){
-			this.mediaPlayers.addPlayer( kplayer );
+			this.mediaPlayers.addPlayer( vplayer );
 		}
 	},
 	addSilverlightPlayer:function(){
@@ -136,7 +136,7 @@ mw.EmbedTypes = {
 		}
 
 		// Use core mw.supportsFlash check:
-		// Safari has cross domain issue - Flash external interface doesn't work, so we disable kplayer
+		// Safari has cross domain issue - Flash external interface doesn't work, so we disable vplayer
 		if( mw.supportsFlash() ){
 			this.addFlashPlayer();
 		}
@@ -276,8 +276,8 @@ mw.EmbedTypes = {
 		return hasObj;
 	},
 
-	getKplayer : function () {
-		return kplayer;
+	getVplayer : function () {
+		return vplayer;
 	},
 	getSilverlightPlayer :function(){
 		return splayer;

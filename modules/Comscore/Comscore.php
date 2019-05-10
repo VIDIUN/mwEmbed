@@ -6,6 +6,6 @@ return array(
 			"mw.EmbedPlayer",
 			'mw.ajaxProxy' 
 		),
-		'kalturaPluginName' => 'comscore'
+		'vidiunPluginName' => 'comscore'
 	),
 );

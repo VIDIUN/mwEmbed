@@ -24,7 +24,7 @@ uiConf Examples:
 		embedPlayer : null,
 
 		// The category for all the tracking events.
-		trackingCategory : 'Kaltura Video Events',
+		trackingCategory : 'Vidiun Video Events',
 
 		// pageTracker object ( if set to null async tracking is used via _gaq.push calls )
 		googlePageTracker : null,
@@ -40,7 +40,7 @@ uiConf Examples:
 
 		// The Default Track List
 		defaultTrackList : [
-			'kdpReady',
+			'vdpReady',
 			'mediaReady',
 			'doPause',
 			'playerPlayed',
@@ -54,7 +54,7 @@ uiConf Examples:
 			'quartiles' // quartiles an event for every 1/4 the of the video played*/
 		],
 
-		// The full set of notifications for kdp3 ( validates event names )
+		// The full set of notifications for vdp3 ( validates event names )
 		validEventList : [
 			'quartiles',
 			'startUp',
@@ -84,8 +84,8 @@ uiConf Examples:
 			'doSeek',
 			'doIntelligentSeek',
 			'doSwitch',
-			'kdpReady',
-			'kdpEmpty',
+			'vdpReady',
+			'vdpEmpty',
 			'layoutReady',
 			'playerStateChange',
 			'playerReady',
@@ -135,7 +135,7 @@ uiConf Examples:
 		],
 
 		getConfig: function( attr )  {
-			return this.embedPlayer.getKalturaConfig( 'googleAnalytics', attr );
+			return this.embedPlayer.getVidiunConfig( 'googleAnalytics', attr );
 		},
 
 		init: function( embedPlayer, callback ) {
@@ -216,7 +216,7 @@ uiConf Examples:
 
 		/**
 		* Handles the mapping for special case eventNames that
-		* don't match their corresponding kaltura listener binding name
+		* don't match their corresponding vidiun listener binding name
 		*/
 		getEventNameBinding: function( eventName ){
 			// Explicitly casting eventName to string - iOS 4.3.1 tweak
@@ -347,10 +347,10 @@ uiConf Examples:
          */
         getOptionalLabel: function( methodName, data ) {
             methodName = methodName.toString();
-            var clipTitle = ( this.embedPlayer.kalturaPlayerMetaData && this.embedPlayer.kalturaPlayerMetaData.name ) ? this.embedPlayer.kalturaPlayerMetaData.name : '';
-            var entryId = this.embedPlayer.kentryid;
-            var widgetId = this.embedPlayer.kwidgetid;
-            var refId = this.embedPlayer.kalturaPlayerMetaData.referenceId;
+            var clipTitle = ( this.embedPlayer.vidiunPlayerMetaData && this.embedPlayer.vidiunPlayerMetaData.name ) ? this.embedPlayer.vidiunPlayerMetaData.name : '';
+            var entryId = this.embedPlayer.ventryid;
+            var widgetId = this.embedPlayer.vwidgetid;
+            var refId = this.embedPlayer.vidiunPlayerMetaData.referenceId;
             var refString = "";
             if(refId && this.getConfig('sendRefId') == true)
                 refString = refId + "|";
