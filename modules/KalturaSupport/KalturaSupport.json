@@ -11,9 +11,9 @@
 		"dependencies": [
 			"base64_encode",
 			"matchMedia",
-			"mw.KEntryLoader",
-			"mw.KDPMapping",
-			"mw.KCuePoints",
+			"mw.VEntryLoader",
+			"mw.VDPMapping",
+			"mw.VCuePoints",
 			"polyfill_Array_filter"
 		],
 		"vidiunLoad": "always",

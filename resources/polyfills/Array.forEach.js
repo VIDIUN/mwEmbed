@@ -37,23 +37,23 @@ if (!Array.prototype.forEach) {
         // 7. Repeat, while k < len
         while (k < len) {
 
-            var kValue;
+            var vValue;
 
             // a. Let Pk be ToString(k).
             //    This is implicit for LHS operands of the in operator
-            // b. Let kPresent be the result of calling the HasProperty
+            // b. Let vPresent be the result of calling the HasProperty
             //    internal method of O with argument Pk.
             //    This step can be combined with c
-            // c. If kPresent is true, then
+            // c. If vPresent is true, then
             if (k in O) {
 
-                // i. Let kValue be the result of calling the Get internal
+                // i. Let vValue be the result of calling the Get internal
                 // method of O with argument Pk.
-                kValue = O[k];
+                vValue = O[k];
 
                 // ii. Call the Call internal method of callback with T as
-                // the this value and argument list containing kValue, k, and O.
-                callback.call(T, kValue, k, O);
+                // the this value and argument list containing vValue, k, and O.
+                callback.call(T, vValue, k, O);
             }
             // d. Increase k by 1.
             k++;

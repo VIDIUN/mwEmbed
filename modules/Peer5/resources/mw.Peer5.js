@@ -3,7 +3,7 @@
 
     // NOTE We assume that HlsJs plugin (a manifested dependency) is defined/added to this point
 
-    var Peer5Plugin =  mw.KBasePlugin.extend({
+    var Peer5Plugin =  mw.VBasePlugin.extend({
         asyncInit: true,
 
         defaultConfig: {

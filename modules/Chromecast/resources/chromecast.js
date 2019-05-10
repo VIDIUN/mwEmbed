@@ -21,7 +21,7 @@
 			'debugReceiver': false,
 			'receiverLogo': true,
 			'logoUrl': null,
-			'useKalturaPlayer': true,
+			'useVidiunPlayer': true,
 			'useReceiverSource': true,
 			'debugKalturaPlayer': false,
 			'uiconfid':null,
