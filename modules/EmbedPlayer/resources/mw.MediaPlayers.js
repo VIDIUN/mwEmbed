@@ -191,12 +191,12 @@ mw.MediaPlayers.prototype = {
 				mimePlayers = [];
 			}
 		}
-		if ( ( mw.getConfig( 'EmbedPlayer.ForceKPlayer' ) ||
+		if ( ( mw.getConfig( 'EmbedPlayer.ForceVPlayer' ) ||
 			( mw.getConfig( 'ForceFlashOnDesktopSafari') && mw.isDesktopSafari() ) ) &&
-			this.isSupportedPlayer( 'kplayer' ) && mimeType !== "video/youtube" ) {
-			var kplayer = mw.EmbedTypes.getKplayer();
-			if (this.isPlayerSupportMimeType(mimePlayers, kplayer)) {
-				mimePlayers = [kplayer];
+			this.isSupportedPlayer( 'vplayer' ) && mimeType !== "video/youtube" ) {
+			var vplayer = mw.EmbedTypes.getVplayer();
+			if (this.isPlayerSupportMimeType(mimePlayers, vplayer)) {
+				mimePlayers = [vplayer];
 			} else {
 				mimePlayers = [];
 			}

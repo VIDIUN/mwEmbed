@@ -49,8 +49,8 @@ class mwEmbedLoader {
 		'vWidget/vWidget.util.js',	
 		// vWidget basic api wrapper
 		'resources/crypto/MD5.js',
-		'kWidget/kWidget.storage.js',
-		'kWidget/kWidget.api.js'
+		'vWidget/vWidget.storage.js',
+		'vWidget/vWidget.api.js'
 	);
 
 	function request() {
@@ -280,8 +280,8 @@ class mwEmbedLoader {
 			$o.="\n".'mw.setConfig(\'Vidiun.ForceFlashOnIE10\', true );' . "\n";
 		}
 
-		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.SupressNonProductionUrlsWarning' ) === true ){
-			$o.="\n".'mw.setConfig(\'Kaltura.SupressNonProductionUrlsWarning\', true );' . "\n";
+		if( $this->getUiConfObject()->getPlayerConfig( null, 'Vidiun.SupressNonProductionUrlsWarning' ) === true ){
+			$o.="\n".'mw.setConfig(\'Vidiun.SupressNonProductionUrlsWarning\', true );' . "\n";
 		}
 
 		if( $this->getUiConfObject()->isJson() ) {
@@ -407,20 +407,20 @@ class mwEmbedLoader {
 			'Kaltura.IframeRewrite' => $wgKalturaIframeRewrite,
 			'EmbedPlayer.EnableIpadHTMLControls' => $wgEnableIpadHTMLControls,
 			'EmbedPlayer.UseFlashOnAndroid' => true,
-			'Kaltura.LoadScriptForVideoTags' => true,
-			'Kaltura.AllowIframeRemoteService' => $wgKalturaAllowIframeRemoteService,
-			'Kaltura.UseAppleAdaptive' => $wgKalturaUseAppleAdaptive,
-			'Kaltura.EnableEmbedUiConfJs' => $wgKalturaEnableEmbedUiConfJs,
-			'Kaltura.PageGoogleAnalytics' => $wgKalturaGoogleAnalyticsUA,
-			'Kaltura.SupressNonProductionUrlsWarning' => $wgKalturaSupressNonProductionUrlsWarning,
-			'Kaltura.APITimeout' => 10000,
-			'Kaltura.kWidgetPsUrl' => $wgHTML5PsWebPath,
-			'Kaltura.CacheTTL' => $wgCacheTTL,
-			'Kaltura.MaxCacheEntries' => $wgMaxCacheEntries,
-			'Kaltura.AllowedVars' => $wgAllowedVars,
-			'Kaltura.AllowedVarsKeyPartials' => $wgAllowedVarsKeyPartials,
-			'Kaltura.AllowedPluginVars' => $wgAllowedPluginVars,
-			'Kaltura.AllowedPluginVarsValPartials' => $wgAllowedPluginVarsValPartials
+			'Vidiun.LoadScriptForVideoTags' => true,
+			'Vidiun.AllowIframeRemoteService' => $wgVidiunAllowIframeRemoteService,
+			'Vidiun.UseAppleAdaptive' => $wgVidiunUseAppleAdaptive,
+			'Vidiun.EnableEmbedUiConfJs' => $wgVidiunEnableEmbedUiConfJs,
+			'Vidiun.PageGoogleAnalytics' => $wgVidiunGoogleAnalyticsUA,
+			'Vidiun.SupressNonProductionUrlsWarning' => $wgVidiunSupressNonProductionUrlsWarning,
+			'Vidiun.APITimeout' => 10000,
+			'Vidiun.vWidgetPsUrl' => $wgHTML5PsWebPath,
+			'Vidiun.CacheTTL' => $wgCacheTTL,
+			'Vidiun.MaxCacheEntries' => $wgMaxCacheEntries,
+			'Vidiun.AllowedVars' => $wgAllowedVars,
+			'Vidiun.AllowedVarsKeyPartials' => $wgAllowedVarsKeyPartials,
+			'Vidiun.AllowedPluginVars' => $wgAllowedPluginVars,
+			'Vidiun.AllowedPluginVarsValPartials' => $wgAllowedPluginVarsValPartials
 		);
 		if( isset( $_GET['psvwidgetpath'] ) ){
 			$exportedJsConfig[ 'Vidiun.VWidgetPsPath' ] = htmlspecialchars( $_GET['psvwidgetpath'] );

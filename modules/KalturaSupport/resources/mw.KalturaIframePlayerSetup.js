@@ -12,7 +12,7 @@
 			//Categorize client flashvars to plugins and vars
 			$.each(clientFlashvars, function (name, value) {
 				//Check if uiVar can be overridden from server side, if not then set
-				//TODO: exclude $pluginId == 'Kaltura' || $pluginId == 'EmbedPlayer' || $pluginId == 'KalturaSupport'
+				//TODO: exclude $pluginId == 'Vidiun' || $pluginId == 'EmbedPlayer' || $pluginId == 'VidiunSupport'
 				if ($.isPlainObject(value)) {
 					clientPlugins[name] = value;
 				} else {
@@ -86,8 +86,8 @@
 	var clientSettings = mw.getConfig("widgetOriginalSettings_" + playerData.playerId);
 	var playerConfig = resolvePlayerConfig(serverSettings, clientSettings);
 
-	// Set the main KalturaSupport.PlayerConfig var:
-	mw.config.set( 'KalturaSupport.PlayerConfig', playerConfig );
+	// Set the main VidiunSupport.PlayerConfig var:
+	mw.config.set( 'VidiunSupport.PlayerConfig', playerConfig );
 
 	// We should first read the config for the hashObj and after that overwrite with our own settings
 	// The entire block below must be after mw.config.set( hashObj.mwConfig );

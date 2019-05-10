@@ -1,5 +1,5 @@
 <?php
-    class KalturaDependencyResolver{
+    class VidiunDependencyResolver{
         /**
          * Mapping of registered modules
          *
