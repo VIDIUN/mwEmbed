@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Seek Api</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+function jsVidiunPlayerTest( videoId ){
+	
+	// Name this module
+	module( "Seek Api" );
+	var vdp = document.getElementById( videoId );
+	var targetSeekTime = 30;
+	var onPlayerSeekStartTime = null;
+	
+	asyncTest("Seek Events", function(){
+	vidiunQunitWaitForPlayer(function(){
+		window[ 'onPlayerSeekStart' ] = function(){
+		onPlayerSeekStartTime = new Date().getTime();
+		ok( true, 'Seek start event fired ( playerSeekStart )' );
+		}
+		
+		window[ 'onPlayerSeekEnd' ] = function(){
+		ok( onPlayerSeekStartTime !== null, "playerSeekStart was fired before playerSeekEnd" );
+		
+		ok( true,  'Seek end event fired ( playerSeekEnd )' );
+		var seekTime = new Date().getTime() - onPlayerSeekStartTime;
+		ok( ( seekTime > 0 ), "Took " + seekTime + "ms to complete seek" );
+		
+		ok( ( Math.abs( targetSeekTime - vdp.evaluate('{video.player.currentTime}') ) < 2 ), 
+			"Seek time within 2 seconds of target: " + targetSeekTime + ' actual: ' + 
+			vdp.evaluate('{video.player.currentTime}')	
+		);
+		// done with async test: 
+		start();
+		}
+		
+		// add a seek listener: 
+		vdp.addJsListener( 'playerSeekStart', 'onPlayerSeekStart')
+		
+		vdp.addJsListener( 'playerSeekEnd', 'onPlayerSeekEnd')
+		
+		// after 1 second of playback issue a seek to 30 seconds
+		vdp.sendNotification('doSeek', targetSeekTime );
+	});
+	});
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> Seek Api </h2>
+Once the player is ready it will seek to 30 seconds. <br>
+Mobile devices that require click gestures for playback won't seek without first playing.
+<br>
+<pre class="prettyprint linenums">
+vWidget.addReadyCallback( function( playerId ){<br/>	var vdp = document.getElementById( playerId );<br/>	// Add a binding for when seek is completed: <br/>	vdp.vBind('playerSeekEnd', function(){<br/>		if( console ) <br/>		console.log( 'playerSeekEnd, playhead should be at 30 seconds');<br/>		<br/>		// Pause player after 2 second <br/>		setTimeout(function(){<br/>			vdp.sendNotification('doPause' );<br/>		},2000)<br/>	});<br/>	// Once playing issue seek<br/>	var seekDone = false;<br/>	vdp.vBind('playerUpdatePlayhead', function(){<br/>		if( ! seekDone ){<br/>		vdp.sendNotification('doSeek', 30 );<br/>		}<br/>		seekDone = true;<br/>	});<br/>	// Wait for &quot;media ready&quot; before starting playback: <br/>	vdp.vBind('mediaReady', function(){<br/>		vdp.sendNotification('doPlay');<br/>	})<br/>});
+</pre>
+<br />
+<script>
+if( !window.QUnit ){
+	vWidget.addReadyCallback( function( playerId ){
+		var vdp = document.getElementById( playerId );
+		// Add a binding for when seek is completed: 
+		vdp.vBind('playerSeekEnd', function(){
+			if( console ){ 
+				console.log( 'playerSeekEnd, playhead should be at 30 seconds');
+			}
+			// Pause player after 2 second 
+			setTimeout(function(){
+			vdp.sendNotification('doPause' );
+			},2000)
+		});
+		// Once playing issue seek
+		var seekDone = false;
+		vdp.vBind('playerUpdatePlayhead', function(){
+			if( ! seekDone ){
+			vdp.sendNotification('doSeek', 30 );
+			}
+			seekDone = true;
+		});
+		// Wait for "media ready" before starting playback: 
+		vdp.vBind('mediaReady', function(){
+			vdp.sendNotification('doPlay');
+		})
+	});
+}
+</script>
+
+<div id="vidiun_player_1360356455" style="width: 400px; height: 333px"></div>
+<script type="text/javascript">
+vWidget.embed({
+	"targetId": "vidiun_player_1360356455",
+	"cache_st": 1360356455,
+	"wid": "_243342",
+	"uiconf_id": "11776282",
+	"flashvars": {},
+	"entry_id": "0_uka1msg4"
+});
+</script>
+
+
+</body>
+</html>
