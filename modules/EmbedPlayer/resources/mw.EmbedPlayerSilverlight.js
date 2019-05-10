@@ -218,18 +218,18 @@
 				}
 			}
 
-			var onKESResponse = function ( response ) {
+			var onVESResponse = function ( response ) {
 
 				if(_this.isOnline){
 
-					mw.log('EmbedPlayerSPlayer got multicast details from KES: ' + JSON.stringify(response));
+					mw.log('EmbedPlayerSPlayer got multicast details from VES: ' + JSON.stringify(response));
 
 
-					//verify we got a valid response from KES
+					//verify we got a valid response from VES
 					if (response && response.multicastAddress && response.multicastPort && response.hls) {
 
 						var multicastAddress = response.multicastAddress + ":" + response.multicastPort;
-						mw.log('multicastAddress: ' + multicastAddress + ' KES: ' + response.multicastSourceAddress);
+						mw.log('multicastAddress: ' + multicastAddress + ' VES: ' + response.multicastSourceAddress);
 
 						//first time
 						if (!_this.multicastAddress ||
@@ -250,26 +250,26 @@
 
 						}
 					} else {
-						//if we got a response from KES that it's still loading, don't do anything
+						//if we got a response from VES that it's still loading, don't do anything
 						if (response && response.state === "Loading") {
 
-							mw.log('KES still loading, retrying later');
+							mw.log('VES still loading, retrying later');
 						} else {
-							mw.log('Got error from KES, switch to another one and keep trying');
-							_this.selectNextKES();
+							mw.log('Got error from VES, switch to another one and keep trying');
+							_this.selectNextVES();
 						}
 					}
 				} else {
-					mw.log( 'EmbedPlayerSPlayer got multicast details from KES while offline' );
+					mw.log( 'EmbedPlayerSPlayer got multicast details from VES while offline' );
 				}
 			};
 
-			var onKESErrorResponce = function (){
+			var onVESErrorResponce = function (){
 				if(_this.isOnline){
-					mw.log('no response from KES... switch KES and retry');
-					_this.selectNextKES();
+					mw.log('no response from VES... switch VES and retry');
+					_this.selectNextVES();
 				} else {
-					mw.log( 'EmbedPlayerSPlayer got error from KES while offline' );
+					mw.log( 'EmbedPlayerSPlayer got error from VES while offline' );
 				}
 			};
 
@@ -286,22 +286,22 @@
 				var retryTime= firstKESConnectTry? 0 : (_this.getKalturaConfig( null , 'multicastKESStartInterval' ) || _this.defaultMulticastKESStartInterval);
 
 				if (_this.isOnline && _this.multicastSessionId)
-					retryTime=_this.getKalturaConfig( null , 'multicastKeepAliveInterval' ) || _this.defaultMulticastKeepAliveInterval;
+					retryTime=_this.getVidiunConfig( null , 'multicastKeepAliveInterval' ) || _this.defaultMulticastKeepAliveInterval;
 
 				_this.keepAliveMCTimeout = setTimeout( function () {
 					try {
 						firstKESConnectTry=false;
 						if(_this.isOnline)
 						{
-							_this.connectToKES(_this.multiastServerUrl)	.then(onKESResponse, onKESErrorResponce)
-								.always(startConnectToKESTimer);
+							_this.connectToVES(_this.multiastServerUrl)	.then(onVESResponse, onVESErrorResponce)
+								.always(startConnectToVESTimer);
 						} else {
-							startConnectToKESTimer();
+							startConnectToVESTimer();
 						}
 					}
 					catch(e){
-						mw.log( 'connectToKES failed ' + e.message + ' ' + e.stack );
-						startConnectToKESTimer();
+						mw.log( 'connectToVES failed ' + e.message + ' ' + e.stack );
+						startConnectToVESTimer();
 					}
 				} , retryTime );
 

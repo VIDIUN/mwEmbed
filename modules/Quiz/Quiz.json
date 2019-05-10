@@ -6,8 +6,8 @@
       "resources/IVQModule.js",
       "resources/IVQScreenTemplate.js"
     ],
-    "dependencies": "mw.KBaseScreen",
-    "kalturaPluginName": "quiz",
+    "dependencies": "mw.VBaseScreen",
+    "vidiunPluginName": "quiz",
     "styles": ["resources/css/quiz.css",
                "resources/css/quizFonts.css"
               ],

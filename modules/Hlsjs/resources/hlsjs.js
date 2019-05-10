@@ -16,7 +16,7 @@
 			}
 		});
 
-		var hlsjs = mw.KBasePlugin.extend({
+		var hlsjs = mw.VBasePlugin.extend({
 
 			defaultConfig: {
 				withCredentials : false,
@@ -557,11 +557,11 @@
 				//5. Set autoplay to restart playback after flash engine is loaded
 				//6. Call setupSourcePlayer to reload playback engine
 				mw.EmbedTypes.mediaPlayers.removeMIMETypePlayers('application/vnd.apple.mpegurl', 'Native');
-				mw.EmbedTypes.mediaPlayers.setMIMETypePlayers('application/vnd.apple.mpegurl', 'Kplayer');
+				mw.EmbedTypes.mediaPlayers.setMIMETypePlayers('application/vnd.apple.mpegurl', 'Vplayer');
 				mw.EmbedTypes.addFlashPlayer();
 				var embedPlayer = this.getPlayer();
-				embedPlayer.setKalturaConfig("", "LeadWithHLSOnJs", false);
-				embedPlayer.setKalturaConfig("", "LeadWithHLSOnFlash", true);
+				embedPlayer.setVidiunConfig("", "LeadWithHLSOnJs", false);
+				embedPlayer.setVidiunConfig("", "LeadWithHLSOnFlash", true);
 				embedPlayer.stop();
 				embedPlayer.autoplay = true;
 				embedPlayer.setupSourcePlayer();
@@ -585,7 +585,7 @@
 							'data-assetid': index
 						};
 					});
-					this.getPlayer().setKDPAttribute('sourceSelector', 'visible', true);
+					this.getPlayer().setVDPAttribute('sourceSelector', 'visible', true);
 					this.getPlayer().onFlavorsListChanged(flavors);
 				}
 			},

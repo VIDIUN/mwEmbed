@@ -3,7 +3,7 @@
  */
 (function (mw, $) {
     "use strict";
-    mw.KIVQApi = function (embedPlayer) {
+    mw.VIVQApi = function (embedPlayer) {
         return this.init(embedPlayer);
     };
     if (!(mw.VIVQApi.prototype = {
@@ -62,11 +62,11 @@
                     var createQuizuserEntryId = {
                         'service': 'userEntry',
                         'action': 'add',
-                        'userEntry:objectType': 'KalturaQuizUserEntry',
-                        'userEntry:entryId': _this.embedPlayer.kentryid
+                        'userEntry:objectType': 'VidiunQuizUserEntry',
+                        'userEntry:entryId': _this.embedPlayer.ventryid
                     };
 
-                    _this.getKClient().doRequest(createQuizuserEntryId, function (data) {
+                    _this.getVClient().doRequest(createQuizuserEntryId, function (data) {
                         callback(data);
                     });
 
@@ -76,9 +76,9 @@
                     var _this = this,answerParams = {};
                     var quizSetAnswer = {
                         'service': 'cuepoint_cuepoint',
-                        'cuePoint:objectType': "KalturaAnswerCuePoint",
+                        'cuePoint:objectType': "VidiunAnswerCuePoint",
                         'cuePoint:answerKey': selectedAnswer,
-                        'cuePoint:quizUserEntryId': kQuizUserEntryId
+                        'cuePoint:quizUserEntryId': vQuizUserEntryId
                     };
 
                     if (isAnswered) {
@@ -101,20 +101,20 @@
                     }
 
                     $.extend(quizSetAnswer, answerParams);
-                    _this.getKClient().doRequest(quizSetAnswer, function (data) {
+                    _this.getVClient().doRequest(quizSetAnswer, function (data) {
 
                         callback(data);
                     });
                 };
 
-                this.submitQuiz = function (kQuizUserEntryId,callback) {
+                this.submitQuiz = function (vQuizUserEntryId,callback) {
 
                     var submitQuizParams = {
                         'service': 'userEntry',
                         'action': 'submitQuiz',
-                        'id': kQuizUserEntryId
+                        'id': vQuizUserEntryId
                     };
-                    _this.getKClient().doRequest(submitQuizParams, function (data) {
+                    _this.getVClient().doRequest(submitQuizParams, function (data) {
 
                         callback(data);
 

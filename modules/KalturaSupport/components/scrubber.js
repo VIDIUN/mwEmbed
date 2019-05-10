@@ -367,10 +367,10 @@
                 if( this.getPlayer().isLiveOffSynch() && parseInt(perc*100) > this.liveEdge ){
                     timeText = 'LIVE';
                 }else {
-                    timeText = "-" + kWidget.seconds2npt(this.duration - currentTime);
+                    timeText = "-" + vWidget.seconds2npt(this.duration - currentTime);
                 }
             }else{
-                timeText = kWidget.seconds2npt(currentTime);
+                timeText = vWidget.seconds2npt(currentTime);
             }
             $sliderPreviewTime.text(timeText);
 			$sliderPreviewTime.css({bottom: 2, left: thumbWidth / 2 - $sliderPreviewTime.width() / 2 + 3});

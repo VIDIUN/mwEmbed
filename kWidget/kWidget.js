@@ -202,8 +202,8 @@
 			}
 
             if (mw.getConfig( 'EmbedPlayer.ForceNativeComponent')) {
-                // set up window.kNativeSdk
-                window.kNativeSdk = window.kNativeSdk || {};
+                // set up window.vNativeSdk
+                window.vNativeSdk = window.vNativeSdk || {};
 
                 var typeMap = function(names) {
                     if (typeof names !== 'string') {
@@ -225,10 +225,10 @@
                 
                 // The Native SDK provides two lists of supported formats, after the hash sign.
                 // Example: #nativeSdkDrmFormats=dash,wvm&nativeSdkAllFormats=dash,mp4,hls,wvm
-                var drmFormats = kWidget.getHashParam("nativeSdkDrmFormats") || "wvm";
-                var allFormats = kWidget.getHashParam("nativeSdkAllFormats") || "wvm,mp4,hls";
-                window.kNativeSdk.drmFormats = typeMap(drmFormats);
-                window.kNativeSdk.allFormats = typeMap(allFormats);
+                var drmFormats = vWidget.getHashParam("nativeSdkDrmFormats") || "wvm";
+                var allFormats = vWidget.getHashParam("nativeSdkAllFormats") || "wvm,mp4,hls";
+                window.vNativeSdk.drmFormats = typeMap(drmFormats);
+                window.vNativeSdk.allFormats = typeMap(allFormats);
 			}
 		},
 
@@ -579,14 +579,14 @@
 					'background: url(\'' + imagePath + 'player_big_play_button.png\') ;' +
 					'z-index: 1;' +
 				'} ' + "\n" +
-				'.kWidgetAccessibilityLabel { ' +
+				'.vWidgetAccessibilityLabel { ' +
 				'font-size:0;' +
 				'height: 1px;' +
 				'overflow: hidden;' +
 				'display:block;' +
 				'position:absolute;' +
 				'} ' + "\n" +
-				'.kWidgetPlayBtn:hover{ ' +
+				'.vWidgetPlayBtn:hover{ ' +
 					'background: url(\'' + imagePath + 'player_big_play_button_hover.png\');"' +
 				'} ';
 			if (this.isIE()) {
@@ -1750,10 +1750,10 @@
 			if (typeof console != 'undefined' && console.log) {
 				if (this.isIE8()){
 					try{
-						console.log("kWidget: " + msg);
+						console.log("vWidget: " + msg);
 					}catch(e){}
 				}else{
-					console.log("kWidget: " + msg);
+					console.log("vWidget: " + msg);
 				}
 			}
 		},

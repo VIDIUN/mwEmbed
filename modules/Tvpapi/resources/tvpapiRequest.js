@@ -1,7 +1,7 @@
 (function (mw, $) {
     "use strict";
 
-    mw.tvpapiRequest = mw.KBasePlugin.extend( {
+    mw.tvpapiRequest = mw.VBasePlugin.extend( {
 
         defaultConfig: {
             "restMethod": "",
@@ -40,7 +40,7 @@
         },
 
         getRequestUrl: function(){
-            var baseUrl = this.getConfig( "restApiBaseUrl" ) || this.getPlayer().getKalturaConfig( null, 'TVPAPIBaseUrl' );
+            var baseUrl = this.getConfig( "restApiBaseUrl" ) || this.getPlayer().getVidiunConfig( null, 'TVPAPIBaseUrl' );
             var restMethod = this.restMethod;
             var url;
             if (baseUrl !== "" && restMethod !== "") {
