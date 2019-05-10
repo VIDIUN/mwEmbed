@@ -620,7 +620,7 @@
                 }
                 mw.log(errMsg, data);
                 _this.quizPlugin.ivqShowScreen();
-                _this.KIVQScreenTemplate.tmplErrorScreen();
+                _this.VIVQScreenTemplate.tmplErrorScreen();
                 $(".sub-text").html(gM('mwe-quiz-err-msg'));
                 _this.isErr = true;
             },

@@ -30,7 +30,7 @@
 
 $wgMwEmbedApiServices['getLicenseData'] = 'mweApiGetLicenseData';
 
-require_once( dirname( __FILE__ ) . '/../KalturaCommon.php' );	// For EntryResult
+require_once( dirname( __FILE__ ) . '/../VidiunCommon.php' );	// For EntryResult
 
 class mweApiGetLicenseData {
 
@@ -39,7 +39,7 @@ class mweApiGetLicenseData {
 	}
 
 	function run() {
-		global $wgKalturaUdrmLicenseServerUrl;
+		global $wgVidiunUdrmLicenseServerUrl;
 
 		// Always send 200, errors are signalled in json.		
 		$this->sendHeaders();

@@ -875,9 +875,9 @@
 				var errorObj;
 				if (this.isDrmRequired()){
 					if (!this.isPluginEnabled( 'multiDrm' )){
-						errorObj = this.getKalturaMsgObject('mwe-embedplayer-drm-error-not-enabled');
+						errorObj = this.getVidiunMsgObject('mwe-embedplayer-drm-error-not-enabled');
 					} else {
-						errorObj = this.getKalturaMsgObject('mwe-embedplayer-drm-error-not-supported');
+						errorObj = this.getVidiunMsgObject('mwe-embedplayer-drm-error-not-supported');
 					}
 				} else {
 					//check if we had silverlight flavors and no silverlight installed - prompt to install silverlight

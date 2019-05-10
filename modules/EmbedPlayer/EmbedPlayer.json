@@ -37,7 +37,7 @@
             "mediawiki.jqueryMsg",
             "screenfull",
             "mw.EmbedPlayerNative",
-            "mw.EmbedPlayerKplayer",
+            "mw.EmbedPlayerVplayer",
             "mw.EmbedPlayerImageOverlay",
             "mw.EmbedPlayerNativeComponent",
             "mw.MediaElement",
@@ -67,8 +67,8 @@
             "mw.PlayerElementSilverlight"
         ]
     },
-    "mw.EmbedPlayerKplayer": {
-        "scripts": "resources/mw.EmbedPlayerKplayer.js",
+    "mw.EmbedPlayerVplayer": {
+        "scripts": "resources/mw.EmbedPlayerVplayer.js",
         "dependencies": [
             "mw.KWidgetSupport",
             "base64_encode",
