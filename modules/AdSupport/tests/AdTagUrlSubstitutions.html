@@ -12,31 +12,31 @@
 	</h1>
 	This page demonstrate ad tag URL substitutions. 
 	<br>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <a href="#" id="changeMedia">Change Entry</a>
 <script>
 var entries = ['0_swup5zao', '1_sf5ovm7u'];
-kWidget.addReadyCallback(function(playerId){
-	var kdp = $('#' + playerId)[0];
+vWidget.addReadyCallback(function(playerId){
+	var vdp = $('#' + playerId)[0];
 	$('#changeMedia').click(function(){
-		if( kdp.evaluate('{mediaProxy.entry.id}') == entries[0] ){
-			kdp.sendNotification('changeMedia', {'entryId' : entries[1] } );
+		if( vdp.evaluate('{mediaProxy.entry.id}') == entries[0] ){
+			vdp.sendNotification('changeMedia', {'entryId' : entries[1] } );
 		} else {
-			kdp.sendNotification('changeMedia', {'entryId' : entries[0] } );
+			vdp.sendNotification('changeMedia', {'entryId' : entries[0] } );
 		}
 	});
 });
 </script>
 <h3>Raw Ad Tag Url:</h3>
-This URL represents a sample ad tag URL that is used to configure a Kaltura player. 
-Evaluation properties are documented in the <a href="http://player.kaltura.com/docs/api#evaluate-desc">kaltura player API documentation</a> page. <br><br>
+This URL represents a sample ad tag URL that is used to configure a Vidiun player. 
+Evaluation properties are documented in the <a href="http://player.vidiun.com/docs/api#evaluate-desc">vidiun player API documentation</a> page. <br><br>
 <pre id="rawurl"></pre>
 <h3>Evaluated Ad Tag URL:</h3>
 This represent the evaluated ad tag URL that the player will send to the ad server:<br><br>
 <pre id="evaluated"></pre>
 <script>
-	var adTagUrl ='http://projects.kaltura.com/mdale/hotelVastAd.xml?' +
-			'&displayMgr=kaltura_player' + 
+	var adTagUrl ='http://projects.vidiun.com/mdale/hotelVastAd.xml?' +
+			'&displayMgr=vidiun_player' + 
 			'&displayMgrVer={playerVersion}' +
 			'&playerWidth={video.player.width}' +
 			'&playerHeight={video.player.height}' + 
@@ -60,8 +60,8 @@ This represent the evaluated ad tag URL that the player will send to the ad serv
 			/*'&videoQuality=' + 
 			'&srcRelationship=';*/
 	
-	kWidget.embed({
-		'targetId': 'kaltura_player',
+	vWidget.embed({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '13306622',
 		'entry_id' : '1_sf5ovm7u',
@@ -77,12 +77,12 @@ This represent the evaluated ad tag URL that the player will send to the ad serv
 			'adsOnReplay':true
 		},
 		'readyCallback': function( playerId ){
-			var kdp = $('#' + playerId )[0];
+			var vdp = $('#' + playerId )[0];
 			
-			kdp.kBind('mediaReady', function(){
+			vdp.vBind('mediaReady', function(){
 				$("#rawurl").html( adTagUrl.replace(/&/g, '<br>&amp;' ) );
 				$("#evaluated").html( 
-					kdp.evaluate( kdp.evaluate('{vast.prerollUrl}') ).replace( /&/g, '<br>&amp;' ) 
+					vdp.evaluate( vdp.evaluate('{vast.prerollUrl}') ).replace( /&/g, '<br>&amp;' ) 
 				);
 			});
 		}

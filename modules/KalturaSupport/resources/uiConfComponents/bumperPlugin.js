@@ -37,7 +37,7 @@
 			mw.getEntryIdSourcesFromApi( embedPlayer, bumperConfig.bumperEntryID, function( sources ){
 				if( ! sources || sources.message ){
 					// no sources, or access control error. 
-					mw.log("Error: bumperPlugin: No sources for: " + embedPlayer.kwidgetid + ' entry: ' +  bumperConfig.bumperEntryID );
+					mw.log("Error: bumperPlugin: No sources for: " + embedPlayer.vwidgetid + ' entry: ' +  bumperConfig.bumperEntryID );
 					callback();
 					return ;
 				}

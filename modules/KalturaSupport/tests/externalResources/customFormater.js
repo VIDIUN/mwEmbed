@@ -1,4 +1,4 @@
-mw.kalturaPluginWrapper(function(){
+mw.vidiunPluginWrapper(function(){
 	mw.util.formaters().register({
 		'escape': function( value ){
 			return escape( value );

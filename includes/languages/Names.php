@@ -208,7 +208,7 @@
 	'kk-cn' => "قازاقشا (جۇنگو)\xE2\x80\x8F",	# Kazakh (China)
 	'kk-kz' => "қазақша (Қазақстан)\xE2\x80\x8E",	# Kazakh (Kazakhstan)
 	'kk-tr' => "qazaqşa (Türkïya)\xE2\x80\x8E",	# Kazakh (Turkey)
-	'kl' => 'kalaallisut',	# Inuktitut, Greenlandic/Greenlandic/Kalaallisut (kal)
+	'kl' => 'kalaallisut',	# Inuktitut, Greenlandic/Greenlandic/Kalaallisut (vid)
 	'km' => 'ភាសាខ្មែរ',	# Khmer, Central
 	'kn' => 'ಕನ್ನಡ',	# Kannada
 	'ko' => '한국어',	# Korean

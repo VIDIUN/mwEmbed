@@ -7,21 +7,21 @@
 		mediaPlayers.addPlayer( chromecastPlayer );
 	});
 
-	mw.PluginManager.add( 'chromecast', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'chromecast', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			'parent': 'controlsContainer',
 			'order': 7,
 			'visible': false,
 			'align': "right",
-			'applicationID': "FFCC6D19", // DB6462E9: Chromecast default receiver, FFCC6D19: Kaltura custom receiver supporting DRM, HLS and smooth streaming
+			'applicationID': "FFCC6D19", // DB6462E9: Chromecast default receiver, FFCC6D19: Vidiun custom receiver supporting DRM, HLS and smooth streaming
 			'showTooltip': true,
 			'tooltip': 'Chromecast',
 			'receiverMode': false,
 			'debugReceiver': false,
 			'receiverLogo': false,
-			'useKalturaPlayer': false,
-			'debugKalturaPlayer': false
+			'useVidiunPlayer': false,
+			'debugVidiunPlayer': false
 		},
 		isDisabled: false,
 
@@ -46,7 +46,7 @@
 
 		receiverName: '',
 		drmConfig: null,
-		MESSAGE_NAMESPACE: 'urn:x-cast:com.kaltura.cast.player',
+		MESSAGE_NAMESPACE: 'urn:x-cast:com.vidiun.cast.player',
 
 		setup: function( embedPlayer ) {
 			if ( this.getConfig("receiverMode") === true ){
@@ -184,7 +184,7 @@
 			if ( this.getConfig("debugReceiver") ){
 				this.sendMessage({'type': 'show', 'target': 'debug'});
 			}
-			// set kaltura logo if needed
+			// set vidiun logo if needed
 			if ( this.getConfig("receiverLogo") ){
 				this.sendMessage({'type': 'show', 'target': 'logo'});
 			}
@@ -193,8 +193,8 @@
 				this.sendMessage({'type': 'license', 'value': this.drmConfig.contextData.widevineLicenseServerURL});
 				this.log("set license URL to: " + this.drmConfig.contextData.widevineLicenseServerURL);
 			}
-			if (this.getConfig("useKalturaPlayer") === true){
-				this.sendMessage({'type': 'embed', 'publisherID': this.embedPlayer.kwidgetid.substr(1), 'uiconfID': this.embedPlayer.kuiconfid, 'entryID': this.embedPlayer.kentryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer")});
+			if (this.getConfig("useVidiunPlayer") === true){
+				this.sendMessage({'type': 'embed', 'publisherID': this.embedPlayer.vwidgetid.substr(1), 'uiconfID': this.embedPlayer.vuiconfid, 'entryID': this.embedPlayer.ventryid, 'debugVidiunPlayer': this.getConfig("debugVidiunPlayer")});
 				this.embedPlayer.showErrorMsg(
 					{'title':'Chromecast Player',
 						'message': gM('mwe-chromecast-loading'),
@@ -309,7 +309,7 @@
 							_this.setPlayingScreen();
 						},0);
 					});
-					// hide kaltura logo
+					// hide vidiun logo
 					if ( _this.getConfig("receiverLogo") ){
 						_this.sendMessage({'type': 'hide', 'target': 'logo'});
 					}

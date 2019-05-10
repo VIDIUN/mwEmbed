@@ -2,7 +2,7 @@
     "use strict";
     $.cpObject = {};
     $.quizParams = {};
-    mw.PluginManager.add('quiz', mw.KBaseScreen.extend({
+    mw.PluginManager.add('quiz', mw.VBaseScreen.extend({
         defaultConfig: {
             parent: "controlsContainer",
             order: 5,
@@ -41,7 +41,7 @@
                 var entryRequest = {
                     'service': 'baseEntry',
                     'action': 'get',
-                    'entryId': embedPlayer.kentryid
+                    'entryId': embedPlayer.ventryid
                 };
                 _this.getKClient().doRequest(entryRequest, function (data) {
                     if (!_this.KIVQModule.checkApiResponse('Get baseEntry err -->',data)){
@@ -51,9 +51,9 @@
                 });
             });
 
-            this.bind('KalturaSupport_CuePointReached', function (e, cuePointObj) {
+            this.bind('VidiunSupport_CuePointReached', function (e, cuePointObj) {
                 if(!_this.isSeekingIVQ){
-                    _this.KIVQModule.cuePointReachedHandler(e, cuePointObj)
+                    _this.VIVQModule.cuePointReachedHandler(e, cuePointObj)
                 }
                 if(_this.enablePlayDuringScreen) {
                     _this.enablePlayDuringScreen = false;
@@ -123,11 +123,11 @@
                 _this.KIVQModule.setupQuiz(embedPlayer);
             });
         },
-        getKClient: function () {
-            if (!this.kClient) {
-                this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+        getVClient: function () {
+            if (!this.vClient) {
+                this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
         getTemplateHTML: function (data) {
             var defer = $.Deferred();
@@ -152,7 +152,7 @@
             $(".welcome").html(gM('mwe-quiz-welcome'));
             $(".confirm-box").html(gM('mwe-quiz-plsWait'));
 
-            _this.KIVQModule.checkCuepointsReady(function(){
+            _this.VIVQModule.checkCuepointsReady(function(){
 
                 if ($.quizParams.allowDownload ) {
                     $(".pdf-download").prepend('<div class="pdf-download-img">' +
@@ -160,7 +160,7 @@
                     + gM('mwe-quiz-pdf')+'</div>');
 
                     $(".pdf-download-img").on('click',function(){
-                        _this.KIVQModule.getIvqPDF(_this.embedPlayer.kentryid);
+                        _this.VIVQModule.getIvqPDF(_this.embedPlayer.ventryid);
                         $(".pdf-download-img").off();
                     });
 
@@ -180,7 +180,7 @@
 
                 $(".confirm-box").html(gM('mwe-quiz-continue'))
                     .on('click', function () {
-                        _this.KIVQModule.checkIfDone(-1);
+                        _this.VIVQModule.checkIfDone(-1);
                     });
             });
         },
@@ -282,7 +282,7 @@
                 .on('click', function () {
                 $(this).off('click');
                 $(this).html(gM('mwe-quiz-plsWait'));
-                _this.KIVQModule.setSubmitQuiz();
+                _this.VIVQModule.setSubmitQuiz();
             });
         },
 
@@ -305,7 +305,7 @@
                         + '<span class="scoreBig">' + score + '</span>' + ' %' + '</br>'
                         + gM('mwe-quiz-reviewSubmit'));
 
-                    _this.KIVQModule.displayHex(_this.KIVQModule.setHexContainerPos("current"),cpArray);
+                    _this.VIVQModule.displayHex(_this.VIVQModule.setHexContainerPos("current"),cpArray);
 
                     $(document).off('click','.q-box')
                         .on('click', '.q-box', function () {
@@ -343,7 +343,7 @@
             if ($.cpObject.cpArray[selectedQuestion].explanation ){
                 _this.ssDisplayWhy(selectedQuestion)
             }
-            $(".reviewAnswerNr").append(_this.KIVQModule.i2q(selectedQuestion));
+            $(".reviewAnswerNr").append(_this.VIVQModule.i2q(selectedQuestion));
             $(".theQuestion").html(gM('mwe-quiz-q') + "  " + $.cpObject.cpArray[selectedQuestion].question);
             $(".yourAnswerText").html(gM('mwe-quiz-yourAnswer'));
             $(".yourAnswer").html($.cpObject.cpArray[selectedQuestion].answeres[$.cpObject.cpArray[selectedQuestion].selectedAnswer]);
@@ -357,13 +357,13 @@
 
                     return $.cpObject.cpArray[selectedQuestion]
                         .answeres[
-                        _this.KIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
+                        _this.VIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
                         ];
                 }
                 else {return " "}
             });
             $('.gotItBox').html(gM('mwe-quiz-gotIt')).bind('click', function () {
-                _this.ssSubmitted(_this.KIVQModule.score);
+                _this.ssSubmitted(_this.VIVQModule.score);
             });
         },
         showSelectedQuestion:function(questionNr){
@@ -467,9 +467,9 @@
         addFooter: function (questionNr) {
             var _this = this;
 
-            if (_this.KIVQModule.quizSubmitted) {
+            if (_this.VIVQModule.quizSubmitted) {
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                    _this.KIVQModule.continuePlay();
+                    _this.VIVQModule.continuePlay();
                 });
                 return;
             }
@@ -482,22 +482,22 @@
                     _this.KIVQModule.continuePlay();
                 });
             } else {
-                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.KIVQModule.i2q(questionNr)
+                $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
                 + '/' + $.cpObject.cpArray.length + '</span>')
                     .css("float", "right"))
                     .append($('<div></div>')
                         .addClass("pie")
                         .css("float", "right"))
-                    .append($('<span>' + (_this.KIVQModule.getUnansweredQuestNrs()).length + ' '
+                    .append($('<span>' + (_this.VIVQModule.getUnansweredQuestNrs()).length + ' '
                     + gM('mwe-quiz-unanswered') + '</span>')
                         .css("float", "right"));
-                if (_this.KIVQModule.canSkip) {
+                if (_this.VIVQModule.canSkip) {
                     $(".ftr-right").html(gM('mwe-quiz-skipForNow')).on('click', function () {
                         _this.KIVQModule.continuePlay();
                     });
-                }else if(!_this.KIVQModule.canSkip && $.cpObject.cpArray[questionNr].isAnswerd ){
+                }else if(!_this.VIVQModule.canSkip && $.cpObject.cpArray[questionNr].isAnswerd ){
                     $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                        _this.KIVQModule.continuePlay();
+                        _this.VIVQModule.continuePlay();
                     });
                 }
             }
@@ -518,12 +518,12 @@
                                              : "bubble bubble-un-ans " + buSize.bubbleUnAnsSize;
                 var pos = (Math.round(((val.startTime/_this.entryData.msDuration)*100) * 10)/10)-1;
                 $('.bubble-cont').append($('<div id ="' + key + '" style="margin-left:' + pos + '%">' +
-                    _this.KIVQModule.i2q(key) + ' </div>')
+                    _this.VIVQModule.i2q(key) + ' </div>')
                         .addClass(displayClass)
                 );
             });
 
-            if (_this.KIVQModule.canSkip) {
+            if (_this.VIVQModule.canSkip) {
                 handleBubbleclick = '.bubble';
             }
             else{
@@ -532,7 +532,7 @@
             $('.bubble','.bubble-ans','.bubble-un-ans').off();
             $(handleBubbleclick).on('click', function () {
                 _this.unbind('seeking');
-                _this.KIVQModule.gotoScrubberPos(parseInt($(this).attr('id')));
+                _this.VIVQModule.gotoScrubberPos(parseInt($(this).attr('id')));
                 _this.bind('seeking', function () {
                     _this.isSeekingIVQ = true;
                 });

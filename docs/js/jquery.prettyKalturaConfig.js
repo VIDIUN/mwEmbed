@@ -1,8 +1,8 @@
-// Add a jQuery plugin for pretty kaltura docs
+// Add a jQuery plugin for pretty vidiun docs
 (function ($) {
 
 	// this is an embarrassing large list of params, should consolidate once feature config wraps everything. 
-	$.fn.prettyKalturaConfig = function (pluginName, flashvars, flashvarCallback, showSettingsTab, pageEmbed) {
+	$.fn.prettyVidiunConfig = function (pluginName, flashvars, flashvarCallback, showSettingsTab, pageEmbed) {
 		var manifestData = {};
 
 		return this.each(function () {
@@ -357,8 +357,8 @@
 				}
 				switch (data.code) {
 					case "SERVICE_FORBIDDEN":
-						error.title = "Missing Kaltura Secret";
-						error.msg = "The chapters editor appears to be missing a valid kaltura secret." +
+						error.title = "Missing Vidiun Secret";
+						error.msg = "The chapters editor appears to be missing a valid vidiun secret." +
 							" Please login."
 						break;
 					default:
@@ -442,12 +442,12 @@
 
 			/* save to player function */
 			function saveToPlayer($saveToUiConf, userObject) {
-				var uiConfId = localStorage[ 'kdoc-embed-uiconf_id' ] || pageEmbed.uiconf_id;
+				var uiConfId = localStorage[ 'vdoc-embed-uiconf_id' ] || pageEmbed.uiconf_id;
 				$saveToUiConf.find('a').text("Saving...").addClass("disabled")
 				// get the current uiConf:
-				var api = new kWidget.api({
+				var api = new vWidget.api({
 					'wid': '_' + userObject.partnerId,
-					'ks': userObject.ks
+					'vs': userObject.vs
 				});
 				// Get existing uiConf:
 				api.doRequest({
@@ -497,7 +497,7 @@
 			}
 
 			function getLoaderUrl(options) {
-				return mw.getConfig('Kaltura.ServiceUrl') + '/' +
+				return mw.getConfig('Vidiun.ServiceUrl') + '/' +
 					'/p/' + options.partner_id + '/sp/' + options.partner_id + '00/embedIframeJs/' +
 					'uiconf_id/' + options.uiconf_id + '/partner_id/' + options.partner_id;
 			}
@@ -505,20 +505,20 @@
 			function getAutoEmbedUrl(options) {
 				var entryId = options.entry_id || pageEmbed.entry_id
 				return getLoaderUrl(options) +
-					'?entry_id=' + entryId + '&autoembed=true&playerId=kplayer_' +
+					'?entry_id=' + entryId + '&autoembed=true&playerId=vplayer_' +
 					Math.round(Math.random() * 100000)
 			}
 
 			function createNewPlayer($createPlayerBtn, userObject) {
-				var uiConfId = localStorage[ 'kdoc-embed-uiconf_id' ] || pageEmbed.uiconf_id;
+				var uiConfId = localStorage[ 'vdoc-embed-uiconf_id' ] || pageEmbed.uiconf_id;
 
 				$createPlayerBtn.find('a')
 					.addClass('disabled')
 					.text('Creating player ...');
 
-				var api = new kWidget.api({
+				var api = new vWidget.api({
 					'wid': '_' + userObject.partnerId,
-					'ks': userObject.ks
+					'vs': userObject.vs
 				});
 				// Get existing / player configured uiConf:
 				api.doRequest({
@@ -549,7 +549,7 @@
 								'service': 'uiConf',
 								'action': 'add',
 								'id': data.id,
-								'uiConf:tags': 'kdp3',
+								'uiConf:tags': 'vdp3',
 								'uiConf:swfUrlVersion': data.swfUrlVersion,
 								'uiConf:swfUrl': data.swfUrl,
 								'uiConf:html5Url': data.html5Url,
@@ -701,7 +701,7 @@
 				// Check for flashvar callback; 
 				var $updatePlayerBtn = flashvarCallback ?
 					$('<a id="btn-update-player-' + id + '" class="btn disabled">')
-						.addClass('kdocUpdatePlayer')
+						.addClass('vdocUpdatePlayer')
 						.text('Preview player')
 						.click(function () {
 							// update hash url with settings:
@@ -736,9 +736,9 @@
 					$saveToUiConf.find('a').attr('title', useCompatiblePlayer);
 					$createPlayerBtn.find('a').attr('title', useCompatiblePlayer);
 				} else {
-					kWidget.auth.addAuthCallback(function (userObject) {
-						// we need a ks to save a new player:
-						if (!userObject.ks) {
+					vWidget.auth.addAuthCallback(function (userObject) {
+						// we need a vs to save a new player:
+						if (!userObject.vs) {
 							return;
 						}
 						// Create new player: 
@@ -751,8 +751,8 @@
 					});
 
 					// Check that we can expose a save to uiConf option
-					kWidget.auth.addAuthCallback(function (userObject) {
-						var uiConfId = localStorage[ 'kdoc-embed-uiconf_id' ];
+					vWidget.auth.addAuthCallback(function (userObject) {
+						var uiConfId = localStorage[ 'vdoc-embed-uiconf_id' ];
 						if (!uiConfId) {
 							$saveToUiConf.find('a').attr('title', 'No uiconf is set in seetings');
 							return;
@@ -828,12 +828,12 @@
 				if (pageEmbed && pageEmbed.flashvars) {
 					flashVarsChanged = getObjectDiff(getConfiguredFlashvars(), pageEmbed.flashvars);
 				}
-				// remove any flashvars that had hidden edit or ks:
+				// remove any flashvars that had hidden edit or vs:
 				$.each(manifestData, function (pName, attr) {
 					if (attr.attributes) {
 						$.each(attr.attributes, function (subKey, subAttr) {
-							// never include the ks in what we hand off to others: 
-							if (subKey == 'ks' && flashVarsChanged[ pName ][subKey]) {
+							// never include the vs in what we hand off to others: 
+							if (subKey == 'vs' && flashVarsChanged[ pName ][subKey]) {
 								delete( flashVarsChanged[ pName ][subKey] );
 							}
 							if (flashVarsChanged[ pName ] && flashVarsChanged[ pName ][ subKey ]
@@ -846,8 +846,8 @@
 						if (attr.hideEdit) {
 							delete( flashVarsChanged[ pName ] );
 						}
-						// never include the ks in what we hand off to others: 
-						if (pName == 'ks' && flashVarsChanged[ pName ]) {
+						// never include the vs in what we hand off to others: 
+						if (pName == 'vs' && flashVarsChanged[ pName ]) {
 							delete( flashVarsChanged[ pName ] );
 						}
 					}
@@ -860,7 +860,7 @@
 					}
 				})
 				// get any local settings overides: 
-				var settingsChanged = getObjectDiff(kWidget.getLocalFeatureConfig(pageEmbed), pageEmbed);
+				var settingsChanged = getObjectDiff(vWidget.getLocalFeatureConfig(pageEmbed), pageEmbed);
 				// update settings flashvars chaged 
 				settingsChanged.flashvars = flashVarsChanged;
 				return settingsChanged;
@@ -903,19 +903,19 @@
 			}
 
 			function getEmbed() {
-				var kdp = $('#' + pageEmbed.targetId)[0];
+				var vdp = $('#' + pageEmbed.targetId)[0];
 				// get config short-cut:
 				var gC = function (attr) {
-					return kdp.evaluate('{' + attr + '}');
+					return vdp.evaluate('{' + attr + '}');
 				}
 				// check if done loading yet 
-				if (!kdp || !kdp.evaluate || gC('playerStatusProxy.kdpStatus') != 'ready') {
+				if (!vdp || !vdp.evaluate || gC('playerStatusProxy.vdpStatus') != 'ready') {
 					return 'Player is not ready';
 				}
 				// add main values:  
-				var partner_id = gC('configProxy.kw.partnerId'),
-					wid = gC('configProxy.kw.id'),
-					uiconf_id = gC('configProxy.kw.uiConfId'),
+				var partner_id = gC('configProxy.vw.partnerId'),
+					wid = gC('configProxy.vw.id'),
+					uiconf_id = gC('configProxy.vw.uiConfId'),
 					entry_id = gC('mediaProxy.entry.id'); // can be null ( playlist for example )
 				// setup metadata:
 				var metaHTML = "\t" + '<!-- Search engine metadata, based on schema.org/VideoObject -->' + "\n";
@@ -927,25 +927,25 @@
 					}
 				})
 				// add height & width: 
-				metaHTML += "\t" + '<span itemprop="width" content="' + $(kdp).width() + '"></span>' + "\n" +
-					"\t" + '<span itemprop="height" content="' + $(kdp).height() + '"></span>' + "\n";
+				metaHTML += "\t" + '<span itemprop="width" content="' + $(vdp).width() + '"></span>' + "\n" +
+					"\t" + '<span itemprop="height" content="' + $(vdp).height() + '"></span>' + "\n";
 
 				// get the playerId
-				var playerId = 'kaltura_player_' + new Date().getTime();
+				var playerId = 'vidiun_player_' + new Date().getTime();
 
-				// the kWidget embed line: 
-				var kWidgetEmbedCall = '<script>' + "\n" +
-					"\t" + 'kWidget.embed({' + "\n" +
+				// the vWidget embed line: 
+				var vWidgetEmbedCall = '<script>' + "\n" +
+					"\t" + 'vWidget.embed({' + "\n" +
 					"\t\t" + 'targetId: "' + playerId + "\",\n" +
 					"\t\t" + 'wid: "' + wid + "\",\n" +
 					"\t\t" + 'uiconf_id: "' + uiconf_id + "\",\n";
 				if (entry_id) {
-					kWidgetEmbedCall += "\t\t" + 'entry_id: "' + entry_id + "\",\n";
+					vWidgetEmbedCall += "\t\t" + 'entry_id: "' + entry_id + "\",\n";
 				}
 				// add flashvars:
-				kWidgetEmbedCall += getFlashvarConfig("\t\t");
+				vWidgetEmbedCall += getFlashvarConfig("\t\t");
 
-				kWidgetEmbedCall += '})' + "\n" +
+				vWidgetEmbedCall += '})' + "\n" +
 					'</script>';
 
 				// get the script url
@@ -955,32 +955,32 @@
 				});
 				// TODO do an ajax check against the version of the library
 				// this way we won't need all the comments
-				//var api = new kWidget.api( { 'wid' : '_' + partner_id });
+				//var api = new vWidget.api( { 'wid' : '_' + partner_id });
 
-				var currentUrl = kWidget.getPath() + 'mwEmbedLoader.php' +
+				var currentUrl = vWidget.getPath() + 'mwEmbedLoader.php' +
 					'/partner_id/' + partner_id + '/uiconf_id/' + uiconf_id;
 
 				$embedCode = $('<div>')
 					.append(
 						$('<span>').html(
-							'Please note, these settings can be edited with <a target="_new" href="http://knowledge.kaltura.com/universal-studio-information-guide">Universal Studio</a> and saved to player. ' +
+							'Please note, these settings can be edited with <a target="_new" href="http://knowledge.vidiun.com/universal-studio-information-guide">Universal Studio</a> and saved to player. ' +
 								'<br>If testing integrations, you can invoke this plugin with current configuration at runtime ' +
-								'by manipulating a <a href="http://knowledge.kaltura.com/embedding-kaltura-media-players-your-site">dynamic embed</a> retived from the KMC.'
+								'by manipulating a <a href="http://knowledge.vidiun.com/embedding-vidiun-media-players-your-site">dynamic embed</a> retived from the VMC.'
 						),
 						$('<br>'),
 						$('<pre>')
 							.addClass('prettyprint linenums')
 							.text(
 								'<!-- Subsitute ' + partner_id + ' with your partner id, ' + uiconf_id + ' with your uiconf_id -->' + "\n" +
-									'<script src="//cdnapisec.kaltura.com/p/' + partner_id + '/sp/' + partner_id + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + partner_id + '">' +
+									'<script src="//cdnapisec.vidiun.com/p/' + partner_id + '/sp/' + partner_id + '00/embedIframeJs/uiconf_id/' + uiconf_id + '/partner_id/' + partner_id + '">' +
 									"\n</script>\n" +
 									'<div id="' + playerId + '" ' +
-									'style="width:' + $(kdp).width() + 'px;' +
-									'height:' + $(kdp).height() + 'px;" ' +
+									'style="width:' + $(vdp).width() + 'px;' +
+									'height:' + $(vdp).height() + 'px;" ' +
 									'itemprop="video" itemscope itemtype="http://schema.org/VideoObject" >' + "\n" +
 									metaHTML +
 									'</div>' + "\n" +
-									kWidgetEmbedCall
+									vWidgetEmbedCall
 							)
 					)
 				return $embedCode;
@@ -1038,7 +1038,7 @@
 			function getFlashvarConfigHTML() {
 				return $('<div />').append(
 					$('<pre class="prettyprint linenums" />').text(getFlashvarConfig()),
-					$('<span>Flashvar JSON can be used with <a target="top" href="../../../docs/index.php?path=Embeding#kwidget">kWidget.embed</a>:</span>')
+					$('<span>Flashvar JSON can be used with <a target="top" href="../../../docs/index.php?path=Embeding#vwidget">vWidget.embed</a>:</span>')
 				);
 			}
 
@@ -1064,7 +1064,7 @@
 				});
 
 				return $('<div />').append(
-					$('<span>Player JSON config can be edited via the <a target="top" href="http://player.kaltura.com/kWidget/tests/PlayerVersionUtility.html">player version utility</a>'),
+					$('<span>Player JSON config can be edited via the <a target="top" href="http://player.vidiun.com/vWidget/tests/PlayerVersionUtility.html">player version utility</a>'),
 					$('<pre class="prettyprint linenums" />').text(uiText)
 				);
 			}
@@ -1101,17 +1101,17 @@
 			}
 
 			function updateAuthWidget($tabTarget) {
-				var $authDoc = $('<span>').text(' Login to kaltura to auto-populate wid and ks settings')
+				var $authDoc = $('<span>').text(' Login to vidiun to auto-populate wid and vs settings')
 				$('#hostedAuthWidget').after(
 					$authDoc
 				).css('display', 'inline');
 				// add widget binding
-				kWidget.auth.getWidget("hostedAuthWidget", function (userObject) {
-					if (!userObject.ks || !userObject.partnerId) {
+				vWidget.auth.getWidget("hostedAuthWidget", function (userObject) {
+					if (!userObject.vs || !userObject.partnerId) {
 						$authDoc.text(" Login error.");
 						return;
 					}
-					$authDoc.text(" Set wid and ks from login ");
+					$authDoc.text(" Set wid and vs from login ");
 					$updatedWarn = $('<div>')
 						.addClass('alert alert-info')
 						.text(
@@ -1119,23 +1119,23 @@
 						)
 					var updatedValue = false;
 					$tabTarget.find('input').each(function (inx, input) {
-						// update ks:
-						if ($(input).data('key') == 'kdoc-embed-ks') {
-							if ($(input).val() != userObject.ks) {
-								$(input).val(userObject.ks).after($updatedWarn.clone())
+						// update vs:
+						if ($(input).data('key') == 'vdoc-embed-vs') {
+							if ($(input).val() != userObject.vs) {
+								$(input).val(userObject.vs).after($updatedWarn.clone())
 								updatedValue = true;
 							}
 						}
 						// update wid
-						if ($(input).data('key') == 'kdoc-embed-wid') {
+						if ($(input).data('key') == 'vdoc-embed-wid') {
 							if ($(input).val() != '_' + userObject.partnerId) {
 								$(input).val('_' + userObject.partnerId).after($updatedWarn.clone())
 								updatedValue = true;
 							}
 						}
 						// update uiconf_id with select tool: 
-						if ($(input).data('key') == 'kdoc-embed-uiconf_id') {
-							$(input).kPagedTableInput({
+						if ($(input).data('key') == 'vdoc-embed-uiconf_id') {
+							$(input).vPagedTableInput({
 								'apiService': 'uiConf',
 								'partnerId': userObject.partnerId,
 								'vs': userObject.vs,
@@ -1176,8 +1176,8 @@
 						}
 
 						// update entry id with select tool:
-						if ($(input).data('key') == 'kdoc-embed-entry_id') {
-							$(input).kPagedTableInput({
+						if ($(input).data('key') == 'vdoc-embed-entry_id') {
+							$(input).vPagedTableInput({
 								'apiService': 'baseEntry',
 								'partnerId': userObject.partnerId,
 								'vs': userObject.vs,
@@ -1264,8 +1264,8 @@
 			// testing files always ../../ from test
 			var request = window.vDocPath + 'configManifest.php?';
 			// check for ps folder travarsal 
-			if (mw && mw.getConfig('Kaltura.KWidgetPsPath')) {
-				request += 'pskwidgetpath=' + mw.getConfig('Kaltura.KWidgetPsPath');
+			if (mw && mw.getConfig('Vidiun.VWidgetPsPath')) {
+				request += 'psvwidgetpath=' + mw.getConfig('Vidiun.VWidgetPsPath');
 			}
 			request += '&plugin_id=' + pluginName + '&vars=' + baseVarsList;
 
@@ -1337,9 +1337,9 @@
 						$textDesc.append(manifestData[ firstAttr ]['description']);
 					}
 				}
-				// always move 'kdoc-more-desc' to $textDesc object
-				if ($('#kdoc-more-desc').length) {
-					$('#kdoc-more-desc').appendTo($textDesc);
+				// always move 'vdoc-more-desc' to $textDesc object
+				if ($('#vdoc-more-desc').length) {
+					$('#vdoc-more-desc').appendTo($textDesc);
 				}
 
 				function getEditTabs() {
@@ -1383,7 +1383,7 @@
 					$settings = $('<div>').append(
 						'Global settings, will be saved to your browsers session.'
 					);
-					// add a kWidget login button:
+					// add a vWidget login button:
 					$settings.append(
 						$('<br>'), $('<br>'),
 						$('<div>').attr("id", "hostedAuthWidget"),
@@ -1393,7 +1393,7 @@
 					var $tbody = $('<tbody />');
 
 					function getInput(key) {
-						var fullKey = 'kdoc-embed-' + key;
+						var fullKey = 'vdoc-embed-' + key;
 						return $('<input>')
 							.data('key', fullKey)
 							.attr('type', "text")
@@ -1403,14 +1403,14 @@
 							)
 					}
 
-					// ( if the pretty widget config was called with kWidget settings )
+					// ( if the pretty widget config was called with vWidget settings )
 					$tbody.append(
 						$('<tr>').append(
-							$('<td>').text('Kaltura secret key'),
+							$('<td>').text('Vidiun secret key'),
 							$('<td>').append(
-								getInput('ks')
+								getInput('vs')
 							),
-							$('<td>').html("<b>Kaltura secret key</b> used for plugins that require a KS for authenticated actions." +
+							$('<td>').html("<b>Vidiun secret key</b> used for plugins that require a VS for authenticated actions." +
 								"<br><i>Note:</i> You must set widget and entries to pull from your account to conduct respective admin actions"
 							)
 						)
@@ -1537,10 +1537,10 @@
 						.append(
 							$('<ul class="nav nav-tabs feature-config" />').append(
 								'<li><a href="#tab-desc-' + id + '" data-toggle="tab">' +
-									'<i class="kpcicon-demo"></i>Demo</a>' +
+									'<i class="vpcicon-demo"></i>Demo</a>' +
 									'</li>' +
 									'<li><a data-getter="showEditTab" href="#tab-edit-' + id + '" data-toggle="tab">' +
-									'<i class="kpcicon-customize"></i>Customize</a></li>' +
+									'<i class="vpcicon-customize"></i>Customize</a></li>' +
 									settingTabHtml
 							),
 							$('<div class="tab-content" />').append(
@@ -1583,14 +1583,14 @@
 		}); // each plugin closure
 	}
 
-	jQuery.fn.kPagedTableInput = function (options) {
+	jQuery.fn.vPagedTableInput = function (options) {
 		var $inputTarget = $(this);
 		// the target table
 		var $table = $();
 		// issue api request to load uiConfs associated with this account
-		var api = new kWidget.api({
+		var api = new vWidget.api({
 			'wid': '_' + options.partnerId,
-			'ks': options.ks
+			'vs': options.vs
 		});
 		/*******************
 		 *  Simple Paged table
@@ -1620,8 +1620,8 @@
 				$thead = $('<thead>');
 				$trow = $('<tr>').appendTo($thead);
 				var fieldCount = 0;
-				$.each(options.fieldMap, function (key, kName) {
-					var $td = $('<td>').text(kName);
+				$.each(options.fieldMap, function (key, vName) {
+					var $td = $('<td>').text(vName);
 					// limit width of name:
 					if (key == 'name') {
 						$td.css('width', '125px')
@@ -1665,7 +1665,7 @@
 							$inputTarget.val(uiConfObj[ 'id' ])
 						});
 					// fill in uiConf data:
-					$.each(options.fieldMap, function (key, kName) {
+					$.each(options.fieldMap, function (key, vName) {
 						$tr.append(
 							$('<td>').html(
 								options.getValue(key, uiConfObj[ key ])
@@ -1725,10 +1725,10 @@
 			.attr('title', 'Select a uiConf from partner: ' + options.partnerId)
 			.css('cursor', 'pointer')
 			.click(function (event) {
-				$('.kPagedTableInput').fadeOut('fast');
+				$('.vPagedTableInput').fadeOut('fast');
 				var pos = $(this).position()
 				var $uiConfList = $('<div>')
-					.addClass('kPagedTableInput')
+					.addClass('vPagedTableInput')
 					.css({
 						'position': 'absolute',
 						'top': pos.top,

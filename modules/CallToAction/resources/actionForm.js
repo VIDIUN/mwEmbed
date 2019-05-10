@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-mw.PluginManager.add( 'actionForm', mw.KBaseScreen.extend({
+mw.PluginManager.add( 'actionForm', mw.VBaseScreen.extend({
 
 	defaultConfig: {
 		displayOn: 'start', // start, <time>, <percent>%, end

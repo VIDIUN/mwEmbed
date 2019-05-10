@@ -6,19 +6,19 @@
 <script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
 <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 <script type="text/javascript">
-function jsKalturaPlayerTest( videoId ){
-    var kdp = document.getElementById( videoId );
+function jsVidiunPlayerTest( videoId ){
+    var vdp = document.getElementById( videoId );
 
     // Name this module
-	module( "KLiveAnalytics" );
+	module( "VLiveAnalytics" );
 	
 	var $iframe = $( '#' + videoId + '_ifp' ).contents();
 	var index = 1;
 	asyncTest("HLS test", function(){
-		kdp.kBind("playerReady",function(){
-            kdp.sendNotification("doPlay");
+		vdp.vBind("playerReady",function(){
+            vdp.sendNotification("doPlay");
         });
-        kdp.kBind( 'liveAnalyticsEvent' , function ( data ) {
+        vdp.vBind( 'liveAnalyticsEvent' , function ( data ) {
             var shouldBe = {bitrate: -2,
                 bufferTime: -2 ,
                 deliveryType: "hls" ,
@@ -49,18 +49,18 @@ function jsKalturaPlayerTest( videoId ){
 
 
 </script>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Live analytics </h2>
 
 <br />
-<div id="kaltura_player" style="width:400px;height:333px;"></div>
+<div id="vidiun_player" style="width:400px;height:333px;"></div>
 <script>
     mw.setConfig("LeadWithHLSOnFlash",true);
-	kWidget.embed( {
-		'targetId' :'kaltura_player',
+	vWidget.embed( {
+		'targetId' :'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id': '1_bhej6q2a',
@@ -79,8 +79,8 @@ function jsKalturaPlayerTest( videoId ){
     <textarea id="txtlog" style="width:450px;height:230px;float:left"></textarea>
     <script>
         function jsCallbackReady(playerid) {
-            var kdp = document.getElementById( playerid );
-            kdp.kBind( 'liveAnalyticsEvent' , function ( data ) {
+            var vdp = document.getElementById( playerid );
+            vdp.vBind( 'liveAnalyticsEvent' , function ( data ) {
                 $( '#txtlog' ).append(
                                 "Play" + ': ' +
                                 JSON.stringify( data ) + "\n\n\n"

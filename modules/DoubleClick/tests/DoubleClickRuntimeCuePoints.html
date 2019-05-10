@@ -9,10 +9,10 @@
   <body>
 	<h1>DFP Runtime Cuepoints</h1>
 	<br>
-<div id="kaltura_player" style="width:400px;height:330px;"></div>
+<div id="vidiun_player" style="width:400px;height:330px;"></div>
 <script>
-	kWidget.embed({
-		'targetId': 'kaltura_player',
+	vWidget.embed({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
@@ -34,9 +34,9 @@
 	})
 </script>
 	<h3> How to set DFP cuePoints at Runtime </h3>
-	CuePoints at Runtime work by partial mediaProxy override. Here you can see a <a href="https://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaCuePoint" target="_new">cuePoint object</a> added with startTime 5 seconds.
+	CuePoints at Runtime work by partial mediaProxy override. Here you can see a <a href="https://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunCuePoint" target="_new">cuePoint object</a> added with startTime 5 seconds.
 	<pre class="prettyprint linenums">
-kWidget.embed({
+vWidget.embed({
 	'targetId': 'myVideoTarget',
 	'wid': '_243342',
 	'uiconf_id' : '12905712',

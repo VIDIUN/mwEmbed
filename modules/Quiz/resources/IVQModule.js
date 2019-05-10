@@ -3,11 +3,11 @@
  */
 (function (mw, $) {
     "use strict";
-    mw.KIVQModule = function (embedPlayer,quizPlugin) {
+    mw.VIVQModule = function (embedPlayer,quizPlugin) {
         return this.init(embedPlayer,quizPlugin);
     };
-    if (!(mw.KIVQModule.prototype = {
-            kQuizUserEntryId: null,
+    if (!(mw.VIVQModule.prototype = {
+            vQuizUserEntryId: null,
             score: null,
             embedPlayer: null,
             quizPlugin: null,
@@ -78,7 +78,7 @@
 
             getQuestionsAndAnswers: function (callback) {
                 var _this = this;
-                _this.KIVQApi.getQuestionAnswerCuepoint(_this.kQuizUserEntryId, function(data){
+                _this.VIVQApi.getQuestionAnswerCuepoint(_this.vQuizUserEntryId, function(data){
 
                     if (!_this.checkApiResponse('Get question err -->',data[0])){
                         return false;
@@ -92,15 +92,15 @@
             setUserEntryId:function(data){
                 var _this = this;
                 if (data[0].totalCount > 0 &&  !$.isEmptyObject(data[0].objects[0])) {
-                    _this.kQuizUserEntryId = data[0].objects[0].id;
+                    _this.vQuizUserEntryId = data[0].objects[0].id;
                 }
                 else{
-                    _this.KIVQApi.createQuizUserEntryId(function(userData){
-                        if (!_this.checkApiResponse('Add KQ user entry id err -->',userData)){
+                    _this.VIVQApi.createQuizUserEntryId(function(userData){
+                        if (!_this.checkApiResponse('Add VQ user entry id err -->',userData)){
                             return false;
                         }
                         else{
-                            _this.kQuizUserEntryId = userData.id;
+                            _this.vQuizUserEntryId = userData.id;
                         }
                   });
                 }
@@ -108,7 +108,7 @@
             setSubmitQuiz:function(){
                 var _this = this;
 
-                _this.KIVQApi.submitQuiz(_this.kQuizUserEntryId, function(data){
+                _this.VIVQApi.submitQuiz(_this.vQuizUserEntryId, function(data){
 
                     if (!_this.checkApiResponse('Submit Quiz err -->',data)){
                         return false;
@@ -129,7 +129,7 @@
             },
             getIvqPDF:function(entryId){
                 var _this = this;
-                _this.KIVQApi.downloadIvqPDF(entryId, function(data){
+                _this.VIVQApi.downloadIvqPDF(entryId, function(data){
                     window.location.assign(data);
                     if (!_this.checkApiResponse('Download PDF  err -->',data)){
                             return false;
@@ -260,7 +260,7 @@
                     _this.intrVal = false;
                 }
                 _this.intrVal = setInterval(function () {
-                    if (_this.kQuizUserEntryId){
+                    if (_this.vQuizUserEntryId){
                         clearInterval(_this.intrVal);
                         _this.intrVal = false;
                         callback()
@@ -308,7 +308,7 @@
                     $.cpObject.cpArray[questionNr].isAnswerd = true;
                 }
 
-                _this.KIVQApi.addAnswer(isAnswered,_this.i2q(selectedAnswer),_this.kQuizUserEntryId,questionNr,function(data){
+                _this.VIVQApi.addAnswer(isAnswered,_this.i2q(selectedAnswer),_this.vQuizUserEntryId,questionNr,function(data){
 
                     if (!_this.checkApiResponse('Add question err -->',data)){
                         return false;

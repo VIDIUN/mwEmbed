@@ -56,8 +56,8 @@ vWidget.addReadyCallback(function(videoId){
 		}
 	})
 	// entry ready is run once the entry data has been loaded
-	kdp.kBind('entryReady', function(){
-		$("#changeLog").append( "Name: " + kdp.evaluate('{mediaProxy.entry.name}') );
+	vdp.vBind('entryReady', function(){
+		$("#changeLog").append( "Name: " + vdp.evaluate('{mediaProxy.entry.name}') );
 	})
 });
 </script>
@@ -94,7 +94,7 @@ Change Media Log: <pre style="max-width:800px" id="changeLog"></pre>
 
 <div id="vidiun_player" style="height:333px;width:400px"></div>
 <script>
-	kWidget.embed( 'kaltura_player', {
+	vWidget.embed( 'vidiun_player', {
 		'wid' : '_243342',
 		'uiconf_id': '12905712',
 		'entry_id': '0_swup5zao',

@@ -1,82 +1,82 @@
 {
-	"mw.KalturaIframePlayerSetup": {
-		"scripts": "resources/mw.KalturaIframePlayerSetup.js",
+	"mw.VidiunIframePlayerSetup": {
+		"scripts": "resources/mw.VidiunIframePlayerSetup.js",
 		"dependencies": [
 			"mw.MwEmbedSupport"
 		],
-		"kalturaLoad": "always"
+		"vidiunLoad": "always"
 	},
-	"mw.KWidgetSupport": {
-		"scripts": "resources/mw.KWidgetSupport.js",
+	"mw.VWidgetSupport": {
+		"scripts": "resources/mw.VWidgetSupport.js",
 		"dependencies": [
 			"base64_encode",
 			"matchMedia",
-			"mw.KEntryLoader",
-			"mw.KDPMapping",
-			"mw.KCuePoints"
+			"mw.VEntryLoader",
+			"mw.VDPMapping",
+			"mw.VCuePoints"
 		],
-		"kalturaLoad": "always",
-		"messageFile": "KalturaSupport.i18n.json"
+		"vidiunLoad": "always",
+		"messageFile": "VidiunSupport.i18n.json"
 	},
-	"mw.KBaseScreen": {
-		"scripts": "resources/mw.KBaseScreen.js",
+	"mw.VBaseScreen": {
+		"scripts": "resources/mw.VBaseScreen.js",
 		"dependencies": [
-			"mw.KBaseComponent"
+			"mw.VBaseComponent"
 		]
 	},
-	"mw.KBaseMediaList": {
-		"scripts": "resources/mw.KBaseMediaList.js",
+	"mw.VBaseMediaList": {
+		"scripts": "resources/mw.VBaseMediaList.js",
 		"dependencies": [
-			"mw.KBaseComponent",
+			"mw.VBaseComponent",
 			"jCarouse",
 			"nanoScroller"
 		]
 	},
-	"mw.KBaseComponent": {
-		"scripts": "resources/mw.KBaseComponent.js",
+	"mw.VBaseComponent": {
+		"scripts": "resources/mw.VBaseComponent.js",
 		"dependencies": [
-			"mw.KBasePlugin",
-			"mediawiki.kmenu"
+			"mw.VBasePlugin",
+			"mediawiki.vmenu"
 		]
 	},
-	"mw.KBaseButton": {
-		"scripts": "resources/mw.KBaseButton.js",
+	"mw.VBaseButton": {
+		"scripts": "resources/mw.VBaseButton.js",
 		"dependencies": [
-			"mw.KBaseComponent"
+			"mw.VBaseComponent"
 		]
 	},
-	"mw.KBasePlugin": {
-		"scripts": "resources/mw.KBasePlugin.js",
+	"mw.VBasePlugin": {
+		"scripts": "resources/mw.VBasePlugin.js",
 		"dependencies": [
 			"class",
 			"mw.PluginManager",
 			"mediawiki.util.tmpl"
 		]
 	},
-	"mw.KCuePoints": {
-		"scripts": "resources/mw.KCuePoints.js"
+	"mw.VCuePoints": {
+		"scripts": "resources/mw.VCuePoints.js"
 	},
-	"mw.KTimedText": {
-		"scripts": "resources/mw.KTimedText.js"
+	"mw.VTimedText": {
+		"scripts": "resources/mw.VTimedText.js"
 	},
-	"mw.KAnalytics": {
-		"scripts": "resources/mw.KAnalytics.js"
+	"mw.VAnalytics": {
+		"scripts": "resources/mw.VAnalytics.js"
 	},
-	"mw.KDPMapping": {
-		"scripts": "resources/mw.KDPMapping.js"
+	"mw.VDPMapping": {
+		"scripts": "resources/mw.VDPMapping.js"
 	},
-	"mw.KEntryLoader": {
-		"scripts": "resources/mw.KEntryLoader.js"
+	"mw.VEntryLoader": {
+		"scripts": "resources/mw.VEntryLoader.js"
 	},
-	"mw.KAds": {
-		"scripts": "resources/mw.KAds.js",
+	"mw.VAds": {
+		"scripts": "resources/mw.VAds.js",
 		"dependencies": [
 			"mw.AdTimeline",
-			"mw.KAdPlayer"
+			"mw.VAdPlayer"
 		]
 	},
-	"mw.KAdPlayer": {
-		"scripts": "resources/mw.KAdPlayer.js"
+	"mw.VAdPlayer": {
+		"scripts": "resources/mw.VAdPlayer.js"
 	},
 	"dualScreen": {
 		"scripts": [
@@ -98,17 +98,17 @@
 			"dualScreenControlBar": "components/dualScreen/dualScreenControlBar.tmpl.html"
 		},
 		"dependencies": [
-			"mw.KBaseComponent",
+			"mw.VBaseComponent",
 			"jquery.ui.draggable",
 			"jquery.ui.resizable"
 		],
-		"kalturaPluginName": "dualScreen"
+		"vidiunPluginName": "dualScreen"
 	},
 	"hammerEvents": {
 		"scripts": "components/hammerEvents/hammerEvents.js",
-		"kalturaPluginName": "hammerEvents",
+		"vidiunPluginName": "hammerEvents",
 		"dependencies": [
-			"mw.KBasePlugin",
+			"mw.VBasePlugin",
 			"hammer"
 		]
 	},
@@ -117,8 +117,8 @@
 	},
 	"smartContainer": {
 		"scripts": "components/smartContainer.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "smartContainer"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "smartContainer"
 	},
 	"chapters": {
 		"scripts": "components/chapters/chapters.js",
@@ -129,16 +129,16 @@
 			"slides": "components/chapters/slides.tmpl.html"
 		},
 		"dependencies": [
-			"mw.KBaseMediaList",
+			"mw.VBaseMediaList",
 			"typeahead",
 			"dotdotdot"
 		],
-		"kalturaPluginName": "chapters"
+		"vidiunPluginName": "chapters"
 	},
 	"keyboardShortcuts": {
 		"scripts": "resources/mw.KeyboardShortcuts.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaLoad": "always"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunLoad": "always"
 	},
    "id3Tag": {
      "scripts": "resources/mw.id3Tag.js",
@@ -147,38 +147,38 @@
    },
 	"controlBarContainer": {
 		"scripts": "components/controlBarContainer.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaLoad": "always"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunLoad": "always"
 	},
 	"topBarContainer": {
 		"scripts": "components/topBarContainer.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaLoad": "always"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunLoad": "always"
 	},
 	"sideBarContainer": {
 		"scripts": "components/sideBarContainer.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaLoad": "always"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunLoad": "always"
 	},
 	"theme": {
 		"scripts": "components/theme.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "theme"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "theme"
 	},
 	"playlistAPI": {
 		"scripts": "components/playlistAPI.js",
 		"dependencies": [
-			"mw.KBaseMediaList",
+			"mw.VBaseMediaList",
 			"dotdotdot"
 		],
 		"styles": "components/playlist/playList.css",
 		"templates": "components/playlist/playList.tmpl.html",
-		"kalturaPluginName": "playlistAPI"
+		"vidiunPluginName": "playlistAPI"
 	},
 	"largePlayBtn": {
 		"scripts": "components/largePlayBtn.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "largePlayBtn"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "largePlayBtn"
 	},
     "pipBtn":{
       "scripts": "components/pipBtn.js",
@@ -187,168 +187,168 @@
     },
 	"playPauseBtn": {
 		"scripts": "components/playPauseBtn.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "playPauseBtn"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "playPauseBtn"
 	},
 	"nextPrevBtn": {
 		"scripts": "components/nextPrevBtn.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "nextPrevBtn"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "nextPrevBtn"
 	},
 	"fullScreenBtn": {
 		"scripts": "components/fullScreenBtn.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "fullScreenBtn"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "fullScreenBtn"
 	},
         "audioSelector":{
             "scripts":  "components/audioSelector.js",
-                "dependencies":"mw.KBaseComponent" ,
-                    "kalturaPluginName":"audioSelector"
+                "dependencies":"mw.VBaseComponent" ,
+                    "vidiunPluginName":"audioSelector"
         } ,
 	"expandToggleBtn": {
 		"scripts": "components/expandToggleBtn.js",
-		"dependencies": "mw.KBaseButton",
-		"kalturaPluginName": "expandToggleBtn"
+		"dependencies": "mw.VBaseButton",
+		"vidiunPluginName": "expandToggleBtn"
 	},
 	"scrubber": {
 		"scripts": "components/scrubber.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "scrubber"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "scrubber"
 	},
 	"volumeControl": {
 		"scripts": "components/volumeControl.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "volumeControl"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "volumeControl"
 	},
 	"accessibilityButtons": {
 		"scripts": "components/accessibilityButtons.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "accessibilityButtons"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "accessibilityButtons"
 	},
 	"currentTimeLabel": {
 		"scripts": "components/currentTimeLabel.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "currentTimeLabel"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "currentTimeLabel"
 	},
 	"durationLabel": {
 		"scripts": "components/durationLabel.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "durationLabel"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "durationLabel"
 	},
 	"sourceSelector": {
 		"scripts": "components/sourceSelector.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "sourceSelector"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "sourceSelector"
 	},
 	"logo": {
 		"scripts": "components/logo.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "logo"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "logo"
 	},
 	"closeFSMobile": {
 		"scripts": "components/closeFSMobile.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "closeFSMobile"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "closeFSMobile"
 	},
 	"airPlay": {
 		"scripts": "components/airPlay.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "airPlay"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "airPlay"
 	},
 	"nativeCallout": {
 		"scripts": "components/nativeCallout/nativeCallout.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaPluginName": "nativeCallout",
+		"dependencies": "mw.VBasePlugin",
+		"vidiunPluginName": "nativeCallout",
 		"styles": "components/nativeCallout/PlayStore.css",
 		"templates": "components/nativeCallout/nativeCallout.tmpl.html"
 	},
 	"closedCaptions": {
 		"scripts": "resources/mw.ClosedCaptions.js",
 		"dependencies": [
-			"mw.KBaseComponent",
+			"mw.VBaseComponent",
 			"mw.TextSource",
 			"mw.Language.names"
 		],
-		"kalturaPluginName": "closedCaptions",
+		"vidiunPluginName": "closedCaptions",
 		"messageFile": "../TimedText/TimedText.i18n.json"
 	},
 	"infoScreen": {
 		"scripts": "components/info/info.js",
 		"templates": "components/info/info.tmpl.html",
 		"dependencies": [
-			"mw.KBaseScreen"
+			"mw.VBaseScreen"
 		],
-		"kalturaPluginName": "infoScreen"
+		"vidiunPluginName": "infoScreen"
 	},
 	"related": {
 		"scripts": "components/related/related.js",
 		"styles": "components/related/related.css",
 		"templates": "components/related/related.tmpl.html",
 		"dependencies": [
-			"mw.KBaseScreen"
+			"mw.VBaseScreen"
 		],
-		"kalturaPluginName": "related"
+		"vidiunPluginName": "related"
 	},
 	"share": {
 		"scripts": "components/share/share.js",
 		"styles": "components/share/share.css",
 		"templates": "components/share/share.tmpl.html",
 		"dependencies": [
-			"mw.KBaseScreen"
+			"mw.VBaseScreen"
 		],
-		"kalturaPluginName": "share"
+		"vidiunPluginName": "share"
 	},
 	"playServerUrls": {
 		"scripts": "components/playServerUrls.js",
 		"dependencies": [
-			"mw.KBasePlugin"
+			"mw.VBasePlugin"
 		],
-		"kalturaPluginName": "playServerUrls"
+		"vidiunPluginName": "playServerUrls"
 	},
 	"adBlockDetector": {
 		"scripts": "components/adBlockDetector/adBlockDetector.js",
 		"dependencies": [
-			"mw.KBasePlugin"
+			"mw.VBasePlugin"
 		],
-		"kalturaPluginName": "adBlockDetector"
+		"vidiunPluginName": "adBlockDetector"
 	},
 	"pptWidgetPlugin": {
 		"scripts": "resources/uiConfComponents/pptWidgetPlugin.js",
-		"kalturaPluginName": "pptWidgetAPI"
+		"vidiunPluginName": "pptWidgetAPI"
 	},
 	"acCheck": {
 		"scripts": "resources/uiConfComponents/acCheck.js",
-		"kalturaLoad": "always"
+		"vidiunLoad": "always"
 	},
 	"acPreview": {
 		"scripts": "resources/uiConfComponents/acPreview.js",
-		"kalturaLoad": "always"
+		"vidiunLoad": "always"
 	},
 	"bumperPlugin": {
 		"scripts": "resources/uiConfComponents/bumperPlugin.js",
 		"dependencies": [
-			"mw.KAds"
+			"mw.VAds"
 		],
-		"kalturaPluginName": "bumper"
+		"vidiunPluginName": "bumper"
 	},
 	"captureThumbnailPlugin": {
 		"scripts": "resources/uiConfComponents/captureThumbnailPlugin.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "captureThumbnail"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "captureThumbnail"
 	},
 	"carouselPlugin": {
 		"scripts": "resources/uiConfComponents/carouselPlugin.js",
 		"dependencies": [
 			"jCarouse"
 		],
-		"kalturaPluginName": [
+		"vidiunPluginName": [
 			"related",
 			"carousel"
 		]
 	},
 	"likeAPIPlugin": {
 		"scripts": "resources/uiConfComponents/likeAPIPlugin.js",
-		"kalturaPluginName": "likeAPI"
+		"vidiunPluginName": "likeAPI"
 	},
 	"liveStream": {
 		"scripts": [
@@ -356,29 +356,29 @@
 			"components/live/liveStatus.js"
 		],
 		"styles": "components/live/liveStream.css",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaLoad": "always"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunLoad": "always"
 	},
 	"titleLabel": {
 		"scripts": "resources/uiConfComponents/titleLabel.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "titleLabel"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "titleLabel"
 	},
 	"shareSnippet": {
 		"scripts": "resources/uiConfComponents/shareSnippet.js",
-		"kalturaPluginName": "shareSnippet"
+		"vidiunPluginName": "shareSnippet"
 	},
 	"moderationPlugin": {
 		"scripts": "resources/uiConfComponents/moderationPlugin.js",
 		"dependencies": [
-			"mw.KBaseScreen"
+			"mw.VBaseScreen"
 		],
-		"kalturaPluginName": "moderation"
+		"vidiunPluginName": "moderation"
 	},
 	"downloadPlugin": {
 		"scripts": "resources/uiConfComponents/downloadPlugin.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "download"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "download"
 	},
 	"jCarouse": {
 		"scripts": "resources/uiConfComponents/jcarousellite_1.0.1.js",
@@ -386,63 +386,63 @@
 			"touchSwipe"
 		]
 	},
-	"mw.KLayout": {
-		"scripts": "resources/mw.KLayout.js"
+	"mw.VLayout": {
+		"scripts": "resources/mw.VLayout.js"
 	},
 	"restrictUserAgentPlugin": {
 		"scripts": "resources/uiConfComponents/restrictUserAgentPlugin.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaPluginName": "restrictUserAgent"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunPluginName": "restrictUserAgent"
 	},
 	"segmentScrubberPlugin": {
 		"scripts": "resources/uiConfComponents/segmentScrubberPlugin.js",
-		"dependencies": "mw.KBasePlugin",
-		"kalturaPluginName": "segmentScrubber"
+		"dependencies": "mw.VBasePlugin",
+		"vidiunPluginName": "segmentScrubber"
 	},
 	"statisticsPlugin": {
 		"scripts": "resources/uiConfComponents/statisticsPlugin.js",
 		"dependencies": [
-			"mw.KAnalytics"
+			"mw.VAnalytics"
 		],
-		"kalturaPluginName": "statistics"
+		"vidiunPluginName": "statistics"
 	},
 	"liveAnalytics": {
-		"scripts": "resources/mw.KLiveAnalytics.js",
+		"scripts": "resources/mw.VLiveAnalytics.js",
 		"dependencies": [
-			"mw.KBasePlugin"
+			"mw.VBasePlugin"
 		],
-		"kalturaPluginName": "liveAnalytics"
+		"vidiunPluginName": "liveAnalytics"
 	},
 	"playbackRateSelectorPlugin": {
 		"scripts": "resources/uiConfComponents/playbackRateSelector.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "playbackRateSelector"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "playbackRateSelector"
 	},
 	"streamSelector": {
 		"scripts": "components/streamSelector.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "streamSelector"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "streamSelector"
 	},
 	"watermarkPlugin": {
 		"scripts": "resources/uiConfComponents/watermarkPlugin.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "watermark"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "watermark"
 	},
 	"vastPlugin": {
 		"scripts": "resources/uiConfComponents/vastPlugin.js",
 		"dependencies": [
-			"mw.KAds"
+			"mw.VAds"
 		],
-		"kalturaPluginName": "vast"
+		"vidiunPluginName": "vast"
 	},
 	"audioDescription": {
 		"scripts": "components/audioDescription.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "audioDescription"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "audioDescription"
 	},
 	"reportError": {
 		"scripts": "components/reportError.js",
-		"dependencies": "mw.KBaseComponent",
-		"kalturaPluginName": "reportError"
+		"dependencies": "mw.VBaseComponent",
+		"vidiunPluginName": "reportError"
 	}
 }

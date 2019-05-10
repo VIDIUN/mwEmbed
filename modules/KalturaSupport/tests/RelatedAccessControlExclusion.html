@@ -9,8 +9,8 @@
 </head>
 <body>
 <h2> Related access control entry removal</h2>
-<div id="kaltura_player" style="width:800px;height:300px"></div>
-<span id="kdoc-more-desc">
+<div id="vidiun_player" style="width:800px;height:300px"></div>
+<span id="vdoc-more-desc">
 	This demo filters out entries from the related playlist that are not playable because of access control (client side)
 	<br>This does not apply for the first entry. The attribute name is enableAccessControlExclution in
 	playlistAPI plugin.
@@ -19,14 +19,14 @@
 </span>
 <script>
 
-    mw.setConfig('Kaltura.LeadWithHTML5', true);
+    mw.setConfig('Vidiun.LeadWithHTML5', true);
 
-    kWidget.featureConfig({
-        'targetId': 'kaltura_player',
+    vWidget.featureConfig({
+        'targetId': 'vidiun_player',
         'wid': '_243342',
         'uiconf_id' : '21099702',
         'flashvars': {
-            "confFilePath": "{libPath}/modules/KalturaSupport/tests/confFiles/jsonConfig.json",
+            "confFilePath": "{libPath}/modules/VidiunSupport/tests/confFiles/jsonConfig.json",
             'related':{
                 'playlistId': "1_dyuibzud",
                 "enableAccessControlExclusion" : true

@@ -84,7 +84,7 @@
 			if (_this.isSecure())
 				comScoreSettings.secure = true;
 
-			// The configuration naming used in Kaltura are different from the settings in the StreamSense plugin
+			// The configuration naming used in Vidiun are different from the settings in the StreamSense plugin
 			for (var key in _this.configOptions) {
 				if (this.getConfig(key)) {
 					comScoreSettings[_this.configOptions[key]] = this.getConfig(key)
@@ -315,7 +315,7 @@
 		},
 
 		getConfig: function (attr) {
-			return this.embedPlayer.getKalturaConfig(this.moduleName, attr);
+			return this.embedPlayer.getVidiunConfig(this.moduleName, attr);
 		},
 
 		callStreamSensePlugin:function(){
@@ -761,7 +761,7 @@
 		},
 
 		isSecure:  function () {
-			return mw.getConfig('Kaltura.Protocol') == 'https';
+			return mw.getConfig('Vidiun.Protocol') == 'https';
 		}
 	};
 

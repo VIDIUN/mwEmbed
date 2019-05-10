@@ -44,10 +44,10 @@ class mwEmbedLoader {
 		// Get resource (  mwEmbedLoader.js )
 		'vWidget/mwEmbedLoader.js', 
 		// Include checkUserAgentPlayer code
-		'kWidget/kWidget.checkUserAgentPlayerRules.js',
-		// Get kWidget utilities:
-		'kWidget/kWidget.util.js',	
-		// kWidget basic api wrapper
+		'vWidget/vWidget.checkUserAgentPlayerRules.js',
+		// Get vWidget utilities:
+		'vWidget/vWidget.util.js',	
+		// vWidget basic api wrapper
 		'resources/crypto/MD5.js',
 		'kWidget/kWidget.storage.js',
 		'kWidget/kWidget.api.js'
@@ -276,8 +276,8 @@ class mwEmbedLoader {
 			$o.="\n"."vWidget.addUserAgentRule('{$this->request()->get('uiconf_id')}', '/.*/', 'leadWithHTML5');";
 		
 		}
-		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.ForceFlashOnIE10' ) === true ){
-			$o.="\n".'mw.setConfig(\'Kaltura.ForceFlashOnIE10\', true );' . "\n";
+		if( $this->getUiConfObject()->getPlayerConfig( null, 'Vidiun.ForceFlashOnIE10' ) === true ){
+			$o.="\n".'mw.setConfig(\'Vidiun.ForceFlashOnIE10\', true );' . "\n";
 		}
 
 		if( $this->getUiConfObject()->getPlayerConfig( null, 'Kaltura.SupressNonProductionUrlsWarning' ) === true ){
@@ -396,14 +396,14 @@ class mwEmbedLoader {
 			'debug' => $wgEnableScriptDebug,
 			//  export the http url for the loader
 			'Mw.XmlProxyUrl' => $wgMwEmbedProxyUrl,
-			'Kaltura.UseManifestUrls' => $wgKalturaUseManifestUrls,
-			'Kaltura.Protocol'	=>	$wgHTTPProtocol,
-			'Kaltura.ServiceUrl' => $wgKalturaServiceUrl,
-			'Kaltura.ServiceBase' => $wgKalturaServiceBase,
-			'Kaltura.CdnUrl' => $wgKalturaCDNUrl,
-			'Kaltura.StatsServiceUrl' => $wgKalturaStatsServiceUrl,
-			'Kaltura.LiveStatsServiceUrl'=>$wgKalturaLiveStatsServiceUrl,
-			'Kaltura.IframeRewrite' => $wgKalturaIframeRewrite,
+			'Vidiun.UseManifestUrls' => $wgVidiunUseManifestUrls,
+			'Vidiun.Protocol'	=>	$wgHTTPProtocol,
+			'Vidiun.ServiceUrl' => $wgVidiunServiceUrl,
+			'Vidiun.ServiceBase' => $wgVidiunServiceBase,
+			'Vidiun.CdnUrl' => $wgVidiunCDNUrl,
+			'Vidiun.StatsServiceUrl' => $wgVidiunStatsServiceUrl,
+			'Vidiun.LiveStatsServiceUrl'=>$wgVidiunLiveStatsServiceUrl,
+			'Vidiun.IframeRewrite' => $wgVidiunIframeRewrite,
 			'EmbedPlayer.EnableIpadHTMLControls' => $wgEnableIpadHTMLControls,
 			'EmbedPlayer.UseFlashOnAndroid' => true,
 			'Kaltura.LoadScriptForVideoTags' => true,
@@ -426,7 +426,7 @@ class mwEmbedLoader {
 		}
 		//For embed services pass "AllowIframeRemoteService" to client so it will be able to pass back the alternative service URL
 		if ($this->request()->isEmbedServicesEnabled()){
-		    $exportedJsConfig['Kaltura.AllowIframeRemoteService'] = true;
+		    $exportedJsConfig['Vidiun.AllowIframeRemoteService'] = true;
 		}
 		
 		// Append Custom config:

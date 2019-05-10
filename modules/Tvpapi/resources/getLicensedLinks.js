@@ -1,7 +1,7 @@
 (function (mw, $) {
 	"use strict";
 
-	mw.PluginManager.add( 'tvpapiGetLicensedLinks', mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'tvpapiGetLicensedLinks', mw.VBasePlugin.extend( {
 
 		defaultConfig: {
 			"restMethod": "GetLicensedLinks",
@@ -35,9 +35,9 @@
 
 		getProxyConfig: function( attr, raw ) {
 			if( raw ){
-				return this.embedPlayer.getRawKalturaConfig( "proxyData", attr );
+				return this.embedPlayer.getRawVidiunConfig( "proxyData", attr );
 			}
-			return this.embedPlayer.getKalturaConfig( "proxyData", attr );
+			return this.embedPlayer.getVidiunConfig( "proxyData", attr );
 		},
 
 		addBindings: function () {
@@ -52,7 +52,7 @@
 		},
 
 		getMediaLicenseLink: function(event, source){
-			var baseUrl = this.getPlayer().getKalturaConfig( null, 'TVPAPIBaseUrl' ) || this.getConfig( "restApiBaseUrl" );
+			var baseUrl = this.getPlayer().getVidiunConfig( null, 'TVPAPIBaseUrl' ) || this.getConfig( "restApiBaseUrl" );
 			var restMethod = this.getConfig("restMethod");
 			if (baseUrl != "" && restMethod != "") {
 				var url = baseUrl + restMethod;

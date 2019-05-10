@@ -245,7 +245,7 @@
 				var _this = this;
 				// Add control bar
 
-				var title = this.getConfig("toggleBtnLabel") || gM("ks-sidebar-toggleBtn");
+				var title = this.getConfig("toggleBtnLabel") || gM("vs-sidebar-toggleBtn");
 
 				this.$elHelper = $('<div>' )
 					.addClass( 'sideBarContainerReminder tooltipBelow ' + _this.getConfig('position') )
