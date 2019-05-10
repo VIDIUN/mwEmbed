@@ -19,7 +19,7 @@
 
 <div class="form-group">
     <label for="url">HLS URL</label>
-    <input type="email" class="form-control" id="url" value="http://cdnapi.kaltura.com/p/1878761/sp/187876100/playManifest/entryId/1_usagz19w/flavorIds/1_5spqkazq,1_nslowvhp,1_boih5aji,1_qahc37ag/format/applehttp/protocol/http/a.m3u8">
+    <input type="email" class="form-control" id="url" value="http://cdnapi.vidiun.com/p/1878761/sp/187876100/playManifest/entryId/1_usagz19w/flavorIds/1_5spqkazq,1_nslowvhp,1_boih5aji,1_qahc37ag/format/applehttp/protocol/http/a.m3u8">
   </div>
   
   <div class="form-group">
@@ -212,14 +212,14 @@ Vidiun Play: Applies only to iOS, Android Browser views. <a href="nativeCallout.
                 'visitorId': '9A32525A5492AE7C0A4C98C6@AdobeOrg',
                 'visitorTrackingServer': 'ovppartners.d1.sc.omtrdc.net',
 
-                'appMeasurementAccount': 'ovppkaltura',
+                'appMeasurementAccount': 'ovppvidiun',
                 'appMeasurementTrackingServer': 'ovppartners.d1.sc.omtrdc.net',
-                'appMeasurementPageName': 'Kaltura Test Page',
+                'appMeasurementPageName': 'Vidiun Test Page',
                 'appMeasurementCharSet': 'UTF-8',
                 'appMeasurementVisitorID': 'test-vid',
 
                 'heartbeatTrackingServer': 'heartbeats.omtrdc.net',
-                'heartbeatPublisher': 'ovpkaltura'
+                'heartbeatPublisher': 'ovpvidiun'
             },
 
             "sourceSelector.plugin" : true,
@@ -279,39 +279,39 @@ Vidiun Play: Applies only to iOS, Android Browser views. <a href="nativeCallout.
 			"flashvars": settings
 		});
 
-        kWidget.addReadyCallback(function( playerId ){
-            var kdp = document.getElementById( playerId );
+        vWidget.addReadyCallback(function( playerId ){
+            var vdp = document.getElementById( playerId );
 
             //HLS-JS debug info
-            kdp.kBind("hlsCurrentBuffer", function( data ){
+            vdp.vBind("hlsCurrentBuffer", function( data ){
                 $('#bufferLen').text(data);
             });
-            kdp.kBind("hlsDroppedFrames", function( data ){
+            vdp.vBind("hlsDroppedFrames", function( data ){
                 $('#droppedFrames').text(data);
             });
-            kdp.kBind("hlsDropFPS", function( data ){
+            vdp.vBind("hlsDropFPS", function( data ){
                 $('#droppedFPS').text("FPS_DROP: "+data);
             });
-            kdp.kBind("hlsCurrentBitrate", function( data ){
+            vdp.vBind("hlsCurrentBitrate", function( data ){
                 $('#currentBitrate').text(data);
             });
-            kdp.kBind("hlsFPS", function( data ){
+            vdp.vBind("hlsFPS", function( data ){
                 $('#currentFPS').text(data);
             });
 
-            kdp.kBind("hlsFragLoading", function( data ){
+            vdp.vBind("hlsFragLoading", function( data ){
                 $('#downloadingSeg').text(data);
             });
-            kdp.kBind("hlsFragBuffered", function( data ){
+            vdp.vBind("hlsFragBuffered", function( data ){
                 $('#processedSeg').text(data);
             });
-            kdp.kBind("hlsFragChanged", function( data ){
-                $('#playingSeg').html(data.url+"<br>"+"startPTS: "+kWidget.seconds2npt(data.startPTS)+" | endPTS: "+kWidget.seconds2npt(data.endPTS));
+            vdp.vBind("hlsFragChanged", function( data ){
+                $('#playingSeg').html(data.url+"<br>"+"startPTS: "+vWidget.seconds2npt(data.startPTS)+" | endPTS: "+vWidget.seconds2npt(data.endPTS));
             });
 
-            kdp.kBind("hlsFragParsingData", function( data ){
+            vdp.vBind("hlsFragParsingData", function( data ){
                 if(data.type === 'video') {
-                    var txt = "startPTS: "+kWidget.seconds2npt(data.startPTS)+" | endPTS: "+kWidget.seconds2npt(data.endPTS)+"<br>startDTS: "+kWidget.seconds2npt(data.startDTS)+" | endDTS: "+kWidget.seconds2npt(data.endDTS);
+                    var txt = "startPTS: "+vWidget.seconds2npt(data.startPTS)+" | endPTS: "+vWidget.seconds2npt(data.endPTS)+"<br>startDTS: "+vWidget.seconds2npt(data.startDTS)+" | endDTS: "+vWidget.seconds2npt(data.endDTS);
                     if( $('#pts_dts').html() === ''){
                         $('#pts_dts').html(txt);
                     }else {
@@ -321,7 +321,7 @@ Vidiun Play: Applies only to iOS, Android Browser views. <a href="nativeCallout.
             });
 
             //HLS-OSMF debug info
-            kdp.kBind("debugInfoReceived", function( data ){
+            vdp.vBind("debugInfoReceived", function( data ){
                     var ts;
                     if (data.uri) {
                         var url = data.uri.split('.');
