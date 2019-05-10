@@ -456,7 +456,7 @@ class downloadEntry {
 		if( isset( $flavorParamsId) ){
 			foreach( $resultObject['contextData']->flavorAssets as $source ){
 				if( isset($source->flavorParamsId) && $source->flavorParamsId == $flavorParamsId){
-					$src = $this->getSourceUrl($kResultObject, $resultObject, $source);
+					$src = $this->getSourceUrl($vResultObject, $resultObject, $source);
 				}
 			}
 		} 

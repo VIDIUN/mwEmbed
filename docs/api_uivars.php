@@ -240,7 +240,7 @@ $uiVars = array(
 		'vars' => array(
 			'entryId' => array(
 				'type' => 'String',
-				'desc' => 'Valid Kaltura media entry id. To support directly assigning media see <a href="#uiVarsMediaProxy">MediaProxy</a>',
+				'desc' => 'Valid Vidiun media entry id. To support directly assigning media see <a href="#uiVarsMediaProxy">MediaProxy</a>',
 				'default' => '',
 				'example' => '../modules/VidiunSupport/tests/vWidget.embed.qunit.html'
 			),
@@ -261,7 +261,7 @@ $uiVars = array(
 				'type' => 'String',
 				'desc' => 'The type of media source to load, either a URL or id of valid Vidiun media entry',
 				'default' => 'entryId',
-				'availability' => 'kdp',
+				'availability' => 'vdp',
 				'example' => ''
 			),
 			'streamerType' => array(
@@ -827,33 +827,33 @@ $uiVars = array(
 		'vars' => array(
 			'mediaProxy.entry' => array(
 					'type' => 'Object',
-					'desc' => 'Supports partial or complete override of <a href="http://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaBaseEntry">entry object</a>.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'desc' => 'Supports partial or complete override of <a href="http://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunBaseEntry">entry object</a>.',
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.entryCuePoints' => array(
 					'type' => 'Object',
-					'desc' => 'Supports partial or complete override of <a href="http://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaCuePoint">player cuePoints</a>.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'desc' => 'Supports partial or complete override of <a href="http://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunCuePoint">player cuePoints</a>.',
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.entryCuePoints' => array(
 					'type' => 'Object',
-					'desc' => 'Supports partial or complete override of <a href="http://www.kaltura.com/api_v3/testmeDoc/index.php?object=KalturaCuePoint">player cuePoints</a>.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'desc' => 'Supports partial or complete override of <a href="http://www.vidiun.com/api_v3/testmeDoc/index.php?object=VidiunCuePoint">player cuePoints</a>.',
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.contextData' => array(
 					'type' => 'Object',
 					'desc' => 'Supports partial or complete override of entry access control restriction.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.entryMetadata' => array(
 					'type' => 'Object',
 					'desc' => 'Supports partial or complete override of entry custom metadata.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.sources' => array(
 					'type' => 'Object',
 					'desc' => 'Supports partial or complete override of entry media sources.',
-					'example' => '../modules/KalturaSupport/tests/StandAlonePlayerMediaProxyOverride.html'
+					'example' => '../modules/VidiunSupport/tests/StandAlonePlayerMediaProxyOverride.html'
 			),
 			'mediaProxy.selectedFlavorId' => array(
 					'type' => 'String',
