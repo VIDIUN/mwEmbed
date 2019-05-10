@@ -29,13 +29,13 @@ mw.MediaPlayers.prototype = {
 
 		// Set up default players order for each library type
 		this.defaultPlayers['video/wvm'] = ['NativeComponent'];
-		this.defaultPlayers['video/live'] = ['Kplayer'];
-		this.defaultPlayers['video/kontiki'] = ['Kplayer'];
-		this.defaultPlayers['video/x-flv'] = ['Kplayer', 'Vlc'];
-		this.defaultPlayers['video/h264'] = ['NativeComponent', 'Native', 'Kplayer', 'Silverlight', 'Vlc'];
-		this.defaultPlayers['video/mp4'] = ['NativeComponent', 'Native', 'Kplayer', 'Silverlight', 'Vlc'];
+		this.defaultPlayers['video/live'] = ['Vplayer'];
+		this.defaultPlayers['video/kontiki'] = ['Vplayer'];
+		this.defaultPlayers['video/x-flv'] = ['Vplayer', 'Vlc'];
+		this.defaultPlayers['video/h264'] = ['NativeComponent', 'Native', 'Vplayer', 'Silverlight', 'Vlc'];
+		this.defaultPlayers['video/mp4'] = ['NativeComponent', 'Native', 'Vplayer', 'Silverlight', 'Vlc'];
 		this.defaultPlayers['application/vnd.apple.mpegurl'] = ['Native'];
-		this.defaultPlayers['application/x-shockwave-flash'] = ['Kplayer'];
+		this.defaultPlayers['application/x-shockwave-flash'] = ['Vplayer'];
 
 		this.defaultPlayers['video/ogg'] = ['Native', 'Vlc', 'Java', 'Generic'];
 		this.defaultPlayers['video/webm'] = ['Native', 'Vlc'];
@@ -57,13 +57,13 @@ mw.MediaPlayers.prototype = {
 			this.defaultPlayers['application/vnd.apple.mpegurl'].push('Vplayer');
 		}
 		// If nativeComponent can play dash, use it.
-        if ($.inArray('application/dash+xml',  window.kNativeSdk && window.kNativeSdk.allFormats) >= 0) {
+        if ($.inArray('application/dash+xml',  window.vNativeSdk && window.vNativeSdk.allFormats) >= 0) {
             this.defaultPlayers['application/dash+xml'] = ['NativeComponent'];
         }
 
 		// If nativeComponent can play hls, use it.
-		if (window.kNativeSdk && window.kNativeSdk.allFormats) {
-			if ( $.inArray( 'application/vnd.apple.mpegurl' , window.kNativeSdk && window.kNativeSdk.allFormats ) >= 0 ) {
+		if (window.vNativeSdk && window.vNativeSdk.allFormats) {
+			if ( $.inArray( 'application/vnd.apple.mpegurl' , window.vNativeSdk && window.vNativeSdk.allFormats ) >= 0 ) {
 				this.defaultPlayers['application/vnd.apple.mpegurl'] = ['NativeComponent'];
 			}
 		} else {

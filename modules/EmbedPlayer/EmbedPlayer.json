@@ -70,7 +70,7 @@
     "mw.EmbedPlayerVplayer": {
         "scripts": "resources/mw.EmbedPlayerVplayer.js",
         "dependencies": [
-            "mw.KWidgetSupport",
+            "mw.VWidgetSupport",
             "base64_encode",
             "base64_decode"
         ]

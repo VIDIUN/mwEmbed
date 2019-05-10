@@ -116,7 +116,7 @@
             if( this.detectPluginIntervalLoops === 0 ){
                 if ( !this.pluginDetected ) {
                     mw.log("EmbedPlayerMultiDRM::detectPlugin::failed to detecting Silverlight plugin");
-                    failCallback(); //trigger fail callback -> goes to the EmbedPlayer in order to displayAlert with ks-PLUGIN-BLOCKED message
+                    failCallback(); //trigger fail callback -> goes to the EmbedPlayer in order to displayAlert with vs-PLUGIN-BLOCKED message
                 }
                 this.cleanInterval(this.detectPluginInterval); // stop trying to detect plugin
             }

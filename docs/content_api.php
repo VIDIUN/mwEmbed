@@ -145,7 +145,7 @@ require_once( realpath( dirname( __FILE__ ) ) . '/api_evaluates.php' );
             if( isset( $var['example'] ) && $var['example'] != '' ){
                 $o.= '<br><a href="'. $var['example'] . '" target="_blank">Usage Example</a>';
             }
-			if( isset( $var['availability'] ) && $var['availability'] == 'kdp' ){
+			if( isset( $var['availability'] ) && $var['availability'] == 'vdp' ){
 				$o.= '<br><span class="label label-warning">Legacy Only</span>';
 			}
 		}

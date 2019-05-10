@@ -32,14 +32,14 @@
 			"nanoScroller"
 		]
 	},
-	"mw.KBaseSmartContainer": {
-		"scripts": "resources/mw.KBaseSmartContainer.js",
+	"mw.VBaseSmartContainer": {
+		"scripts": "resources/mw.VBaseSmartContainer.js",
 		"dependencies": [
-			"mw.KBaseComponent"
+			"mw.VBaseComponent"
 		]
 	},
-	"mw.KBaseComponent": {
-		"scripts": "resources/mw.KBaseComponent.js",
+	"mw.VBaseComponent": {
+		"scripts": "resources/mw.VBaseComponent.js",
 		"dependencies": [
 			"mw.VBasePlugin",
 			"mediawiki.vmenu"
@@ -422,12 +422,12 @@
 		],
 		"vidiunPluginName": "liveAnalytics"
 	},
-	"kAnalony": {
-		"scripts": "resources/mw.kAnalony.js",
+	"vAnalony": {
+		"scripts": "resources/mw.vAnalony.js",
 		"dependencies": [
-			"mw.KBasePlugin"
+			"mw.VBasePlugin"
 		],
-		"kalturaPluginName": "kAnalony"
+		"vidiunPluginName": "vAnalony"
 	},
 	"playbackRateSelectorPlugin": {
 		"scripts": "resources/uiConfComponents/playbackRateSelector.js",
@@ -436,13 +436,13 @@
 	},
 	"qualitySettings": {
 		"scripts": "components/qualitySettings.js",
-		"dependencies": "mw.KBaseSmartContainer",
-		"kalturaPluginName": "qualitySettings"
+		"dependencies": "mw.VBaseSmartContainer",
+		"vidiunPluginName": "qualitySettings"
 	},
 	"morePlugins": {
 		"scripts": "components/morePlugins.js",
-		"dependencies": "mw.KBaseSmartContainer",
-		"kalturaPluginName": "morePlugins"
+		"dependencies": "mw.VBaseSmartContainer",
+		"vidiunPluginName": "morePlugins"
 	},
 	"streamSelector": {
 		"scripts": "components/streamSelector.js",

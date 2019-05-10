@@ -972,8 +972,8 @@
                 var failCallback = function(){
                     _this.removePoster();
                     _this.layoutBuilder.displayAlert( {
-                        title: _this.getKalturaMsg( 'ks-PLUGIN-BLOCKED-TITLE' ),
-                        message: _this.getKalturaMsg( 'ks-PLUGIN-BLOCKED' ),
+                        title: _this.getVidiunMsg( 'vs-PLUGIN-BLOCKED-TITLE' ),
+                        message: _this.getVidiunMsg( 'vs-PLUGIN-BLOCKED' ),
                         keepOverlay: true,
                         noButtons : true,
                         props: {
@@ -2188,8 +2188,8 @@
 		},
 
 		isMobileSkin: function(){
-			var skin = this.getRawKalturaConfig("layout") ? this.getRawKalturaConfig("layout").skin : "kdark";
-			return ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "kdark" && mw.isMobileDevice());
+			var skin = this.getRawVidiunConfig("layout") ? this.getRawVidiunConfig("layout").skin : "vdark";
+			return ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "vdark" && mw.isMobileDevice());
 		},
 
 		/**

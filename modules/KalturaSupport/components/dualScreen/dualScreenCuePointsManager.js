@@ -54,7 +54,7 @@
 
         function getCodeCuePoints() {
 
-            return player.kCuePoints ? player.kCuePoints.getCodeCuePoints() : [];
+            return player.vCuePoints ? player.vCuePoints.getCodeCuePoints() : [];
         }
 
         /**

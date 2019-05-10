@@ -10,15 +10,15 @@
 		 	"showTooltip": true,
 			"smartContainer": 'morePlugins',
 			"smartContainerCloseEvent": 'closeMenuOverlay',
-			"title": gM("ks-MODERATION-REPORT"),
-			"header": gM("ks-MODERATION-HEADER"),
-			"text": gM("ks-MODERATION-TEXT"),
-			"placeholder": gM("ks-MODERATION-PLACEHOLDER"),
-		 	"tooltip": gM("ks-MODERATION-REPORT"),
-		 	"reasonSex": gM("ks-MODERATION-REASON-SEX"),
-		 	"reasonViolence": gM("ks-MODERATION-REASON-VIOLENCE"),
-		 	"reasonHarmful": gM("ks-MODERATION-REASON-HARMFUL"),
-		 	"reasonSpam": gM("ks-MODERATION-REASON-SPAM")
+			"title": gM("vs-MODERATION-REPORT"),
+			"header": gM("vs-MODERATION-HEADER"),
+			"text": gM("vs-MODERATION-TEXT"),
+			"placeholder": gM("vs-MODERATION-PLACEHOLDER"),
+		 	"tooltip": gM("vs-MODERATION-REPORT"),
+		 	"reasonSex": gM("vs-MODERATION-REASON-SEX"),
+		 	"reasonViolence": gM("vs-MODERATION-REASON-VIOLENCE"),
+		 	"reasonHarmful": gM("vs-MODERATION-REASON-HARMFUL"),
+		 	"reasonSpam": gM("vs-MODERATION-REASON-SPAM")
 		},
 
 		setup: function () {
@@ -61,12 +61,12 @@
 					.css({'width': '100%', 'height': '26px', 'margin-top': '10px'})),
 				$( '<textarea />' )
 					.attr( 'id', 'flagComments' )
-					.attr( 'placeholder', gM("ks-MODERATION-PLACEHOLDER" ))
+					.attr( 'placeholder', gM("vs-MODERATION-PLACEHOLDER" ))
 					.css({'width': '100%', 'height': '40px', 'margin-top': '10px'}),
 				$('<div/>' ).append(
 					$( '<div />' )
 					.addClass( 'reportButton right' )
-					.text( gM("ks-MODERATION-SUBMIT") )
+					.text( gM("vs-MODERATION-SUBMIT") )
 					.click(function() {
 						_this.submitFlag({
 							'flagType': $( '#flagType' ).val(),
@@ -106,7 +106,7 @@
 			var _this = this;
 			this.getPlayer().triggerHelper( 'moderationSubmit', flagObj.flagType );
 			this.getPlayer().addPlayerSpinner();
-			this.getKalturaClient().doRequest( {
+			this.getVidiunClient().doRequest( {
 				'service' : 'baseentry',
 				'action' : 'flag',
 				'moderationFlag:objectType' : 'VidiunModerationFlag',
@@ -121,7 +121,7 @@
 						$( '<div />' ).append(
 							$( '<div />' )
 								.addClass( 'reportButton' )
-								.text( gM("ks-MODERATION-DONE") )
+								.text( gM("vs-MODERATION-DONE") )
 								.click(function() {
 									_this.getPlayer().triggerHelper( 'onEnableKeyboardBinding' );
 									_this.closeModal();

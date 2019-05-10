@@ -2,7 +2,7 @@
         "use strict";
         mw.dualScreen = mw.dualScreen || {};
 
-        mw.dualScreen.externalControlManager = mw.KBasePlugin.extend({
+        mw.dualScreen.externalControlManager = mw.VBasePlugin.extend({
             setup : function()
             {
 
@@ -11,7 +11,7 @@
             {
                 var _this = this;
 
-                if (_this.getPlayer().isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints") || _this.getPlayer().kCuePoints) {
+                if (_this.getPlayer().isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints") || _this.getPlayer().vCuePoints) {
                     // handle cue points only if either live or we have cue points loaded from the server
                     setTimeout(function()
                     {

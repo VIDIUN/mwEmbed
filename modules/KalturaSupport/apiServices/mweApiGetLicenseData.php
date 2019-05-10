@@ -8,7 +8,7 @@
 		
 	Return value:
 	{
-        "licenseUri": "https://udrm.kaltura.com/widevine/license?custom_data=xyz123&signature=sxyz123&files=sdhu3R"
+        "licenseUri": "https://udrm.vidiun.com/widevine/license?custom_data=xyz123&signature=sxyz123&files=sdhu3R"
     }
 	
 	OR, if there's an error:
@@ -39,7 +39,7 @@ class mweApiGetLicenseData {
 		$response = array();
 		
         // Trim possible ending slash
-        $udrmBaseURL = rtrim($wgKalturaUdrmLicenseServerUrl, '/');
+        $udrmBaseURL = rtrim($wgVidiunUdrmLicenseServerUrl, '/');
         
         try {
             $missingParams = array_diff(array('drm', 'flavor_id', 'entry_id', 'uiconf_id'), array_keys($_REQUEST));
@@ -97,7 +97,7 @@ class mweApiGetLicenseData {
         if (isset($resultObject['error'])) {
             throw new Exception($resultObject['error']);
         }
-		$drmPluginData = (array)$resultObject['contextData']->pluginData['KalturaDrmEntryContextPluginData'];
+		$drmPluginData = (array)$resultObject['contextData']->pluginData['VidiunDrmEntryContextPluginData'];
         // Convert the result to array.
         return json_decode(json_encode($drmPluginData['flavorData']), true);
 	}

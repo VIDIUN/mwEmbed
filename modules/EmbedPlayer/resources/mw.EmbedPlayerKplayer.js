@@ -39,7 +39,7 @@
 		ignoreEnableGui: false,
 		flashActivationRequired: false,
         unresolvedSrcURL: false,
-        kPreload: {
+        vPreload: {
             'preLoading':false,
             'playPending':false
         },
@@ -122,7 +122,7 @@
                     var preferedBitRate = _this.evaluate( '{mediaProxy.preferedFlavorBR}' );
                     if( preferedBitRate ) {
                         hlsPluginConfiguration["prefBitrate"] = preferedBitRate;
-                        flashvars.disableAutoDynamicStreamSwitch = true; // disable autoDynamicStreamSwitch logic inside KDP (while playing + if player.isDynamicStream turn autoSwitch on)
+                        flashvars.disableAutoDynamicStreamSwitch = true; // disable autoDynamicStreamSwitch logic inside VDP (while playing + if player.isDynamicStream turn autoSwitch on)
                     }
                     if( mw.getConfig("maxBitrate") ) {
                         hlsPluginConfiguration["maxBitrate"] = mw.getConfig("maxBitrate");
@@ -255,7 +255,7 @@
             //block preload if live or autoplay, unless autoplay was activated on a player with preroll
             if( !this.isLive() && (!this.autoplay || ( this.autoplay && this.isInSequence() ) ) ) {
                 //activate preload workaround: start downloading segments and pause the stream
-                this.kPreload.preLoading = true;
+                this.vPreload.preLoading = true;
                 this.playerObject.play();
             }
         },
@@ -437,10 +437,10 @@
 		 * update the interface
 		 */
 		onPause: function () {
-            if(this.kPreload.preLoading){
-                this.kPreload.preLoading = false;
-                if(this.kPreload.playPending){
-                    this.kPreload.playPending = false;
+            if(this.vPreload.preLoading){
+                this.vPreload.preLoading = false;
+                if(this.vPreload.playPending){
+                    this.vPreload.playPending = false;
                     this.play();
                 }
                 return;
@@ -453,7 +453,7 @@
 		 * parent_play
 		 */
 		onPlay: function () {
-            if(this.kPreload.preLoading){
+            if(this.vPreload.preLoading){
                 this.playerObject.pause();
                 return;
             }
@@ -544,8 +544,8 @@
 		 * play method calls parent_play to update the interface
 		 */
 		play: function () {
-            if(this.kPreload.preLoading){
-                this.kPreload.playPending = true;
+            if(this.vPreload.preLoading){
+                this.vPreload.playPending = true;
                 return;
             }
             if(this.restarting){
@@ -852,8 +852,8 @@
 			var deferred = $.Deferred();
 			var originalSrc = this.mediaElement.selectedSource.getSrc();
 			if (this.isHlsSource(this.mediaElement.selectedSource)) {
-                // add playerType=flash indicator (Kaltura Live HLS only)
-                //if( this.isLive() &&  mw.getConfig('isLiveKalturaHLS') ) {
+                // add playerType=flash indicator (Vidiun Live HLS only)
+                //if( this.isLive() &&  mw.getConfig('isLiveVidiunHLS') ) {
                 //    originalSrc = originalSrc + "&playerType=flash";
                 //}
                 this.streamerType = 'hls';
@@ -965,7 +965,7 @@
 		backToLive: function () {
 			this.triggerHelper('movingBackToLive');
             var _this = this;
-            var evChannel = ".kBackToLive"; //event channel name ".backToLive" already exists in liveCore class
+            var evChannel = ".vBackToLive"; //event channel name ".backToLive" already exists in liveCore class
             if(this.isDVR()){
                 this.playerObject.sendNotification('goLive');
                 if (this.buffering) {
@@ -984,8 +984,8 @@
             }
 		},
 
-		setKPlayerAttribute: function (host, prop, val) {
-			this.playerObject.setKDPAttribute(host, prop, val);
+		setVPlayerAttribute: function (host, prop, val) {
+			this.playerObject.setVDPAttribute(host, prop, val);
 		},
 		clean: function () {
 			$(this.getPlayerContainer()).remove();

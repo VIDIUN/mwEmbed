@@ -170,7 +170,7 @@
 
 			var liveCuepointsRequestInterval = mw.getConfig("EmbedPlayer.LiveCuepointsRequestInterval", 10000);
 
-			mw.log("mw.KCuePoints::start live cue points watchdog, polling rate: " + liveCuepointsRequestInterval + "ms");
+			mw.log("mw.VCuePoints::start live cue points watchdog, polling rate: " + liveCuepointsRequestInterval + "ms");
 
 			//Start live cuepoint pulling
 			this.liveCuePointsIntervalId = setInterval(function(){
@@ -180,14 +180,14 @@
 			//Todo: stop when live is offline or when stopped/paused
 			this.embedPlayer.bindHelper("liveOffline", function(){
 				if (_this.liveCuePointsIntervalId) {
-					mw.log("mw.KCuePoints::lifeOffline event received, stop live cue points watchdog");
+					mw.log("mw.VCuePoints::lifeOffline event received, stop live cue points watchdog");
 					clearInterval(_this.liveCuePointsIntervalId);
 					_this.liveCuePointsIntervalId = null;
 				}
 			});
 			this.embedPlayer.bindHelper("liveOnline", function(){
 				if (!_this.liveCuePointsIntervalId) {
-					mw.log("mw.KCuePoints::liveOnline event received, start live cue points watchdog");
+					mw.log("mw.VCuePoints::liveOnline event received, start live cue points watchdog");
 					//Fetch first update when going back to live and then set a watchdog
 					_this.requestLiveCuepoints();
 					_this.liveCuePointsIntervalId = setInterval(function () {
@@ -198,12 +198,12 @@
 		},
 		requestLiveCuepoints: function () {
 			var _this = this;
-			var entryId = _this.embedPlayer.kentryid;
+			var entryId = _this.embedPlayer.ventryid;
 			var request = {
 				'service': 'cuepoint_cuepoint',
 				'action': 'list',
 				'filter:entryIdEqual': entryId,
-				'filter:objectType': 'KalturaCuePointFilter',
+				'filter:objectType': 'VidiunCuePointFilter',
 				'filter:statusIn': '1,3', //1=READY, 3=HANDLED  (3 is after copying to VOD)
 				'filter:cuePointTypeIn': 'thumbCuePoint.Thumb,codeCuePoint.Code',
 				'filter:orderBy': "+createdAt" //let backend sorting them
@@ -213,17 +213,17 @@
 			if (lastCreationTime > 0) {
 				request['filter:createdAtGreaterThanOrEqual'] = lastCreationTime;
 			}
-			this.getKalturaClient().doRequest( request,
+			this.getVidiunClient().doRequest( request,
 				function (data) {
 					// if an error pop out:
 					if (!data || data.code) {
 						// todo: add error handling
-						mw.log("Error:: KCuePoints could not retrieve live cuepoints");
+						mw.log("Error:: VCuePoints could not retrieve live cuepoints");
 						return;
 					}
 					_this.fixLiveCuePointArray(data.objects);
 					_this.updateCuePoints(data.objects);
-					_this.embedPlayer.triggerHelper('KalturaSupport_CuePointsUpdated', [data.totalCount]);
+					_this.embedPlayer.triggerHelper('VidiunSupport_CuePointsUpdated', [data.totalCount]);
 				}
 			);
 		},
@@ -255,7 +255,7 @@
 					$.merge(this.midCuePointsArray, thumbNewCuePoints);
 					//Request thumb asset only for new cuepoints
 					this.requestThumbAsset(thumbNewCuePoints, function () {
-						_this.embedPlayer.triggerHelper('KalturaSupport_ThumbCuePointsUpdated', [thumbNewCuePoints]);
+						_this.embedPlayer.triggerHelper('VidiunSupport_ThumbCuePointsUpdated', [thumbNewCuePoints]);
 					});
 				}
 
@@ -285,9 +285,9 @@
 			});
 			return lastCreationTime;
 		},
-		getKalturaClient: function () {
-			if (!this.kClient) {
-				this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+		getVidiunClient: function () {
+			if (!this.vClient) {
+				this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
 			}
 			return this.vClient;
 		},
@@ -459,7 +459,7 @@
 			} else {
 				return;
 			}
-			mw.log('mw.KCuePoints :: Trigger event: ' + eventName + ' - ' + rawCuePoint.cuePointType + ' at: ' + rawCuePoint.startTime );
+			mw.log('mw.VCuePoints :: Trigger event: ' + eventName + ' - ' + rawCuePoint.cuePointType + ' at: ' + rawCuePoint.startTime );
 			$(this.embedPlayer).trigger(eventName, cuePointWrapper);
 			// TOOD "midSequenceComplete"
 		},

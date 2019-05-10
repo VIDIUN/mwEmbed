@@ -281,9 +281,9 @@ mw.VWidgetSupport.prototype = {
 	updatePlayerContextData: function(embedPlayer, playerData){
 		if( playerData.contextData ){
 			if ( playerData.contextData.msDuration) {
-				embedPlayer.kalturaPlayerMetaData.duration = Math.floor(playerData.contextData.msDuration / 1000);
+				embedPlayer.vidiunPlayerMetaData.duration = Math.floor(playerData.contextData.msDuration / 1000);
 			}
-			embedPlayer.kalturaContextData = playerData.contextData;
+			embedPlayer.vidiunContextData = playerData.contextData;
 			if (playerData.contextData &&
 				$.isArray(playerData.contextData.accessControlActions)) {
 
@@ -296,7 +296,7 @@ mw.VWidgetSupport.prototype = {
 
 					if (action.pattern && action.replacement) {
 						var regExp=new RegExp(action.pattern, "i");
-						var urlsToModify = ['Kaltura.ServiceUrl','Kaltura.StatsServiceUrl','Kaltura.ServiceBase','Kaltura.LiveStatsServiceUrl','Kaltura.AnalyticsUrl'];
+						var urlsToModify = ['Vidiun.ServiceUrl','Vidiun.StatsServiceUrl','Vidiun.ServiceBase','Vidiun.LiveStatsServiceUrl','Vidiun.AnalyticsUrl'];
 						urlsToModify.forEach(function (key) {
 							var serviceUrl = mw.config.get(key);
 							var match = serviceUrl.match( regExp );
@@ -1100,7 +1100,7 @@ mw.VWidgetSupport.prototype = {
 			playerRequest.entry_id =  embedPlayer.ventryid;
 		}
 
-		var proxyData = embedPlayer.getKalturaConfig('proxyData', 'data');
+		var proxyData = embedPlayer.getVidiunConfig('proxyData', 'data');
 		if(proxyData){
 			playerRequest.proxyData = proxyData;
 		}
@@ -1135,18 +1135,18 @@ mw.VWidgetSupport.prototype = {
 			if( window.vidiunIframePackageData && window.vidiunIframePackageData.entryResult ){
 				var entryResult =  window.vidiunIframePackageData.entryResult;
 				_this.handlePlayerData( embedPlayer, entryResult );
-				//if we dont have special widgetID or the KS is defined continue as usual
-				var kpartnerid = embedPlayer.kpartnerid ? embedPlayer.kpartnerid : "";
-				if ( this.isEmbedServicesEnabled(entryResult) || "_" + kpartnerid == playerRequest.widget_id || _this.kClient.getKs() ) {
+				//if we dont have special widgetID or the VS is defined continue as usual
+				var vpartnerid = embedPlayer.vpartnerid ? embedPlayer.vpartnerid : "";
+				if ( this.isEmbedServicesEnabled(entryResult) || "_" + vpartnerid == playerRequest.widget_id || _this.vClient.getVs() ) {
 					callback( entryResult );
 				}else{
-					//if we have special widgetID and we dont have a KS - ask for KS before continue the process
-					this.kClient.forceKs(playerRequest.widget_id,function(ks) {
-						_this.kClient.setKs( ks );
+					//if we have special widgetID and we dont have a VS - ask for VS before continue the process
+					this.vClient.forceVs(playerRequest.widget_id,function(vs) {
+						_this.vClient.setVs( vs );
 						if ( embedPlayer.playerConfig && !embedPlayer.playerConfig.vars ) {
 							embedPlayer.playerConfig.vars = {};
 						}
-						embedPlayer.playerConfig.vars.ks = ks;
+						embedPlayer.playerConfig.vars.vs = vs;
 						callback( entryResult );
 					},function(){
 						mw.log("Error occur while trying to create widget VS");
@@ -1824,9 +1824,9 @@ mw.VWidgetSupport.prototype = {
 	getFairplayCert: function(playerData){
 		var publicCertificate = null;
 		if (playerData.contextData.pluginData &&
-			playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData &&
-			playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData.publicCertificate){
-			publicCertificate = playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData.publicCertificate;
+			playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData &&
+			playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData.publicCertificate){
+			publicCertificate = playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData.publicCertificate;
 		}
 		return publicCertificate;
 	},

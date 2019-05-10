@@ -250,8 +250,8 @@
                                 _this.addPoster();
                             } else {
                                 embedPlayer.layoutBuilder.displayAlert({
-                                    title: embedPlayer.getKalturaMsg('ks-LIVE-STREAM-OFFLINE-TITLE'),
-                                    message: embedPlayer.getKalturaMsg('ks-LIVE-STREAM-OFFLINE'),
+                                    title: embedPlayer.getVidiunMsg('vs-LIVE-STREAM-OFFLINE-TITLE'),
+                                    message: embedPlayer.getVidiunMsg('vs-LIVE-STREAM-OFFLINE'),
                                     keepOverlay: true,
                                     noButtons: true,
                                     props: {
