@@ -11,7 +11,7 @@
 			this.targetObj = target;
 			var xapPath = mw.getMwEmbedPath() + 'modules/EmbedPlayer/binPlayers/silverlight-player/Player.xap';
 
-			//var xapPath = 'http://192.168.162.72/lightKdp/Player.xap';
+			//var xapPath = 'http://192.168.162.72/lightVdp/Player.xap';
 			window["onError" + playerId]=function(sender, args){
 				var appSource = "";
 				if (sender != null && sender != 0) {
@@ -170,10 +170,10 @@
 		removeJsListener: function( eventName, methodName ) {
 			if ( this.playerElement ) {
 				mw.log( 'PlayerElementSilverlight:: unbindPlayerFunction:' + eventName );
-				// The kaltura kdp can only call a global function by given name
-				var gKdpCallbackName = 'silverlight_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
+				// The vidiun vdp can only call a global function by given name
+				var gVdpCallbackName = 'silverlight_' + methodName + '_cb_' + this.id.replace(/[^a-zA-Z 0-9]+/g,'');
 				// Remove the listener ( if it exists already )
-				this.playerElement.removeJsListener( eventName, gKdpCallbackName );
+				this.playerElement.removeJsListener( eventName, gVdpCallbackName );
 			}
 		},
 		play: function(){

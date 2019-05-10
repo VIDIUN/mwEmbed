@@ -1,9 +1,9 @@
 {
-    "kdark": {
+    "vdark": {
         "dependencies": "mw.EmbedPlayer",
         "styles": [
-            "skins/kdark/css/layout.css",
-            "skins/kdark/css/icons.css"
+            "skins/vdark/css/layout.css",
+            "skins/vdark/css/icons.css"
         ]
     },
 	"ott": {

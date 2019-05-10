@@ -14,9 +14,9 @@ class mweLanguageSupport {
 		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../../EmbedPlayer/EmbedPlayer.i18n.json'), TRUE );
 		$embedPlayerMessages = $messages;
 		
-		// get all the messages supported in KalturaSupport:
-		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../KalturaSupport.i18n.json'), TRUE );
-		$kMessages = $messages;
+		// get all the messages supported in VidiunSupport:
+		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../VidiunSupport.i18n.json'), TRUE );
+		$vMessages = $messages;
 
 		// sort language keys A-Z: 
 		vsort( $coreLanguageNames );
@@ -44,9 +44,9 @@ class mweLanguageKeys {
 		// get all the message supported in embedPlayer
 		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../../EmbedPlayer/EmbedPlayer.i18n.json'), TRUE );
 		$embedPlayerMessages = $messages['en'];
-		// get all the messages supported in KalturaSupport:
-		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../KalturaSupport.i18n.json'), TRUE );
-        $kMessages = $messages['en'];
-        echo json_encode(array_merge($embedPlayerMessages, $kMessages));
+		// get all the messages supported in VidiunSupport:
+		$messages = json_decode( file_get_contents(dirname( __FILE__ ) .'/../VidiunSupport.i18n.json'), TRUE );
+        $vMessages = $messages['en'];
+        echo json_encode(array_merge($embedPlayerMessages, $vMessages));
 	}
 }

@@ -2,22 +2,22 @@
 $sendNotificationActions = array (
 		'doPause' => array (
 				'desc' => 'Pauses media playback.',
-				'example' => '../modules/KalturaSupport/tests/PlayStopApi.qunit.html'
+				'example' => '../modules/VidiunSupport/tests/PlayStopApi.qunit.html'
 		),
 		'doPlay' => array (
 				'desc' => 'Plays media. If in stopped state will initiate playback sequence.',
-				'example' => '../modules/KalturaSupport/tests/PlayStopApi.qunit.html'
+				'example' => '../modules/VidiunSupport/tests/PlayStopApi.qunit.html'
 		),
 		'doStop' => array (
 				'desc' => 'Stops media playback. Will pause and move the playhead to 0.', 
-				'example' => '../modules/KalturaSupport/tests/PlayStopApi.qunit.html'
+				'example' => '../modules/VidiunSupport/tests/PlayStopApi.qunit.html'
 		),
 		'doSeek' => array (
 				'notificationDataType' => 'Float',
 				'notificationData' => 'Seconds of target seek position.',
 				'notificationDataValue' => '30',
 				'desc' => 'Issues a seek.',
-				'example' => '../modules/KalturaSupport/tests/SeekApi.qunit.html'
+				'example' => '../modules/VidiunSupport/tests/SeekApi.qunit.html'
 		),
 		'changeMedia' => array (
 				'notificationDataType' => 'Object',
@@ -27,14 +27,14 @@ $sendNotificationActions = array (
 						'{ "entryId" : "0_wm82kqmm" }',
 						'{ "mediaProxy" : mediaProxyObject }'
 				),
-				'example' => '../modules/KalturaSupport/tests/ChangeMediaEntry.qunit.html'
+				'example' => '../modules/VidiunSupport/tests/ChangeMediaEntry.qunit.html'
 		),
 		'changeVolume' => array (
 				'notificationData' => 'Volume value from 0 to 1',
 				'notificationDataType' => 'Float',
 				'notificationDataValue' => '0.5',
 				'desc' => 'Change the audio volume',
-				'example' => '../modules/KalturaSupport/tests/SendNotificationWithAds.html'
+				'example' => '../modules/VidiunSupport/tests/SendNotificationWithAds.html'
 		),
 		'cleanMedia' => array (
 				'desc' => 'Cleans the media from the player.'
@@ -48,7 +48,7 @@ $sendNotificationActions = array (
 		'changePreferredBitrate' => array (
 				'notificationData' => 'The new preferred bitrate',
 				'desc' => 'Change the preferedFlavorBR on mediaProxy.vo object',
-				'availability' => 'kdp' 
+				'availability' => 'vdp' 
 		),
 		'doReplay' => array (
 				'desc' => 'Re-plays the video' 
@@ -56,49 +56,49 @@ $sendNotificationActions = array (
 		'alert' => array (
 				'notificationData' => 'message: alert message, title: alert title',
 				'desc' => 'Pop up an alert' ,
-				'example' => '../modules/KalturaSupport/tests/showAlert.html'
+				'example' => '../modules/VidiunSupport/tests/showAlert.html'
 		),
 		'showUiElement' => array (
 				'notificationData' => 'id: ID of the element, show: true / false',
 				'desc' => 'Show/hide an element from the layout',
-				'availability' => 'kdp' 
+				'availability' => 'vdp' 
 		),
 		'removeAlerts' => array (
 				'notificationData' => 'None',
 				'desc' => 'Fired when all alerts popped by the player need to be removed',
-				'availability' => 'kdp' 
+				'availability' => 'vdp' 
 		),
 		'enableGui' => array (
 				'notificationData' => '{ guiEnabled: true / false, enableType: full / controls }',
 				'desc' => 'Enable or Disable GUI',
-				'example' => '../modules/KalturaSupport/tests/EnableGui.html'
+				'example' => '../modules/VidiunSupport/tests/EnableGui.html'
 		),
 		'cancelAlerts' => array (
 				'notificationData' => 'None',
 				'desc' => 'Hide Alerts at the Alerts Mediator',
-				'availability' => 'kdp' 
+				'availability' => 'vdp' 
 		),
 		'liveEntry' => array (
 				'notificationData' => 'The URL resource of the played entry',
 				'desc' => 'Call the LiveStream command which tests whether the stream is currently on air',
-				'availability' => 'kdp'
+				'availability' => 'vdp'
 		),
 		'showClosedCaptions' => array (
 				'notificationData' => 'None',
 				'desc' => 'Display closed captions',
-				'example' => '../modules/KalturaSupport/tests/ClosedCaptions.html'
+				'example' => '../modules/VidiunSupport/tests/ClosedCaptions.html'
 		),
 		'hideClosedCaptions' => array (
 				'notificationData' => 'None',
 				'desc' => 'Hide closed captions',
-				'example' => '../modules/KalturaSupport/tests/ClosedCaptions.html'
+				'example' => '../modules/VidiunSupport/tests/ClosedCaptions.html'
 		)
 );
 
 /* should ideally auto generate or be in a separate file */
 $methodDocs = array (
-		'kWidget.embed' => array (
-				'desc' => 'Used to embed the Kaltura player against an element target in the DOM',
+		'vWidget.embed' => array (
+				'desc' => 'Used to embed the Vidiun player against an element target in the DOM',
 				'params' => array (
 						'targetId' => array (
 								'type' => 'String', // assumed
@@ -106,7 +106,7 @@ $methodDocs = array (
 								'desc' => 'The DOM player target id attribute string. ( if not included, you must include targetId in "settings" object )' 
 						),
 						'settings' => array (
-								'type' => 'kWidget.settingsObject',
+								'type' => 'vWidget.settingsObject',
 								'desc' => 'Object of settings to be used in embedding.' 
 						) 
 				),
@@ -118,18 +118,18 @@ $methodDocs = array (
 						array (
 								// either doc name or path can be defined ( for feature listed files vs non-feature listed )
 								'type' => 'link',
-								'name' => 'kWidget.embed',
-								'docPath' => 'kwidget' 
+								'name' => 'vWidget.embed',
+								'docPath' => 'vwidget' 
 						),
 						array (
 								'type' => 'link',
-								'name' => 'kWidget.embed playlist',
-								'docFullPath' => 'modules/KalturaSupport/tests/kWidget.embed.playlist.qunit.html ' 
+								'name' => 'vWidget.embed playlist',
+								'docFullPath' => 'modules/VidiunSupport/tests/vWidget.embed.playlist.qunit.html ' 
 						) 
 				) 
 		),
-		'kWidget.thumbEmbed' => array (
-				'desc' => 'Used to embed a thumbnail player. When the user clicks on the thumbnail kWidget.embed will be called with the provided settings.',
+		'vWidget.thumbEmbed' => array (
+				'desc' => 'Used to embed a thumbnail player. When the user clicks on the thumbnail vWidget.embed will be called with the provided settings.',
 				'params' => array (
 						'targetId' => array (
 								'type' => 'String', // assumed
@@ -137,7 +137,7 @@ $methodDocs = array (
 								'desc' => 'The DOM player target id attribute string. ( if not included, you must include targetId in "settings" object' 
 						),
 						'settings' => array (
-								'type' => 'kWidget.settingsObject',
+								'type' => 'vWidget.settingsObject',
 								'desc' => 'Object of settings to be used in embedding.' 
 						) 
 				),
@@ -145,78 +145,78 @@ $methodDocs = array (
 						array (
 								// either doc name or path can be defined ( for feature listed files vs non-feature listed )
 								'type' => 'link',
-								'name' => 'kWidget.thumbEmbed',
+								'name' => 'vWidget.thumbEmbed',
 								'docPath' => 'thumb' 
 						) 
 				) 
 		),
-		'kWidget.getKalturaThumbUrl' => array (
+		'vWidget.getVidiunThumbUrl' => array (
 				'desc' => 'Get video thumbnail URL.',
 				'params' => array (
 						'settings' => array (
-								'type' => 'kWidget.settingsObject',
+								'type' => 'vWidget.settingsObject',
 								'desc' => 'Object of settings to be used in embedding.'
 						)
 				)
 		),
-		'kWidget.isMobileDevice' => array(
+		'vWidget.isMobileDevice' => array(
 				'desc' => 'If user agent identifies as mobile device ( android, iOS or windows phone )',
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.supportsHTML5' => array(
+		'vWidget.supportsHTML5' => array(
 				'desc' => 'If the device or browser supports HTML5',
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.supportsFlash' => array(
+		'vWidget.supportsFlash' => array(
 				'desc' => 'If the device or browser supports Flash ( version 10 and above )',
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.isIOS' => array (
+		'vWidget.isIOS' => array (
 				'desc' => 'If user agent identifies as iOS device',
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.isIE' => array(
+		'vWidget.isIE' => array(
 				'desc' => "If user agent identifies as Internet Explorer browser",
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.isIE8' => array(
+		'vWidget.isIE8' => array(
 				'desc' => "If user agent identifies as Internet Explorer 8 browser",
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.isAndroid' => array(
+		'vWidget.isAndroid' => array(
 				'desc' => "If user agent identifies as Android device",
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.isWindowsDevice' => array(
+		'vWidget.isWindowsDevice' => array(
 				'desc' => "If user agent identifies as Windows Phone device",
 				'returns' => array (
 						'type' => 'boolean',
 						'desc' => 'true|false'
 				),
 		),
-		'kWidget.addReadyCallback' => array (
-				'desc' => 'Adds a ready callback to be called after the KDP or HTML5 player is ready.',
+		'vWidget.addReadyCallback' => array (
+				'desc' => 'Adds a ready callback to be called after the VDP or HTML5 player is ready.',
 				'params' => array (
 						'readyCallback' => array (
 								'type' => 'String',
@@ -226,12 +226,12 @@ $methodDocs = array (
 				'examples' => array (
 						array (
 								'type' => 'link',
-								'name' => 'kWidget.addReadyCallback',
-								'docFullPath' => 'modules/KalturaSupport/tests/ChangeMediaEntry.qunit.html ' 
+								'name' => 'vWidget.addReadyCallback',
+								'docFullPath' => 'modules/VidiunSupport/tests/ChangeMediaEntry.qunit.html ' 
 						) 
 				) 
 		),
-		'kWidget.destroy' => array (
+		'vWidget.destroy' => array (
 				'desc' => 'Removes the player from the DOM.',
 				'params' => array (
 						'target' => array (
@@ -242,16 +242,16 @@ $methodDocs = array (
 				'examples' => array (
 						array (
 								'type' => 'link',
-								'name' => 'kWidget.embed',
-								'docPath' => 'kwidget' 
+								'name' => 'vWidget.embed',
+								'docPath' => 'vwidget' 
 						) 
 				) 
 		),
-		'kWidget.api' => array (
-				'desc' => 'The kWidget API object, used to create new instances of Kaltura API request.',
+		'vWidget.api' => array (
+				'desc' => 'The vWidget API object, used to create new instances of Vidiun API request.',
 				'params' => array (
 						'apiObject' => array (
-								'type' => 'kWidget.apiOptions',
+								'type' => 'vWidget.apiOptions',
 								'desc' => 'Object of API settings to be used in API requests.' 
 						),
 						'callback' => array (
@@ -266,22 +266,22 @@ $methodDocs = array (
 						) 
 				),
 				'returns' => array (
-						'type' => 'kWidget.api',
-						'desc' => 'Returns an instance of the kWidget API object.' 
+						'type' => 'vWidget.api',
+						'desc' => 'Returns an instance of the vWidget API object.' 
 				),
 				'examples' => array (
 						array (
-								'name' => 'kWidget.api',
-								'docFullPath' => 'kWidget/tests/kWidget.api.html' 
+								'name' => 'vWidget.api',
+								'docFullPath' => 'vWidget/tests/vWidget.api.html' 
 						),
 						array (
-								'name' => 'kWidget.getSources',
-								'docFullPath' => 'modules/KalturaSupport/tests/kWidget.getSources.html' 
+								'name' => 'vWidget.getSources',
+								'docFullPath' => 'modules/VidiunSupport/tests/vWidget.getSources.html' 
 						) 
 				) 
 		),
 		'sendNotification' => array (
-				'desc' => 'Call a KDP notification (perform actions using this API, for example: play, pause, changeMedia, etc.)',
+				'desc' => 'Call a VDP notification (perform actions using this API, for example: play, pause, changeMedia, etc.)',
 				'params' => array (
 						'notificationName' => array (
 								'type' => 'String',
@@ -294,8 +294,8 @@ $methodDocs = array (
 						) 
 				) 
 		),
-		'kBind'=> array(
-				'desc' => 'Register a JavaScript handler function for a KDP notification',
+		'vBind'=> array(
+				'desc' => 'Register a JavaScript handler function for a VDP notification',
 				'params' => array (
 						'eventName' => array (
 								'type' => 'String',
@@ -309,13 +309,13 @@ $methodDocs = array (
 				'examples'  => array (
 						array (
 							'type' => 'link',
-							'name' => 'kBind and kUBnind',
-							'docFullPath' => 'modules/KalturaSupport/tests/kBind_kUnbind.qunit.html'
+							'name' => 'vBind and vUnBind',
+							'docFullPath' => 'modules/VidiunSupport/tests/vBind_vUnbind.qunit.html'
 						)
 					)
 		),
-		'kUnbind' => array(
-				'desc' => 'Remove a JavaScript handler function by name or by setfor a KDP notification',
+		'vUnbind' => array(
+				'desc' => 'Remove a JavaScript handler function by name or by setfor a VDP notification',
 				'params' => array (
 						'eventName' => array (
 								'type' => 'String',
@@ -324,12 +324,12 @@ $methodDocs = array (
 				),
 				'examples' => array (
 							'type' => 'link',
-							'name' => 'kBind and kUBnind',
-							'docFullPath' => '../modules/KalturaSupport/tests/kBind_kUnbind.qunit.html'
+							'name' => 'vBind and vUnBind',
+							'docFullPath' => '../modules/VidiunSupport/tests/vBind_vUnbind.qunit.html'
 						)
 		),
 		'addJsListener' => array (
-				'desc' => 'Register a javascript handler function for a KDP notification',
+				'desc' => 'Register a javascript handler function for a VDP notification',
 				'params' => array (
 						'listenerString' => array (
 								'type' => 'String',
@@ -342,7 +342,7 @@ $methodDocs = array (
 				) 
 		),
 		'evaluate' => array (
-				'desc' => "Retrieves the value of a KDP model property or component's property, using the standard OOP dot notation inside curly braces",
+				'desc' => "Retrieves the value of a VDP model property or component's property, using the standard OOP dot notation inside curly braces",
 				'params' => array (
 						'object.property.properties' => array (
 								'type' => 'String',
@@ -350,7 +350,7 @@ $methodDocs = array (
 						) 
 				) 
 		),
-		'setKDPAttribute' => array (
+		'setVDPAttribute' => array (
 				'desc' => "Change a value of a player configuration property or component's property using the standard OOP dot notation.",
 				'params' => array (
 						'object' => array (
@@ -368,7 +368,7 @@ $methodDocs = array (
 				) 
 		),
 		'jsCallbackReady' => array (
-				'desc' => "A JavaScript function on the hosting web page that is called by KDP when the setup of externalInterface APIs is completed.",
+				'desc' => "A JavaScript function on the hosting web page that is called by VDP when the setup of externalInterface APIs is completed.",
 				'params' => array (
 						'objectId' => array (
 								'type' => 'String',
@@ -378,31 +378,31 @@ $methodDocs = array (
 		) 
 );
 $objectDefinitions = array (
-		'kWidget.apiOptions' => array (
+		'vWidget.apiOptions' => array (
 				'wid' => array (
 						'desc' => "The partner id to be used in the API request." 
 				),
-				'ks' => array (
-						'desc' => "The Kaltura secret to be used in the request, if not supplied an anonymous KS will be generated and used." 
+				'vs' => array (
+						'desc' => "The Vidiun secret to be used in the request, if not supplied an anonymous VS will be generated and used." 
 				),
 				'serviceUrl' => array (
-						'desc' => 'Can be overwritten to target a different Kaltura server.',
-						'default' => 'http://cdnapi.kaltura.com' 
+						'desc' => 'Can be overwritten to target a different Vidiun server.',
+						'default' => 'http://cdnapi.vidiun.com' 
 				),
 				'serviceBase' => array (
-						'desc' => "Can be overwritten to alternate Kaltura service path.",
+						'desc' => "Can be overwritten to alternate Vidiun service path.",
 						'default' => '/api_v3/index.php?service=' 
 				),
 				'statsServiceUrl' => array (
-						'desc' => "Default supplied via Kaltura library include, can be overwritten to alternate URL for core analytics events.",
-						'default' => 'http://stats.kaltura.com' 
+						'desc' => "Default supplied via Vidiun library include, can be overwritten to alternate URL for core analytics events.",
+						'default' => 'http://stats.vidiun.com' 
 				),
 				'disableCache' => array (
 						'desc' => "Sends no-cache param to API, for a fresh result. Can hurt performance and CDN cachability should be used sparingly.",
 						'default' => 'false' 
 				) 
 		),
-		'kWidget.settingsObject' => array (
+		'vWidget.settingsObject' => array (
 				'targetId' => array (
 						'desc' => 'The DOM player target id attribute string if not defined as top level param.' 
 				),
@@ -433,7 +433,7 @@ $objectDefinitions = array (
 						'optional' => true,
 						'type' => 'Function',
 						'desc' => 'Local callback method to be called once player is ready for bindings. Player id is passes as an argument. 
-						See <a target="_new" href="../modules/KalturaSupport/tests/kWidget.embed.qunit.html">live example</a>' 
+						See <a target="_new" href="../modules/VidiunSupport/tests/vWidget.embed.qunit.html">live example</a>' 
 				)
 		) 
 );

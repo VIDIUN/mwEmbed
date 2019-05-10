@@ -62,10 +62,10 @@ window['disablePlaybackModeSelector'] = true;
 		<b>Code example of modal usage:</b>
 		<pre class="prettyprint linenums">$('#myModal').on( 'show', function(){
 	$('#video_wrap').html(
-		'&lt;div id="kaltura_player" style="width:525px;height:330px;"&gt;&lt;/div&gt;'
+		'&lt;div id="vidiun_player" style="width:525px;height:330px;"&gt;&lt;/div&gt;'
 	);
-	kWidget.embed({
-		'targetId': 'kaltura_player',
+	vWidget.embed({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
 		'entry_id' : '0_uka1msg4',
@@ -78,15 +78,15 @@ window['disablePlaybackModeSelector'] = true;
 				return ;
 			}
 			// AutoPlay: issue a play on mediaReady
-			var kdp = document.getElementById( playerId );
-			kdp.kBind('mediaReady', function(){
-				kdp.sendNotification( 'doPlay' );
+			var vdp = document.getElementById( playerId );
+			vdp.vBind('mediaReady', function(){
+				vdp.sendNotification( 'doPlay' );
 			});
 		}
 	});
 });
 $('#myModal').on( 'hide', function(){
-	kWidget.destroy('kaltura_player');
+	vWidget.destroy('vidiun_player');
 });
 </pre>
 	</body>

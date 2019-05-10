@@ -6,8 +6,8 @@
     mw.KIVQApi = function (embedPlayer) {
         return this.init(embedPlayer);
     };
-    if (!(mw.KIVQApi.prototype = {
-            bindPostfix: '.KIVQApi',
+    if (!(mw.VIVQApi.prototype = {
+            bindPostfix: '.VIVQApi',
             init: function (embedPlayer) {
 
                 var _this = this;
@@ -19,17 +19,17 @@
                     var getQuizuserEntryIdAndQuizParams = [{
                         'service': 'userEntry',
                         'action': 'list',
-                        'filter:objectType': 'KalturaQuizUserEntryFilter',
-                        'filter:entryIdEqual': _this.embedPlayer.kentryid,
+                        'filter:objectType': 'VidiunQuizUserEntryFilter',
+                        'filter:entryIdEqual': _this.embedPlayer.ventryid,
                         'filter:userIdEqualCurrent':'1',
                         'filter:orderBy': '-createdAt'
                     }, {
                         'service': 'quiz_quiz',
                         'action': 'get',
-                        'entryId': _this.embedPlayer.kentryid
+                        'entryId': _this.embedPlayer.ventryid
                     }];
 
-                    _this.getKClient().doRequest(getQuizuserEntryIdAndQuizParams, function (data) {
+                    _this.getVClient().doRequest(getQuizuserEntryIdAndQuizParams, function (data) {
 
                         callback(data);
                     });
@@ -125,7 +125,7 @@
                         'quizOutputType':1,
                         'entryId': EntryId
                     };
-                    _this.getKClient().doRequest(downloadPdf, function (data) {
+                    _this.getVClient().doRequest(downloadPdf, function (data) {
                         callback(data);
                     });
                 };
@@ -134,12 +134,12 @@
 
             },
 
-            getKClient: function () {
+            getVClient: function () {
                 var _this = this;
-                if (!this.kClient) {
-                    this.kClient = mw.kApiGetPartnerClient(_this.embedPlayer.kwidgetid);
+                if (!this.vClient) {
+                    this.vClient = mw.vApiGetPartnerClient(_this.embedPlayer.vwidgetid);
                 }
-                return this.kClient;
+                return this.vClient;
             }
 
         })) {

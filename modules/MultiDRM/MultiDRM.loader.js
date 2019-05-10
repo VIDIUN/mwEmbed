@@ -134,12 +134,12 @@
 
 	function setEmbedPlayerConfig(embedPlayer){
 		//Get user configuration
-		var drmUserConfig = embedPlayer.getKalturaConfig("multiDrm");
+		var drmUserConfig = embedPlayer.getVidiunConfig("multiDrm");
 		//Get default config
-		var drmConfig = getDefaultDrmConfig(embedPlayer.kpartnerid);
+		var drmConfig = getDefaultDrmConfig(embedPlayer.vpartnerid);
 		//Deep extend custom config
 		$.extend(true, drmConfig, drmUserConfig);
-		embedPlayer.setKalturaConfig("multiDrm", drmConfig);
+		embedPlayer.setVidiunConfig("multiDrm", drmConfig);
 		return drmConfig;
 	}
 
@@ -299,7 +299,7 @@
 			"customData": {
 				"userId": partnerId ,
 				"sessionId": "castlab-session",
-				"merchant": "kaltura"
+				"merchant": "vidiun"
 			},
 			"sendCustomData": false,
 			"generatePSSH": false,

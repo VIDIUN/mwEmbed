@@ -59,10 +59,10 @@ function jsVidiunPlayerTest( videoId ){
 Demonstrates basic usage of the play, stop & pause API.
 <br>
 <pre class="prettyprint linenums">
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	$('#sampleActions .btn').click(function(){
-		kdp.sendNotfication( $(this).text() );
+		vdp.sendNotfication( $(this).text() );
 	});
 });
 </pre>
@@ -74,10 +74,10 @@ kWidget.addReadyCallback( function( playerId ){
 </div>
 <br>
 <script>
-kWidget.addReadyCallback( function( playerId ){
-	var kdp = document.getElementById( playerId );
+vWidget.addReadyCallback( function( playerId ){
+	var vdp = document.getElementById( playerId );
 	$('#sampleActions .btn').click(function(){
-		kdp.sendNotification( $(this).text() );
+		vdp.sendNotification( $(this).text() );
 	});
 });
 </script>

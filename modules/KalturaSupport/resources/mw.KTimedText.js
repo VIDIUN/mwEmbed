@@ -235,7 +235,7 @@
 			}
 
 			// Api sources require that a api query
-			mw.log( 'KTimedText:: loadTextSources> from api');
+			mw.log( 'VTimedText:: loadTextSources> from api');
 			_this.getTextSourcesFromApi( function( dbTextSources ) {
 				var multiRequest = [];
 				var captionIds = [];
@@ -250,21 +250,21 @@
 					captionIds.push(dbTextSource.id);
 				});
 				if ( multiRequest.length ) {
-					_this.getKalturaClient().doRequest( multiRequest, function( results ) {
+					_this.getVidiunClient().doRequest( multiRequest, function( results ) {
 						var captionsURLs = {};
 						$.each( results, function( idx, url ) {
 							captionsURLs[ captionIds[idx] ] = url;
 						} );
 						$.each( dbTextSources, function( inx, dbTextSource ) {
 							dbTextSource.src = captionsURLs[ dbTextSource.id ];
-							mw.log( 'KTimedText:: loadTextSources> add textSources from db:' + inx );
+							mw.log( 'VTimedText:: loadTextSources> add textSources from db:' + inx );
 							_this.textSources.push(
 								_this.getTextSourceFromDB( dbTextSource )
 							);
 						});
-						$( _this.embedPlayer ).trigger( 'KalturaSupport_CCDataLoaded' );
+						$( _this.embedPlayer ).trigger( 'VidiunSupport_CCDataLoaded' );
 						// Done adding source issue callback
-						mw.log( 'KTimedText:: loadTextSources> total source count: ' + _this.textSources.length );
+						mw.log( 'VTimedText:: loadTextSources> total source count: ' + _this.textSources.length );
 						callback();
 					} );
 				}
@@ -275,7 +275,7 @@
 		 */
 		getTextSourcesFromApi: function( callback ) {
 			var _this = this;
-			this.getKalturaClient().doRequest({
+			this.getVidiunClient().doRequest({
 				'service' : 'caption_captionasset',
 				'action' : 'list',
 				'filter:objectType' : 'VidiunAssetFilter',
@@ -367,7 +367,7 @@
 			var params = {
 				'action': 'serve',
 				'captionAssetId': captionId,
-				'ks': this.getKalturaClient().getKs()
+				'vs': this.getVidiunClient().getVs()
 			};
 			var vidsig = this.getVidiunClient().getSignature( params );
 			var baseUrl = mw.getConfig( 'Vidiun.ServiceUrl' ) + mw.getConfig( 'Vidiun.ServiceBase' ).replace( 'index.php', '' );

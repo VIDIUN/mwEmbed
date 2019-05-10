@@ -9,16 +9,16 @@
 
 	<script type="text/javascript">
 		// Enable uiconf js which includes external resources
-		mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+		mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-		function jsKalturaPlayerTest( videoId ){
+		function jsVidiunPlayerTest( videoId ){
 			// Name this module
 			module( "playlist" );
-			var kdp = $('#' + videoId )[0];
+			var vdp = $('#' + videoId )[0];
 			var $iframe = $('#' + videoId + '_ifp').contents();
 
 			asyncTest( "Check for access controlled playlist", function(){
-				kalturaQunitWaitForPlayer(function(){
+				vidiunQunitWaitForPlayer(function(){
 					// look for the playlist:
 					ok( $( $iframe).find( '.medialistContainer' ).length > 0 , "Found playlist div" );
 					equal ( $( $iframe).find('.chapterBox').length, 2, "Number of clips is 2 instead of 4");
@@ -28,14 +28,14 @@
 		}
 
 	</script>
-	<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-	<script type="text/javascript" src="../../../modules/KalturaSupport/tests/resources/qunit-kaltura-bootstrap.js"></script>
+	<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+	<script type="text/javascript" src="../../../modules/VidiunSupport/tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 </head>
 <body>
 <h2> Playlist access control entry removal</h2>
-<div id="kaltura_player" style="width:800px;height:300px"></div>
-<span id="kdoc-more-desc">
+<div id="vidiun_player" style="width:800px;height:300px"></div>
+<span id="vdoc-more-desc">
 	This demo filters out entries from the playlist that are not playable because of access control (client side)
 	<br>This does not apply for the first entry. The attribute name is enableAccessControlExclution in
 	playlistAPI plugin.
@@ -44,17 +44,17 @@
 </span>
 <script>
 
-	mw.setConfig('Kaltura.LeadWithHTML5', true);
+	mw.setConfig('Vidiun.LeadWithHTML5', true);
 
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '25975211',
 		'flashvars':{
 			'autoMute': true,
 			'playlistAPI':{
 				'includeInLayout': true,
-				'kpl0Id': "1_dyuibzud",
+				'vpl0Id': "1_dyuibzud",
 				"enableAccessControlExclusion" : true
 			}
 		}

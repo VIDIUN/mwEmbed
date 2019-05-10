@@ -4,28 +4,28 @@
 			'callbackArgs' => 'Root of the application',
 			'callbackType' => 'Object',
 			'desc' => 'The first command that registers the main proxys and main view mediator.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'initiatApp' => array(
 			'desc' => 'Start the init macro commands.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'skinLoaded' => array(
 			'desc' => 'Dispatched when the skin is loaded.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'skinLoadFailed' => array(
 			'desc' => 'Dispatched when the skin load failed.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'sourceReady' => array(
 			'desc' => 'When the source is ready use to set the media element to the media player.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
-		'kdpReady' => array(
+		'vdpReady' => array(
 			'desc' => 'Notify that the application is ready to be used and events can be listened to and that the loaded entry is ready to be played.'
 		),
-		'kdpEmpty' => array(
+		'vdpEmpty' => array(
 			'desc' => 'Notify that the application is ready to be used and events can be listened to, but no media was loaded'
 		),
 		'layoutReady' => array(
@@ -40,29 +40,29 @@
 		'pluginsLoaded' => array(
 			'callbackArgs' => 'Plugins map object. Every key is a plugin ID, value is the status of the plugin (see PluginStatus class)',
 			'desc' => 'Notification fired when all plugins finished the loading process.',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'singlePluginLoaded' => array(
 			'callbackArgs' => 'The plugin ID',
 			'desc' => 'Notification fired when a single plugin is ready',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'singlePluginFailedToLoad' => array(
 			'callbackArgs' => 'The plugin ID',
 			'desc' => 'Notification fired when a single plugin failed to load',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'readyToPlay' => array(
 			'callbackArgs' => 'None',
-			'desc' => 'Notification added with version 3.5.0, signifies that an entry / media is ready to be played in the KDP',
-			'availability' => 'kdp'
+			'desc' => 'Notification added with version 3.5.0, signifies that an entry / media is ready to be played in the VDP',
+			'availability' => 'vdp'
 		),
 		'readyToLoad' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'Dispatched when the skin is loaded.'
 		),
 		'entryReady' => array(
-			'callbackArgs' => 'The entry object (KalturaBaseEntry)',
+			'callbackArgs' => 'The entry object (VidiunBaseEntry)',
 			'desc' => 'The Entry is set'
 		),
 		'entryFailed' => array(
@@ -71,8 +71,8 @@
 		),
 		'entryNotAvailable' => array(
 			'callbackArgs' => 'entryId: The new entry ID',
-			'desc' => "Notification fired when the BaseEntry object has been retrieved but KDP can't play the entry. Possible reasons: status not ready / moderation status/ access control",
-			'availability' => 'kdp'
+			'desc' => "Notification fired when the BaseEntry object has been retrieved but VDP can't play the entry. Possible reasons: status not ready / moderation status/ access control",
+			'availability' => 'vdp'
 		),
 		'mediaReady' => array(
 			'callbackArgs' => 'None',
@@ -112,12 +112,12 @@
 		'rootResize' => array(
 			'callbackArgs' => 'width: new width, height: new height',
 			'desc' => 'The player parent was resized',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'mediaViewableChange' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'Used mainly to know when OSMF Media Player is viewable',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'playerStateChange' => array(
 			'callbackArgs' => 'The new state (MediaPlayerState)',
@@ -167,22 +167,22 @@
 		'openFullScreen' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'Player entered full screen mode',
-            'example' => '../modules/KalturaSupport/tests/FullscreenOnPlay.html'
+            'example' => '../modules/VidiunSupport/tests/FullscreenOnPlay.html'
 		),
 		'closeFullScreen' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'Player exited from full screen mode',
-            'example' => '../modules/KalturaSupport/tests/FullscreenOnPlay.html'
+            'example' => '../modules/VidiunSupport/tests/FullscreenOnPlay.html'
 		),
 		'hasCloseFullScreen' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'The fullscreen has just closed',
-            'example' => '../modules/KalturaSupport/tests/FullscreenOnPlay.html'
+            'example' => '../modules/VidiunSupport/tests/FullscreenOnPlay.html'
 		),
 		'hasOpenedFullScreen' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'The fullscreen was just activated',
-            'example' => '../modules/KalturaSupport/tests/FullscreenOnPlay.html'
+            'example' => '../modules/VidiunSupport/tests/FullscreenOnPlay.html'
 		),
 		'volumeChanged' => array(
 			'callbackArgs' => 'New volume value',
@@ -191,7 +191,7 @@
 		'volumeChangedEnd' => array(
 			'callbackArgs' => 'New volume value',
 			'desc' => 'Notification fired when volumeChanged process ended (volume slider thumb release / volume button click). Saves value to cookie if possible',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'mute' => array(
 			'callbackArgs' => 'None',
@@ -219,27 +219,27 @@
 		),
 		'bufferStartEvent' => array(
 			'desc' => 'Dispatches when the player starts buffering',
-			'example' => '../modules/KalturaSupport/tests/PlayerBufferTest.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlayerBufferTest.qunit.html'
 		),
 		'bufferEndEvent' => array(
 			'callbackArgs' => 'bufferTime: The amount of time since last buffer start event.',
 			'desc' => 'Dispatches when the player starts buffering',
-			'example' => '../modules/KalturaSupport/tests/PlayerBufferTest.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlayerBufferTest.qunit.html'
 		),
 		'scrubberDragStart' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'The scrubber had started being dragged',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'scrubberDragEnd' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'The scrubber had stopped being dragged',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'intelliSeek' => array(
 			'callbackArgs' => 'intelliseekTo: new position to seek to',
 			'desc' => 'Notification fired when the player has started intelligent seeking',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'freePreviewEnd' => array(
 			'callbackArgs' => 'id of the viewed entry',
@@ -248,7 +248,7 @@
 		'changeMediaProcessStarted' => array(
 			'callbackArgs' => 'entryId: The new entry ID',
 			'desc' => 'Notification fired when the first mini-command of the ChangeMedia macro command has started',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'metadataReceived' => array(
 			'callbackArgs' => 'None',
@@ -261,7 +261,7 @@
 		'cuePointReached' => array(
 			'callbackArgs' => 'Current cuePoint object. Return Object with context and a cuePoint object',
 			'desc' => "Notification fired when the player reaches a cuePoint",
-			'example' => '../modules/KalturaSupport/components/related/CuePointsMidrollVast.html'
+			'example' => '../modules/VidiunSupport/components/related/CuePointsMidrollVast.html'
 		),
 		'switchingChangeStarted' => array(
 			'callbackArgs' => 'newIndex: The index of the bitrate the player started switching to. If auto, send -1, newBitrate: The bitrate the player started switching to. If auto, send null',
@@ -293,17 +293,17 @@
 		'adOpportunity' => array(
 			'callbackArgs' => 'context: context of the ad opportunity: pre, post, mid, cuePoint: the cue point object',
 			'desc' => "Notification fired when the player's time progress reaches an ad cue point",
-			"example" => "../modules/KalturaSupport/tests/CuePointsMidrollVast.html"
+			"example" => "../modules/VidiunSupport/tests/CuePointsMidrollVast.html"
 		),
 		'sequenceItemPlayStart' => array(
 			'callbackArgs' => 'sequenceContext: pre / post / mid / main (see SequenceContextType class), currentIndex: index of current item',
 			'desc' => 'Signifies the start of an entry that is part of a sequence',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'sequenceItemPlayEnd' => array(
 			'callbackArgs' => 'sequenceContext: pre / post / mid / main (see SequenceContextType class), currentIndex: index of current item',
 			'desc' => 'Signifies the end of an entry that is part of a sequence as opposed to the end of a regular entry',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'preSequenceStart' => array(
 			'callbackArgs' => 'None',
@@ -332,12 +332,12 @@
 		'bumperStarted' => array(
 			'callbackArgs' => 'timeSlot: preroll / postroll',
 			'desc' => 'Defines the value of the type property of a bumper start notification',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'bumperClicked' => array(
 			'callbackArgs' => 'None',
 			'desc' => 'Defines the value of the type property of a bumper click notification',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'adStart' => array(
 			'callbackArgs' => 'timeSlot: pre / post / mid / main (see SequenceContextType class)',
@@ -359,17 +359,17 @@
 		'firstQuartileOfAd' => array(
 			'callbackArgs' => 'timeSlot: pre / post / mid / main (see SequenceContextType class)',
 			'desc' => 'Defines the value of the type property of 25% of ad notification',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'midOfAd' => array(
 			'callbackArgs' => 'timeSlot: pre / post / mid / main (see SequenceContextType class)',
 			'desc' => 'Defines the value of the type property of 50% of ad notification',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'ThirdQuartileOfAd' => array(
 			'callbackArgs' => 'timeSlot: pre / post / mid / main (see SequenceContextType class)',
 			'desc' => 'Defines the value of the type property of 75% of ad notification',
-			'availability' => 'kdp'
+			'availability' => 'vdp'
 		),
 		'adErrorEvent' => array(
 			'callbackArgs' => 'None',
@@ -381,37 +381,37 @@
 			'callbackArgs' => 'An object with "entryId" property with the current selected entry as a value.',
 			'callbackType' => 'object',
 			'desc' => 'Called when user clicks or auto continues to a related video.',
-			'example' => '../modules/KalturaSupport/components/related/Related.html'
+			'example' => '../modules/VidiunSupport/components/related/Related.html'
 		),
 		'playlistReady' => array(
 			'props' => 'None',
 			'desc' => 'The playlist layout is ready.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		),
 		'playlistPlayNext' => array(
 			'props' => 'None',
 			'desc' => 'The next clip was requested.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		),
 		'playlistPlayPrevious' => array(
 			'props' => 'None',
 			'desc' => 'The previous clip was requested.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		),
 		'playlistFirstEntry' => array(
 			'props' => 'None',
 			'desc' => 'The first clip in the playlist was loaded.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		),
 		'playlistMiddleEntry' => array(
 			'props' => 'None',
 			'desc' => 'A clip that is not the first or the last clip in the playlist was loaded.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		),
 		'playlistLastEntry' => array(
 			'props' => 'None',
 			'desc' => 'The last clip in the playlist was loaded.',
-			'example' => '../modules/KalturaSupport/tests/PlaylistEvents.qunit.html'
+			'example' => '../modules/VidiunSupport/tests/PlaylistEvents.qunit.html'
 		)
 	);
 ?>

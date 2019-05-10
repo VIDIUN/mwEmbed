@@ -191,14 +191,14 @@ DAL for Q&A Module
     }
 
 
-    mw.KQnaService = function (embedPlayer,qnaPlugin) {
+    mw.VQnaService = function (embedPlayer,qnaPlugin) {
         return this.init(embedPlayer,qnaPlugin);
     };
 
-    mw.KQnaService.prototype = {
+    mw.VQnaService.prototype = {
 
         // The bind postfix:
-        bindPostfix: '.KQnaService',
+        bindPostfix: '.VQnaService',
         liveAQnaIntervalId: null,
         QnaThreads: ko.observableArray(),
         AnswerOnAirQueue: ko.observableArray(),
@@ -206,7 +206,7 @@ DAL for Q&A Module
         moduleStatusLastUpdateTime: -1,
         QandA_ResponseProfile: "QandA_ResponseProfile",
         QandA_ResponseProfileSystemName: "QandA",
-        QandA_MetadataProfileSystemName: "Kaltura-QnA",
+        QandA_MetadataProfileSystemName: "Vidiun-QnA",
         QandA_cuePointTag: "qna",
         QandA_cuePointTypes: {"Question":1,"Answer":2, "Announcement":3},
         bootPromise:null,
@@ -264,11 +264,11 @@ DAL for Q&A Module
             $(this.embedPlayer).unbind(this.bindPostfix);
         },
 
-        getKClient: function () {
-            if (!this.kClient) {
-                this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+        getVClient: function () {
+            if (!this.vClient) {
+                this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
 
         //returns questions, answers and announcement
@@ -304,8 +304,8 @@ DAL for Q&A Module
                 var createCuePointRequest = {
                     "service": "cuePoint_cuePoint",
                     "action": "add",
-                    "cuePoint:objectType": "KalturaAnnotation",
-                    "cuePoint:entryId": embedPlayer.kentryid,
+                    "cuePoint:objectType": "VidiunAnnotation",
+                    "cuePoint:entryId": embedPlayer.ventryid,
                     "cuePoint:startTime": embedPlayer.currentTime,
                     "cuePoint:text": question,
                     "cuePoint:isPublic": 1,
@@ -328,13 +328,13 @@ DAL for Q&A Module
                     "service": "cuePoint_cuePoint",
                     "action": "update",
                     "id": "{1:result:id}",
-                    "cuePoint:objectType": "KalturaAnnotation",
+                    "cuePoint:objectType": "VidiunAnnotation",
                     "cuePoint:tags": _this.QandA_cuePointTag
                 };
 
                 // mw.log("Submitting a new question: " + question);
 
-                _this.getKClient().doRequest([createCuePointRequest, addMetadataRequest, updateCuePointRequestAddQnaTag], function (result) {
+                _this.getVClient().doRequest([createCuePointRequest, addMetadataRequest, updateCuePointRequestAddQnaTag], function (result) {
 
                         var endTime = new Date();
                         var cuePoint = result[2];
@@ -543,7 +543,7 @@ DAL for Q&A Module
 
             this.boot().then(function() {
 
-                var entryId = _this.embedPlayer.kentryid;
+                var entryId = _this.embedPlayer.ventryid;
 
                 // build list annotation cue point request
                 var request = {
@@ -551,29 +551,29 @@ DAL for Q&A Module
                     'action': 'list',
                     'filter:tagsLike':_this.QandA_cuePointTag,
                     'filter:entryIdEqual': entryId,
-                    'filter:objectType': 'KalturaAnnotationFilter',
+                    'filter:objectType': 'VidiunAnnotationFilter',
                     'filter:orderBy': '+createdAt',
                     'filter:isPublicEqual': '1',
-                    "responseProfile:objectType":"KalturaResponseProfileHolder",
+                    "responseProfile:objectType":"VidiunResponseProfileHolder",
                     "responseProfile:systemName":_this.QandA_ResponseProfileSystemName,
 
                     /*Search  metadata   */
-                    'filter:advancedSearch:objectType': 'KalturaMetadataSearchItem',
+                    'filter:advancedSearch:objectType': 'VidiunMetadataSearchItem',
                     'filter:advancedSearch:metadataProfileId': _this.metadataProfile.id,
                     'filter:advancedSearch:type': 2, //or
 
                     //search all messages on my session id
-                    'filter:advancedSearch:items:item0:objectType': "KalturaSearchCondition",
+                    'filter:advancedSearch:items:item0:objectType': "VidiunSearchCondition",
                     'filter:advancedSearch:items:item0:field': "/*[local-name()='metadata']/*[local-name()='ThreadCreatorId']",
                     'filter:advancedSearch:items:item0:value': _this.userId,
 
                     //find all announcements
-                    'filter:advancedSearch:items:item1:objectType': "KalturaSearchCondition",
+                    'filter:advancedSearch:items:item1:objectType': "VidiunSearchCondition",
                     'filter:advancedSearch:items:item1:field': "/*[local-name()='metadata']/*[local-name()='Type']",
                     'filter:advancedSearch:items:item1:value': "Announcement",
 
                     //find all AnswerOnAir cue points
-                    'filter:advancedSearch:items:item2:objectType': "KalturaSearchCondition",
+                    'filter:advancedSearch:items:item2:objectType': "VidiunSearchCondition",
                     'filter:advancedSearch:items:item2:field': "/*[local-name()='metadata']/*[local-name()='Type']",
                     'filter:advancedSearch:items:item2:value': "AnswerOnAir"
                 };
@@ -603,7 +603,7 @@ DAL for Q&A Module
                     codeCuePointListRequest['filter:updatedAtGreaterThanOrEqual'] = moduleStatusLastUpdateTime;
                 }
 
-                _this.getKClient().doRequest( [request, codeCuePointListRequest],
+                _this.getVClient().doRequest( [request, codeCuePointListRequest],
                     function (resoults) {
 
                         // process results from 1st request
@@ -611,7 +611,7 @@ DAL for Q&A Module
                         // if an error pop out:
                         if (!data || data.code) {
                             // todo: add error handling
-                            mw.log("Error:: KCuePoints could not retrieve live cuepoints");
+                            mw.log("Error:: VCuePoints could not retrieve live cuepoints");
                             return;
                         }
 

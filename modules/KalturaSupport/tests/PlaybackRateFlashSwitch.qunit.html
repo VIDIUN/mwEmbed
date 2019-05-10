@@ -9,8 +9,8 @@
 <style>
 		td, th{ text-align: left; padding: 4px;}
 	</style>
-<!-- qunit-kaltura must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
-<script type="text/javascript" src="resources/qunit-kaltura-bootstrap.js"></script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
 </head>
 <body>
 <h2> Playback Rate flash switch</h2>
@@ -19,7 +19,7 @@ This page shows a type switch from flash hdnetwork to progressive, when flash pl
 <br>
 
 <script>
-	kWidget.featureConfig({
+	vWidget.featureConfig({
 		'targetId': 'myVideoTarget',
 		'wid': '_243342',
 		'uiconf_id' : '12905712',
@@ -40,10 +40,10 @@ This page shows a type switch from flash hdnetwork to progressive, when flash pl
 			}
 		}
 	});
-	kWidget.addReadyCallback( function( playerId ){
-		var kdp = document.getElementById( playerId );
+	vWidget.addReadyCallback( function( playerId ){
+		var vdp = document.getElementById( playerId );
 		// Log playback rate changes:
-		kdp.kBind('updatedPlaybackRate', function( newRate ){
+		vdp.vBind('updatedPlaybackRate', function( newRate ){
 			$("#changeLog").append( "Set playback rate to x" + newRate + "\n" );
 		});
 	});

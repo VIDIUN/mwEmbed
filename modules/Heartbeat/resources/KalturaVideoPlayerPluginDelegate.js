@@ -3,11 +3,11 @@
  */
 (function(mw, $) {
     'use strict';
-    $.extend(KalturaVideoPlayerPluginDelegate.prototype, ADB.va.plugins.videoplayer.VideoPlayerPluginDelegate.prototype);
+    $.extend(VidiunVideoPlayerPluginDelegate.prototype, ADB.va.plugins.videoplayer.VideoPlayerPluginDelegate.prototype);
 
     var _this;
 
-    function KalturaVideoPlayerPluginDelegate(player, config) {
+    function VidiunVideoPlayerPluginDelegate(player, config) {
         _this = this;
         _this.player = player;
         _this.config = config;
@@ -45,7 +45,7 @@
 
         _this.initadBreakInfo = function(){
             _this.adBreakInfo = new ADB.va.plugins.videoplayer.AdBreakInfo();
-            _this.adBreakInfo.playerName = _this.config.playerPlayerName || _this.player.kuiconfid;
+            _this.adBreakInfo.playerName = _this.config.playerPlayerName || _this.player.vuiconfid;
             _this.adBreakInfo.name = "";
             _this.adBreakInfo.position = 1;
             _this.adBreakInfo.startTime = -1;
@@ -116,7 +116,7 @@
 
     }
 
-    KalturaVideoPlayerPluginDelegate.prototype.getVideoInfo = function() {
+    VidiunVideoPlayerPluginDelegate.prototype.getVideoInfo = function() {
         if( !_this.videoInfo ) {
             _this.initVideoInfo();
         }
@@ -128,22 +128,22 @@
         return _this.videoInfo;
     };
 
-    KalturaVideoPlayerPluginDelegate.prototype.getAdBreakInfo = function() {
+    VidiunVideoPlayerPluginDelegate.prototype.getAdBreakInfo = function() {
         if( !_this.adBreakInfo ) {
             _this.initadBreakInfo();
         }
         return _this.adBreakInfo;
     };
 
-    KalturaVideoPlayerPluginDelegate.prototype.getAdInfo = function() {
+    VidiunVideoPlayerPluginDelegate.prototype.getAdInfo = function() {
         return _this.adInfo;
     };
 
-    KalturaVideoPlayerPluginDelegate.prototype.getChapterInfo = function() {
+    VidiunVideoPlayerPluginDelegate.prototype.getChapterInfo = function() {
         return _this.chapterInfo;
     };
 
-    KalturaVideoPlayerPluginDelegate.prototype.getQoSInfo = function() {
+    VidiunVideoPlayerPluginDelegate.prototype.getQoSInfo = function() {
         if( !_this.qos ){
             _this.qos = new ADB.va.plugins.videoplayer.QoSInfo();
         }
@@ -160,10 +160,10 @@
         return _this.qos;
     };
 
-    KalturaVideoPlayerPluginDelegate.prototype.onError = function(errorInfo) {
+    VidiunVideoPlayerPluginDelegate.prototype.onError = function(errorInfo) {
         mw.log("HeartBeat plugin :: VideoPlayerPluginDelegate error: " + errorInfo.getMessage() + " | " + errorInfo.getDetails());
     };
 
     // Export symbols.
-    window.KalturaVideoPlayerPluginDelegate = KalturaVideoPlayerPluginDelegate;
+    window.VidiunVideoPlayerPluginDelegate = VidiunVideoPlayerPluginDelegate;
 })(window.mw, window.jQuery);

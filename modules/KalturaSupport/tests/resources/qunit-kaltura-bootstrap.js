@@ -17,7 +17,7 @@ if( window.QUnit ){
 			ok( false, "Player timed out" );
 			start();
 		}, 180000 );
-		window['kalturaPlayerLoadedCallbackCalled'] = function( playerId ){
+		window['vidiunPlayerLoadedCallbackCalled'] = function( playerId ){
 			ok( true, "Player loaded: " + playerId );
 			if( typeof jsVidiunPlayerTest == 'function' ){
 				jsVidiunPlayerTest( playerId );

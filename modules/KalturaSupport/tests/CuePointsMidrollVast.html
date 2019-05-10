@@ -100,9 +100,9 @@ Read more about <a href="http://knowledge.vidiun.com/faq/how-configure-mid-roll-
 <div style="clear:both"></div>
 <h3>Listening to a cuePoint event in JavasScirpt</h3>
 <pre class="prettyprint linenums" syle="width:100%">
-kWidget.addReadyCallback(function(playerId){
-	var kdp = $('#' + playerId)[0]; 
-	kdp.kBind('cuePointReached', function( qPoint ){
+vWidget.addReadyCallback(function(playerId){
+	var vdp = $('#' + playerId)[0]; 
+	vdp.vBind('cuePointReached', function( qPoint ){
 		var type = (qPoint.context) ? 'Ad' : 'Code';
 		$('#eventRowDesc').after(
 		$('<tr />' ).append(
