@@ -212,7 +212,7 @@
 			this.loadIma( function(){
 				_this.imaLoaded = true;
 				_this.embedPlayer.unbindHelper('prePlayAction' + _this.bindPostfix);
-				// Determine if we are in managed or kaltura point based mode.
+				// Determine if we are in managed or vidiun point based mode.
 				if ( _this.localizationCode ){
 					google.ima.settings.setLocale(_this.localizationCode);
 				}
@@ -855,7 +855,7 @@
 			if (this.isChromeless){
 				adsRequest.adTagUrl = encodeURIComponent(adsRequest.adTagUrl);
 				this.embedPlayer.getPlayerElement().sendNotification( 'requestAds', adsRequest );
-				mw.log( "DoubleClick::requestAds: Chromeless player request ad from KDP plugin");
+				mw.log( "DoubleClick::requestAds: Chromeless player request ad from VDP plugin");
 				var timeout = this.getConfig("adsManagerLoadedTimeout") || 5000;
 				this.chromelessAdManagerLoadedId = setTimeout(function(){
 					mw.log( "DoubleClick::Error: AdsManager failed to load by Flash plugin after " + timeout + " seconds.");

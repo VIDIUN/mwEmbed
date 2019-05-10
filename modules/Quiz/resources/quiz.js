@@ -49,16 +49,16 @@
                         embedPlayer.autoplay = false;
                     }
 
-                    _this.KIVQModule.setupQuiz().fail(function(data, msg) {
+                    _this.VIVQModule.setupQuiz().fail(function(data, msg) {
                         mw.log("Quiz: error loading quiz, error: " + msg);
                         embedPlayer.hideSpinner();
-                        _this.KIVQModule.unloadQuizPlugin(embedPlayer);
+                        _this.VIVQModule.unloadQuizPlugin(embedPlayer);
                         embedPlayer.enablePlayControls();
                     }).done(function(data) {
                         mw.log("Quiz: setup is completed, continuing...");
                     });
 
-                    _this.KIVQScreenTemplate = new mw.KIVQScreenTemplate(embedPlayer);
+                    _this.VIVQScreenTemplate = new mw.VIVQScreenTemplate(embedPlayer);
 
                     if(_this.VIVQModule.isVPlaylist){
                         _this.VIVQModule.unloadQuizPlugin(embedPlayer);

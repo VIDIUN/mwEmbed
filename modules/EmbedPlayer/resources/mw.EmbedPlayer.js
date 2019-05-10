@@ -737,7 +737,7 @@
 			if ( this.casting ){
 				return mw.EmbedTypes.getMediaPlayers().getPlayerById('chromecast');
 			}
-			//currently only kplayer can handle other streamerTypes
+			//currently only vplayer can handle other streamerTypes
 			if (!mw.getConfig('EmbedPlayer.IgnoreStreamerType')
 				&& !this.isImageSource()   //not an image entry
 				&& this.streamerType != 'http'
@@ -3096,7 +3096,7 @@
 		},
 
 		isDrmRequired: function () {
-			return this.drmRequired && !this.getRawKalturaConfig("embedPlayerChromecastReceiver","plugin") === true;
+			return this.drmRequired && !this.getRawVidiunConfig("embedPlayerChromecastReceiver","plugin") === true;
 		},
 
 		isDVR: function () {

@@ -220,7 +220,7 @@ class UiConfResult {
 			'reportError' => array(),
 			"sideBarContainer" => array(),
 			"liveAnalytics"=>array(),
-			"kAnalony"=>array(),
+			"vAnalony"=>array(),
 			//"playersJsReceiver" => array()
 		);
 

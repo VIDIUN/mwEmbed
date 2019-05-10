@@ -20,7 +20,7 @@
 
         _this.initVideoInfo = function(){
             _this.videoInfo = new ADB.va.plugins.videoplayer.VideoInfo();
-            _this.videoInfo.playerName = _this.config.playerPlayerName || _this.player.kuiconfid;
+            _this.videoInfo.playerName = _this.config.playerPlayerName || _this.player.vuiconfid;
             var duration = -1;
             if(_this.player.evaluate('{mediaProxy.entry}')) {
                 var id = _this.player.evaluate('{mediaProxy.entry}').id ? _this.player.evaluate('{mediaProxy.entry}').id : _this.player.evaluate('{mediaProxy.entry}').name;

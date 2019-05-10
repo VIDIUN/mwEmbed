@@ -122,7 +122,7 @@ onload = function () {
 				document.getElementById('vdebug').style.display = 'block';
 			}
 			mw.setConfig("chromecastReceiver", true);
-			mw.setConfig("Kaltura.ExcludedModules", "chromecast");
+			mw.setConfig("Vidiun.ExcludedModules", "chromecast");
 			var fv = {
 				"multiDrm": {
 					'plugin': false
@@ -135,15 +135,15 @@ onload = function () {
 				}
 			};
 			fv = extend(fv, payload['flashVars']);
-			kWidget.embed({
-				"targetId": "kaltura_player",
+			vWidget.embed({
+				"targetId": "vidiun_player",
 				"wid": "_" + publisherID,
 				"uiconf_id": uiconfID,
 				"readyCallback": function (playerId) {
 					if (!playerInitialized){
 						playerInitialized = true;
-						var kdp = document.getElementById(playerId);
-						kdp.kBind("chromecastReceiverLoaded", function(){
+						var vdp = document.getElementById(playerId);
+						vdp.vBind("chromecastReceiverLoaded", function(){
 							setMediaManagerEvents();
 							messageBus.broadcast("readyForMedia");
 						});
