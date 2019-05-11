@@ -2644,8 +2644,8 @@ if (typeof module !== "undefined" && module.exports) {
             "euc-kr",
             "iso-ir-149",
             "korean",
-            "ks_c_5601-1987",
-            "ks_c_5601-1989",
+            "vs_c_5601-1987",
+            "vs_c_5601-1989",
             "ksc5601",
             "ksc_5601",
             "windows-949"

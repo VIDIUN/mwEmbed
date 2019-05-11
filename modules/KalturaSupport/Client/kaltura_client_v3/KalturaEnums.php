@@ -2220,7 +2220,7 @@ class VidiunLanguageCode
 	const KM = "km";
 	const KN = "kn";
 	const KO = "ko";
-	const KS = "ks";
+	const KS = "vs";
 	const KU = "ku";
 	const KY = "ky";
 	const LA = "la";

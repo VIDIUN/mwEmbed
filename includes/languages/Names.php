@@ -218,9 +218,9 @@
 	'krc' => 'къарачай-малкъар', # Karachay-Balkar
 	'kri' => 'Krio', # Krio
 	'krj' => 'Kinaray-a', # Kinaray-a
-	'ks' => 'कॉशुर / کٲشُر',	# Kashmiri (multiple scripts - defaults to Perso-Arabic)
-	'ks-arab' => 'کٲشُر',	# Kashmiri (Perso-Arabic script)
-	'ks-deva' => 'कॉशुर',	# Kashmiri (Devanagari script)
+	'vs' => 'कॉशुर / کٲشُر',	# Kashmiri (multiple scripts - defaults to Perso-Arabic)
+	'vs-arab' => 'کٲشُر',	# Kashmiri (Perso-Arabic script)
+	'vs-deva' => 'कॉशुर',	# Kashmiri (Devanagari script)
 	'ksh' => 'Ripoarisch',	# Ripuarian
 	'ku' => 'Kurdî',	# Kurdish (multiple scripts - defaults to Latin)
 	'ku-latn' => "Kurdî (latînî)\xE2\x80\x8E",	# Northern Kurdish (Latin script)
