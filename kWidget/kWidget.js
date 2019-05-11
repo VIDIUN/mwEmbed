@@ -660,7 +660,7 @@
 				}
 				settings.readyCallback = function (playerId) {
 					// issue a play ( since we already clicked the play button )
-					var kdp = document.getElementById(playerId);
+					var vdp = document.getElementById(playerId);
 					if (typeof orgEmbedCallback == 'function') {
 						orgEmbedCallback(playerId);
 					}

@@ -10,14 +10,14 @@
 
 	<div class="column-1-4">
 		<div class="fontSizeContainer">
-			<input type="text" id="kFontSizeVal" tabindex="-1">
+			<input type="text" id="vFontSizeVal" tabindex="-1">
 			<div><%=cvaa.locale.fontSizelabel%></div>
-			<div id="kFontSize"></div>
+			<div id="vFontSize"></div>
 		</div>
 
 		<div class="fontFamilyContainer">
 			<div><%=cvaa.locale.fontFamilylabel%></div>
-			<select id="kFontFamily">
+			<select id="vFontFamily">
 				<% $.each(cvaaOptions.family, function(idx, property){ %>
 				<option value="<%=property.prop%>"><%=property.text%></option>
 				<% }); %>
@@ -27,7 +27,7 @@
 
 		<div class="fontEdgeStyleContainer">
 			<div><%=cvaa.locale.edgeStylelabel%></div>
-			<select id="kEdgeStyle">
+			<select id="vEdgeStyle">
 				<% $.each(cvaaOptions.edgeStyle, function(idx, property){ %>
 				<option value="<%=property.prop%>"><%=property.text%></option>
 				<% }); %>
@@ -39,7 +39,7 @@
 			<ul class="colorContainer">
 				<div><%=cvaa.locale.fontColorlabel%></div>
 				<% $.each(cvaaOptions.color, function(idx, property){ %>
-				<li id="kFontColor" value="<%=property.prop%>" tabindex="0" role="button">
+				<li id="vFontColor" value="<%=property.prop%>" tabindex="0" role="button">
 					<span class=<%=property.text%>></span>
 				</li>
 				<% }); %>
@@ -48,7 +48,7 @@
 			<ul class="colorContainer">
 				<div><%=cvaa.locale.backgroundColorlabel%></div>
 				<% $.each(cvaaOptions.color, function(idx, property){ %>
-				<li id="kBackgroundColor" value="<%=property.prop%>" tabindex="0" role="button">
+				<li id="vBackgroundColor" value="<%=property.prop%>" tabindex="0" role="button">
 					<span class=<%=property.text%>></span>
 				</li>
 				<% }); %>
@@ -58,7 +58,7 @@
 			<ul class="colorContainer">
 				<div><%=cvaa.locale.windowColorlabel%></div>
 				<% $.each(cvaaOptions.color, function(idx, property){ %>
-				<li id="kWindowColor" value="<%=property.prop%>" tabindex="0" role="button">
+				<li id="vWindowColor" value="<%=property.prop%>" tabindex="0" role="button">
 					<span class=<%=property.text%>></span>
 				</li>
 				<% }); %>
@@ -67,19 +67,19 @@
 
 	<div class="column-1-4">
 		<div class="fontOpacityContainer">
-			<input type="text" id="kFontOpacityVal" tabindex="-1">
+			<input type="text" id="vFontOpacityVal" tabindex="-1">
 			<div><%=cvaa.locale.fontOplabel%></div>
-			<div id="kFontOpacity"></div>
+			<div id="vFontOpacity"></div>
 		</div>
 		<div class="backgroundOpacityContainer">
-			<input type="text" id="kBackgroundOpacityVal" tabindex="-1">
+			<input type="text" id="vBackgroundOpacityVal" tabindex="-1">
 			<div><%=cvaa.locale.backgroundOpLabel%></div>
-			<div id="kBackgroundOpacity"></div>
+			<div id="vBackgroundOpacity"></div>
 		</div>
 		<div class="windowOpacityContainer">
-			<input type="text" id="kWindowOpacityVal" tabindex="-1">
+			<input type="text" id="vWindowOpacityVal" tabindex="-1">
 			<div><%=cvaa.locale.windowOplabel%></div>
-			<div id="kWindowOpacity"></div>
+			<div id="vWindowOpacity"></div>
 		</div>
 	</div>
 

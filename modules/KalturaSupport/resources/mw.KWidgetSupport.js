@@ -174,7 +174,7 @@ mw.VWidgetSupport.prototype = {
 		});
 
 		// Example how to override embedPlayerError handler
-		if (!this.isEmbedServicesEnabled(kalturaIframePackageData.entryResult)){
+		if (!this.isEmbedServicesEnabled(vidiunIframePackageData.entryResult)){
 			embedPlayer.shouldHandlePlayerError = false;
 			embedPlayer.bindHelper( 'embedPlayerError' , function ( event , data , doneCallback ) {
 				var displayedAcError = false;
@@ -184,7 +184,7 @@ mw.VWidgetSupport.prototype = {
 					embedPlayer.handlePlayerError( data );
 					return;
 				}
-				_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.kentryid , function ( sources ) {
+				_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.ventryid , function ( sources ) {
 					// no sources, or access control error.
 					if ( !sources || sources.message ) {
 						embedPlayer.showErrorMsg( sources );

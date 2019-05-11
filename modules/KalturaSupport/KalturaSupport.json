@@ -282,12 +282,12 @@
 			"components/cvaa/cvaa.js"
 		],
 		"dependencies": [
-			"mw.KBaseComponent",
-			"mw.KBaseScreen",
+			"mw.VBaseComponent",
+			"mw.VBaseScreen",
 			"mw.TextSource",
 			"mw.Language.names"
 		],
-		"kalturaPluginName": "closedCaptions",
+		"vidiunPluginName": "closedCaptions",
 		"styles": "components/cvaa/cvaa.css",
 		"templates": "components/cvaa/cvaa.tmpl.html",
 		"messageFile": "../TimedText/TimedText.i18n.json"

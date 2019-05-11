@@ -10,14 +10,14 @@
 </head>
 <body>
 	<h1>Captions styles menu</h1>
-	<div id="kaltura_player" style="width: 660px; height: 460px;float: left;"></div>
+	<div id="vidiun_player" style="width: 660px; height: 460px;float: left;"></div>
 	<br style="clear: both;" /><br />
 	<h1> Caption Styles Api </h1>
 <pre>
 <h3>It is possible to update styles via API call, using the following object format:</h3>
- kWidget.addReadyCallback( function( playerId ){
-    var kdp = document.getElementById( playerId );
-     kaltura_player.sendNotification("newCaptionsStyles",
+ vWidget.addReadyCallback( function( playerId ){
+    var vdp = document.getElementById( playerId );
+     vidiun_player.sendNotification("newCaptionsStyles",
        {
            "fontFamily": "Courier New, Courier, Nimbus Mono L, Cutive Mono, monospace",
            "fontColor": "rgb(123, 33, 111, 0.8)",
@@ -58,8 +58,8 @@ To disable cookie for the plugin set the following flashvar to false:
 </pre>
 
 <script>
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': '_243342',
 		'uiconf_id': '20540612',
 		'entry_id': '0_uka1msg4',

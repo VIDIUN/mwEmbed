@@ -40,9 +40,9 @@
                 _this.multiStreamWelcomeSkip = true;
             });
 
-            embedPlayer.addJsListener( 'kdpReady', function(){
-                _this.KIVQModule = new mw.KIVQModule(embedPlayer, _this);
-                _this.KIVQModule.isKPlaylist = (typeof (embedPlayer.playlist) === "undefined" ) ? false : true;
+            embedPlayer.addJsListener( 'vdpReady', function(){
+                _this.VIVQModule = new mw.VIVQModule(embedPlayer, _this);
+                _this.VIVQModule.isVPlaylist = (typeof (embedPlayer.playlist) === "undefined" ) ? false : true;
 
                 if (embedPlayer.vidiunPlayerMetaData.capabilities === "quiz.quiz"){
                     if (embedPlayer.autoplay) {

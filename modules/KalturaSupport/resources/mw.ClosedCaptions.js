@@ -27,7 +27,7 @@
 			"title": gM( 'mwe-embedplayer-timed_text'),
 			"smartContainer": "qualitySettings",
 			'smartContainerCloseEvent': 'changedClosedCaptions',
-			"forceWebVTT": false, // force using webvtt on-the-fly. only for kalturaAPI captions
+			"forceWebVTT": false, // force using webvtt on-the-fly. only for vidiunAPI captions
 			"enableOptionsMenu": false,
 			"sortCaptionsAlphabetically": false
 		},

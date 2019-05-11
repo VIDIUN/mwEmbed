@@ -49,7 +49,7 @@
 		stopCastTitle: gM( 'mwe-chromecast-stopcast' ),
 
 		receiverName: '',
-		MESSAGE_NAMESPACE: 'urn:x-cast:com.kaltura.cast.player',
+		MESSAGE_NAMESPACE: 'urn:x-cast:com.vidiun.cast.player',
 
 		isNativeSDK: false, //flag for using native mobile IMA SDK
 		pendingRelated: false,
@@ -57,7 +57,7 @@
 		replay: false,
 		inSequence: false,
 		adDuration: null,
-		supportedPlugins: ['doubleClick', 'youbora', 'kAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat'],
+		supportedPlugins: ['doubleClick', 'youbora', 'vAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat'],
 		chromeLib: null,
 
 		setup: function( embedPlayer ) {
@@ -67,13 +67,13 @@
 
 			if (!this.isNativeSDK) {
 				var loadScriptInFrame = function(){
-					kWidget.appendScriptUrl("https://www.gstatic.com/cv/js/sender/v1/cast_sender.js", function(){
+					vWidget.appendScriptUrl("https://www.gstatic.com/cv/js/sender/v1/cast_sender.js", function(){
 						_this.chromeLib = window.chrome;
 					});
 				}
 				if (mw.getConfig('EmbedPlayer.IsFriendlyIframe')){
 					try{
-						kWidget.appendScriptUrl("https://www.gstatic.com/cv/js/sender/v1/cast_sender.js", function(){
+						vWidget.appendScriptUrl("https://www.gstatic.com/cv/js/sender/v1/cast_sender.js", function(){
 							try{
 								_this.chromeLib = window.top.chrome;
 							}catch(e){
@@ -134,7 +134,7 @@
 			});
 
 			$( this.embedPlayer).bind('onChangeMedia', function(e){
-				_this.sendMessage({'type': 'changeMedia', 'entryId': _this.embedPlayer.kentryid});
+				_this.sendMessage({'type': 'changeMedia', 'entryId': _this.embedPlayer.ventryid});
 				_this.savedPosition = 0;
 				_this.pendingReplay = false;
 				_this.pendingRelated = false;
@@ -600,7 +600,7 @@
 		},
 
 		buildUdrmLicenseUri: function(mimeType) {
-			var licenseServer = mw.getConfig('Kaltura.UdrmServerURL');
+			var licenseServer = mw.getConfig('Vidiun.UdrmServerURL');
 			var licenseParams = this.getPlayer().mediaElement.getLicenseUriComponent();
 			var licenseUri = null;
 
