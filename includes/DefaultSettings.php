@@ -37,7 +37,7 @@ date_default_timezone_set('UTC');
 $wgServerPort = (($_SERVER['SERVER_PORT']) != '80' && $_SERVER['SERVER_PORT'] != '443')?':'.$_SERVER['SERVER_PORT']:'';
 $wgServer = $wgHTTPProtocol . '://' . $_SERVER['SERVER_NAME'] .$wgServerPort. dirname( dirname( $_SERVER['SCRIPT_NAME'] ) ) .'/';
 
-$psRelativePath = '../kwidget-ps/';
+$psRelativePath = '../vwidget-ps/';
 
 
 // By default set $wgScriptPath to empty
@@ -252,22 +252,22 @@ if( is_file( $wgLocalSettingsFile ) ){
 	require_once( $wgLocalSettingsFile );
 }
 
-if( isset( $_GET['pskwidgetpath'] ) ){
-	$psRelativePath = htmlspecialchars( $_GET['pskwidgetpath'] );
+if( isset( $_GET['psvwidgetpath'] ) ){
+	$psRelativePath = htmlspecialchars( $_GET['psvwidgetpath'] );
 }
 // The html5-ps settings file path
-$wgKalturaPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
+$wgVidiunPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
 
 // The html5-ps modules dir
-$wgKalturaPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
+$wgVidiunPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
 
-// Enable every module in the "ps/modules" folder of kwidget-ps
-$wgKwidgetPsEnabledModules = array();
-if (!empty($wgKalturaPSHtml5ModulesDir)){
-    $dPs = dir( $wgKalturaPSHtml5ModulesDir );
+// Enable every module in the "ps/modules" folder of vwidget-ps
+$wgVwidgetPsEnabledModules = array();
+if (!empty($wgVidiunPSHtml5ModulesDir)){
+    $dPs = dir( $wgVidiunPSHtml5ModulesDir );
     while (false !== ($entryPs = $dPs->read())) {
-        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgKwidgetPsEnabledModules ) ){
-            $wgKwidgetPsEnabledModules[] = $entryPs;
+        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgVwidgetPsEnabledModules ) ){
+            $wgVwidgetPsEnabledModules[] = $entryPs;
         }
     }
 }

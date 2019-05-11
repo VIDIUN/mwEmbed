@@ -692,7 +692,7 @@
 				this.getMedialistHeaderComponent().height(this.getConfig('horizontalHeaderHeight'));
 			}
 			if ( this.getConfig( 'showControls' ) === true && !this.embedPlayer.isMobileSkin() ) {
-				this.getMedialistHeaderComponent().prepend( '<div class="playlistControls k-' + this.getLayout() + '"><div class="prevBtn playlistBtn"></div><div class="nextBtn playlistBtn"></div></div>' );
+				this.getMedialistHeaderComponent().prepend( '<div class="playlistControls v-' + this.getLayout() + '"><div class="prevBtn playlistBtn"></div><div class="nextBtn playlistBtn"></div></div>' );
 				this.getMedialistHeaderComponent().find( ".playlistControls .nextBtn" ).on( "click", function () {
 					_this.playNext(true)
 				} );

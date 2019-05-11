@@ -114,7 +114,7 @@ onload = function () {
 		} else if (payload['type'] === 'load') {
 			setMediaManagerEvents();
 		} else if (payload['type'] === 'notification') {
-			kdp.sendNotification(payload['event'], [payload['data']]); // pass notification event to the player
+			vdp.sendNotification(payload['event'], [payload['data']]); // pass notification event to the player
 		} else if (payload['type'] === 'setLogo') {
 			document.getElementById('logo').style.backgroundImage = "url(" + payload['logo'] + ")";
 		} else if (payload['type'] === 'embed' && !playerInitialized) {
@@ -176,7 +176,7 @@ onload = function () {
 									}
 									messageBus.broadcast(msg);
 								});
-								kdp.kBind("SourceSelected", function(source){
+								vdp.vBind("SourceSelected", function(source){
 									mimeType = source.mimeType;
 									src = source.src;
 								});

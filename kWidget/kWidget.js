@@ -387,12 +387,12 @@
 
 			if (this.isMobileDevice()){
 				if (settings.flashvars['layout']){
-					settings.flashvars.layout['skin'] = "kdark";
+					settings.flashvars.layout['skin'] = "vdark";
 				}
 			}
 
-			if ( document.URL.indexOf('forceKalturaNativeComponentPlayer') !== -1 ||
-				document.URL.indexOf('forceKalturaNative') !== -1) {
+			if ( document.URL.indexOf('forceVidiunNativeComponentPlayer') !== -1 ||
+				document.URL.indexOf('forceVidiunNative') !== -1) {
 				settings.flashvars["nativeCallout"] = { plugin: true }
 			}
 

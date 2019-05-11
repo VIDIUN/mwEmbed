@@ -504,7 +504,7 @@ mw.VWidgetSupport.prototype = {
 			playerData.meta.partnerData["isLive"] == "true" ) {
 			embedPlayer.setLive( true );
 		}
-		embedPlayer.setKalturaConfig('originalProxyData', embedPlayer.getKalturaConfig('proxyData'));
+		embedPlayer.setVidiunConfig('originalProxyData', embedPlayer.getVidiunConfig('proxyData'));
 		//Set proxyData response data
 		embedPlayer.setVidiunConfig( 'proxyData', playerData.meta.partnerData);
 	},

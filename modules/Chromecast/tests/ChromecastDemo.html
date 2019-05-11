@@ -18,12 +18,12 @@
 		'wid': '_243342',
 		'uiconf_id' : '21099702',
         'readyCallback': function(playerid){
-            var kdp = document.getElementById(playerid);
+            var vdp = document.getElementById(playerid);
 
             // add support for inbound closed caption tracks
-            kdp.kBind("chromecastCaptionsReceived", function(languages){
+            vdp.vBind("chromecastCaptionsReceived", function(languages){
                 for (var language in languages) break;                     // grab the first caption from the captions hash table
-                kdp.sendNotification("chromecastSelectCaption", language); // turn on this caption in the Chromecast receiver
+                vdp.sendNotification("chromecastSelectCaption", language); // turn on this caption in the Chromecast receiver
             });
 
         },
@@ -33,7 +33,7 @@
 				'applicationID': 'C43947A1',
 				'debugReceiver': false,
 				'receiverLogo': true,
-				'useKalturaPlayer': true,
+				'useVidiunPlayer': true,
                 'debugKalturaPlayer': false ,
                 'defaultConfig':true,
                 'uiconfid':null

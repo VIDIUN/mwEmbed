@@ -14,7 +14,7 @@
 			'order': 7,
 			'visible': false,
 			'align': "right",
-			'applicationID': "276999A7", // DB6462E9: Chromecast default receiver, 276999A7: Kaltura custom receiver supporting DRM, HLS and smooth streaming
+			'applicationID': "276999A7", // DB6462E9: Chromecast default receiver, 276999A7: Vidiun custom receiver supporting DRM, HLS and smooth streaming
 			'showTooltip': true,
 			'tooltip': gM('mwe-chromecast-chromecast'),
 			'title': gM('mwe-chromecast-chromecast'),
@@ -59,7 +59,7 @@
 		inSequence: false,
 		adDuration: null,
 		sendPlayerReady: false, // after changing media we need to send the playerReady event to the chromecast receiver as it doesn't reload the player there
-		supportedPlugins: ['doubleClick', 'youbora', 'kAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat'],
+		supportedPlugins: ['doubleClick', 'youbora', 'vAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat'],
 
 		setup: function( embedPlayer ) {
 			var _this = this;
@@ -295,9 +295,9 @@
 				this.sendMessage({'type': 'license', 'value': licenseUrl});
 				this.log("set license URL to: " + licenseUrl);
 			}
-			if (this.getConfig("useKalturaPlayer") === true){
+			if (this.getConfig("useVidiunPlayer") === true){
 				var flashVars = this.getFlashVars();
-				this.sendMessage({'type': 'embed', 'lib': kWidget.getPath(), 'publisherID': this.embedPlayer.kwidgetid.substr(1), 'uiconfID': this.getConfig('uiconfid') || this.embedPlayer.kuiconfid, 'entryID': this.embedPlayer.kentryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars});
+				this.sendMessage({'type': 'embed', 'lib': vWidget.getPath(), 'publisherID': this.embedPlayer.vwidgetid.substr(1), 'uiconfID': this.getConfig('uiconfid') || this.embedPlayer.vuiconfid, 'entryID': this.embedPlayer.ventryid, 'debugKalturaPlayer': this.getConfig("debugKalturaPlayer"), 'flashVars': flashVars});
 				this.displayMessage(gM('mwe-chromecast-loading'));
 			} else {
 				this.sendMessage({'type': 'load'});
@@ -360,8 +360,8 @@
 
 			var fv = {};
 			this.supportedPlugins.forEach( function ( plugin ) {
-				if ( !$.isEmptyObject( _this.embedPlayer.getKalturaConfig( plugin ) ) ) {
-					fv[plugin] = _this.embedPlayer.getKalturaConfig( plugin );
+				if ( !$.isEmptyObject( _this.embedPlayer.getVidiunConfig( plugin ) ) ) {
+					fv[plugin] = _this.embedPlayer.getVidiunConfig( plugin );
 				}
 			} );
 			// add support for custom proxyData for OTT app developers
@@ -381,15 +381,15 @@
 				recursiveIteration( proxyData );
 				fv['proxyData'] = proxyData;
 			} else {
-				var data  = _this.embedPlayer.getKalturaConfig('originalProxyData');
+				var data  = _this.embedPlayer.getVidiunConfig('originalProxyData');
 				if (!$.isEmptyObject(data)) {
 					fv['proxyData'] = data;
 				}
 			}
 
-			// add support for passing ks
-			if ( this.embedPlayer.getFlashvars( "ks" ) ) {
-				fv["ks"] = this.embedPlayer.getFlashvars( "ks" );
+			// add support for passing vs
+			if ( this.embedPlayer.getFlashvars( "vs" ) ) {
+				fv["vs"] = this.embedPlayer.getFlashvars( "vs" );
 			}
 			if (this.getConfig('defaultConfig')) {
 				fv['controlBarContainer'] = {hover: true};
