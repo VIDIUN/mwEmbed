@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Resizable Player</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../modules/MwEmbedSupport/jquery/jquery.ui.touchPunch.js"></script>
+	<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+	<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" href="resources/displaySizesColors.css" />
+</head>
+<body>
+<h2>Resizable many active plugins</h2>
+Also moves the control bar to take up available space till min size.  
+<br />
+	<h3>Display Priority Key: <span class="display-low" style="color:#FFF">Low</span>
+	<span class="display-medium" style="color:#FFF">Medium</span> 
+	<span class="display-high" style="color:#FFF">High</span> : Press + / - to change component sizes</h3>
+	<div id="resizable" style="width: 1000px; height: 333px; padding: 1.5em;" class="ui-widget-content">
+		<div id="playerTarget" style="width: 100%; height: 100%;"></div>
+	</div>
+	<script>
+		var vdp;
+		var addedComponets = {
+			'scrubber':{
+				'plugin':true
+			},
+			'titleLabel': {
+				'plugin': true,
+				"align": "left",
+				"text": '{mediaProxy.entry.name}'
+			},
+			'watermark': {
+				'plugin' : "true",
+				'watermarkPath' : "http://www.vidiun.com/content/uiconf/vidiun/vmc/appstudio/vdp3/exampleWatermark.png",
+				'watermarkClickPath' : "http://www.vidiun.com/",
+				'watermarkPosition' : "bottomLeft",
+				'padding' : null,
+			},
+			'volumeControl':{
+				"pinVolumeBar": true
+			},
+			'infoScreen':{
+				'plugin': true,
+				'parent': "controlsContainer"
+			},
+			'related': {
+				'plugin': true,
+				'playlistId': "1_zx9gv0bi",
+				'autoContinueTime': 5,
+				'parent': "controlsContainer"
+			},
+			'share':{
+				'plugin' : true,
+				'parent': "controlsContainer"
+			},
+			"liveCore":{
+				"plugin":true,
+				"disableLiveCheck":true
+			},
+	        "liveStatus":{"plugin":true},
+			/* LC player: */
+			'streamSelector':{
+				'plugin' : true,
+				'parent': "controlsContainer"
+			},
+            'dualScreen': {'plugin': true,},
+            'streamSelector': {'plugin': true},
+            'sideBarContainer': {
+                'plugin': true,
+                'position': 'left',
+                'clickToClose': false
+            },
+            'chapters': {
+                'plugin': true,
+                'layout': 'vertical',
+                'thumbnailWidth': 80,
+                'thumbnailRotator': false
+            },
+            /*playlist */
+            'playlistAPI': {
+				'plugin' : true,
+				'includeInLayout': true,
+				'vpl0Id': "1_zx9gv0bi",
+				'vpl0Name': "Most popular",
+				'autoContinue': true,
+				'autoPlay': false,
+				'loop': false
+			},
+            
+			'nextPrevBtn': {'plugin': true},
+			
+			'chromecast':{'plugin': true},
+			'sourceSelector':{'plugin': true},
+			'closedCaptions':{'plugin': true},
+			'moderation':{'plugin': true},
+			'captureThumbnail':{'plugin': true},
+			'playbackRateSelector':{'plugin': true},
+		}
+		var fv = Object.create( addedComponets );
+		// add iframe to flashvars: 
+		fv["IframeCustomPluginCss1"] = "resources/displaySizesColors.css";
+		vWidget.embed( 'playerTarget', {
+			"wid": "_1877111",
+	        "uiconf_id": "27949061",
+			'entry_id' : '0_fzhw8tst',
+			'flashvars': fv,
+			'readyCallback': function( playerId ){
+				vdp = $('#' + playerId )[0];
+				
+				// create hide show API example: 
+				$.each(addedComponets, function(componentName, componentConfig){
+					$('#complist').append(
+						$('<li>').text( componentName + ': ')
+						.append(
+							$('<a href="#">').text('hide').click(function(){
+								vdp.setVDPAttribute( componentName, 'visible', false);
+								return false;
+							}),
+							$('<span>').text( ' | ' ),
+							$('<a href="#">').text('show').click(function(){
+								vdp.setVDPAttribute( componentName, 'visible', true)
+								return false;
+							})
+						)
+					)
+				})
+			}
+		});
+		
+		$(window).keypress(function(e){
+			var bodyElement =  $('#playerTarget iframe').get(0).contentWindow.document.body;
+
+			var fontSize = parseInt(bodyElement.style.fontSize) || 13;
+
+			switch(e.keyCode){
+				case  45://-
+					fontSize--;
+					break
+				case 61://=
+					fontSize++;
+					break;
+			}
+			bodyElement.style.fontSize = fontSize +"px";
+			$(bodyElement).find('#playerTarget')[0].doUpdateLayout();
+		});
+	</script>
+	<script>
+	$(function() {
+		$( "#resizable" ).resizable();
+	});
+	</script>
+<br />
+<h3>Hide show components via manual API calls:</h3>
+<pre class="prettyprint linenums">
+vdp.setVDPAttribute('pluginName', 'visible', false);
+</pre>
+<ul id='complist'></ul>
+</body>
+</html>

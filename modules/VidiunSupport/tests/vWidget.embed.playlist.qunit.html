@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>vWidget Playlist test</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+window.inlineReadyCallbackCalled = false;
+
+function jsVidiunPlayerTest( videoId ){
+	
+	var vdp = $( '#myVideoTarget' )[0];
+	// Name this module
+	module( "vWidget Playlist" );
+	
+
+	asyncTest("Inline readyCallback fired", function(){
+		vidiunQunitWaitForPlayer(function(){
+			equal( window.inlineReadyCallbackCalled, videoId, "ReadyCallback fired with id:" + videoId );
+			testAutoPlay();
+			// done with async
+			start();
+		});
+	});
+	
+	function testAutoPlay(){
+		asyncTest("AutoPlay flashvar passing", function(){
+			equal( vdp.evaluate('{configProxy.flashvars.autoPlay}'), false , 'AutoPlay set to false');
+			start();
+		});
+	}
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> vWidget Playlist embed </h2>
+
+vWidget can also easily be used to embed playlists, simply pass along playlist plugin configuration as flashvars: <br>
+<pre class="prettyprint linenums">
+&lt;div id=&quot;myEmbedTarget&quot; style=&quot;height:365px;width:650px&quot;&gt;
+&lt;!--  SEO and video metadata go here --&gt;<br/>	&lt;span property=&quot;dc:description&quot; content=&quot;test folgers coffe&quot;&gt;&lt;/span&gt;<br/>	&lt;span property=&quot;media:title&quot; content=&quot;FolgersCoffe.mpeg&quot;&gt;&lt;/span&gt;<br/>	&lt;span property=&quot;media:width&quot; content=&quot;400&quot;&gt;&lt;/span&gt;<br/>	&lt;span property=&quot;media:height&quot; content=&quot;300&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;script src=&quot;{{HTML5LibraryURL}}&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	vWidget.embed({
+		'targetId': 'myVideoTarget',
+		'wid': '_243342',
+		'uiconf_id' : '25975211',
+		'flashvars': {
+			'playlistAPI':{
+				'plugin': true,
+				'includeInLayout': true,
+				'autoPlay': false,
+				'autoInsert':true,
+				'vpl0Name' : 'test 4 item playlist',
+				'vpl0Url' : 'http://www.vidiun.com/index.php/partnerservices2/executeplaylist?uid=&partner_id=243342&subp_id=24334200&format=8&vs={vs}&playlist_id=0_q79jh71b'
+			}
+		}
+	});
+&lt;/script&gt;
+</pre>
+
+<span id="playbackModeSelector"></span>
+<br>
+
+<div id="myVideoTarget" style="height:365px;width:650px">
+	<!--  SEO and video metadata go here -->
+	<span property="dc:description" content="test folgers coffe"></span>
+	<span property="media:title" content="FolgersCoffe.mpeg"></span>
+	<span property="media:width" content="400"></span>
+	<span property="media:height" content="300"></span>
+</div>
+<script>
+	window['doPlayCallback'] = function( playerId ){
+		console.log( 'vWidget doPlayCallback ' + playerId );
+		//$('body').append( '<div>started playback</div>' );
+	};
+	vWidget.embed({
+		'targetId': 'myVideoTarget',
+		'wid': '_243342',
+		'uiconf_id' : '25975211',
+		'flashvars': {
+			'playlistAPI':{
+				'plugin': true,
+				'includeInLayout': true,
+				'autoPlay': false,
+				'autoInsert':true,
+				'vpl0Name' : 'test 4 item playlist',
+				'vpl0Url' : 'http://www.vidiun.com/index.php/partnerservices2/executeplaylist?uid=&partner_id=243342&subp_id=24334200&format=8&vs={vs}&playlist_id=0_q79jh71b'
+			}
+		},
+		'readyCallback': function( playerId ){
+			console.log( "vWidget Playlist ready: " + playerId );
+			var vdp = $('#' + playerId ).get(0);
+			vdp.addJsListener( 'doPlay', 'doPlayCallback');
+			window.inlineReadyCallbackCalled = playerId;
+		}
+	});
+</script>
+<p><p>
+<!-- 
+<b> Slow loading document.write scripts </b>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=0"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=1"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=2"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=3"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=4"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=5"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=6"></script>
+ -->
+ 
+</body>
+</html>
