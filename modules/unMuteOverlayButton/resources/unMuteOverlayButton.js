@@ -2,7 +2,7 @@
 
     "use strict";
 
-    mw.PluginManager.add('unMuteOverlayButton', mw.KBaseComponent.extend({
+    mw.PluginManager.add('unMuteOverlayButton', mw.VBaseComponent.extend({
             defaultConfig: {
                 'parent': 'videoHolder',
                 'order': 1,
@@ -23,7 +23,7 @@
                     return !!(mw.isDesktopSafariVersionGreaterThan(11) || mw.isChromeVersionGreaterThan(66) || mw.isFirefoxVersionGreaterThan(66));
                 };
                 var isAutoplayConfigured = function() {
-                    return !!(mw.getConfig('autoPlay') || _this.getPlayer().getRawKalturaConfig('playlistAPI', 'autoPlay'));
+                    return !!(mw.getConfig('autoPlay') || _this.getPlayer().getRawVidiunConfig('playlistAPI', 'autoPlay'));
                 };
                 if (mw.getConfig('thumbEmbedOrigin') || mw.getConfig('autoMute')) {
                     return false;

@@ -9,17 +9,17 @@
 </head>
 <body>
 <p style="width:600px">HLS</p>
-<div id="kdp" style="width:600px;height:370px;float:left"></div>
+<div id="vdp" style="width:600px;height:370px;float:left"></div>
 <script>
-	kWidget.embed({
-		"targetId": "kdp",
+	vWidget.embed({
+		"targetId": "vdp",
         "wid": "_2196781",
         "uiconf_id": "12905712",
         "entry_id": "1_afvj3z0u",
 		"flashvars": {
 //			'EmbedPlayer.EnableMobileSkin': true,
 //            'EmbedPlayer.WebKitPlaysInline':true,
-			"Kaltura.LeadHLSOnAndroid": true,
+			"Vidiun.LeadHLSOnAndroid": true,
 			'disableHLSOnJs':false,
 			'video360': {
 				'plugin': true,
@@ -43,9 +43,9 @@
 			}
 		}
 	    ,readyCallback: function(){
-		    var kdp = document.getElementById('kdp');
-		    kdp.kBind( 'playerReady', function () {
-			    kdp.sendNotification("loadExternalClosedCaptions", {
+		    var vdp = document.getElementById('vdp');
+		    vdp.vBind( 'playerReady', function () {
+			    vdp.sendNotification("loadExternalClosedCaptions", {
 				    languages: [{
 					    "language": "Hebrew",
 					    "languageCode": "he",

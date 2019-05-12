@@ -61,7 +61,7 @@
 					this.target.innerHTML = '' +
 						'<div style="position: relative; width: 100%; height: 100%;">' +
 						'<img src="' + thumbUrl  + '" >' +
-						'<div role="button" class="kWidgetCentered kWidgetPlayBtn" ' +
+						'<div role="button" class="vWidgetCentered vWidgetPlayBtn" ' +
 						'id="' + targetId + '_playBtn"' +
 						'></div></div>';
 					// Add a click binding to do the really embed:

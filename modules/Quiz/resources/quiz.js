@@ -7,7 +7,7 @@
     $.cpObject = {};
     $.quizParams = {};
     $.changedMedia = 0;
-    mw.PluginManager.add('quiz', mw.KBaseScreen.extend({
+    mw.PluginManager.add('quiz', mw.VBaseScreen.extend({
         defaultConfig: {
             parent: "controlsContainer",
             order: 5,
@@ -51,7 +51,7 @@
 
 
 
-            embedPlayer.addJsListener( 'kdpReady', function(){
+            embedPlayer.addJsListener( 'vdpReady', function(){
                 $.changedMedia ++;
                 _this.destroy();
                 // [FEC-6441: Quiz plugin damaged when switching between dual video options]
@@ -61,8 +61,8 @@
                     return;
                 }
 
-                _this.KIVQModule = new mw.KIVQModule(embedPlayer, _this);
-                _this.KIVQModule.isKPlaylist = (typeof (embedPlayer.playlist) === "undefined" ) ? false : true;
+                _this.VIVQModule = new mw.VIVQModule(embedPlayer, _this);
+                _this.VIVQModule.isVPlaylist = (typeof (embedPlayer.playlist) === "undefined" ) ? false : true;
 
                 if (embedPlayer.vidiunPlayerMetaData.capabilities === "quiz.quiz"){
                     if (embedPlayer.autoplay) {
@@ -90,7 +90,7 @@
                         embedPlayer.addPlayerSpinner();
                     };
 
-                    _this.KIVQModule.checkCuepointsReady(function(){
+                    _this.VIVQModule.checkCuepointsReady(function(){
                         _this.addBindings();
 
                         if(_this.VIVQModule.isVPlaylist){
@@ -135,8 +135,8 @@
             if (!_this.multiStreamWelcomeSkip){
                 this.bind('prePlayAction'+_this.VIVQModule.bindPostfix, function (e, data) {
                     mw.log("Quiz: Bind PrePlay");
-                    if(!_this.KIVQModule.isKPlaylist){
-                        if(_this.getPlayer().firstPlay && _this.KIVQModule.showWelcomePage) {
+                    if(!_this.VIVQModule.isVPlaylist){
+                        if(_this.getPlayer().firstPlay && _this.VIVQModule.showWelcomePage) {
                             mw.log("Quiz: Welcome");
                             data.allowPlayback = false;
                             _this.enablePlayDuringScreen = false;
@@ -170,10 +170,10 @@
                 }
             });
 
-            embedPlayer.bindHelper('seeked'+_this.KIVQModule.bindPostfix, function () {
-                // KMS-13599
-                // Let the mw.KCuePoints 'seeked' handler run before
-                // in order to make sure that the 'KalturaSupport_CuePointReached' event,
+            embedPlayer.bindHelper('seeked'+_this.VIVQModule.bindPostfix, function () {
+                // VMS-13599
+                // Let the mw.VCuePoints 'seeked' handler run before
+                // in order to make sure that the 'VidiunSupport_CuePointReached' event,
                 // triggered by the 'seeked' event, is not handled by the plugin
                 setTimeout(function () {
                     _this.isSeekingIVQ = false;
@@ -262,15 +262,15 @@
 
         retakeSuccess : function(data){
             var _this = this;
-            if(data.objectType === "KalturaAPIException"){
-                _this.KIVQModule.errMsg('Error', data);
+            if(data.objectType === "VidiunAPIException"){
+                _this.VIVQModule.errMsg('Error', data);
             }else{
-                // reset quiz and KIVQModule
+                // reset quiz and VIVQModule
                 this.destroy();
-                this.KIVQModule.destroy();
-                this.KIVQModule.setupQuiz().then(function(){
+                this.VIVQModule.destroy();
+                this.VIVQModule.setupQuiz().then(function(){
                     // new quiz data is now loaded - proceed with CPs loading 
-                    _this.KIVQModule.getQuestionsAndAnswers(function(){
+                    _this.VIVQModule.getQuestionsAndAnswers(function(){
                         _this.embedPlayer.stopPlayAfterSeek = false;
                         _this.embedPlayer.seek(0,false);
                         _this.ivqHideScreen()
@@ -281,7 +281,7 @@
 
         retake : function(){
             var _this = this;
-            this.KIVQModule.retake(function(data){
+            this.VIVQModule.retake(function(data){
                 // retake successful 
                 _this.retakeSuccess(data);
             });
@@ -291,7 +291,7 @@
         ssWelcome: function () {
             var _this = this;
             _this.ivqShowScreen();
-            _this.KIVQScreenTemplate.tmplWelcome();
+            _this.VIVQScreenTemplate.tmplWelcome();
             $(".welcome").html(gM('mwe-quiz-welcome'));
                 if ($.quizParams.allowDownload ) {
                     $(".pdf-download").prepend('<div class="pdf-download-img">' +
@@ -318,11 +318,11 @@
                 });
              
             // add title to ivq welcome container for accessibility
-            $(".ivqContainer").attr("title", "Kaltura Video Quiz "+_this.embedPlayer.evaluate( '{mediaProxy.entry.name}' ));
+            $(".ivqContainer").attr("title", "Vidiun Video Quiz "+_this.embedPlayer.evaluate( '{mediaProxy.entry.name}' ));
             // make welcome "continue" button accessible
             $(".confirm-box").html(gM('mwe-quiz-continue')).show().attr("tabindex", 5).attr("title", "Click to start the quiz").on('keydown', _this.keyDownHandler)
                 .on('click', function () {
-                    _this.KIVQModule.checkIfDone(-1);
+                    _this.VIVQModule.checkIfDone(-1);
                 }).focus().attr('id', 'welcome-continue-button');
             // verify focus in IE
             document.getElementById('welcome-continue-button').focus();
@@ -330,7 +330,7 @@
             if ($.quizParams.attemptsAllowed > 0){
                 var localedText = gM('mwe-quiz-available-tries');
                 var availableRetakes = $.quizParams.attemptsAllowed
-                var retakes = _this.KIVQModule.retakeNumber; // 0 is the 1st try, 1 is the first retake ... 
+                var retakes = _this.VIVQModule.retakeNumber; // 0 is the 1st try, 1 is the first retake ... 
                 if(availableRetakes <= retakes ){
                     localedText = "";
                 }else{
@@ -340,7 +340,7 @@
                         attempts = availableRetakes
                     }
                     // handle post 1st submit (we need to decrease by 1)
-                    if(this.KIVQModule.quizSubmitted ){
+                    if(this.VIVQModule.quizSubmitted ){
                         attempts--;
                     }
                     // edge case - when we have 1 attempts - show nothing (1 attempt is the last attempt) 
@@ -420,11 +420,11 @@
         submitOpenQuestion: function(cuepoint){
             // we have the cuepoint and the value 
             cuepoint.openAnswer = this.embedPlayer.getInterface().find(".open-question-textarea").val();
-            this.KIVQModule.submitAnswer(cuepoint.key,null,cuepoint.openAnswer);
+            this.VIVQModule.submitAnswer(cuepoint.key,null,cuepoint.openAnswer);
             this.selectedAnswer = null;
             var _this = this;
             setTimeout(function(){
-                _this.KIVQModule.checkIfDone(cuepoint.key)
+                _this.VIVQModule.checkIfDone(cuepoint.key)
             },
             _this.postAnswerTimer);
         },
@@ -468,12 +468,12 @@
             // OPEN QUESTION
             var interfaceElement = this.embedPlayer.getInterface();
 
-            if(cPo.questionType == this.KIVQModule.QUESTIONS_TYPE.OPEN_QUESTION){
+            if(cPo.questionType == this.VIVQModule.QUESTIONS_TYPE.OPEN_QUESTION){
                 this.buildOpenQuestion(cPo);
             }
 
             if (cPo.isAnswerd){
-                if(cPo.questionType == this.KIVQModule.QUESTIONS_TYPE.OPEN_QUESTION){
+                if(cPo.questionType == this.VIVQModule.QUESTIONS_TYPE.OPEN_QUESTION){
                     // this is an open question - we need to fill the value from the coresponding answer CP
                     // and ,anipulate the UI to support changes. 
                     if(cPo.openAnswer){
@@ -499,7 +499,7 @@
             }
             else {
                 if (_this.isReflectionPoint(cPo)) {
-                    _this.KIVQModule.submitAnswer(questionNr,0);
+                    _this.VIVQModule.submitAnswer(questionNr,0);
                 }
                 _this._selectAnswerConroller(cPo, questionNr);
             }
@@ -557,11 +557,11 @@
             interfaceElement.find("#open-question-change-answer").text(gM('mwe-quiz-open-question-change-answer'));
 
             // enter update-mode only if we have a previous answer value on the CP, AND allowed to change answer AND this quiz was not submitted yet
-            if ($.quizParams.allowAnswerUpdate && !this.KIVQModule.quizSubmitted && cPo.openAnswer ) {
+            if ($.quizParams.allowAnswerUpdate && !this.VIVQModule.quizSubmitted && cPo.openAnswer ) {
                 // update open question mode 
                 interfaceElement.find("#open-question-change-answer").show();
                 interfaceElement.find(".open-question-textarea").removeAttr("disabled");
-            }else if(!this.KIVQModule.quizSubmitted && !cPo.openAnswer ){
+            }else if(!this.VIVQModule.quizSubmitted && !cPo.openAnswer ){
                 // Normal mode 
                 // We have not submitted quiz yet but user had not filled this question yet - keep textarea enabled
                 interfaceElement.find("#open-question-change-answer").hide(); 
@@ -576,21 +576,21 @@
 
         getClassByCPType: function(cpTypeId){
             switch (cpTypeId) {
-                case this.KIVQModule.QUESTIONS_TYPE.TRUE_FALSE:
+                case this.VIVQModule.QUESTIONS_TYPE.TRUE_FALSE:
                     return 'true-false-question';
-                case this.KIVQModule.QUESTIONS_TYPE.OPEN_QUESTION:
+                case this.VIVQModule.QUESTIONS_TYPE.OPEN_QUESTION:
                     return 'open-question';
-                case this.KIVQModule.QUESTIONS_TYPE.REFLECTION_POINT:
+                case this.VIVQModule.QUESTIONS_TYPE.REFLECTION_POINT:
                     return 'reflection-point-question';
-                case this.KIVQModule.QUESTIONS_TYPE.MULTIPLE_ANSWER_QUESTION:
+                case this.VIVQModule.QUESTIONS_TYPE.MULTIPLE_ANSWER_QUESTION:
                     return 'multiple-answer-question';
-                case this.KIVQModule.QUESTIONS_TYPE.FILL_IN_BLANK:
+                case this.VIVQModule.QUESTIONS_TYPE.FILL_IN_BLANK:
                     return 'fill-in-blank-question';
-                case this.KIVQModule.QUESTIONS_TYPE.HOT_SPOT:
+                case this.VIVQModule.QUESTIONS_TYPE.HOT_SPOT:
                     return 'hot-spot-question';
-                case this.KIVQModule.QUESTIONS_TYPE.GO_TO:
+                case this.VIVQModule.QUESTIONS_TYPE.GO_TO:
                     return 'go-to-question';
-                case this.KIVQModule.QUESTIONS_TYPE.MULTIPLE_CHOICE_ANSWER:
+                case this.VIVQModule.QUESTIONS_TYPE.MULTIPLE_CHOICE_ANSWER:
                 default:
                     return 'multiple-choice-answer-question';
             }
@@ -611,7 +611,7 @@
                 )
             ).on('click', function () {
                     _this.embedPlayer.seek(0,true);
-                    _this.KIVQModule.continuePlay();
+                    _this.VIVQModule.continuePlay();
                 }).on('keydown', _this.keyDownHandler);
 
             $(".submit-button").append(
@@ -622,7 +622,7 @@
             ).on('click', function () {
                     $(this).off('click');
                     $(this).html(gM('mwe-quiz-plsWait'));
-                    _this.KIVQModule.setSubmitQuiz();
+                    _this.VIVQModule.setSubmitQuiz();
                 }).on('keydown', _this.keyDownHandler);
         },
         ssSubmitted: function (score) {
@@ -654,14 +654,14 @@
 
                     $(document).off('click','.q-box:not(.reflection-point-question)')
                         .on('click', '.q-box:not(.reflection-point-question)', function () {
-                            _this.KIVQScreenTemplate.tmplReviewAnswer();
+                            _this.VIVQScreenTemplate.tmplReviewAnswer();
                             _this.ssReviewAnswer(parseInt($(this).attr('id')));
                         })
                         .attr({'tabindex': '5' , 'role': 'button','title': 'click to view the question and your answer'});
 
                         $(document).off('click','.q-box-false:not(.reflection-point-question)')
                         .on('click', '.q-box-false:not(.reflection-point-question)', function () {
-                            _this.KIVQScreenTemplate.tmplReviewAnswer();
+                            _this.VIVQScreenTemplate.tmplReviewAnswer();
                             _this.ssReviewAnswer(parseInt($(this).attr('id')));
                         })
                         .attr({'tabindex': '5' , 'role': 'button','title': 'click to view the question and your answer'})
@@ -679,7 +679,7 @@
             }
 
             var retakesTotal = $.quizParams.attemptsAllowed;
-            var currentRetake = _this.KIVQModule.retakeNumber;
+            var currentRetake = _this.VIVQModule.retakeNumber;
             var localedText = gM('mwe-quiz-retake-btn'); //  Locale : "Retake (|X|/|Y|)"
             
             if( !retakesTotal ){
@@ -698,9 +698,9 @@
                 localedText = localedText.split("|Y|").join(retakesTotal); // assign total 
                 summaryText = summaryText.split("|attempt|").join(currentRetake);
                 summaryText = summaryText.split("|attempts|").join(retakesTotal);
-                var score = Math.round(_this.KIVQModule.calculatedScore * 100);
+                var score = Math.round(_this.VIVQModule.calculatedScore * 100);
                 summaryScoreText = summaryScoreText.split("|score|").join(score);
-                summaryScoreText = summaryScoreText.split("|scoreType|").join(gM('mwe-quiz-retake-scoretype-'+_this.KIVQModule.scoreType));
+                summaryScoreText = summaryScoreText.split("|scoreType|").join(gM('mwe-quiz-retake-scoretype-'+_this.VIVQModule.scoreType));
                 $(".retake-summary-text").text(summaryText);
                 if ($.quizParams.showGradeAfterSubmission){
                     $(".retake-summary-score-text").text(summaryScoreText);
@@ -731,7 +731,7 @@
                                 _this.embedPlayer.seek(0, false);
                             }
                             if (_this.getConfig("autoContinue")) {
-                                _this.KIVQModule.continuePlay();
+                                _this.VIVQModule.continuePlay();
                             }
                         });
                     }
@@ -752,7 +752,7 @@
                 _this.ssDisplayWhy(selectedQuestion)
             }
             $(".reviewAnswerPrefix").append(gM('mwe-quiz-question-number'));
-            $(".reviewAnswerNr").append(_this.KIVQModule.i2q(selectedQuestion));
+            $(".reviewAnswerNr").append(_this.VIVQModule.i2q(selectedQuestion));
             //$(".theQuestion").html(gM('mwe-quiz-q') + "  " + $.cpObject.cpArray[selectedQuestion].question);
             $(".theQuestion").html(this.wrapLinksWithTags($.cpObject.cpArray[selectedQuestion].question));
             $(".yourAnswerText").html(gM('mwe-quiz-yourAnswer'));
@@ -767,17 +767,17 @@
                     
                     return $.cpObject.cpArray[selectedQuestion]
                     .answeres[
-                        _this.KIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
+                        _this.VIVQModule.q2i($.cpObject.cpArray[selectedQuestion].correctAnswerKeys[0].value)
                     ];
                 }
                 else {return " "}
             });
             $('.gotItBox').html(gM('mwe-quiz-gotIt')).bind('click', function () {
-                _this.ssSubmitted(_this.KIVQModule.score);
+                _this.ssSubmitted(_this.VIVQModule.score);
             }).attr('role', 'button').attr('tabindex', '5').focus().on('keydown', _this.keyDownHandler);
             
             // handle open quesition 
-            if($.cpObject.cpArray[selectedQuestion].questionType === this.KIVQModule.QUESTIONS_TYPE.OPEN_QUESTION 
+            if($.cpObject.cpArray[selectedQuestion].questionType === this.VIVQModule.QUESTIONS_TYPE.OPEN_QUESTION 
                 && $.cpObject.cpArray[selectedQuestion].openAnswer){
                 var text = $.cpObject.cpArray[selectedQuestion].openAnswer;
                 text = text.replace(/\n/g,"<br/>");
@@ -889,9 +889,9 @@
                     .text(gM('mwe-quiz-selected'))
                     .addClass('qApplied').fadeIn(100).attr('aria-disabled', true);
             });
-            _this.KIVQModule.submitAnswer(questionNr,_this.selectedAnswer);
+            _this.VIVQModule.submitAnswer(questionNr,_this.selectedAnswer);
             _this.selectedAnswer = null;
-            setTimeout(function(){_this.KIVQModule.checkIfDone(questionNr)},_this.postAnswerTimer);
+            setTimeout(function(){_this.VIVQModule.checkIfDone(questionNr)},_this.postAnswerTimer);
         },
 
         showPortraitWarning:function(){
@@ -915,9 +915,9 @@
             }
             _this.showScreen();
             mw.log("hiding flash player");
-            $('#kplayer_pid_kplayer').css('visibility', 'hidden');
-            $('#kplayer_pid_kplayer').css('display', 'none');
-            $('#kplayer_pid_kplayer').attr('aria-hidden', 'true');
+            $('#vplayer_pid_vplayer').css('visibility', 'hidden');
+            $('#vplayer_pid_vplayer').css('display', 'none');
+            $('#vplayer_pid_vplayer').attr('aria-hidden', 'true');
         },
         isPortrait: function () {
             if ( this.getPlayer().getInterface().hasClass("mobile") && mw.getConfig('EmbedPlayer.IsFriendlyIframe') ) {
@@ -937,9 +937,9 @@
             _this.VIVQModule.showQuizOnScrubber();
             $(".icon-close").css("display", "");
             mw.log("showing flash player");
-            $('#kplayer_pid_kplayer').css('visibility', 'visible');
-            $('#kplayer_pid_kplayer').css('display', 'block');
-            $('#kplayer_pid_kplayer').attr('aria-hidden', 'false');
+            $('#vplayer_pid_vplayer').css('visibility', 'visible');
+            $('#vplayer_pid_vplayer').css('display', 'block');
+            $('#vplayer_pid_vplayer').attr('aria-hidden', 'false');
         },
 
         addQuePointsNavigationButtons:function (questionNr) {
@@ -954,15 +954,15 @@
                 var prevQuePoint = allPoints[currentPoint.key-1];
                 if(currentPoint.key > allPoints[0].key && prevQuePoint){
                     //allow go to prev CP: 1 - if canSkip is true; 2 - if canSkip is false but current CP and prev CP is already answered
-                    if( (_this.KIVQModule.canSkip) || (!_this.KIVQModule.canSkip && currentPoint.isAnswerd && prevQuePoint.isAnswerd) ){
+                    if( (_this.VIVQModule.canSkip) || (!_this.VIVQModule.canSkip && currentPoint.isAnswerd && prevQuePoint.isAnswerd) ){
                         prevBtn.attr({'aria-label':gM('mwe-quiz-previous-question'),'tabindex': 5})
                             .removeClass('disabled')
                             .on('keydown', _this.keyDownHandler)
                             .on('click',function (e) {
                                 e.preventDefault();
-                                _this.KIVQModule.continuePlay();
+                                _this.VIVQModule.continuePlay();
                                 _this.seekToQuestionTime = prevQuePoint.startTime;
-                                _this.KIVQModule.gotoScrubberPos(prevQuePoint.key);
+                                _this.VIVQModule.gotoScrubberPos(prevQuePoint.key);
                                 _this.isSeekingIVQ = true;
                                 mw.log("Quiz: gotoScrubberPos : " + prevQuePoint.key);
                             });
@@ -971,15 +971,15 @@
                 var nextQuePoint = allPoints[currentPoint.key+1];
                 if(currentPoint.key < allPoints[allPoints.length-1].key && nextQuePoint){
                     //allow go to next CP: 1 - if canSkip is true; 2 - if canSkip is false but current CP and next CP is already answered
-                    if( (_this.KIVQModule.canSkip) || (!_this.KIVQModule.canSkip && nextQuePoint.isAnswerd)){
+                    if( (_this.VIVQModule.canSkip) || (!_this.VIVQModule.canSkip && nextQuePoint.isAnswerd)){
                         nextBtn.attr({'aria-label':gM('mwe-quiz-next-question') ,'tabindex': 5 })
                             .removeClass('disabled')
                             .on('keydown', _this.keyDownHandler)
                             .on('click',function (e) {
                                 e.preventDefault();
-                                _this.KIVQModule.continuePlay();
+                                _this.VIVQModule.continuePlay();
                                 _this.seekToQuestionTime = nextQuePoint.startTime;
-                                _this.KIVQModule.gotoScrubberPos(nextQuePoint.key);
+                                _this.VIVQModule.gotoScrubberPos(nextQuePoint.key);
                                 _this.isSeekingIVQ = true;
                                 mw.log("Quiz: gotoScrubberPos : " + nextQuePoint.key);
                             });
@@ -995,7 +995,7 @@
 
             if (_this.VIVQModule.quizSubmitted) {
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                    _this.KIVQModule.continuePlay();
+                    _this.VIVQModule.continuePlay();
                 }).on('keydown', _this.keyDownHandler).attr({'tabindex': 6.3, "role" : "button"});
                 return;
             }
@@ -1005,7 +1005,7 @@
                 + '/' + $.cpObject.cpArray.length + '</span>'));
 
                 $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
-                    _this.KIVQModule.continuePlay();
+                    _this.VIVQModule.continuePlay();
                 }).attr({'tabindex': 6.3, "role" : "button"}).on('keydown', _this.keyDownHandler);
             } else {
                 $(".ftr-left").append($('<span> ' + gM('mwe-quiz-question') + ' ' + this.VIVQModule.i2q(questionNr)
@@ -1019,16 +1019,16 @@
                     + gM('mwe-quiz-unanswered') + '</span>')
                         .css("float", "right")
                         .css("cursor","default"));
-                if (_this.KIVQModule.canSkip) {
+                if (_this.VIVQModule.canSkip) {
                     var skipTxt = gM('mwe-quiz-skipForNow');
                     if ($.cpObject.cpArray[questionNr].isAnswerd || _this.isReflectionPoint($.cpObject.cpArray[questionNr]) ){
                         skipTxt = gM('mwe-quiz-next');
                     }
 
                     $(".ftr-right").html(skipTxt).on('click', function () {
-                        _this.KIVQModule.checkIfDone(questionNr)
+                        _this.VIVQModule.checkIfDone(questionNr)
                     }).on('keydown', _this.keyDownHandler).attr('tabindex', 5).attr('role', 'button');
-                }else if(!_this.KIVQModule.canSkip &&  ( $.cpObject.cpArray[questionNr].isAnswerd || _this.isReflectionPoint($.cpObject.cpArray[questionNr])) ){
+                }else if(!_this.VIVQModule.canSkip &&  ( $.cpObject.cpArray[questionNr].isAnswerd || _this.isReflectionPoint($.cpObject.cpArray[questionNr])) ){
                     $(".ftr-right").html(gM('mwe-quiz-next')).on('click', function () {
                         _this.VIVQModule.checkIfDone(questionNr)
                     });
@@ -1071,9 +1071,9 @@
             var embedPlayer = this.getPlayer();
             var handleBubbleclick;
             var scrubber = embedPlayer.getInterface().find(".scrubber");
-            var buSize = _this.KIVQModule.bubbleSizeSelector(_this.inFullScreen);
-            _this.KIVQModule.hideQuizOnScrubber();
-            var buCotainerPos = _this.KIVQModule.quizEndFlow ? "bubble-cont bu-margin3":"bubble-cont bu-margin1";
+            var buSize = _this.VIVQModule.bubbleSizeSelector(_this.inFullScreen);
+            _this.VIVQModule.hideQuizOnScrubber();
+            var buCotainerPos = _this.VIVQModule.quizEndFlow ? "bubble-cont bu-margin3":"bubble-cont bu-margin1";
 
             scrubber.parent().prepend('<div class="'+buCotainerPos+'"></div>');
             if($.cpObject.cpArray){
@@ -1081,14 +1081,14 @@
                     displayClass = val.isAnswerd ? "bubble bubble-ans " + buSize.bubbleAnsSize
                     : "bubble bubble-un-ans " + buSize.bubbleUnAnsSize;
                     
-                    var pos = (Math.round(((val.startTime/embedPlayer.kalturaPlayerMetaData.msDuration)*100) * 10)/10)-1;
+                    var pos = (Math.round(((val.startTime/embedPlayer.vidiunPlayerMetaData.msDuration)*100) * 10)/10)-1;
                     $('.bubble-cont').append($('<div id ="' + key + '" style="margin-left:' + pos + '%">' +
-                    _this.KIVQModule.i2q(key) + ' </div>')
+                    _this.VIVQModule.i2q(key) + ' </div>')
                     .addClass(displayClass).attr('role', 'button').attr({'tabindex': 20 , "aria-label" : "Jump to Question "+ (key+1) }).on('keydown', _this.keyDownHandler)
                     );
                 });
             }
-            if (_this.KIVQModule.canSkip) {
+            if (_this.VIVQModule.canSkip) {
                 handleBubbleclick = '.bubble';
             }
             else{
@@ -1100,7 +1100,7 @@
         onBubbleClick: function (event) {
             var qNumber = parseInt($(event.target).attr("id"));
             this.seekToQuestionTime = $.cpObject.cpArray[qNumber].startTime;
-            this.KIVQModule.gotoScrubberPos(qNumber);
+            this.VIVQModule.gotoScrubberPos(qNumber);
             this.isSeekingIVQ = true;
             mw.log("Quiz: gotoScrubberPos : " + qNumber);
         },
@@ -1150,7 +1150,7 @@
             $('.bubble-cont').remove();
         },
         isReflectionPoint: function(cPo){
-            return cPo.questionType && cPo.questionType === this.KIVQModule.QUESTIONS_TYPE.REFLECTION_POINT;
+            return cPo.questionType && cPo.questionType === this.VIVQModule.QUESTIONS_TYPE.REFLECTION_POINT;
         }
     }));
 })(window.mw, window.jQuery);

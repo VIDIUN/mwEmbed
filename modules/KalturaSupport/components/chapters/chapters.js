@@ -242,7 +242,7 @@
 				function () {
 					setTimeout(function(){
 						_this.getComponent()
-							.find(".k-title-container.mediaBoxText, .k-description-container.mediaBoxText").dotdotdot();
+							.find(".v-title-container.mediaBoxText, .v-description-container.mediaBoxText").dotdotdot();
 					}, 100);
 				}
 			);
@@ -468,12 +468,12 @@
 			//Get current item number
 			var orderId = this.mediaList.length;
 			var clearDuplicatedCP = items.filter(function( item,index,allInArray ) {
-				return _this.getPlayer().kCuePoints.removeDuplicatedCuePoints(allInArray,index);
+				return _this.getPlayer().vCuePoints.removeDuplicatedCuePoints(allInArray,index);
 			});
 			
-			var previewCuePointTag = _this.getPlayer().kCuePoints.getPreviewCuePointTag();
+			var previewCuePointTag = _this.getPlayer().vCuePoints.getPreviewCuePointTag();
 			var filterItems = clearDuplicatedCP.filter(function( item ) {
-				return _this.getPlayer().kCuePoints.validateCuePointTags(item, previewCuePointTag);
+				return _this.getPlayer().vCuePoints.validateCuePointTags(item, previewCuePointTag);
 			});
             //Map items to mediaList items
 			var mediaItems = $.map(filterItems, function (item) {
@@ -545,9 +545,9 @@
 			var slides = [];
 			this.getMediaListDomElements().each(function (index, mediaBox) {
 				var type = Number(mediaBox.getAttribute('data-box-type'));
-				if (type === mw.KCuePoints.THUMB_SUB_TYPE.CHAPTER) {
+				if (type === mw.VCuePoints.THUMB_SUB_TYPE.CHAPTER) {
 					chapters.push(mediaBox);
-				} else if (type === mw.KCuePoints.THUMB_SUB_TYPE.SLIDE) {
+				} else if (type === mw.VCuePoints.THUMB_SUB_TYPE.SLIDE) {
 					slides.push(mediaBox);
 				}
 			});
@@ -1029,8 +1029,8 @@
 		renderBottomBar: function(){
 			this.getMedialistFooterComponent().empty();
 			var bottomBar = $("<div/>", {"class": "footerWrapper"} )
-					.append($("<span/>", {"class": "slideLocator icon-locator", "title": gM("ks-chapters-locate-active-media")}).attr({'aria-label':gM("ks-chapters-slider-locator")}))
-					.append($("<span/>", {"class": "toggleAll icon-toggleAll", "title": gM("ks-chapters-toggle-all-chapter")}).attr({'aria-label':gM("ks-chapters-toggle-all-chapter")}));
+					.append($("<span/>", {"class": "slideLocator icon-locator", "title": gM("vs-chapters-locate-active-media")}).attr({'aria-label':gM("vs-chapters-slider-locator")}))
+					.append($("<span/>", {"class": "toggleAll icon-toggleAll", "title": gM("vs-chapters-toggle-all-chapter")}).attr({'aria-label':gM("vs-chapters-toggle-all-chapter")}));
 			this.getMedialistFooterComponent().append(bottomBar);
 		},
 		isValidResult: function (data) {
@@ -1445,7 +1445,7 @@
 					}
 
 					if (mediaItem.title) {
-						var $title = $(chapterBox).find('.k-chapter-title');
+						var $title = $(chapterBox).find('.v-chapter-title');
 						if (!$title.length) {
 							return;
 						}
@@ -1467,7 +1467,7 @@
 					}
 
 					if (mediaItem.description) {
-						var $description = $(chapterBox).find('.k-description');
+						var $description = $(chapterBox).find('.v-description');
 						if (!$description.length) {
 							return;
 						}

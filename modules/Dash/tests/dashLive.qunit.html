@@ -6,11 +6,11 @@
 </head>
 <body>
 <h2>Live Dash</h2>
-<div id="kaltura_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
+<div id="vidiun_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
 
 <script>
-    kWidget.embed({
-        "targetId": "kaltura_player_1453904613",
+    vWidget.embed({
+        "targetId": "vidiun_player_1453904613",
 //        'wid' : '_1897241',
 //        'uiconf_id' : '11140701',
 //        'entry_id' : '1_gffgxm38',
@@ -56,9 +56,9 @@
 
 
         ,readyCallback: function(videoid){
-            var kdp = document.getElementById(videoid);
-            kdp.kBind( 'playerReady', function () {
-                kdp.sendNotification("loadExternalClosedCaptions", {
+            var vdp = document.getElementById(videoid);
+            vdp.vBind( 'playerReady', function () {
+                vdp.sendNotification("loadExternalClosedCaptions", {
                     languages: [{
                         "language": "Hebrew",
                         "languageCode": "he",

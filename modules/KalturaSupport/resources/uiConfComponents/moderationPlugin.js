@@ -11,15 +11,15 @@
 			"smartContainer": 'morePlugins',
 			"smartContainerCloseEvent": 'closeMenuOverlay',
 			"minDescriptionLength" : 0,
-			"title": gM("ks-MODERATION-REPORT"),
-			"header": gM("ks-MODERATION-HEADER"),
-			"text": gM("ks-MODERATION-TEXT"),
-			"placeholder": gM("ks-MODERATION-PLACEHOLDER"),
-			"tooltip": gM("ks-MODERATION-REPORT"),
-			"reasonSex": gM("ks-MODERATION-REASON-SEX"),
-			"reasonViolence": gM("ks-MODERATION-REASON-VIOLENCE"),
-			"reasonHarmful": gM("ks-MODERATION-REASON-HARMFUL"),
-			"reasonSpam": gM("ks-MODERATION-REASON-SPAM")
+			"title": gM("vs-MODERATION-REPORT"),
+			"header": gM("vs-MODERATION-HEADER"),
+			"text": gM("vs-MODERATION-TEXT"),
+			"placeholder": gM("vs-MODERATION-PLACEHOLDER"),
+			"tooltip": gM("vs-MODERATION-REPORT"),
+			"reasonSex": gM("vs-MODERATION-REASON-SEX"),
+			"reasonViolence": gM("vs-MODERATION-REASON-VIOLENCE"),
+			"reasonHarmful": gM("vs-MODERATION-REASON-HARMFUL"),
+			"reasonSpam": gM("vs-MODERATION-REASON-SPAM")
 		},
 
 		setup: function () {
@@ -83,7 +83,7 @@
 						$( '<option />' ).attr( {'value': 4, 'role':'option', 'aria-label':_this.getConfig( 'reasonSpam' )} ).text( _this.getConfig( 'reasonSpam' ) )
 					)
 					.css({'width': '100%', 'height': '26px', 'margin': '10px 0 10px 0'})),
-				$( '<label for="flagComments">'+ gM("ks-MODERATION-PLACEHOLDER" ) +'</label>' ),
+				$( '<label for="flagComments">'+ gM("vs-MODERATION-PLACEHOLDER" ) +'</label>' ),
 				$( '<textarea />' )
 					.attr( 'id', 'flagComments' )
 					.bind('input propertychange', function() {
@@ -95,7 +95,7 @@
 				$('<div/>' ).append(
 					$( '<div />' )
 					.addClass( 'reportButton right' )
-					.text( gM("ks-MODERATION-SUBMIT-BTN") )
+					.text( gM("vs-MODERATION-SUBMIT-BTN") )
 					.attr( 'tabindex',0 )
 					.attr( 'role', 'button')
 					.click(function() {

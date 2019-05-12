@@ -26,8 +26,8 @@
             quizEndFlow: false,
             bindPostfix: '.quizPlugin',
             reviewMode:false,
-            isKPlaylist:false,
-            kQuizEntryId: "",
+            isVPlaylist:false,
+            vQuizEntryId: "",
             QUESTIONS_TYPE: {
                 MULTIPLE_CHOICE_ANSWER: 1,
                 TRUE_FALSE: 2,
@@ -41,9 +41,9 @@
 
             init: function (embedPlayer,quizPlugin) {
                 var _this = this;
-                _this.kQuizEntryId = embedPlayer.kentryid;
-                _this.KIVQApi = new mw.KIVQApi(embedPlayer);
-                _this.KIVQScreenTemplate = new mw.KIVQScreenTemplate(embedPlayer);
+                _this.vQuizEntryId = embedPlayer.ventryid;
+                _this.VIVQApi = new mw.VIVQApi(embedPlayer);
+                _this.VIVQScreenTemplate = new mw.VIVQScreenTemplate(embedPlayer);
                 this.destroy();
                 this.embedPlayer = embedPlayer;
                 this.quizPlugin = quizPlugin;
@@ -52,7 +52,7 @@
                 var _this = this,
                     deferred = $.Deferred();
 
-                _this.KIVQApi.getUserEntryIdAndQuizParams( function(data) {
+                _this.VIVQApi.getUserEntryIdAndQuizParams( function(data) {
                     // validate data integrity 
                     if (!_this.checkApiResponse('User Entry err-->', data[0])) {
                         return false;
@@ -143,7 +143,7 @@
 
             getQuestionsAndAnswers: function (callback) {
                 var _this = this;
-                _this.KIVQApi.getQuestionAnswerCuepoint(_this.kQuizEntryId, _this.kQuizUserEntryId, function(data){
+                _this.VIVQApi.getQuestionAnswerCuepoint(_this.vQuizEntryId, _this.vQuizUserEntryId, function(data){
                     if (!_this.checkApiResponse('Get question err -->',data[0])){
                         return false;
                     }
@@ -173,7 +173,7 @@
             },
             setSubmitQuiz:function(){
                 var _this = this;
-                _this.KIVQApi.submitQuiz(_this.kQuizUserEntryId, function(data){
+                _this.VIVQApi.submitQuiz(_this.vQuizUserEntryId, function(data){
                     
                     if (!_this.checkApiResponse('Submit Quiz err -->',data)){
                         return false;
@@ -365,7 +365,7 @@
                     isAnswered = false;
                     $.cpObject.cpArray[questionNr].isAnswerd = true;
                 }
-                _this.KIVQApi.addAnswer(isAnswered,_this.i2q(selectedAnswer),_this.kQuizUserEntryId,questionNr,function(data){
+                _this.VIVQApi.addAnswer(isAnswered,_this.i2q(selectedAnswer),_this.vQuizUserEntryId,questionNr,function(data){
                     if (!_this.checkApiResponse('Add question err -->',data)){
                         return false;
                     }else {
@@ -625,7 +625,7 @@
                 _this.isErr = true;
             },
             retake: function (callback){
-                this.KIVQApi.retake(callback);
+                this.VIVQApi.retake(callback);
             },
             destroy: function () {
                 this.score = undefined;

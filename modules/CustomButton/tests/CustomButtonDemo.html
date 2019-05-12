@@ -13,14 +13,14 @@
 	<div id="vidiun_player" style="width: 585px; height: 330px;float: left;"></div>
 	<br style="clear: both;" /><br />
 <script>
-var kdp;
+var vdp;
     function onReadyCallback(playerID){
-        kdp = $('#' + playerID )[0];
+        vdp = $('#' + playerID )[0];
     }
 
-	kWidget.featureConfig({
+	vWidget.featureConfig({
         'readyCallback': onReadyCallback,
-		'targetId': 'kaltura_player',
+		'targetId': 'vidiun_player',
 		'wid': '_101',
 		'uiconf_id' : '23448207',
 		'flashvars': {
@@ -35,10 +35,10 @@ var kdp;
 
 
 	function disableButton() {
-		kdp.sendNotification('customButton.disable');
+		vdp.sendNotification('customButton.disable');
 	}
 	function enableButton() {
-        kdp.sendNotification('customButton.enable');
+        vdp.sendNotification('customButton.enable');
 	}
 </script>
 

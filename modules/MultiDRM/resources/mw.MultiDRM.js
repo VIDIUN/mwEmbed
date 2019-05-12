@@ -1,6 +1,6 @@
 (function (mw, $) {
 	"use strict";
-	var multiDrm = mw.KBasePlugin.extend({
+	var multiDrm = mw.VBasePlugin.extend({
 
 		setup: function () {
 			//If both FPS certificate is available and FPS is supported then
@@ -40,8 +40,8 @@
 
 		getFpsCertificate: function (embedPlayer) {
 			var cert = null;
-			if (window.kWidgetSupport) {
-				cert = window.kWidgetSupport.getFairplayCert({contextData: embedPlayer.kalturaContextData});
+			if (window.vWidgetSupport) {
+				cert = window.vWidgetSupport.getFairplayCert({contextData: embedPlayer.vidiunContextData});
 			}
 			return cert;
 		},
@@ -83,8 +83,8 @@
 		setupNativeDrm: function(){
 			mw.log("Loading Native SDK DRM");
 			var _this = this;
-			var nativeSdkDRMTypes = window.kNativeSdk && window.kNativeSdk.drmFormats;
-			var nativeSdkAllTypes = window.kNativeSdk && window.kNativeSdk.allFormats;
+			var nativeSdkDRMTypes = window.vNativeSdk && window.vNativeSdk.drmFormats;
+			var nativeSdkAllTypes = window.vNativeSdk && window.vNativeSdk.allFormats;
 			$(mw).bind('EmbedPlayerUpdateMediaPlayers', function (event, mediaPlayers) {
 				$.each(nativeSdkAllTypes, function(i, nativeSdkType){
 					mediaPlayers.removeMIMETypePlayers(nativeSdkType, 'NativeComponent');
@@ -92,7 +92,7 @@
 				$.each(nativeSdkDRMTypes, function(i, nativeSdkDRMType){
 					mediaPlayers.setMIMETypePlayers(nativeSdkDRMType, 'NativeComponent');
 				});
-				if (kWidget.isIOS()) {
+				if (vWidget.isIOS()) {
 					var sources = _this.getPlayer().getSources();
 					var hlsIndex = sources.findIndex(function(src) {return src.mimeType === "application/vnd.apple.mpegurl";});
 					var wvmIndex = sources.findIndex(function(src) {return src.mimeType === "video/wvm";});
@@ -113,12 +113,12 @@
 
 		setEmbedPlayerConfig: function (embedPlayer) {
 			//Get user configuration
-			var drmUserConfig = embedPlayer.getKalturaConfig("multiDrm");
+			var drmUserConfig = embedPlayer.getVidiunConfig("multiDrm");
 			//Get default config
-			var drmConfig = this.getDefaultDrmConfig(embedPlayer.kpartnerid);
+			var drmConfig = this.getDefaultDrmConfig(embedPlayer.vpartnerid);
 			//Deep extend custom config
 			$.extend(true, drmConfig, drmUserConfig);
-			embedPlayer.setKalturaConfig("multiDrm", drmConfig);
+			embedPlayer.setVidiunConfig("multiDrm", drmConfig);
 			return drmConfig;
 		},
 
@@ -128,7 +128,7 @@
 				"customData": {
 					"userId": partnerId,
 					"sessionId": "castlab-session",
-					"merchant": "kaltura"
+					"merchant": "vidiun"
 				},
 				"sendCustomData": false,
 				"generatePSSH": false,

@@ -1,7 +1,7 @@
 var user1="Eitan";
 var user2="Guest";
-var user1Ks="djJ8MjcwMTd8EyIl3_L6Ark51uIS3N6PdMSDTODjlNm5OA5ZRJGhFwNghvrqKbdOKF-s-a9_-sWzrf_M9vLHyLJC_iTlbV2aUi1nFhy1Z0sd3t3XFlLudxu6awf2XuxzJlBwtu59MhUdviL4swjiPCqiK3s2TChLn4GPwPZZLeYo242VgvokxGqBk6aSUOjCuuKdZ3qZLxbInwwsSWCoXtRthxhQF8ZlXcTvotuFawU6PKnruMxBjq6dBkHJrt9TUeYFOU1LhnSeAgKimX3KFnYwwth-bM_we0UufUFYua6hh3QbVH5gQMCjKBCb_JBnYSPfafZcwLaLYQ_ASsipxheHJvMlck3FFvlKYODXX7uR3aoM7kkC0CY=";
-var user2Ks=user1Ks;
+var user1Vs="djJ8MjcwMTd8EyIl3_L6Ark51uIS3N6PdMSDTODjlNm5OA5ZRJGhFwNghvrqKbdOKF-s-a9_-sWzrf_M9vLHyLJC_iTlbV2aUi1nFhy1Z0sd3t3XFlLudxu6awf2XuxzJlBwtu59MhUdviL4swjiPCqiK3s2TChLn4GPwPZZLeYo242VgvokxGqBk6aSUOjCuuKdZ3qZLxbInwwsSWCoXtRthxhQF8ZlXcTvotuFawU6PKnruMxBjq6dBkHJrt9TUeYFOU1LhnSeAgKimX3KFnYwwth-bM_we0UufUFYua6hh3QbVH5gQMCjKBCb_JBnYSPfafZcwLaLYQ_ASsipxheHJvMlck3FFvlKYODXX7uR3aoM7kkC0CY=";
+var user2Vs=user1Vs;
 var entry="1_8eoa4vir";
 
 
@@ -16,24 +16,24 @@ var wid = '_27017'; // prod
 
 
 // DON'T CHANGE ANYTHING BELOW THIS POINT
-var kdp;
-if(!user2Ks && user1Ks){
-	user2Ks = user1Ks;
+var vdp;
+if(!user2Vs && user1Vs){
+	user2Vs = user1Vs;
 }
 function seekTo(t) {
-	kdp.sendNotification("doSeek", t);
+	vdp.sendNotification("doSeek", t);
 }
 function seekRelative(offset) {
-	var currentPosition = kdp.evaluate("{video.player.currentTime}");
-	kdp.sendNotification("doSeek", currentPosition + offset);
+	var currentPosition = vdp.evaluate("{video.player.currentTime}");
+	vdp.sendNotification("doSeek", currentPosition + offset);
 }
 function openSlidesMenu() {
-	var $iframe = $("#kaltura_player_ifp").contents();
+	var $iframe = $("#vidiun_player_ifp").contents();
 	var sbc = $iframe.find('.sideBarContainer');
 	sbc.addClass("pinned")
 }
 function closeSlidesMenu() {
-	var $iframe = $("#kaltura_player_ifp").contents();
+	var $iframe = $("#vidiun_player_ifp").contents();
 	var sbc = $iframe.find('.sideBarContainer');
 	sbc.removeClass("pinned");
 }

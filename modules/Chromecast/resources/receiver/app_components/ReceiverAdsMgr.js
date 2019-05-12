@@ -1,8 +1,8 @@
 var ReceiverAdsManager = null;
 
-$( window ).bind( 'onReceiverKDPReady', function ( event ) {
-    var doubleClick = kdp.evaluate('{doubleClick}');
-    ReceiverLogger.log("ReceiverAdsManager", "event-->onReceiverKDPReady", {'adsEnabled?': !!(doubleClick && doubleClick.adTagUrl)});
+$( window ).bind( 'onReceiverVDPReady', function ( event ) {
+    var doubleClick = vdp.evaluate('{doubleClick}');
+    ReceiverLogger.log("ReceiverAdsManager", "event-->onReceiverVDPReady", {'adsEnabled?': !!(doubleClick && doubleClick.adTagUrl)});
     if (doubleClick && doubleClick.adTagUrl) {
         ReceiverAdsManager = new AdsManager();
     }
@@ -50,18 +50,18 @@ AdsManager.prototype = {
         mediaManager.onPause = mediaManager.onPauseOrig;
 
         /**
-         * Unbind kdp from all ads specific events.
+         * Unbind vdp from all ads specific events.
          */
-        kdp.kUnbind( "onCuePointsRevealed" );
-        kdp.kUnbind( "durationChange" );
-        kdp.kUnbind( "adErrorEvent" );
-        kdp.kUnbind( "onAdPlay" );
-        kdp.kUnbind( "preSequenceStart" );
-        kdp.kUnbind( "preSequenceComplete" );
-        kdp.kUnbind( "postSequenceStart" );
-        kdp.kUnbind( "postSequenceComplete" );
-        kdp.kUnbind( "onAllAdsCompleted" );
-        kdp.kUnbind( "onEndedDone" );
+        vdp.vUnbind( "onCuePointsRevealed" );
+        vdp.vUnbind( "durationChange" );
+        vdp.vUnbind( "adErrorEvent" );
+        vdp.vUnbind( "onAdPlay" );
+        vdp.vUnbind( "preSequenceStart" );
+        vdp.vUnbind( "preSequenceComplete" );
+        vdp.vUnbind( "postSequenceStart" );
+        vdp.vUnbind( "postSequenceComplete" );
+        vdp.vUnbind( "onAllAdsCompleted" );
+        vdp.vUnbind( "onEndedDone" );
 
         ReceiverAdsManager = null;
     },
@@ -131,18 +131,18 @@ AdsManager.prototype = {
         mediaManager.onPause = this._onPause.bind( this );
 
         /**
-         * Bind to the kdp ads specific events.
+         * Bind to the vdp ads specific events.
          */
-        kdp.kBind( "onCuePointsRevealed", this._onCuePointsRevealed.bind( this ) );
-        kdp.kBind( "durationChange", this._onDurationChange.bind( this ) );
-        kdp.kBind( "adErrorEvent", this._onAdErrorEvent.bind( this ) );
-        kdp.kBind( "onAdPlay", this._onAdPlay.bind( this ) );
-        kdp.kBind( "preSequenceStart", this._onPreSequenceStart.bind( this ) );
-        kdp.kBind( "preSequenceComplete", this._onPreSequenceComplete.bind( this ) );
-        kdp.kBind( "postSequenceStart", this._onPostSequenceStart.bind( this ) );
-        kdp.kBind( "postSequenceComplete", this._onPostSequenceComplete.bind( this ) );
-        kdp.kBind( "onAllAdsCompleted", this._onAllAdsCompleted.bind( this ) );
-        kdp.kBind( "onEndedDone", this._onEndedDone.bind( this ) );
+        vdp.vBind( "onCuePointsRevealed", this._onCuePointsRevealed.bind( this ) );
+        vdp.vBind( "durationChange", this._onDurationChange.bind( this ) );
+        vdp.vBind( "adErrorEvent", this._onAdErrorEvent.bind( this ) );
+        vdp.vBind( "onAdPlay", this._onAdPlay.bind( this ) );
+        vdp.vBind( "preSequenceStart", this._onPreSequenceStart.bind( this ) );
+        vdp.vBind( "preSequenceComplete", this._onPreSequenceComplete.bind( this ) );
+        vdp.vBind( "postSequenceStart", this._onPostSequenceStart.bind( this ) );
+        vdp.vBind( "postSequenceComplete", this._onPostSequenceComplete.bind( this ) );
+        vdp.vBind( "onAllAdsCompleted", this._onAllAdsCompleted.bind( this ) );
+        vdp.vBind( "onEndedDone", this._onEndedDone.bind( this ) );
     },
 
     /**
@@ -192,7 +192,7 @@ AdsManager.prototype = {
      */
     _onPause: function ( event ) {
         ReceiverLogger.log( this.CLASS_NAME, "_onPause", event );
-        kdp.sendNotification( "doPause" );
+        vdp.sendNotification( "doPause" );
         if ( this.adsInfo.isPlayingAd ) {
             // We have an issue that if sender pause in middle of an ad it sending the wrong status (PLAYING)
             // We need to understand the root cause
@@ -224,10 +224,10 @@ AdsManager.prototype = {
                         if ( mediaInfo.duration ) {
                             this.adsInfo.adsBreakInfo.push( mediaInfo.duration );
                         } else {
-                            kdp.kBind( "receiverContentPlay", function ( contentDuration ) {
+                            vdp.vBind( "receiverContentPlay", function ( contentDuration ) {
                                 this.adsInfo.adsBreakInfo.push( Math.round( contentDuration ) );
                                 mediaManager.broadcastStatus( false );
-                                kdp.kUnbind( "receiverContentPlay" );
+                                vdp.vUnbind( "receiverContentPlay" );
                             }.bind( this ) );
                         }
                     }

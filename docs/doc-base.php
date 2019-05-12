@@ -60,9 +60,9 @@ if( $path == 'resources'
 // Set page title if avaliable from path:
 $allowedPages = Array('api', 'resources', 'contact', 'templates', 'customersamples', 'advertising', 'main');
 if (in_array($path, $allowedPages)) {
-    $kdocPageTitle = $path;
+    $vdocPageTitle = $path;
 } else {
-    $kdocPageTitle = 'main';
+    $vdocPageTitle = 'main';
 }
 
 if(		isset( $featureList[ $pathParts[0] ] )

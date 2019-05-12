@@ -1,4 +1,4 @@
-(function (mw, $, kWidgetSupport, base64_encode, gM) {
+(function (mw, $, vWidgetSupport, base64_encode, gM) {
     'use strict';
 
     mw.dualScreen = mw.dualScreen || {};
@@ -27,7 +27,7 @@
             this.stream = stream;
             this.embedPlayer = embedPlayer;
             this.duration = this.stream.data.meta.duration || 0;
-            this.b64Referrer = base64_encode(kWidgetSupport.getHostPageUrl());
+            this.b64Referrer = base64_encode(vWidgetSupport.getHostPageUrl());
             this.initPlayerElement(readyCallback);
             this.updatePoster();
             return this;
@@ -78,7 +78,7 @@
 
             this.seekStarted = true;
             if (this.firstPlay && this.streamerType !== 'http') {
-                this.playerObject.setKDPAttribute('mediaProxy', 'mediaPlayFrom', seekTime);
+                this.playerObject.setVDPAttribute('mediaProxy', 'mediaPlayFrom', seekTime);
                 this.playerObject.play();
             } else {
                 this.playerObject.seek(seekTime);
@@ -138,7 +138,7 @@
         },
 
         getPoster: function getPoster() {
-            return kWidgetSupport.getKalturaThumbnailUrl({
+            return vWidgetSupport.getVidiunThumbnailUrl({
                 url: this.stream.thumbnailUrl,
                 width: this.embedPlayer.getWidth(),
                 height: this.embedPlayer.getHeight()
@@ -227,8 +227,8 @@
 
         initPlayerElement: function initPlayerElement(readyCallback) {
             var seed = new Date().getTime();
-            var containerId = 'kaltura_player_container_' + seed;
-            var playerId = 'kaltura_player_' + seed;
+            var containerId = 'vidiun_player_container_' + seed;
+            var playerId = 'vidiun_player_' + seed;
 
             $(this)
                 .attr('id', containerId)
@@ -254,9 +254,9 @@
                 isLive: false,
                 stretchVideo: false,
                 entryDuration: this.duration,
-                serviceUrl: mw.getConfig('Kaltura.ServiceUrl'),
-                partnerId: this.embedPlayer.kpartnerid,
-                widgetId: '_' + this.embedPlayer.kpartnerid,
+                serviceUrl: mw.getConfig('Vidiun.ServiceUrl'),
+                partnerId: this.embedPlayer.vpartnerid,
+                widgetId: '_' + this.embedPlayer.vpartnerid,
                 b64Referrer: this.b64Referrer
             };
 
@@ -266,7 +266,7 @@
                 $.extend(flashVars, {
                     disableAutoDynamicStreamSwitch: true,
                     streamerType: 'hls',
-                    KalturaHLS: {
+                    VidiunHLS: {
                         plugin: 'true',
                         asyncInit: 'true',
                         loadingPolicy: 'preInitialize',
@@ -292,4 +292,4 @@
             $(this).trigger(eventName, params);
         }
     };
-})(window.mw, window.jQuery, window.kWidgetSupport, window.base64_encode, window.gM);
+})(window.mw, window.jQuery, window.vWidgetSupport, window.base64_encode, window.gM);

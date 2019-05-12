@@ -8,7 +8,7 @@
     <div>currentState: {{currentState}}</div>
     <div ng-show="hls">
         <div class="mw-debug-info-separator">HLS Information ({{hlsEngine}})</div>
-        <div ng-show="kesChain">KES: {{kesChain}}</div>
+        <div ng-show="vesChain">VES: {{vesChain}}</div>
         <span>current:</span><a class="mw-debug-info-a" href="{{hlsCurrentSegment}}">{{hlsCurrentSegment | getFileName}}</a><br>
         <span>downloading:</span><a class="mw-debug-info-a" href="{{hlsDownloadingSegment}}">{{hlsDownloadingSegment | getFileName}}</a><br>
         <span>processed:</span><a class="mw-debug-info-a" href="{{hlsLastProcessedSegment}}">{{hlsLastProcessedSegment | getFileName}}</a><br>

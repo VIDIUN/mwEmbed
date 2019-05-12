@@ -4,8 +4,8 @@
       "resources/unMuteOverlayButton.js"
     ],
     "styles": "resources/css/unMuteOverlayButton.css",
-    "dependencies": "mw.KBaseButton",
+    "dependencies": "mw.VBaseButton",
     "messageFile": "unMuteOverlayButton.i18n.json",
-    "kalturaPluginName": "unMuteOverlayButton"
+    "vidiunPluginName": "unMuteOverlayButton"
   }
 }

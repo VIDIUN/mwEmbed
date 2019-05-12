@@ -32,11 +32,11 @@
     "tvpapiStartOver": {
         "scripts": "resources/startOver.js",
         "dependencies": ["tvpapiRequest"] ,
-        "kalturaPluginName": "tvpapiStartOver"
+        "vidiunPluginName": "tvpapiStartOver"
     },
     "tvpapiGetlicensedUrl": {
         "scripts": "resources/getLicensedUrl.js",
         "dependencies": ["tvpapiRequest"] ,
-        "kalturaPluginName": "tvpapiGetlicensedUrl"
+        "vidiunPluginName": "tvpapiGetlicensedUrl"
     }
 }

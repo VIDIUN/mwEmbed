@@ -14,7 +14,7 @@
 		enablePlayDuringScreen: false,
 
 		lastNonScreenFocus: $('.playPauseBtn'),//play button by default
-		// Returns KBaseComponent config with screen config
+		// Returns VBaseComponent config with screen config
 		getBaseConfig: function () {
 			var parentConfig = this._super();
 			return $.extend({}, parentConfig, {

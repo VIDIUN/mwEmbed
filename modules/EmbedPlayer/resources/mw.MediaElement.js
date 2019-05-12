@@ -51,7 +51,7 @@ mw.MediaElement.prototype = {
 			var found = false;
             var protocol = location.protocol.slice(0, -1);
             if (src){
-				$.each( mw.getConfig( 'Kaltura.BlackVideoSources' ), function(inx, sourceAttr ) {
+				$.each( mw.getConfig( 'Vidiun.BlackVideoSources' ), function(inx, sourceAttr ) {
                     sourceAttr.src = sourceAttr.src.replace("http", protocol);
 					if (src.indexOf(sourceAttr.src) !== -1){
 						found = true;
@@ -579,7 +579,7 @@ mw.MediaElement.prototype = {
 					if ( !mw.isIE8() ) {
 						var $vid = $( '#pid_' + this.parentEmbedId );
 						if( $vid.length ) {
-							if( mw.isIphone() || mw.getConfig('Kaltura.addCrossoriginToIframe') === true ) {
+							if( mw.isIphone() || mw.getConfig('Vidiun.addCrossoriginToIframe') === true ) {
 								$vid.attr('crossorigin', 'anonymous');
 							}
 							$vid.append(element);

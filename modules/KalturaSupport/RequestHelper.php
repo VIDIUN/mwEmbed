@@ -266,8 +266,8 @@ class RequestHelper {
 	}
 
  	public function getRemoteAddrHeader(){
-		global $wgKalturaRemoteAddressSalt, $wgKalturaForceIP;
-		if( $wgKalturaRemoteAddressSalt === false ){
+		global $wgVidiunRemoteAddressSalt, $wgVidiunForceIP;
+		if( $wgVidiunRemoteAddressSalt === false ){
 			return '';
 		}
 		$ip = null;

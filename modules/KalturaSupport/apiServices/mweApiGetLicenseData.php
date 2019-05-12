@@ -8,7 +8,7 @@
 		
 	Return value:
 	{
-        "licenseUri": "https://udrm.kaltura.com/widevine/license?custom_data=xyz123&signature=sxyz123&files=sdhu3R",
+        "licenseUri": "https://udrm.vidiun.com/widevine/license?custom_data=xyz123&signature=sxyz123&files=sdhu3R",
         "fpsCertificate": "BASE64-ENCODED-CERTIFICATE"
     }
     
@@ -153,13 +153,13 @@ class mweApiGetLicenseData {
         }
         
         $pluginData = $resultObject['contextData']->pluginData;
-        if (!isset($pluginData['KalturaDrmEntryContextPluginData'])) {
+        if (!isset($pluginData['VidiunDrmEntryContextPluginData'])) {
             throw new Exception("Entry does not have DRM data");
         }
         
-		$drmPluginData = (array)$pluginData['KalturaDrmEntryContextPluginData'];
-        if (isset($pluginData['KalturaFairplayEntryContextPluginData'])) {
-            $fpsPluginData = (array)$pluginData['KalturaFairplayEntryContextPluginData'];
+		$drmPluginData = (array)$pluginData['VidiunDrmEntryContextPluginData'];
+        if (isset($pluginData['VidiunFairplayEntryContextPluginData'])) {
+            $fpsPluginData = (array)$pluginData['VidiunFairplayEntryContextPluginData'];
             $fpsCertificate = $fpsPluginData['publicCertificate'];
         } else {
             $fpsCertificate = null;

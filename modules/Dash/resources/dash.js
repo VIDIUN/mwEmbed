@@ -25,7 +25,7 @@
 			mediaPlayers.addPlayer(shakaPlayer);
 			mw.EmbedTypes.mediaPlayers.setMIMETypePlayers('application/dash+xml', 'Native');
 		});
-		var dash = mw.KBasePlugin.extend({
+		var dash = mw.VBasePlugin.extend({
 
 
 		/** type {boolean} */
@@ -110,12 +110,12 @@
 
 			setEmbedPlayerConfig: function (embedPlayer) {
 				//Get user configuration
-				var userConfig = embedPlayer.getKalturaConfig("dash");
+				var userConfig = embedPlayer.getVidiunConfig("dash");
 				//Get default config
 				var dashConfig = this.getDefaultDashConfig();
 				//Deep extend custom config
 				$.extend(true, dashConfig, userConfig);
-				embedPlayer.setKalturaConfig("dash", dashConfig);
+				embedPlayer.setVidiunConfig("dash", dashConfig);
 			},
 
 			getDefaultDashConfig: function () {
@@ -142,7 +142,7 @@
 			},
 
 			getDrmConfig: function () {
-				var licenseBaseUrl = mw.getConfig('Kaltura.UdrmServerURL');
+				var licenseBaseUrl = mw.getConfig('Vidiun.UdrmServerURL');
 				if (!licenseBaseUrl) {
 					this.log('Error:: failed to retrieve UDRM license URL ');
 				}
@@ -272,7 +272,7 @@
 						};
 					});
 					mw.log("Dash::" + videoTracks.length + " ABR flavors were found: ", videoTracks);
-					this.getPlayer().setKDPAttribute('sourceSelector', 'visible', true);
+					this.getPlayer().setVDPAttribute('sourceSelector', 'visible', true);
 					this.getPlayer().onFlavorsListChanged(flavors);
 				}
 			},
@@ -616,12 +616,12 @@ try {
 		mw.PluginManager.add('Dash', dash);
 
 		// register dash plugin by default
-		var playerConfig = window.kalturaIframePackageData.playerConfig;
+		var playerConfig = window.vidiunIframePackageData.playerConfig;
 		if (playerConfig && playerConfig.plugins && !playerConfig.plugins["dash"]) {
 			playerConfig.plugins["dash"] = {
 				plugin: true
 			};
-			mw.setConfig('KalturaSupport.PlayerConfig', playerConfig);
+			mw.setConfig('VidiunSupport.PlayerConfig', playerConfig);
 		}
 	}
 })

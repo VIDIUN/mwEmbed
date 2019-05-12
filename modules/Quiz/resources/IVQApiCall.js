@@ -29,29 +29,29 @@
                         'entryId': _this.embedPlayer.ventryid
                     }];
 
-                    _this.getKClient().doRequest(getQuizuserEntryIdAndQuizParams, function (data) {
+                    _this.getVClient().doRequest(getQuizuserEntryIdAndQuizParams, function (data) {
                         callback(data);
                     });
                 };
-                this.getQuestionAnswerCuepoint = function(kQuizEntryId, kQuizUserEntryId,callback){
+                this.getQuestionAnswerCuepoint = function(vQuizEntryId, vQuizUserEntryId,callback){
 
                     var getCp = [{
                         'service': 'cuepoint_cuepoint',
                         'action': 'list',
-                        'filter:entryIdEqual': kQuizEntryId,
-                        'filter:objectType': 'KalturaQuestionCuePointFilter',
+                        'filter:entryIdEqual': vQuizEntryId,
+                        'filter:objectType': 'VidiunQuestionCuePointFilter',
                         'filter:cuePointTypeEqual': 'quiz.QUIZ_QUESTION',
                         'filter:orderBy': '+startTime'
                     },{
                         'service': 'cuepoint_cuepoint',
                         'action': 'list',
-                        'filter:objectType': 'KalturaAnswerCuePointFilter',
-                        'filter:entryIdEqual': kQuizEntryId,
-                        'filter:quizUserEntryIdEqual':kQuizUserEntryId,
+                        'filter:objectType': 'VidiunAnswerCuePointFilter',
+                        'filter:entryIdEqual': vQuizEntryId,
+                        'filter:quizUserEntryIdEqual':vQuizUserEntryId,
                         'filter:cuePointTypeEqual': 'quiz.QUIZ_ANSWER'
                     }];
 
-                    _this.getKClient().doRequest(getCp, function (data) {
+                    _this.getVClient().doRequest(getCp, function (data) {
                         callback(data);
                     });
                 };
@@ -71,7 +71,7 @@
                     });
 
                 };
-                this.addAnswer = function(isAnswered,selectedAnswer,kQuizUserEntryId,questionNr,callback,openQuestionText){
+                this.addAnswer = function(isAnswered,selectedAnswer,vQuizUserEntryId,questionNr,callback,openQuestionText){
 
                     var _this = this,answerParams = {};
                     var quizSetAnswer = {

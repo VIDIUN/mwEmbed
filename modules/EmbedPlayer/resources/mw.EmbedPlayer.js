@@ -884,7 +884,7 @@
 					if (!mw.isMobileDevice() && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('splayer')) {
 						$.each(this.mediaElement.sources, function (currentIndex, currentSource) {
 							if (currentSource.getFlavorId() == "ism") {
-								errorObj = _this.getKalturaMsgObject('mwe-embedplayer-install-silverlight');
+								errorObj = _this.getVidiunMsgObject('mwe-embedplayer-install-silverlight');
 								errorObj.code = "7000";
 								return;
 							}
@@ -1753,7 +1753,7 @@
 				this.postSequenceFlag = false;
 				this.shouldEndClip = true;
 				this.mediaLoadedFlag = false;
-                window.kWidgetSupport.resetGUID();
+                window.vWidgetSupport.resetGUID();
 			}
 
 			// Add a loader to the embed player:
@@ -1858,7 +1858,7 @@
 			if (!this.widgetLoaded) {
 				this.widgetLoaded = true;
 				mw.log("EmbedPlayer:: Trigger: widgetLoaded");
-				if( mw.getConfig('Kaltura.ForceLayoutRedraw') && ! (this.getInterface().width() === 0) && ! (this.getInterface().height() === 0)  && ! this.isPlaylistScreen() ) {
+				if( mw.getConfig('Vidiun.ForceLayoutRedraw') && ! (this.getInterface().width() === 0) && ! (this.getInterface().height() === 0)  && ! this.isPlaylistScreen() ) {
 					mw.log("EmbedPlayer:: ForceLayoutRedraw");
 					var resize = {
 						width: this.getInterface().width(),
@@ -2236,8 +2236,8 @@
 		},
 
 		isMobileSkin: function(){
-			var skin = this.getRawKalturaConfig("layout") ? this.getRawKalturaConfig("layout").skin : window["kalturaIframePackageData"].playerConfig.layout ? window["kalturaIframePackageData"].playerConfig.layout.skin : "kdark";
-			return (mw.isChromeCast() || ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "kdark" &&
+			var skin = this.getRawVidiunConfig("layout") ? this.getRawVidiunConfig("layout").skin : window["vidiunIframePackageData"].playerConfig.layout ? window["vidiunIframePackageData"].playerConfig.layout.skin : "vdark";
+			return (mw.isChromeCast() || ( mw.getConfig("EmbedPlayer.EnableMobileSkin") === true && skin === "vdark" &&
 				mw.isMobileDevice() && !mw.isWindowsPhone() ));		},
 
 		/**
@@ -3366,7 +3366,7 @@
 		handlePlayerError: function (data, shouldHandlePlayerError) {
 			if (this.shouldHandlePlayerError || shouldHandlePlayerError) {
 				var message = this.getErrorMessage(data);
-				var errorObj = { title: this.getKalturaMsg('ks-GENERIC_ERROR_TITLE'), message: message};
+				var errorObj = { title: this.getVidiunMsg('vs-GENERIC_ERROR_TITLE'), message: message};
 				if(data.code){
 					errorObj.code = data.code;
 				}

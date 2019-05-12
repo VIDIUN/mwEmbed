@@ -2,7 +2,7 @@
         "use strict";
         mw.dualScreen = mw.dualScreen || {};
 
-        mw.dualScreen.externalControlManager = mw.KBasePlugin.extend({
+        mw.dualScreen.externalControlManager = mw.VBasePlugin.extend({
             /* DEVELOPER NOTICE: you should not set any property directly here (they will be shared between instances) - use the setup function instead */
             defaultConfig: {
                 /* DEVELOPER NOTICE : don't use this plugin config feature since it is a detached plugin. A detached plugin cannot access the player configuration to support overrides */

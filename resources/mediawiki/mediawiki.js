@@ -942,8 +942,8 @@ var mw = ( function ( $, undefined ) {
             }
 
             function getPid() {
-                if (kalturaIframePackageData && kalturaIframePackageData.playerConfig && kalturaIframePackageData.playerConfig.widgetId) {
-                	return kalturaIframePackageData.playerConfig.widgetId;
+                if (vidiunIframePackageData && vidiunIframePackageData.playerConfig && vidiunIframePackageData.playerConfig.widgetId) {
+                	return vidiunIframePackageData.playerConfig.widgetId;
 				}
 				return null;
 			}
@@ -1350,7 +1350,7 @@ var mw = ( function ( $, undefined ) {
                     if ((/CrKey/.test(navigator.userAgent))) {
 						var excludeForChromeCast = ["mw.EmbedPlayerNativeComponent", "mw.EmbedPlayerSilverlight", "mw.EmbedPlayerVlc",
 							"mw.EmbedPlayerYouTube", "mw.EmbedPlayerGeneric", "mw.EmbedPlayerImageOverlay", "mw.EmbedPlayerJava",
-							"mw.EmbedPlayerKplayer", "mw.EmbedPlayerMultiDRM"];
+							"mw.EmbedPlayerVplayer", "mw.EmbedPlayerMultiDRM"];
 
                         registry["mw.EmbedPlayer"].dependencies = registry["mw.EmbedPlayer"].dependencies.filter(function (dep) {
                             return excludeForChromeCast.indexOf(dep) === -1;

@@ -6,11 +6,11 @@
 </head>
 <body>
 <h2>DRM dash using shaka</h2>
-<div id="kaltura_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
+<div id="vidiun_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
 
 <script>
-    kWidget.embed({
-        "targetId": "kaltura_player_1453904613",
+    vWidget.embed({
+        "targetId": "vidiun_player_1453904613",
 //        "wid": "_4171",
 //        "uiconf_id": 15190234,
 //        "entry_id": "0_2jiaa9tb",
@@ -71,9 +71,9 @@
 
 
         ,readyCallback: function(videoid){
-            var kdp = document.getElementById(videoid);
-            kdp.kBind( 'playerReady', function () {
-                kdp.sendNotification("loadExternalClosedCaptions", {
+            var vdp = document.getElementById(videoid);
+            vdp.vBind( 'playerReady', function () {
+                vdp.sendNotification("loadExternalClosedCaptions", {
                     languages: [{
                         "language": "Hebrew",
                         "languageCode": "he",
@@ -96,8 +96,8 @@
             });
         }
     });
-//kWidget.embed({
-//    "targetId": "kaltura_player_1453904613",
+//vWidget.embed({
+//    "targetId": "vidiun_player_1453904613",
 //    "wid": "_",
 //    "uiconf_id": "8413350",
 //    "flashvars": {

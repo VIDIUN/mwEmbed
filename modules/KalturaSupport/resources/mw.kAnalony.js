@@ -4,7 +4,7 @@
 ( function( mw, $ ) {
 	"use strict";
 
-	mw.PluginManager.add( 'kAnalony' , mw.KBasePlugin.extend( {
+	mw.PluginManager.add( 'vAnalony' , mw.VBasePlugin.extend( {
 
 		defaultConfig: {
 			id3TagMaxDelay: 20000
@@ -118,8 +118,8 @@
 			var playerEvent = this.PlayerEvent;
 			this.embedPlayer.bindHelper( 'playerReady' , function () {
                 _this.resetPlayerflags();
-				if ( _this.kalturaContextData && _this.kalturaContextData.flavorAssets && _this.kalturaContextData.flavorAssets.length === 1 ){
-			        _this.currentBitRate = _this.kalturaContextData.flavorAssets[0].bitrate;
+				if ( _this.vidiunContextData && _this.vidiunContextData.flavorAssets && _this.vidiunContextData.flavorAssets.length === 1 ){
+			        _this.currentBitRate = _this.vidiunContextData.flavorAssets[0].bitrate;
 		        }
 				_this.sendAnalytics(playerEvent.IMPRESSION);
 			});
@@ -478,7 +478,7 @@
 
 		sendAnalytics : function(eventType, additionalData){
 			//Don't send analytics if entry or partner id are missing
-			if (!(this.embedPlayer.kentryid && this.embedPlayer.kpartnerid)){
+			if (!(this.embedPlayer.ventryid && this.embedPlayer.vpartnerid)){
 				return;
 			}
 			var _this = this;
@@ -526,15 +526,15 @@
             };
             // support legacy ( deprecated ) top level config
             for( var fvKey in flashVarEvents){
-                if( this.embedPlayer.getKalturaConfig( '', fvKey ) ){
-                    statsEvent[ flashVarEvents[ fvKey ] ] = this.embedPlayer.getKalturaConfig('', fvKey );
+                if( this.embedPlayer.getVidiunConfig( '', fvKey ) ){
+                    statsEvent[ flashVarEvents[ fvKey ] ] = this.embedPlayer.getVidiunConfig('', fvKey );
                 }
             }
 
-			// add ks if available
-			var ks = this.kClient.getKs();
-			if (ks){
-				statsEvent["ks"] = ks;
+			// add vs if available
+			var vs = this.vClient.getVs();
+			if (vs){
+				statsEvent["vs"] = vs;
 			}
 
 			// add preferred bitrate if defined by the user

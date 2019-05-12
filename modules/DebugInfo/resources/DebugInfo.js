@@ -7,7 +7,7 @@ mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
         cssFileName: 'modules/debugInfo/resources/DebugInfo.css',
         isVisible:false,
         emailButton:true,
-        emailAddress:"kalturasupport@kaltura.com"
+        emailAddress:"vidiunsupport@vidiun.com"
 	},
     getBaseConfig: function() {
         var parentConfig = this._super();
@@ -118,7 +118,7 @@ mw.PluginManager.add( 'debugInfo', mw.VBaseComponent.extend({
 
         this.bind("hlsFragChanged", function( e, data ){
             if (data.url) {
-                _this.extractKES(data.url);
+                _this.extractVES(data.url);
             }
             $scope.hlsCurrentSegment=data.url;
             $scope.startPTS=data.startPTS;

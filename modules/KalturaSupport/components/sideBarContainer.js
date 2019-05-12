@@ -265,7 +265,7 @@
 				this.$elHelper = $('<a>' )
 					.addClass( 'sideBarContainerReminder tooltipBelow ' + _this.getConfig('position') )
 					.prop("title", title)
-					.attr({"data-show-tooltip":true, "tabindex":52,"href":"#","aria-label":gM("ks-sidebar-toggleBtn")})
+					.attr({"data-show-tooltip":true, "tabindex":52,"href":"#","aria-label":gM("vs-sidebar-toggleBtn")})
 					.append($('<div id="sideBarContainerReminderContainer">' )
 						.addClass( 'icon-chapterMenu' )
 					);

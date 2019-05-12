@@ -1,22 +1,22 @@
-function jsKalturaPlayerTest( videoId ){
+function jsVidiunPlayerTest( videoId ){
 		module('RaptMedia');
 
     window.onTestPlayerPlayed = function setPlayedOnce() {
         window.RaptMedia_playing = true;
     };
 
-    var kdp = $('#' + videoId)[0];
+    var vdp = $('#' + videoId)[0];
 
     asyncTest('RaptMedia plugin exists', function() {
-        kalturaQunitWaitForPlayer(function(){
-            equal(kdp.evaluate('{raptMedia.plugin}'), true, 'RaptMedia plugin exists');
+        vidiunQunitWaitForPlayer(function(){
+            equal(vdp.evaluate('{raptMedia.plugin}'), true, 'RaptMedia plugin exists');
             start();
         });
     });
     asyncTest('Playback has started', function() {
-        kalturaQunitWaitForPlayer(function() {
-            kdp.addJsListener('playerPlayed', 'onTestPlayerPlayed');
-					  kdp.sendNotification('doPlay');
+        vidiunQunitWaitForPlayer(function() {
+            vdp.addJsListener('playerPlayed', 'onTestPlayerPlayed');
+					  vdp.sendNotification('doPlay');
             setTimeout(function() {
                 ok(window.RaptMedia_playing, 'Player has started playing');
                 start();

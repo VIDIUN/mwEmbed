@@ -3,7 +3,7 @@
  */
 (function (mw, $) {
     "use strict";
-    mw.KIVQScreenTemplate = function (embedPlayer) {
+    mw.VIVQScreenTemplate = function (embedPlayer) {
         $(".videoHolder").attr("aria-live", "polite");
         return this.init(embedPlayer);
     };

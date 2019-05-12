@@ -2,7 +2,7 @@
     "use strict";
     var NUM_OF_MAX_CHAR = 500;
 
-    mw.KQnaModule = function (embedPlayer,qnaPlugin,qnaService) {
+    mw.VQnaModule = function (embedPlayer,qnaPlugin,qnaService) {
         return this.init(embedPlayer,qnaPlugin,qnaService);
     };
     if (!(mw.VQnaModule.prototype = {

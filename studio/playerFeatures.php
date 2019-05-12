@@ -133,9 +133,9 @@ if (is_file($html5ManifestFile)) {
 }
 
 //Traverse the PS modules directory
-global $wgKwidgetPsEnabledModules;
-foreach ($wgKwidgetPsEnabledModules as $moduleName) {
-    $manifestPath = realpath(dirname($wgKalturaPSHtml5SettingsPath) . "/../ps/modules/$moduleName/{$moduleName}.manifest.json");
+global $wgVwidgetPsEnabledModules;
+foreach ($wgVwidgetPsEnabledModules as $moduleName) {
+    $manifestPath = realpath(dirname($wgVidiunPSHtml5SettingsPath) . "/../ps/modules/$moduleName/{$moduleName}.manifest.json");
     if( is_file( $manifestPath ) ){
         $plugins = json_decode( file_get_contents($manifestPath), TRUE );
     }
@@ -273,7 +273,7 @@ foreach ($menu as $menuItem => &$menuContent) {
 }
 
 //Traverse PS featureStructure
-$psFeaturesStructure = realpath(dirname($wgKalturaPSHtml5SettingsPath) . "/../ps/modules/featuresStructure.php");
+$psFeaturesStructure = realpath(dirname($wgVidiunPSHtml5SettingsPath) . "/../ps/modules/featuresStructure.php");
 if (is_file($psFeaturesStructure)){
     $psMenu = include($psFeaturesStructure);
     foreach ($psMenu as $menuItem => &$menuContent) {

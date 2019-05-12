@@ -105,7 +105,7 @@
 		addBinding: function(){
 			var _this = this;
 
-			this.bind('KalturaSupport_ThumbCuePointsReady' , function(){
+			this.bind('VidiunSupport_ThumbCuePointsReady' , function(){
 				if (_this.getPlayer().isLive()){
 					//Forcing 1st slide is only on VOD entry
 					return;

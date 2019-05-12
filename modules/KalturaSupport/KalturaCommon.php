@@ -11,18 +11,18 @@ define( 'VIDIUN_GENERIC_SERVER_ERROR', "Error getting sources from server. Pleas
 require_once( dirname( __FILE__ ) . '/../../includes/Pimple.php' );
 // Include request utility helper
 require_once( dirname( __FILE__ ) . '/RequestHelper.php' );
-// Include the kaltura client
-require_once( dirname( __FILE__ ) . '/Client/KalturaClientHelper.php' );
-// Include Kaltura Logger
-require_once( dirname( __FILE__ ) . '/KalturaLogger.php' );
-// Include Kaltura Cache
-require_once( dirname( __FILE__ ) . '/Cache/kFileSystemCacheWrapper.php');
-require_once( dirname( __FILE__ ) . '/Cache/kMemcacheCacheWrapper.php');
-require_once( dirname( __FILE__ ) . '/Cache/kNoCacheWrapper.php');
-require_once( dirname( __FILE__ ) . '/KalturaCache.php');
-require_once( dirname( __FILE__ ) . '/KalturaUtils.php');
+// Include the vidiun client
+require_once( dirname( __FILE__ ) . '/Client/VidiunClientHelper.php' );
+// Include Vidiun Logger
+require_once( dirname( __FILE__ ) . '/VidiunLogger.php' );
+// Include Vidiun Cache
+require_once( dirname( __FILE__ ) . '/Cache/vFileSystemCacheWrapper.php');
+require_once( dirname( __FILE__ ) . '/Cache/vMemcacheCacheWrapper.php');
+require_once( dirname( __FILE__ ) . '/Cache/vNoCacheWrapper.php');
+require_once( dirname( __FILE__ ) . '/VidiunCache.php');
+require_once( dirname( __FILE__ ) . '/VidiunUtils.php');
 
-// Include Kaltura Utilities
+// Include Vidiun Utilities
 
 // Initilize our shared container
 $container = new Pimple();
@@ -63,7 +63,7 @@ $container['file_cache_adapter'] = $container->share(function ($c) {
 
 $container['memcache_cache_adapter'] = $container->share(function ($c) {
 	global $wgMemcacheConfiguration;
-	$memCache = new kMemcacheCacheWrapper();
+	$memCache = new vMemcacheCacheWrapper();
 	$memCache->init($wgMemcacheConfiguration['host'], $wgMemcacheConfiguration['port'], $wgMemcacheConfiguration['flags']);
 	return $memCache;
 });
@@ -71,7 +71,7 @@ $container['memcache_cache_adapter'] = $container->share(function ($c) {
 $container['cache_helper'] = $container->share(function ($c) {
 
 	// Choose which cache adapter to use
-	global $wgEnableScriptDebug, $wgKalturaForceResultCache,$wgUseMemcache;
+	global $wgEnableScriptDebug, $wgVidiunForceResultCache,$wgUseMemcache;
 	$useCache = !$wgEnableScriptDebug;
 	// Force cache flag ( even in debug )
 	if( $wgVidiunForceResultCache === true){
@@ -88,7 +88,7 @@ $container['cache_helper'] = $container->share(function ($c) {
 		$cacheProvider = 'memcache_cache_adapter';
 	}
 	$className = ($useCache) ? $cacheProvider : 'no_cache_adapter';
-	return new KalturaCache( $c[ $className ], $c['cache_expiry'] );
+	return new VidiunCache( $c[ $className ], $c['cache_expiry'] );
 });
 
 // Setup client helper

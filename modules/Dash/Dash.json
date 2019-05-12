@@ -4,7 +4,7 @@
             "resources/shaka-player.compiled.js" ,
             "resources/dash.js"
         ],
-        "dependencies": ["mw.KBasePlugin"],
-        "kalturaPluginName": "dash"
+        "dependencies": ["mw.VBasePlugin"],
+        "vidiunPluginName": "dash"
     }
 }

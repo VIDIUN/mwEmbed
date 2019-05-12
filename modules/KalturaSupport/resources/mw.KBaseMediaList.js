@@ -158,10 +158,10 @@
 									var cssLink = this.getConfig('cssFileName');
 									if (cssLink) {
 										//Scroller CSS
-										kWidget.appendCssUrl(kWidget.getPath() + this.getConfig("scrollerCssPath"), window.parent.document);
+										vWidget.appendCssUrl(vWidget.getPath() + this.getConfig("scrollerCssPath"), window.parent.document);
 										//Plugin CSS
-										cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : kWidget.getPath() + cssLink; // support external CSS links
-										kWidget.appendCssUrl(cssLink, window.parent.document);
+										cssLink = cssLink.toLowerCase().indexOf("http") === 0 ? cssLink : vWidget.getPath() + cssLink; // support external CSS links
+										vWidget.appendCssUrl(cssLink, window.parent.document);
 									} else {
 										mw.log("Error: " + this.pluginName + " could not find CSS link");
 									}
@@ -180,7 +180,7 @@
 										var containerHeight = this.getLayout() === "vertical" ? this.getConfig("mediaItemHeight") * this.getConfig('MinClips') + this.getConfig('verticalHeaderHeight') : this.getConfig("mediaItemHeight") + this.getConfig('horizontalHeaderHeight');
 										$(this.$mediaListContainer).height(containerHeight);
 									}
-									this.$mediaListContainer.addClass("k-" + this.getLayout());
+									this.$mediaListContainer.addClass("v-" + this.getLayout());
 								} catch (e) {
 									mw.log("Error: " + this.pluginName + " could not access parent iframe");
 								}
@@ -408,7 +408,7 @@
 		},
 		getThumbUrl: function(item) {
 			var time = item.thumbOffset || item.startTime;
-			var thumbUrl = kWidgetSupport.getKalturaThumbnailUrl(
+			var thumbUrl = vWidgetSupport.getVidiunThumbnailUrl(
 				$.extend( {}, this.baseThumbSettings, {
                     'url': this.embedPlayer.evaluate('{mediaProxy.entry.thumbnailUrl}'),
 					'vid_sec': parseInt( time / 1000 )
@@ -424,7 +424,7 @@
 		},
 		getThumRotatorUrl: function(){
 			var _this = this;
-			var imageSlicesUrl = kWidgetSupport.getKalturaThumbnailUrl(
+			var imageSlicesUrl = vWidgetSupport.getVidiunThumbnailUrl(
 				$.extend( {}, this.baseThumbSettings, {
                     'url': this.embedPlayer.evaluate('{mediaProxy.entry.thumbnailUrl}'),
 					'vid_slices': _this.getSliceCount()

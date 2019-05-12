@@ -1,5 +1,5 @@
 /*
- * The "kaltura player" embedPlayer interface for fallback h.264 and flv video format support
+ * The "vidiun player" embedPlayer interface for fallback h.264 and flv video format support
  */
 (function ( mw, $ ) {
     "use strict";
@@ -13,7 +13,7 @@
             'stop': true,
             'volumeControl': true
         },
-        supportedPlugins: [ 'doubleClick', 'youbora', 'kAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat' ],
+        supportedPlugins: [ 'doubleClick', 'youbora', 'vAnalony', 'related', 'comScoreStreamingTag', 'watermark', 'heartbeat' ],
         seeking: false,
         currentTime: 0,
         duration: 0,
@@ -553,9 +553,9 @@
 
         getEmbedConfig: function () {
             var embedConfig = {
-                'publisherID': this.kwidgetid.substr( 1 ),
-                'uiconfID': this.getKalturaConfig('chromecast').uiconf_id || this.kuiconfid,
-                'entryID': this.kentryid,
+                'publisherID': this.vwidgetid.substr( 1 ),
+                'uiconfID': this.getVidiunConfig('chromecast').uiconf_id || this.vuiconfid,
+                'entryID': this.ventryid,
                 'flashVars': this.getFlashVars()
             };
             mw.log( "EmbedPlayerChromecast:: getEmbedConfig", embedConfig );
@@ -563,18 +563,18 @@
         },
 
         getReceiverConfig: function () {
-            var receiverConfig = this.getKalturaConfig('chromecast').receiverConfig || {};
+            var receiverConfig = this.getVidiunConfig('chromecast').receiverConfig || {};
             receiverConfig.defaultLanguageKey = this.beforeCastParams.captions ? this.beforeCastParams.captions.language : null;
             return receiverConfig;
         },
 
         getMediaMetadata: function () {
             //TODO: Do we need to get external image also?
-            var thumbnailUrl = kWidgetSupport.getKalturaThumbnailUrl( { url: this.poster, width: 800, height: 1200 } );
-            if ( this.kalturaPlayerMetaData ) {
+            var thumbnailUrl = vWidgetSupport.getVidiunThumbnailUrl( { url: this.poster, width: 800, height: 1200 } );
+            if ( this.vidiunPlayerMetaData ) {
                 var mediaMetadata = new chrome.cast.media.MovieMediaMetadata();
-                mediaMetadata.title = this.kalturaPlayerMetaData.name || '';
-                mediaMetadata.subtitle = this.kalturaPlayerMetaData.description || '';
+                mediaMetadata.title = this.vidiunPlayerMetaData.name || '';
+                mediaMetadata.subtitle = this.vidiunPlayerMetaData.description || '';
                 if ( thumbnailUrl ) {
                     var image = new chrome.cast.Image( thumbnailUrl );
                     image.width = 800;
@@ -592,23 +592,23 @@
             var _this = this;
             var fv = {};
             this.supportedPlugins.forEach( function ( plugin ) {
-                if ( !$.isEmptyObject( _this.getRawKalturaConfig( plugin ) ) ) {
-                    fv[ plugin ] = _this.getRawKalturaConfig( plugin );
+                if ( !$.isEmptyObject( _this.getRawVidiunConfig( plugin ) ) ) {
+                    fv[ plugin ] = _this.getRawVidiunConfig( plugin );
                 }
             } );
             var proxyData = this.getProxyData();
             if ( proxyData ) {
                 fv[ "proxyData" ] = proxyData;
             }
-            if ( this.getFlashvars( "ks" ) ) {
-                fv[ "ks" ] = this.getFlashvars( "ks" );
+            if ( this.getFlashvars( "vs" ) ) {
+                fv[ "vs" ] = this.getFlashvars( "vs" );
             }
             return fv;
         },
 
         getProxyData: function () {
             mw.log( "EmbedPlayerChromecast:: getProxyData" );
-            var proxyData = this.getKalturaConfig("chromecast", "proxyData" );
+            var proxyData = this.getVidiunConfig("chromecast", "proxyData" );
             if ( proxyData ) {
                 var _this = this;
                 var recursiveIteration = function ( object ) {
@@ -625,7 +625,7 @@
                 recursiveIteration( proxyData );
                 return proxyData;
             } else {
-                proxyData = this.getKalturaConfig( "originalProxyData" );
+                proxyData = this.getVidiunConfig( "originalProxyData" );
                 if ( !$.isEmptyObject( proxyData ) ) {
                     if ( proxyData.data ) {
                         return proxyData.data;
@@ -675,7 +675,7 @@
             $( ".chromecastThumbBorder" ).width( thumbWidth );
             $( ".chromecastThumb" ).height( thumbWidth / factor );
             $( ".chromecastThumbBorder" ).height( thumbWidth / factor );
-            $( ".chromecastTitle" ).text( this.kalturaPlayerMetaData.name );
+            $( ".chromecastTitle" ).text( this.vidiunPlayerMetaData.name );
             $( "#chromecastReceiverName" ).text( this.receiverName );
         },
 

@@ -120,7 +120,7 @@
 				return (cuePoint.cuePointType == 'thumbCuePoint.Thumb');
 			});
 			var loadThumbnailWithReferrer = this.embedPlayer.getFlashvars( 'loadThumbnailWithReferrer' );
-			var referrer = window.kWidgetSupport.getHostPageUrl();
+			var referrer = window.vWidgetSupport.getHostPageUrl();
 
             function processAllCuePoints() {
             	var urls=[];
@@ -158,7 +158,7 @@
 					return;
 				}
                 // do the api request
-                _this.getKalturaClient().doRequest({
+                _this.getVidiunClient().doRequest({
                     'service': 'thumbAsset',
                     'action': 'getUrl',
                     'id': requestArray[index].id
@@ -170,7 +170,7 @@
                     } else {
                         getUrl(index+1)
                     }
-                },false,null,false,"Kaltura.thumbAssetServiceUrl"); //we force the API request to use specific domain
+                },false,null,false,"Vidiun.thumbAssetServiceUrl"); //we force the API request to use specific domain
             }
             //Create request data only for cuepoints that have assetId
             $.each(thumbCuePoint, function (index, item) {
@@ -197,13 +197,13 @@
 					}
 				} else {
                         // do the api request
-                    this.getKalturaClient().doRequest(requestArray, function (data) {
+                    this.getVidiunClient().doRequest(requestArray, function (data) {
                         // Validate result
                         if (requestArray.length === 1) {
                             data = [data];
                         }
                         processThumbnailUrls(data);
-                    },false,null,false,"Kaltura.thumbAssetServiceUrl");
+                    },false,null,false,"Vidiun.thumbAssetServiceUrl");
                 }
 			} else {
 				if (callback) {
@@ -224,7 +224,7 @@
 		handlePushCuepoints: function(cuepoints){
         	this.fixLiveCuePointArray(cuepoints);
         	this.updateCuePoints(cuepoints);
-        	this.embedPlayer.triggerHelper("KalturaSupport_CuePointsUpdated", [
+        	this.embedPlayer.triggerHelper("VidiunSupport_CuePointsUpdated", [
             cuepoints.length
        	 ]);
 		},
@@ -241,29 +241,29 @@
 			});
 			// By default use push notification - unless explicitly usePollingForSlides is set to true
 			if(!mw.getConfig("usePollingForSlides")){
-				// if the KPushServerNotification code is not loaded - stop here.
-				if(!mw.KPushServerNotification){
-					mw.log("mw.KCuePoints::Missing KPushServerNotification. Slides for live are not supposed to work");
+				// if the VPushServerNotification code is not loaded - stop here.
+				if(!mw.VPushServerNotification){
+					mw.log("mw.VCuePoints::Missing VPushServerNotification. Slides for live are not supposed to work");
 					return;
 				}
-				this.kPushServerNotification= mw.KPushServerNotification.getInstance(this.embedPlayer);
-				var thumbsPushNotification =  this.kPushServerNotification.createNotificationRequest(
+				this.vPushServerNotification= mw.VPushServerNotification.getInstance(this.embedPlayer);
+				var thumbsPushNotification =  this.vPushServerNotification.createNotificationRequest(
 				"THUMB_CUE_POINT_READY_NOTIFICATION",
-				{"entryId": _this.embedPlayer.kentryid}, function(cuepoints) {
+				{"entryId": _this.embedPlayer.ventryid}, function(cuepoints) {
 					_this.handlePushCuepoints(cuepoints);
 				});
-				var layoutPushNotification =  this.kPushServerNotification.createNotificationRequest(
+				var layoutPushNotification =  this.vPushServerNotification.createNotificationRequest(
 				"SLIDE_VIEW_CHANGE_CODE_CUE_POINT",
-				{"entryId": _this.embedPlayer.kentryid}, function(cuepoints) {
+				{"entryId": _this.embedPlayer.ventryid}, function(cuepoints) {
 					_this.handlePushCuepoints(cuepoints);
 				});
-				this.kPushServerNotification.registerNotifications([thumbsPushNotification]);
-				this.kPushServerNotification.registerNotifications([layoutPushNotification]);
+				this.vPushServerNotification.registerNotifications([thumbsPushNotification]);
+				this.vPushServerNotification.registerNotifications([layoutPushNotification]);
 				// don't setup the list interval
 				return;
 			}
 			var liveCuepointsRequestInterval = mw.getConfig("EmbedPlayer.LiveCuepointsRequestInterval", 10000);
-			mw.log("mw.KCuePoints::start live cue points watchdog, polling rate: " + liveCuepointsRequestInterval + "ms");
+			mw.log("mw.VCuePoints::start live cue points watchdog, polling rate: " + liveCuepointsRequestInterval + "ms");
 			//Start live cuepoint pulling
 			this.liveCuePointsIntervalId = setInterval(function(){
 				_this.requestLiveCuepoints();
@@ -304,7 +304,7 @@
 			// Only add lastUpdatedAt filter if any cue points already received
 			if (lastCreationTime > 0) {
 				var cpThreshold  = mw.getConfig("cuePointsThreshold") ? parseInt(mw.getConfig("cuePointsThreshold")) : 60;
-				mw.log("mw.KCuePoints:: Loading cue points with threshold of " + cpThreshold + " seconds : "+ (lastCreationTime - cpThreshold) );
+				mw.log("mw.VCuePoints:: Loading cue points with threshold of " + cpThreshold + " seconds : "+ (lastCreationTime - cpThreshold) );
 				request['filter:createdAtGreaterThanOrEqual'] = lastCreationTime - cpThreshold;
 			}
 			this.getVidiunClient().doRequest( request,

@@ -1,4 +1,4 @@
-(function (mw, $, kWidgetSupport, Hls) {
+(function (mw, $, vWidgetSupport, Hls) {
     'use strict';
 
     mw.dualScreen = mw.dualScreen || {};
@@ -69,7 +69,7 @@
         },
 
         getPoster: function getPoster() {
-            return kWidgetSupport.getKalturaThumbnailUrl({
+            return vWidgetSupport.getVidiunThumbnailUrl({
                 url: this.stream.thumbnailUrl,
                 width: this.embedPlayer.getWidth(),
                 height: this.embedPlayer.getHeight()
@@ -92,4 +92,4 @@
             return this.streamerType === 'hls' && mw.isDesktopSafari();
         }
     };
-})(window.mw, window.jQuery, window.kWidgetSupport, window.Hls);
+})(window.mw, window.jQuery, window.vWidgetSupport, window.Hls);

@@ -65,7 +65,7 @@
 		},
 		isSourceOnly: function()	{
 			//Entries with only a source have only one flavor
-	 		if (this.getPlayer().kalturaFlavors.length === 1) {
+	 		if (this.getPlayer().vidiunFlavors.length === 1) {
 				return true;
 			}
 		}

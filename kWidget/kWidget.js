@@ -196,7 +196,7 @@
 					window.location.host != 'localhost'
 				) {
 					if (console && console.error) {
-						console.error("Error: Using non-production version of kaltura player library. Please see http://knowledge.kaltura.com/production-player-urls")
+						console.error("Error: Using non-production version of vidiun player library. Please see http://knowledge.vidiun.com/production-player-urls")
 					}
 				}
 			}
@@ -387,12 +387,12 @@
 
 			if (this.isMobileDevice()){
 				if (settings.flashvars['layout']){
-					settings.flashvars.layout['skin'] = "kdark";
+					settings.flashvars.layout['skin'] = "vdark";
 				}
 			}
 
-			if ( document.URL.indexOf('forceKalturaNativeComponentPlayer') !== -1 ||
-				document.URL.indexOf('forceKalturaNative') !== -1) {
+			if ( document.URL.indexOf('forceVidiunNativeComponentPlayer') !== -1 ||
+				document.URL.indexOf('forceVidiunNative') !== -1) {
 				settings.flashvars["nativeCallout"] = { plugin: true }
 			}
 
@@ -648,8 +648,8 @@
 			}
 			elm.innerHTML = '' +
 				'<div style="position: relative; width: 100%; height: 100%;">' +
-				'<button aria-label="Play video content"  class="kWidgetCentered kWidgetPlayBtn" ' + 'id="' + targetId + '_playBtn" ></button>' +
-				'<img class="kWidgetCentered" src="' + this.getKalturaThumbUrl(settings) + '" alt="Video thumbnail">' +
+				'<button aria-label="Play video content"  class="vWidgetCentered vWidgetPlayBtn" ' + 'id="' + targetId + '_playBtn" ></button>' +
+				'<img class="vWidgetCentered" src="' + this.getVidiunThumbUrl(settings) + '" alt="Video thumbnail">' +
 				'</div>';
 			// Add a click binding to do the really embed:
 			var playBtn = document.getElementById(targetId + '_playBtn');
@@ -660,11 +660,11 @@
 				}
 				settings.readyCallback = function (playerId) {
 					// issue a play ( since we already clicked the play button )
-					var kdp = document.getElementById(playerId);
-					kdp.kBind('mediaReady', function () {
+					var vdp = document.getElementById(playerId);
+					vdp.vBind('mediaReady', function () {
 						setTimeout(function () {
 							if (_this.isMobileDevice()) {
-								kdp.sendNotification('doPlay');
+								vdp.sendNotification('doPlay');
 							}
 						}, 0);
 					});
@@ -972,8 +972,8 @@
 			iframe.id = iframeId;
 			iframe.scrolling = "no";
 			iframe.name = iframeId;
-			iframe.className = 'mwEmbedKalturaIframe';
-			iframe.setAttribute('title', 'The Kaltura Dynamic Video Player');
+			iframe.className = 'mwEmbedVidiunIframe';
+			iframe.setAttribute('title', 'The Vidiun Dynamic Video Player');
 			// IE8 requires frameborder attribute to hide frame border:
 			iframe.setAttribute('frameborder', '0');
 
@@ -1282,7 +1282,7 @@
 			// grab a black source
             var vidSrc;
             var protocol = ((location.protocol && location.protocol.slice(0, -1) || "https"));
-            vidSrc = protocol + "://www.kaltura.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/"+ protocol +"/a.mp4";
+            vidSrc = protocol + "://www.vidiun.com/p/243342/sp/24334200/playManifest/entryId/1_vp5cng42/flavorId/1_6wf0o9n7/format/url/protocol/"+ protocol +"/a.mp4";
 
 			// Add the iframe skeleton with video element to the iframe
 			newDoc.write('<html>' +

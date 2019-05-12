@@ -2,7 +2,7 @@
     'use strict';
 
     mw.dualScreen = mw.dualScreen || {};
-    mw.dualScreen.StreamUtils = mw.KBasePlugin.extend({
+    mw.dualScreen.StreamUtils = mw.VBasePlugin.extend({
         defaultConfig: {
             streamSelectorConfig: {}
         },
@@ -193,7 +193,7 @@
                 .replace(entryId, stream.id)
                 .replace(source.assetid, assetId);
 
-            if (this.getPlayer().instanceOf === 'Kplayer') {
+            if (this.getPlayer().instanceOf === 'Vplayer') {
                 src = src
                     .replace('/format/url/', '/format/http/')
                     .replace('/a.mp4', '/a/a.f4m')

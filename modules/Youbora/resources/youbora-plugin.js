@@ -1,19 +1,19 @@
 /**
  * @license
- * Youbora Plugin Kaltura player
- * Copyright NicePopleAtWork & Kaltura
+ * Youbora Plugin Vidiun player
+ * Copyright NicePopleAtWork & Vidiun
  * @author Jordi Aguilar & Dan Ziv
  */
 
 var VERSION = '1.0.0';
 
-$YB.plugins.KalturaV2 = function (player, options) {
+$YB.plugins.VidiunV2 = function (player, options) {
   try {
     /** Name and platform of the plugin.*/
-    this.pluginName = 'kaltura-js';
+    this.pluginName = 'vidiun-js';
 
     /** Version of the plugin. ie: 5.1.0-name */
-    this.pluginVersion = '5.4.5-' + VERSION + '-kaltura-js';
+    this.pluginVersion = '5.4.5-' + VERSION + '-vidiun-js';
 
     /* Initialize YouboraJS */
     this.startMonitoring(player, options);
@@ -28,13 +28,13 @@ $YB.plugins.KalturaV2 = function (player, options) {
 };
 
 /** Inherit from generic plugin */
-$YB.plugins.KalturaV2.prototype = new $YB.plugins.Generic;
+$YB.plugins.VidiunV2.prototype = new $YB.plugins.Generic;
 
-$YB.plugins.KalturaV2.prototype.getPlayhead = function () {
+$YB.plugins.VidiunV2.prototype.getPlayhead = function () {
   return this.player.getPlayer().currentTime;
 };
 
-$YB.plugins.KalturaV2.prototype.getBitrate = function () {
+$YB.plugins.VidiunV2.prototype.getBitrate = function () {
   if (this.player.getPlayer().isMulticast &&
     $.isFunction(this.player.getPlayer().getMulticastBitrate)
   ) {
@@ -49,35 +49,35 @@ $YB.plugins.KalturaV2.prototype.getBitrate = function () {
   return (this.bitrate !== -1) ? (this.bitrate * 1024) : -1
 };
 
-$YB.plugins.KalturaV2.prototype.getMediaDuration = function () {
+$YB.plugins.VidiunV2.prototype.getMediaDuration = function () {
   return this.player.getPlayer().evaluate("{mediaProxy.entry.duration}");
 };
 
-$YB.plugins.KalturaV2.prototype.getTitle = function () {
+$YB.plugins.VidiunV2.prototype.getTitle = function () {
   return this.player.getPlayer().evaluate("{mediaProxy.entry.name}");
 };
 
-$YB.plugins.KalturaV2.prototype.getRendition = function () {
+$YB.plugins.VidiunV2.prototype.getRendition = function () {
   var source = this.player.getPlayer().mediaElement.selectedSource;
   if (source && source.height && source.width) {
     return $YB.utils.buildRenditionString(source.width, source.height, source.bandwidth)
   }
 };
 
-$YB.plugins.KalturaV2.prototype.getResource = function () {
+$YB.plugins.VidiunV2.prototype.getResource = function () {
   return this.player.getPlayer().getSrc()
 };
 
-$YB.plugins.KalturaV2.prototype.getIsLive = function () {
+$YB.plugins.VidiunV2.prototype.getIsLive = function () {
   return this.player.getPlayer().isLive()
 };
 
-$YB.plugins.KalturaV2.prototype.getPlayerVersion = function () {
-  return 'kaltura-player-v' + MWEMBED_VERSION;
+$YB.plugins.VidiunV2.prototype.getPlayerVersion = function () {
+  return 'vidiun-player-v' + MWEMBED_VERSION;
 };
 
 /** Register Listeners */
-$YB.plugins.KalturaV2.prototype.registerListeners = function () {
+$YB.plugins.VidiunV2.prototype.registerListeners = function () {
   // save context
   var context = this;
 
@@ -94,10 +94,10 @@ $YB.plugins.KalturaV2.prototype.registerListeners = function () {
     context.setMetadata();
 
     // Set bitrate
-    var kalturaContextData = context.player.getPlayer().kalturaContextData;
-    if (kalturaContextData && kalturaContextData.flavorAssets) {
-      if (kalturaContextData.flavorAssets.length === 1) {
-        context.bitrate = kalturaContextData.flavorAssets[0].bitrate;
+    var vidiunContextData = context.player.getPlayer().vidiunContextData;
+    if (vidiunContextData && vidiunContextData.flavorAssets) {
+      if (vidiunContextData.flavorAssets.length === 1) {
+        context.bitrate = vidiunContextData.flavorAssets[0].bitrate;
       } else {
         context.bitrate = -1;
       }
@@ -171,22 +171,22 @@ $YB.plugins.KalturaV2.prototype.registerListeners = function () {
   });
 
   // Adnalyzer start
-  this.adnalyzer = new $YB.adnalyzers.KalturaAds(this)
+  this.adnalyzer = new $YB.adnalyzers.VidiunAds(this)
 };
 
-$YB.plugins.KalturaV2.prototype.unregisterListeners = function () {
+$YB.plugins.VidiunV2.prototype.unregisterListeners = function () {
   this.player.unbind(this.eventSuffix)
 };
 
-$YB.plugins.KalturaV2.prototype.reset = function () {
+$YB.plugins.VidiunV2.prototype.reset = function () {
   this.viewManager.comm.view++;
 };
 
-$YB.plugins.KalturaV2.prototype.setMetadata = function () {
-    //Set default kaltura properties
+$YB.plugins.VidiunV2.prototype.setMetadata = function () {
+    //Set default vidiun properties
 	this.setOptions({
 		properties: {
-			kalturaInfo: {
+			vidiunInfo: {
 				entryId: this.player.getPlayer().evaluate("{mediaProxy.entry.id}"),
 				sessionId: this.player.getPlayer().evaluate("{configProxy.sessionId}"),
 				uiConfigId: this.player.getPlayer().evaluate("{configProxy.kw.uiConfId}")
@@ -195,6 +195,6 @@ $YB.plugins.KalturaV2.prototype.setMetadata = function () {
 	});
 	//Set new youbora media config
 	var player = this.player.getPlayer();
-	var config = player.getKalturaConfig("youbora");
+	var config = player.getVidiunConfig("youbora");
 	this.setOptions(config);
 };

@@ -44,7 +44,7 @@ class EntryResult
 
     function getResponseHeaders()
     {
-        global $wgKalturaUiConfCacheTime;
+        global $wgVidiunUiConfCacheTime;
         // only use response headers if not cachable
         if (!$this->isCachable($this->entryResultObj)) {
             return $this->responseHeaders;
@@ -55,8 +55,8 @@ class EntryResult
             $saveTime = time();
         }
         return array(
-            "Cache-Control: public, max-age=$wgKalturaUiConfCacheTime, max-stale=0",
-            "Expires: " . gmdate("D, d M Y H:i:s", $saveTime + $wgKalturaUiConfCacheTime) . " GMT",
+            "Cache-Control: public, max-age=$wgVidiunUiConfCacheTime, max-stale=0",
+            "Expires: " . gmdate("D, d M Y H:i:s", $saveTime + $wgVidiunUiConfCacheTime) . " GMT",
         );
     }
 
@@ -75,7 +75,7 @@ class EntryResult
         }
 
         // Check for entry non-expired entry cache:
-        if (!$this->request->hasKS()) {
+        if (!$this->request->hasVS()) {
             $this->entryResultObj = unserialize($this->cache->get($this->getCacheKey()));
         }
 
@@ -85,7 +85,7 @@ class EntryResult
             // if no errors, not admin and we have access, and we have a fresh API result, add to cache.
             // note playback will always go through playManifest
             // so we don't care if we cache where one users has permission but another does not.
-            // we never cache admin or ks users access so would never expose info that not defined across anonymous regional access.
+            // we never cache admin or vs users access so would never expose info that not defined across anonymous regional access.
             if ($this->isCachable()) {
                 $this->cache->set($this->getCacheKey(), serialize($this->entryResultObj));
                 $this->cache->set($this->getCacheKey() . '_savetime', time());
@@ -111,7 +111,7 @@ class EntryResult
         &&
         $this->isAccessControlAllowed($this->entryResultObj)
         &&
-        !$this->request->hasKS();
+        !$this->request->hasVS();
     }
 
     function getCacheKey()
@@ -143,10 +143,10 @@ class EntryResult
 
     function getEntryResultFromApi()
     {
-        global $wgKalturaApiFeatures;
+        global $wgVidiunApiFeatures;
 
         // Check if the API supports entryRedirect feature
-        $supportsEntryRedirect = isset($wgKalturaApiFeatures['entryRedirect']) ? $wgKalturaApiFeatures['entryRedirect'] : false;
+        $supportsEntryRedirect = isset($wgVidiunApiFeatures['entryRedirect']) ? $wgVidiunApiFeatures['entryRedirect'] : false;
 
         $client = $this->client->getClient();
         // define resultObject prior to try catch call
@@ -158,9 +158,9 @@ class EntryResult
             if ($this->request->noCache) {
                 $client->addParam($params, "nocache", true);
             }
-            $namedMultiRequest = new KalturaNamedMultiRequest($client, $params);
+            $namedMultiRequest = new VidiunNamedMultiRequest($client, $params);
 
-            $filter = new KalturaBaseEntryFilter();
+            $filter = new VidiunBaseEntryFilter();
             if (!$this->request->getEntryId() && $this->request->getReferenceId()) {
                 $filter->referenceIdEqual = $this->request->getReferenceId();
             } else if ($supportsEntryRedirect && $this->uiconf->getPlayerConfig(false, 'disableEntryRedirect') !== true) {
@@ -183,7 +183,7 @@ class EntryResult
             $entryId = '{' . $baseEntryIdx . ':result:objects:0:id}';
 
             // ------- Disabled AC from iframe. -----
-            // Access control NOTE: kaltura does not use http header spelling of Referer instead kaltura uses: "referrer"
+            // Access control NOTE: vidiun does not use http header spelling of Referer instead vidiun uses: "referrer"
             $filter = $this->getACFilter();
             $params = array(
                 "contextDataParams" => $filter,
@@ -195,17 +195,17 @@ class EntryResult
             // Entry Custom Metadata
             // Always get custom metadata for now
             //if( $this->uiconf->getPlayerConfig(false, 'requiredMetadataFields') ) {
-            $filter = new KalturaMetadataFilter();
-            $filter->orderBy = KalturaMetadataOrderBy::CREATED_AT_ASC;
+            $filter = new VidiunMetadataFilter();
+            $filter->orderBy = VidiunMetadataOrderBy::CREATED_AT_ASC;
             $filter->objectIdEqual = $entryId;
-            $filter->metadataObjectTypeEqual = KalturaMetadataObjectType::ENTRY;
+            $filter->metadataObjectTypeEqual = VidiunMetadataObjectType::ENTRY;
             // Check if metadataProfileId is defined
             $metadataProfileId = $this->uiconf->getPlayerConfig(false, 'metadataProfileId');
             if ($metadataProfileId) {
                 $filter->metadataProfileIdEqual = $metadataProfileId;
             }
 
-            $metadataPager = new KalturaFilterPager();
+            $metadataPager = new VidiunFilterPager();
             $metadataPager->pageSize = 1;
             $params = array('filter' => $filter, 'metadataPager', $metadataPager);
             $namedMultiRequest->addNamedRequest('entryMeta', 'metadata_metadata', 'list', $params);
@@ -214,8 +214,8 @@ class EntryResult
             // Entry Cue Points
             // Always get Cue Points for now
             //if( $this->uiconf->getPlayerConfig(false, 'getCuePointsData') !== false ) {
-            $filter = new KalturaCuePointFilter();
-            $filter->orderBy = KalturaAdCuePointOrderBy::START_TIME_ASC;
+            $filter = new VidiunCuePointFilter();
+            $filter->orderBy = VidiunAdCuePointOrderBy::START_TIME_ASC;
             $filter->entryIdEqual = $entryId;
 
             $params = array('filter' => $filter);
@@ -229,7 +229,7 @@ class EntryResult
 
         } catch (Exception $e) {
             // Update the Exception and pass it upward
-            throw new Exception(KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage());
+            throw new Exception(VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage());
             return array();
         }
 
@@ -242,9 +242,9 @@ class EntryResult
         } else {
             $resultObject['meta'] = array();
         }
-        // Check that the ks was valid on the first response ( flavors )
-        if (is_array($resultObject['meta']) && isset($resultObject['meta']['code']) && $resultObject['meta']['code'] == 'INVALID_KS') {
-            $this->error = 'Error invalid KS';
+        // Check that the vs was valid on the first response ( flavors )
+        if (is_array($resultObject['meta']) && isset($resultObject['meta']['code']) && $resultObject['meta']['code'] == 'INVALID_VS') {
+            $this->error = 'Error invalid VS';
             return array();
         }
 
@@ -261,7 +261,7 @@ class EntryResult
         if (isset($resultObject['meta']) && isset($resultObject['meta']->status) &&
             ($resultObject['meta']->status == 0 || $resultObject['meta']->status == 1)
         ) {
-            if (!isset($playerConfig['plugins']['strings']['ks-ENTRY_CONVERTING'])) {
+            if (!isset($playerConfig['plugins']['strings']['vs-ENTRY_CONVERTING'])) {
                 $this->error = 'No source video was found - Entry in process';
                 return array();
             }
@@ -322,7 +322,7 @@ class EntryResult
             if ($this->request->noCache) {
                 $client->addParam($params, "nocache", true);
             }
-            $pagesMultiRequest = new KalturaNamedMultiRequest($client, $params);
+            $pagesMultiRequest = new VidiunNamedMultiRequest($client, $params);
             // retrieve the number of missing pages.
             // for example: 700 / 500 = ceil(1.4) = 2 pages (500 from the first and 200 from the second)
             $missingPages = ceil($countDiff / $pageSize);
@@ -330,10 +330,10 @@ class EntryResult
                 // we added 2 to the requested page since we already have the first page.
                 // for example: i=0 -> page 2, i=1 -> page 3 and so on...
                 $requestedPage = $i + 2;
-                $filter = new KalturaCuePointFilter();
-                $filter->orderBy = KalturaAdCuePointOrderBy::START_TIME_ASC;
+                $filter = new VidiunCuePointFilter();
+                $filter->orderBy = VidiunAdCuePointOrderBy::START_TIME_ASC;
                 $filter->entryIdEqual = $this->request->getEntryId();
-                $pager = new KalturaFilterPager();
+                $pager = new VidiunFilterPager();
                 $pager->pageSize = $pageSize;
                 $pager->pageIndex = $requestedPage;
                 $pageParams = array('filter' => $filter, 'pager' => $pager);
@@ -342,7 +342,7 @@ class EntryResult
             return $pagesMultiRequest->doQueue();
         } catch (Exception $e) {
             // Update the Exception and pass it upward
-            throw new Exception(KALTURA_GENERIC_SERVER_ERROR . "\n" . $e->getMessage());
+            throw new Exception(VIDIUN_GENERIC_SERVER_ERROR . "\n" . $e->getMessage());
             return array();
         }
     }
@@ -364,7 +364,7 @@ class EntryResult
 
     public function getACFilter()
     {
-        $filter = new KalturaEntryContextDataParams();
+        $filter = new VidiunEntryContextDataParams();
         $filter->referrer = $this->request->getReferer();
         $filter->userAgent = $this->request->getUserAgent();
         $filter->flavorTags = 'all';
@@ -384,7 +384,7 @@ class EntryResult
     function isAccessControlAllowed($resultObject = null)
     {
 
-        // Kaltura only has entry level access control not playlist level access control atm:
+        // Vidiun only has entry level access control not playlist level access control atm:
         // don't check anything without an entry_id
         /*if( !$this->request->getEntryId() ){
             return true;
@@ -437,7 +437,7 @@ class EntryResult
                 ($accessControl['previewLength'] == -1 || $accessControl['previewLength'] == null)
             )
         ) {
-            return "No KS where KS is required\nWe're sorry, access to this content is restricted.";
+            return "No VS where VS is required\nWe're sorry, access to this content is restricted.";
         }
 
         if (isset($accessControl['isScheduledNow']) &&
@@ -465,8 +465,8 @@ class EntryResult
             for ($i = 0; $i < count($actions); $i++) {
                 $actionsObj = $actions[$i];
 
-                if (get_class($actionsObj) == 'KalturaAccessControlBlockAction') {
-                    return "No KS where KS is required\nWe're sorry, access to this content is restricted.";
+                if (get_class($actionsObj) == 'VidiunAccessControlBlockAction') {
+                    return "No VS where VS is required\nWe're sorry, access to this content is restricted.";
                 }
             }
         }

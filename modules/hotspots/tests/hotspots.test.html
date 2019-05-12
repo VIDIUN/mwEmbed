@@ -61,7 +61,7 @@
             cursor: nwse-resize;
         }
 
-        #kaltura_player_1545049605 {
+        #vidiun_player_1545049605 {
             display: inline;
             position: absolute;
             width: 100%;
@@ -75,7 +75,7 @@
 <button onclick="changeMedia()">test change media</button>
 <div style="position:relative;margin-top:10px">
     <div class='resizable'>
-        <div id="kaltura_player_1545049605"></div>
+        <div id="vidiun_player_1545049605"></div>
         <div class='resizers'>
             <div class='resizer top-left'></div>
             <div class='resizer top-right'></div>
@@ -88,20 +88,20 @@
 <script>
 
   function changeMedia() {
-    kdp.sendNotification("changeMedia", { "entryId" : "1_4gs7ozgq" });
+    vdp.sendNotification("changeMedia", { "entryId" : "1_4gs7ozgq" });
   }
-  var kdp;
+  var vdp;
 
-  kWidget.addReadyCallback(function( playerId ){
-    kdp = document.getElementById( playerId );
+  vWidget.addReadyCallback(function( playerId ){
+    vdp = document.getElementById( playerId );
   });
 
-  kWidget.embed({
-    "targetId": "kaltura_player_1545049605",
+  vWidget.embed({
+    "targetId": "vidiun_player_1545049605",
     "wid": "_2052371",
     "uiconf_id": 39149581,
     "flashvars": {
-      ks: '',
+      vs: '',
       hotspots: {
         plugin: true
       },

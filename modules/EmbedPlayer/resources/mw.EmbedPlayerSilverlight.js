@@ -130,14 +130,14 @@
 				var lastIndex=flavor.url.lastIndexOf("/vLive");
 				var key=flavor.url.substring(0,lastIndex);
 
-				var kMulticastIndex = flavor.url.indexOf("kMulticast/");
+				var vMulticastIndex = flavor.url.indexOf("vMulticast/");
 
 				//in case server returned a non-multicast url
-				if (kMulticastIndex===-1) {
+				if (vMulticastIndex===-1) {
 					return;
 				}
 
-				var index = kMulticastIndex + 11;
+				var index = vMulticastIndex + 11;
 				//var hls = flavor.url.substring(index);
 				if (!VESMapping.hasOwnProperty(key)) {
 					VESMapping[key] = {"flavors": [], "baseUrl": flavor.url.substring(0, index)};
@@ -273,9 +273,9 @@
 				}
 			};
 
-			var firstKESConnectTry=true;
+			var firstVESConnectTry=true;
 
-			var startConnectToKESTimer = function () {
+			var startConnectToVESTimer = function () {
 
 				//in case of fallback to unicast we don't want to restart by accident
 				if (!_this.isMulticast || !_this.multiastServerUrl) {
@@ -283,14 +283,14 @@
 				}
 
 
-				var retryTime= firstKESConnectTry? 0 : (_this.getKalturaConfig( null , 'multicastKESStartInterval' ) || _this.defaultMulticastKESStartInterval);
+				var retryTime= firstVESConnectTry? 0 : (_this.getVidiunConfig( null , 'multicastVESStartInterval' ) || _this.defaultMulticastVESStartInterval);
 
 				if (_this.isOnline && _this.multicastSessionId)
 					retryTime=_this.getVidiunConfig( null , 'multicastKeepAliveInterval' ) || _this.defaultMulticastKeepAliveInterval;
 
 				_this.keepAliveMCTimeout = setTimeout( function () {
 					try {
-						firstKESConnectTry=false;
+						firstVESConnectTry=false;
 						if(_this.isOnline)
 						{
 							_this.connectToVES(_this.multiastServerUrl)	.then(onVESResponse, onVESErrorResponce)
@@ -736,7 +736,7 @@
 				}
 			}
 
-			var errorObj = {message: messageText , title: gM( 'ks-ERROR' )};
+			var errorObj = {message: messageText , title: gM( 'vs-ERROR' )};
 			if(data.code){
 				errorObj.code = data.code;
 			}

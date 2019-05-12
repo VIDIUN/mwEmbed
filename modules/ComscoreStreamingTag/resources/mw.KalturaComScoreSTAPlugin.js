@@ -1,11 +1,11 @@
 (function (mw) {
     "use strict";
 
-    var PLUGIN_PLATFORM_NAME = 'kaltura',
+    var PLUGIN_PLATFORM_NAME = 'vidiun',
         PLUGIN_VERSION = '1.3.0.170908',
         PLAYER_VERSION = mw.getConfig('version');
 
-    function KalturaComScoreSTAPlugin(playerPluginInstance) {
+    function VidiunComScoreSTAPlugin(playerPluginInstance) {
         var self = this;
         
         var gPlugin = null,
@@ -76,7 +76,7 @@
         function init () {
             attachEvents();
 
-            // Values as "{foo.bar}" are automatically processed by the kdp evaluation parser.
+            // Values as "{foo.bar}" are automatically processed by the vdp evaluation parser.
             var pluginOptions = playerPluginInstance.getConfig();
 
             // The labelMapping property is deprecated. Use labelmapping instead.
@@ -524,7 +524,7 @@
 
                 //It might not have the final value at this point (0 instead)
                 // In live streams it will always report 0.
-                // However, the kdp duration will report a value in the case of DVR.
+                // However, the vdp duration will report a value in the case of DVR.
                 labels.ns_st_cl = mediaProxyEntry.msDuration; // or .duration in seconds
                 labels.ns_st_ci = mediaProxyEntry.id;
                 labels.ns_st_pn = clipPartNumber + "";
@@ -581,24 +581,24 @@
 
         // Player API helpers
         var playerAPIHelpers = {
-            getKdpProp: function (componentObject) {
+            getVdpProp: function (componentObject) {
                 return playerPluginInstance.getPlayer().evaluate('{' + componentObject + '}');
             },
             isLive: function () {
                 // return true;
-                return playerAPIHelpers.getKdpProp('mediaProxy.isLive');
+                return playerAPIHelpers.getVdpProp('mediaProxy.isLive');
             },
             getCurrentTime: function () {
-                return playerAPIHelpers.getKdpProp('video.player.currentTime');
+                return playerAPIHelpers.getVdpProp('video.player.currentTime');
             },
             getDuration: function () {
-                return playerAPIHelpers.getKdpProp('duration');
+                return playerAPIHelpers.getVdpProp('duration');
             },
             getMediaProxyEntry: function () {
-                return playerAPIHelpers.getKdpProp('mediaProxy.entry');
+                return playerAPIHelpers.getVdpProp('mediaProxy.entry');
             },
             getPlayerVolume: function () {
-                return playerAPIHelpers.getKdpProp('video.volume');
+                return playerAPIHelpers.getVdpProp('video.volume');
             },
             isAudio: function () {
                 return playerPluginInstance.getPlayer().isAudio();
@@ -608,5 +608,5 @@
         init();
     }
 
-    mw.KalturaComScoreSTAPlugin = KalturaComScoreSTAPlugin;
+    mw.VidiunComScoreSTAPlugin = VidiunComScoreSTAPlugin;
 })(window.mw);

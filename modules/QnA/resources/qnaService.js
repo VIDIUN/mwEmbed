@@ -228,7 +228,7 @@
     mw.VQnaService.prototype = {
 
         // The bind postfix:
-        bindPostfix: '.KQnaService',
+        bindPostfix: '.VQnaService',
         QnaThreads: ko.observableArray(),
         AnswerOnAirQueue: ko.observableArray(),
         QandA_ResponseProfile: "QandA_ResponseProfile",
@@ -249,7 +249,7 @@
             this.qnaPlugin = qnaPlugin;
             this.overrideModeratorName =  qnaPlugin.getConfig('overrideModeratorName') ? qnaPlugin.getConfig('overrideModeratorName') : false;
 
-            this.kPushServerNotification= mw.KPushServerNotification.getInstance(embedPlayer);
+            this.vPushServerNotification= mw.VPushServerNotification.getInstance(embedPlayer);
             if (embedPlayer.isLive()) {
                 //we first register to all notification before continue to get the existing cuepoints, so we don't get races and lost cue points
                 this.getMetaDataProfile().then(function() {
@@ -273,9 +273,9 @@
 
 
             var deferred = $.Deferred();
-            this.getKClient().doRequest(listMetadataProfileRequest, function (result) {
+            this.getVClient().doRequest(listMetadataProfileRequest, function (result) {
 
-                if (result.objectType==="KalturaAPIException") {
+                if (result.objectType==="VidiunAPIException") {
                     mw.log("Error getting metadata profile: "+result.message+" ("+result.code+")");
                     deferred.resolve(false);
                     return;
@@ -333,8 +333,8 @@
             var createCuePointRequest = {
                 "service": "cuePoint_cuePoint",
                 "action": "add",
-                "cuePoint:objectType": "KalturaAnnotation",
-                "cuePoint:entryId": embedPlayer.kentryid,
+                "cuePoint:objectType": "VidiunAnnotation",
+                "cuePoint:entryId": embedPlayer.ventryid,
                 "cuePoint:startTime": embedPlayer.currentTime,
                 "cuePoint:text": question,
                 "cuePoint:isPublic": 1,
@@ -357,13 +357,13 @@
                 "service": "cuePoint_cuePoint",
                 "action": "update",
                 "id": "{1:result:id}",
-                "cuePoint:objectType": "KalturaAnnotation",
+                "cuePoint:objectType": "VidiunAnnotation",
                 "cuePoint:tags": _this.QandA_cuePointTag
             };
 
             // mw.log("Submitting a new question: " + question);
 
-            _this.getKClient().doRequest([createCuePointRequest, addMetadataRequest, updateCuePointRequestAddQnaTag], function (result) {
+            _this.getVClient().doRequest([createCuePointRequest, addMetadataRequest, updateCuePointRequestAddQnaTag], function (result) {
 
                     var endTime = new Date();
                     var cuePoint = result[2];
@@ -601,10 +601,10 @@
         registerNotifications: function() {
             var _this = this;
 
-            var codeNotifications =  this.kPushServerNotification.createNotificationRequest(
+            var codeNotifications =  this.vPushServerNotification.createNotificationRequest(
                 _this.QandA_CodeNotificationName,
                 {
-                    "entryId": _this.embedPlayer.kentryid
+                    "entryId": _this.embedPlayer.ventryid
                 },
                 function(cuePoints) {
                     $.each(cuePoints, function(index, cuePoint) {
@@ -613,27 +613,27 @@
                 });
 
 
-            var publicNotifications =  this.kPushServerNotification.createNotificationRequest(
+            var publicNotifications =  this.vPushServerNotification.createNotificationRequest(
                 _this.QandA_publicNotificationName,
                 {
-                    "entryId": _this.embedPlayer.kentryid
+                    "entryId": _this.embedPlayer.ventryid
                 },
                 function(cuePoints) {
                     _this.processQnA(cuePoints);
                 });
 
 
-            var userNotifications =  this.kPushServerNotification.createNotificationRequest(
+            var userNotifications =  this.vPushServerNotification.createNotificationRequest(
                 _this.QandA_UserNotificationName,
                 {
-                    "entryId": _this.embedPlayer.kentryid,
+                    "entryId": _this.embedPlayer.ventryid,
                     "userId":_this.userId
                 },
                 function(cuePoints) {
                     _this.processQnA(cuePoints);
                 });
 
-            return this.kPushServerNotification.registerNotifications([userNotifications,codeNotifications,publicNotifications]);
+            return this.vPushServerNotification.registerNotifications([userNotifications,codeNotifications,publicNotifications]);
         }
 
     };

@@ -4,13 +4,13 @@
 (function (mw) {
     "use strict";
 
-    mw.PluginManager.add('comScoreStreamingTag', mw.KBasePlugin.extend({
+    mw.PluginManager.add('comScoreStreamingTag', mw.VBasePlugin.extend({
         setup: function () {
-            this.kalturaComScoreSTAPlugin = new mw.KalturaComScoreSTAPlugin(this);
+            this.vidiunComScoreSTAPlugin = new mw.VidiunComScoreSTAPlugin(this);
         },
 
         destroy: function () {
-            this.kalturaComScoreSTAPlugin.destroy();
+            this.vidiunComScoreSTAPlugin.destroy();
         }
     }));
 

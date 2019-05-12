@@ -2,7 +2,7 @@
     "use strict";
     mw.dualScreen = mw.dualScreen || {};
 
-    mw.dualScreen.videoPlayer = mw.KBaseComponent.extend({
+    mw.dualScreen.videoPlayer = mw.VBaseComponent.extend({
         stream: null,
         playerElement: null,
 
@@ -46,7 +46,7 @@
                 case "Native":
                     playerConstructor = mw.dualScreen.NativePlayer;
                     break;
-                case "Kplayer":
+                case "Vplayer":
                     playerConstructor = mw.dualScreen.FlashPlayer;
                     break;
                 default:

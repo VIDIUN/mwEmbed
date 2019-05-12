@@ -78,7 +78,7 @@ vWidget.api.prototype = {
 	/**
 	 * Do an api request and get data in callback
 	 */
-	doRequest: function ( requestObject, callback,skipKS, errorCallback, withProxyData, apiHost){ //apihost: we force the API request to use specific domain
+	doRequest: function ( requestObject, callback,skipVS, errorCallback, withProxyData, apiHost){ //apihost: we force the API request to use specific domain
 		var _this = this;
 		var param = {};
 		var globalCBName = null;
@@ -104,8 +104,8 @@ vWidget.api.prototype = {
 		// set format to JSON ( Access-Control-Allow-Origin:* )
 		param['format'] = 1;
 
-		// Add kalsig to query:
-		param[ 'kalsig' ] = this.hashCode( kWidget.param( param ) );
+		// Add vidsig to query:
+		param[ 'vidsig' ] = this.hashCode( vWidget.param( param ) );
 
 		var serviceType = param['service'];
 
@@ -292,9 +292,9 @@ vWidget.api.prototype = {
 		return param;
 	},
 	getApiUrl : function( serviceType, apiHost ) {
-		var serviceUrl = mw.getConfig( 'Kaltura.ServiceUrl' );
-		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Kaltura.StatsServiceUrl' ) ) {
-			serviceUrl = mw.getConfig( 'Kaltura.StatsServiceUrl' );
+		var serviceUrl = mw.getConfig( 'Vidiun.ServiceUrl' );
+		if( serviceType && serviceType == 'stats' &&  mw.getConfig( 'Vidiun.StatsServiceUrl' ) ) {
+			serviceUrl = mw.getConfig( 'Vidiun.StatsServiceUrl' );
 		}
 		if( serviceType && serviceType == 'liveStats' &&  mw.getConfig( 'Vidiun.LiveStatsServiceUrl' ) ) {
 			serviceUrl = mw.getConfig( 'Vidiun.LiveStatsServiceUrl' );
@@ -306,7 +306,7 @@ vWidget.api.prototype = {
             serviceUrl = mw.getConfig( apiHost );
 
         }
-        return serviceUrl + mw.getConfig( 'Kaltura.ServiceBase' ) + serviceType;
+        return serviceUrl + mw.getConfig( 'Vidiun.ServiceBase' ) + serviceType;
 	},
 	hashCode: function( str ){
 		return md5(str);

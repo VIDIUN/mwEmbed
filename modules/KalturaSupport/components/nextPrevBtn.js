@@ -1,7 +1,7 @@
 (function (mw, $) {
     "use strict";
 
-    mw.PluginManager.add('nextPrevBtn', mw.KBaseComponent.extend({
+    mw.PluginManager.add('nextPrevBtn', mw.VBaseComponent.extend({
 
             defaultConfig: {
                 'parent': 'controlsContainer',

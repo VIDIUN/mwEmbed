@@ -289,7 +289,7 @@
                     obj.attr({
                         "aria-expanded" : "false",
                         "aria-controls":"dualScreen-states",
-                        "aria-label": gM("ks-CURRENT-VIEW") + " "+ obj.attr("title") + ". " +gM("ks-SHOW-OTHER-OPTIONS")
+                        "aria-label": gM("vs-CURRENT-VIEW") + " "+ obj.attr("title") + ". " +gM("vs-SHOW-OTHER-OPTIONS")
 					});
 				}
                 obj.addClass('stateSelected ds-collapsible-handle').removeClass('ds-collapsible-content');

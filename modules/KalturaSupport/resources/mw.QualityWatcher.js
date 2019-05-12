@@ -6,7 +6,7 @@
  */
 ( function( mw, $ ) {
     "use strict";
-    mw.PluginManager.add( "qualitywatcher" , mw.KBasePlugin.extend({
+    mw.PluginManager.add( "qualitywatcher" , mw.VBasePlugin.extend({
         defaultConfig: {
             fpsDroppedFramesPeriod:5000
         },

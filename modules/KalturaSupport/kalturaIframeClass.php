@@ -1331,13 +1331,13 @@ HTML;
 	</script>
 </head>
 <body>
-<?php echo $this->getKalturaIframeScripts(); ?>
+<?php echo $this->getVidiunIframeScripts(); ?>
 
 <script type="text/javascript">
     var customCSS = <?php echo $customCss ?>;
-    if ( window['kWidget'] && window["kalturaIframePackageData"] && window["kalturaIframePackageData"].playerConfig && window["kalturaIframePackageData"].playerConfig.layout  && window["kalturaIframePackageData"].playerConfig.vars ) {
-           var skin = window["kalturaIframePackageData"].playerConfig.layout ? window["kalturaIframePackageData"].playerConfig.layout.skin : "kdark";
-           var mobileSkin = window['kWidget'].isChromeCast() || ( window["kalturaIframePackageData"].playerConfig.vars["EmbedPlayer.EnableMobileSkin"] === true && skin === "kdark" && window['kWidget'].isMobileDevice() );
+    if ( window['vWidget'] && window["vidiunIframePackageData"] && window["vidiunIframePackageData"].playerConfig && window["vidiunIframePackageData"].playerConfig.layout  && window["vidiunIframePackageData"].playerConfig.vars ) {
+           var skin = window["vidiunIframePackageData"].playerConfig.layout ? window["vidiunIframePackageData"].playerConfig.layout.skin : "vdark";
+           var mobileSkin = window['vWidget'].isChromeCast() || ( window["vidiunIframePackageData"].playerConfig.vars["EmbedPlayer.EnableMobileSkin"] === true && skin === "vdark" && window['vWidget'].isMobileDevice() );
     }
     if (  customCSS && mobileSkin === false ) {
         var head = document.head || document.getElementsByTagName('head')[0];

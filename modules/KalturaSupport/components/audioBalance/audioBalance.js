@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 	
-	mw.PluginManager.add( 'audioBalance', mw.KBaseComponent.extend({
+	mw.PluginManager.add( 'audioBalance', mw.VBaseComponent.extend({
 			
 		defaultConfig: {
 			"align": "right",

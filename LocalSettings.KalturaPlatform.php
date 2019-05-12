@@ -99,7 +99,7 @@ if( $vConf->hasParam('enableEmbedServicesRouting') ) {
 
 
 $wgUseMemcache = false;
-$wgMemcacheConfiguration = $kConf->get('memcacheLocal','cache',null);
+$wgMemcacheConfiguration = $vConf->get('memcacheLocal','cache',null);
 if( $wgMemcacheConfiguration )
 {
 	$wgUseMemcache = true;

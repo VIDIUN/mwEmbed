@@ -28,7 +28,7 @@
 			"title": gM( 'mwe-embedplayer-timed_text'),
 			"smartContainer": "qualitySettings",
 			'smartContainerCloseEvent': 'changedClosedCaptions',
-			"forceWebVTT": false, // force using webvtt on-the-fly. only for kalturaAPI captions
+			"forceWebVTT": false, // force using webvtt on-the-fly. only for vidiunAPI captions
 			"enableOptionsMenu": false,
 			"sortCaptionsAlphabetically": false,
 			"enableNativeTextTrackCSS": false
@@ -573,12 +573,12 @@
 			var captionsSrc;
 			if( mw.isIphone() && !mw.getConfig('disableTrackElement') && !this.getConfig('forceLoadLanguage') || this.getConfig("forceWebVTT") ) {
 				// getting generated vtt file from dfxp/srt
-				var ks = _this.embedPlayer.getFlashvars('ks');
-				captionsSrc = mw.getConfig('Kaltura.ServiceUrl') +
+				var vs = _this.embedPlayer.getFlashvars('vs');
+				captionsSrc = mw.getConfig('Vidiun.ServiceUrl') +
 							"/api_v3/index.php/service/caption_captionasset/action/serveWebVTT/captionAssetId/" +
 							dbTextSource.id +
 							"/segmentIndex/-1/version/2/captions.vtt";
-				captionsSrc += ks ? '/ks/' + ks : '';
+				captionsSrc += vs ? '/vs/' + vs : '';
 			} else {
 				captionsSrc = this.getCaptionURL( dbTextSource.id ) + '/.' + dbTextSource.fileExt;
 			}
@@ -1312,7 +1312,7 @@
 		},
 		getMenu: function(){
 			if( !this.menu ) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex'),
 					menuName: this.getConfig("title")
 				});

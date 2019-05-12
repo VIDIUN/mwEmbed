@@ -14,18 +14,18 @@
 <body>
 <h2>Related Plugin</h2>
 <br />
-<div id="kdp" style="width:600px;height:370px;float:left"></div>
-<script type="text/javascript" src="../../tests/resources/qunit-kaltura-bootstrap.js"></script>
+<div id="vdp" style="width:600px;height:370px;float:left"></div>
+<script type="text/javascript" src="../../tests/resources/qunit-vidiun-bootstrap.js"></script>
 
 <script>
 	// will be poulated via ace editor:
     var triggerRelated = function(){
-      kdp.sendNotification("showScreenByName","related")
+      vdp.sendNotification("showScreenByName","related")
     };
     var hideRelated = function(){
-      kdp.sendNotification("hideScreenByName","related")
+      vdp.sendNotification("hideScreenByName","related")
     };
-    var kdp;
+    var vdp;
 	var customRelatedEntries = null
 	var doPlayerEmbed = function(){
 		vWidget.featureConfig({
@@ -54,8 +54,8 @@
 				'titleLabel.plugin': true
 			},
 			'readyCallback': function( playerId ){
-                kdp = $('#' + playerId)[0];
-				kdp.kBind( 'relatedVideoSelect', function( relatedData ){
+                vdp = $('#' + playerId)[0];
+				vdp.vBind( 'relatedVideoSelect', function( relatedData ){
 					$('#relatedVideoSelectLog').append( "Selected: " + relatedData.entryId  + "<br>" );
 				});
 				// bind custom related data

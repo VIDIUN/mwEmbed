@@ -2,7 +2,7 @@
     "use strict";
     mw.dualScreen = mw.dualScreen || {};
 
-    mw.dualScreen.videoSync = mw.KBasePlugin.extend({
+    mw.dualScreen.videoSync = mw.VBasePlugin.extend({
         isSyncDelay: false,
         shouldSyncState: true,
         eventListeners: {},
@@ -11,14 +11,14 @@
             return !( "mediaGroup" in document.createElement("video") );
         },
         setMediaGroups: function(groups){
-            var mediagroupId = this.getPlayer().pid+"_kMediaGroup";
-            this.embedPlayer.setAttribute("kMediaGroup", mediagroupId);
-            this.embedPlayer.setAttribute("kMediaGroupMaster", "true");
+            var mediagroupId = this.getPlayer().pid+"_vMediaGroup";
+            this.embedPlayer.setAttribute("vMediaGroup", mediagroupId);
+            this.embedPlayer.setAttribute("vMediaGroupMaster", "true");
             groups.forEach(function(element){
-                $(element).attr("kMediaGroup", mediagroupId);
+                $(element).attr("vMediaGroup", mediagroupId);
             });
 
-            var nodelist = document.querySelectorAll( "[kMediaGroup]" ),
+            var nodelist = document.querySelectorAll( "[vMediaGroup]" ),
                 elements = [].slice.call( nodelist ),
                 filtereds = {},
                 mediagroups;
@@ -31,11 +31,11 @@
 
             // Filter for groupnames
             mediagroups = elements.map(function( elem ) {
-                return elem.getAttribute( "kMediaGroup" );
+                return elem.getAttribute( "vMediaGroup" );
             }).filter(function( val ) {
                 if ( !filtereds[ val ] ) {
                     filtereds[ val ] = elements.filter(function( elem ) {
-                        return elem.getAttribute( "kMediaGroup" ) === val;
+                        return elem.getAttribute( "vMediaGroup" ) === val;
                     });
                     return true;
                 }
@@ -45,32 +45,32 @@
             // Iterate all collected mediagroup names
             // Call mediaGroup() with group name and nodelist params
             mediagroups.forEach(function( group ) {
-                this.kMediaGroup( group, filtereds[ group ] );
+                this.vMediaGroup( group, filtereds[ group ] );
             }.bind(this));
         },
         setMediaGroup: function (elements) {
-            var mediagroupId = this.getPlayer().pid + '_kMediaGroup';
-            this.embedPlayer.setAttribute('kMediaGroupMaster', 'true');
-            this.kMediaGroup(mediagroupId, elements.concat(this.embedPlayer).map(function (element) {
-                element.setAttribute('kMediaGroup', mediagroupId);
+            var mediagroupId = this.getPlayer().pid + '_vMediaGroup';
+            this.embedPlayer.setAttribute('vMediaGroupMaster', 'true');
+            this.vMediaGroup(mediagroupId, elements.concat(this.embedPlayer).map(function (element) {
+                element.setAttribute('vMediaGroup', mediagroupId);
                 return element;
             }));
         },
 
-        kMediaGroup: function( group, elements ) {
+        vMediaGroup: function( group, elements ) {
 
             var controller, slaves,
                 ready = 0;
 
             // Get the single controller element
             controller = elements.filter(function( elem ) {
-                return elem.getAttribute("kMediaGroupMaster") || !!elem.controls || elem.getAttribute("controls", true);
+                return elem.getAttribute("vMediaGroupMaster") || !!elem.controls || elem.getAttribute("controls", true);
             })[ 0 ];
 
             // Filter nodelist for all elements that will
             // be controlled by the	controller element
             slaves = elements.filter(function( elem ) {
-                return !elem.controls && !elem.getAttribute("kMediaGroupMaster");
+                return !elem.controls && !elem.getAttribute("vMediaGroupMaster");
             });
 
             if ( !controller ) {
@@ -95,9 +95,9 @@
             // doesn't throw exception (Code 11) by tripping seek on a media element
             // that is not yet seekable
             elements.forEach(function( elem ) {
-                // Set the actual element IDL property `kMediaGroup`
+                // Set the actual element IDL property `vMediaGroup`
                 //Currently we don't support native mediaGroups. In the future, when native mediaGroups will be fully implemented in the browsers, our custom implementation might be removed
-                elem.kMediaGroup = elem.getAttribute( "kMediaGroup" );
+                elem.vMediaGroup = elem.getAttribute( "vMediaGroup" );
                 $(elem).one('canplay', canPlay);
             });
 
@@ -227,7 +227,7 @@
             };
 
             $(controller).on(eventsMap);
-            this.eventListeners[controller.kMediaGroup] = eventsMap;
+            this.eventListeners[controller.vMediaGroup] = eventsMap;
         },
         mediaGroupSync: function( controller, slaves ) {
             if ( this.isSyncDelay || (controller.stopped && !controller.seeking) ) {
@@ -395,7 +395,7 @@
         },
         destroy: function () {
             $.each(this.eventListeners, function (mediaGroupId, events) {
-                $('[kmediagroup="' + mediaGroupId + '"]').off(events);
+                $('[vmediagroup="' + mediaGroupId + '"]').off(events);
             });
 
             this._super();

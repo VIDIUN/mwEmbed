@@ -8,8 +8,8 @@
             "resources/qna.js"
         ],
         "dependencies": [
-        	"mw.KBaseScreen",
-            "mw.KPushServerNotification",
+        	"mw.VBaseScreen",
+            "mw.VPushServerNotification",
         	"nanoScroller"
         ],
         "vidiunPluginName": "qna",

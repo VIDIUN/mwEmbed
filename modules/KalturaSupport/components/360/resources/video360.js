@@ -1,7 +1,7 @@
 (function (mw, $, THREE) {
 	"use strict";
 
-	mw.PluginManager.add('video360', mw.KBaseComponent.extend({
+	mw.PluginManager.add('video360', mw.VBaseComponent.extend({
 
 		defaultConfig: {
 			// vr button default config
@@ -410,14 +410,14 @@
 	}));
 
 	// set EmbedPlayer.WebKitPlaysInline true for iPhone inline playback
-	if (mw.getConfig('Kaltura.AddWebKitPlaysInline')){
-		var playerConfig = mw.getConfig('KalturaSupport.PlayerConfig');
+	if (mw.getConfig('Vidiun.AddWebKitPlaysInline')){
+		var playerConfig = mw.getConfig('VidiunSupport.PlayerConfig');
 		if (playerConfig) {
 			if (!playerConfig.vars) {
 				playerConfig.vars = {};
 			}
 			playerConfig.vars["EmbedPlayer.WebKitPlaysInline"] = true;
-			mw.setConfig('KalturaSupport.PlayerConfig', playerConfig);
+			mw.setConfig('VidiunSupport.PlayerConfig', playerConfig);
 		}
 	}
 

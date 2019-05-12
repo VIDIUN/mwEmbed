@@ -2,7 +2,7 @@
     "use strict";
     mw.webcast = mw.webcast || {};
 
-    mw.webcast.CuePointsManager = mw.KBasePlugin.extend({
+    mw.webcast.CuePointsManager = mw.VBasePlugin.extend({
         /* DEVELOPER NOTICE: you should not set any property directly here (they will be shared between instances) - use the setup function instead */
         setup: function () {
             var _this = this;
@@ -23,7 +23,7 @@
             });
             if(!this.pushServerNotification){
                 try{
-                    this.pushServerNotification = mw.KPushServerNotification.getInstance(this.embedPlayer);
+                    this.pushServerNotification = mw.VPushServerNotification.getInstance(this.embedPlayer);
                 } catch (e){
                     mw.log("Failed to initiate pushServerNotification from " + this.pluginName);
                 }
@@ -39,7 +39,7 @@
         getCuePoints : function()
         {
             var player = this.getPlayer();
-            var cuePoints = (player && player.kCuePoints) ? player.kCuePoints.getCuePoints() : null;
+            var cuePoints = (player && player.vCuePoints) ? player.vCuePoints.getCuePoints() : null;
 
             return cuePoints || [];
         },
@@ -57,7 +57,7 @@
             _this.bind("playerReady", function() {
 
                 var player = _this.getPlayer();
-                var shouldRun = player && ((player.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || player.kCuePoints);
+                var shouldRun = player && ((player.isLive() && mw.getConfig("EmbedPlayer.LiveCuepoints")) || player.vCuePoints);
                 if (!shouldRun) {
                     _this.log('addBindings(playerReady): prerequisites check failed (event is either vod without cuepoints or marked to ignore live cuepoints), not monitoring cuepoints for that entry');
                     return;
@@ -66,7 +66,7 @@
                 if(_this.shouldUsePush() ){
                     //initiate push logic
                     if(!_this.pushServerNotification){
-                        _this.pushServerNotification = mw.KPushServerNotification.getInstance(_this.embedPlayer);
+                        _this.pushServerNotification = mw.VPushServerNotification.getInstance(_this.embedPlayer);
                     }
                 }else{
                     _this.handleMonitoredCuepoints(_this.getCuePoints());
@@ -79,7 +79,7 @@
                 function (e) {
                     var player = _this.getPlayer();
                     // check if need to handle player events
-                    if (!player ||  !player.kCuePoints)
+                    if (!player ||  !player.vCuePoints)
                     {
                         // no cuepoints service found - should not continue with the cuepoint processing
                         return;
@@ -151,12 +151,12 @@
             _this.log('startMonitorProcess(): Staring monitor variables by' +_this.pluginName);
             function retrieveServerCuepoints() {
                 _this.log("retrieveServerCuepoints(): requesting new monitored cuepoints from server");
-                var entryId = _this.embedPlayer.kentryid;
+                var entryId = _this.embedPlayer.ventryid;
                 var request = {
                     'service': 'cuepoint_cuepoint',
                     'action': 'list',
                     'filter:entryIdEqual': entryId,
-                    'filter:objectType': 'KalturaCuePointFilter',
+                    'filter:objectType': 'VidiunCuePointFilter',
                     'filter:statusIn': '1,3', //1=READY, 3=HANDLED  (3 is after copying to VOD)
                     'filter:cuePointTypeIn': 'codeCuePoint.Code',
                     'filter:tagsLike' : _this._monitoredCuepoints.tagsLike,
@@ -169,9 +169,9 @@
 
 
                 var requestedEntryId = entryId;
-                _this.getKalturaClient().doRequest(request,
+                _this.getVidiunClient().doRequest(request,
                     function (data) {
-                        if (_this.embedPlayer.kentryid === requestedEntryId && _this._monitoredCuepoints.enabled)
+                        if (_this.embedPlayer.ventryid === requestedEntryId && _this._monitoredCuepoints.enabled)
                         {
                             // if an error pop out:
                             if (!data || data.code) {
@@ -323,7 +323,7 @@
                     {
                         callbackList = _this._monitoredCuepoints.typesMapping[cuepointType] = [];
 
-                        // this type was not registered yet, update the tagsLike condition to be used against Kaltura API
+                        // this type was not registered yet, update the tagsLike condition to be used against Vidiun API
                         _this._monitoredCuepoints.tagsLike += _this._monitoredCuepoints.tagsLike ? ',' : '';
                         _this._monitoredCuepoints.tagsLike +=  cuepointType;
                     }
@@ -340,10 +340,10 @@
                 for (var i = 0; i < systemNames.length; i++) {
                     var tempNotification = this.pushServerNotification.createNotificationRequest(
                     systemNames[i],{
-                        "entryId": _this.embedPlayer.kentryid
+                        "entryId": _this.embedPlayer.ventryid
                     },
                     function (cuePoints) {
-                        mw.log("KPushCuePointsManager cuePoints loaded from "+_this.pluginName +" " + cuePoints );
+                        mw.log("VPushCuePointsManager cuePoints loaded from "+_this.pluginName +" " + cuePoints );
                         _this.handleMonitoredCuepoints(cuePoints);
                     });
                     tempNotifications.push(tempNotification);
@@ -361,7 +361,7 @@
 
                     if (this.cuePoints) {
                         var filterByTags = (args.tags ? args.tags : (args.tag ? [args.tag] : null));
-                        var previewCuePointTag = _this.getPlayer().kCuePoints.getPreviewCuePointTag();
+                        var previewCuePointTag = _this.getPlayer().vCuePoints.getPreviewCuePointTag();
                         result = $.grep(this.cuePoints, function (cuePoint) {
                             var hasTagCondition = filterByTags;
                             var hasTypeCondition = args.types && args.types.length && args.types.length > 0;
@@ -372,11 +372,11 @@
                             }).length > 0) : false;
 
                             var passedCustomFilter = (isValidTag || isValidType) && args.filter ? args.filter(cuePoint) : true;
-                            var checkCuePointsTag = _this.getPlayer().kCuePoints.validateCuePointTags(cuePoint, previewCuePointTag);
+                            var checkCuePointsTag = _this.getPlayer().vCuePoints.validateCuePointTags(cuePoint, previewCuePointTag);
                             return (isValidTag || isValidType) && passedCustomFilter && checkCuePointsTag;
                         });
                         result = result.filter(function( item,index,allInArray ) {
-                            return _this.getPlayer().kCuePoints.removeDuplicatedCuePoints(allInArray,index);
+                            return _this.getPlayer().vCuePoints.removeDuplicatedCuePoints(allInArray,index);
                         });
 
                         result.sort(function (a, b) {
@@ -532,11 +532,11 @@
         shouldUsePush : function(){
             return this.embedPlayer.usePushNotificationForPolls;
         },
-        getKalturaClient: function () {
-            if (!this.kClient) {
-                this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+        getVidiunClient: function () {
+            if (!this.vClient) {
+                this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
             }
-            return this.kClient;
+            return this.vClient;
         },
     });
 })(window.mw, window.jQuery);
