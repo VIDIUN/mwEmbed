@@ -1,7 +1,7 @@
 (function(mw, $) {
     "use strict";
 
-    var Peer5Plugin = mw.KBasePlugin.extend({
+    var Peer5Plugin = mw.VBasePlugin.extend({
         asyncInit: true,
 
         setup: function() {
@@ -26,10 +26,10 @@
                     mw.log('Peer5: Error loading peer5 client. Plugging out.');
                     thi$.initCompleteCallback()
                 });
-            $.ajax({dataType: 'script', url: 'https://api.peer5.com/peer5.kaltura.plugin.js', cache: true})
+            $.ajax({dataType: 'script', url: 'https://api.peer5.com/peer5.vidiun.plugin.js', cache: true})
                 .done(setupCompleteCallback)
                 .fail(function() {
-                    mw.log('Peer5: Error loading peer5.kaltura.plugin Plugging out.');
+                    mw.log('Peer5: Error loading peer5.vidiun.plugin Plugging out.');
                     thi$.initCompleteCallback()
                 });
         }

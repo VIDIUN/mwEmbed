@@ -2,7 +2,7 @@
     "use strict";
     mw.webcastPolls = mw.webcastPolls || {};
 
-    mw.webcastPolls.WebcastPollsView = mw.KBasePlugin.extend({
+    mw.webcastPolls.WebcastPollsView = mw.VBasePlugin.extend({
         /* DEVELOPER NOTICE: you should not set any property directly here (they will be shared between instances) - use the setup function instead */
         defaultConfig: {
             /* DEVELOPER NOTICE : don't use this plugin config feature since it is a detached plugin. A detached plugin cannot access the player configuration to support overrides */
@@ -100,7 +100,7 @@
 
                         if (targetLayoutName){
                             var templateName = '../WebcastPolls/resources/webcastPolls-' + targetLayoutName + '.tmpl.html';
-                            pollRawLayoutHTML = (window && window.kalturaIframePackageData && window.kalturaIframePackageData.templates) ? window.kalturaIframePackageData.templates[templateName] : '';
+                            pollRawLayoutHTML = (window && window.vidiunIframePackageData && window.vidiunIframePackageData.templates) ? window.vidiunIframePackageData.templates[templateName] : '';
                         }
 
                         var $pollLayout = $(pollRawLayoutHTML);

@@ -9,10 +9,10 @@
 <body>
 <h2>Chapters</h2>
 
-<div id="kaltura_player" style="width:800px;height:570px;float:left"></div>
+<div id="vidiun_player" style="width:800px;height:570px;float:left"></div>
 <script>
-    kWidget.featureConfig({
-        'targetId': 'kaltura_player',
+    vWidget.featureConfig({
+        'targetId': 'vidiun_player',
         'wid': '_2222',
         'uiconf_id' : '41159601',
         'entry_id' : '1_ex0njfgh',
@@ -24,18 +24,18 @@
     });
     var swPlayer;
     function showSlides(){
-        try{$(".kWidgetIframeContainer")[0].sendNotification("openSideBarContainer")}catch(e){}
-        try{$("#kaltura_player")[0].sendNotification("openSideBarContainer")}catch(e){}
+        try{$(".vWidgetIframeContainer")[0].sendNotification("openSideBarContainer")}catch(e){}
+        try{$("#vidiun_player")[0].sendNotification("openSideBarContainer")}catch(e){}
     }
 
     function renderUI(){
-        $("#kaltura_player").parent().prepend('<div class="seekers-wrapper"></div>');
+        $("#vidiun_player").parent().prepend('<div class="seekers-wrapper"></div>');
         $(".seekers-wrapper")
             .append('<button class="seekers-hack" onclick="showSlides()"> Chapters </button>');
     }
     var embedPlayer;
     var loadScriptInterval = setInterval(function(){
-        swPlayer = $("#kaltura_player")[0];
+        swPlayer = $("#vidiun_player")[0];
         if(swPlayer && swPlayer.evaluate){
             clearInterval(loadScriptInterval);
             renderUI();

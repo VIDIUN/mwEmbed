@@ -145,7 +145,7 @@ mw.VWidgetSupport.prototype = {
 			if (mw.getConfig('thumbnailUrl')) {
 				thumbUrl = embedPlayer.evaluate(mw.getConfig('thumbnailUrl'));
 			}
-			var alt = gM('mwe-embedplayer-video-thumbnail-for', kWidget.sanitize(embedPlayer.evaluate('{mediaProxy.entry.name}')));
+			var alt = gM('mwe-embedplayer-video-thumbnail-for', vWidget.sanitize(embedPlayer.evaluate('{mediaProxy.entry.name}')));
 			embedPlayer.updatePoster( thumbUrl, alt );
 			embedPlayer.isAudioPlayer = ( embedPlayer.vidiunPlayerMetaData.mediaType === 5 );
 		});
@@ -153,7 +153,7 @@ mw.VWidgetSupport.prototype = {
 		// Add black sources:
 		embedPlayer.bindHelper( 'AddEmptyBlackSources', function( event, vid ){
 			$(vid).empty();
-			$.each( mw.getConfig( 'Kaltura.BlackVideoSources' ), function(inx, sourceAttr ){
+			$.each( mw.getConfig( 'Vidiun.BlackVideoSources' ), function(inx, sourceAttr ){
 				if (location.protocol === "https:") {
                     sourceAttr.src = sourceAttr.src.replace('http', 'https');
 				}
@@ -174,7 +174,7 @@ mw.VWidgetSupport.prototype = {
 		});
 
 		// Example how to override embedPlayerError handler
-		if (!this.isEmbedServicesEnabled(kalturaIframePackageData.entryResult)){
+		if (!this.isEmbedServicesEnabled(vidiunIframePackageData.entryResult)){
 			embedPlayer.shouldHandlePlayerError = false;
 			embedPlayer.bindHelper( 'embedPlayerError' , function ( event , data , doneCallback ) {
 				var displayedAcError = false;
@@ -184,7 +184,7 @@ mw.VWidgetSupport.prototype = {
 					embedPlayer.handlePlayerError( data );
 					return;
 				}
-				_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.kentryid , function ( sources ) {
+				_this.getEntryIdSourcesFromApi( embedPlayer , embedPlayer.ventryid , function ( sources ) {
 					// no sources, or access control error.
 					if ( !sources || sources.message ) {
 						embedPlayer.showErrorMsg( sources );
@@ -301,12 +301,12 @@ mw.VWidgetSupport.prototype = {
 					if (action.pattern && action.replacement) {
 						var regExp=new RegExp(action.pattern, "i");
 						var flashvars = embedPlayer.getFlashvars();
-						var serviceUrl = mw.config.get('Kaltura.playManifestServiceUrl');
+						var serviceUrl = mw.config.get('Vidiun.playManifestServiceUrl');
 						var match = serviceUrl.match( regExp );
 						if (match) {
 							serviceUrl = serviceUrl.replace(regExp, action.replacement);
 							//override urls according to the regex
-                            ['Kaltura.playManifestServiceUrl','Kaltura.thumbAssetServiceUrl'].forEach(function (key,index) {
+                            ['Vidiun.playManifestServiceUrl','Vidiun.thumbAssetServiceUrl'].forEach(function (key,index) {
 
                                 if (index===1 && !flashvars.serveThumbAssetsViaECDN) {
                                     return;
@@ -413,7 +413,7 @@ mw.VWidgetSupport.prototype = {
 			attachLiveDrmData(playerData, liveSource);
 			// Set live property to true
 			embedPlayer.setLive( true );
-		} else if ( mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'kplayer' ) ) {
+		} else if ( mw.EmbedTypes.getMediaPlayers().isSupportedPlayer( 'vplayer' ) ) {
 			var streamerType = this.resolveFlashStreamerType(embedPlayer, playerData);
 			// Add live stream source
 			this.addLiveEntrySource( embedPlayer, playerData.meta, "flash", streamerType );
@@ -565,7 +565,7 @@ mw.VWidgetSupport.prototype = {
                 }
             }
         }
-		embedPlayer.setKalturaConfig('originalProxyData', embedPlayer.getKalturaConfig('proxyData'));
+		embedPlayer.setVidiunConfig('originalProxyData', embedPlayer.getVidiunConfig('proxyData'));
 		//Set proxyData response data
 		embedPlayer.setVidiunConfig( 'proxyData', playerData.meta.partnerData);
 	},
@@ -825,8 +825,8 @@ mw.VWidgetSupport.prototype = {
 		embedPlayer.getVidiunMsgObject = function( msgKey ) {
 			return {
 			    'key': msgKey,
-				'title': embedPlayer.getKalturaMsgTitle( msgKey ),
-				'message': embedPlayer.getKalturaMsg( msgKey )
+				'title': embedPlayer.getVidiunMsgTitle( msgKey ),
+				'message': embedPlayer.getVidiunMsg( msgKey )
 			}
 		};
 
@@ -1460,11 +1460,11 @@ mw.VWidgetSupport.prototype = {
 		return hostUrl;
 	},
     getBaseFlavorUrl: function(partnerId) {
-        if( mw.getConfig( 'Kaltura.UseManifestUrls' ) ){
-            return  mw.getConfig('Kaltura.playManifestServiceUrl')+ '/p/' + partnerId +
+        if( mw.getConfig( 'Vidiun.UseManifestUrls' ) ){
+            return  mw.getConfig('Vidiun.playManifestServiceUrl')+ '/p/' + partnerId +
                 '/sp/' +  partnerId + '00/playManifest';
         } else {
-            return mw.getConfig('Kaltura.CdnUrl') + '/p/' + partnerId +
+            return mw.getConfig('Vidiun.CdnUrl') + '/p/' + partnerId +
                 '/sp/' +  partnerId + '00/flvclipper';
         }
     },
@@ -1730,10 +1730,10 @@ mw.VWidgetSupport.prototype = {
 				var validClipAspect = this.getValidAspect(deviceSources);
 				var lowResolutionDevice = (mw.isMobileDevice() && mw.isDeviceLessThan480P() && iphoneAdaptiveFlavors.length);
 				var targetFlavors;
-				if (mw.getConfig('Kaltura.ForceHighResFlavors')){
-					mw.log( 'KWidgetSupport::Forcing High resolution flavours');
+				if (mw.getConfig('Vidiun.ForceHighResFlavors')){
+					mw.log( 'VWidgetSupport::Forcing High resolution flavours');
 					if (ipadAdaptiveFlavors.length || dashAdaptiveFlavors.length) {
-						mw.log( 'KWidgetSupport::High resolution flavours found');
+						mw.log( 'VWidgetSupport::High resolution flavours found');
 						targetFlavors = ipadAdaptiveFlavors;
 						if (dashAdaptiveFlavors.length) {
 							//Concat the dash and ipadNew tags and filter duplicates
@@ -1746,7 +1746,7 @@ mw.VWidgetSupport.prototype = {
 							}
 						}
 					} else {
-						mw.log( 'KWidgetSupport::High resolution flavours not found - will use low resolution flavours');
+						mw.log( 'VWidgetSupport::High resolution flavours not found - will use low resolution flavours');
 						targetFlavors = iphoneAdaptiveFlavors;
 					}
 				} else {
@@ -1785,7 +1785,7 @@ mw.VWidgetSupport.prototype = {
 
 		}
 
-		if( mw.getConfig('Kaltura.UseFlavorIdsUrls') ) {
+		if( mw.getConfig('Vidiun.UseFlavorIdsUrls') ) {
 			var validClipAspect = this.getValidAspect(deviceSources);
 			//Only add mpeg dash CENC on the fly if dash sources exist
 			if (dashAdaptiveFlavors.length) {
@@ -1828,7 +1828,7 @@ mw.VWidgetSupport.prototype = {
 		this.removedAdaptiveFlavors = false;
 		// Apple adaptive streaming is broken for short videos
 		// remove adaptive sources if duration is less then 10 seconds,
-		if( playerData.meta.duration < 10 && mw.getConfig("Kaltura.force10secProgressive") ) {
+		if( playerData.meta.duration < 10 && mw.getConfig("Vidiun.force10secProgressive") ) {
 			deviceSources = this.removeAdaptiveFlavors( deviceSources );
 		}
 
@@ -1842,7 +1842,7 @@ mw.VWidgetSupport.prototype = {
 		if( !this.removedAdaptiveFlavors &&
 				(mw.isAndroid() && !mw.isNativeApp()) &&
 				hasH264Flavor &&
-				mw.getConfig( 'Kaltura.LeadHLSOnAndroid' ) == false ) {
+				mw.getConfig( 'Vidiun.LeadHLSOnAndroid' ) == false ) {
 			deviceSources = this.removeHlsFlavor( deviceSources );
 		}
 
@@ -1919,9 +1919,9 @@ mw.VWidgetSupport.prototype = {
 	getFairplayCert: function(playerData){
 		var publicCertificate = null;
 		if (playerData && playerData.contextData && playerData.contextData.pluginData &&
-			playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData &&
-			playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData.publicCertificate){
-			publicCertificate = playerData.contextData.pluginData.KalturaFairplayEntryContextPluginData.publicCertificate;
+			playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData &&
+			playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData.publicCertificate){
+			publicCertificate = playerData.contextData.pluginData.VidiunFairplayEntryContextPluginData.publicCertificate;
 		}
 		return publicCertificate;
 	},
@@ -2022,8 +2022,8 @@ mw.VWidgetSupport.prototype = {
 				extension = 'f4m';
 				embedPlayer.setFlashvars( 'streamerType', streamerType );
 				protocol = 'rtmp';
-				if ( embedPlayer.kalturaContextData ) {
-					protocol = embedPlayer.kalturaContextData.mediaProtocol;
+				if ( embedPlayer.vidiunContextData ) {
+					protocol = embedPlayer.vidiunContextData.mediaProtocol;
 				}
 				mimeType = 'video/live';
 				break;
@@ -2040,7 +2040,7 @@ mw.VWidgetSupport.prototype = {
 			case "hls":
 				embedPlayer.setFlashvars( 'streamerType', 'http' );
 				extension = 'm3u8';
-				protocol = mw.getConfig('Kaltura.Protocol');
+				protocol = mw.getConfig('Vidiun.Protocol');
 				if( !protocol ){
 					protocol = window.location.protocol.replace(':','');
 				}
@@ -2049,7 +2049,7 @@ mw.VWidgetSupport.prototype = {
 			case "dash":
 				embedPlayer.setFlashvars( 'streamerType', 'http' );
 				extension = 'mpd';
-				protocol = mw.getConfig('Kaltura.Protocol');
+				protocol = mw.getConfig('Vidiun.Protocol');
 				if( !protocol ){
 					protocol = window.location.protocol.replace(':','');
 				}
@@ -2075,7 +2075,7 @@ mw.VWidgetSupport.prototype = {
 		});
 
 		//add source
-		mw.log( 'KWidgetSupport::addLiveEntrySource: Add Live Entry Source - ' + srcUrl );
+		mw.log( 'VWidgetSupport::addLiveEntrySource: Add Live Entry Source - ' + srcUrl );
 		var liveSource = embedPlayer.mediaElement.tryAddSource(
 			$('<source />')
 				.attr({
@@ -2101,9 +2101,9 @@ mw.VWidgetSupport.prototype = {
 		return this.vSessionId;
 	},
     resetGUID: function() {
-        this.kSessionId = null
+        this.vSessionId = null
     },
-	getKalturaThumbnailUrl: function( thumb ) {
+	getVidiunThumbnailUrl: function( thumb ) {
 		if( ! thumb.url ){
 			return mw.getConfig( 'EmbedPlayer.BlackPixel' );
 		}
@@ -2122,8 +2122,8 @@ mw.VWidgetSupport.prototype = {
             if (thumb.vid_slices) {
                 thumbUrl += '/vid_slices/' + thumb.vid_slices;
             }
-            if( mw.getConfig('loadThumbnailWithKs') === true ) {
-		thumbUrl += '/ks/' + mw.getConfig('ks');
+            if( mw.getConfig('loadThumbnailWithVs') === true ) {
+		thumbUrl += '/vs/' + mw.getConfig('vs');
             }
 
 		}

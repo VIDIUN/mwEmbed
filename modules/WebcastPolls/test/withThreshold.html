@@ -1,9 +1,9 @@
 <html>
 <head>
     <title>polls demo - user1</title>
-    <script type="text/javascript" src="/html5.kaltura/mwEmbed/tests/qunit/qunit-bootstrap.js"></script>
-    <script type="text/javascript" src="/html5.kaltura/mwEmbed/mwEmbedLoader.php"></script>
-    <script type="text/javascript" src="/html5.kaltura/mwEmbed/docs/js/doc-bootstrap.js"></script>
+    <script type="text/javascript" src="/html5.vidiun/mwEmbed/tests/qunit/qunit-bootstrap.js"></script>
+    <script type="text/javascript" src="/html5.vidiun/mwEmbed/mwEmbedLoader.php"></script>
+    <script type="text/javascript" src="/html5.vidiun/mwEmbed/docs/js/doc-bootstrap.js"></script>
     <script type="text/javascript" src="config.js"></script>
     <style>
         .fwd{
@@ -29,24 +29,24 @@
 <button class="fwd" onclick="seekRelative(180)">+3m</button>
 <a href="user2.html">User 2 test page</a>
 
-<div id="kaltura_player" style="width: 885px; height: 630px;float: left;"></div>
+<div id="vidiun_player" style="width: 885px; height: 630px;float: left;"></div>
 <div id="qnaListHolder" style="width: 220px; height: 330px; float:left; float: left"></div>
 <br style="clear: both;"/><br/>
 
 <script>
 
-	var ks = this.user1Ks;
+	var vs = this.user1Vs;
 	qna.userId = this.user1;
 
-	paramFromUrl("ks");
+	paramFromUrl("vs");
 	paramFromUrl("wid");
 	paramFromUrl("entry");
 	paramFromUrl("playerId");
 
-	kWidget.addReadyCallback(function (playerId) {
-		kdp = document.getElementById(playerId);
+	vWidget.addReadyCallback(function (playerId) {
+		vdp = document.getElementById(playerId);
 
-		kdp.kBind('playerReady', function () {
+		vdp.vBind('playerReady', function () {
 			setTimeout(function () {
 				//
 			}, 1000)
@@ -54,8 +54,8 @@
 	});
 
 
-	kWidget.featureConfig({
-		'targetId': 'kaltura_player',
+	vWidget.featureConfig({
+		'targetId': 'vidiun_player',
 		'wid': wid,
 		'uiconf_id': playerId,
 		'flashvars': {
@@ -75,7 +75,7 @@
 			},
 			"IframeCustomPluginCss1": "pin-chapters.css",
 			'qna': qna,
-			'ks': ks,
+			'vs': vs,
 			"webcastPolls": {
 				"plugin": true,
                 "userId": "Eitan",

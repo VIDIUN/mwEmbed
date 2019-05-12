@@ -6,7 +6,7 @@
 	 * http://support.youbora.com/hc/en-us/article_attachments/201042582/Youbora_Analytics_-_Player_Plugin_Open_REST_API_-_v2.1.0.pdf
 	 */
 
-	var YouboraPlugin = mw.KBasePlugin.extend({
+	var YouboraPlugin = mw.VBasePlugin.extend({
 		defaultConfig: {
 			haltOnError: false,
 			transactionCode: 'Free'
@@ -23,7 +23,7 @@
 			}
 			this.setConfig('extraParams', this.getCustomParams());
 
-			this.youbora = new $YB.plugins.KalturaV2(this, this.getConfig());
+			this.youbora = new $YB.plugins.VidiunV2(this, this.getConfig());
 		},
 
 		bindLogs: function () {

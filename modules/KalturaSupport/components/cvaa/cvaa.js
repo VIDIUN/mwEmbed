@@ -3,7 +3,7 @@
 
     mw.closedCaptions = mw.closedCaptions || {};
 
-    mw.closedCaptions.cvaa = mw.KBaseScreen.extend({
+    mw.closedCaptions.cvaa = mw.VBaseScreen.extend({
 
         defaultConfig: {
             templatePath: 'components/cvaa/cvaa.tmpl.html',

@@ -6,29 +6,29 @@
 		],
 		"styles": "resources/RaptMediaPlugin.css",
 		"dependencies": [
-			"mw.KBaseComponent"
+			"mw.VBaseComponent"
 		],
-		"kalturaPluginName": "raptMedia"
+		"vidiunPluginName": "raptMedia"
 	},
 	"mw.RaptMediaDurationLabel": {
 		"scripts": "resources/mw.RaptMediaDurationLabel.js",
 		"dependencies": [
 			"durationLabel"
 		],
-		"kalturaPluginName": "raptMediaDurationLabel"
+		"vidiunPluginName": "raptMediaDurationLabel"
 	},
 	"mw.RaptMediaScrubber": {
 		"scripts": "resources/mw.RaptMediaScrubber.js",
 		"dependencies": [
 			"scrubber"
 		],
-		"kalturaPluginName": "raptMediaScrubber"
+		"vidiunPluginName": "raptMediaScrubber"
 	},
 	"mw.RaptMediaPlayPauseBtn": {
 		"scripts": "resources/mw.RaptMediaPlayPauseBtn.js",
 		"dependencies": [
 			"playPauseBtn"
 		],
-		"kalturaPluginName": "raptMediaPlayPauseBtn"
+		"vidiunPluginName": "raptMediaPlayPauseBtn"
 	}
 }

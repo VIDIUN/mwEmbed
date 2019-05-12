@@ -117,7 +117,7 @@ $uiVars = array(
 					'desc' => 'If Apple HLS streams should be used when available on Android devices, 
 			by default progressive streams are used on Android because of Android HLS compatibility issues.',
 					'default' => 'true',
-					'example' => '../modules/KalturaSupport/tests/UseHLS_WhereAvailable.qunit.html'
+					'example' => '../modules/VidiunSupport/tests/UseHLS_WhereAvailable.qunit.html'
 			),
 			'Vidiun.UseAppleAdaptive' => array(
 					'type' => 'String',

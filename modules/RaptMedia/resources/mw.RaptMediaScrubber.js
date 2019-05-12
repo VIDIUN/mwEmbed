@@ -64,7 +64,7 @@
 
 			// Overwrite timestamp
 			var $sliderPreviewTime = this.getComponent().find(".sliderPreview .sliderPreviewTime");
-			$sliderPreviewTime.text(kWidget.seconds2npt(original / 1000 * this.getDuration()));
+			$sliderPreviewTime.text(vWidget.seconds2npt(original / 1000 * this.getDuration()));
 		},
 
 		updateAttr: function(ui) {

@@ -28,7 +28,7 @@
   <script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
 
   <script type="text/javascript">
-    (function (QUnit, mw, kWidget) {
+    (function (QUnit, mw, vWidget) {
       'use strict';
 
       if (!QUnit) {
@@ -49,7 +49,7 @@
         var mediaReadyCallbacks = [];
         var mediaReadyFired = false;
 
-        QUnit.asyncTest('KalturaSupport::PlayerLoaded ' + playerId, function () {
+        QUnit.asyncTest('VidiunSupport::PlayerLoaded ' + playerId, function () {
           setTimeout(function () {
             QUnit.ok(false, 'Player timed out');
             QUnit.start();
@@ -79,7 +79,7 @@
           }
         });
 
-        kWidget.addReadyCallback(function (loadedPlayerId) {
+        vWidget.addReadyCallback(function (loadedPlayerId) {
           if (loadedPlayerId !== playerId) {
             return;
           }
@@ -117,7 +117,7 @@
           }, 0);
         }
       }
-    })(window.QUnit, window.mw, window.kWidget);
+    })(window.QUnit, window.mw, window.vWidget);
 
 
     // playlist on page tests
@@ -125,29 +125,29 @@
       'use strict';
 
       if (addPlayerTest) {
-        addPlayerTest('kaltura_player_1', playerTest);
-        addPlayerTest('kaltura_player_2', playerTest);
+        addPlayerTest('vidiun_player_1', playerTest);
+        addPlayerTest('vidiun_player_2', playerTest);
       }
 
       function playerTest(playerId, waitForMediaReadyFn) {
         // Name this module
         module('onPage playlist');
 
-        var kdp = document.getElementById(playerId);
+        var vdp = document.getElementById(playerId);
 
         asyncTest('Check for onPage playlist for player ' + playerId, function () {
           waitForMediaReadyFn(function () {
-            var $playlistContainer = $('#' + kdp.evaluate('{playlistAPI.clipListTargetId}'));
+            var $playlistContainer = $('#' + vdp.evaluate('{playlistAPI.clipListTargetId}'));
             var $playlistInterface = $playlistContainer.find('.onpagePlaylistInterface');
             ok($playlistInterface.length > 0, 'Found playlistOnPage div');
             
-            var actualThumbnailWidth = $playlistInterface.find('.k-thumb').width();;
-            var expectedThumbnailWidth = kdp.evaluate('{playlistAPI.thumbnailWidth}');
+            var actualThumbnailWidth = $playlistInterface.find('.v-thumb').width();;
+            var expectedThumbnailWidth = vdp.evaluate('{playlistAPI.thumbnailWidth}');
             equal(actualThumbnailWidth, expectedThumbnailWidth, 'ThumbWidth is set correctly');
 
-            var actualDescription = $playlistInterface.find('.k-description:first').html().substr(0, 5);
-            var expectedDescription = kdp.evaluate('{mediaProxy.entry.description}');
-            ok(expectedDescription.indexOf(actualDescription) === 0, 'description matches kdp description');
+            var actualDescription = $playlistInterface.find('.v-description:first').html().substr(0, 5);
+            var expectedDescription = vdp.evaluate('{mediaProxy.entry.description}');
+            ok(expectedDescription.indexOf(actualDescription) === 0, 'description matches vdp description');
             start();
           });
         });
@@ -164,39 +164,39 @@
 
   <h3>Player #1</h3>
   <div class="player-wrap">
-    <div id="kaltura_player_1" class="player"></div>
+    <div id="vidiun_player_1" class="player"></div>
     <div id="playlist_holder_1" class="playlist"></div>
   </div>
 
   <h3>Player #2</h3>
   <div class="player-wrap">
-    <div id="kaltura_player_2" class="player"></div>
+    <div id="vidiun_player_2" class="player"></div>
     <div id="playlist_holder_2" class="playlist"></div>
   </div>
 
   <script>
-    (function (kWidget, mw, $) {
+    (function (vWidget, mw, $) {
       'use strict';
 
       // Enable uiconf js which includes external resources
-      mw.setConfig('Kaltura.EnableEmbedUiConfJs', true);
+      mw.setConfig('Vidiun.EnableEmbedUiConfJs', true);
 
-      kWidget.embed(getEmbedConfig('kaltura_player_1', 'playlist_holder_1'));
-      kWidget.embed(getEmbedConfig('kaltura_player_2', 'playlist_holder_2', true));
+      vWidget.embed(getEmbedConfig('vidiun_player_1', 'playlist_holder_1'));
+      vWidget.embed(getEmbedConfig('vidiun_player_2', 'playlist_holder_2', true));
 
       function getEmbedConfig(playerId, playlistContainerId, reversePlaylists) {
         var playlists = [{
-          url: 'http://www.kaltura.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&ks={ks}',
+          url: 'http://www.vidiun.com/index.php/partnerservices2/executeplaylist?playlist_id=1_e387kavu&partner_id=243342&subp_id=24334200&format=8&vs={vs}',
           name: 'simple two clip pl'
         }, {
-          url: 'http://www.kaltura.com/index.php/partnerservices2/executeplaylist?playlist_id=0_9ahdych6&partner_id=243342&subp_id=24334200&format=8&ks={ks}',
+          url: 'http://www.vidiun.com/index.php/partnerservices2/executeplaylist?playlist_id=0_9ahdych6&partner_id=243342&subp_id=24334200&format=8&vs={vs}',
           name: 'electric sheep test'
         }];
 
         var plConfig = {};
         $.each(reversePlaylists ? playlists.reverse() : playlists, function (index, playlist) {
-          plConfig['kpl' + index + 'Url'] = playlist.url;
-          plConfig['kpl' + index + 'Name'] = playlist.name;
+          plConfig['vpl' + index + 'Url'] = playlist.url;
+          plConfig['vpl' + index + 'Name'] = playlist.name;
         });
 
         return {
@@ -219,7 +219,7 @@
           }
         };
       }
-    })(window.kWidget, window.mw, window.jQuery);
+    })(window.vWidget, window.mw, window.jQuery);
   </script>
 </body>
 

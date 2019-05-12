@@ -219,10 +219,10 @@ class UiConfResult {
 			'liveStatus' => array(),
 			'reportError' => array(),
 			"sideBarContainer" => array(),
-			"kAnalony"=>array(),
+			"vAnalony"=>array(),
 			"hlsjs"=>array(),
 			"unMuteOverlayButton"=>array(),
-			"kgitGuard"=>array()
+			"vgitGuard"=>array()
 			//"playersJsReceiver" => array()
 		);
 

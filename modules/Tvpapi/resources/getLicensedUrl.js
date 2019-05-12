@@ -10,7 +10,7 @@
             "ItemID": 0,
             "Type": "",
             "Params": {},
-            "ks": ""
+            "vs": ""
         },
 
         isDisabled: false,
@@ -48,14 +48,14 @@
                                                                 return file.FileID == source.assetid;
                                                             });
                     request = {
-                        "objectType": "KalturaLicensedUrlRecordingRequest",
+                        "objectType": "VidiunLicensedUrlRecordingRequest",
                         "assetId": config.ItemID,
                         "fileType": mediaSelectedFile[0].Format
                     }
                     break;
                   case "Media":
                     request = {
-                        "objectType": "KalturaLicensedUrlMediaRequest",
+                        "objectType": "VidiunLicensedUrlMediaRequest",
                         "assetId": config.ItemID,
                         "contentId": config.Params.contentId,
                         "baseUrl": config.Params.baseUrl
@@ -63,7 +63,7 @@
                     break;
                   case "EPG":
                     request = {
-                        "objectType": "KalturaLicensedUrlEpgRequest",
+                        "objectType": "VidiunLicensedUrlEpgRequest",
                         "assetId": config.ItemID,
                         "contentId": config.Params.contentId,
                         "baseUrl": config.Params.baseUrl,
@@ -75,7 +75,7 @@
 
                 var data = {
                   "apiVersion":config.apiVersion,
-                  "ks": config.ks,
+                  "vs": config.vs,
                   "request":request
                 };
 

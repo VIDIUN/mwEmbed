@@ -1,6 +1,6 @@
 {
     "chromecast": {
-        "description": "The Cast functionality allows your videos to be cast from the Kaltura player, via the Chromecast plugin, directly to a Kaltura Player receiver application on a Chromecast-connected TV.",
+        "description": "The Cast functionality allows your videos to be cast from the Vidiun player, via the Chromecast plugin, directly to a Vidiun Player receiver application on a Chromecast-connected TV.",
         "attributes": {
             "parent": {
                 "doc": "Parent container for component. Components include default placement, leave as null if unsure.",
@@ -23,7 +23,7 @@
             },
             "applicationID": {
                 "label": "Application ID",
-                "doc": "The Chromecast Application ID. Leave empty if default Kaltura receiver is used",
+                "doc": "The Chromecast Application ID. Leave empty if default Vidiun receiver is used",
                 "type": "string"
             }
         }

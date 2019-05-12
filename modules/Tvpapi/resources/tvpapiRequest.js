@@ -30,9 +30,9 @@
                 return data;
             }
             if ( raw ) {
-                return this.embedPlayer.getRawKalturaConfig( "proxyData" , attr );
+                return this.embedPlayer.getRawVidiunConfig( "proxyData" , attr );
             }
-            return this.embedPlayer.getKalturaConfig( "proxyData" , attr );
+            return this.embedPlayer.getVidiunConfig( "proxyData" , attr );
         },
 
         getInitObj: function( attr, raw ) {

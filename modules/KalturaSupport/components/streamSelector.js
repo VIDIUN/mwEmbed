@@ -416,7 +416,7 @@
 		},
 		getMenu: function () {
 			if (!this.menu) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex'),
 					menuName: this.getConfig("title")
 				});
@@ -439,4 +439,4 @@
 		}
 	}));
 
-})(window.mw, window.jQuery, kWidget);
+})(window.mw, window.jQuery, vWidget);

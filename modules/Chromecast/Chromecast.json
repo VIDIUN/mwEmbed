@@ -3,8 +3,8 @@
     "scripts": [
       "resources/sender/chromecast.js"
     ],
-    "dependencies": "mw.KBaseComponent",
-    "kalturaPluginName": "chromecast",
+    "dependencies": "mw.VBaseComponent",
+    "vidiunPluginName": "chromecast",
     "styles": "resources/chromecast.css",
     "messageFile": "Chromecast.i18n.json"
   },
@@ -13,6 +13,6 @@
   },
   "mw.EmbedPlayerChromecastReceiver": {
     "scripts": "resources/receiver/mw.EmbedPlayerChromecastReceiver.js",
-    "kalturaPluginName": "embedPlayerChromecastReceiver"
+    "vidiunPluginName": "embedPlayerChromecastReceiver"
   }
 }

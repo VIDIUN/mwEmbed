@@ -310,7 +310,7 @@
                 //we want to handle it on ourselves so always set it to hidden after hls.js makes its decision
                 this.log("manifest loaded");
                 //we want to handle it on ourselves so always set it to hidden after hls.js makes its decision
-                if (!this.embedPlayer.getKalturaConfig('closedCaptions', 'showEmbeddedCaptions')) {
+                if (!this.embedPlayer.getVidiunConfig('closedCaptions', 'showEmbeddedCaptions')) {
 		            var vid = this.getPlayer().getPlayerElement();
 		            var textTracks = vid.textTracks;
 		            for (var i=0; i < textTracks.length; i++){
@@ -489,7 +489,7 @@
 			},
 			isProtocolMismatch: function(data) {
 				var protocolMismatch = false;
-				var hostPageProtocol = this.getProtocol(kWidgetSupport.getHostPageUrl());
+				var hostPageProtocol = this.getProtocol(vWidgetSupport.getHostPageUrl());
 				var currentUrl = null;
 
 				switch (data.details) {

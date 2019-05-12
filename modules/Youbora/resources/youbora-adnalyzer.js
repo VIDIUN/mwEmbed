@@ -1,15 +1,15 @@
 /**
  * @license,
- * Youbora Plugin Kaltura player
- * Copyright NicePopleAtWork & Kaltura
+ * Youbora Plugin Vidiun player
+ * Copyright NicePopleAtWork & Vidiun
  * @author Jordi Aguilar & Dan Ziv
  */
 
 var VERSION = '1.0.0';
 
-$YB.adnalyzers.KalturaAds = function (plugin) {
+$YB.adnalyzers.VidiunAds = function (plugin) {
   try {
-    this.adnalyzerVersion = '5.4.5-' + VERSION + '-kalturaads-js';
+    this.adnalyzerVersion = '5.4.5-' + VERSION + '-vidiunads-js';
 
     // Reference to the plugin where it was called.
     this.startMonitoring(plugin, plugin.player);
@@ -23,10 +23,10 @@ $YB.adnalyzers.KalturaAds = function (plugin) {
 };
 
 // Inheritance
-$YB.adnalyzers.KalturaAds.prototype = new $YB.adnalyzers.Generic();
+$YB.adnalyzers.VidiunAds.prototype = new $YB.adnalyzers.Generic();
 
 // Expose info from ads plugin
-$YB.adnalyzers.KalturaAds.prototype.getMediaPlayhead = function () {
+$YB.adnalyzers.VidiunAds.prototype.getMediaPlayhead = function () {
   if (this.plugin.viewManager.isShowingAds) {
     return this.mediaPlayhead;
   } else {
@@ -34,11 +34,11 @@ $YB.adnalyzers.KalturaAds.prototype.getMediaPlayhead = function () {
   }
 };
 
-$YB.adnalyzers.KalturaAds.prototype.getAdPlayhead = function () {
+$YB.adnalyzers.VidiunAds.prototype.getAdPlayhead = function () {
   return this.playhead;
 };
 
-$YB.adnalyzers.KalturaAds.prototype.getAdPosition = function () {
+$YB.adnalyzers.VidiunAds.prototype.getAdPosition = function () {
   var pos = this.ads.getPlayer().adTimeline.currentAdSlotType;
   switch (pos) {
     case 'preroll':
@@ -56,20 +56,20 @@ $YB.adnalyzers.KalturaAds.prototype.getAdPosition = function () {
   }
 };
 
-$YB.adnalyzers.KalturaAds.prototype.getAdDuration = function () {
+$YB.adnalyzers.VidiunAds.prototype.getAdDuration = function () {
   return this.duration;
 };
 
-$YB.adnalyzers.KalturaAds.prototype.getAdTitle = function () {
+$YB.adnalyzers.VidiunAds.prototype.getAdTitle = function () {
   return this.title;
 };
 
-$YB.adnalyzers.KalturaAds.prototype.getAdPlayerVersion = function () {
-  return 'kaltura-player-v' + MWEMBED_VERSION;
+$YB.adnalyzers.VidiunAds.prototype.getAdPlayerVersion = function () {
+  return 'vidiun-player-v' + MWEMBED_VERSION;
 };
 
 // Register listeners
-$YB.adnalyzers.KalturaAds.prototype.registerListeners = function () {
+$YB.adnalyzers.VidiunAds.prototype.registerListeners = function () {
   try {
     this.enableAdBufferMonitor();
 
@@ -114,7 +114,7 @@ $YB.adnalyzers.KalturaAds.prototype.registerListeners = function () {
   }
 };
 
-$YB.adnalyzers.KalturaAds.prototype.resetValues = function () {
+$YB.adnalyzers.VidiunAds.prototype.resetValues = function () {
   this.title = '';
   this.mediaPlayhead = 0;
   this.duration = 0;

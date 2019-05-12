@@ -65,7 +65,7 @@
 			isViewModeLocked : false, //indicating if current view mode state is locked by external application.
 
 			setup: function ( ) {
-                mw.setConfig("preferedBitrate", 50); //ABR - load kplayer video with the lowest fixed bitrate in order to give dual screen full control on ABR (right now supported for HLS kplayer only). Will be ignored in Native player
+                mw.setConfig("preferedBitrate", 50); //ABR - load vplayer video with the lowest fixed bitrate in order to give dual screen full control on ABR (right now supported for HLS vplayer only). Will be ignored in Native player
                 mw.setConfig("EmbedPlayer.SpinnerTarget", "videoHolder"); //set SpinnerTarget to videoHolder
 				this.initConfig();
 				this.initDisplays();
@@ -138,7 +138,7 @@
 					}
 				} );
 
-				// moderation plugin doesn't send standard KBaseScreen events
+				// moderation plugin doesn't send standard VBaseScreen events
 				// so we have to handle it separately
 				var isModerationOpen = false;
 				this.bind("moderationOpen", function () {
@@ -930,13 +930,13 @@
                 var player = this.getPlayer();
                 var secondPlayer = this.secondPlayer;
                 var isSecondPlayerABR = secondPlayer instanceof mw.dualScreen.videoPlayer && secondPlayer.playerElement.isABR();
-                player.instanceOf === 'Kplayer' && this.getUtils().isAutoBitrate().then(function (res) {
+                player.instanceOf === 'Vplayer' && this.getUtils().isAutoBitrate().then(function (res) {
                     if (!res) {
                         return;
                     }
                     var isMainPlayerABR = player instanceof mw.dualScreen.videoPlayer && player.playerElement.isABR();
                     if ( player.getVideoDisplay().attr('data-display-rule') === 'primary' ) {
-                        mw.log("DualScreen :: handleABR :: set kplayer to ABR AUTO and secondPlayer to lowest bitrate");
+                        mw.log("DualScreen :: handleABR :: set vplayer to ABR AUTO and secondPlayer to lowest bitrate");
                         // switch to -1 only if main player was set to ABR before
                         if(isMainPlayerABR){
                             player.switchSrc(-1);
@@ -945,7 +945,7 @@
                             secondPlayer.playerElement.switchSrc(0);
                         }
                     } else {
-                        mw.log("DualScreen :: handleABR :: set secondPlayer to ABR AUTO and kplayer to lowest bitrate");
+                        mw.log("DualScreen :: handleABR :: set secondPlayer to ABR AUTO and vplayer to lowest bitrate");
                         player.switchSrc(0);
                         if( isSecondPlayerABR ) {
                             secondPlayer.playerElement.switchSrc(-1);
@@ -991,7 +991,7 @@
 				});
 
                 //take care of flash obj (seek through hidden flash player will be very slow, so we need to bring at least several pixels inside the visible area of the player frame)
-                if ( this.getPlayer().instanceOf === 'Kplayer' ) {
+                if ( this.getPlayer().instanceOf === 'Vplayer' ) {
                     this.displays.setFlashMode(true);
                 }
 			},
@@ -1105,12 +1105,12 @@
 			getSupportedCuePoints: function () {
 				if (!this.cuePoints) {
 					var cuePoints = [];
-					var kCuePoints = this.getPlayer().kCuePoints;
+					var vCuePoints = this.getPlayer().vCuePoints;
 
-					if (kCuePoints) {
+					if (vCuePoints) {
 						$.each(this.getConfig('cuePointType'), function (i, cuePointType) {
 							$.each(cuePointType.sub, function (j, cuePointSubType) {
-								var filteredCuePoints = kCuePoints.getCuePointsByType(cuePointType.main, cuePointSubType);
+								var filteredCuePoints = vCuePoints.getCuePointsByType(cuePointType.main, cuePointSubType);
 								cuePoints = cuePoints.concat(filteredCuePoints);
 							});
 						});

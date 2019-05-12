@@ -1,6 +1,6 @@
 ( function( mw, $ ) {"use strict";
 
-    mw.PluginManager.add( 'kgitGuard', mw.KBasePlugin.extend({
+    mw.PluginManager.add( 'vgitGuard', mw.VBasePlugin.extend({
 
         defaultConfig: {
             "guardText": "Using non production player"
@@ -10,10 +10,10 @@
             this.proxyPosterMethods();
         },
         isSafeEnviornment: function(){
-            var hostPageUrl = window.kWidgetSupport.getHostPageUrl();
-            var loaderPath = kWidget.getPath();
+            var hostPageUrl = window.vWidgetSupport.getHostPageUrl();
+            var loaderPath = vWidget.getPath();
             return ((hostPageUrl.indexOf("kgit.html5video.org") === -1) &&
-                    (hostPageUrl.indexOf("player.kaltura.com") === -1) &&
+                    (hostPageUrl.indexOf("player.vidiun.com") === -1) &&
                     (loaderPath.indexOf("kgit.html5video.org") !== -1));
         },
         proxyPosterMethods: function(){

@@ -277,7 +277,7 @@
             }
 
             if ( this.getPlayer().streamerType != "http" && !this.getPlayer().isPlaying() && !this.getPlayer().isInSequence() ){
-				if(this.getPlayer().streamerType !== "hls" && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('kplayer')){ //If flash disabled, player fallback to http progressive, but the streamerType might still be hdnetwork
+				if(this.getPlayer().streamerType !== "hls" && !mw.EmbedTypes.getMediaPlayers().isSupportedPlayer('vplayer')){ //If flash disabled, player fallback to http progressive, but the streamerType might still be hdnetwork
 					return true;
                 }
 	            if ( this.getPlayer().streamerType == "hls" && this.secondIteration === true ) {
@@ -421,7 +421,7 @@
 		},
 		getMenu: function(){
 			if( !this.menu ) {
-				this.menu = new mw.KMenu(this.getComponent().find('ul'), {
+				this.menu = new mw.VMenu(this.getComponent().find('ul'), {
 					tabIndex: this.getBtn().attr('tabindex'),
 					menuName: this.getConfig("title")
 				});

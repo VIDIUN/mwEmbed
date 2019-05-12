@@ -122,8 +122,8 @@
 
                 // Add our skin name as css class
                 var skinName = embedPlayer.playerConfig.layout.skin;
-                if (embedPlayer.getRawKalturaConfig("layout") && embedPlayer.getRawKalturaConfig("layout").skin) {
-                    skinName = embedPlayer.getRawKalturaConfig("layout").skin;
+                if (embedPlayer.getRawVidiunConfig("layout") && embedPlayer.getRawVidiunConfig("layout").skin) {
+                    skinName = embedPlayer.getRawVidiunConfig("layout").skin;
                 }
                 this.$interface.addClass(skinName);
 
@@ -512,7 +512,7 @@
         },
         setupTooltip: function (elm, arrowDirection) {
             // exit if not enabled
-            if (!this.embedPlayer.enableTooltips || kWidget.isIE8()) {
+            if (!this.embedPlayer.enableTooltips || vWidget.isIE8()) {
                 return;
             }
             var tooltips = elm ? elm : this.getInterface();
@@ -662,7 +662,7 @@
             });
 
             // IE8 does not trigger click events on Flash objects
-            if ((embedPlayer.adSiblingFlashPlayer || embedPlayer.instanceOf == 'Kplayer') &&
+            if ((embedPlayer.adSiblingFlashPlayer || embedPlayer.instanceOf == 'Vplayer') &&
                 (mw.isIE8() || mw.isIE9())) {
                 embedPlayer.getVideoHolder().bind('mouseup', function () {
                     if (embedPlayer.sequenceProxy && embedPlayer.sequenceProxy.isInSequence) {
@@ -841,7 +841,7 @@
         },
         addTouchOverlay: function () {
             if (mw.isTouchDevice() && !this.keepControlsOnScreen &&
-                this.embedPlayer.getKalturaConfig("controlBarContainer", "hover")) {
+                this.embedPlayer.getVidiunConfig("controlBarContainer", "hover")) {
                 var _this = this;
                 if (this.getInterface().find('#touchOverlay').length == 0) {
                     var touchOverlay = this.getInterface().find('.controlBarContainer').before(
@@ -1332,7 +1332,7 @@
             if (embedPlayer.getInterface().find('.overlay-win').length != 0) {
                 return;
             }
-            // remove error message from kalturaIframeClass.php
+            // remove error message from vidiunIframeClass.php
             try {
                 embedPlayer.getInterface().parent().find('#error').remove();
             } catch (e) {

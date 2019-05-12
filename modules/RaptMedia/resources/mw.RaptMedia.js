@@ -1,16 +1,16 @@
 /**
- * The RaptMedia plugin integrates the RaptMedia Engine to the Kaltura Player.
+ * The RaptMedia plugin integrates the RaptMedia Engine to the Vidiun Player.
  * RaptMedia adds clickable interactive layer that accompanies your video content and can do things like:
  * cue or launch different media plays, jump to specific timecode, trigger an event on your webpage and launch a new web page or an app.
  * Learn more at http://docs.raptmedia.com/
  *
- * This plugins is only usable for raptmedia.com accounts who enabled integration with Kaltura.
- * If you don't have a RaptMedia account or need to enable the Kaltura integration, please contact support@raptmedia.com
+ * This plugins is only usable for raptmedia.com accounts who enabled integration with Vidiun.
+ * If you don't have a RaptMedia account or need to enable the Vidiun integration, please contact support@raptmedia.com
  *
  * This plugin is only activated when the entryId provided is a Playlist Entry with partnerData == "raptmedia;projectId".
  * This plugin also makes use of accompanying plugin RaptMediaScrubber plugin to override the default scrubber behavior to fit a Rapt Media experience.
  * With RaptMediaScrubber plugin the scrubber can interact within the context of a single RaptMedia clip instead of just the entire stitched playlist.
- * The RaptMedia plugin integrates the RaptMedia Engine to the Kaltura Player.
+ * The RaptMedia plugin integrates the RaptMedia Engine to the Vidiun Player.
  * It also makes use of accompanying plugin RaptMediaDurationLabel used to override the default player DurationLabel to behave according to the RaptMedia Sequence rather than show the overall playlist duration.
  */
 (function ( mw, $ ) {
@@ -21,12 +21,12 @@
 	var SEEK_EPSILON = 0.1;
 
 	// Required for playback of stitched playlists on android
-	mw.setConfig("Kaltura.LeadHLSOnAndroid", true);
+	mw.setConfig("Vidiun.LeadHLSOnAndroid", true);
 
 	// Required for playback of stitched playlists on IE11 on Windows 7
 	mw.setConfig("LeadWithHLSOnFlash", true);
 
-	mw.PluginManager.add( 'raptMedia', mw.KBaseComponent.extend( {
+	mw.PluginManager.add( 'raptMedia', mw.VBaseComponent.extend( {
 
 		defaultConfig: {
 			parent: 'videoHolder'
@@ -94,8 +94,8 @@
 				_this.playbackCallback = callback;
 			});
 
-			this.bind('KalturaSupport_EntryDataReady', function(event) {
-				// KalturaSupport_EntryDataReady can be called synchronously from a
+			this.bind('VidiunSupport_EntryDataReady', function(event) {
+				// VidiunSupport_EntryDataReady can be called synchronously from a
 				// `checkPlayerSourcesEvent` handler if the required data is already
 				// cached. In that case `_this.playbackCallback` may not be available
 				// synchronously, so we force asynchronous evaluation
@@ -131,7 +131,7 @@
 				}, 0);
 			});
 
-			this.bind('Kaltura_ConfigChanged', function(event, pluginName, property, value) {
+			this.bind('Vidiun_ConfigChanged', function(event, pluginName, property, value) {
 				if (_this.raptMediaEngine == null) { return; }
 				if (pluginName === 'googleAnalytics' && property === 'urchinCode') {
 					_this.raptMediaEngine.execute({ type: 'config:set', payload: { key: 'ga', value: value } });
@@ -158,7 +158,7 @@
 		readRaptProjectId: function() {
 			var partnerData = this.getPlayer().evaluate('{mediaProxy.entry.partnerData}') || '';
 			if (partnerData.toLowerCase() === 'raptmedia!') {
-				return '!' + this.getPlayer().kentryid;
+				return '!' + this.getPlayer().ventryid;
 			}
 
 			var segments = partnerData.split(';');
@@ -352,7 +352,7 @@
 					return resolve(projectId);
 				}
 
-				_this.getKalturaClient().doRequest({
+				_this.getVidiunClient().doRequest({
 					service: 'fileAsset',
 					action: 'list',
 					'filter:fileAssetObjectTypeEqual' : 3,
@@ -373,7 +373,7 @@
 						return reject(Error('Unable to load graph data, missing file asset'));
 					}
 
-					_this.getKalturaClient().doRequest({
+					_this.getVidiunClient().doRequest({
 						service: 'fileAsset',
 						action: 'serve',
 						id: asset.id,
@@ -422,7 +422,7 @@
 			_this.log('Loading video segment metadata');
 
 			return this.promise(function(resolve, reject) {
-				_this.getKalturaClient().doRequest(request, function (data) {
+				_this.getVidiunClient().doRequest(request, function (data) {
 					if (raptProjectId !== _this.getConfig('projectId')) {
 						return _this.reject(new AbortError);
 					}
@@ -573,7 +573,7 @@
 			if (!this.raptMediaEngine) {
 				var config = this.getConfig('raptEngine') || {};
 
-				var ua = this.getPlayer().getKalturaConfig('googleAnalytics', 'urchinCode');
+				var ua = this.getPlayer().getVidiunConfig('googleAnalytics', 'urchinCode');
 				if (ua != null) {
 					config.ga = ua;
 				}

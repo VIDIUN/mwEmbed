@@ -12,18 +12,18 @@
    	<h3>Dual video playlist (from <a href="../rss.xml">MRSS</a>)</h3>
 
    	<br> <br>
-    <div id="kaltura_player" style="width: 960px; height: 640px;"></div>
+    <div id="vidiun_player" style="width: 960px; height: 640px;"></div>
     <script>
-    var playlistURL = kWidget.getPath() + 'modules/KalturaSupport/components/dualScreen/tests/rss.xml';
-    kWidget.embed({
-      "targetId": "kaltura_player",
+    var playlistURL = vWidget.getPath() + 'modules/VidiunSupport/components/dualScreen/tests/rss.xml';
+    vWidget.embed({
+      "targetId": "vidiun_player",
       "wid": "_27017",
       "uiconf_id": 35826631,
       "flashvars": {
         'disableHLSOnJs': true,
-        'Kaltura.ForceFlashOnDesktop': true,
+        'Vidiun.ForceFlashOnDesktop': true,
         'LeadWithHLSOnFlash': true,
-        'EmbedPlayer.ForceKPlayer': true,
+        'EmbedPlayer.ForceVPlayer': true,
 	      'playlistAPI':{
 		      'autoContinue': true,
 		      'includeInLayout': true,
@@ -33,8 +33,8 @@
 		      'autoInsert':true,
 		      'layout': 'vertical',
 		      'containerPosition': 'left',
-		      'kpl0Name': "Playlist",
-		      'kpl0Id': playlistURL,
+		      'vpl0Name': "Playlist",
+		      'vpl0Id': playlistURL,
 		      'mediaItemWidth': '240px'
 	      },
         "dualScreen": {

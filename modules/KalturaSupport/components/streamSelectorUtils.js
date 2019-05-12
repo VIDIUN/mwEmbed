@@ -1,8 +1,8 @@
-(function (mw, $, kWidget) {
+(function (mw, $, vWidget) {
     "use strict";
     mw.streamSelectorUtils = mw.streamSelectorUtils || {};
 
-    mw.streamSelectorUtils.selector = mw.KBaseComponent.extend({
+    mw.streamSelectorUtils.selector = mw.VBaseComponent.extend({
 
         defaultConfig: {
             "defaultStream": 1,
@@ -35,15 +35,15 @@
                 _this.streamsReady = true;
                 //Insert original entry to streams
                 _this.streams.splice(0, 0, {
-                    id: _this.getPlayer().kentryid,
+                    id: _this.getPlayer().ventryid,
                     data: {
-                        meta: _this.getPlayer().kalturaPlayerMetaData,
-                        contextData: _this.getPlayer().kalturaContextData
+                        meta: _this.getPlayer().vidiunPlayerMetaData,
+                        contextData: _this.getPlayer().vidiunContextData
                     }
                 });
                 _this.currentStream = _this.getDefaultStream();
 
-                if (_this.getPlayer().kentryid !== _this.currentStream.id) {
+                if (_this.getPlayer().ventryid !== _this.currentStream.id) {
                     _this.setStream(_this.currentStream);
                 }
                 if (_this.streams.length > 1) {
@@ -78,9 +78,9 @@
             requestObject.push({
                 'service': 'baseEntry',
                 'action': 'list',
-                'filter:objectType': 'KalturaBaseEntryFilter',
+                'filter:objectType': 'VidiunBaseEntryFilter',
                 'filter:typeEqual': 1,
-                'filter:parentEntryIdEqual': this.getPlayer().kentryid
+                'filter:parentEntryIdEqual': this.getPlayer().ventryid
             });
 
             var i = 0;
@@ -94,7 +94,7 @@
             }
 
             // do the api request
-            this.getKalturaClient().doRequest(requestObject, function (data) {
+            this.getVidiunClient().doRequest(requestObject, function (data) {
                 // Validate result
                 if (data && _this.isValidResult(data[0] && data[0].totalCount > 0)) {
                     _this.createStreamList(data);
@@ -204,21 +204,21 @@
 
                 var checkPlayerSourcesFunction = function (callback) {
                     //Create source data from raw data
-                    var sources = kWidgetSupport.getEntryIdSourcesFromPlayerData(embedPlayer.kpartnerid, stream.data);
+                    var sources = vWidgetSupport.getEntryIdSourcesFromPlayerData(embedPlayer.vpartnerid, stream.data);
                     //handle player data mappings to embedPlayer and check for errors
-                    kWidgetSupport.handlePlayerData(embedPlayer, stream.data);
+                    vWidgetSupport.handlePlayerData(embedPlayer, stream.data);
                     //Replace sources
                     embedPlayer.replaceSources(sources);
 
                     //Update player metadata and poster/thumbnail urls
-                    embedPlayer.kalturaPlayerMetaData = stream.data.meta;
+                    embedPlayer.vidiunPlayerMetaData = stream.data.meta;
                     //Do not show poster on switch to avoid poster flashing
                     mw.setConfig('EmbedPlayer.HidePosterOnStart', true);
-                    embedPlayer.triggerHelper('KalturaSupport_EntryDataReady', embedPlayer.kalturaPlayerMetaData);
-                    //Reinit the kCuePoints service
+                    embedPlayer.triggerHelper('VidiunSupport_EntryDataReady', embedPlayer.vidiunPlayerMetaData);
+                    //Reinit the vCuePoints service
                     if( (embedPlayer.rawCuePoints && embedPlayer.rawCuePoints.length > 0)) {
-                        embedPlayer.kCuePoints = new mw.KCuePoints( embedPlayer );
-                        embedPlayer.triggerHelper('KalturaSupport_CuePointsReady', [embedPlayer.rawCuePoints]);
+                        embedPlayer.vCuePoints = new mw.VCuePoints( embedPlayer );
+                        embedPlayer.triggerHelper('VidiunSupport_CuePointsReady', [embedPlayer.rawCuePoints]);
                     }
                     callback();
                 };
@@ -254,7 +254,7 @@
                         embedPlayer.addBlackScreen();
 
                         var postFix = '.streamSelectorUtilsChangeMedia';
-                        if (embedPlayer.instanceOf === 'Kplayer' && embedPlayer.streamerType === 'hls') {
+                        if (embedPlayer.instanceOf === 'Vplayer' && embedPlayer.streamerType === 'hls') {
                             embedPlayer.unbindHelper('playing' + postFix).bindOnceHelper('playing' + postFix, function () {
                                 embedPlayer.unbindHelper('seeked' + postFix).bindOnceHelper('seeked' + postFix, onSeeked);
                                 embedPlayer.seek(currentTime, false);
@@ -308,4 +308,4 @@
         }
     });
 
-})(window.mw, window.jQuery, kWidget);
+})(window.mw, window.jQuery, vWidget);

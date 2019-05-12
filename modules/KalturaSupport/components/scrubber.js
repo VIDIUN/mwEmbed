@@ -298,7 +298,7 @@
 				thumbReq[ 'vs' ] = this.getPlayer().getFlashvars('vs');
 			}
 			// else get thumb slices from helper:
-			return kWidgetSupport.getKalturaThumbnailUrl( thumbReq );
+			return vWidgetSupport.getVidiunThumbnailUrl( thumbReq );
 		},
 		showThumbnailPreview: function (data) {
 			var showOnlyTime = this.getConfig("showOnlyTime");

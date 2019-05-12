@@ -2,13 +2,13 @@
     "webcastPolls": {
         "scripts": [
             "resources/webcastPolls.js",
-            "resources/webcastPollsKalturaProxy.js",
+            "resources/webcastPollsVidiunProxy.js",
             "resources/webcastPollsView.js",
-            "../KalturaSupport/resources/webcast/cuePointsManager.js",
-            "../KalturaSupport/resources/webcast/userProfile.js"
+            "../VidiunSupport/resources/webcast/cuePointsManager.js",
+            "../VidiunSupport/resources/webcast/userProfile.js"
         ],
-        "dependencies": ["mw.KBaseScreen","mw.KPushServerNotification"],
-        "kalturaPluginName": "webcastPolls",
+        "dependencies": ["mw.VBaseScreen","mw.VPushServerNotification"],
+        "vidiunPluginName": "webcastPolls",
 	    "templates": ["../WebcastPolls/resources/webcastPolls-large.tmpl.html",
             "../WebcastPolls/resources/webcastPolls-medium.tmpl.html",
             "../WebcastPolls/resources/webcastPolls-small.tmpl.html"

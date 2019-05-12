@@ -5,8 +5,8 @@
 		],
 		"styles": "./resources/hotspots.css",
 		"dependencies": [
-			"mw.KBaseComponent"
+			"mw.VBaseComponent"
 		],
-		"kalturaPluginName": "hotspots"
+		"vidiunPluginName": "hotspots"
 	}
 }

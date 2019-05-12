@@ -188,8 +188,8 @@
         },
 
         setInitialCaptions: function (tracksInfo) {
-            if (this.getKalturaConfig('embedPlayerChromecastReceiver', 'defaultLanguageKey')) {
-                var languageKey = this.getKalturaConfig('embedPlayerChromecastReceiver', 'defaultLanguageKey');
+            if (this.getVidiunConfig('embedPlayerChromecastReceiver', 'defaultLanguageKey')) {
+                var languageKey = this.getVidiunConfig('embedPlayerChromecastReceiver', 'defaultLanguageKey');
                 var textTrack = tracksInfo.tracks.find(function (track) {
                     if (typeof track.language === 'string') {
                         return track.language.startsWith(languageKey);
@@ -211,7 +211,7 @@
 
         buildUdrmLicenseUri: function ( mimeType ) {
             mw.log( "EmbedPlayerChromecastReceiver::buildUdrmLicenseUri()" );
-            var licenseServer = mw.getConfig( 'Kaltura.UdrmServerURL' );
+            var licenseServer = mw.getConfig( 'Vidiun.UdrmServerURL' );
             var licenseParams = this.mediaElement.getLicenseUriComponent();
             var licenseUri = null;
 
@@ -647,7 +647,7 @@
             "kr": {
                 "name": "Kanuri"
             },
-            "ks": {
+            "vs": {
                 "name": "Kashmiri"
 
             },

@@ -61,15 +61,15 @@
 				//if localStorage is available, get & store the user id from it;
 				if (window.localStorage) {
 					try {
-						if (!localStorage.kAnonymousUserId) {
-							localStorage.kAnonymousUserId = userId;
+						if (!localStorage.vAnonymousUserId) {
+							localStorage.vAnonymousUserId = userId;
 						}
-						userId = localStorage.kAnonymousUserId;
+						userId = localStorage.vAnonymousUserId;
 					}catch(e) {
 						mw.log("Exception in getUserID: "+e);
 					}
 				}
-				mw.log("Using kAnonymousUserId: ",userId);
+				mw.log("Using vAnonymousUserId: ",userId);
 				return userId;
 			}
 			return _this.getConfig("userId");
@@ -198,7 +198,7 @@
 		updateUnreadBadge: function(){
 			var _this = this;
 			// if its a number and is greater then 0 - show & update the badge
-			var num = _this.KQnaModule ? _this.KQnaModule.getUnreadCount() : 0;
+			var num = _this.VQnaModule ? _this.VQnaModule.getUnreadCount() : 0;
 			if (isNaN(num) || num <=0 ){
 				$('.qna-badge').hide();
 			}
@@ -313,10 +313,10 @@
 						_this.VQnaModule.applyLayout();
 					});
 				}else{ // for in player plugin don't wait for css to load
-                    _this.KQnaService = new mw.KQnaService(embedPlayer, _this);
-                    _this.KQnaModule = new mw.KQnaModule(embedPlayer, _this, _this.KQnaService);
-                    ko.applyBindings(_this.KQnaModule, _this.$qnaListContainer[0]);
-                    _this.KQnaModule.applyLayout();
+                    _this.VQnaService = new mw.VQnaService(embedPlayer, _this);
+                    _this.VQnaModule = new mw.VQnaModule(embedPlayer, _this, _this.VQnaService);
+                    ko.applyBindings(_this.VQnaModule, _this.$qnaListContainer[0]);
+                    _this.VQnaModule.applyLayout();
                 }
 			}
             else if ( !this.getPlayer().isLive() ) {
@@ -374,7 +374,7 @@
 				alert(gM('qna-cant-ask-while-not-live'));
 			} else {
 				if (question !== gM('qna-default-question-box-text')) {
-					_this.KQnaService.submitQuestion(question);
+					_this.VQnaService.submitQuestion(question);
 					_this.resetTextArea(textArea, questionCharCounter);
 					return true;
 				}

@@ -37,7 +37,7 @@ date_default_timezone_set('UTC');
 $wgServerPort = (($_SERVER['SERVER_PORT']) != '80' && $_SERVER['SERVER_PORT'] != '443')?':'.$_SERVER['SERVER_PORT']:'';
 $wgServer = $wgHTTPProtocol . '://' . $_SERVER['SERVER_NAME'] .$wgServerPort. dirname( dirname( $_SERVER['SCRIPT_NAME'] ) ) .'/';
 
-$psRelativePath = '../kwidget-ps/';
+$psRelativePath = '../vwidget-ps/';
 
 
 // By default set $wgScriptPath to empty
@@ -51,7 +51,7 @@ $wgResourceLoaderUrl = $wgLoadScript;
 
 // The list of enabled modules
 // Added two base modules that must be included before others
-$wgMwEmbedEnabledModules = array( 'EmbedPlayer', 'KalturaSupport' );
+$wgMwEmbedEnabledModules = array( 'EmbedPlayer', 'VidiunSupport' );
 
 // By default we enable every module in the "modules" folder
 // Modules are registered after localsettings.php to give a chance
@@ -124,48 +124,48 @@ $wgExternalPlayersSupportedTypes = array('YouTube');
 
 //Embedded services
 //To enable service re routing for entryResult calls
-$wgEnableKalturaEmbedServicesRouting = true;
+$wgEnableVidiunEmbedServicesRouting = true;
 
 // To include signed headers with user IPs for IP restriction lookups, input a salt string for
 // $wgKalturaRemoteAddressSalt configuration option.
 $wgKalturaRemoteAddressSalt = false;
 
 // If we should check for onPage resources per the external resources plugin
-$wgKalturaEnableEmbedUiConfJs = false;
+$wgVidiunEnableEmbedUiConfJs = false;
 
 // Enables the result cache while in debug mode
 // This enables fast player rendering while scripts remain unminifed.
 // ( normally $wgEnableScriptDebug disables result cache )
-$wgKalturaForceResultCache = false;
+$wgVidiunForceResultCache = false;
 
 // For force ip testing geo restrictions
-$wgKalturaForceIP = false;
+$wgVidiunForceIP = false;
 
 // To test sites with referre restrictions:
 $wgKalturaForceReferer = false;
 
-// The default Kaltura service url:
-$wgKalturaServiceUrl = 'http://cdnapi.kaltura.com';
+// The default Vidiun service url:
+$wgVidiunServiceUrl = 'http://cdnapi.vidiun.com';
 // if https use cdnsecakmi
 if( $wgHTTPProtocol == 'https' ){
-	$wgKalturaServiceUrl =  'https://cdnapisec.kaltura.com';
+	$wgVidiunServiceUrl =  'https://cdnapisec.vidiun.com';
 }
 
 // Default Kaltura CDN url:
 $wgKalturaCDNUrl = 'http://cdnbakmi.kaltura.com';
 // if https use cdnsecakmi
 if( $wgHTTPProtocol == 'https' ){
-	$wgKalturaCDNUrl =  'https://cdnsecakmi.kaltura.com';
+	$wgVidiunCDNUrl =  'https://cdnsecakmi.vidiun.com';
 }
 
-// Default Kaltura Stats url
-$wgKalturaStatsServiceUrl = 'http://stats.kaltura.com';
+// Default Vidiun Stats url
+$wgVidiunStatsServiceUrl = 'http://stats.vidiun.com';
 if( $wgHTTPProtocol == 'https' ){
-	$wgKalturaStatsServiceUrl = 'https://stats.kaltura.com';
+	$wgVidiunStatsServiceUrl = 'https://stats.vidiun.com';
 }
 
-// Default Kaltura service url:
-$wgKalturaServiceBase = '/api_v3/index.php?service=';
+// Default Vidiun service url:
+$wgVidiunServiceBase = '/api_v3/index.php?service=';
 
 // Log Api Request
 $wgLogApiRequests = false;
@@ -184,14 +184,14 @@ $wgKalturaAllowIframeRemoteService = false;
 $wgKalturaUiConfCacheTime = 60*10; // 10 min
 
 // Cache errors for 30 seconds to avoid overloading apaches in CDN setups
-$wgKalturaErrorCacheTime = 30;
+$wgVidiunErrorCacheTime = 30;
 
 // By default enable the iframe rewrite
-$wgKalturaIframeRewrite = true;
+$wgVidiunIframeRewrite = true;
 
 $wgEnableIpadHTMLControls = true;
 
-$wgKalturaUseManifestUrls = true;
+$wgVidiunUseManifestUrls = true;
 
 // The admin secret should be set to an integration admin secret key for testing
 // api actions that require admin rights, like granting a ks for preview / play:
@@ -204,18 +204,18 @@ $wgAllowCustomResourceIncludes = true;
 $wgKalturaPartnerDisableAppleAdaptive = array();
 
 // By default use apple adaptive if we have the ability
-$wgKalturaUseAppleAdaptive = true;
+$wgVidiunUseAppleAdaptive = true;
 
 /********************************************************
  *  Authentication configuration variables
  *******************************************************/
-// If the kaltura authentication should run on https ( true by default )
-$wgKalturaAuthHTTPS = true;
+// If the vidiun authentication should run on https ( true by default )
+$wgVidiunAuthHTTPS = true;
 // What domains are allowed to host the auth page:
-$wgKalturaAuthDomains = array( 'www.kaltura.com', 'kmc.kaltura.com' );
+$wgVidiunAuthDomains = array( 'www.vidiun.com', 'vmc.vidiun.com' );
 
 // If google anlytics should be enabled, set to the ua string
-$wgKalturaGoogleAnalyticsUA = false;
+$wgVidiunGoogleAnalyticsUA = false;
 
 // for additional script includes.
 $wgAdditionalDocsScriptInclude = false;
@@ -223,13 +223,13 @@ $wgAdditionalDocsScriptInclude = false;
 //Remote web inspector URL such as: weinre, fireBug
 $wgRemoteWebInspector = false;
 
-// Kaltura Supported API Features
-$wgKalturaApiFeatures = array();
+// Vidiun Supported API Features
+$wgVidiunApiFeatures = array();
 
 /*********************************************************
  * Override Domain:
 ********************************************************/
-$wgEnableKalturaOverrideDomain = true;
+$wgEnableVidiunOverrideDomain = true;
 
 /*********************************************************
  * A comma-delimited string of allowed flashavrs to be passed to server on dynamic embed call:
@@ -238,9 +238,9 @@ $wgAllowedVars = "inlineScript";
 $wgAllowedVarsKeyPartials = "onPageJs,onPageCss,IframeCustomPluginJs,IframeCustomPluginCss";
 $wgAllowedPluginVars = "plugin,templatePath,templates,iframeHTML5Js,iframeHTML5Css,loadInIframe";
 $wgAllowedPluginVarsValPartials = "{html5ps}";
-// Kaltura cache TTL value in unix time for dynamic embed local storage caching of kWidget, default is 10 minutes
+// Vidiun cache TTL value in unix time for dynamic embed local storage caching of vWidget, default is 10 minutes
 $wgCacheTTL = (10 * 60 * 1000);
-// Kaltura max cache entries, limit max available cached entries per domain to avoid over populating localStorage
+// Vidiun max cache entries, limit max available cached entries per domain to avoid over populating localStorage
 $wgMaxCacheEntries = 1;
 
 /*********************************************************
@@ -252,22 +252,22 @@ if( is_file( $wgLocalSettingsFile ) ){
 	require_once( $wgLocalSettingsFile );
 }
 
-if( isset( $_GET['pskwidgetpath'] ) ){
-	$psRelativePath = htmlspecialchars( $_GET['pskwidgetpath'] );
+if( isset( $_GET['psvwidgetpath'] ) ){
+	$psRelativePath = htmlspecialchars( $_GET['psvwidgetpath'] );
 }
 // The html5-ps settings file path
-$wgKalturaPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
+$wgVidiunPSHtml5SettingsPath =  realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/includes/DefaultSettings.php';
 
 // The html5-ps modules dir
-$wgKalturaPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
+$wgVidiunPSHtml5ModulesDir =  realpath(realpath( dirname( __FILE__ ) ) . '/../' . $psRelativePath . '/ps/modules');
 
-// Enable every module in the "ps/modules" folder of kwidget-ps
-$wgKwidgetPsEnabledModules = array();
-if (!empty($wgKalturaPSHtml5ModulesDir)){
-    $dPs = dir( $wgKalturaPSHtml5ModulesDir );
+// Enable every module in the "ps/modules" folder of vwidget-ps
+$wgVwidgetPsEnabledModules = array();
+if (!empty($wgVidiunPSHtml5ModulesDir)){
+    $dPs = dir( $wgVidiunPSHtml5ModulesDir );
     while (false !== ($entryPs = $dPs->read())) {
-        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgKwidgetPsEnabledModules ) ){
-            $wgKwidgetPsEnabledModules[] = $entryPs;
+        if( substr( $entryPs, 0, 1 ) != '.' && !in_array( $entryPs , $wgVwidgetPsEnabledModules ) ){
+            $wgVwidgetPsEnabledModules[] = $entryPs;
         }
     }
 }
@@ -276,20 +276,20 @@ if (!empty($wgKalturaPSHtml5ModulesDir)){
 //Set global configs into $wgMwEmbedModuleConfig in order to enable
 //resource loader to output the config in the response
 // if Manifest urls should be used:
-$wgMwEmbedModuleConfig['Kaltura.UseManifestUrls'] = $wgKalturaUseManifestUrls;
+$wgMwEmbedModuleConfig['Vidiun.UseManifestUrls'] = $wgVidiunUseManifestUrls;
 //Add license server config:
-global $wgKalturaLicenseServerUrl, $wgKalturaUdrmLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.LicenseServerURL'] = $wgKalturaLicenseServerUrl;
-$wgMwEmbedModuleConfig['Kaltura.UdrmServerURL'] = $wgKalturaUdrmLicenseServerUrl;
+global $wgVidiunLicenseServerUrl, $wgVidiunUdrmLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.LicenseServerURL'] = $wgVidiunLicenseServerUrl;
+$wgMwEmbedModuleConfig['Vidiun.UdrmServerURL'] = $wgVidiunUdrmLicenseServerUrl;
 
-// Add Kaltura api services: ( should be part of kaltura module config)
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiKSTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiUiConfJs.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiSleepTest.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweFeaturesList.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiLanguageSupport.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweUpgradePlayer.php' );
-include_once( realpath( dirname( __FILE__ ) )  . '/../modules/KalturaSupport/apiServices/mweApiGetLicenseData.php' );
+// Add Vidiun api services: ( should be part of vidiun module config)
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiVSTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiUiConfJs.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiSleepTest.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweFeaturesList.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiLanguageSupport.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweUpgradePlayer.php' );
+include_once( realpath( dirname( __FILE__ ) )  . '/../modules/VidiunSupport/apiServices/mweApiGetLicenseData.php' );
 include_once( realpath( dirname( __FILE__ ) )  . '/../studio/studioService.php');
 /**
  * Extensions should register foreign module sources here. 'local' is a

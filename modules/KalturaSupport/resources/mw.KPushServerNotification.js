@@ -1,17 +1,17 @@
 (function (mw, $) {
     "use strict";
-    mw.KPushServerNotification = function (embedPlayer) {
+    mw.VPushServerNotification = function (embedPlayer) {
         return this.init(embedPlayer);
     }
 
-    mw.KPushServerNotification.getInstance=function(embedPlayer) {
-        if (!embedPlayer.kPushServerNotification) {
-            embedPlayer.kPushServerNotification = new mw.KPushServerNotification(embedPlayer);
+    mw.VPushServerNotification.getInstance=function(embedPlayer) {
+        if (!embedPlayer.vPushServerNotification) {
+            embedPlayer.vPushServerNotification = new mw.VPushServerNotification(embedPlayer);
         }
-        return embedPlayer.kPushServerNotification;
+        return embedPlayer.vPushServerNotification;
     }
 
-    mw.KPushServerNotification.connectionTimeout = 10000;
+    mw.VPushServerNotification.connectionTimeout = 10000;
 
 
     function SocketWrapper(key) {
@@ -109,16 +109,16 @@
         }
     };
 
-    mw.KPushServerNotification.prototype = {
+    mw.VPushServerNotification.prototype = {
         // The bind postfix:
-        bindPostfix: '.KPushServerNotification',
+        bindPostfix: '.VPushServerNotification',
         socketPool: {},
         init: function (embedPlayer) {
             // Remove any old bindings:
             this.destroy();
             // Setup player ref:
             this.embedPlayer = embedPlayer;
-            this.kClient = mw.kApiGetPartnerClient(this.embedPlayer.kwidgetid);
+            this.vClient = mw.vApiGetPartnerClient(this.embedPlayer.vwidgetid);
 
 
             // Process cue points
@@ -136,13 +136,13 @@
                 'action': 'register',
                 'format': 1,
                 "notificationTemplateSystemName": eventName,
-                "pushNotificationParams:objectType": "KalturaPushNotificationParams"
+                "pushNotificationParams:objectType": "VidiunPushNotificationParams"
             };
             var index=0;
             $.each( eventParams, function(key,value) {
-                request["pushNotificationParams:userParams:item"+index+":objectType"]="KalturaPushNotificationParams";
+                request["pushNotificationParams:userParams:item"+index+":objectType"]="VidiunPushNotificationParams";
                 request["pushNotificationParams:userParams:item"+index+":key"]=key;
-                request["pushNotificationParams:userParams:item"+index+":value:objectType"]="KalturaStringValue";
+                request["pushNotificationParams:userParams:item"+index+":value:objectType"]="VidiunStringValue";
                 request["pushNotificationParams:userParams:item"+index+":value:value"]=value;
                 request["pushNotificationParams:userParams:item"+index+":isQueueKeyParam"]=1;
                 index++;
@@ -171,7 +171,7 @@
             function processResult(registerRequest,result) {
                 var deferred = $.Deferred();
 
-                if (result.objectType==="KalturaAPIException") {
+                if (result.objectType==="VidiunAPIException") {
                     mw.log("Error registering to "+registerRequest.eventName+" message:"+result.message+" ("+result.code+")");
                     deferred.resolve(result.message);
                     return deferred;
@@ -206,14 +206,14 @@
                         mw.log('Timeout waiting for connection  '+registerRequest.eventName+ " for key: "+result.queueKey);
                         deferred.reject();
                     }
-                },mw.KPushServerNotification.connectionTimeout);
+                },mw.VPushServerNotification.connectionTimeout);
                 return deferred;
 
             }
 
-            this.kClient.doRequest(apiRequests, function(results) {
+            this.vClient.doRequest(apiRequests, function(results) {
 
-                if (results.objectType==="KalturaAPIException") {
+                if (results.objectType==="VidiunAPIException") {
                     mw.log("Error registering to event tempalte service :"+results.message+" ("+results.code+")");
                     deferred.reject(results.message);
                     return deferred;

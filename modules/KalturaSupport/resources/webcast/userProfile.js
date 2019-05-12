@@ -2,7 +2,7 @@
     "use strict";
     mw.webcast = mw.webcast || {};
 
-    mw.webcast.UserProfile = mw.KBasePlugin.extend({
+    mw.webcast.UserProfile = mw.VBasePlugin.extend({
         /* DEVELOPER NOTICE: you should not set any property directly here (they will be shared between instances) - use the setup function instead */
         defaultConfig : {
             /* DEVELOPER NOTICE : don't use this plugin config feature since it is a detached plugin. A detached plugin cannot access the player configuration to support overrides */
@@ -16,14 +16,14 @@
             $.extend(_this, {
             });
         },
-        // get an hash code from a ks
-        getKSHash: function(ks) {
+        // get an hash code from a vs
+        getVSHash: function(vs) {
             var hash = 0, i, chr, len;
-            if (ks.length === 0){
+            if (vs.length === 0){
                 return hash;
             }
-            for (i = 0, len = ks.length; i < len; i++) {
-                chr   = ks.charCodeAt(i);
+            for (i = 0, len = vs.length; i < len; i++) {
+                chr   = vs.charCodeAt(i);
                 hash  = ((hash << 5) - hash) + chr;
                 hash |= 0; // Convert to 32bit integer
             }
@@ -41,7 +41,7 @@
 
             return	"##" +
                 prefix + "HashSeparator" +
-                _this.getKSHash(_this.getPlayer().getFlashvars().ks) +
+                _this.getVSHash(_this.getPlayer().getFlashvars().vs) +
                 _this.getRandomInt(10000,99999999).toString() +
                 "##";
         },
@@ -61,10 +61,10 @@
                 //if localStorage is available, get & store the user id from it;//if localStorage is available, get & store the user id from it;
                 if (window.localStorage) {
                     try {
-                        if (!localStorage.kAnonymousUserId) {
-                            localStorage.kAnonymousUserId = _this.generateUserId(pluginGetConfig("userId"));
+                        if (!localStorage.vAnonymousUserId) {
+                            localStorage.vAnonymousUserId = _this.generateUserId(pluginGetConfig("userId"));
                         }
-                        return localStorage.kAnonymousUserId;
+                        return localStorage.vAnonymousUserId;
                     }catch(e) {
                         mw.log("Exception in getUserID: "+e);
                     }

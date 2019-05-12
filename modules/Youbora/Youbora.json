@@ -7,8 +7,8 @@
             "resources/mw.Youbora.js"
         ],
         "dependencies": [
-            "mw.KBasePlugin"
+            "mw.VBasePlugin"
         ],
-        "kalturaPluginName": "youbora"
+        "vidiunPluginName": "youbora"
     }
 }

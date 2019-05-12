@@ -37,7 +37,7 @@ mw.VAnalytics.prototype = {
 
     histroyEvent : {},
     histroyEventCount:{},
-	kEventTypes : {
+	vEventTypes : {
 		'WIDGET_LOADED' : 1,
 		'MEDIA_LOADED' : 2,
 		'PLAY' : 3,
@@ -78,8 +78,8 @@ mw.VAnalytics.prototype = {
 		var _this = this;
 		// set the version of html5 player
 		this.version = mw.getConfig( 'version' );
-        if (!mw.KAnalytics.totalEventCount)  {
-            mw.KAnalytics.totalEventCount = 0;
+        if (!mw.VAnalytics.totalEventCount)  {
+            mw.VAnalytics.totalEventCount = 0;
         }
 		// Setup the local reference to the embed player
 		this.embedPlayer = embedPlayer;
@@ -127,7 +127,7 @@ mw.VAnalytics.prototype = {
 		}
 
 		// get the id for the given event:
-		var eventKeyId = this.kEventTypes[ KalturaStatsEventKey ];
+		var eventKeyId = this.vEventTypes[ VidiunStatsEventKey ];
 		// Generate the status event
 		var eventSet = {
 			'eventType'			: eventKeyId,
@@ -167,12 +167,12 @@ mw.VAnalytics.prototype = {
         }
         this.histroyEvent[eventSet[ 'entryId' ]][eventKeyId - 1] = 1;
         this.histroyEventCount[eventSet[ 'entryId' ]]++;
-        mw.KAnalytics.totalEventCount++;
+        mw.VAnalytics.totalEventCount++;
 
-        eventSet[ 'historyEvents' ] = this.histroyEvent[eventSet[ 'entryId' ]].join('') + '-' + this.histroyEventCount[eventSet[ 'entryId' ]] + '-' + mw.KAnalytics.totalEventCount ;
+        eventSet[ 'historyEvents' ] = this.histroyEvent[eventSet[ 'entryId' ]].join('') + '-' + this.histroyEventCount[eventSet[ 'entryId' ]] + '-' + mw.VAnalytics.totalEventCount ;
         // Set the 'event:uiconfId'
-		if( this.embedPlayer.kuiconfid ) {
-			eventSet[ 'uiconfId' ] = this.embedPlayer.kuiconfid;
+		if( this.embedPlayer.vuiconfid ) {
+			eventSet[ 'uiconfId' ] = this.embedPlayer.vuiconfid;
 		}
 		// Set the 'event:widgetId'
 		if( this.embedPlayer.vwidgetid ) {
@@ -225,7 +225,7 @@ mw.VAnalytics.prototype = {
 		}
 
 		eventRequest['hasKanalony'] = false;
-		if (this.embedPlayer.plugins && this.embedPlayer.plugins.kAnalony) {
+		if (this.embedPlayer.plugins && this.embedPlayer.plugins.vAnalony) {
 			eventRequest['hasKanalony'] = true;
 		}
 

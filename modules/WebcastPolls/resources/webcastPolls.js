@@ -5,14 +5,14 @@
      * Plugin representing a webcast polls.
      * This class is responsible for the the interaction with the producer (using cue points), the player (using player events) and the user (using dom elements and events).
      */
-    mw.PluginManager.add('webcastPolls', mw.KBasePlugin.extend({
+    mw.PluginManager.add('webcastPolls', mw.VBasePlugin.extend({
         defaultConfig: {
             'userId' : 'User',
             'usePushNotification' : true
         },
         polls_push_notification: "POLLS_PUSH_NOTIFICATIONS",
         cuePointsManager: null, // manages all the cue points tracking (cue point reached of poll results, poll states etc).
-        kalturaProxy: null, // manages the communication with the Kaltura api (invoke a vote, extract poll data).
+        vidiunProxy: null, // manages the communication with the Vidiun api (invoke a vote, extract poll data).
         userProfile: null, // manages active user profile
         configuration: {}, // ## Should remain empty (filled by 'resetPersistData')
         userVote: {}, // ## Should remain empty (filled by 'resetPersistData')
@@ -66,7 +66,7 @@
                 _this.log("got user id '" + _this.globals.userId + "'  that will be used for voting");
 
                 //  get voting metadata id needed to create user voting
-                _this.kalturaProxy.getVoteCustomMetadataProfileId().then(function (result) {
+                _this.vidiunProxy.getVoteCustomMetadataProfileId().then(function (result) {
                     _this.log("got voting metadata profile id '" + result.profileId + "', reload current poll user voting (if any)");
                     // got metadata id - store for later use and reload user voting of current poll
                     _this.globals.votingProfileId = result.profileId;
@@ -236,16 +236,16 @@
                 }, "webcastPolls_UserProfile");
             }
 
-            if (!_this.kalturaProxy) {
-                // kaltura api proxy used to communicate with the kaltura api (transmit voting, fetch poll data etc)
-                _this.kalturaProxy = new mw.webcastPolls.WebcastPollsKalturaProxy(_this.getPlayer(), function () {
-                }, "webcastPolls_KalturaProxy");
+            if (!_this.vidiunProxy) {
+                // vidiun api proxy used to communicate with the vidiun api (transmit voting, fetch poll data etc)
+                _this.vidiunProxy = new mw.webcastPolls.WebcastPollsVidiunProxy(_this.getPlayer(), function () {
+                }, "webcastPolls_VidiunProxy");
             }
 
             if (!_this.view) {
                 // initialize component that manages the interactions with polls DOM elements.
                 _this.view = new mw.webcastPolls.WebcastPollsView(_this.getPlayer(), function () {
-                }, "webcastPolls_KalturaView");
+                }, "webcastPolls_VidiunView");
                 _this.view.parent = _this;
             }
 
@@ -562,16 +562,16 @@
             if (this.embedPlayer.isLive()) {
 
                 if (_this.globals.votingProfileId) {
-                    _this.log("requesting user vote for  poll '" + pollId + "' from kaltura api");
-                    _this.kalturaProxy.getUserVote(pollId, _this.globals.userId).then(function (result) {
-                        _this.log("retrieved user vote for poll '" + pollId + "' from kaltura api");
+                    _this.log("requesting user vote for  poll '" + pollId + "' from vidiun api");
+                    _this.vidiunProxy.getUserVote(pollId, _this.globals.userId).then(function (result) {
+                        _this.log("retrieved user vote for poll '" + pollId + "' from vidiun api");
                         defer.resolve(result);
                     }, function (reason) {
-                        _this.log("failed to retrieve user vote for poll '" + pollId + "' from kaltura api." + JSON.stringify(reason || {}));
-                        defer.reject({error: "failed to retrieve user vote for poll '" + pollId + "' from kaltura api"});
+                        _this.log("failed to retrieve user vote for poll '" + pollId + "' from vidiun api." + JSON.stringify(reason || {}));
+                        defer.reject({error: "failed to retrieve user vote for poll '" + pollId + "' from vidiun api"});
                     });
                 } else {
-                    _this.log("request aborted. missing voting profile id required by Kaltura api");
+                    _this.log("request aborted. missing voting profile id required by Vidiun api");
                     defer.reject({error: "missing required information to retrieve user vote"});
                 }
             } else {
@@ -648,7 +648,7 @@
                 if (_this.userVote.metadataId) {
                     _this.log('user already voted for this poll, update user vote');
                     var invokedByPollId = _this.pollData.pollId;
-                    _this.kalturaProxy.transmitVoteUpdate(_this.userVote.metadataId, _this.globals.userId, selectedAnswer, _this.pollData.pollId).then(function (result) {
+                    _this.vidiunProxy.transmitVoteUpdate(_this.userVote.metadataId, _this.globals.userId, selectedAnswer, _this.pollData.pollId).then(function (result) {
                         if (invokedByPollId === _this.pollData.pollId) {
                             _this.log('successfully updated server with user answer');
                             _this.userVote.inProgress = false;
@@ -673,7 +673,7 @@
 
 
                     var invokedByPollId = _this.pollData.pollId;
-                    _this.kalturaProxy.transmitNewVote(_this.pollData.pollId, _this.globals.votingProfileId, _this.globals.userId, selectedAnswer).then(function (result) {
+                    _this.vidiunProxy.transmitNewVote(_this.pollData.pollId, _this.globals.votingProfileId, _this.globals.userId, selectedAnswer).then(function (result) {
                         if (invokedByPollId === _this.pollData.pollId) {
                             _this.log('successfully updated server with user vote');
                             _this.userVote.inProgress = false;
@@ -701,7 +701,7 @@
 
 
             } catch (e) {
-                _this.log('failed to get update user vote in kaltura server - undo to previously selected answer (if any)');
+                _this.log('failed to get update user vote in vidiun server - undo to previously selected answer (if any)');
                 _this.userVote.inProgress = false;
                 _this.userVote.answer = previousAnswer;
                 _this.view.syncDOMUserVoting();

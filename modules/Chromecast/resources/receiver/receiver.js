@@ -30,19 +30,19 @@ var embedPlayerInitialized = {
  */
 var debugReceiver;
 /**
- * Indicates if we're running in debug mode for the Kaltura player.
+ * Indicates if we're running in debug mode for the Vidiun player.
  * @type {boolean}
  */
 var debugKalturaPlayer;
 /**
- * The Kaltura player.
+ * The Vidiun player.
  * @type {object}
  */
-var kdp;
+var vdp;
 /**
- * Saves the kdp state.
+ * Saves the vdp state.
  */
-var kdpState;
+var vdpState;
 /**
  * Flag that indicates if we need to pause the player after he started to play.
  * @type {boolean}
@@ -64,7 +64,7 @@ var mediaManager;
  */
 var messageBus;
 /**
- * The Kaltura video element.
+ * The Vidiun video element.
  */
 var mediaElement;
 
@@ -152,7 +152,7 @@ var MessageBusMap = {
         }
         var tracks = mediaInfo.tracks;
         var activeBitratesIds = event.data.activeBitratesIds;
-        kdp.sendNotification( "switchSrc", {
+        vdp.sendNotification( "switchSrc", {
             type: 'bitrates',
             activeBitratesIds: activeBitratesIds,
             tracks: tracks
@@ -210,7 +210,7 @@ function startReceiver() {
     mediaManager.onError = onError.bind( this );
 
     // Init message bus and setting his event
-    messageBus = receiverManager.getCastMessageBus( 'urn:x-cast:com.kaltura.cast.player' );
+    messageBus = receiverManager.getCastMessageBus( 'urn:x-cast:com.vidiun.cast.player' );
     messageBus.onMessage = onMessage.bind( this );
 
     // Init queue manager
@@ -258,14 +258,14 @@ function onEditTracksInfo( event ) {
         || event.data.activeTrackIds.length === 0 ) {
         return;
     }
-    if ( kdpState === "paused" ) {
+    if ( vdpState === "paused" ) {
         forcePauseAfterPlaying = true;
-        kdp.sendNotification( 'doPlay' );
+        vdp.sendNotification( 'doPlay' );
     }
     mediaManager.onEditTracksInfoOrig( event );
     var activeTrackIds = event.data.activeTrackIds;
     var tracks = mediaInfo.tracks;
-    kdp.sendNotification( "switchSrc", {
+    vdp.sendNotification( "switchSrc", {
         type: 'tracks',
         activeTrackIds: activeTrackIds,
         tracks: tracks,
@@ -278,7 +278,7 @@ function onEditTracksInfo( event ) {
  */
 function onPause( event ) {
     ReceiverLogger.log( "MediaManager", "onPause", event );
-    kdp.sendNotification( "doPause" );
+    vdp.sendNotification( "doPause" );
     mediaManager.broadcastStatus( false, event.data.requestId );
 }
 
@@ -287,7 +287,7 @@ function onPause( event ) {
  */
 function onPlay( event ) {
     ReceiverLogger.log( "MediaManager", "onPlay", event );
-    kdp.sendNotification( "doPlay" );
+    vdp.sendNotification( "doPlay" );
     mediaManager.broadcastStatus( false, event.data.requestId );
 }
 
@@ -328,7 +328,7 @@ function playNextMedia( mediaConfig ) {
     ReceiverStateManager.onProgress( 0, 0 );
 
     // Rest mediaPlayFrom if needed
-    kdp.setKDPAttribute( 'mediaProxy', 'mediaPlayFrom', 0 );
+    vdp.setVDPAttribute( 'mediaProxy', 'mediaPlayFrom', 0 );
 
     // Set app state as idle
     ReceiverStateManager.setState( StateManager.State.IDLE );
@@ -337,7 +337,7 @@ function playNextMedia( mediaConfig ) {
     loadMetadataOnScreen();
 
     // If same entry is sent then reload, else perform changeMedia
-    if ( kdp.evaluate( '{mediaProxy.entry.id}' ) === mediaConfig.entryID && !ReceiverQueueManager.isQueueActive() ) {
+    if ( vdp.evaluate( '{mediaProxy.entry.id}' ) === mediaConfig.entryID && !ReceiverQueueManager.isQueueActive() ) {
         doReplay( mediaConfig );
     } else {
         doChangeMedia( mediaConfig );
@@ -364,7 +364,7 @@ function configure( config ) {
 function doReplay( embedConfig ) {
     ReceiverLogger.log( "MediaManager", "Embed player already initialized with the same entry. Start replay.", embedConfig );
     $( window ).trigger( "onReceiverReplay" );
-    kdp.sendNotification( "doReplay" );
+    vdp.sendNotification( "doReplay" );
 }
 
 /**
@@ -374,27 +374,27 @@ function doReplay( embedConfig ) {
 function doChangeMedia( embedConfig ) {
     ReceiverLogger.log( "MediaManager", "Embed player already initialized with different entry. Change media.", embedConfig );
     var adsPluginEnabledNext = !!(embedConfig.flashVars && embedConfig.flashVars.doubleClick && embedConfig.flashVars.doubleClick.adTagUrl !== '');
-    var adsPluginEnabledNow = kdp.evaluate( '{doubleClick.plugin}' );
+    var adsPluginEnabledNow = vdp.evaluate( '{doubleClick.plugin}' );
 
     if ( adsPluginEnabledNow && adsPluginEnabledNext ) {
         ReceiverLogger.log( "MediaManager", "doChangeMedia - before: ads, now: ads" );
         $( window ).trigger( "onReceiverChangeMedia", true );
-        kdp.setKDPAttribute( 'doubleClick', 'adTagUrl', embedConfig.flashVars.doubleClick.adTagUrl );
+        vdp.setVDPAttribute( 'doubleClick', 'adTagUrl', embedConfig.flashVars.doubleClick.adTagUrl );
 
     } else {
         if ( adsPluginEnabledNow && !adsPluginEnabledNext ) {
             ReceiverLogger.log( "MediaManager", "doChangeMedia - before: ads, now: no ads" );
-            kdp.setKDPAttribute( 'doubleClick', 'adTagUrl', '' );
+            vdp.setVDPAttribute( 'doubleClick', 'adTagUrl', '' );
         }
         $( window ).trigger( "onReceiverChangeMedia", false );
     }
     if ( embedConfig.flashVars && embedConfig.flashVars.proxyData ) {
-        kdp.sendNotification( "changeMedia", {
+        vdp.sendNotification( "changeMedia", {
             "entryId": embedConfig.entryID,
             "proxyData": embedConfig.flashVars.proxyData
         } );
     } else {
-        kdp.sendNotification( "changeMedia", { "entryId": embedConfig.entryID } );
+        vdp.sendNotification( "changeMedia", { "entryId": embedConfig.entryID } );
     }
 }
 
@@ -455,17 +455,17 @@ function embedPlayer( event ) {
     $.getScript( embedLoaderLibPath )
      .then( function () {
          setConfiguration( embedInfo );
-         kWidget.embed( {
-             "targetId": "kaltura_player",
+         vWidget.embed( {
+             "targetId": "vidiun_player",
              "wid": "_" + embedInfo.publisherID,
              "uiconf_id": embedInfo.uiconfID,
              "readyCallback": function ( playerID ) {
                  loadMetadataOnScreen();
-                 kdp = document.getElementById( playerID );
+                 vdp = document.getElementById( playerID );
                  $( '#initial-video-element' ).remove();
-                 mediaElement = $( kdp ).contents().contents().find( 'video' )[ 0 ];
+                 mediaElement = $( vdp ).contents().contents().find( 'video' )[ 0 ];
                  mediaManager.setMediaElement( mediaElement );
-                 $( window ).trigger( "onReceiverKDPReady" );
+                 $( window ).trigger( "onReceiverVDPReady" );
                  setMediaElementEvents();
                  addBindings();
                  embedPlayerInitialized.setState( EmbedPhase.Completed );
@@ -530,10 +530,10 @@ function onSeekEnd() {
 }
 
 /**
- * Add bindings to the kdp.
+ * Add bindings to the vdp.
  */
 function addBindings() {
-    kdp.kBind( "onTracksParsed", function ( tracksInfo ) {
+    vdp.vBind( "onTracksParsed", function ( tracksInfo ) {
         mediaManager.loadTracksInfo( tracksInfo );
         var mediaInfo = mediaManager.getMediaInformation();
         if ( mediaInfo ) {
@@ -543,20 +543,20 @@ function addBindings() {
         }
     } );
 
-    kdp.kBind( "embedPlayerError", function ( error ) {
+    vdp.vBind( "embedPlayerError", function ( error ) {
         broadcastError( error );
     } );
 
-    kdp.kBind( "playing", function () {
+    vdp.vBind( "playing", function () {
         if ( forcePauseAfterPlaying ) {
             forcePauseAfterPlaying = false;
-            kdp.sendNotification( 'doPause' );
+            vdp.sendNotification( 'doPause' );
         }
         mediaManager.broadcastStatus( false );
     } );
 
-    kdp.kBind( "playerStateChange", function ( newState ) {
-        kdpState = newState;
+    vdp.vBind( "playerStateChange", function ( newState ) {
+        vdpState = newState;
     } );
 }
 
@@ -570,13 +570,13 @@ function setConfiguration( embedInfo ) {
         mw.setConfig( "debug", true );
     }
     mw.setConfig( "chromecastReceiver", true );
-    mw.setConfig( "Kaltura.ExcludedModules", "chromecast" );
+    mw.setConfig( "Vidiun.ExcludedModules", "chromecast" );
 }
 
 /**
  * Merge between the receiver's constant flashvars and the flashvars
  * that been sent from the sender who opened the session.
- * The sender usually will need to send ks or proxyData.
+ * The sender usually will need to send vs or proxyData.
  * The sender can override playFrom and autoPlay flashvars.
  * @param senderPlayFrom
  * @param senderAutoPlay

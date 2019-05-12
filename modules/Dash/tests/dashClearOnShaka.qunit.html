@@ -6,11 +6,11 @@
 </head>
 <body>
 <h2>Clear dash using shaka</h2>
-<div id="kaltura_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
+<div id="vidiun_player_1453904613" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>
 
 <script>
-    kWidget.embed({
-        "targetId": "kaltura_player_1453904613",
+    vWidget.embed({
+        "targetId": "vidiun_player_1453904613",
 //        "wid": "_1091",
 //        "uiconf_id": 15057971,
 //        "entry_id": "0_wu32qrt3",
@@ -22,14 +22,14 @@
 //        "entry_id": "1_oilow8ls",
         "flashvars": {
 //            "vast": {
-//                "prerollUrl" : "http://projects.kaltura.com/MichalR/vast3_demo.xml",
+//                "prerollUrl" : "http://projects.vidiun.com/MichalR/vast3_demo.xml",
 //                "numPreroll" : "1",
 //                "prerollStartWith" : "1",
 //                "prerollInterval" : "1",
 //                "preSequence" : "1",
 //                "numPostroll" : "1",
 //                "postSequence" : "1",
-//                "overlayUrl" : "http://projects.kaltura.com/MichalR/vast_overlay.xml",
+//                "overlayUrl" : "http://projects.vidiun.com/MichalR/vast_overlay.xml",
 //                "overlayStartAt" : "20",
 //                "overlayInterval" : "300",
 //                "timeout" : "4"
@@ -87,9 +87,9 @@
 
 
         ,readyCallback: function(videoid){
-            var kdp = document.getElementById(videoid);
-            kdp.kBind( 'playerReady', function () {
-                kdp.sendNotification("loadExternalClosedCaptions", {
+            var vdp = document.getElementById(videoid);
+            vdp.vBind( 'playerReady', function () {
+                vdp.sendNotification("loadExternalClosedCaptions", {
                     languages: [{
                         "language": "Hebrew",
                         "languageCode": "he",

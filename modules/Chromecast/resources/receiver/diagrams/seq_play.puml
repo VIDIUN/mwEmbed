@@ -2,6 +2,6 @@
 User -> Sender: replay
 Sender-> ReceiverApp: session.loadMedia(req)
 ReceiverApp->ReceiverApp: onLoad(req)
-ReceiverApp -> RemotePlayer: kdp.sendNotification('doPlay')
+ReceiverApp -> RemotePlayer: vdp.sendNotification('doPlay')
 RemotePlayer --> Sender: play
 @enduml

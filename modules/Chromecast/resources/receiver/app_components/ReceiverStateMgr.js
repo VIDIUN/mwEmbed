@@ -11,7 +11,7 @@
  */
 function StateManager() {
     this.CLASS_NAME = "ReceiverStateManager";
-    this.KALTURA_DEFAULT_LOGO_URL = "assets/kaltura-logo.png";
+    this.VIDIUN_DEFAULT_LOGO_URL = "assets/vidiun-logo.png";
     this.PAUSE_TIMEOUT_DURATION = 5 * 1000;
     this.currState = null;
     this.idleManager = new IdleManager();
@@ -215,7 +215,7 @@ StateManager.prototype = {
             }
         };
 
-        if (!kdp.evaluate('{mediaProxy.isLive}')) {
+        if (!vdp.evaluate('{mediaProxy.isLive}')) {
             if (!isNaN(curTime) && !isNaN(totalTime)) {
                 var pct = (curTime / totalTime);
                 var pix = pct * 780;
@@ -281,7 +281,7 @@ StateManager.prototype = {
      * Sets the receiver's idle screen logo.
      * If a query string with a logoUrl key added to the
      * receiver application's url it will set it. Else,
-     * it will set Kaltura logo.
+     * it will set Vidiun logo.
      * @private
      */
     _setLogo: function () {
@@ -291,9 +291,9 @@ StateManager.prototype = {
             ReceiverLogger.log( this.CLASS_NAME, "Setting partner's logo.", { 'logoUrl': logoUrl } );
             this.logoUrl = logoUrl;
         } else {
-            // Set Kaltura's default logo
-            ReceiverLogger.log( this.CLASS_NAME, "Setting Kaltura's logo." );
-            this.logoUrl = this.KALTURA_DEFAULT_LOGO_URL;
+            // Set Vidiun's default logo
+            ReceiverLogger.log( this.CLASS_NAME, "Setting Vidiun's logo." );
+            this.logoUrl = this.VIDIUN_DEFAULT_LOGO_URL;
         }
         this.logoDiv.css( 'background-image', 'url(' + this.logoUrl + ')' );
     },

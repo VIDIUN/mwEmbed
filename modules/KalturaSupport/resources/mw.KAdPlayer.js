@@ -1301,7 +1301,7 @@ mw.VAdPlayer.prototype = {
 
 			if( $.isFunction( doneCallback ) ){
 				$( vid ).unbind( 'ended.playVideoSibling' ).bind('ended.playVideoSibling', function(){
-					mw.log("kAdPlayer::playVideoSibling: ended");
+					mw.log("vAdPlayer::playVideoSibling: ended");
 					$( vid ).unbind( 'ended.playVideoSibling' );
 					_this.restoreEmbedPlayer();
 					// call the deon callback:
