@@ -251,7 +251,7 @@
 
             this.AddNotificationsDelayForQnaThreads();
 
-            this.kPushServerNotification= mw.KPushServerNotification.getInstance(embedPlayer);
+            this.vPushServerNotification= mw.VPushServerNotification.getInstance(embedPlayer);
             if (embedPlayer.isLive()) {
                 //we first register to all notification before continue to get the existing cuepoints, so we don't get races and lost cue points
                 this.getMetaDataProfile().then(function() {
@@ -628,7 +628,7 @@
                 });
 
             // Register to Announcements (Public)
-            var publicNotifications =  this.kPushServerNotification.createNotificationRequest(
+            var publicNotifications =  this.vPushServerNotification.createNotificationRequest(
                 _this.QandA_publicNotificationName,
                 {
                     "entryId": _this.embedPlayer.ventryid
@@ -638,7 +638,7 @@
                 });
 
             // Register to Questions (User Private)
-            var userNotifications =  this.kPushServerNotification.createNotificationRequest(
+            var userNotifications =  this.vPushServerNotification.createNotificationRequest(
                 _this.QandA_UserNotificationName,
                 {
                     "entryId": _this.embedPlayer.ventryid,

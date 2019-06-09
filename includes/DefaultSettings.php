@@ -1,6 +1,6 @@
 <?php
 /**
- * This file stores default settings for Kaltura html5 client library "mwEmbed"
+ * This file stores default settings for Vidiun html5 client library "mwEmbed"
  *
  * DO NOT MODIFY THIS FILE. Instead modify LocalSettings.php in the parent mwEmbd directory.
  *
@@ -118,8 +118,8 @@ $wgResourceLoaderMaxage = array(
 $wgExternalPlayersSupportedTypes = array('YouTube');
 
 /*********************************************************
- * Default Kaltura Configuration:
- * TODO move kaltura configuration to KalturaSupport module ( part of New ResourceLoader update )
+ * Default Vidiun Configuration:
+ * TODO move vidiun configuration to VidiunSupport module ( part of New ResourceLoader update )
  ********************************************************/
 
 //Embedded services
@@ -127,8 +127,8 @@ $wgExternalPlayersSupportedTypes = array('YouTube');
 $wgEnableVidiunEmbedServicesRouting = true;
 
 // To include signed headers with user IPs for IP restriction lookups, input a salt string for
-// $wgKalturaRemoteAddressSalt configuration option.
-$wgKalturaRemoteAddressSalt = false;
+// $wgVidiunRemoteAddressSalt configuration option.
+$wgVidiunRemoteAddressSalt = false;
 
 // If we should check for onPage resources per the external resources plugin
 $wgVidiunEnableEmbedUiConfJs = false;
@@ -142,7 +142,7 @@ $wgVidiunForceResultCache = false;
 $wgVidiunForceIP = false;
 
 // To test sites with referre restrictions:
-$wgKalturaForceReferer = false;
+$wgVidiunForceReferer = false;
 
 // The default Vidiun service url:
 $wgVidiunServiceUrl = 'http://cdnapi.vidiun.com';
@@ -151,8 +151,8 @@ if( $wgHTTPProtocol == 'https' ){
 	$wgVidiunServiceUrl =  'https://cdnapisec.vidiun.com';
 }
 
-// Default Kaltura CDN url:
-$wgKalturaCDNUrl = 'http://cdnbakmi.kaltura.com';
+// Default Vidiun CDN url:
+$wgVidiunCDNUrl = 'http://cdnbakmi.vidiun.com';
 // if https use cdnsecakmi
 if( $wgHTTPProtocol == 'https' ){
 	$wgVidiunCDNUrl =  'https://cdnsecakmi.vidiun.com';
@@ -174,14 +174,14 @@ $wgLogApiRequests = false;
 $wgCDNAssetPath = $wgHTTPProtocol . '://' . $_SERVER['HTTP_HOST'];
 
 // Default api request timeout in seconds
-$wgKalturaServiceTimeout = 20;
+$wgVidiunServiceTimeout = 20;
 
 // If the iframe will accept 3rd party domain remote service requests
 // should be left "off" in production.
-$wgKalturaAllowIframeRemoteService = false;
+$wgVidiunAllowIframeRemoteService = false;
 
 // Default expire time for ui conf api queries in seconds
-$wgKalturaUiConfCacheTime = 60*10; // 10 min
+$wgVidiunUiConfCacheTime = 60*10; // 10 min
 
 // Cache errors for 30 seconds to avoid overloading apaches in CDN setups
 $wgVidiunErrorCacheTime = 30;
@@ -194,14 +194,14 @@ $wgEnableIpadHTMLControls = true;
 $wgVidiunUseManifestUrls = true;
 
 // The admin secret should be set to an integration admin secret key for testing
-// api actions that require admin rights, like granting a ks for preview / play:
-$wgKalturaAdminSecret = null;
+// api actions that require admin rights, like granting a vs for preview / play:
+$wgVidiunAdminSecret = null;
 
 // By default do allow custom resource includes.
 $wgAllowCustomResourceIncludes = true;
 
 // An array of partner ids for which apple adaptive should be disabled.
-$wgKalturaPartnerDisableAppleAdaptive = array();
+$wgVidiunPartnerDisableAppleAdaptive = array();
 
 // By default use apple adaptive if we have the ability
 $wgVidiunUseAppleAdaptive = true;
