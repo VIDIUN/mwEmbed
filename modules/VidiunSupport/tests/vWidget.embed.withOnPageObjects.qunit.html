@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>vWidget with Object tag on page test</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+window.vWidgetCallbackWithID = false;
+function jsVidiunPlayerTest( videoId ){
+	if( videoId != 'myVideoTarget' ){
+		// don't run tests for non-vWidget with Object tag on page
+		return ;
+	}
+	// Name this module
+	module( "vWidget with Object tag on page" );
+
+	asyncTest("Inline readyCallback fired", function(){
+		vidiunQunitWaitForPlayer(function(){
+			if( window.vWidgetCallbackWithID ){
+				equal( window.vWidgetCallbackWithID, videoId, " ReadyCallback fired for video:" + videoId );
+				// done with async
+				start();
+			}
+		});
+	});
+}
+function readyCallbackFired( playerId ){
+	if( playerId == 'myVideoTarget' ){
+		window.vWidgetCallbackWithID = playerId;
+	}
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> vWidget with Object tag on page test </h2>
+
+<br />
+
+<div id="myVideoTarget" style="width:400px;height:330px;">
+	<!--  SEO and video metadata go here -->
+	<span property="dc:description" content="test folgers coffe"></span>
+	<span property="media:title" content="FolgersCoffe.mpeg"></span>
+	<span property="media:width" content="400"></span>
+	<span property="media:height" content="300"></span>
+</div>
+<div style="float:left;width:420px;">
+Secondary Object tag video embed: 
+<object id="vidiun_player_1334859345" name="vidiun_player_1334859345" 
+type="application/x-shockwave-flash" allowFullScreen="true" 
+allowNetworking="all" allowScriptAccess="always" 
+height="333" width="400" bgcolor="#000000" 
+xmlns:dc="http://purl.org/dc/terms/" 
+xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
+rel="media:video" 
+resource="http://www.vidiun.com/index.php/vwidget/cache_st/1334859345/wid/_243342/uiconf_id/7752572/entry_id/0_k4dkai5u" 
+data="http://www.vidiun.com/index.php/vwidget/cache_st/1334859345/wid/_243342/uiconf_id/7752572/entry_id/0_k4dkai5u">
+	<param name="allowFullScreen" value="true" />
+	<param name="allowNetworking" value="all" />
+	<param name="allowScriptAccess" value="always" />
+	<param name="bgcolor" value="#000000" />
+	<param name="flashVars" value="&" />
+	<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1334859345/wid/_243342/uiconf_id/7752572/entry_id/0_k4dkai5u" />
+</object>
+</div>
+<script>
+	window['doPlayCallback'] = function( playerId ){
+		console.log( 'vWidget doPlayCallback ' + playerId );
+		//$('body').append( '<div>started playback</div>' );
+	};
+	vWidget.embed({
+		'targetId': 'myVideoTarget',
+		'wid': '_243342',
+		'uiconf_id' : '12905712',
+		'entry_id' : '0_uka1msg4',
+		'flashvars':{
+			'externalInterfaceDisabled' : false,
+		},
+		'readyCallback': function( playerId ){
+			console.log( "vWidget player ready: " + playerId );
+			var vdp = $('#' + playerId ).get(0);
+			vdp.addJsListener( 'doPlay', 'doPlayCallback');
+			readyCallbackFired( playerId );
+		}
+	});
+</script>
+<p><p>
+<!-- 
+<b> Slow loading document.write scripts </b>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=0"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=1"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=2"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=3"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=4"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=5"></script>
+<script type="text/javascript" src="../../../services.php?service=sleepTest&waitTime=6"></script>
+ -->
+ 
+</body>
+</html>

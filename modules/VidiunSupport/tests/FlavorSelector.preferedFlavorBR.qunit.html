@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Flavor Selector and Prefered Flavor Bitrate</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+function jsVidiunPlayerTest( videoId ){
+	var vdp =  $( '#' + videoId )[0];
+	var $iframe = $( '#' + videoId + '_ifp' ).contents();
+	// Name this module
+	module( "Flavor Selector" );
+
+	asyncTest("Target bitrate", function(){
+		vidiunQunitWaitForPlayer(function(){
+			// reach into the iframe grab the mediaElement: 
+			var source = $iframe.find( '#' + videoId)[0].getSource();
+			// FIXME add more webm flavors to chouse from! 
+			if( source.mimeType == 'video/webm' && source.bandwidth == 690176 ){
+				// selected the single webm flavor
+				ok( true, "Single webm flavor selected");
+			} else {
+				// check if the browser supports adaptive and instead check for preferedFlavorBR
+				var vndSources = $iframe.find( '#' + videoId)[0].mediaElement.getPlayableSources('application/vnd.apple.mpegurl');
+				if( vndSources.length ){
+					for( var i=0; i < vndSources.length; i++ ){
+						notEqual( vndSources[i].src.indexOf('preferedFlavorBR'), -1, "preferedFlavorBR param found in adaptive source URL:\n" +  vndSources[i].src );
+					}
+				}else {
+					// make sure the chrome, IE, safari select the correct h.264 flavor bitrate: 
+					equal( source.bandwidth, 1715200, "target bitrate selected");
+				}
+			}
+			addChangeMediaTest();
+			start();
+		});
+	});
+	function addChangeMediaTest(){
+		var changeMediaEntryID = '0_swup5zao';
+		asyncTest("Change Media Sources", function(){
+			// select the first source: 
+			$iframe.find('.sourceSelector button').click();
+			$iframe.find('.sourceSelector li :first').click();
+
+			//var streamUrl = $iframe.find( '#' + videoId)[0].mediaElement.selectedSource.src
+			//ok( streamUrl, "Stream url:" + streamUrl );
+			vdp.vBind("mediaReady", function(){
+				// switch to the first source:
+				$iframe.find('.source-switch').click();
+				$iframe.find('.swMenuContainer li :first').click();
+				var newStreamUrl = $iframe.find( '#' + videoId)[0].mediaElement.selectedSource.src
+				notEqual( newStreamUrl, streamUrl, "Stream source is not equal" );
+				// make sure the new stream ulr includes the new entry id:
+				notEqual( newStreamUrl.indexOf(changeMediaEntryID), -1, "New stream url includes updated entry id" )
+				start();
+			});
+			vdp.sendNotification( 'changeMedia', {'entryId': changeMediaEntryID} );
+		});
+	}
+	
+}
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2> Flavor Selector and Prefered Flavor Bitrate </h2>
+<div id="myVideoTarget" style="width:560px;height:330px;float:left">
+</div>
+<script>
+	// clear the companions 
+	vWidget.featureConfig({
+		'targetId': 'myVideoTarget',
+        'wid': '_243342',
+        'uiconf_id' : '29205831',
+        'entry_id' : '0_l1v5vzh3',
+		'flashvars': {
+			'sourceSelector': {
+				"plugin": true,
+				"switchOnResize": false,
+				"simpleFormat": true,
+				'displayMode' : 'sizebitrate'
+			},
+			'mediaProxy.preferedFlavorBR': 1600
+		},
+		'readyCallback':function( playerId ){
+			var vdp = $('#'+ playerId )[0];
+			$('#changeMedia').click(function(){
+				vdp.sendNotification( 'changeMedia', {'entryId': '0_swup5zao'} );
+				return false;
+			});
+		}
+	})
+</script>
+<div style="clear:both"></div>
+<h3> Flavor selection criteria </h3>
+There are several factors that influence initial bitrate selection and whether "auto" adaptive bitrate can be enabled or not.
+<br>
+You can see the flavor selection logic in <a href="https://github.com/vidiun/mwEmbed/blob/master/modules/EmbedPlayer/resources/mw.MediaElement.js#L208" target="_new">code here</a>.
+Basically the flow is as follows: <br>
+1) Filters playable sources, <br>
+2) Filters via playable adaptive streaming source where adaptive streaming is active.( DASH, HLS, SmoothStreaming or HDS)<br>
+The preferred bitrate will be passed into the adaptive stream initial flavor logic. <br>
+3) User selected or player configured preferred bitrate is used to select nearest target. <br>
+4) A subset of flavors are defined that don't need a plugin to be played. <br>
+5) A flavor matching the embed size of the player is selected against flavor subset.  <br>
+6) If no native playback flavors was selected, the first compatible flavor is selected. 
+</body>
+</html>

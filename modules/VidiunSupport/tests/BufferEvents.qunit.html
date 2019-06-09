@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Buffer Events test</title>
+<script type="text/javascript" src="../../../tests/qunit/qunit-bootstrap.js"></script>
+<script type="text/javascript" src="../../../mwEmbedLoader.php"></script>
+<script type="text/javascript" src="../../../docs/js/doc-bootstrap.js"></script>
+<script type="text/javascript">	
+function jsVidiunPlayerTest( videoId ){
+	// Name this module
+	module( "Buffer Events" );
+	var vdp = $( '#' + videoId ).get(0);
+	
+	test( "Add buffer listeners", function() {
+		vdp.vBind( 'bytesDownloadedChange', 'testBytesDownloadedChange' );
+		vdp.vBind( 'bytesTotalChange', 'testBytesTotalChange' );
+		vdp.vBind( 'bufferProgress',  'testBufferProgress' );
+		vdp.vBind( 'bufferChange',  'testBufferChange' );
+		vdp.vBind( 'playerDownloadComplete', 'testPlayerDownloadComplete' );
+		ok( true, "Added buffer listeners" );
+		// Start playback after 1 second: 
+		setTimeout( function(){
+			vdp.sendNotification( 'doPlay' );
+		}, 2000 );
+	});
+	
+	var firstEventBytesDownloadedChange = true;
+	window['testBytesDownloadedChange'] = function( eventData ){
+		test( "bytesDownloadedChange", function(){
+			if( firstEventBytesDownloadedChange ){
+				firstEventBytesDownloadedChange = false;
+				ok( true, "Got testBytesDownloadedChange event");
+			}
+			// check for new value: 
+			ok( eventData.newValue >= 0, 'Bytes Downloaded Change sends newValue:' + eventData.newValue);
+		});
+	};
+	
+	window['testBytesTotalChange'] = function( eventData ){
+		test( "bytesTotalChange", function(){
+			ok( true, "BytesTotalChange:" + eventData.newValue);
+		});
+	};
+	
+	var prevBufferTime = 0;
+	var firstBuffProgress = true;
+	window['testBufferProgress'] = function( eventData ){
+		test( "bufferProgress", function(){
+			if( firstBuffProgress ){
+				firstBuffProgress = false;
+				ok( true, "Got bufferProgress event");
+			}
+			ok( eventData.newTime >= prevBufferTime, "Buffer is increasing: " + eventData.newTime  );
+			prevBufferTime = eventData.newTime;
+		});
+	};
+	
+	var bufferToggle = true;
+	window['testBufferChange'] = function( isBuffering  ){
+		test( "bufferChange", function(){
+			equal( bufferToggle, isBuffering, "Buffer state in sync: " + isBuffering);
+			bufferToggle = !bufferToggle;
+		});
+	};
+	
+	window['testPlayerDownloadComplete'] = function( eventData ){
+		test( "playerDownloadComplete", function(){
+			ok( true, "Got playerDownloadComplete event");
+		});
+	};
+	
+}
+</script>
+<script>
+	vWidget.addReadyCallback(function(playerId){
+		var vdp = $('#' + playerId )[0];
+		vdp.vBind( 'bytesDownloadedChange', function( eventData ){
+			$('#bufferEvents').append(
+				'testBytesDownloadedChange: ' + eventData.newValue + "\n"
+			)
+		});
+		vdp.vBind( 'bufferProgress',  function( eventData ){
+			$('#bufferEvents').append(
+				'bufferProgress: new time: ' + eventData.newTime	+ "\n"
+			)
+		});
+		var once = false;
+		vdp.vBind( 'playerDownloadComplete: ',  function( eventData ){
+			if( once ){
+				return 
+			}
+			once = true;
+			$('#bufferEvents').append(
+				'playerDownloadComplete' + "\n"	
+			)
+		});
+	})
+</script>
+<!-- qunit-vidiun must come after qunit-bootstrap.js and after mwEmbedLoader.php and after any jsCallbackReady stuff-->
+<script type="text/javascript" src="resources/qunit-vidiun-bootstrap.js"></script>
+</head>
+<body>
+<h2>Buffer Events</h2>
+The following binds to buffer events and logs progress. All buffer events are <a href="http://www.vidiun.org/demos/vdp3/docs.html#jsapi">listed here</a>:  
+<pre class="prettyprint linenums">
+vWidget.addReadyCallback(function(playerId){
+	var vdp = $('#' + playerId )[0];
+	}
+	vdp.vBind( 'bytesDownloadedChange', function( eventData ){
+		$('#bufferEvents').append(
+			'testBytesDownloadedChange: ' + eventData.newValue 
+		)
+	});
+	vdp.vBind( 'bufferProgress',  function( eventData ){
+		$('#bufferEvents').append(
+			'bufferProgress: new time: ' + eventData.newTime	
+		)
+	});
+})
+</pre>
+<br />
+
+<object id="vidiun_player_1330021939" 
+	name="vidiun_player_1330021939" 
+	type="application/x-shockwave-flash" 
+	allowFullScreen="true" 
+	allowNetworking="all" 
+	allowScriptAccess="always" 
+	height="333" width="400" 
+	bgcolor="#000000" 
+	xmlns:dc="http://purl.org/dc/terms/" 
+	xmlns:media="http://search.yahoo.com/searchmonkey/media/" 
+	rel="media:video" 
+	resource="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" 
+	data="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm">
+		<param name="allowFullScreen" value="true" />
+		<param name="allowNetworking" value="all" />
+		<param name="allowScriptAccess" value="always" />
+		<param name="bgcolor" value="#000000" />
+		<param name="flashVars" value="&" />
+		<param name="movie" value="http://www.vidiun.com/index.php/vwidget/cache_st/1330021939/wid/_243342/uiconf_id/7235092/entry_id/0_wm82kqmm" />
+</object>
+Buffer event log: <br>
+<textarea id="bufferEvents" style="width:500px;height:100px"></textarea>
+</body>
+</html>
