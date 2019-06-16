@@ -211,7 +211,7 @@ class ResourceLoaderStartUpModule extends ResourceLoaderModule {
 				'version' => wfTimestamp( TS_ISO_8601_BASIC, $version )
 			);
 			// Ensure uniform query order
-			vsort( $query );
+			ksort( $query );
 
 			// Startup function
 			$configuration = $this->getConfig( $context );
