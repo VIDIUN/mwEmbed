@@ -18,7 +18,7 @@ class mweLanguageSupport {
 		$vMessages = $messages;
 
 		// sort language keys A-Z: 
-		vsort( $coreLanguageNames );
+		ksort( $coreLanguageNames );
 		$messageSupport = array();
 		// build support list array: 
 		foreach( $coreLanguageNames as $key => $name){
