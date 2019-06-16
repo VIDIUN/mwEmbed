@@ -155,7 +155,7 @@ require_once( realpath( dirname( __FILE__ ) ) . '/api_evaluates.php' );
 
 	function getTableContent($headers, $param){
 		$paramArrayObject = new ArrayObject($param);
-		$paramArrayObject->vsort();
+		$paramArrayObject->ksort();
 		$o = "<table>";
 		$o.= "<tr>";
 		foreach( $headers as $header ){
